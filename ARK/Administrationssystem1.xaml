@@ -6,7 +6,7 @@
     <DockPanel>
         <Administrationssystem:TopMenu DockPanel.Dock="Top" />
         <DockPanel>
-            <Administrationssystem:Filter Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200"/>
+            <Administrationssystem:Filter Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200" Loaded="Filter_Loaded"/>
             <Administrationssystem:Content Margin="10,10,0,0" />
         </DockPanel>
     </DockPanel>
