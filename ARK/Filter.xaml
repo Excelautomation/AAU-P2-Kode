@@ -7,15 +7,12 @@
              d:DesignHeight="500" d:DesignWidth="256">
     <Grid>
         <DockPanel HorizontalAlignment="Stretch">
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top">
-                <TextBox HorizontalAlignment="Stretch" Text="TextBox" VerticalAlignment="Top" TextWrapping="WrapWithOverflow"/>
-                <Button Content="Søg" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30"/>
-            </Grid>
+           
 
-            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Filter" FontSize="30" />
-            <ListBox x:Name="ListBox" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionMode="Multiple" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Filter" FontSize="25" FontFamily="Arial" FontWeight="Bold" Margin="0,10,0,10" />
+            <ListBox x:Name="ListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Multiple" DockPanel.Dock="Top" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
             </ListBox>
-
+            
         </DockPanel>
     </Grid>
 </UserControl>

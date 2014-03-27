@@ -23,5 +23,10 @@ namespace ARK
         {
             InitializeComponent();
         }
+
+        private void Filter_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

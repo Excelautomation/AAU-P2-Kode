@@ -20,7 +20,7 @@ namespace Administrationssystem
     /// </summary>
     public partial class FilterControl : UserControl
     {
-        public string FilterName { get { return this.UISelecter.Text; } set { this.UISelecter.Text = value; } }
+        public string FilterName { get { return (string)this.knap1.Content; } set { this.knap1.Content = value; } }
 
         public FilterControl(string filterName)
         {
