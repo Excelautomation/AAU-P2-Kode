@@ -18,9 +18,9 @@ namespace ARK
     /// <summary>
     /// Interaction logic for user.xaml
     /// </summary>
-    public partial class user : UserControl
+    public partial class BrugerKontrol : UserControl
     {
-        public user()
+        public BrugerKontrol()
         {
             InitializeComponent();
         }
