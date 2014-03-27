@@ -52,7 +52,7 @@
 
 	<Grid x:Name="LayoutRoot">
 		<GroupBox x:Name="groupBox" Header="Kilometerstatistik" HorizontalAlignment="Left" Margin="0,-2.966,0,0" VerticalAlignment="Top" Height="83.966" Width="259.329"/>
-		<GroupBox Header="Statistik på bådtype" HorizontalAlignment="Left" Margin="271.829,-2.966,0,0" VerticalAlignment="Top" Height="83.966" Width="263.697"/>
+		<GroupBox Header="Statistik fordelt på bådtyper" HorizontalAlignment="Left" Margin="271.829,-2.966,0,0" VerticalAlignment="Top" Height="83.966" Width="263.697"/>
 		<Button x:Name="button" Content="Robåde" HorizontalAlignment="Left" Margin="11,21.5,0,0" VerticalAlignment="Top" Width="73.5" Height="43.96" Style="{DynamicResource SmallShadow}" UseLayoutRounding="False">
 			<Button.Effect>
 				<DropShadowEffect BlurRadius="2" ShadowDepth="2"/>
