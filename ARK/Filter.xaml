@@ -1,0 +1,21 @@
+﻿<UserControl xmlns:Administrationssystem="clr-namespace:Administrationssystem"  x:Class="Administrationssystem.Filter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="256">
+    <Grid>
+        <DockPanel HorizontalAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top">
+                <TextBox HorizontalAlignment="Stretch" Text="TextBox" VerticalAlignment="Top" TextWrapping="WrapWithOverflow"/>
+                <Button Content="Søg" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30"/>
+            </Grid>
+
+            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Filter" FontSize="30" />
+            <ListBox x:Name="ListBox" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionMode="Multiple" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}">
+            </ListBox>
+
+        </DockPanel>
+    </Grid>
+</UserControl>
