@@ -83,13 +83,7 @@
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="TopMenu.xaml.cs">
-      <DependentUpon>TopMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BrugerKontrol.xaml.cs">
-      <DependentUpon>BrugerKontrol.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Administrationssystem1.xaml">
+    <Page Include="Administrationssystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,10 +95,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Filter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="FilterControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,8 +103,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Administrationssystem1.xaml.cs">
-      <DependentUpon>Administrationssystem1.xaml</DependentUpon>
+    <Compile Include="Administrationssystem.xaml.cs">
+      <DependentUpon>Administrationssystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -122,9 +112,6 @@
     </Compile>
     <Compile Include="Content.xaml.cs">
       <DependentUpon>Content.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Filter.xaml.cs">
-      <DependentUpon>Filter.xaml</DependentUpon>
     </Compile>
     <Compile Include="FilterControl.xaml.cs">
       <DependentUpon>FilterControl.xaml</DependentUpon>
@@ -136,14 +123,6 @@
     <Page Include="Oversigt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TopMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="BrugerKontrol.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\tom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\logo.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
