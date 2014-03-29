@@ -37,6 +37,11 @@ namespace Administrationssystem
             knap1.DataContext = this;
         }
 
+        private void knap1_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsChecked = !this.IsChecked;
+        }
+
         #region Property
         public event PropertyChangedEventHandler PropertyChanged;
         protected void Notify(string propertyName)
