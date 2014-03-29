@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" xmlns:local="clr-namespace:Protokolsystem" x:Class="Protokolsystem.MainWindow"
-        Title="MainWindow" Height="768" Width="1024">
+        Title="MainWindow" Height="768" Width="1024" Background="White">
 	<Window.Resources>
 		<Style x:Key="SmallShadow" TargetType="{x:Type Button}">
 			<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -26,12 +26,61 @@
 							<Trigger Property="IsDefaulted" Value="true">
 								<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
 							</Trigger>
-							<Trigger Property="IsMouseOver" Value="true"/>
-							<Trigger Property="IsPressed" Value="true">
-								<Setter Property="Background" Value="Black"/>
+
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsPressed" Value="True" />
+								    <Condition Property="Name" Value="beginTrip"/>
+							    </MultiTrigger.Conditions>
 								<Setter Property="Background" TargetName="border" Value="#FF19C500"/>
 								<Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-							</Trigger>
+							</MultiTrigger>
+
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsPressed" Value="True" />
+								    <Condition Property="Name" Value="endTrip"/>
+							    </MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="border" Value="#c72727"/>
+								<Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
+							</MultiTrigger>
+
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsPressed" Value="True" />
+								    <Condition Property="Name" Value="boatsOverview"/>
+							    </MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="border" Value="#069294"/>
+								<Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
+							</MultiTrigger>
+
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsPressed" Value="True" />
+								    <Condition Property="Name" Value="createDamage"/>
+							    </MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="border" Value="#5f1df6"/>
+								<Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
+							</MultiTrigger>
+
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsPressed" Value="True" />
+								    <Condition Property="Name" Value="createLongdistance"/>
+							    </MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="border" Value="#5f1df6"/>
+								<Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
+							</MultiTrigger>
+
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsPressed" Value="True" />
+								    <Condition Property="Name" Value="adminPanel"/>
+							    </MultiTrigger.Conditions>
+								<Setter Property="Background" TargetName="border" Value="#777777"/>
+								<Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
+							</MultiTrigger>
+							
 							<Trigger Property="IsEnabled" Value="false">
 								<Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
 								<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
@@ -43,6 +92,12 @@
 			</Setter>
 		</Style>
 	</Window.Resources>
+	<Window.BorderBrush>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="#FFB0D141" Offset="0"/>
+			<GradientStop Color="#FF1B4E09" Offset="1"/>
+		</LinearGradientBrush>
+	</Window.BorderBrush>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="43*"/>
