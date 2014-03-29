@@ -16,24 +16,17 @@ using System.Windows.Shapes;
 
 namespace ARK
 {
-    /// <summary>
-    /// Interaction logic for BådItem.xaml
-    /// </summary>
-    public partial class BådItem : UserControl, INotifyPropertyChanged
+    public partial class Header : UserControl, INotifyPropertyChanged
     {
-        // TODO: Båd skal nok være af typen båd
-        public string Båd { get { return _båd; } set { _båd = value; Notify("Båd"); } }
-        public string Besked { get { return _besked; } set { _besked = value; Notify("Besked"); } }
+        public string Title { get { return _title; } set { _title = value; Notify("Title"); } }
+        private string _title;
 
-        private string _båd;
-        private string _besked;
-
-        public BådItem()
+        public Header()
         {
             InitializeComponent();
 
-            txtBåd.DataContext = this;
-            txtBesked.DataContext = this;
+            // Sæt datacontext
+            HeaderTitleText.DataContext = this;
         }
 
         #region Property

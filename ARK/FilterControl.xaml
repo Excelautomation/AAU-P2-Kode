@@ -7,7 +7,7 @@
              d:DesignHeight="100" d:DesignWidth="200">
 
     <Grid Margin="0,5">
-        <Button x:Name="knap1" Height="30" MaxWidth="300" VerticalAlignment="Top" Margin="2,0,0,0" BorderBrush="{x:Null}" Click="knap1_Click">
+        <Button x:Name="knap1" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="2,0,0,0" BorderBrush="{x:Null}" Click="knap1_Click">
             <Button.Background>
                 <ImageBrush ImageSource="images/tom.png" Stretch="Uniform"></ImageBrush>
             </Button.Background>

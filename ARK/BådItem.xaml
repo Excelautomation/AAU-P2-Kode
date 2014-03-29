@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock>En båd på vandet</TextBlock>
-    </Grid>
+             d:DesignHeight="100" d:DesignWidth="100">
+    <WrapPanel HorizontalAlignment="Stretch" Orientation="Vertical" Width="90" Height="90" Margin="5">
+        <TextBlock x:Name="txtBåd" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="14" Text="{Binding Båd}" />
+        <TextBlock x:Name="txtBesked" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="12" Text="{Binding Besked}" Margin="0,5,0,0" />
+
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="10" Text="Klik her for at læse mere" Margin="0,5,0,0" />
+    </WrapPanel>
 </UserControl>

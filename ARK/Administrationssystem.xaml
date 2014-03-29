@@ -5,8 +5,8 @@
         MinWidth="800" MinHeight="600">
     <DockPanel>
         <DockPanel LastChildFill="False" DockPanel.Dock="Top">
-            <WrapPanel Margin="10,5,10,0" DockPanel.Dock="Left">
-                <Grid>
+            <WrapPanel DockPanel.Dock="Left">
+                <Grid Margin="0,0,40,0">
                     <Image Source="/images/logo.gif" Stretch="Uniform" Height="90"></Image>
                     <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="14"
                             HorizontalAlignment="Center" Foreground="#0a42f7" 
@@ -17,24 +17,25 @@
                     </TextBlock>
                 </Grid>
 
-                <Button Content="Oversigt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Margin="10,0,0,0"/>
-                <Button Content="Blanketter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Margin="10,0,0,0"/>
-                <Button Content="Indstillinger" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="40" Margin="10,0,0,0"/>
+                <Button Content="Oversigt" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="40"/>
+                <Button Content="Blanketter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="40"/>
+                <Button Content="Indstillinger" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="40"/>
 
-                <TextBox HorizontalAlignment="Stretch" Text="" Width="120" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" Margin="60,8,0,0"/>
-                <Button Content="Søg" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Margin="0,8,0,0"/>
+                <TextBox HorizontalAlignment="Stretch" Text="" Width="120" Height="40" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                <Button Content="Søg" HorizontalAlignment="Right" VerticalAlignment="Center" Height="40" Width="30"/>
             </WrapPanel>
 
             <Grid Height="100" VerticalAlignment="Top" DockPanel.Dock="Right">
                 <TextBlock Margin="0,-40,5,0" Height="40" FontSize="20" FontFamily="Arial">Jon Doe Larsen</TextBlock>
                 <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial">Formand</TextBlock>
-                <Button Content="Log ud" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,65,0,0"/>
+                <Button Content="Log ud" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="70,60,0,0"/>
             </Grid>
         </DockPanel>
         
         <DockPanel Background="#e2e9f0">
-            <DockPanel HorizontalAlignment="Stretch"  Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200">
-                <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Filter" FontSize="25" FontFamily="Arial" FontWeight="Bold" Margin="0,10,0,10" />
+            <DockPanel HorizontalAlignment="Stretch" Width="200" Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200">
+                <ARK:Header Title="Filter" DockPanel.Dock="Top"/>
+                
                 <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 </StackPanel>
             </DockPanel>
