@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +19,33 @@ namespace Administrationssystem
     /// <summary>
     /// Interaction logic for FilterControl.xaml
     /// </summary>
-    public partial class FilterControl : UserControl
+    public partial class FilterControl : UserControl, INotifyPropertyChanged
     {
-        public string FilterName { get { return (string)this.knap1.Content; } set { this.knap1.Content = value; } }
+        private bool _isChecked;
+        private string _filterName;
+
+        public string FilterName { get { return _filterName; } set { _filterName = value; Notify("FilterName"); } }
+        public bool IsChecked { get { return _isChecked; } set { _isChecked = value; Notify("IsChecked"); } }
 
         public FilterControl(string filterName)
         {
             InitializeComponent();
 
             this.FilterName = filterName;
+            this.IsChecked = false;
+
+            knap1.DataContext = this;
         }
+
+        #region Property
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void Notify(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }
