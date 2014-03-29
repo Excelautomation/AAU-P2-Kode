@@ -26,7 +26,7 @@ namespace Administrationssystem
             InitializeComponent();
 
             for (int i = 0; i < 4; i++)
-                ListBox.Items.Add(new FilterControl("FilterNavn"));
+                Filters.Children.Add(new FilterControl("FilterNavn"));
         }
     }
 }
