@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <ScrollViewer Name="Scroller">       
+    <ScrollViewer Name="Scroller">
     </ScrollViewer>
 </UserControl>
