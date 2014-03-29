@@ -21,11 +21,11 @@ namespace Administrationssystem
     /// </summary>
     public partial class FilterControl : UserControl, INotifyPropertyChanged
     {
-        private bool _isChecked;
-        private string _filterName;
-
         public string FilterName { get { return _filterName; } set { _filterName = value; Notify("FilterName"); } }
         public bool IsChecked { get { return _isChecked; } set { _isChecked = value; Notify("IsChecked"); } }
+
+        private bool _isChecked;
+        private string _filterName;
 
         public FilterControl(string filterName)
         {

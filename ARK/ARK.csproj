@@ -79,6 +79,9 @@
     <Compile Include="BådItem.xaml.cs">
       <DependentUpon>BådItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <Page Include="FilterControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
