@@ -7,6 +7,7 @@
              d:DesignHeight="100" d:DesignWidth="300">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="https://scontent-a-fra.xx.fbcdn.net/hphotos-prn2/t1.0-9/1530506_355629557911254_1987273982_n.jpg"/>
 
         <TextBlock Margin="105,-40,5,0" Height="40" FontSize="20" FontFamily="Arial">Jon Doe Larsen</TextBlock>
         <TextBlock Margin="105,5,5,0" Height="40" FontSize="16" FontFamily="Arial">Formand</TextBlock>
