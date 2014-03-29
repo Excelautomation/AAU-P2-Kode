@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Administrationssystem;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +21,14 @@ namespace ARK
     /// </summary>
     public partial class Administrationssystem : Window
     {
+        ObservableCollection<FilterControl> filterControls = new ObservableCollection<FilterControl>();
+
         public Administrationssystem()
         {
             InitializeComponent();
-        }
 
-        private void Filter_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            for (int i = 0; i < 4; i++)
+                Filters.Children.Add(new FilterControl("FilterNavn" + i));
         }
     }
 }
