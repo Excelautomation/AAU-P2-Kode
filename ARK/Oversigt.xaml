@@ -10,13 +10,16 @@
 
         <WrapPanel DockPanel.Dock="Top" Orientation="Vertical">
             <ARK:Header Title="Både på vandet" Width="195px" Height="32px" HorizontalAlignment="Left"/>
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <WrapPanel>
-                    
-                </WrapPanel>
-            </ScrollViewer>
+            <!--<ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            -->
+            <WrapPanel>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 2" Besked="Båd 2 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 3" Besked="Båd 3 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+            </WrapPanel>
+            <!--</ScrollViewer>-->
         </WrapPanel>
-        <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,10,0,0">
+        <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,30,0,0">
             <ARK:Header Title="Skadesanmeldelser" Width="195px" Height="32px" HorizontalAlignment="Left"/>
             <!--<ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             -->    <WrapPanel>
@@ -28,13 +31,20 @@
                 </WrapPanel>
             <!--</ScrollViewer>-->
         </WrapPanel>
-        <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,10,0,0">
+        <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,30,0,0">
             <ARK:Header Title="Langtursansøgninger" Width="195px" Height="32px" HorizontalAlignment="Left"/>
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <WrapPanel>
-                    
-                </WrapPanel>
-            </ScrollViewer>
+            <!--<ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            -->
+            <WrapPanel>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 2" Besked="Båd 2 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 3" Besked="Båd 3 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 4" Besked="Båd 4 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 5" Besked="Båd 5 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 6" Besked="Båd 6 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+                <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 7" Besked="Båd 7 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+            </WrapPanel>
+            <!--</ScrollViewer>-->
         </WrapPanel>
     </DockPanel>
 </UserControl>

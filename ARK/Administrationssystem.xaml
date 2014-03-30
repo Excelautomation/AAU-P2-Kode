@@ -55,9 +55,15 @@
             </Grid>
         </DockPanel>
 
-        <WrapPanel DockPanel.Dock="Bottom" Background="#0a2f6c" Height="35">
-
-        </WrapPanel>
+        <Grid DockPanel.Dock="Bottom" Background="#0a2f6c" Height="35">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" HorizontalAlignment="Center" FontFamily="Arial" Foreground="White" FontSize="16" Margin="0,8,0,0">Aalborg Roklub | +45 98 12 67 19 | Søsportsvej 9, 9000 Aalborg</TextBlock>
+        </Grid>
         
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
