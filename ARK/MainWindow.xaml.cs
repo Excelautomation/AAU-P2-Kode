@@ -24,5 +24,25 @@ namespace ARK
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Administrationssystem window = new Administrationssystem();
+            showWindow(window);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Protokolsystem window = new Protokolsystem();
+            showWindow(window);
+        }
+
+        private void showWindow(Window window)
+        {
+            window.Show();
+            this.Hide();
+
+            window.Closing += (sender, e) => this.Close();
+        }
     }
 }
