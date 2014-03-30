@@ -27,7 +27,7 @@
             </TextBlock>
         </Grid>
 
-        <WrapPanel Grid.Column="2" VerticalAlignment="Center">
+        <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0,0,0">
             <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40">
                 <Button.Background>
                     <ImageBrush ImageSource="/images/menu1.png"></ImageBrush>
