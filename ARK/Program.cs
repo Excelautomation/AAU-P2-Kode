@@ -17,7 +17,12 @@ namespace ARK
             if (args.Select(e => e.ToLower()).Contains("administrationssystem"))
             {
                 window = new Administrationssystem();
-            } else
+            }
+            else if (args.Select(e => e.ToLower()).Contains("protokolsystem"))
+            {
+                window = new Protokolsystem();
+            }
+            else
             {
                 window = new Administrationssystem();
             }
