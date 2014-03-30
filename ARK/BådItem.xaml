@@ -6,9 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="130" d:DesignWidth="130">
     <WrapPanel HorizontalAlignment="Stretch" Orientation="Vertical" Width="120" Height="120" Margin="5">
-        <TextBlock x:Name="txtBåd" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="14" Text="{Binding Båd}" />
-        <TextBlock x:Name="txtBesked" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="12" Text="{Binding Besked}" Margin="0,5,0,0" />
+        <WrapPanel.Background>
+            <ImageBrush ImageSource="/images/baadbackground.png"></ImageBrush>
+        </WrapPanel.Background>
+        
+        <TextBlock x:Name="txtBåd" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="14" Foreground="White" Text="{Binding Båd}" />
+        <TextBlock x:Name="txtBesked" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="12" Foreground="White" Text="{Binding Besked}" Margin="0,5,0,0" />
 
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="10" Text="Klik her for at læse mere" Margin="0,5,0,0" />
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="10" Foreground="White" Text="Klik her for at læse mere" Margin="0,5,0,0" />
     </WrapPanel>
 </UserControl>

@@ -6,7 +6,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="300">
 
-    <Grid HorizontalAlignment="Stretch" Background="#3f73ac" Height="40">
+    <Grid HorizontalAlignment="Stretch" Height="40">
+        <Grid.Background>
+            <ImageBrush ImageSource="/images/overskriftsknap.png"/>
+        </Grid.Background>
+        
         <TextBlock x:Name="HeaderTitleText" TextWrapping="NoWrap" Text="{Binding Title}" VerticalAlignment="Top" Foreground="White" FontSize="28" HorizontalAlignment="Center"/>
     </Grid>
 
