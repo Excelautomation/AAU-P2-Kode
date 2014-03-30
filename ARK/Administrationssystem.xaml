@@ -22,18 +22,18 @@
                         <ImageBrush ImageSource="/images/menu1.png"></ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="40">
+                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="40">
                     <Button.Background>
                         <ImageBrush ImageSource="/images/menu3.png"></ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="40">
+                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="40">
                     <Button.Background>
                         <ImageBrush ImageSource="/images/menu4.png"></ImageBrush>
                     </Button.Background>
                 </Button>
 
-                <TextBox HorizontalAlignment="Stretch" Text="" Width="120" Height="40" VerticalAlignment="Center" TextWrapping="WrapWithOverflow">
+                <TextBox Foreground="White" Padding="10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Text="" Width="130" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
                     <TextBox.Background>
                         <ImageBrush ImageSource="/images/menu5.png"></ImageBrush>
                     </TextBox.Background>
