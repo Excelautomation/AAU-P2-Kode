@@ -16,8 +16,8 @@
                     <Grid>
                         <Image x:Name="Img" Source="images/tom.png" Stretch="Fill"></Image>
                         <TextBlock Text="{Binding FilterName}" FontFamily="Arial" FontSize="14"
-                            HorizontalAlignment="Center" Foreground="White" 
-                            VerticalAlignment="Center">
+                            HorizontalAlignment="Left" Foreground="White" 
+                            VerticalAlignment="Center" Margin="5,0,0,0">
                             <TextBlock.Effect>
                                 <DropShadowEffect ShadowDepth="0" Color="Blue" BlurRadius="10" />
                             </TextBlock.Effect>
@@ -26,10 +26,10 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Img" Property="Source" Value="images/langtursblanketter.png" />
+                            <Setter TargetName="Img" Property="Source" Value="images/tom-hover.png" />
                         </Trigger>
                         <DataTrigger Binding="{Binding IsChecked}" Value="True">
-                            <Setter TargetName="Img" Property="Source" Value="images/langtursblanketter.png"/>
+                            <Setter TargetName="Img" Property="Source" Value="images/tom-hover.png"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

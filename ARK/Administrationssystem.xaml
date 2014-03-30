@@ -54,7 +54,7 @@
         
         <DockPanel Background="#e2e9f0">
             <DockPanel HorizontalAlignment="Stretch" Width="200" Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200">
-                <ARK:Header Title="Filter" DockPanel.Dock="Top"/>
+                <ARK:Header Title="Filter" DockPanel.Dock="Top" Height="32px"/>
                 
                 <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 </StackPanel>
