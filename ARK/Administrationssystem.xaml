@@ -16,16 +16,16 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Margin="0,0,40,0" Grid.Column="0">
+        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
             <Image Source="/images/logo.gif" Stretch="Uniform" Height="90"></Image>
             <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="14"
                             HorizontalAlignment="Center" Foreground="#0a42f7" 
-                            VerticalAlignment="Bottom" Margin="0,0,0,10">
+                            VerticalAlignment="Bottom" Margin="0,-20,0,10">
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="0" Color="Blue" BlurRadius="10" />
                 </TextBlock.Effect>
             </TextBlock>
-        </Grid>
+        </StackPanel>
 
         <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0,0,0">
             <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40">
