@@ -17,23 +17,23 @@
                     </TextBlock>
                 </Grid>
 
-                <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="40">
+                <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40">
                     <Button.Background>
                         <ImageBrush ImageSource="/images/menu1.png"></ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="40">
+                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="112.387" Height="40">
                     <Button.Background>
                         <ImageBrush ImageSource="/images/menu3.png"></ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Height="40">
+                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Width="125.82" Height="40">
                     <Button.Background>
                         <ImageBrush ImageSource="/images/menu4.png"></ImageBrush>
                     </Button.Background>
                 </Button>
 
-                <TextBox Foreground="White" Padding="10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Text="" Width="130" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
+                <TextBox Foreground="White" Padding="10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Text="" Width="155.373" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
                     <TextBox.Background>
                         <ImageBrush ImageSource="/images/menu5.png"></ImageBrush>
                     </TextBox.Background>
@@ -52,14 +52,16 @@
             </Grid>
         </DockPanel>
         
-        <DockPanel Background="#e2e9f0">
-            <DockPanel HorizontalAlignment="Stretch" Width="200" Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200">
-                <ARK:Header Title="Filter" DockPanel.Dock="Top" Height="32px"/>
+        <DockPanel>
+			<StackPanel Background="#e2e9f0">
+				<DockPanel  HorizontalAlignment="Stretch" Width="200" Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200">
+					<ARK:Header Title="Filter" DockPanel.Dock="Top" Height="32px"/>
                 
-                <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                </StackPanel>
-            </DockPanel>
-            <Administrationssystem:Content Margin="10,10,0,0"/>
+					<StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
+					</StackPanel>
+				</DockPanel>
+			</StackPanel>
+            <Administrationssystem:Content Margin="10,0,0,0" Padding="10,10,0,0" Background="#e2e9f0"/>
         </DockPanel>
     </DockPanel>
 </Window>

@@ -4,15 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="130" d:DesignWidth="130">
-    <WrapPanel HorizontalAlignment="Stretch" Orientation="Vertical" Width="120" Height="120" Margin="5">
-        <WrapPanel.Background>
-            <ImageBrush ImageSource="/images/baadbackground.png"></ImageBrush>
-        </WrapPanel.Background>
-        
-        <TextBlock x:Name="txtBåd" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="14" Foreground="White" Text="{Binding Båd}" />
-        <TextBlock x:Name="txtBesked" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="12" Foreground="White" Text="{Binding Besked}" Margin="0,5,0,0" />
+             d:DesignHeight="125" d:DesignWidth="160">
+	<DockPanel LastChildFill="False" Width="160" Height="120" Margin="0,5,0,0">
+		<DockPanel.Background>
+			<ImageBrush ImageSource="/images/baadbackground.png"></ImageBrush>
+		</DockPanel.Background>
 
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="10" Foreground="White" Text="Klik her for at læse mere" Margin="0,5,0,0" />
-    </WrapPanel>
+		<WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Orientation="Vertical">
+			<TextBlock x:Name="txtBåd" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="14" Foreground="White" Text="{Binding Båd}" Padding="5,10,5,0" />
+			<TextBlock x:Name="txtBesked" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="12" Foreground="White" Text="{Binding Besked}" Margin="0,5,0,0" Padding="10,0,10,0" />
+		</WrapPanel>
+
+		<TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="10" Foreground="White" Text="Klik her for at læse mere" Margin="0,5,0,0" Padding="5,0,5,15" />
+	</DockPanel>
 </UserControl>
