@@ -33,9 +33,12 @@
                     </Button.Background>
                 </Button>
 
-                <TextBox Foreground="White" Padding="10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Text="" Width="155.373" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
+                <TextBox BorderThickness="1" BorderBrush="#FF707070" Foreground="White" Padding="20,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Width="155.373" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
+                    <TextBox.Text>
+                        Søg her...
+                    </TextBox.Text>
                     <TextBox.Background>
-                        <ImageBrush ImageSource="/images/menu5.png"></ImageBrush>
+                        <ImageBrush ImageSource="/images/Søgebar.png"></ImageBrush>
                     </TextBox.Background>
                 </TextBox>
                 <!--<Button Content="Søg" HorizontalAlignment="Right" VerticalAlignment="Center" Height="40" Width="30"/>-->
@@ -51,17 +54,33 @@
                 </Button>
             </Grid>
         </DockPanel>
+
+        <WrapPanel DockPanel.Dock="Bottom" Background="#0a2f6c" Height="35">
+
+        </WrapPanel>
         
-        <DockPanel>
-			<StackPanel Background="#e2e9f0">
-				<DockPanel  HorizontalAlignment="Stretch" Width="200" Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top" MinWidth="200">
-					<ARK:Header Title="Filter" DockPanel.Dock="Top" Height="32px"/>
-                
-					<StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
-					</StackPanel>
-				</DockPanel>
-			</StackPanel>
-            <Administrationssystem:Content Margin="10,0,0,0" Padding="10,10,0,0" Background="#e2e9f0"/>
-        </DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Background="#e2e9f0" Grid.Column="0">
+                <DockPanel HorizontalAlignment="Stretch" Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top">
+                    <ARK:Header Title="Filter" DockPanel.Dock="Top" Height="32px"/>
+
+                    <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    </StackPanel>
+                </DockPanel>
+
+            </StackPanel>
+
+            <ScrollViewer x:Name="Scroller" Grid.Column="1" Margin="10,0,0,0" Padding="10,10,0,0" Background="#e2e9f0">
+                <Administrationssystem:Oversigt />
+            </ScrollViewer>
+        </Grid>
     </DockPanel>
 </Window>

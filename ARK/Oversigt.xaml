@@ -21,10 +21,10 @@
             <!--<ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             -->    <WrapPanel>
                     <ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
-					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
-					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
-					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
-					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 2" Besked="Båd 2 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 3" Besked="Båd 3 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 4" Besked="Båd 4 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
+					<ARK:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 5" Besked="Båd 5 blev skadet af nisser d. 18/12" Margin="0,0,5,0"/>
                 </WrapPanel>
             <!--</ScrollViewer>-->
         </WrapPanel>
