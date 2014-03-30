@@ -8,9 +8,13 @@
 	x:Name="UserControl"
 	d:DesignWidth="596" d:DesignHeight="43">
 
-	<Grid x:Name="LayoutRoot">
-		<StackPanel x:Name="Headline" HorizontalAlignment="Left" Height="43" Width="596" VerticalAlignment="Top" Background="White" Margin="0,-1,0,0">
-			<Label Name="HeadlineLabel" Content="Vælg båd" Height="43" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="29.333"/>
-		</StackPanel>
-	</Grid>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="339*"/>
+            <ColumnDefinition Width="257*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="Headline" HorizontalAlignment="Left" Height="43" Width="596" VerticalAlignment="Top" Background="White" Margin="0,-1,0,0" Grid.ColumnSpan="2">
+            <Label Name="HeadlineLabel" Content="Start Rotur▸Vælg båd" Height="43" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="24"/>
+        </StackPanel>
+    </Grid>
 </UserControl>
