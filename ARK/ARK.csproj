@@ -76,32 +76,69 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BådItem.xaml.cs">
+    <Compile Include="Administrationssystem\Administrationssystem.xaml.cs">
+      <DependentUpon>Administrationssystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Administrationssystem\AdminLogin.xaml.cs">
+      <DependentUpon>AdminLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Administrationssystem\BådItem.xaml.cs">
       <DependentUpon>BådItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Header.xaml.cs">
+    <Compile Include="Administrationssystem\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Oversigt.xaml.cs">
+    <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Protokolsystem.xaml.cs">
+    <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
+      <DependentUpon>BeginTripBoats.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\BoatsOut.xaml.cs">
+      <DependentUpon>BoatsOut.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\CreateInjury.xaml.cs">
+      <DependentUpon>CreateInjury.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\CreateLongDistance.xaml.cs">
+      <DependentUpon>CreateLongDistance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\DistanceStatisticFilterss.xaml.cs">
+      <DependentUpon>DistanceStatisticFilterss.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\DistanceStatistics.xaml.cs">
+      <DependentUpon>DistanceStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\EndTrip.xaml.cs">
+      <DependentUpon>EndTrip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\HeadlineControl.xaml.cs">
+      <DependentUpon>HeadlineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\MembersInformation.xaml.cs">
+      <DependentUpon>MembersInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Protokolsystem.xaml.cs">
       <DependentUpon>Protokolsystem.xaml</DependentUpon>
     </Compile>
-    <Page Include="Administrationssystem.xaml">
+    <Page Include="Administrationssystem\Administrationssystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BådItem.xaml">
+    <Page Include="Administrationssystem\AdminLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FilterControl.xaml">
+    <Page Include="Administrationssystem\BådItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Administrationssystem\FilterControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Header.xaml">
+    <Page Include="Administrationssystem\Header.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,25 +146,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Administrationssystem.xaml.cs">
-      <DependentUpon>Administrationssystem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FilterControl.xaml.cs">
+    <Compile Include="Administrationssystem\FilterControl.xaml.cs">
       <DependentUpon>FilterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Oversigt.xaml">
+    <Page Include="Administrationssystem\Pages\Oversigt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Protokolsystem.xaml">
+    <Page Include="Protokolsystem\Pages\BeginTripBoats.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\BoatsOut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\CreateInjury.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\CreateLongDistance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\DistanceStatisticFilterss.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\DistanceStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\EndTrip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\HeadlineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\MembersInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Protokolsystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,6 +220,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\arial.ttf" />
+    <Resource Include="Fonts\arialbd.ttf" />
+    <Resource Include="Fonts\arialbi.ttf" />
+    <Resource Include="Fonts\ariali.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -210,6 +284,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\menu5-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ark.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

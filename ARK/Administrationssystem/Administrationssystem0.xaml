@@ -1,0 +1,133 @@
+﻿<Window xmlns:ARK="clr-namespace:ARK"  xmlns:Administrationssystem="clr-namespace:Administrationssystem"  x:Class="ARK.Administrationssystem0"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Aalborg Roklubs administrationssystem" Height="768" Width="1024"
+        MinWidth="1024" MinHeight="768" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MinWidth="150" MaxWidth="280" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+            <Image Source="/images/logo.gif" Stretch="Uniform" Height="90"></Image>
+            <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="19"
+                            HorizontalAlignment="Center" Foreground="#0a42f7" 
+                            VerticalAlignment="Bottom" Margin="0,-20,0,10">
+            </TextBlock>
+        </StackPanel>
+
+        <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0,0,0">
+            <Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="Img" Source="/images/menu1-1.png" Stretch="Fill"></Image>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Img" Property="Source" Value="/images/menu1-1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="btnMenuBlanketter" Content="Blanketter" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="112.387" Height="40">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="Img" Source="/images/menu3-1.png" Stretch="Fill"></Image>
+                            <TextBlock Text="Blanketter" FontSize="17"
+                                HorizontalAlignment="Center" Foreground="White" 
+                                VerticalAlignment="Center">
+                            </TextBlock>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Img" Property="Source" Value="/images/menu3-1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="btnMenuIndstillinger" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125.82" Height="40">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="Img" Source="/images/menu4-1.png" Stretch="Fill"></Image>
+                            <TextBlock Text="Indstillinger" FontSize="17"
+                                HorizontalAlignment="Center" Foreground="White" 
+                                VerticalAlignment="Center">
+                            </TextBlock>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Img" Property="Source" Value="/images/menu4-1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <TextBox x:Name="txtMenuSearch" BorderThickness="0" Foreground="White" Padding="20,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Width="155.373" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
+                <TextBox.Text>
+                    Søg her...
+                </TextBox.Text>
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/images/Søgebar.png"></ImageBrush>
+                </TextBox.Background>
+            </TextBox>
+        </WrapPanel>
+
+        <Grid Height="100" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right">
+
+            <TextBlock Margin="0,-40,5,0" Height="40" FontSize="20" FontFamily="Arial">Jon Doe Larsen</TextBlock>
+            <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial">Formand</TextBlock>
+            <Button x:Name="btnMenuLogout" Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="50,70,20,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="/images/logud.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <Image x:Name="imgMenuBrugerBillede" Margin="-105,5,0,0" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="https://scontent-a-fra.xx.fbcdn.net/hphotos-prn2/t1.0-9/1530506_355629557911254_1987273982_n.jpg"/>
+        </Grid>
+
+        <StackPanel Background="#e2e9f0" Grid.Column="0" Grid.Row="1">
+            <DockPanel HorizontalAlignment="Stretch" Margin="10,10,10,0" DockPanel.Dock="Left" VerticalAlignment="Top">
+                <ARK:Header Title="Filter" DockPanel.Dock="Top" Height="32px"/>
+
+                <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                </StackPanel>
+            </DockPanel>
+
+        </StackPanel>
+
+        <GridSplitter HorizontalAlignment="Right" 
+                  VerticalAlignment="Stretch" 
+                  Grid.Column="1" Grid.Row="1" ResizeBehavior="PreviousAndNext"
+                  Width="5" Background="#FFBCBCBC"/>
+
+        <ScrollViewer x:Name="Scroller" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" PanningMode="VerticalOnly" Margin="10,0,0,0" Padding="10,10,0,0" Background="#e2e9f0">
+            <Administrationssystem:Oversigt />
+        </ScrollViewer>
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="4" Background="#0a2f6c" Height="35">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Center" FontFamily="Arial" Foreground="White" FontSize="16" Margin="0,8,0,0">Aalborg Roklub | +45 98 12 67 19 | Søsportsvej 9, 9000 Aalborg</TextBlock>
+        </Grid>
+    </Grid>
+</Window>

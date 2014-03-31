@@ -1,4 +1,4 @@
-﻿using Administrationssystem;
+﻿using ARK.Administrationssystem;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ARK
+namespace ARK.Administrationssystem
 {
     /// <summary>
     /// Interaction logic for Administrationssystem.xaml

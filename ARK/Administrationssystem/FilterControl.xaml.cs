@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Administrationssystem
+namespace ARK.Administrationssystem
 {
     /// <summary>
     /// Interaction logic for FilterControl.xaml
