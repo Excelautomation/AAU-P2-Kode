@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ARK.modle
+namespace ARK.Model
 {
-    class både
+    class Både
     {
         public int Id { get; set; }
         public string Navn { get; set; }
