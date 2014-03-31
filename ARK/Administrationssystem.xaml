@@ -18,33 +18,68 @@
 
         <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
             <Image Source="/images/logo.gif" Stretch="Uniform" Height="90"></Image>
-            <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="14"
+            <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="19"
                             HorizontalAlignment="Center" Foreground="#0a42f7" 
                             VerticalAlignment="Bottom" Margin="0,-20,0,10">
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="0" Color="Blue" BlurRadius="10" />
-                </TextBlock.Effect>
             </TextBlock>
         </StackPanel>
 
         <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,0,0,0">
-            <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40">
-                <Button.Background>
-                    <ImageBrush ImageSource="/images/menu1-1.png"></ImageBrush>
-                </Button.Background>
+            <Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="Img" Source="/images/menu1-1.png" Stretch="Fill"></Image>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Img" Property="Source" Value="/images/menu1-1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button Content="Blanketter" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="112.387" Height="40">
-                <Button.Background>
-                    <ImageBrush ImageSource="/images/menu3-1.png"></ImageBrush>
-                </Button.Background>
+            <Button x:Name="btnMenuBlanketter" Content="Blanketter" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="112.387" Height="40">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="Img" Source="/images/menu3-1.png" Stretch="Fill"></Image>
+                            <TextBlock Text="Blanketter" FontSize="17"
+                                HorizontalAlignment="Center" Foreground="White" 
+                                VerticalAlignment="Center">
+                            </TextBlock>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Img" Property="Source" Value="/images/menu3-1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button Content="Indstillinger" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125.82" Height="40">
-                <Button.Background>
-                    <ImageBrush ImageSource="/images/menu4-1.png"></ImageBrush>
-                </Button.Background>
+            <Button x:Name="btnMenuIndstillinger" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125.82" Height="40">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image x:Name="Img" Source="/images/menu4-1.png" Stretch="Fill"></Image>
+                            <TextBlock Text="Indstillinger" FontSize="17"
+                                HorizontalAlignment="Center" Foreground="White" 
+                                VerticalAlignment="Center">
+                            </TextBlock>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Img" Property="Source" Value="/images/menu4-1.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
 
-            <TextBox BorderThickness="1" BorderBrush="#FF707070" Foreground="White" Padding="20,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Width="155.373" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
+            <TextBox x:Name="txtMenuSearch" BorderThickness="0" Foreground="White" Padding="20,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Width="155.373" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
                 <TextBox.Text>
                     Søg her...
                 </TextBox.Text>
@@ -58,12 +93,12 @@
 
             <TextBlock Margin="0,-40,5,0" Height="40" FontSize="20" FontFamily="Arial">Jon Doe Larsen</TextBlock>
             <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial">Formand</TextBlock>
-            <Button Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="50,70,20,0">
+            <Button x:Name="btnMenuLogout" Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="50,70,20,0">
                 <Button.Background>
                     <ImageBrush ImageSource="/images/logud.png"></ImageBrush>
                 </Button.Background>
             </Button>
-            <Image Margin="-105,5,0,0" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="https://scontent-a-fra.xx.fbcdn.net/hphotos-prn2/t1.0-9/1530506_355629557911254_1987273982_n.jpg"/>
+            <Image x:Name="imgMenuBrugerBillede" Margin="-105,5,0,0" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="https://scontent-a-fra.xx.fbcdn.net/hphotos-prn2/t1.0-9/1530506_355629557911254_1987273982_n.jpg"/>
         </Grid>
 
         <StackPanel Background="#e2e9f0" Grid.Column="0" Grid.Row="1">
