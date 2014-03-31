@@ -5,15 +5,20 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARK", "ARK\ARK.csproj", "{813CD1E8-C513-433E-8123-3826C66895EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{06672D10-FDA0-4953-9787-3F6B652E5A1F}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://edelskjold.dk:8080/tfs/defaultcollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ARK\\ARK.csproj
 		SccProjectName1 = ARK
 		SccLocalPath1 = ARK
+		SccProjectUniqueName2 = Test\\Test.csproj
+		SccProjectName2 = Test
+		SccLocalPath2 = Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +29,10 @@ Global
 		{813CD1E8-C513-433E-8123-3826C66895EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{813CD1E8-C513-433E-8123-3826C66895EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{813CD1E8-C513-433E-8123-3826C66895EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06672D10-FDA0-4953-9787-3F6B652E5A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06672D10-FDA0-4953-9787-3F6B652E5A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06672D10-FDA0-4953-9787-3F6B652E5A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06672D10-FDA0-4953-9787-3F6B652E5A1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
