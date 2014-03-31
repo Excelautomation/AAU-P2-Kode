@@ -91,7 +91,7 @@
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\både.cs" />
+    <Compile Include="Model\Både.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
       <DependentUpon>BeginTripBoats.xaml</DependentUpon>
