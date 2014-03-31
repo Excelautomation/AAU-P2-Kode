@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Administrationssystem
+namespace ARK.Administrationssystem
 {
     /// <summary>
-    /// Interaction logic for Oversigt.xaml
+    /// Interaction logic for AdminLogin.xaml
     /// </summary>
-    public partial class Oversigt : UserControl
+    public partial class AdminLogin : Window
     {
-        public Oversigt()
+        public AdminLogin()
         {
             InitializeComponent();
         }

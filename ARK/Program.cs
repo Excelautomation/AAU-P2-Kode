@@ -16,15 +16,15 @@ namespace ARK
 
             if (args.Select(e => e.ToLower()).Contains("administrationssystem"))
             {
-                window = new Administrationssystem();
+                window = new ARK.Administrationssystem.Administrationssystem();
             }
             else if (args.Select(e => e.ToLower()).Contains("protokolsystem"))
             {
-                window = new Protokolsystem();
+                window = new Protokolsystem.Protokolsystem();
             }
             else if (System.Security.Principal.WindowsIdentity.GetCurrent().Name == "SAHB-WIN7\\sahb")
             {
-                window = new Administrationssystem();
+                window = new MainWindow();
             }
             else
             {

@@ -14,19 +14,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ARK
+namespace ARK.Administrationssystem
 {
-    public partial class Header : UserControl, INotifyPropertyChanged
+    /// <summary>
+    /// Interaction logic for BådItem.xaml
+    /// </summary>
+    public partial class BådItem : UserControl, INotifyPropertyChanged
     {
-        public string Title { get { return _title; } set { _title = value; Notify("Title"); } }
-        private string _title;
+        // TODO: Båd skal nok være af typen båd
+        public string Båd { get { return _båd; } set { _båd = value; Notify("Båd"); } }
+        public string Besked { get { return _besked; } set { _besked = value; Notify("Besked"); } }
 
-        public Header()
+        private string _båd;
+        private string _besked;
+
+        public BådItem()
         {
             InitializeComponent();
 
-            // Sæt datacontext
-            HeaderTitleText.DataContext = this;
+            txtBåd.DataContext = this;
+            txtBesked.DataContext = this;
         }
 
         #region Property

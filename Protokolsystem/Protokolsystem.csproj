@@ -61,8 +61,20 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="HeadlineControl.xaml.cs">
+      <DependentUpon>HeadlineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminLogin.xaml.cs">
       <DependentUpon>AdminLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BeginTripBoats.xaml.cs">
+      <DependentUpon>BeginTripBoats.xaml</DependentUpon>
     </Compile>
     <Compile Include="BoatsOut.xaml.cs">
       <DependentUpon>BoatsOut.xaml</DependentUpon>
@@ -73,54 +85,18 @@
     <Compile Include="CreateLongDistance.xaml.cs">
       <DependentUpon>CreateLongDistance.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DistanceStatisticFilterss.xaml.cs">
+      <DependentUpon>DistanceStatisticFilterss.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DistanceStatistics.xaml.cs">
       <DependentUpon>DistanceStatistics.xaml</DependentUpon>
     </Compile>
     <Compile Include="EndTrip.xaml.cs">
       <DependentUpon>EndTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HeadlineControl.xaml.cs">
-      <DependentUpon>HeadlineControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Information.xaml.cs">
-      <DependentUpon>Information.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BeginTripBoats.xaml.cs">
-      <DependentUpon>BeginTripBoats.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DistanceStatisticFilterss.xaml.cs">
-      <DependentUpon>DistanceStatisticFilterss.xaml</DependentUpon>
-    </Compile>
-    <Page Include="AdminLogin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BoatsOut.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CreateInjury.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CreateLongDistance.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DistanceStatistics.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EndTrip.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="HeadlineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,7 +109,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MembersInformation.xaml">
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="AdminLogin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -141,11 +121,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="BoatsOut.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreateInjury.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreateLongDistance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DistanceStatisticFilterss.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DistanceStatistics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EndTrip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MembersInformation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -199,6 +199,9 @@
       <AutoFill>True</AutoFill>
     </BlendEmbeddedFont>
     <Resource Include="Images\ark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Protokolsystem\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />

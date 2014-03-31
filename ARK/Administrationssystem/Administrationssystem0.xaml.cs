@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Administrationssystem;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +17,18 @@ using System.Windows.Shapes;
 namespace ARK
 {
     /// <summary>
-    /// Interaction logic for Protokolsystem.xaml
+    /// Interaction logic for Administrationssystem.xaml
     /// </summary>
-    public partial class Protokolsystem : Window
+    public partial class Administrationssystem0 : Window
     {
-        public Protokolsystem()
+        ObservableCollection<FilterControl> filterControls = new ObservableCollection<FilterControl>();
+
+        public Administrationssystem0()
         {
             InitializeComponent();
+
+            for (int i = 0; i < 4; i++)
+                Filters.Children.Add(new FilterControl("FilterNavn" + i));
         }
     }
 }
