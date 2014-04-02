@@ -6,8 +6,9 @@
              x:Class="ARK.Administrationssystem.Oversigt" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" Background="#CCCCCC">
+    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" Background="#CCCCCC" BorderThickness="1" BorderBrush="Black">
         <StackPanel>
+            <Label FontSize="40" Margin="0,-15,0,5">Oversigt</Label>
             <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,0" Background="#e2e9f0">
                 <Administrationssystem:Header Title="Både på vandet" Width="195px" Height="32px" HorizontalAlignment="Left" Margin="5,5,5,0"/>
                 <Rectangle Margin="5,5,5,0" Height="2" Fill="Gray"/>
