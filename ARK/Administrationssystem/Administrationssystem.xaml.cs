@@ -29,14 +29,18 @@ namespace ARK.Administrationssystem
 
             //for (int i = 0; i < 4; i++)
             //    Filters.Children.Add(new FilterControl("FilterNavn" + i));
-
+        
             CheckBox[] arrch = new CheckBox[] {
-                new CheckBox() { Name="ch1", Content="checkbox1", FontSize=16 },
-                new CheckBox() { Name="ch2", Content="checkbox2", FontSize=16 },
-                new CheckBox() { Name="ch3", Content="checkbox3", FontSize=16 },
-                new CheckBox() { Name="ch4", Content="checkbox4", FontSize=16 }
+                new CheckBox() { Name="ch1", Content="Både på vandet"},
+                new CheckBox() { Name="ch2", Content="Skadesblanketter"},
+                new CheckBox() { Name="ch3", Content="Langtursansøgninger"},
+                new CheckBox() { Name="ch4", Content="Bådtype1" },
+                new CheckBox() { Name="ch5", Content="Bådtype2"},
+                new CheckBox() { Name="ch6", Content="Bådtype3"},
+                new CheckBox() { Name="ch7", Content="Bådtype4"}
             };
 
+            // Jeg ville godt have en lille streg ind mellem langtursblanketter og bådtype1, men det er ikke en prioritet.
             foreach (CheckBox ch in arrch)      
             {
                 Stackpanelfilter.Children.Add(ch);
