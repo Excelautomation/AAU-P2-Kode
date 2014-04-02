@@ -88,6 +88,12 @@
     <Compile Include="Administrationssystem\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Administrationssystem\Pages\Blanketter.xaml.cs">
+      <DependentUpon>Blanketter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Administrationssystem\Pages\Indstillinger.xaml.cs">
+      <DependentUpon>Indstillinger.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
@@ -141,6 +147,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Administrationssystem\Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Administrationssystem\Pages\Blanketter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Administrationssystem\Pages\Indstillinger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
