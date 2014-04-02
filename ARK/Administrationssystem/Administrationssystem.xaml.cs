@@ -29,19 +29,20 @@ namespace ARK.Administrationssystem
 
             //for (int i = 0; i < 4; i++)
             //    Filters.Children.Add(new FilterControl("FilterNavn" + i));
-        
-            CheckBox[] arrch = new CheckBox[] {
-                new CheckBox() { Name="ch1", Content="Både på vandet"},
-                new CheckBox() { Name="ch2", Content="Skadesblanketter"},
-                new CheckBox() { Name="ch3", Content="Langtursansøgninger"},
-                new CheckBox() { Name="ch4", Content="Bådtype1" },
-                new CheckBox() { Name="ch5", Content="Bådtype2"},
-                new CheckBox() { Name="ch6", Content="Bådtype3"},
-                new CheckBox() { Name="ch7", Content="Bådtype4"}
+
+
+            CheckBox[] oversigt_checkbox_arr = new CheckBox[] {
+                new CheckBox() { Name="oversigt_cb1", Content="Både på vandet"},
+                new CheckBox() { Name="oversigt_cb2", Content="Skadesblanketter"},
+                new CheckBox() { Name="oversigt_cb3", Content="Langtursansøgninger"},
+                new CheckBox() { Name="oversigt_cb4", Content="Bådtype1" },
+                new CheckBox() { Name="oversigt_cb5", Content="Bådtype2"},
+                new CheckBox() { Name="oversigt_cb6", Content="Bådtype3"},
+                new CheckBox() { Name="oversigt_cb7", Content="Bådtype4"}
             };
 
             // Jeg ville godt have en lille streg ind mellem langtursblanketter og bådtype1, men det er ikke en prioritet.
-            foreach (CheckBox ch in arrch)      
+            foreach (CheckBox ch in oversigt_checkbox_arr)      
             {
                 Stackpanelfilter.Children.Add(ch);
             }
@@ -53,11 +54,42 @@ namespace ARK.Administrationssystem
         {
             MainContent.Children.Clear();
             MainContent.Children.Add(new Oversigt());
+
+            // duplikeret fra Administrationssystem(). Grimt grimt.
+            CheckBox[] oversigt_checkbox_arr = new CheckBox[] {
+                new CheckBox() { Name="oversigt_cb1", Content="Både på vandet"},
+                new CheckBox() { Name="oversigt_cb2", Content="Skadesblanketter"},
+                new CheckBox() { Name="oversigt_cb3", Content="Langtursansøgninger"},
+                new CheckBox() { Name="oversigt_cb4", Content="Bådtype1" },
+                new CheckBox() { Name="oversigt_cb5", Content="Bådtype2"},
+                new CheckBox() { Name="oversigt_cb6", Content="Bådtype3"},
+                new CheckBox() { Name="oversigt_cb7", Content="Bådtype4"}
+            };
+
+            Stackpanelfilter.Children.Clear();
+            foreach (CheckBox cb in oversigt_checkbox_arr)
+            {
+                Stackpanelfilter.Children.Add(cb);
+            }
         }
         private void btnMenuBlanketter_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Children.Clear();
             MainContent.Children.Add(new Pages.Blanketter());
+
+            CheckBox[] Blanketter_checkbox_arr = new CheckBox[] {
+                new CheckBox() { Name="blank_cb1", Content="Skadesblanketter"},
+                new CheckBox() { Name="blank_cb2", Content="Langtursblanketter"},
+                new CheckBox() { Name="blank_cb3", Content="Ulæste"},
+                new CheckBox() { Name="blank_cb4", Content="Læste"},
+            };
+
+            Stackpanelfilter.Children.Clear();
+            foreach (CheckBox cb in Blanketter_checkbox_arr)
+            {
+                Stackpanelfilter.Children.Add(cb);
+            }
+
         }
         private void btnMenuIndstillinger_Click(object sender, RoutedEventArgs e)
         {

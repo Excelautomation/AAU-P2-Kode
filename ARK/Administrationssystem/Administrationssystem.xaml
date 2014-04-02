@@ -4,7 +4,7 @@
         x:Class="ARK.Administrationssystem.Administrationssystem"
         Title="Administrationssystem" Height="768" Width="1024"
         MinWidth="1024" MinHeight="768" WindowState="Maximized">
-    
+
     <!--Skalerer checkboxes-->
     <Window.Resources>
         <Style TargetType="CheckBox">
@@ -15,11 +15,12 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
     <Grid Background="#CCCCCC">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="104" />
+            <RowDefinition Height="6"/>
+            <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -28,14 +29,14 @@
             <ColumnDefinition Width="809*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Height="102" Margin="0,2,0,0">
             <Image Source="/images/logo.gif" Stretch="Uniform" Height="90"/>
             <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="19"
 				HorizontalAlignment="Center" Foreground="#0a42f7" 
 				VerticalAlignment="Bottom" Margin="0,-20,0,10"/>
         </StackPanel>
 
-        <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,31,202,31">
+        <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,36,202,28" Height="40">
             <Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40" Click="btnMenuHome_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -95,7 +96,7 @@
             </TextBox> -->
         </WrapPanel>
 
-        <Grid Height="100" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right">
+        <Grid Height="100" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="165">
 
             <TextBlock Margin="0,-40,5,0" Height="40" FontSize="20" FontFamily="Arial"><Run Text="Jon Doge Larsen" FontFamily="Arial"/></TextBlock>
             <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial"><Run Text="Formand" FontFamily="Arial"/></TextBlock>
@@ -106,8 +107,8 @@
             </Button>
             <Image x:Name="imgMenuBrugerBillede" Margin="-105,5,0,0" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="https://scontent-a-fra.xx.fbcdn.net/hphotos-prn2/t1.0-9/1530506_355629557911254_1987273982_n.jpg"/>
         </Grid>
-
-        <StackPanel Background="#e2e9f0" Grid.Column="0" Grid.Row="1">
+        <Border Grid.Column="0" Grid.Row="2"  Background="#e2e9f0" BorderBrush="Gray" BorderThickness="2">
+        <StackPanel>
             <Border BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,5,5,5" Height="68">
                 <StackPanel Margin="0,0,0,0">
                     <Label Margin="0,0,0,-10" FontSize="18">Søgning</Label>
@@ -126,20 +127,22 @@
                     <!-- <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/> -->
                 </StackPanel>
             </Border>
-
         </StackPanel>
-
-        <GridSplitter HorizontalAlignment="Right" 
+        </Border>
+        <!--<GridSplitter HorizontalAlignment="Right" 
 			VerticalAlignment="Stretch" 
-			Grid.Column="1" Grid.Row="1" ResizeBehavior="PreviousAndNext"
+			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
 			Width="5" Background="#FFBCBCBC"/>
-
-        <Grid x:Name="MainContent" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Margin="10,0,0,0" Background="#e2e9f0">
-            <Administrationssystem:Oversigt/>
+        -->
+        
+        <Grid x:Name="MainContent" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Margin="10,0,0,0" Background="#e2e9f0">
+            <Border BorderBrush="Gray" BorderThickness="2">
+                <Administrationssystem:Oversigt/>
+            </Border>
         </Grid>
 
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="3" Background="#0a2f6c" Height="35">
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="#0a2f6c">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
