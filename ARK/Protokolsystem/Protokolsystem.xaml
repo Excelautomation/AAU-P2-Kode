@@ -109,6 +109,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}"/>
     </Window.Resources>
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -130,6 +131,10 @@
         <StackPanel x:Name="Content" HorizontalAlignment="Left" Height="601" Width="601" VerticalAlignment="Top"  Background="White" Grid.Column="1" Grid.Row="1"/>
         <StackPanel x:Name="Knapper" Grid.Column="1" Height="84" Margin="10,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="576"/>
         <Grid HorizontalAlignment="Left" Height="759" VerticalAlignment="Bottom" Width="194" Grid.RowSpan="3" Background="#FFE9EAED" Margin="0,-10,0,-12">
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="76.998" Margin="5.331,663.002,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource RectangleStyle1}"/>
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="148.498" Margin="5.331,483.002,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource RectangleStyle1}"/>
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="223" Margin="5.331,230.5,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource RectangleStyle1}"/>
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="184.5" Margin="5.331,19.502,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource RectangleStyle1}"/>
             <Button x:Name="BeginTrip" Content="START &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{DynamicResource SmallShadow}" BorderThickness="2" Margin="10,28,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Click="BeginTrip_Click">
                 <Button.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
