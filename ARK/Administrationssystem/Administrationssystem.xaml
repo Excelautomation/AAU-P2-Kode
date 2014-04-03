@@ -123,17 +123,18 @@
                     <Label FontSize="18">Filter</Label>
 
                     <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
-                    <StackPanel x:Name="Stackpanelfilter" Margin="5,0,5,5"></StackPanel>
+                        <StackPanel x:Name="Stackpanelfilter" Margin="5,0,5,5">
+                            <ItemsControl ItemsSource="{Binding Path=FilterControls}" />
+                        </StackPanel>
                     <!-- <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/> -->
                 </StackPanel>
             </Border>
         </StackPanel>
         </Border>
-        <!--<GridSplitter HorizontalAlignment="Right" 
+        <GridSplitter HorizontalAlignment="Right" 
 			VerticalAlignment="Stretch" 
 			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
 			Width="5" Background="#FFBCBCBC"/>
-        -->
         
         <Grid x:Name="MainContent" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Margin="10,0,0,0" Background="#e2e9f0">
             <Border BorderBrush="Gray" BorderThickness="2">
