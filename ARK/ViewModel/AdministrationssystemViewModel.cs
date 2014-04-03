@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -13,16 +14,7 @@ namespace ARK.ViewModel
 {
     class AdministrationssystemViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Control> CurrentFilter
-        { 
-            get { 
-                return _filterControls; 
-            } 
-            set { 
-                _filterControls = value;
-                Notify("CurrentFilter"); 
-            } 
-        }
+        
         public UserControl CurrentPage { 
             get { 
                 return _currentPage; 
@@ -31,6 +23,33 @@ namespace ARK.ViewModel
                 _currentPage = value;
                 Notify("CurrentPage"); 
             } 
+        }
+        public ObservableCollection<Control> CurrentFilter
+        {
+            get
+            {
+                return _filterControls;
+            }
+            set
+            {
+                _filterControls = value;
+                Notify("CurrentFilter");
+                Notify("ShowFilter");
+            }
+        }
+        public Visibility ShowSearch 
+        { 
+            get 
+            { 
+                return Visibility.Visible; 
+            } 
+        }
+        public Visibility ShowFilter 
+        { 
+            get 
+            {
+                return CurrentFilter.Count == 0 ? Visibility.Hidden : Visibility.Visible;
+            }
         }
 
         public ICommand MenuOversigt { get { return GenerateCommand(PageOversigt, FiltersOversigt); } }
