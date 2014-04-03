@@ -131,6 +131,11 @@
       <DependentUpon>Protokolsystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdministrationssystemViewModel.cs" />
+    <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Filter\Filter.cs" />
+    <Compile Include="ViewModel\Filter\IFilter.cs" />
+    <Compile Include="ViewModel\Filter\IFilterItems.cs" />
+    <Compile Include="ViewModel\TimeCounter.cs" />
     <Page Include="Administrationssystem\Administrationssystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
