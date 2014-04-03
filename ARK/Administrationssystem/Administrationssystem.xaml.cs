@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,19 +20,18 @@ namespace ARK.Administrationssystem
     /// <summary>
     /// Interaction logic for Administrationssystem.xaml
     /// </summary>
-    public partial class Administrationssystem : Window
+    public partial class Administrationssystem : Window, INotifyPropertyChanged
     {
-        ObservableCollection<FilterControl> filterControls = new ObservableCollection<FilterControl>();
+        private ObservableCollection<CheckBox> _filterControls;
+        public ObservableCollection<CheckBox> FilterControls { get { return _filterControls; } set { _filterControls = value; Notify("FilterControls"); } }
 
         public Administrationssystem()
         {
             InitializeComponent();
 
-            //for (int i = 0; i < 4; i++)
-            //    Filters.Children.Add(new FilterControl("FilterNavn" + i));
+            this.DataContext = this;
 
-
-            CheckBox[] oversigt_checkbox_arr = new CheckBox[] {
+            FilterControls = new ObservableCollection<CheckBox>() {
                 new CheckBox() { Name="oversigt_cb1", Content="Både på vandet"},
                 new CheckBox() { Name="oversigt_cb2", Content="Skadesblanketter"},
                 new CheckBox() { Name="oversigt_cb3", Content="Langtursansøgninger"},
@@ -40,13 +40,6 @@ namespace ARK.Administrationssystem
                 new CheckBox() { Name="oversigt_cb6", Content="Bådtype3"},
                 new CheckBox() { Name="oversigt_cb7", Content="Bådtype4"}
             };
-
-            // Jeg ville godt have en lille streg ind mellem langtursblanketter og bådtype1, men det er ikke en prioritet.
-            foreach (CheckBox ch in oversigt_checkbox_arr)      
-            {
-                Stackpanelfilter.Children.Add(ch);
-            }
-            
         }
 
         // Skift vinduer i maincontent
@@ -56,7 +49,7 @@ namespace ARK.Administrationssystem
             MainContent.Children.Add(new Oversigt());
 
             // duplikeret fra Administrationssystem(). Grimt grimt.
-            CheckBox[] oversigt_checkbox_arr = new CheckBox[] {
+            var oversigt_checkbox_arr = new CheckBox[] {
                 new CheckBox() { Name="oversigt_cb1", Content="Både på vandet"},
                 new CheckBox() { Name="oversigt_cb2", Content="Skadesblanketter"},
                 new CheckBox() { Name="oversigt_cb3", Content="Langtursansøgninger"},
@@ -77,7 +70,7 @@ namespace ARK.Administrationssystem
             MainContent.Children.Clear();
             MainContent.Children.Add(new Pages.Blanketter());
 
-            CheckBox[] Blanketter_checkbox_arr = new CheckBox[] {
+            var Blanketter_checkbox_arr = new CheckBox[] {
                 new CheckBox() { Name="blank_cb1", Content="Skadesblanketter"},
                 new CheckBox() { Name="blank_cb2", Content="Langtursblanketter"},
                 new CheckBox() { Name="blank_cb3", Content="Ulæste"},
@@ -96,5 +89,16 @@ namespace ARK.Administrationssystem
             MainContent.Children.Clear();
             MainContent.Children.Add(new Pages.Indstillinger());
         }
+
+        #region Property
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void Notify(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }
