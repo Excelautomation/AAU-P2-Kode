@@ -130,6 +130,7 @@
     <Compile Include="Protokolsystem\Protokolsystem.xaml.cs">
       <DependentUpon>Protokolsystem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AdministrationssystemViewModel.cs" />
     <Page Include="Administrationssystem\Administrationssystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -37,7 +37,7 @@
         </StackPanel>
 
         <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,36,202,28" Height="40">
-            <Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40" Click="btnMenuHome_Click">
+            <Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40" Command="{Binding Path=MenuOversigt}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -52,7 +52,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="btnMenuBlanketter" Content="Blanketter" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="112.387" Height="40" Click="btnMenuBlanketter_Click">
+            <Button x:Name="btnMenuBlanketter" Content="Blanketter" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="112.387" Height="40" Command="{Binding Path=MenuBlanketter}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -70,7 +70,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="btnMenuIndstillinger" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125.82" Height="40" Click="btnMenuIndstillinger_Click">
+            <Button x:Name="btnMenuIndstillinger" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125.82" Height="40" Command="{Binding Path=MenuIndstilinger}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -124,7 +124,7 @@
 
                     <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
                         <StackPanel x:Name="Stackpanelfilter" Margin="5,0,5,5">
-                            <ItemsControl ItemsSource="{Binding Path=FilterControls}" />
+                            <ItemsControl ItemsSource="{Binding Path=CurrentFilter}" />
                         </StackPanel>
                     <!-- <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/> -->
                 </StackPanel>
@@ -138,7 +138,7 @@
         
         <Grid x:Name="MainContent" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Margin="10,0,0,0" Background="#e2e9f0">
             <Border BorderBrush="Gray" BorderThickness="2">
-                <Administrationssystem:Oversigt/>
+                <ContentControl Content="{Binding Path=CurrentPage}"/>
             </Border>
         </Grid>
 
