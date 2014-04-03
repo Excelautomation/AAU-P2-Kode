@@ -25,8 +25,6 @@ namespace ARK.Administrationssystem
         public Administrationssystem()
         {
             InitializeComponent();
-
-            this.DataContext = new ARK.ViewModel.AdministrationssystemViewModel();
         }
     }
 }
