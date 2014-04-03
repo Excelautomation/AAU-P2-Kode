@@ -10,6 +10,14 @@ namespace ARK.ViewModel.Filter
     {
         protected List<IFilterItems<T>> filterItems = new List<IFilterItems<T>>();
 
+        public virtual bool Active()
+        {
+            foreach (var filter in filterItems)
+                if (filter.Active())
+                    return true;
+
+            return false;
+        }
         public virtual bool FilterItem(T item)
         {
             foreach (var filter in filterItems)
@@ -72,5 +80,7 @@ namespace ARK.ViewModel.Filter
             return filterItems.GetEnumerator();
         }
         #endregion
+
+        
     }
 }

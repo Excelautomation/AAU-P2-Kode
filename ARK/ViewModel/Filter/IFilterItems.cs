@@ -8,6 +8,7 @@ namespace ARK.ViewModel.Filter
 {
     interface IFilterItems<T>
     {
+        bool Active();
         bool FilterItem(T item);
     }
 }
