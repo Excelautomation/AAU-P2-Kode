@@ -14,7 +14,6 @@ namespace ARK.ViewModel
 {
     class AdministrationssystemViewModel : INotifyPropertyChanged
     {
-        
         public UserControl CurrentPage { 
             get { 
                 return _currentPage; 
@@ -37,6 +36,7 @@ namespace ARK.ViewModel
                 Notify("ShowFilter");
             }
         }
+        
         public Visibility ShowSearch 
         { 
             get 
