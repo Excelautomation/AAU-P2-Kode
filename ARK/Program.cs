@@ -24,7 +24,7 @@ namespace ARK
             }
             else if (System.Security.Principal.WindowsIdentity.GetCurrent().Name == "SAHB-WIN7\\sahb")
             {
-                window = new MainWindow();
+                window = new ARK.Administrationssystem.Administrationssystem();
             }
             else
             {
