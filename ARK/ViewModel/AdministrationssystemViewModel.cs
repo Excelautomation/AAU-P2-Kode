@@ -12,6 +12,7 @@ using System.Windows.Input;
 
 namespace ARK.ViewModel
 {
+
     class AdministrationssystemViewModel : INotifyPropertyChanged
     {
         public UserControl CurrentPage { 
