@@ -94,6 +94,7 @@
     <Compile Include="Administrationssystem\Pages\Indstillinger.xaml.cs">
       <DependentUpon>Indstillinger.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Administrationssystem\Model\Langtursblanket.cs" />
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
