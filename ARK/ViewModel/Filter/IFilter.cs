@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ARK.ViewModel.Filter
 {
-    interface IFilter<T> : ICollection<IFilterItems<T>>
+    interface IFilter<T>
     {
         bool Active();
         bool FilterItem(T item);
