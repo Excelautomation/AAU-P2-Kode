@@ -133,9 +133,8 @@
     </Compile>
     <Compile Include="ViewModel\AdministrationssystemViewModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
-    <Compile Include="ViewModel\Filter\Filter.cs" />
+    <Compile Include="ViewModel\Filter\FilterBåditem.cs" />
     <Compile Include="ViewModel\Filter\IFilter.cs" />
-    <Compile Include="ViewModel\Filter\IFilterItems.cs" />
     <Compile Include="ViewModel\TimeCounter.cs" />
     <Page Include="Administrationssystem\Administrationssystem.xaml">
       <SubType>Designer</SubType>
@@ -247,6 +246,7 @@
     <Resource Include="Fonts\arialbd.ttf" />
     <Resource Include="Fonts\arialbi.ttf" />
     <Resource Include="Fonts\ariali.ttf" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
