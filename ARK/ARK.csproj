@@ -94,7 +94,7 @@
     <Compile Include="Administrationssystem\Pages\Indstillinger.xaml.cs">
       <DependentUpon>Indstillinger.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\Model\Langtursblanket.cs" />
+    <Compile Include="Model\Langtursblanket.cs" />
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
@@ -311,6 +311,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\ark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Administrationssystem\Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
