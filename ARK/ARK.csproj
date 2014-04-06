@@ -100,6 +100,7 @@
     </Compile>
     <Compile Include="Model\Både.cs" />
     <Compile Include="Model\Medlem.cs" />
+    <Compile Include="Model\Ture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
       <DependentUpon>BeginTripBoats.xaml</DependentUpon>
