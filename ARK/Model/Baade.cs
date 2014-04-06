@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    public class Både
+    public class Baade
     {
         public int ID { get; set; }
         public string Navn { get; set; }
