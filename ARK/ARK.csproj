@@ -98,7 +98,6 @@
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Baad.cs" />
     <Compile Include="Model\Medlem.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Search\ISearchable.cs" />
