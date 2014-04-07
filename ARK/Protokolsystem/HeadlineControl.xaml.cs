@@ -24,5 +24,13 @@ namespace ARK.Protokolsystem
         {
             InitializeComponent();
         }
+		
+		// Property for binding
+        static private string _HeadlineText;
+        static public string HeadlineText
+        {
+            get { return _HeadlineText; }
+            set { _HeadlineText = value; }
+        }
     }
 }
