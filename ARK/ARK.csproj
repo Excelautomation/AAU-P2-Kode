@@ -126,9 +126,6 @@
     <Compile Include="Protokolsystem\Pages\EndTrip.xaml.cs">
       <DependentUpon>EndTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\HeadlineControl.xaml.cs">
-      <DependentUpon>HeadlineControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Protokolsystem\Pages\MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
     </Compile>
@@ -137,6 +134,7 @@
     </Compile>
     <Compile Include="ViewModel\AdministrationssystemViewModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\ProtokolsystemViewModel.cs" />
     <Compile Include="ViewModel\TimeCounter.cs" />
     <Page Include="Administrationssystem\Administrationssystem.xaml">
       <SubType>Designer</SubType>
@@ -210,10 +208,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Protokolsystem\Pages\EndTrip.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Protokolsystem\HeadlineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
