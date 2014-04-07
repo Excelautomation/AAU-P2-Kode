@@ -26,7 +26,7 @@ namespace Test
         public class FlereBåde
         {
             [System.Xml.Serialization.XmlElementAttribute("BådeSpecifik")]
-            public ARK.Model.Både[] BådeSpecifik { get; set; }
+            public ARK.Model.Baade[] BådeSpecifik { get; set; }
         }
     }
 }
