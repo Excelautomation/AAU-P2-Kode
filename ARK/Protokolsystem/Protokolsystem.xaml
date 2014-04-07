@@ -253,7 +253,10 @@
                 </Button.Background>
             </Button>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="200" Grid.RowSpan="3" Background="#FFE9EAED" Margin="10,0,-6,0" Grid.Column="2"/>
+        <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="200" Grid.RowSpan="3" Background="#FFE9EAED" Margin="10,0,-6,0" Grid.Column="2">
+        	<Rectangle HorizontalAlignment="Left" Height="717" Margin="6,13,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource White+rounded}"/>
+        	<GroupBox Header="Informationer" HorizontalAlignment="Left" Margin="17.5,20.5,0,0" VerticalAlignment="Top" Height="699" Width="160.5"/>
+        </Grid>
 
         <local:HeadlineControl Grid.Column="1" Margin="0,5,0,0"/>
     </Grid>
