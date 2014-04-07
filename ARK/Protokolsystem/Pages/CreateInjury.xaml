@@ -5,7 +5,48 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
-    <Grid>
+<UserControl.Resources>
+	    <Style TargetType="{x:Type DatePickerTextBox}">
+			<Setter Property="Text" Value="Vælg dato" />
+		</Style>
+</UserControl.Resources>
+	<Grid>
+    	<ListView HorizontalAlignment="Left" Height="244.216" Margin="12.422,58.784,0,0" VerticalAlignment="Top" Width="279.104">
+    		<ListView.View>
+    			<GridView>
+    				<GridViewColumn/>
+    			</GridView>
+    		</ListView.View>
+    	</ListView>
+    	<Label Content="Anmelder" HorizontalAlignment="Left" Margin="88.831,10,0,0" VerticalAlignment="Top" Height="48.284" Width="129.261" FontSize="28"/>
+    	<RichTextBox HorizontalAlignment="Left" Height="214.216" Margin="12.422,375.784,0,0" VerticalAlignment="Top" Width="351.104">
+    		<FlowDocument/>
+    	</RichTextBox>
+    	<Button x:Name="SubmitLongDistance" Content="INDSEND&#xA;ANMELDELSE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="395.026,526,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                <!-- Problemer med style -->
+    		<Button.BorderBrush>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="#FF004546" Offset="1"/>
+    				<GradientStop Color="#FF00B0B4"/>
+    			</LinearGradientBrush>
+    		</Button.BorderBrush>
+    		<Button.Background>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="#FF019FA2" Offset="0"/>
+    				<GradientStop Color="#FF006364" Offset="1"/>
+    			</LinearGradientBrush>
+    		</Button.Background>
+    	</Button>
+    	<DatePicker HorizontalAlignment="Left" Margin="395.026,375.784,0,0" VerticalAlignment="Top" Height="61.5" Width="174" FirstDayOfWeek="Monday" FontSize="28"/>
+    	<ListView HorizontalAlignment="Left" Height="244.216" Margin="307.922,58.784,0,0" VerticalAlignment="Top" Width="279.104">
+    		<ListView.View>
+    			<GridView>
+    				<GridViewColumn/>
+    			</GridView>
+    		</ListView.View>
+    	</ListView>
+    	<Label Content="Skadet båd" HorizontalAlignment="Left" Margin="378.331,10,0,0" VerticalAlignment="Top" Height="48.284" Width="150.261" FontSize="28"/>
+    	<Label Content="Beskrivelse af skaden" HorizontalAlignment="Left" Margin="49.922,327.5,0,0" VerticalAlignment="Top" Height="48.284" Width="270.104" FontSize="28"/>
             
     </Grid>
 </UserControl>
