@@ -11,7 +11,7 @@
             <ColumnDefinition Width="257*"/>
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Left" Height="43" Width="596" VerticalAlignment="Top" Background="White" Margin="0,-1,0,0" Grid.ColumnSpan="2">
-            <Label x:Name="HeadlineLabel" Content="Start Rotur▸Vælg båd" Height="43" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="24"/>
+        	<Label x:Name="HeadlineLabel" Content="{Binding Path=HeadlineText}" Height="43" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="24" />
         </StackPanel>
     </Grid>
 </UserControl>
