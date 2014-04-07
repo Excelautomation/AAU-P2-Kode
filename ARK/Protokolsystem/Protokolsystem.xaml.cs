@@ -24,16 +24,6 @@ namespace ARK.Protokolsystem
             InitializeComponent();
         }
 
-        private void BeginTrip_Click(object sender, RoutedEventArgs e)
-        {
-			HeadlineControl.HeadlineText = "Hej";
-			
-			BeginTripBoats boatCollection = new BeginTripBoats();
-
-            Content.Children.Clear();
-            Content.Children.Add(boatCollection);
-        }
-
         private void EndTrip_Click(object sender, RoutedEventArgs e)
         {
             EndTrip boatEndtrip = new EndTrip();
