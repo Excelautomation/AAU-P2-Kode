@@ -98,11 +98,12 @@
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Baade.cs" />
+    <Compile Include="Model\Baad.cs" />
     <Compile Include="Model\Medlem.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Search\ISearchable.cs" />
     <Compile Include="Model\Search\Searchable.cs" />
+    <Compile Include="Model\Skadesblanket.cs" />
     <Compile Include="Model\Ture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
