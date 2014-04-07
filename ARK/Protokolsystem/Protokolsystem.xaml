@@ -9,7 +9,7 @@
     </Window.DataContext>
     
     <Window.Resources>
-        <Style x:Key="SmallShadow" TargetType="{x:Type Button}">
+		<Style x:Key="SmallShadow" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{DynamicResource FocusVisual}"/>
             <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource Button.Static.Border}"/>
