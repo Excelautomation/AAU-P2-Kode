@@ -14,39 +14,42 @@ namespace ARK.ViewModel
 {
     class AdministrationssystemViewModel : INotifyPropertyChanged
     {
-        public UserControl CurrentPage { 
-            get { 
-                return _currentPage; 
-            } 
-            private set { 
-                _currentPage = value;
-                Notify("CurrentPage"); 
-            } 
+        public UserControl CurrentPage
+        {
+            get
+            {
+                return this._currentPage;
+            }
+            private set
+            {
+                this._currentPage = value;
+                Notify("CurrentPage");
+            }
         }
         public ObservableCollection<Control> CurrentFilter
         {
             get
             {
-                return _filterControls;
+                return this._filterControls;
             }
             set
             {
-                _filterControls = value;
+                this._filterControls = value;
                 Notify("CurrentFilter");
                 Notify("ShowFilter");
             }
         }
-        
-        public Visibility ShowSearch 
-        { 
-            get 
-            { 
-                return Visibility.Visible; 
-            } 
+
+        public Visibility ShowSearch
+        {
+            get
+            {
+                return Visibility.Visible;
+            }
         }
-        public Visibility ShowFilter 
-        { 
-            get 
+        public Visibility ShowFilter
+        {
+            get
             {
                 return CurrentFilter.Count == 0 ? Visibility.Hidden : Visibility.Visible;
             }
@@ -61,17 +64,29 @@ namespace ARK.ViewModel
         private UserControl _currentPage;
 
         // TODO: Implementer noget cache på objekterne
-        private Administrationssystem.Oversigt PageOversigt { get {
-            return new Administrationssystem.Oversigt();
-        }}
+        private Administrationssystem.Oversigt PageOversigt
+        {
+            get
+            {
+                return new Administrationssystem.Oversigt();
+            }
+        }
 
-        private Administrationssystem.Pages.Blanketter PageBlanketter { get {
-            return new Administrationssystem.Pages.Blanketter();
-        }}
+        private Administrationssystem.Pages.Blanketter PageBlanketter
+        {
+            get
+            {
+                return new Administrationssystem.Pages.Blanketter();
+            }
+        }
 
-        private Administrationssystem.Pages.Indstillinger PageIndstillinger { get {
+        private Administrationssystem.Pages.Indstillinger PageIndstillinger
+        {
+            get
+            {
                 return new Administrationssystem.Pages.Indstillinger();
-        }}
+            }
+        }
 
         private ObservableCollection<Control> FiltersOversigt
         {
@@ -79,14 +94,14 @@ namespace ARK.ViewModel
             {
                 return new ObservableCollection<Control>() 
                 {
-                    new CheckBox() { Content="Både på vandet"},
-                    new CheckBox() { Content="Skadesblanketter"},
-                    new CheckBox() { Content="Langtursansøgninger"},
+                    new CheckBox() { Content = "Både på vandet"},
+                    new CheckBox() { Content = "Skadesblanketter"},
+                    new CheckBox() { Content = "Langtursansøgninger"},
                     new Separator() { Height = 20 },
-                    new CheckBox() { Content="Bådtype1" },
-                    new CheckBox() { Content="Bådtype2" },
-                    new CheckBox() { Content="Bådtype3" },
-                    new CheckBox() { Content="Bådtype4" }
+                    new CheckBox() { Content = "Bådtype1" },
+                    new CheckBox() { Content = "Bådtype2" },
+                    new CheckBox() { Content = "Bådtype3" },
+                    new CheckBox() { Content = "Bådtype4" }
                 };
             }
         }
@@ -96,17 +111,18 @@ namespace ARK.ViewModel
             get
             {
                 return new ObservableCollection<Control>() {
-                    new CheckBox() { Content="Skadesblanketter"},
-                    new CheckBox() { Content="Langtursblanketter"},
-                    new CheckBox() { Content="Ulæste"},
-                    new CheckBox() { Content="Læste"}
+                    new CheckBox() { Content = "Skadesblanketter"},
+                    new CheckBox() { Content = "Langtursblanketter"},
+                    new CheckBox() { Content = "Ulæste"},
+                    new CheckBox() { Content = "Læste"}
                 };
             }
         }
 
         private ObservableCollection<Control> FiltersIndstillinger
         {
-            get {
+            get
+            {
                 return new ObservableCollection<Control>();
             }
         }
