@@ -13,11 +13,16 @@ namespace ARK.Model
         public int AnmeldersMedlemsNr { get; set; }
         public Baad SkadetBåd { get; set; }
         public SkadeBeskrivelse Skade { get; set; }
+
+        public override Skadesblanket getTarget()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class SkadeBeskrivelse
     {
-        public string SkadeBeskrivelse { get; set; }
+        public string Beskrivelse { get; set; }
         public string PåkrævedeMaterialer { get; set; }
     }
 }
