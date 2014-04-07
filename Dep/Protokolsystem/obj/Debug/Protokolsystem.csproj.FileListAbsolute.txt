@@ -193,3 +193,7 @@ C:\Users\Mikkel\Dropbox\AAU\2. semester\# P2\ARK\Protokolsystem\obj\Debug\Protok
 C:\Users\Mikkel\Dropbox\AAU\2. semester\# P2\ARK\Protokolsystem\obj\Debug\Protokolsystem.csproj.GenerateResource.Cache
 C:\Users\Mikkel\Dropbox\AAU\2. semester\# P2\ARK\Protokolsystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Mikkel\Dropbox\AAU\2. semester\# P2\ARK\Protokolsystem\obj\Debug\Protokolsystem_MarkupCompile.lref
+C:\P2\Protokolsystem\bin\Debug\Protokolsystem.exe.config
+C:\P2\Protokolsystem\obj\Debug\Protokolsystem.exe
+C:\P2\Protokolsystem\obj\Debug\Protokolsystem.pdb
+C:\P2\Protokolsystem\obj\Debug\Protokolsystem.csprojResolveAssemblyReference.cache
