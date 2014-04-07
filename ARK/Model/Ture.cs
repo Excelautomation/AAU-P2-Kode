@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    class Ture
+    public class Ture : Search.Searchable<Ture>
     {
         public int ID { get; set; }
         public int Kilometer { get; set; }
@@ -22,5 +22,10 @@ namespace ARK.Model
         public int MedlemsID_7 { get; set; }
         public int MedlemsID_8 { get; set; }
         public int MedlemsID_9 { get; set; }
+
+        public override Ture getTarget()
+        {
+            return this;
+        }
     }
 }

@@ -4,15 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ARK.Administrationssystem.Model
+namespace ARK.Model
 {
-    class Person
-    {
-        public string Navn { get; set; }
-        public string Telefon { get; set; }
-    }
-
-    class Langtursblanket
+    public class Langtursblanket : Search.Searchable<Langtursblanket>
     {
         public int Id { get; set; }
         public DateTime Afgangstid { get; set; }
@@ -20,5 +14,10 @@ namespace ARK.Administrationssystem.Model
         public string Text { get; set; }
         public virtual List<Person> Deltager { get; set; }
         public bool Godkendt { get; set; }
+
+        public override Langtursblanket getTarget()
+        {
+            return this;
+        }
     }
 }
