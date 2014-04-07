@@ -14,19 +14,19 @@ namespace ARK.ViewModel
     {
         public string HeadlineText
         {
-            get { return _headlineText; }
-            set { _headlineText = value; Notify("HeadlineText"); }
+            get { return this._headlineText; }
+            set { this._headlineText = value; Notify("HeadlineText"); }
         }
 
         public UserControl CurrentPage
         {
             get
             {
-                return _currentPage;
+                return this._currentPage;
             }
             private set
             {
-                _currentPage = value;
+                this._currentPage = value;
                 Notify("CurrentPage");
             }
         }
@@ -94,7 +94,8 @@ namespace ARK.ViewModel
 
         public ProtokolsystemViewModel()
         {
-            HeadlineText = "";
+            StartRotur.Execute(null);
+            HeadlineText = "Søren er awesome";
         }
 
         #region Property
