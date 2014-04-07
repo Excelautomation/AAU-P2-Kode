@@ -31,14 +31,13 @@ namespace ARK.ViewModel
             }
         }
 
+        #region Commands
         public ICommand StartRotur { 
             get {
-                return new DelegateCommand<object>((e) =>
-                {
-                    HeadlineText = "Søren er endnu mere awesome";
-                }, (e) => { return true; });
+                return GenerateCommand("Søren er endnu mere awesome", new Protokolsystem.BeginTripBoats());
             }
         }
+        #endregion
 
         #region Private
         private string _headlineText;
@@ -58,6 +57,16 @@ namespace ARK.ViewModel
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+        #endregion
+        #region Command
+        private ICommand GenerateCommand(string HeadLineText, UserControl page)
+        {
+            return new DelegateCommand<object>((e) =>
+            {
+                this.HeadlineText = HeadLineText;
+                CurrentPage = page;
+            }, (e) => { return true; });
         }
         #endregion
     }
