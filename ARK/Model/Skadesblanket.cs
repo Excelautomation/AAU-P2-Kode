@@ -11,7 +11,7 @@ namespace ARK.Model
         public DateTime Dato { get; set; }
         public string AnmeldersNavn { get; set; }
         public int AnmeldersMedlemsNr { get; set; }
-        public Baade SkadetBåd { get; set; }
+        public Baad SkadetBåd { get; set; }
         public SkadeBeskrivelse Skade { get; set; }
 
         public override Skadesblanket getTarget()
