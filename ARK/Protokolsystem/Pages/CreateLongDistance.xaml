@@ -6,6 +6,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
     <Grid>
-            
+    	<ListView HorizontalAlignment="Left" Height="536.716" Margin="310.896,53.284,0,0" VerticalAlignment="Top" Width="279.104">
+    		<ListView.View>
+    			<GridView>
+    				<GridViewColumn/>
+    			</GridView>
+    		</ListView.View>
+    	</ListView>
+    	<Label Content="Deltagere på turen" HorizontalAlignment="Left" Margin="330.305,0,0,0" VerticalAlignment="Top" Height="48.284" Width="247.761" FontSize="28"/>
+    	<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="48.373" Margin="10,80.598,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="29.333"/>
+    	<TextBox HorizontalAlignment="Left" Height="48.373" Margin="162.011,80.598,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}"/>
+    	<Label Content="Hjemkomst" HorizontalAlignment="Left" Margin="169.476,40.686,0,0" VerticalAlignment="Top" Width="109.552" Height="45.363" FontSize="18.667"/>
+    	<Label Content="Afgang" HorizontalAlignment="Left" Margin="38.092,40.686,0,0" VerticalAlignment="Top" Width="73.731" Height="45.363" FontSize="18.667"/>
+    	<RichTextBox HorizontalAlignment="Left" Height="311.94" Margin="10,192.537,0,0" VerticalAlignment="Top" Width="280.966">
+    		<FlowDocument/>
+    	</RichTextBox>
+    	<Label Content="Kommentarer" HorizontalAlignment="Left" Margin="76.898,148.144,0,0" VerticalAlignment="Top" Height="39.393" Width="125.811" FontSize="18.667"/>
+            <Button x:Name="SubmitLongDistance" Content="INDSEND&#xA;ANMODNING" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="38.092,526,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                <Button.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF004546" Offset="1"/>
+                        <GradientStop Color="#FF00B0B4"/>
+                    </LinearGradientBrush>
+                </Button.BorderBrush>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF019FA2" Offset="0"/>
+                        <GradientStop Color="#FF006364" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
     </Grid>
 </UserControl>
