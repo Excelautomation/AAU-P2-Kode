@@ -18,7 +18,18 @@ namespace ARK.Administrationssystem
 {
     public partial class Header : UserControl, INotifyPropertyChanged
     {
-        public string Title { get { return _title; } set { _title = value; Notify("Title"); } }
+        public string Title 
+        { 
+            get 
+            { 
+                return _title; 
+            } 
+            set 
+            { 
+                _title = value; 
+                Notify("Title"); 
+            } 
+        }
         private string _title;
 
         public Header()

@@ -110,7 +110,8 @@ namespace ARK.ViewModel
         {
             get
             {
-                return new ObservableCollection<Control>() {
+                return new ObservableCollection<Control>() 
+                {
                     new CheckBox() { Content = "Skadesblanketter"},
                     new CheckBox() { Content = "Langtursblanketter"},
                     new CheckBox() { Content = "Ulæste"},
@@ -130,13 +131,13 @@ namespace ARK.ViewModel
 
         public AdministrationssystemViewModel()
         {
-            TimeCounter.startTimer();
+            TimeCounter.StartTimer();
 
             // Start oversigten
             CurrentPage = PageOversigt;
             CurrentFilter = FiltersOversigt;
 
-            TimeCounter.stopTime("AdministrationssystemViewModel load");
+            TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
 
         #region Property

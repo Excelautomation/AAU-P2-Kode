@@ -21,15 +21,12 @@ namespace ARK.Administrationssystem
     /// </summary>
     public partial class FilterControl : UserControl, INotifyPropertyChanged
     {
-        public string FilterName { get { return _filterName; } set { _filterName = value; Notify("FilterName"); } }
-        public bool IsChecked { get { return _isChecked; } set { _isChecked = value; Notify("IsChecked"); } }
-
         private bool _isChecked;
         private string _filterName;
 
         public FilterControl(string filterName)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.FilterName = filterName;
             this.IsChecked = false;
@@ -37,20 +34,45 @@ namespace ARK.Administrationssystem
             knap1.DataContext = this;
         }
 
-        private void knap1_Click(object sender, RoutedEventArgs e)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string FilterName
         {
-            this.IsChecked = !this.IsChecked;
+            get 
+            { 
+                return _filterName; 
+            }
+            set 
+            { 
+                _filterName = value; 
+                Notify("FilterName"); 
+            }
         }
 
-        #region Property
-        public event PropertyChangedEventHandler PropertyChanged;
+        public bool IsChecked
+        {
+            get 
+            { 
+                return _isChecked; 
+            }
+            set 
+            { 
+                _isChecked = value; 
+                Notify("IsChecked"); 
+            }
+        }
+
         protected void Notify(string propertyName)
         {
             if (this.PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        #endregion
+
+        private void knap1_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsChecked = !this.IsChecked;
+        }
     }
 }
