@@ -32,44 +32,58 @@ namespace ARK.ViewModel
         }
 
         #region Commands
-        public ICommand StartRotur { 
-            get {
+        public ICommand StartRotur
+        {
+            get
+            {
                 return GenerateCommand("Start rotur", PageBeginTripBoats);
             }
         }
-		
-		public ICommand AfslutRotur { 
-            get {
+
+        public ICommand AfslutRotur
+        {
+            get
+            {
                 return GenerateCommand("Afslut rotur", PageEndTrip);
             }
         }
-		
-		public ICommand BaadePaaVandet { 
-            get {
+
+        public ICommand BaadePaaVandet
+        {
+            get
+            {
                 return GenerateCommand("Både på vandet", PageBoatsOut);
             }
         }
-		
-		public ICommand Statistik { 
-            get {
+
+        public ICommand Statistik
+        {
+            get
+            {
                 return GenerateCommand("Kilometerstatistik", PageDistanceStatistics);
             }
         }
-		
-		public ICommand MedlemsInformation { 
-            get {
+
+        public ICommand MedlemsInformation
+        {
+            get
+            {
                 return GenerateCommand("Medlemsinformation", PageMembersInformation);
             }
         }
-		
-		public ICommand OpretSkade { 
-            get {
+
+        public ICommand OpretSkade
+        {
+            get
+            {
                 return GenerateCommand("Opret blanket ► Skade", PageCreateInjury);
             }
         }
-		
-		public ICommand OpretLangtur { 
-            get {
+
+        public ICommand OpretLangtur
+        {
+            get
+            {
                 return GenerateCommand("Opret blanket ► Langtur", PageCreateLongDistance);
             }
         }
@@ -78,13 +92,13 @@ namespace ARK.ViewModel
         #region Pages
         // TODO: Implementer noget cache på objekterne
         public Protokolsystem.BeginTripBoats PageBeginTripBoats { get { return new Protokolsystem.BeginTripBoats(); } }
-		public Protokolsystem.EndTrip PageEndTrip { get { return new Protokolsystem.EndTrip(); } }
+        public Protokolsystem.EndTrip PageEndTrip { get { return new Protokolsystem.EndTrip(); } }
         public Protokolsystem.BoatsOut PageBoatsOut { get { return new Protokolsystem.BoatsOut(); } }
-		public Protokolsystem.DistanceStatistics PageDistanceStatistics { get { return new Protokolsystem.DistanceStatistics(); } }
-		public Protokolsystem.MembersInformation PageMembersInformation { get { return new Protokolsystem.MembersInformation(); } }
-		public Protokolsystem.CreateInjury PageCreateInjury { get { return new Protokolsystem.CreateInjury(); } }
-		public Protokolsystem.CreateLongDistance PageCreateLongDistance { get { return new Protokolsystem.CreateLongDistance(); } }
-        
+        public Protokolsystem.DistanceStatistics PageDistanceStatistics { get { return new Protokolsystem.DistanceStatistics(); } }
+        public Protokolsystem.MembersInformation PageMembersInformation { get { return new Protokolsystem.MembersInformation(); } }
+        public Protokolsystem.CreateInjury PageCreateInjury { get { return new Protokolsystem.CreateInjury(); } }
+        public Protokolsystem.CreateLongDistance PageCreateLongDistance { get { return new Protokolsystem.CreateLongDistance(); } }
+
         #endregion
 
         #region Private

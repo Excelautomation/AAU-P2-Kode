@@ -28,9 +28,6 @@ namespace ARK.Administrationssystem.Pages
             {
                 StackPanelLeft.Children.Add(new Label() { Content = "Søren er en nub" });
             }
-
-
-
         }
     }
 }

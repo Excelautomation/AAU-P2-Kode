@@ -28,16 +28,16 @@ namespace ARK
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ARK.Administrationssystem.Administrationssystem window = new ARK.Administrationssystem.Administrationssystem();
-            showWindow(window);
+            ShowWindow(window);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Protokolsystem.Protokolsystem window = new Protokolsystem.Protokolsystem();
-            showWindow(window);
+            ShowWindow(window);
         }
 
-        private void showWindow(Window window)
+        private void ShowWindow(Window window)
         {
             window.Show();
             this.Hide();
