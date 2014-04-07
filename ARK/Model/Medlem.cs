@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    class Medlem
+    public class Medlem : Search.Searchable<Medlem>
     {
         public int MedlemsNr { get; set; }
         public int ID { get; set; }
@@ -29,5 +29,10 @@ namespace ARK.Model
         public bool ScullerRet { get; set; }
         public bool OutriggerRet { get; set; }
         public bool Kajakret { get; set; }
+
+        public override Medlem getTarget()
+        {
+            return this;
+        }
     }
 }
