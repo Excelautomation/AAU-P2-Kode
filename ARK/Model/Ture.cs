@@ -11,7 +11,7 @@ namespace ARK.Model
         public int ID { get; set; }
         public int Kilometer { get; set; }
         public DateTime Dato { get; set; }
-        public Boolean Langtur { get; set; }
+        public bool Langtur { get; set; }
         public int BådID { get; set; }
         public int MedlemsID_1 { get; set; }
         public int MedlemsID_2 { get; set; }

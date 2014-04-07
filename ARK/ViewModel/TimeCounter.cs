@@ -10,19 +10,19 @@ namespace ARK.ViewModel
     class TimeCounter
     {
         private static Stack<DateTime> stack = new Stack<DateTime>();
-        public static void startTimer()
+        public static void StartTimer()
         {
             stack.Push(DateTime.Now);
         }
 
-        public static TimeSpan stopTime()
+        public static TimeSpan StopTime()
         {
             return DateTime.Now - stack.Pop();
         }
 
-        public static void stopTime(string name)
+        public static void StopTime(string name)
         {
-            TimeSpan span = stopTime();
+            TimeSpan span = StopTime();
 
             Debug.WriteLine(name + " took " + span.TotalMilliseconds + " ms to execute");
         }

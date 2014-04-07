@@ -16,7 +16,9 @@ namespace ARK.Model.Search
             foreach (var filter in filters)
             {
                 if (filter(getTarget()))
+                {
                     return true;
+                }
             }
 
             return false;
@@ -50,10 +52,14 @@ namespace ARK.Model.Search
                 if (properties.Where(e => e.Value.Contains(element)).Count() > 0)
                 {
                     if (expression.Type == ExpressionType.or)
+                    {
                         matching = true;
+                    }
                 }
                 else if (expression.Type == ExpressionType.and)
+                {
                     matching = false;
+                }
             }
 
             if (matching && expression.Expressions.Count() > 0)
@@ -63,10 +69,14 @@ namespace ARK.Model.Search
                     if (SearchMatching(expression, target, properties))
                     {
                         if (expression.Type == ExpressionType.or)
+                        {
                             matching = true;
+                        }
                     }
                     else if (expression.Type == ExpressionType.and)
+                    {
                         matching = false;
+                    }
                 }
             }
             
@@ -82,7 +92,9 @@ namespace ARK.Model.Search
         {
             // Tjek expression
             if (expression == null || expression.Length == 0)
+            {
                 return null;
+            }
 
             // Analyser searchstring
             List<string> input = new List<string>();
@@ -133,7 +145,9 @@ namespace ARK.Model.Search
 
             // Tjek længden
             if (length < 1)
+            {
                 return null;
+            }
 
             // Kopir array
             T[] result = new T[length];
