@@ -34,9 +34,16 @@ namespace ARK.ViewModel
         #region Commands
         public ICommand StartRotur { 
             get {
-                return GenerateCommand("Søren er endnu mere awesome", new Protokolsystem.BeginTripBoats());
+                return GenerateCommand("Søren er endnu mere awesome", PageBeginTripBoats);
             }
         }
+        #endregion
+
+        #region Pages
+        // TODO: Implementer noget cache på objekterne
+        public Protokolsystem.BeginTripBoats PageBeginTripBoats { get { return new Protokolsystem.BeginTripBoats(); } }
+        public Protokolsystem.BoatsOut PageBoatsOut { get { return new Protokolsystem.BoatsOut(); } }
+        
         #endregion
 
         #region Private
