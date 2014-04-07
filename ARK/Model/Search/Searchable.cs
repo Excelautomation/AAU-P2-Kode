@@ -93,7 +93,7 @@ namespace ARK.Model.Search
                 // Håndter or
                 else if (expression[i].ToLower() == "or")
                 {
-                    //Tjek at or ikke var første keyword - ignorer or hvis det er første keyword
+                    // Tjek at or ikke var første keyword - ignorer or hvis det er første keyword
                     if (i != 0) { 
                         // Fjern forrige keyword
                         string last = input.Last();
