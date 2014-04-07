@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    public class Baade : Search.Searchable<Baade>
+    public class Baad : Search.Searchable<Baad>
     {
         public int ID { get; set; }
         public string Navn { get; set; }
@@ -18,7 +18,7 @@ namespace ARK.Model
         public int SpecifikBådType { get; set; }
         public bool LangtursBåd { get; set; }
 
-        public override Baade getTarget()
+        public override Baad getTarget()
         {
             return this;
         }
