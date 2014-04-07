@@ -62,8 +62,11 @@ namespace ARK.Model.Search
                 {
                     if (SearchMatching(expression, target, properties))
                     {
-
+                        if (expression.Type == ExpressionType.or)
+                            matching = true;
                     }
+                    else if (expression.Type == ExpressionType.and)
+                        matching = false;
                 }
             }
             
