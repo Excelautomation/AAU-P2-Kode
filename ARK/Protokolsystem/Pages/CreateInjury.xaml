@@ -37,7 +37,7 @@
     			</LinearGradientBrush>
     		</Button.Background>
     	</Button>
-    	<DatePicker HorizontalAlignment="Left" Margin="413.026,370.04,0,0" VerticalAlignment="Top" Height="61.5" Width="174" FirstDayOfWeek="Monday" FontSize="28"/>
+    	<DatePicker HorizontalAlignment="Left" Margin="413.026,370.04,0,0" VerticalAlignment="Top" Height="45.96" Width="174" FirstDayOfWeek="Monday" FontSize="28"/>
     	<ListView HorizontalAlignment="Left" Height="244.216" Margin="307.922,58.784,0,0" VerticalAlignment="Top" Width="279.104">
     		<ListView.View>
     			<GridView>
