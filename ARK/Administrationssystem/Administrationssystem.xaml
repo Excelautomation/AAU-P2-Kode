@@ -42,12 +42,12 @@
         </StackPanel>
 
         <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,30,202,30">
-            <Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,10,0" Command="{Binding Path=MenuOversigt}">
+            <Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,30,0" Command="{Binding Path=MenuOversigt}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid Width="120" Margin="0,0,20,0">
+                        <Grid Width="130" Margin="0,0,0,0">
                             <Image x:Name="Img" Source="/images/home.png" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Padding="45,0,0,0" Margin="0,0,0,0">Oversigt</Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Padding="0,0,0,0" Margin="0,0,5,0">Oversigt</Label>
                         </Grid>
 
                         <ControlTemplate.Triggers>
@@ -59,12 +59,12 @@
                 </Button.Template>
             </Button>
             
-            <Button x:Name="btnMenuBlanketter" VerticalAlignment="Center" Margin="0,0,0,0" Command="{Binding Path=MenuBlanketter}">
+            <Button x:Name="btnMenuBlanketter" VerticalAlignment="Center" Margin="0,0,30,0" Command="{Binding Path=MenuBlanketter}" Width="145">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Width="170">
                             <Image x:Name="Img" Source="/images/BlanketterIcon2.png" HorizontalAlignment="Left"/>
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Margin="2,0,25,0">Blanketter</Label>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Margin="0,0,25,0">Blanketter</Label>
                         </Grid>
 
                         <ControlTemplate.Triggers>
@@ -77,11 +77,12 @@
             </Button>
             
 
-            <Button x:Name="btnMenuIndstillinger" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding Path=MenuIndstilinger}">
+            <Button x:Name="btnMenuIndstillinger" Width="160" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding Path=MenuIndstilinger}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Image x:Name="Img" Source="/images/options.png"/>
+                            <Image x:Name="Img" HorizontalAlignment="Left" Source="/images/options.png"/>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Margin="0,0,0,0" >Indstillinger</Label>
                         </Grid>
 
                         <ControlTemplate.Triggers>
@@ -92,7 +93,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Label VerticalAlignment="Center" FontSize="20" Margin="2,0,25,0" >Indstillinger</Label>
+            
 
             <!--<Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40" Command="{Binding Path=MenuOversigt}">
                 <Button.Template>
