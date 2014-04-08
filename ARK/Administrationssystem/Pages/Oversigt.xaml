@@ -6,10 +6,10 @@
              x:Class="ARK.Administrationssystem.Oversigt" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" Background="#CCCCCC" BorderThickness="1" BorderBrush="Black">
+    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" Background="white" BorderThickness="1" BorderBrush="Black">
         <StackPanel>
             <Label Padding="10,10,0,0" FontSize="40" Margin="0,-15,0,5" Background="#e2e9f0">OVERSIGT</Label>
-            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,0" Background="#e2e9f0">
+            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,5" Background="#e2e9f0">
                 <Administrationssystem:Header Title="Både på vandet" Width="195px" Height="32px" HorizontalAlignment="Left" Margin="5,5,5,0"/>
                 <!--<Rectangle Margin="5,5,5,0" Height="2" Fill="Gray"/>-->
                 <WrapPanel>
@@ -18,7 +18,7 @@
                     <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 3" Besked="Båd 3 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
                 </WrapPanel>
             </WrapPanel>
-            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,15,0,0" Background="#e2e9f0">
+            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,5" Background="#e2e9f0">
                 <Administrationssystem:Header Title="Skadesanmeldelser" Width="195px" Height="32px" HorizontalAlignment="Left" Margin="5,5,5,0"/>
                 <!--<Rectangle Margin="5,5,5,0" Height="2" Fill="Gray"/>-->
                 <WrapPanel>
@@ -29,7 +29,7 @@
                     <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 5" Besked="Båd 5 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
                 </WrapPanel>
             </WrapPanel>
-            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,15,0,0" Background="#e2e9f0">
+            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,5" Background="#e2e9f0">
                 <Administrationssystem:Header Title="Langtursansøgninger" Width="195px" Height="32px" HorizontalAlignment="Left" Background="#e2e9f0" Margin="5,5,5,0"/>
                 <!--<Rectangle Margin="5,5,5,0" Height="2" Fill="Gray"/>-->
                 <WrapPanel>
