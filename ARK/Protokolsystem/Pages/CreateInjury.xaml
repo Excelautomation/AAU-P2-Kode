@@ -19,7 +19,7 @@
     		</ListView.View>
     	</ListView>
     	<Label Content="Anmelder" HorizontalAlignment="Left" Margin="88.831,10,0,0" VerticalAlignment="Top" Height="48.284" Width="129.261" FontSize="28"/>
-    	<RichTextBox HorizontalAlignment="Left" Height="214.216" Margin="12.422,375.784,0,0" VerticalAlignment="Top" Width="351.104">
+    	<RichTextBox HorizontalAlignment="Left" Height="124.216" Margin="12.422,465.784,0,0" VerticalAlignment="Top" Width="351.104">
     		<FlowDocument/>
     	</RichTextBox>
     	<Button x:Name="SubmitLongDistance" Content="INDSEND&#xA;ANMELDELSE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="395.026,526,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
@@ -37,7 +37,7 @@
     			</LinearGradientBrush>
     		</Button.Background>
     	</Button>
-    	<DatePicker HorizontalAlignment="Left" Margin="395.026,375.784,0,0" VerticalAlignment="Top" Height="61.5" Width="174" FirstDayOfWeek="Monday" FontSize="28"/>
+    	<DatePicker HorizontalAlignment="Left" Margin="413.026,370.04,0,0" VerticalAlignment="Top" Height="61.5" Width="174" FirstDayOfWeek="Monday" FontSize="28"/>
     	<ListView HorizontalAlignment="Left" Height="244.216" Margin="307.922,58.784,0,0" VerticalAlignment="Top" Width="279.104">
     		<ListView.View>
     			<GridView>
@@ -46,7 +46,13 @@
     		</ListView.View>
     	</ListView>
     	<Label Content="Skadet båd" HorizontalAlignment="Left" Margin="378.331,10,0,0" VerticalAlignment="Top" Height="48.284" Width="150.261" FontSize="28"/>
-    	<Label Content="Beskrivelse af skaden" HorizontalAlignment="Left" Margin="49.922,327.5,0,0" VerticalAlignment="Top" Height="48.284" Width="270.104" FontSize="28"/>
+    	<Label Content="Suppplerende tekst" HorizontalAlignment="Left" Margin="58.922,416,0,0" VerticalAlignment="Top" Height="48.284" Width="252.104" FontSize="28"/>
+    	<ComboBox HorizontalAlignment="Left" Margin="12.422,370.04,0,0" VerticalAlignment="Top" Width="351.104" Height="45.96" FontSize="21.333">
+    		<ComboBoxItem Content="Hul i skroget" HorizontalAlignment="Left" Width="349.104"/>
+    		<ComboBoxItem Content="Åre knækket" HorizontalAlignment="Left" Width="349.104"/>
+    		<ComboBoxItem Content="Båd eksploderede" HorizontalAlignment="Left" Width="349.104"/>
+    	</ComboBox>
+    	<Label Content="Vælg skade" HorizontalAlignment="Left" Margin="114.422,321.5,0,0" VerticalAlignment="Top" Height="48.284" Width="156.104" FontSize="28"/>
             
     </Grid>
 </UserControl>
