@@ -16,16 +16,17 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
-
-        <Label VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="3" Padding="10,0,0,0" FontSize="40" Margin="0,0,0,0" Background="#e2e9f0">BLANKETTER</Label>
-
-        <ScrollViewer Grid.Column="0" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="#e2e9f0" BorderThickness="1" BorderBrush="Black">
+        <WrapPanel Grid.Row="0" Grid.ColumnSpan="3">
+            <Image Height="32" Source="/images/application_side_list.png"/>
+            <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="28" Background="White">BLANKETTER</Label>
+        </WrapPanel>
+        <ScrollViewer Grid.Column="0" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="White" BorderThickness="1" BorderBrush="Black">
             <StackPanel Name="StackPanelLeft">
 
             </StackPanel>
         </ScrollViewer>
 
-        <ScrollViewer Grid.Column="2" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="#e2e9f0" BorderThickness="1" BorderBrush="Black">
+        <ScrollViewer Grid.Column="2" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="White" BorderThickness="1" BorderBrush="Black">
 
         </ScrollViewer>
 

@@ -7,17 +7,19 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="White">
         <StackPanel>
-            <Label VerticalAlignment="Top" Padding="10,0,0,0" FontSize="40" Margin="0,0,0,5" Background="#e2e9f0">INDSTILLINGER</Label>
-
+            <WrapPanel>
+                <Image Source="/images/setting_tools.png" Height="32"/>
+                <Label FontSize="28" Margin="0" Background="White">INDSTILLINGER</Label>
+            </WrapPanel>
             <TabControl Margin="0,0,0,0" VerticalAlignment="Top" Background="#CCCCCC">
-                <TabItem Header="Skadesindstilling af både" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
-                    <Grid Background="#CCCCCC"/>
+                <TabItem Header="Skadesindstilling" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
+                    <Grid Background="White"/>
                 </TabItem>
-                <TabItem Header="Redigerings af skadesblanketter" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
-                    <Grid Background="#CCCCCC"/>
+                <TabItem Header="Blanketter" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <Grid Background="White"/>
                 </TabItem>
-                <TabItem Header="Redigering af langtursblanketter" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
-                    <Grid Background="#CCCCCC"/>
+                <TabItem Header="Administrator" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <Grid Background="White"/>
                 </TabItem>
             </TabControl>
         </StackPanel>
