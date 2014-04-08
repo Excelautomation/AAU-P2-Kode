@@ -7,26 +7,26 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Background="#CCCCCC">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="8px"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="302*"/>
+            <ColumnDefinition Width="302*" MinWidth="200" MaxWidth="500"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
 
-        <Label VerticalAlignment="Top" Grid.ColumnSpan="3" Padding="10,0,0,0" FontSize="40" Margin="0,0,0,0" Background="#e2e9f0">BLANKETTER</Label>
+        <Label VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="3" Padding="10,0,0,0" FontSize="40" Margin="0,0,0,0" Background="#e2e9f0">BLANKETTER</Label>
 
         <ScrollViewer Grid.Column="0" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="#e2e9f0" BorderThickness="1" BorderBrush="Black">
             <StackPanel Name="StackPanelLeft">
-                
+
             </StackPanel>
         </ScrollViewer>
 
         <ScrollViewer Grid.Column="2" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="#e2e9f0" BorderThickness="1" BorderBrush="Black">
-            
+
         </ScrollViewer>
 
 
