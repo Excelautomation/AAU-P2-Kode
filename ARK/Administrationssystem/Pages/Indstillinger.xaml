@@ -5,7 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+    <Grid Background="#CCCCCC">
+        <StackPanel>
+            <Label VerticalAlignment="Top" Padding="10,0,0,0" FontSize="40" Margin="0,0,0,5" Background="#e2e9f0">INDSTILLINGER</Label>
+
+            <TabControl Margin="0,0,0,0" VerticalAlignment="Top" Background="#CCCCCC">
+                <TabItem Header="Skadesindstilling af både" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
+                    <Grid Background="#CCCCCC"/>
+                </TabItem>
+                <TabItem Header="Redigerings af skadesblanketter" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <Grid Background="#CCCCCC"/>
+                </TabItem>
+                <TabItem Header="Redigering af langtursblanketter" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <Grid Background="#CCCCCC"/>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
     </Grid>
 </UserControl>
