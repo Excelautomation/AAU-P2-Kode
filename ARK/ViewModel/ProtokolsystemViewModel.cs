@@ -32,7 +32,7 @@ namespace ARK.ViewModel
         }
 
         #region Commands
-        public ICommand StartRotur
+        public ICommand StartTrip
         {
             get
             {
@@ -40,7 +40,7 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand AfslutRotur
+        public ICommand EndTrip
         {
             get
             {
@@ -48,7 +48,7 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand BaadePaaVandet
+        public ICommand BoatsOut
         {
             get
             {
@@ -56,7 +56,7 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand Statistik
+        public ICommand StatisticsDistance
         {
             get
             {
@@ -64,7 +64,7 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand MedlemsInformation
+        public ICommand MemberInformation
         {
             get
             {
@@ -72,7 +72,7 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand OpretSkade
+        public ICommand CreateDamage
         {
             get
             {
@@ -80,7 +80,7 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand OpretLangtur
+        public ICommand CreateLongDistance
         {
             get
             {
@@ -108,8 +108,8 @@ namespace ARK.ViewModel
 
         public ProtokolsystemViewModel()
         {
-            StartRotur.Execute(null);
-            HeadlineText = "Søren er awesome";
+            StartTrip.Execute(null);
+            HeadlineText = "Aalborg Roklubs Protokolsystem";
         }
 
         #region Property
