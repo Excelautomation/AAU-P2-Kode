@@ -46,13 +46,13 @@
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Width="130" Margin="0,0,0,0">
-                            <Image x:Name="Img" Source="/images/home.png" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                            <Image x:Name="Img" Source="/images/house.png" HorizontalAlignment="Left" Margin="0,0,0,0"/>
                             <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Padding="0,0,0,0" Margin="0,0,5,0">Oversigt</Label>
                         </Grid>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Img" Property="Source" Value="/images/home.png" />
+                                <Setter TargetName="Img" Property="Source" Value="/images/house.png" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -63,13 +63,13 @@
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Width="170">
-                            <Image x:Name="Img" Source="/images/BlanketterIcon2.png" HorizontalAlignment="Left"/>
+                            <Image x:Name="Img" Source="/images/application_side_list.png" HorizontalAlignment="Left"/>
                             <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Margin="0,0,25,0">Blanketter</Label>
                         </Grid>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Img" Property="Source" Value="/images/BlanketterIcon2.png" />
+                                <Setter TargetName="Img" Property="Source" Value="/images/application_side_list.png" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -81,13 +81,13 @@
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Image x:Name="Img" HorizontalAlignment="Left" Source="/images/options.png"/>
+                            <Image x:Name="Img" HorizontalAlignment="Left" Source="/images/setting_tools.png"/>
                             <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Margin="0,0,0,0" >Indstillinger</Label>
                         </Grid>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Img" Property="Source" Value="/images/options.png" />
+                                <Setter TargetName="Img" Property="Source" Value="/images/setting_tools.png" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
