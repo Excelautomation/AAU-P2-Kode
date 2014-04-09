@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="ViewModel\AdministrationssystemViewModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\OverviewViewModel.cs" />
     <Compile Include="ViewModel\PageInformation.cs" />
     <Compile Include="ViewModel\ProtokolsystemViewModel.cs" />
     <Compile Include="ViewModel\TimeCounter.cs" />
