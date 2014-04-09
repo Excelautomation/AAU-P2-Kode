@@ -6,12 +6,12 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface ISearchable<T>
+    public interface ISearchable<out T>
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="filter"></param>
+        /// <param name="filters"></param>
         /// <returns></returns>
         bool SearchMatching(params Func<T, bool>[] filters);
         bool SearchMatching(string searchExpression);
