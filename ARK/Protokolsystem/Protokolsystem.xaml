@@ -7,113 +7,7 @@
     <Window.DataContext>
         <VM:ProtokolsystemViewModel />
     </Window.DataContext>
-    
     <Window.Resources>
-		<Style x:Key="SmallShadow" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{DynamicResource FocusVisual}"/>
-            <Setter Property="Background" Value="{DynamicResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" CornerRadius="5">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="White"/>
-                            </Border.Effect>
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="BeginTrip"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#FF19C500"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="EndTrip"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#c72727"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="boatsOverview"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#FFD502B1"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="DistanceStatistics"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#FFD502B1"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="MembersInformation"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#FFD502B1"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="CreateInjury"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#FF019FA2"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="CreateLongDistance"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#FF019FA2"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsPressed" Value="True" />
-                                    <Condition Property="Name" Value="AdminPanel"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="border" Value="#777777"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787"/>
-                            </MultiTrigger>
-
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{DynamicResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource Button.Disabled.Foreground}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <Style x:Key="White+rounded" TargetType="{x:Type Rectangle}">
         	<Setter Property="Stroke" Value="#FF292929"/>
         	<Setter Property="Fill" Value="White"/>
@@ -141,7 +35,7 @@
         <StackPanel HorizontalAlignment="Left" Height="601" Width="601" VerticalAlignment="Top"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
             <ContentControl Content="{Binding Path=CurrentPage}"/>
         </StackPanel>
-        <StackPanel x:Name="Knapper" Grid.Column="1" Height="84" Margin="10,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="576"/>
+        <StackPanel x:Name="Buttons" Grid.Column="1" Height="84" Margin="10,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="576"/>
         <Grid HorizontalAlignment="Left" Height="759" VerticalAlignment="Bottom" Width="194" Grid.RowSpan="3" Background="#FFE9EAED" Margin="0,-10,0,-12">
             <Rectangle HorizontalAlignment="Left" Height="76.998" Margin="5.331,663.002,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource White+rounded}"/>
             <Rectangle HorizontalAlignment="Left" Height="148.498" Margin="5.331,483.002,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource White+rounded}"/>
