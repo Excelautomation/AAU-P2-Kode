@@ -55,16 +55,22 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand MenuOversigt { get { return GenerateCommand(PageOversigt, FiltersOversigt); } }
-        public ICommand MenuBlanketter { get { return GenerateCommand(PageBlanketter, FiltersBlanketter); } }
-        public ICommand MenuIndstilinger { get { return GenerateCommand(PageIndstillinger, FiltersIndstillinger); } }
+        public bool OverviewSelected { get { return true; } set { } }
+        public bool FormsSelected { get { return true; } set { } }
+        public bool BoatsSelected { get { return true; } set { } }
+        public bool ConfigurationsSelected { get { return true; } set { } }
+
+        public ICommand MenuOverview { get { return GenerateCommand(PageOverview, FiltersOverview); } }
+        public ICommand MenuForms { get { return GenerateCommand(PageForms, FiltersForms); } }
+        public ICommand MenuBoats { get { return GenerateCommand(PageBoats, FiltersBoats); } }
+        public ICommand MenuConfigurations { get { return GenerateCommand(PageConfigurations, FiltersConfigurations); } }
 
         #region private
         private ObservableCollection<Control> _filterControls;
         private UserControl _currentPage;
 
         // TODO: Implementer noget cache på objekterne
-        private Administrationssystem.Oversigt PageOversigt
+        private Administrationssystem.Oversigt PageOverview
         {
             get
             {
@@ -72,7 +78,7 @@ namespace ARK.ViewModel
             }
         }
 
-        private Administrationssystem.Pages.Blanketter PageBlanketter
+        private Administrationssystem.Pages.Blanketter PageForms
         {
             get
             {
@@ -80,7 +86,15 @@ namespace ARK.ViewModel
             }
         }
 
-        private Administrationssystem.Pages.Indstillinger PageIndstillinger
+        private Administrationssystem.Pages.Baede PageBoats
+        {
+            get
+            {
+                return new Administrationssystem.Pages.Baede();
+            }
+        }
+
+        private Administrationssystem.Pages.Indstillinger PageConfigurations
         {
             get
             {
@@ -88,39 +102,52 @@ namespace ARK.ViewModel
             }
         }
 
-        private ObservableCollection<Control> FiltersOversigt
+        private ObservableCollection<Control> FiltersOverview
         {
             get
             {
                 return new ObservableCollection<Control>() 
                 {
-                    new CheckBox() { Content = "Både på vandet"},
-                    new CheckBox() { Content = "Skadesblanketter"},
-                    new CheckBox() { Content = "Langtursansøgninger"},
+                    new CheckBox() { Content = "Langtur"},
+                    new CheckBox() { Content = "Skader"},
+                    new CheckBox() { Content = "Både ude"}
+                };
+            }
+        }
+
+        private ObservableCollection<Control> FiltersForms
+        {
+            get
+            {
+                return new ObservableCollection<Control>() 
+                {
+                    new CheckBox() { Content = "Langtur"},
+                    new CheckBox() { Content = "Skader"},
                     new Separator() { Height = 20 },
-                    new CheckBox() { Content = "Bådtype1" },
-                    new CheckBox() { Content = "Bådtype2" },
-                    new CheckBox() { Content = "Bådtype3" },
-                    new CheckBox() { Content = "Bådtype4" }
+                    new CheckBox() { Content = "Afviste"},
+                    new CheckBox() { Content = "Godkendte"}
                 };
             }
         }
 
-        private ObservableCollection<Control> FiltersBlanketter
+        private ObservableCollection<Control> FiltersBoats
         {
             get
             {
-                return new ObservableCollection<Control>() 
+                return new ObservableCollection<Control>()
                 {
-                    new CheckBox() { Content = "Skadesblanketter"},
-                    new CheckBox() { Content = "Langtursblanketter"},
-                    new CheckBox() { Content = "Ulæste"},
-                    new CheckBox() { Content = "Læste"}
+                    new CheckBox() { Content = "Både ude"},
+                    new CheckBox() { Content = "Både hjemme"},
+                    new Separator() { Height = 20 },
+                    new CheckBox() { Content = "Både under reparation"},
+                    new CheckBox() { Content = "Beskadigede både"},
+                    new CheckBox() { Content = "Inaktive både"},
+                    new CheckBox() { Content = "Funktionelle både"}
                 };
             }
         }
 
-        private ObservableCollection<Control> FiltersIndstillinger
+        private ObservableCollection<Control> FiltersConfigurations
         {
             get
             {
@@ -134,8 +161,9 @@ namespace ARK.ViewModel
             TimeCounter.StartTimer();
 
             // Start oversigten
-            CurrentPage = PageOversigt;
-            CurrentFilter = FiltersOversigt;
+            CurrentPage = PageOverview;
+            CurrentFilter = FiltersOverview;
+            OverviewSelected = true;
 
             TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
