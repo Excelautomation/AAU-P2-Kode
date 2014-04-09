@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    public class Ture : Search.Searchable<Ture>
+    public class Tur : Search.Searchable<Tur>
     {
+        public Tur(XMLParseHelpers.XMLTure.datarootTur tur)
+        {
+
+        }
+
         public int ID { get; set; }
         public int Kilometer { get; set; }
         public DateTime Dato { get; set; }
@@ -23,7 +28,7 @@ namespace ARK.Model
         public int MedlemsID_8 { get; set; }
         public int MedlemsID_9 { get; set; }
 
-        public override Ture getTarget()
+        public override Tur getTarget()
         {
             return this;
         }

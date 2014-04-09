@@ -8,6 +8,11 @@ namespace ARK.Model
 {
     public class Medlem : Search.Searchable<Medlem>
     {
+        public Medlem(XMLParseHelpers.XMLMedlemmer.datarootAktiveMedlemmer medlemXML)
+        {
+
+        }
+
         public int MedlemsNr { get; set; }
         public int ID { get; set; }
         public string Fornavn { get; set; }
