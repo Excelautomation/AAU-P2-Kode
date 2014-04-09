@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ARK.Administrationssystem.Pages;
 
 namespace ARK.ViewModel
 {
@@ -25,11 +26,11 @@ namespace ARK.ViewModel
         private UserControl _currentPage;
 
         // TODO: Implementer noget cache på objekterne
-        private Administrationssystem.Oversigt PageOverview
+        private Oversigt PageOverview
         {
             get
             {
-                return new Administrationssystem.Oversigt();
+                return new Oversigt();
             }
         }
 

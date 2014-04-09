@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel
 {
@@ -91,13 +92,13 @@ namespace ARK.ViewModel
 
         #region Pages
         // TODO: Implementer noget cache på objekterne
-        public Protokolsystem.BeginTripBoats PageBeginTripBoats { get { return new Protokolsystem.BeginTripBoats(); } }
-        public Protokolsystem.EndTrip PageEndTrip { get { return new Protokolsystem.EndTrip(); } }
-        public Protokolsystem.BoatsOut PageBoatsOut { get { return new Protokolsystem.BoatsOut(); } }
-        public Protokolsystem.DistanceStatistics PageDistanceStatistics { get { return new Protokolsystem.DistanceStatistics(); } }
-        public Protokolsystem.MembersInformation PageMembersInformation { get { return new Protokolsystem.MembersInformation(); } }
-        public Protokolsystem.CreateInjury PageCreateInjury { get { return new Protokolsystem.CreateInjury(); } }
-        public Protokolsystem.CreateLongDistance PageCreateLongDistance { get { return new Protokolsystem.CreateLongDistance(); } }
+        public BeginTripBoats PageBeginTripBoats { get { return new BeginTripBoats(); } }
+        public EndTrip PageEndTrip { get { return new EndTrip(); } }
+        public BoatsOut PageBoatsOut { get { return new BoatsOut(); } }
+        public DistanceStatistics PageDistanceStatistics { get { return new DistanceStatistics(); } }
+        public MembersInformation PageMembersInformation { get { return new MembersInformation(); } }
+        public CreateInjury PageCreateInjury { get { return new CreateInjury(); } }
+        public CreateLongDistance PageCreateLongDistance { get { return new CreateLongDistance(); } }
 
         #endregion
 

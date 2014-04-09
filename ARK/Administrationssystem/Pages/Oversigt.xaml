@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             x:Class="ARK.Administrationssystem.Oversigt" 
+             xmlns:VM="clr-namespace:ARK.ViewModel"
+             x:Class="ARK.Administrationssystem.Pages.Oversigt" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <VM:OverviewViewModel></VM:OverviewViewModel>
+    </UserControl.DataContext>
+    
     <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" Background="white" BorderThickness="1" BorderBrush="Black">
         <StackPanel>
             <WrapPanel Margin="0,0,0,10">
@@ -17,9 +22,14 @@
                     <Image Source="/images/application_side_list.png" Height="24"></Image>
                     <Label FontSize="18">Skadesblanketter</Label>
                 </WrapPanel>
-                <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
-                    
-                </StackPanel>
+                <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding Path=AnmeldersNavn}">
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <WrapPanel>
                     <Image Source="/images/application_side_list.png" Height="24"></Image>
