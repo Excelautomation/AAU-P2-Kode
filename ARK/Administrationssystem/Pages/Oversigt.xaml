@@ -8,43 +8,36 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" Background="white" BorderThickness="1" BorderBrush="Black">
         <StackPanel>
-            <WrapPanel>
+            <WrapPanel Margin="0,0,0,10">
                 <Image Source="/images/house.png" Height="32"/>
                 <Label FontSize="28" Margin="0" Background="White">OVERSIGT</Label>
             </WrapPanel>
-            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,5" Background="White">
-                <Administrationssystem:Header Title="Både på vandet" Width="195px" Height="32px" HorizontalAlignment="Left" Margin="5,5,5,0"/>
-                <!--<Rectangle Margin="5,5,5,0" Height="2" Fill="Gray"/>-->
+            <StackPanel>
                 <WrapPanel>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 2" Besked="Båd 2 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 3" Besked="Båd 3 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
+                    <Image Source="/images/application_side_list.png" Height="24"></Image>
+                    <Label FontSize="18">Skadesblanketter</Label>
                 </WrapPanel>
-            </WrapPanel>
-            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,5" Background="White">
-                <Administrationssystem:Header Title="Skadesanmeldelser" Width="195px" Height="32px" HorizontalAlignment="Left" Margin="5,5,5,0"/>
-                <!--<Rectangle Margin="5,5,5,0" Height="2" Fill="Gray"/>-->
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                    
+                </StackPanel>
+
                 <WrapPanel>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 2" Besked="Båd 2 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 3" Besked="Båd 3 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 4" Besked="Båd 4 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 5" Besked="Båd 5 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
+                    <Image Source="/images/application_side_list.png" Height="24"></Image>
+                    <Label FontSize="18">Langtursblanketter</Label>
                 </WrapPanel>
-            </WrapPanel>
-            <WrapPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,5" Background="White">
-                <Administrationssystem:Header Title="Langtursansøgninger" Width="195px" Height="32px" HorizontalAlignment="Left" Background="#e2e9f0" Margin="5,5,5,0"/>
-                <!--<Rectangle Margin="5,5,5,0" Height="2" Fill="Gray"/>-->
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+
+                </StackPanel>
+
                 <WrapPanel>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 1" Besked="Båd 1 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 2" Besked="Båd 2 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 3" Besked="Båd 3 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 4" Besked="Båd 4 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 5" Besked="Båd 5 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 6" Besked="Båd 6 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
-                    <Administrationssystem:BådItem VerticalAlignment="Top" HorizontalAlignment="Left" Båd="Båd 7" Besked="Båd 7 blev skadet af nisser d. 18/12" Margin="5,0,5,5"/>
+                    <Image Source="/images/yacht.png" Height="24"></Image>
+                    <Label FontSize="18">Både ude</Label>
                 </WrapPanel>
-            </WrapPanel>
+                <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
+
     </ScrollViewer>
 </UserControl>

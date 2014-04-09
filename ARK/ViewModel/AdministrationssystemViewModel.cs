@@ -15,10 +15,10 @@ namespace ARK.ViewModel
             set { _page = value; Notify("Page"); }
         }
 
-        public ICommand MenuOverview { get { return GenerateCommand("Oversigt", PageOverview, FiltersOverview); } }
-        public ICommand MenuForms { get { return GenerateCommand("Blanketter", PageForms, FiltersForms); } }
-        public ICommand MenuBoats { get { return GenerateCommand("Både", PageBoats, FiltersBoats); } }
-        public ICommand MenuConfigurations { get { return GenerateCommand("Indstillinger", PageConfigurations, FiltersConfigurations); } }
+        public ICommand MenuOverview { get { return GenerateCommand("Overview", PageOverview, FiltersOverview); } }
+        public ICommand MenuForms { get { return GenerateCommand("Forms", PageForms, FiltersForms); } }
+        public ICommand MenuBoats { get { return GenerateCommand("Boats", PageBoats, FiltersBoats); } }
+        public ICommand MenuConfigurations { get { return GenerateCommand("Configurations", PageConfigurations, FiltersConfigurations); } }
 
         #region private
         private ObservableCollection<Control> _filterControls;
