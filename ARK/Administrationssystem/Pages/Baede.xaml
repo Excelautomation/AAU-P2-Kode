@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ARK.Administrationssystem.Pages.Blanketter"
+﻿<UserControl x:Class="ARK.Administrationssystem.Pages.Baede"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -16,18 +16,18 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Row="0" Grid.ColumnSpan="3">
-            <Image Height="32" Source="/images/application_side_list.png"/>
-            <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="28" Background="White">BLANKETTER</Label>
+        <WrapPanel>
+            <Image Height="32" Source="/images/yacht.png"/>
+            <Label FontSize="28" >BÅDE</Label>
         </WrapPanel>
         <ScrollViewer Grid.Column="0" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="White" BorderThickness="1" BorderBrush="Black">
             <StackPanel Name="StackpanelLeft">
-                
+
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="2" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="White" BorderThickness="1" BorderBrush="Black">
             <StackPanel Name="StackpanelRight">
-                
+
             </StackPanel>
         </ScrollViewer>
 
