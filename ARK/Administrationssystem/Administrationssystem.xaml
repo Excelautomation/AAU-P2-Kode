@@ -21,7 +21,14 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="White">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Gainsboro" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FFF7F9FA" Offset="0.025"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="104" />
             <RowDefinition Height="6"/>
@@ -42,126 +49,111 @@
         </StackPanel>
 
         <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,25,202,25">
-            <Button Width="115"  x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,30,0" Command="{Binding Path=MenuOversigt}">
+            <Button Width="115"  x:Name="btnMenuOverview" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,30,0" Command="{Binding Path=MenuOverview}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid x:Name="MenuHome_bg">
-                            <Grid Margin="5">
-                                <Image Height="32" x:Name="Img" Source="/images/house.png" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,0,0,0">Oversigt</Label>
-                            </Grid>
+                        <Grid x:Name="MenuOverview_bg">
+                            <Border x:Name="MenuOverview_border" BorderThickness="1">
+                                <Grid Margin="5">
+                                    <Image Height="32" x:Name="Img" Source="/images/house.png" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                                    <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,0,0,0">Oversigt</Label>
+                                </Grid>
+                            </Border>
                         </Grid>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MenuHome_bg" Property="Background" Value="#eff8fe"/>
+                                <Setter TargetName="MenuOverview_bg" Property="Background" Value="#eff8fe"/>
+                                <Setter TargetName="MenuOverview_border" Property="BorderBrush" Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/house.png"/>-->
                             </Trigger>
+                            <DataTrigger Binding="{Binding Path=OverviewSelected}" Value="true">
+                                <Setter TargetName="MenuOverview_bg" Property="Background" Value="Red" />
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
 
-            <Button  Width="130" x:Name="btnMenuBlanketter" VerticalAlignment="Center" Margin="0,0,30,0" Command="{Binding Path=MenuBlanketter}">
+            <Button  Width="130" x:Name="btnMenuForms" VerticalAlignment="Center" Margin="0,0,30,0" Command="{Binding Path=MenuForms}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid x:Name="MenuBlanketter_bg">
-                            <Grid Margin="5">
-                                <Image Height="32" x:Name="Img" Source="/images/application_side_list.png" HorizontalAlignment="Left"/>
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,0,0,0">Blanketter</Label>
-                            </Grid>
+                        <Grid x:Name="MenuForms_bg">
+                            <Border x:Name="MenuForms_border" BorderThickness="1">
+                                <Grid Margin="5">
+                                    <Image Height="32" x:Name="Img" Source="/images/application_side_list.png" HorizontalAlignment="Left"/>
+                                    <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,0,0,0">Blanketter</Label>
+                                </Grid>
+                            </Border>
                         </Grid>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MenuBlanketter_bg" Property="Background"   Value="#eff8fe"/>
+                                <Setter TargetName="MenuForms_bg" Property="Background"   Value="#eff8fe"/>
+                                <Setter TargetName="MenuForms_border" Property="BorderBrush"   Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/application_side_list.png" />-->
                             </Trigger>
+                            <DataTrigger Binding="{Binding Path=FormsSelected}" Value="true">
+                                <Setter TargetName="MenuForms_bg" Property="Background" Value="Red" />
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            
 
-            <Button x:Name="btnMenuIndstillinger" Width="145" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding Path=MenuIndstilinger}">
+            <Button Width="90" x:Name="btnMenuBoats" VerticalAlignment="Center" Margin="0,0,30,0" Command="{Binding Path=MenuBoats}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid x:Name="MenuIndstillinger_bg">
-                            <Grid  Margin="5">
-                                <Image Height="32" HorizontalAlignment="Left" Source="/images/setting_tools.png"/>
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,0,0,0" >Indstillinger</Label>
-                            </Grid>
+                        <Grid x:Name="MenuBoats_bg">
+                            <Border x:Name="MenuBoats_border" BorderThickness="1">
+                                <Grid Margin="5">
+                                    <Image Height="32" x:Name="Img" Source="/images/yacht.png" HorizontalAlignment="Left"/>
+                                    <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,0,0,0">Både</Label>
+                                </Grid>
+                            </Border>
                         </Grid>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MenuIndstillinger_bg" Property="Background" Value="#eff8fe"/>
+                                <Setter TargetName="MenuBoats_bg" Property="Background"   Value="#eff8fe"/>
+                                <Setter TargetName="MenuBoats_border" Property="BorderBrush"   Value="#e5eef2"/>
+                                <!--<Setter TargetName="MenuBaede_bg" Property="BorderBrush"/>-->
+                                <!--<Setter TargetName="Img" Property="Source" Value="/images/application_side_list.png" />-->
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Path=BoatsSelected}" Value="false">
+                                <Setter TargetName="MenuBoats_bg" Property="Background" Value="Red" />
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button x:Name="btnMenuConfigurations" Width="145" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding Path=MenuConfigurations}">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="MenuConfigurations_bg">
+                            <Border x:Name="MenuConfigurations_border" BorderThickness="1">
+                                <Grid  Margin="5">
+                                    <Image Height="32" HorizontalAlignment="Left" Source="/images/setting_tools.png"/>
+                                    <Label VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,0,0,0" >Indstillinger</Label>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="MenuConfigurations_bg" Property="Background" Value="#eff8fe"/>
+                                <Setter TargetName="MenuConfigurations_border" Property="BorderBrush"   Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/setting_tools.png" />
                                 <Setter TargetName="btnMenuIndstillinger" Property="Background" Value="black"/>-->
                             </Trigger>
+                            <DataTrigger Binding="{Binding Path=ConfigurationsSelected}" Value="false">
+                                <Setter TargetName="MenuConfigurations_bg" Property="Background" Value="Red" />
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            
-
-            <!--<Button x:Name="btnMenuHome" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82.462" Height="40" Command="{Binding Path=MenuOversigt}">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Image x:Name="Img" Source="/images/menu1-1.png" Stretch="Fill"/>
-                        </Grid>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Img" Property="Source" Value="/images/menu1-1.png" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="btnMenuBlanketter" Content="Blanketter" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="112.387" Height="40" Command="{Binding Path=MenuBlanketter}">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Image x:Name="Img" Source="/images/menu3-1.png" Stretch="Fill"/>
-                            <TextBlock Text="Blanketter" FontSize="17"
-								HorizontalAlignment="Center" Foreground="White" 
-								VerticalAlignment="Center"/>
-                        </Grid>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Img" Property="Source" Value="/images/menu3-1.png" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="btnMenuIndstillinger" Foreground="White" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125.82" Height="40" Command="{Binding Path=MenuIndstilinger}">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Image x:Name="Img" Source="/images/menu4-1.png" Stretch="Fill"/>
-                            <TextBlock Text="Indstillinger" FontSize="17"
-								HorizontalAlignment="Center" Foreground="White" 
-								VerticalAlignment="Center"/>
-                        </Grid>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Img" Property="Source" Value="/images/menu4-1.png" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>-->
-
-            <!--<TextBox x:Name="txtMenuSearch" BorderThickness="0" Foreground="White" Padding="20,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" FontSize="15" Width="155.373" Height="40" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow">
-                <TextBox.Background>
-                    <ImageBrush ImageSource="/images/Søgebar.png"/>
-                </TextBox.Background> Søg her...
-            </TextBox> -->
         </WrapPanel>
 
         <Grid Height="100" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="165">
@@ -173,7 +165,7 @@
                     <ImageBrush ImageSource="/images/logud.png"/>
                 </Button.Background>
             </Button>
-            <Image x:Name="imgMenuBrugerBillede" Margin="-105,5,0,0" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="https://scontent-a-fra.xx.fbcdn.net/hphotos-prn2/t1.0-9/1530506_355629557911254_1987273982_n.jpg"/>
+            <!--<Image x:Name="imgMenuBrugerBillede" Margin="-105,5,0,0" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="https://scontent-a-fra.xx.fbcdn.net/hphotos-prn2/t1.0-9/1530506_355629557911254_1987273982_n.jpg"/>-->
         </Grid>
         <Border Grid.Column="0" Grid.Row="2"  Background="#e2e9f0" BorderBrush="Gray" BorderThickness="2">
             <StackPanel>
@@ -181,8 +173,7 @@
                     <StackPanel Margin="0,0,0,0">
                         <Label Margin="0,0,0,-10" FontSize="18">Søgning</Label>
                         <Rectangle Margin="5,5,5,-5" Height="1" Fill="Gray"/>
-                        <TextBox x:Name="txtMenuSearchleft" Text="Søg her..." BorderThickness="1" Padding="5,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"  VerticalAlignment="Bottom" FontSize="15" Height="25" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,10,5,5">
-                        </TextBox>
+                        <TextBox x:Name="txtMenuSearchleft" Text="Søg her..." BorderThickness="1" Padding="5,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"  VerticalAlignment="Bottom" FontSize="15" Height="25" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,10,5,5"/>
                     </StackPanel>
                 </Border>
                 <Border Visibility="{Binding Path=ShowFilter}" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,5,5,5">
