@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ARK.Model.XML;
 
 namespace ARK.Model
 {
     public class Tur : Search.Searchable<Tur>
     {
-        public Tur(XMLParseHelpers.XMLTure.datarootTur tur)
+        public Tur(XMLTure.datarootTur tur)
         {
 
         }
