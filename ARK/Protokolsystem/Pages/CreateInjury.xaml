@@ -11,7 +11,6 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-
         <ListView HorizontalAlignment="Left" Height="244.216" Margin="12.422,58.784,0,0" VerticalAlignment="Top" Width="279.104">
             <ListView.View>
                 <GridView>
@@ -23,21 +22,20 @@
         <RichTextBox HorizontalAlignment="Left" Height="124.216" Margin="12.422,465.784,0,0" VerticalAlignment="Top" Width="351.104">
             <FlowDocument />
         </RichTextBox>
-        <Button x:Name="SubmitLongDistance" Content="INDSEND&#xA;ANMELDELSE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{StaticResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="395.026,526,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
-            <!-- Problemer med style -->
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF004546" Offset="1" />
-                    <GradientStop Color="#FF00B0B4" />
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF019FA2" Offset="0" />
-                    <GradientStop Color="#FF006364" Offset="1" />
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+            <Button x:Name="AddInjury" Content="INDSEND &#xA;SKADESRAPPORT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="413.026,510,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddInjury}">
+                <Button.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF004546" Offset="0"/>
+                        <GradientStop Color="#FF00B0B4" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.BorderBrush>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF019FA2" Offset="0"/>
+                        <GradientStop Color="#FF006364" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         <DatePicker HorizontalAlignment="Left" Margin="413.026,370.04,0,0" VerticalAlignment="Top" Height="45.96" Width="174" FirstDayOfWeek="Monday" FontSize="28" />
         <ListView HorizontalAlignment="Left" Height="244.216" Margin="307.922,58.784,0,0" VerticalAlignment="Top" Width="279.104">
             <ListView.View>
@@ -54,20 +52,5 @@
             <ComboBoxItem Content="Båd eksploderede" HorizontalAlignment="Left" Width="349.104" />
         </ComboBox>
         <Label Content="Vælg skade" HorizontalAlignment="Left" Margin="114.422,321.5,0,0" VerticalAlignment="Top" Height="48.284" Width="156.104" FontSize="28" />
-
-        <Button x:Name="BeginTrip" Content="START &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="10,28,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=StartTrip}">
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFB0D141" Offset="0"/>
-                    <GradientStop Color="#FF1B4E09" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF93C700" Offset="0"/>
-                    <GradientStop Color="#FF0E6E00" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
     </Grid>
 </UserControl>
