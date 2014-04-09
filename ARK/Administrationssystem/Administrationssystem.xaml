@@ -67,7 +67,7 @@
                                 <Setter TargetName="MenuOverview_border" Property="BorderBrush" Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/house.png"/>-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=OverviewSelected}" Value="true">
+                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Oversigt">
                                 <Setter TargetName="MenuOverview_bg" Property="Background" Value="Red" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
@@ -169,21 +169,21 @@
         </Grid>
         <Border Grid.Column="0" Grid.Row="2"  Background="#e2e9f0" BorderBrush="Gray" BorderThickness="2">
             <StackPanel>
-                <Border Visibility="{Binding Path=ShowSearch}" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,5,5,5" Height="68">
+                <Border Visibility="{Binding Path=Page.ShowSearch}" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,5,5,5" Height="68">
                     <StackPanel Margin="0,0,0,0">
                         <Label Margin="0,0,0,-10" FontSize="18">Søgning</Label>
                         <Rectangle Margin="5,5,5,-5" Height="1" Fill="Gray"/>
                         <TextBox x:Name="txtMenuSearchleft" Text="Søg her..." BorderThickness="1" Padding="5,0,20,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"  VerticalAlignment="Bottom" FontSize="15" Height="25" VerticalContentAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,10,5,5"/>
                     </StackPanel>
                 </Border>
-                <Border Visibility="{Binding Path=ShowFilter}" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,5,5,5">
+                <Border Visibility="{Binding Path=Page.ShowFilter}" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,5,5,5">
                     <StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0" DockPanel.Dock="Left" VerticalAlignment="Top">
                         <!-- <Administrationssystem:Header Title="Filter" DockPanel.Dock="Top" Height="32px"/> -->
                         <Label FontSize="18">Filter</Label>
 
                         <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
                         <StackPanel x:Name="Stackpanelfilter" Margin="5,0,5,5">
-                            <ItemsControl ItemsSource="{Binding Path=CurrentFilter}" />
+                            <ItemsControl ItemsSource="{Binding Path=Page.Filter}" />
                         </StackPanel>
                         <!-- <StackPanel x:Name="Filters" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Auto"/> -->
                     </StackPanel>
@@ -196,7 +196,7 @@
 			Width="5" Background="#FFBCBCBC"/>
 
         <Grid x:Name="MainContent" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Margin="10,0,0,0" Background="white">
-            <ContentControl Content="{Binding Path=CurrentPage}"/>
+            <ContentControl Content="{Binding Path=Page.Page}"/>
         </Grid>
 
 
