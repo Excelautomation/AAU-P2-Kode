@@ -13,15 +13,7 @@ namespace ARK.Model.Search
 
         public bool SearchMatching(params Func<T, bool>[] filters)
         {
-            foreach (var filter in filters)
-            {
-                if (filter(getTarget()))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return filters.Any(filter => filter(getTarget()));
         }
 
         public bool SearchMatching(string searchExpression)
@@ -29,12 +21,8 @@ namespace ARK.Model.Search
             T target = getTarget();
 
             // Indlæs alle properties
-            PropertyInfo[] properties = target.GetType().GetProperties();
-            Dictionary<PropertyInfo, string> propertiesInfo = new Dictionary<PropertyInfo, string>();
-            foreach (var prop in properties)
-            {
-                propertiesInfo.Add(prop, prop.GetValue(target).ToString());
-            }
+            var properties = target.GetType().GetProperties();
+            var propertiesInfo = properties.ToDictionary(prop => prop, prop => prop.GetValue(target).ToString());
 
             // Finder expression
             Expression expression = TranslateSearchexpression(searchExpression);
@@ -49,7 +37,7 @@ namespace ARK.Model.Search
 
             foreach (var element in expression.Input)
             {
-                if (properties.Where(e => e.Value.Contains(element)).Count() > 0)
+                if (properties.Count(e => e.Value.Contains(element)) > 0)
                 {
                     if (expression.Type == ExpressionType.or)
                     {
@@ -62,24 +50,23 @@ namespace ARK.Model.Search
                 }
             }
 
-            if (matching && expression.Expressions.Count() > 0)
+            if (!matching || !expression.Expressions.Any()) return matching;
+
+            foreach (var expr in expression.Expressions)
             {
-                foreach (var expr in expression.Expressions)
+                if (SearchMatching(expression, target, properties))
                 {
-                    if (SearchMatching(expression, target, properties))
+                    if (expression.Type == ExpressionType.or)
                     {
-                        if (expression.Type == ExpressionType.or)
-                        {
-                            matching = true;
-                        }
-                    }
-                    else if (expression.Type == ExpressionType.and)
-                    {
-                        matching = false;
+                        matching = true;
                     }
                 }
+                else if (expression.Type == ExpressionType.and)
+                {
+                    matching = false;
+                }
             }
-            
+
             return matching;
         }
 
