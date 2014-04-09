@@ -108,11 +108,11 @@
     <Compile Include="Model\Search\ISearchable.cs" />
     <Compile Include="Model\Search\Searchable.cs" />
     <Compile Include="Model\Skadesblanket.cs" />
-    <Compile Include="Model\Ture.cs" />
-    <Compile Include="Model\XMLBåde.cs" />
-    <Compile Include="Model\XMLMedlemmer.cs" />
-    <Compile Include="Model\XMLParser.cs" />
-    <Compile Include="Model\XMLTure.cs" />
+    <Compile Include="Model\Tur.cs" />
+    <Compile Include="Model\XML\XMLBåde.cs" />
+    <Compile Include="Model\XML\XMLMedlemmer.cs" />
+    <Compile Include="Model\XML\XMLParser.cs" />
+    <Compile Include="Model\XML\XMLTure.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
       <DependentUpon>BeginTripBoats.xaml</DependentUpon>

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ARK.Model.XML;
 
 namespace ARK.Model
 {
     public class Medlem : Search.Searchable<Medlem>
     {
-        public Medlem(XMLParseHelpers.XMLMedlemmer.datarootAktiveMedlemmer medlemXML)
+        public Medlem(XMLMedlemmer.datarootAktiveMedlemmer medlemXML)
         {
-
         }
 
         public int MedlemsNr { get; set; }
