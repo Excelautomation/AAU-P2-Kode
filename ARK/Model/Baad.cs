@@ -9,6 +9,11 @@ namespace ARK.Model
 {
     public class Baad : Search.Searchable<Baad>
     {
+        public Baad(XMLParseHelpers.XMLBåde.datarootBådeSpecifik båd)
+        {
+
+        }
+
         public int ID { get; set; }
         public string Navn { get; set; }
         public int AntalPladser { get; set; }
