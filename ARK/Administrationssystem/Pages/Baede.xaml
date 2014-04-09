@@ -21,8 +21,8 @@
             <Label FontSize="28" >BÅDE</Label>
         </WrapPanel>
         <StackPanel Grid.Column="0" Grid.Row="2">
-            <Label>Bådoversigt</Label>
-            <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" Background="White" BorderThickness="1" BorderBrush="Black">
+            <Label FontSize="18">Bådoversigt</Label>
+            <ScrollViewer>
                 <StackPanel Name="StackpanelLeft">
 
                 </StackPanel>
