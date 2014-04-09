@@ -22,7 +22,7 @@
     	<RichTextBox HorizontalAlignment="Left" Height="124.216" Margin="12.422,465.784,0,0" VerticalAlignment="Top" Width="351.104">
     		<FlowDocument/>
     	</RichTextBox>
-    	<Button x:Name="SubmitLongDistance" Content="INDSEND&#xA;ANMELDELSE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="395.026,526,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+    	<Button x:Name="SubmitLongDistance" Content="INDSEND&#xA;ANMELDELSE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{StaticResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="395.026,526,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
                 <!-- Problemer med style -->
     		<Button.BorderBrush>
     			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

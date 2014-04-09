@@ -55,7 +55,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ARK.Program</StartupObject>
+    <StartupObject>ARK.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
