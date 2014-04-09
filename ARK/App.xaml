@@ -98,6 +98,24 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="#FF878787" />
                             </MultiTrigger>
 
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed" Value="True" />
+                                    <Condition Property="Name" Value="AddInjury" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="border" Value="#FF019FA2" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787" />
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed" Value="True" />
+                                    <Condition Property="Name" Value="AddLongDistance" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="border" Value="#FF019FA2" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF878787" />
+                            </MultiTrigger>
+
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{DynamicResource Button.Disabled.Background}" />
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.Disabled.Border}" />
