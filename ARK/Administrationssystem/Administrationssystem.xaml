@@ -67,8 +67,9 @@
                                 <Setter TargetName="MenuOverview_border" Property="BorderBrush" Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/house.png"/>-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Oversigt">
-                                <Setter TargetName="MenuOverview_bg" Property="Background" Value="Red" />
+                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Overview">
+                                <Setter TargetName="MenuOverview_bg" Property="Background" Value="#c1deec" />
+                                <Setter TargetName="MenuOverview_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -93,8 +94,9 @@
                                 <Setter TargetName="MenuForms_border" Property="BorderBrush"   Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/application_side_list.png" />-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=FormsSelected}" Value="true">
-                                <Setter TargetName="MenuForms_bg" Property="Background" Value="Red" />
+                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Forms">
+                                <Setter TargetName="MenuForms_bg" Property="Background" Value="#c1deec" />
+                                <Setter TargetName="MenuForms_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -120,8 +122,9 @@
                                 <!--<Setter TargetName="MenuBaede_bg" Property="BorderBrush"/>-->
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/application_side_list.png" />-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=BoatsSelected}" Value="false">
-                                <Setter TargetName="MenuBoats_bg" Property="Background" Value="Red" />
+                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Boats">
+                                <Setter TargetName="MenuBoats_bg" Property="Background" Value="#c1deec" />
+                                <Setter TargetName="MenuBoats_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -147,8 +150,9 @@
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/setting_tools.png" />
                                 <Setter TargetName="btnMenuIndstillinger" Property="Background" Value="black"/>-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=ConfigurationsSelected}" Value="false">
-                                <Setter TargetName="MenuConfigurations_bg" Property="Background" Value="Red" />
+                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Configurations">
+                                <Setter TargetName="MenuConfigurations_bg" Property="Background" Value="#c1deec" />
+                                <Setter TargetName="MenuConfigurations_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
