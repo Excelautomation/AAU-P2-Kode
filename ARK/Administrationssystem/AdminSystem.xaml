@@ -5,6 +5,9 @@
         x:Class="ARK.Administrationssystem.AdminSystem"
         Title="Administrationssystem" Height="768" Width="1024"
         MinWidth="1024" MinHeight="768" WindowState="Maximized">
+    <Window.DataContext>
+        <VM:AdminSystemViewModel></VM:AdminSystemViewModel>
+    </Window.DataContext>
     <!--Skalerer checkboxes-->
     <Window.Resources>
         <Style TargetType="CheckBox">
