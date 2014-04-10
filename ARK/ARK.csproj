@@ -113,9 +113,6 @@
     <Compile Include="Model\XML\XMLMedlemmer.cs" />
     <Compile Include="Model\XML\XMLParser.cs" />
     <Compile Include="Model\XML\XMLTure.cs" />
-    <Compile Include="Objects\Boats.cs" />
-    <Compile Include="Objects\Forms.cs" />
-    <Compile Include="Objects\Members.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
       <DependentUpon>BeginTripBoats.xaml</DependentUpon>

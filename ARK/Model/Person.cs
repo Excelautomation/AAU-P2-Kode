@@ -8,7 +8,7 @@ namespace ARK.Model
 {
     public class Person
     {
-        public string Navn { get; set; }
-        public string Telefon { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
     }
 }
