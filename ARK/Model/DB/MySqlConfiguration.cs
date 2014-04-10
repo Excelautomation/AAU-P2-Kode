@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Migrations.Infrastructure;
 
 namespace ARK.Model.DB
 {
-    internal class MySqlConfiguration : DbConfiguration
+    public class MySqlConfiguration : DbConfiguration
     {
         public MySqlConfiguration()
         {
