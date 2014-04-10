@@ -105,8 +105,8 @@
     <Compile Include="Model\Baad.cs" />
     <Compile Include="Model\Medlem.cs" />
     <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\Search\ISearchable.cs" />
-    <Compile Include="Model\Search\Searchable.cs" />
+    <Compile Include="Model\Search\IFilter.cs" />
+    <Compile Include="Model\SkadeBeskrivelse.cs" />
     <Compile Include="Model\Skadesblanket.cs" />
     <Compile Include="Model\Tur.cs" />
     <Compile Include="Model\XML\XMLBåde.cs" />

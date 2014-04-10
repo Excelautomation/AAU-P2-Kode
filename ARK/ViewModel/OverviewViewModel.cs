@@ -6,7 +6,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using ARK.Model;
+using ARK.Model.Search;
 
 namespace ARK.ViewModel
 {
@@ -14,6 +16,14 @@ namespace ARK.ViewModel
     {
         private ObservableCollection<Skadesblanket> _skadesblanketter = new ObservableCollection<Skadesblanket>();
         public ObservableCollection<Skadesblanket> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+
+        public ObservableCollection<IFilter<Skadesblanket, CheckBox>> SkadesblanketterFilters
+        {
+            get
+            {
+                
+            }
+        }
 
         public OverviewViewModel()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    public class Langtursblanket : Search.Searchable<Langtursblanket>
+    public class Langtursblanket
     {
         public int Id { get; set; }
         public DateTime Afgangstid { get; set; }
@@ -14,10 +14,5 @@ namespace ARK.Model
         public string Text { get; set; }
         public virtual List<Person> Deltager { get; set; }
         public bool Godkendt { get; set; }
-
-        public override Langtursblanket getTarget()
-        {
-            return this;
-        }
     }
 }

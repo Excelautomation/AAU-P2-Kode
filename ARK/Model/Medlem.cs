@@ -7,8 +7,10 @@ using ARK.Model.XML;
 
 namespace ARK.Model
 {
-    public class Medlem : Search.Searchable<Medlem>
+    public class Medlem
     {
+        public Medlem() { }
+
         public Medlem(XMLMedlemmer.datarootAktiveMedlemmer medlemXML)
         {
         }
@@ -34,10 +36,5 @@ namespace ARK.Model
         public bool ScullerRet { get; set; }
         public bool OutriggerRet { get; set; }
         public bool Kajakret { get; set; }
-
-        public override Medlem getTarget()
-        {
-            return this;
-        }
     }
 }

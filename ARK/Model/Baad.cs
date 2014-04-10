@@ -8,7 +8,7 @@ using ARK.Model.XML;
 
 namespace ARK.Model
 {
-    public class Baad : Search.Searchable<Baad>
+    public class Baad
     {
         public Baad(XML.XMLBåde.datarootBådeSpecifik bådXML)
         {
@@ -21,11 +21,6 @@ namespace ARK.Model
         public int BådType { get; set; }
         public bool Roforbud { get; set; }
         public int SpecifikBådType { get; set; }
-        public bool LangtursBåd { get; set; }
-
-        public override Baad getTarget()
-        {
-            return this;
-        }
+        public bool LangtursBåd { get; set; }   
     }
 }
