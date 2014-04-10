@@ -11,9 +11,9 @@ namespace ARK.ViewModel
 {
     class AdminSystemViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Skadesblanket> _skadesblanketter = new ObservableCollection<Skadesblanket>();
+        private ObservableCollection<DamageForm> _skadesblanketter = new ObservableCollection<DamageForm>();
 
-        public ObservableCollection<Skadesblanket> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+        public ObservableCollection<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
 
         private PageInformation _page;
         public PageInformation Page
@@ -126,8 +126,8 @@ namespace ARK.ViewModel
             Page = new PageInformation();
             MenuOverview.Execute(null);
 
-            Skadesblanketter.Add(new Skadesblanket { ReportedBy = "Martin er noob" });
-            Skadesblanketter.Add(new Skadesblanket { ReportedBy = "Martin er mere noob" });
+            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er noob" });
+            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er mere noob" });
 
             TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
