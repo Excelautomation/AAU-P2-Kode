@@ -15,12 +15,12 @@ namespace ARK.Model
 
         public DbSet<FtpInfo> FTPInfo { get; set; }
         public DbSet<DamageType> DamageType { get; set; }
-        public DbSet<Baad> Baad { get; set; }
-        public DbSet<Langtursblanket> Langtursblanket { get; set; }
-        public DbSet<Medlem> Medlem { get; set; }
+        public DbSet<Boat> Baad { get; set; }
+        public DbSet<LongTripForm> Langtursblanket { get; set; }
+        public DbSet<Member> Medlem { get; set; }
         public DbSet<Person> Person { get; set; }
-        public DbSet<SkadeBeskrivelse> SkadeBeskrivelse { get; set; }
-        public DbSet<Skadesblanket> Skadesblanket { get; set; }
-        public DbSet<Tur> Tur { get; set; }
+        public DbSet<DamageDescription> SkadeBeskrivelse { get; set; }
+        public DbSet<DamageForm> Skadesblanket { get; set; }
+        public DbSet<Trip> Tur { get; set; }
     }
 }
