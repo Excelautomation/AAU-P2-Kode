@@ -48,8 +48,24 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
-                            <Border Margin="5" CornerRadius="5" Background="White">
-                                
+                            <Border Margin="10" CornerRadius="5" Background="White">
+                                <Grid Margin="25">
+                                    <StackPanel>
+                                        <Label FontSize="30" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,40">Skadesblanket</Label>
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                                            <Label FontSize="18" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Oblique">Indgivet af:</Label>
+                                            <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18"> Jon Doge Larsen</TextBox>
+                                        </WrapPanel>
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                                            <Label FontSize="18" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Oblique">Båd:</Label>
+                                            <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">Den Døde Baby</TextBox>
+                                        </WrapPanel>
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                                            <Label FontSize="18" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Oblique">Dato:</Label>
+                                            <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">23/11/2014</TextBox>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </Grid>
                             </Border>
                         </ScrollViewer>
                     </DockPanel>
