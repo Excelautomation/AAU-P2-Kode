@@ -8,10 +8,10 @@ namespace ARK.Model.Search
 {
     public interface IFilter<TType, TControl>
     {
-        TControl Control { get; set; }
+        TControl Control { get; }
 
-        bool Active { get; set; }
-        Func<TType, bool> Filter { get; set; }
+        bool Active { get; }
+        Func<TType, bool> Filter { get; }
 
         event EventHandler ActiveChanged;
     }
