@@ -9,9 +9,16 @@
     <UserControl.DataContext>
         <VM:SettingsViewModel></VM:SettingsViewModel>
     </UserControl.DataContext>
-    <Grid Background="White">
+    <Grid >
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0.118"/>
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FFF9F7F7" Offset="0.056"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <StackPanel>
-            <WrapPanel>
+            <WrapPanel Margin="5,0,0,0">
                 <Image Source="/images/setting_tools.png" Height="32"/>
                 <Label FontSize="28" Margin="0">INDSTILLINGER</Label>
             </WrapPanel>

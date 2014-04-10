@@ -6,39 +6,63 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-        <UserControl.DataContext><VM:BoatViewModel></VM:BoatViewModel></UserControl.DataContext>
-    <Grid Background="white">
+    <UserControl.DataContext>
+        <VM:BoatViewModel></VM:BoatViewModel>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0.118"/>
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FFF9F7F7" Offset="0.056"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="5"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="302*" MinWidth="200" MaxWidth="500"/>
+            <ColumnDefinition Width="252*" MinWidth="200" MaxWidth="500"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
-        <WrapPanel>
+        <WrapPanel Margin="5,0,0,0" Grid.ColumnSpan="3">
             <Image Height="32" Source="/images/yacht.png"/>
             <Label FontSize="28" >BÅDE</Label>
         </WrapPanel>
-        <StackPanel Grid.Column="0" Grid.Row="2">
-            <Label FontSize="18">Bådoversigt</Label>
-            <ScrollViewer>
-                <StackPanel Name="StackpanelLeft">
+        <DockPanel Grid.Row="2" >
+            <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Både</Label>
+            <Grid Margin="0,0,5,5">
+                <Border BorderBrush="Gray" BorderThickness="1">
+                    <DockPanel>
+                        <ScrollViewer DockPanel.Dock="Bottom">
+                            <StackPanel Name="StackpanelLeft">
 
-                </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
-        <ScrollViewer Grid.Column="2" Grid.Row="2" PanningMode="VerticalOnly" Padding="0,0,0,0" Background="White" BorderThickness="1" BorderBrush="Black">
-            <StackPanel Name="StackpanelRight">
+                            </StackPanel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.Column="2" >
+            <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Detaljer</Label>
+            <Grid Margin="5,0,5,5">
+                <Border BorderBrush="Gray" BorderThickness="1">
+                    <DockPanel>
+                        <ScrollViewer DockPanel.Dock="Bottom">
+                            <StackPanel Name="StackpanelRight">
 
-            </StackPanel>
-        </ScrollViewer>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </DockPanel>
 
 
 
-        <GridSplitter HorizontalAlignment="Right" 
+        <GridSplitter HorizontalAlignment="Right" Margin="0,35,0,0"
 			VerticalAlignment="Stretch" 
 			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
 			Width="5" Background="Gray"/>

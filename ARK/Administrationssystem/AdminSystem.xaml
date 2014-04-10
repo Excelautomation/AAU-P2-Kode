@@ -25,8 +25,8 @@
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Gainsboro" Offset="0"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFF7F9FA" Offset="0.025"/>
+                <GradientStop Color="White" Offset="0.053"/>
+                <GradientStop Color="#FFF7F9FA" Offset="0.031"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -199,7 +199,7 @@
 			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
 			Width="5" Background="#FFBCBCBC"/>
 
-        <Grid x:Name="MainContent" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Margin="10,0,0,0" Background="white">
+        <Grid x:Name="MainContent" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="1" Margin="10,0,0,0">
             <ContentControl Content="{Binding Path=Page.Page}"/>
         </Grid>
 
