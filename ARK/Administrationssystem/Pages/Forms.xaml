@@ -51,19 +51,33 @@
                             <Border Margin="10" CornerRadius="5" Background="White">
                                 <Grid Margin="25">
                                     <StackPanel>
-                                        <Label FontSize="30" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,40">Skadesblanket</Label>
-                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
-                                            <Label FontSize="18" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Oblique">Indgivet af:</Label>
-                                            <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18"> Jon Doge Larsen</TextBox>
+                                        <Label FontSize="40" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,40">Skadesblanket</Label>
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,30">
+                                            <StackPanel Margin="0,0,60,0">
+                                                <WrapPanel Margin="0,0,0,15">
+                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Indgivet af:</Label>
+                                                    <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18"> Jon Doge Larsen</TextBox>
+                                                </WrapPanel>
+                                                <WrapPanel Margin="0,0,0,15">
+                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Båd:</Label>
+                                                    <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">Den Døde Baby</TextBox>
+                                                </WrapPanel>
+                                                <WrapPanel Margin="0,0,0,15">
+                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Dato:</Label>
+                                                    <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">23/11/2014</TextBox>
+                                                </WrapPanel>
+                                            </StackPanel>
+                                            <DockPanel Width="300">
+                                                <Label DockPanel.Dock="Top" FontSize="24" FontStyle="Italic" Margin="0,0,0,10">Supplerende tekst</Label>
+                                                <Border  DockPanel.Dock="Bottom"  BorderBrush="Black" BorderThickness="1">
+                                                    <TextBlock Margin="2" FontSize="18" TextWrapping="Wrap">Der skete det, at der kom en enhjørning og gennemhullede vores båd i en sådan grad, at jeg måtte skære Søren i stykker og stoppe  hullerne til med dem for bare at få båden hjem. Og det er derfor jeg ikke kommer på arbejde i dag, chef.</TextBlock>
+                                                </Border>
+                                            </DockPanel>
                                         </WrapPanel>
-                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
-                                            <Label FontSize="18" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Oblique">Båd:</Label>
-                                            <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">Den Døde Baby</TextBox>
-                                        </WrapPanel>
-                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,10">
-                                            <Label FontSize="18" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Oblique">Dato:</Label>
-                                            <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">23/11/2014</TextBox>
-                                        </WrapPanel>
+                                        <Label FontStyle="Oblique" FontSize="20" HorizontalAlignment="Center">Her skal der være "Gør båd skadet" og "Aktiver båd" buttons.</Label>
+                                        <!--Buttons for sæt båd til skadet eller aktiv-->
+                                        
+                                        
                                     </StackPanel>
                                 </Grid>
                             </Border>
