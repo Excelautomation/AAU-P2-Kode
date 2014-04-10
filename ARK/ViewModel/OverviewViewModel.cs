@@ -21,7 +21,7 @@ namespace ARK.ViewModel
         {
             get
             {
-                
+                return null;
             }
         }
 

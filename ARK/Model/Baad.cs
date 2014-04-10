@@ -10,7 +10,7 @@ namespace ARK.Model
 {
     public class Baad
     {
-        public Baad(XML.XMLBåde.datarootBådeSpecifik bådXML)
+        public Baad(XML.XMLBoats.datarootBådeSpecifik bådXML)
         {
 
         }
