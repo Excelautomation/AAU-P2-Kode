@@ -6,9 +6,6 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <VM:SettingsViewModel></VM:SettingsViewModel>
-    </UserControl.DataContext>
     <Grid >
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

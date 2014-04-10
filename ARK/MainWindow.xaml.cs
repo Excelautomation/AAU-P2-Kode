@@ -27,8 +27,8 @@ namespace ARK
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ARK.Administrationssystem.Administrationssystem window = new ARK.Administrationssystem.Administrationssystem();
-            ShowWindow(window);
+            //ARK.Administrationssystem.Administrationssystem window = new ARK.Administrationssystem.Administrationssystem();
+            //ShowWindow(window);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
