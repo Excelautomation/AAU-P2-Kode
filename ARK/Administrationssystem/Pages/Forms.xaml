@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <VM:BlanketterViewModel></VM:BlanketterViewModel>
+        <VM:FormsViewModel></VM:FormsViewModel>
     </UserControl.DataContext>
     <Grid Background="white">
         <Grid.RowDefinitions>
