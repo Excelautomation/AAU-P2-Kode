@@ -9,7 +9,7 @@ namespace ARK.Model.Search
         // TODO fix EventArgs til at indeholde active
         private CheckBox _control;
 
-        public CheckboxFilter(CheckBox checkbox, Func<T, bool> filter)
+        public CheckboxFilter(CheckBox checkbox, Action filter)
         {
             this.Control = checkbox;
             this.Filter = filter;
@@ -40,6 +40,6 @@ namespace ARK.Model.Search
                 _control.Checked += WrapperEvent;
             }
         }
-        public Func<T, bool> Filter { get; private set; }
+        public Action Filter { get; private set; }
     }
 }
