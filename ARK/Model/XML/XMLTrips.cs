@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model.XML
 {
-    public class XMLTrip
+    public class XMLTrips
     {
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
@@ -15,21 +15,21 @@ namespace ARK.Model.XML
         public partial class dataroot
         {
 
-            private datarootTur[] turField;
+            private datarootTur[] tripField;
 
             private System.DateTime generatedField;
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute("Tur")]
-            public datarootTur[] Tur
+            public datarootTur[] Trip
             {
                 get
                 {
-                    return this.turField;
+                    return this.tripField;
                 }
                 set
                 {
-                    this.turField = value;
+                    this.tripField = value;
                 }
             }
 
