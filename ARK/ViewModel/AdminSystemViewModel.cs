@@ -9,13 +9,13 @@ using ARK.Model;
 
 namespace ARK.ViewModel
 {
-    class AdminSystemViewModel : INotifyPropertyChanged
+    public class AdminSystemViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<DamageForm> _skadesblanketter = new ObservableCollection<DamageForm>();
+        private PageInformation _page;
 
         public ObservableCollection<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
 
-        private PageInformation _page;
         public PageInformation Page
         {
             get { return _page; }
@@ -150,7 +150,8 @@ namespace ARK.ViewModel
                 Page.PageName = pageName;
                 Page.Page = page;
                 Page.Filter = filters;
-            }, (e) => true);
+            }, 
+            (e) => true);
         }
         #endregion
     }

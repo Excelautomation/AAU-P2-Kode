@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Data;
 
 
 namespace ARK.Model
 {
-    class DbArkContext : DbContext
+    public class DbArkContext : DbContext
     {
         public DbArkContext() : base("Server=nobs.mclc.dk;Database=ark;Uid=ark;Pwd=bqLWb6nGTPNVRqRb;") { }
 

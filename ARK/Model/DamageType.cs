@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    class DamageType
+    public class DamageType
     {
-		public int Id { get; set; }
-		public string Title { get; set; }
-		public bool IsFunctional { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool IsFunctional { get; set; }
     }
 }

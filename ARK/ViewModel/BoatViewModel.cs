@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARK.ViewModel
 {
-    class BoatViewModel
-    {
-        
+    public class BoatViewModel
+    {        
     }
 }

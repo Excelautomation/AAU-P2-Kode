@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARK.ViewModel
 {
-    class FormsViewModel
+    public class FormsViewModel
     {
     }
 }
