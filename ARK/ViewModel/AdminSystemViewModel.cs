@@ -8,7 +8,7 @@ using ARK.Administrationssystem.Pages;
 
 namespace ARK.ViewModel
 {
-    class AdministrationssystemViewModel : INotifyPropertyChanged
+    class AdminSystemViewModel : INotifyPropertyChanged
     {
         private PageInformation _page;
         public PageInformation Page
@@ -113,7 +113,7 @@ namespace ARK.ViewModel
         }
         #endregion
 
-        public AdministrationssystemViewModel()
+        public AdminSystemViewModel()
         {
             TimeCounter.StartTimer();
 
