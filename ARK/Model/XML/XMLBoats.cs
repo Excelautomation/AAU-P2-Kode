@@ -5,16 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace ARK.Model.XML
 {
-    [XmlRoot("dataroot")]
-    public class MoreBoats
-    {
-        [System.Xml.Serialization.XmlElementAttribute("BådeSpecifik")]
-        public ARK.Model.Boat[] BoatsSpecific { get; set; }
-    }
     public class XMLBoats
     {
         /// <remarks/>

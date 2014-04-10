@@ -131,6 +131,7 @@
     <Compile Include="Model\DamageDescription.cs" />
     <Compile Include="Model\DamageForm.cs" />
     <Compile Include="Model\Trip.cs" />
+    <Compile Include="Model\XML\MoreBoats.cs" />
     <Compile Include="Model\XML\XMLBoats.cs" />
     <Compile Include="Model\XML\XMLMembers.cs" />
     <Compile Include="Model\XML\XMLParser.cs" />
