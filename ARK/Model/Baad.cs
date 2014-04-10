@@ -10,9 +10,12 @@ namespace ARK.Model
 {
     public class Baad
     {
-        public Baad(XML.XMLBoats.datarootBådeSpecifik bådXML)
+        public Baad(XML.XMLBoats.datarootBådeSpecifik boatXML)
         {
-
+            this.ID = boatXML.ID;
+            this.Name = boatXML.Navn;
+            this.NumberofSeats = boatXML.AntalPladser;
+            this.Aktive = boatXML.Aktiv == 1 ? true : false;
         }
 
         public int ID { get; set; }
