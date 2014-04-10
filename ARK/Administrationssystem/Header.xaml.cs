@@ -30,6 +30,7 @@ namespace ARK.Administrationssystem
                 Notify("Title"); 
             } 
         }
+
         private string _title;
 
         public Header()

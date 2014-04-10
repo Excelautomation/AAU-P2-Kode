@@ -23,10 +23,6 @@ namespace ARK.Administrationssystem.Pages
         public Blanketter()
         {
             InitializeComponent();
-
-
-
-
         }
     }
 }
