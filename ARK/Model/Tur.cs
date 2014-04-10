@@ -7,8 +7,13 @@ using ARK.Model.XML;
 
 namespace ARK.Model
 {
-    public class Tur : Search.Searchable<Tur>
+    public class Tur
     {
+        public Tur()
+        {
+            
+        }
+
         public Tur(XMLTure.datarootTur tur)
         {
 
@@ -28,10 +33,5 @@ namespace ARK.Model
         public int MedlemsID_7 { get; set; }
         public int MedlemsID_8 { get; set; }
         public int MedlemsID_9 { get; set; }
-
-        public override Tur getTarget()
-        {
-            return this;
-        }
     }
 }
