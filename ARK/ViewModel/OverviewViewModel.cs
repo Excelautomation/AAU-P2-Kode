@@ -27,8 +27,8 @@ namespace ARK.ViewModel
 
         public OverviewViewModel()
         {
-            Skadesblanketter.Add(new Skadesblanket() { AnmeldersNavn = "Martin er noob" });
-            Skadesblanketter.Add(new Skadesblanket { AnmeldersNavn = "Martin er mere noob" });
+            Skadesblanketter.Add(new Skadesblanket() { ReportedBy = "Martin er noob" });
+            Skadesblanketter.Add(new Skadesblanket { ReportedBy = "Martin er mere noob" });
         }
 
         #region Property
