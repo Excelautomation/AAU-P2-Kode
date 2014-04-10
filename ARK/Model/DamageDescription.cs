@@ -1,6 +1,6 @@
 ﻿namespace ARK.Model
 {
-    public class SkadeBeskrivelse
+    public class DamageDescription
     {
         public string Type { get; set; }
         public string Description { get; set; }

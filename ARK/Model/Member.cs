@@ -7,9 +7,9 @@ using ARK.Model.XML;
 
 namespace ARK.Model
 {
-    public class Medlem
+    public class Member
     {
-        public Medlem(XMLMembers.datarootAktiveMedlemmer medlemXML)
+        public Member(XMLMembers.datarootAktiveMedlemmer medlemXML)
         {
         }
 
