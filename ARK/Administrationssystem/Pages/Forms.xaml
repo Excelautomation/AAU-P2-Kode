@@ -6,9 +6,6 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <VM:FormsViewModel></VM:FormsViewModel>
-    </UserControl.DataContext>
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -51,9 +48,9 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
-                            <StackPanel Name="StackpanelRight">
-
-                            </StackPanel>
+                            <Border Margin="5" CornerRadius="5" Background="White">
+                                
+                            </Border>
                         </ScrollViewer>
                     </DockPanel>
                 </Border>

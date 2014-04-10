@@ -2,14 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:VM="clr-namespace:ARK.ViewModel"
-        x:Class="ARK.Administrationssystem.Administrationssystem"
+        x:Class="ARK.Administrationssystem.AdminSystem"
         Title="Administrationssystem" Height="768" Width="1024"
         MinWidth="1024" MinHeight="768" WindowState="Maximized">
-
-    <Window.DataContext>
-        <VM:AdminSystemViewModel />
-    </Window.DataContext>
-
     <!--Skalerer checkboxes-->
     <Window.Resources>
         <Style TargetType="CheckBox">
