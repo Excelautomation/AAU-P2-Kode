@@ -15,18 +15,18 @@ namespace ARK.Model
         }
 
         public int ID { get; set; }
-        public int Kilometer { get; set; }
-        public DateTime Dato { get; set; }
-        public bool Langtur { get; set; }
-        public int BådID { get; set; }
-        public int MedlemsID_1 { get; set; }
-        public int MedlemsID_2 { get; set; }
-        public int MedlemsID_3 { get; set; }
-        public int MedlemsID_4 { get; set; }
-        public int MedlemsID_5 { get; set; }
-        public int MedlemsID_6 { get; set; }
-        public int MedlemsID_7 { get; set; }
-        public int MedlemsID_8 { get; set; }
-        public int MedlemsID_9 { get; set; }
+        public int Distance { get; set; }
+        public DateTime Date { get; set; }
+        public bool LongTrip { get; set; }
+        public int BoatID { get; set; }
+        public int MemberID_1 { get; set; }
+        public int MemberID_2 { get; set; }
+        public int MemberID_3 { get; set; }
+        public int MemberID_4 { get; set; }
+        public int MemberID_5 { get; set; }
+        public int MemberID_6 { get; set; }
+        public int MemberID_7 { get; set; }
+        public int MemberID_8 { get; set; }
+        public int MemberID_9 { get; set; }
     }
 }

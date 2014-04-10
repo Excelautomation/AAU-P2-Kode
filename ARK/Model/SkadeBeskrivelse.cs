@@ -3,7 +3,7 @@
     public class SkadeBeskrivelse
     {
         public string Type { get; set; }
-        public string Beskrivelse { get; set; }
-        public string PåkrævedeMaterialer { get; set; }
+        public string Description { get; set; }
+        public string NeededMaterials { get; set; }
     }
 }
