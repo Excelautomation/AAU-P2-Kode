@@ -15,7 +15,7 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlElementAttribute("BådeSpecifik")]
         public ARK.Model.Baad[] BådeSpecifik { get; set; }
     }
-    public class XMLBåde
+    public class XMLBoats
     {
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model.XML
 {
-    public class XMLMedlemmer
+    public class XMLMembers
     {
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]

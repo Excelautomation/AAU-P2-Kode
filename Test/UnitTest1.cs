@@ -11,8 +11,8 @@ namespace Test
         [TestMethod]
         public void TestMethod1()
         {
-            string output = ARK.Model.XML.XMLParser.DlToMemFromFTP("ftp://ws14.surftown.dk", "/upload/monday/AktiveMedlemmer.xml", new System.Net.NetworkCredential("aauarat", "aautest"));
-            XMLMedlemmer.dataroot test = ARK.Model.XML.XMLParser.ParseXML<XMLMedlemmer.dataroot>(output);
+            string output = ARK.Model.XML.XMLParser.DlToMemFromFTP("ftp://ws14.surftown.dk", "/upload/monday/BådeSpecifik.xml", new System.Net.NetworkCredential("aauarat", "aautest"));
+            XMLBoats.dataroot test = ARK.Model.XML.XMLParser.ParseXML<XMLBoats.dataroot>(output);
             Console.WriteLine();
         }
     }
