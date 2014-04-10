@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ARK.Model.XML;
+using System.ComponentModel.DataAnnotations;
 
 namespace ARK.Model
 {
@@ -37,6 +38,7 @@ namespace ARK.Model
             UNKOWN = 6
         }
 
+        [Key]
         public int ID { get; set; }
         public string Name { get; set; }
         public int NumberofSeats { get; set; }
