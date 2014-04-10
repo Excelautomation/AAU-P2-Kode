@@ -35,6 +35,7 @@ namespace ARK.Administrationssystem
                 Notify("Båd"); 
             } 
         }
+
         public string Besked { get { return _besked; } set { _besked = value; Notify("Besked"); } }
 
         private string _båd;

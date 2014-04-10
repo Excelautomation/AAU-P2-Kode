@@ -11,7 +11,8 @@ namespace ARK.ViewModel
     class AdministrationssystemViewModel : INotifyPropertyChanged
     {
         private PageInformation _page;
-        public PageInformation Page {
+        public PageInformation Page
+        {
             get { return _page; }
             set { _page = value; Notify("Page"); }
         }
@@ -64,9 +65,9 @@ namespace ARK.ViewModel
             {
                 return new ObservableCollection<Control>() 
                 {
-                    new CheckBox() { Content = "Langtur"},
-                    new CheckBox() { Content = "Skader"},
-                    new CheckBox() { Content = "Både ude"}
+                    new CheckBox() { Content = "Langtur" },
+                    new CheckBox() { Content = "Skader" },
+                    new CheckBox() { Content = "Både ude" }
                 };
             }
         }
@@ -77,11 +78,11 @@ namespace ARK.ViewModel
             {
                 return new ObservableCollection<Control>
                 {
-                    new CheckBox() { Content = "Langtur"},
-                    new CheckBox() { Content = "Skader"},
+                    new CheckBox() { Content = "Langtur" },
+                    new CheckBox() { Content = "Skader" },
                     new Separator() { Height = 20 },
-                    new CheckBox() { Content = "Afviste"},
-                    new CheckBox() { Content = "Godkendte"}
+                    new CheckBox() { Content = "Afviste" },
+                    new CheckBox() { Content = "Godkendte" }
                 };
             }
         }
@@ -92,13 +93,13 @@ namespace ARK.ViewModel
             {
                 return new ObservableCollection<Control>
                 {
-                    new CheckBox() { Content = "Både ude"},
-                    new CheckBox() { Content = "Både hjemme"},
+                    new CheckBox() { Content = "Både ude" },
+                    new CheckBox() { Content = "Både hjemme" },
                     new Separator() { Height = 20 },
-                    new CheckBox() { Content = "Både under reparation"},
-                    new CheckBox() { Content = "Beskadigede både"},
-                    new CheckBox() { Content = "Inaktive både"},
-                    new CheckBox() { Content = "Funktionelle både"}
+                    new CheckBox() { Content = "Både under reparation" },
+                    new CheckBox() { Content = "Beskadigede både" },
+                    new CheckBox() { Content = "Inaktive både" },
+                    new CheckBox() { Content = "Funktionelle både" }
                 };
             }
         }

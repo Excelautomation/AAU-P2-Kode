@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
 namespace ARK.Model.Search
 {
@@ -93,7 +93,8 @@ namespace ARK.Model.Search
                 else if (expression[i].ToLower() == "or")
                 {
                     // Tjek at or ikke var første keyword - ignorer or hvis det er første keyword
-                    if (i != 0) { 
+                    if (i != 0) 
+                    { 
                         // Fjern forrige keyword
                         string last = input.Last();
                         input.RemoveAt(input.Count - 1);
