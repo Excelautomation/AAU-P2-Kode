@@ -58,7 +58,14 @@
     <StartupObject>ARK.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -98,6 +105,9 @@
     <Compile Include="Administrationssystem\Pages\Indstillinger.xaml.cs">
       <DependentUpon>Indstillinger.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DamageType.cs" />
+    <Compile Include="Model\DbArkContext.cs" />
+    <Compile Include="Model\FtpInfo.cs" />
     <Compile Include="Model\Langtursblanket.cs" />
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
@@ -142,7 +152,10 @@
       <DependentUpon>Protokolsystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdministrationssystemViewModel.cs" />
+    <Compile Include="ViewModel\BlanketterViewModel.cs" />
+    <Compile Include="ViewModel\BoatViewModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\IndstillingerViewModel.cs" />
     <Compile Include="ViewModel\OverviewViewModel.cs" />
     <Compile Include="ViewModel\PageInformation.cs" />
     <Compile Include="ViewModel\ProtokolsystemViewModel.cs" />
