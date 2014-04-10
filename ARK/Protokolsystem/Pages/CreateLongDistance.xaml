@@ -6,12 +6,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
     <Grid>
-    	<ListView HorizontalAlignment="Left" Height="536.716" Margin="310.896,53.284,0,0" VerticalAlignment="Top" Width="279.104">
+    	<ListView HorizontalAlignment="Left" Height="536.716" Margin="310.896,53.284,0,0" VerticalAlignment="Top" Width="279.104" SelectionMode="Multiple">
     		<ListView.View>
     			<GridView>
     				<GridViewColumn/>
     			</GridView>
     		</ListView.View>
+			<ListViewItem>
+				Jørgen Svendsen
+			</ListViewItem>
+			<ListViewItem>
+				Henning Hansen
+			</ListViewItem>
+			<ListViewItem>
+				Svend-Erik Thomsen
+			</ListViewItem>
     	</ListView>
     	<Label Content="Deltagere på turen" HorizontalAlignment="Left" Margin="330.305,0,0,0" VerticalAlignment="Top" Height="48.284" Width="247.761" FontSize="28"/>
     	<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="48.373" Margin="10,80.598,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="29.333"/>
@@ -21,7 +30,7 @@
     	<RichTextBox HorizontalAlignment="Left" Height="291.94" Margin="10,192.537,0,0" VerticalAlignment="Top" Width="280.966">
     		<FlowDocument/>
     	</RichTextBox>
-    	<Label Content="Kommentarer" HorizontalAlignment="Left" Margin="82.898,148.144,0,0" VerticalAlignment="Top" Height="39.393" Width="129.194" FontSize="18.667" FontWeight="Bold"/>
+    	<Label Content="Kommentarer" HorizontalAlignment="Left" Margin="82.898,148.144,0,0" VerticalAlignment="Top" Height="39.393" Width="135.194" FontSize="18.667" FontWeight="Bold"/>
             <Button x:Name="AddLongDistance" Content="INDSEND &#xA;SKADESRAPPORT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="64.898,510,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddLongDistance}">
                 <Button.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
