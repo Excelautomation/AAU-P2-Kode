@@ -36,7 +36,7 @@
             <ContentControl Content="{Binding Path=CurrentPage}"/>
         </StackPanel>
         <StackPanel x:Name="Buttons" Grid.Column="1" Height="84" Margin="10,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="576">
-        	<Button Content="Button" Click="TestFTP_Click" />
+        	<Button Content="Midlertidig knap til test af FTP" Click="TestFTP_Click" />
         </StackPanel>
         <Grid HorizontalAlignment="Left" Height="759" VerticalAlignment="Bottom" Width="194" Grid.RowSpan="3" Background="#FFE9EAED" Margin="0,-10,0,-12">
             <Rectangle HorizontalAlignment="Left" Height="76.998" Margin="5.331,663.002,0,0" Stroke="Black" VerticalAlignment="Top" Width="184" Style="{DynamicResource White+rounded}"/>
