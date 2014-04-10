@@ -10,10 +10,10 @@ using System.Xml.Serialization;
 namespace ARK.Model.XML
 {
     [XmlRoot("dataroot")]
-    public class FlereBåde
+    public class MoreBoats
     {
         [System.Xml.Serialization.XmlElementAttribute("BådeSpecifik")]
-        public ARK.Model.Baad[] BådeSpecifik { get; set; }
+        public ARK.Model.Baad[] BoatsSpecific { get; set; }
     }
     public class XMLBoats
     {
@@ -23,7 +23,7 @@ namespace ARK.Model.XML
         public partial class dataroot
         {
 
-            private datarootBådeSpecifik[] bådeSpecifikField;
+            private datarootBådeSpecifik[] boatsSpecificField;
 
             private System.DateTime generatedField;
 
@@ -33,11 +33,11 @@ namespace ARK.Model.XML
             {
                 get
                 {
-                    return this.bådeSpecifikField;
+                    return this.boatsSpecificField;
                 }
                 set
                 {
-                    this.bådeSpecifikField = value;
+                    this.boatsSpecificField = value;
                 }
             }
 

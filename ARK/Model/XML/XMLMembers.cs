@@ -15,21 +15,21 @@ namespace ARK.Model.XML
         public partial class dataroot
         {
 
-            private datarootAktiveMedlemmer[] aktiveMedlemmerField;
+            private datarootAktiveMedlemmer[] activeMembersField;
 
             private System.DateTime generatedField;
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute("AktiveMedlemmer")]
-            public datarootAktiveMedlemmer[] AktiveMedlemmer
+            public datarootAktiveMedlemmer[] activeMembers
             {
                 get
                 {
-                    return this.aktiveMedlemmerField;
+                    return this.activeMembersField;
                 }
                 set
                 {
-                    this.aktiveMedlemmerField = value;
+                    this.activeMembersField = value;
                 }
             }
 
