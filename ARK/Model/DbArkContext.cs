@@ -11,9 +11,9 @@ namespace ARK.Model
 {
     public class DbArkContext : DbContext
     {
-        public DbArkContext() : base("Server=nobs.mclc.dk;Database=ark;Uid=ark;Pwd=bqLWb6nGTPNVRqRb;") { }
+        public DbArkContext() : base("MikkelsNoobDB") { }
 
-        public DbSet<FtpInfo> FTPInfo { get; set; }
+        public DbSet<FtpInfo> FtpInfo { get; set; }
         public DbSet<DamageType> DamageType { get; set; }
         public DbSet<Boat> Boat { get; set; }
         public DbSet<LongTripForm> LongTripForm { get; set; }

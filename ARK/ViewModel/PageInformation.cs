@@ -7,21 +7,13 @@ namespace ARK.ViewModel
 {
     public class PageInformation : INotifyPropertyChanged
     {
-        private string _pageName;
         private UserControl _page;
-
-        public string PageName { get { return _pageName; } set { _pageName = value; Notify("PageName"); } }
-        public UserControl Page { get { return _page; } set { _page = value; Notify("Page"); Notify("Filter"); Notify("ShowFilter"); Notify("ShowSearch"); } }
+        private string _pageName;
         public ObservableCollection<Control> Filter { get { return ((IFilter)Page.DataContext).Filters; } }
 
-        public Visibility ShowSearch
-        {
-            get
-            {
-                return Visibility.Visible;
-            }
-        }
+        public UserControl Page { get { return _page; } set { _page = value; Notify("Page"); Notify("Filter"); Notify("ShowFilter"); Notify("ShowSearch"); } }
 
+        public string PageName { get { return _pageName; } set { _pageName = value; Notify("PageName"); } }
         public Visibility ShowFilter
         {
             get
@@ -30,8 +22,17 @@ namespace ARK.ViewModel
             }
         }
 
+        public Visibility ShowSearch
+        {
+            get
+            {
+                return Visibility.Visible;
+            }
+        }
         #region Property
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void Notify(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -39,6 +40,7 @@ namespace ARK.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        #endregion
+
+        #endregion Property
     }
 }
