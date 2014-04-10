@@ -11,7 +11,7 @@ namespace ARK.Model.Search
         TControl Control { get; }
 
         bool Active { get; }
-        Func<TType, bool> Filter { get; }
+        Action Filter { get; }
 
         event EventHandler ActiveChanged;
     }

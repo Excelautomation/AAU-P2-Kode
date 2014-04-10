@@ -5,11 +5,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Administrationssystem.Pages;
+using ARK.Model;
 
 namespace ARK.ViewModel
 {
     class AdminSystemViewModel : INotifyPropertyChanged
     {
+        private ObservableCollection<Skadesblanket> _skadesblanketter = new ObservableCollection<Skadesblanket>();
+
+        public ObservableCollection<Skadesblanket> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+
         private PageInformation _page;
         public PageInformation Page
         {
@@ -23,15 +28,15 @@ namespace ARK.ViewModel
         public ICommand MenuConfigurations { get { return GenerateCommand("Configurations", PageConfigurations, FiltersConfigurations); } }
 
         #region private
-        private ObservableCollection<Control> _filterControls;
-        private UserControl _currentPage;
-
         // TODO: Implementer noget cache på objekterne
         private Oversigt PageOverview
         {
             get
             {
-                return new Oversigt();
+                return new Oversigt
+                {
+                    DataContext = this
+                };
             }
         }
 
@@ -120,6 +125,9 @@ namespace ARK.ViewModel
             // Start oversigten
             Page = new PageInformation();
             MenuOverview.Execute(null);
+
+            Skadesblanketter.Add(new Skadesblanket { ReportedBy = "Martin er noob" });
+            Skadesblanketter.Add(new Skadesblanket { ReportedBy = "Martin er mere noob" });
 
             TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
