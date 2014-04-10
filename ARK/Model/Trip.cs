@@ -7,9 +7,9 @@ using ARK.Model.XML;
 
 namespace ARK.Model
 {
-    public class Tur
+    public class Trip
     {
-        public Tur(XMLTrips.datarootTur tur)
+        public Trip(XMLTrips.datarootTur tur)
         {
 
         }
@@ -19,6 +19,6 @@ namespace ARK.Model
         public DateTime Date { get; set; }
         public bool LongTrip { get; set; }
         public int BoatID { get; set; }
-        public List<Medlem> MembersOnTrip;
+        public List<Member> MembersOnTrip;
     }
 }

@@ -110,18 +110,18 @@
     <Compile Include="Model\DamageType.cs" />
     <Compile Include="Model\DbArkContext.cs" />
     <Compile Include="Model\FtpInfo.cs" />
-    <Compile Include="Model\Langtursblanket.cs" />
+    <Compile Include="Model\LongTripForm.cs" />
     <Compile Include="Administrationssystem\Pages\Oversigt.xaml.cs">
       <DependentUpon>Oversigt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Baad.cs" />
-    <Compile Include="Model\Medlem.cs" />
+    <Compile Include="Model\Boat.cs" />
+    <Compile Include="Model\Member.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Search\CheckboxFilter.cs" />
     <Compile Include="Model\Search\IFilter.cs" />
-    <Compile Include="Model\SkadeBeskrivelse.cs" />
-    <Compile Include="Model\Skadesblanket.cs" />
-    <Compile Include="Model\Tur.cs" />
+    <Compile Include="Model\DamageDescription.cs" />
+    <Compile Include="Model\DamageForm.cs" />
+    <Compile Include="Model\Trip.cs" />
     <Compile Include="Model\XML\XMLBoats.cs" />
     <Compile Include="Model\XML\XMLMembers.cs" />
     <Compile Include="Model\XML\XMLParser.cs" />

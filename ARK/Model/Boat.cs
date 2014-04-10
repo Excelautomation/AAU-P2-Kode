@@ -8,9 +8,9 @@ using ARK.Model.XML;
 
 namespace ARK.Model
 {
-    public class Baad
+    public class Boat
     {
-        public Baad(XML.XMLBoats.datarootBådeSpecifik boatXML)
+        public Boat(XML.XMLBoats.datarootBådeSpecifik boatXML)
         {
             this.ID = boatXML.ID;
             this.Name = boatXML.Navn;
