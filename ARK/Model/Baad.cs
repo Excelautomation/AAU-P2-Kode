@@ -16,12 +16,12 @@ namespace ARK.Model
         }
 
         public int ID { get; set; }
-        public string Navn { get; set; }
-        public int AntalPladser { get; set; }
-        public bool Aktiv { get; set; }
-        public int BådType { get; set; }
-        public bool Roforbud { get; set; }
-        public int SpecifikBådType { get; set; }
-        public bool LangtursBåd { get; set; }   
+        public string Name { get; set; }
+        public int NumberofSeats { get; set; }
+        public bool Aktive { get; set; }
+        public int BoatType { get; set; }
+        public bool Usable { get; set; }
+        public int SpecifikBoatType { get; set; }
+        public bool LongTripBoat { get; set; }   
     }
 }
