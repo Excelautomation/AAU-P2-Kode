@@ -11,8 +11,11 @@ using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel
 {
-    class ProtocolSystemViewModel : INotifyPropertyChanged
+    public class ProtocolSystemViewModel : INotifyPropertyChanged
     {
+        private string _headlineText;
+        private UserControl _currentPage;
+
         public string HeadlineText
         {
             get { return this._headlineText; }
@@ -25,6 +28,7 @@ namespace ARK.ViewModel
             {
                 return this._currentPage;
             }
+
             private set
             {
                 this._currentPage = value;
@@ -102,11 +106,6 @@ namespace ARK.ViewModel
 
         #endregion
 
-        #region Private
-        private string _headlineText;
-        private UserControl _currentPage;
-        #endregion
-
         public ProtocolSystemViewModel()
         {
             StartTrip.Execute(null);
@@ -130,7 +129,8 @@ namespace ARK.ViewModel
             {
                 this.HeadlineText = HeadLineText;
                 CurrentPage = page;
-            }, (e) => { return true; });
+            }, 
+            (e) => { return true; });
         }
         #endregion
     }

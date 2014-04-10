@@ -21,23 +21,6 @@ namespace ARK.Administrationssystem
     /// </summary>
     public partial class BådItem : UserControl, INotifyPropertyChanged
     {
-        // TODO: Båd skal nok være af typen båd
-        // Skal laves til dette http://msdn.microsoft.com/en-us/library/ms742521(v=vs.110).aspx
-        public string Båd 
-        { 
-            get 
-            { 
-                return _båd; 
-            } 
-            set 
-            { 
-                _båd = value; 
-                Notify("Båd"); 
-            } 
-        }
-
-        public string Besked { get { return _besked; } set { _besked = value; Notify("Besked"); } }
-
         private string _båd;
         private string _besked;
 
@@ -48,6 +31,24 @@ namespace ARK.Administrationssystem
             txtBåd.DataContext = this;
             txtBesked.DataContext = this;
         }
+
+        // TODO: Båd skal nok være af typen båd
+        // Skal laves til dette http://msdn.microsoft.com/en-us/library/ms742521(v=vs.110).aspx
+        public string Båd 
+        { 
+            get 
+            { 
+                return _båd; 
+            } 
+
+            set 
+            { 
+                _båd = value; 
+                Notify("Båd"); 
+            } 
+        }
+
+        public string Besked { get { return _besked; } set { _besked = value; Notify("Besked"); } }
 
         #region Property
         public event PropertyChangedEventHandler PropertyChanged;

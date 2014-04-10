@@ -13,6 +13,7 @@ namespace ARK.Model
         public Boat()
         {
         }
+
         public Boat(XML.XMLBoats.datarootBådeSpecifik boatXML)
         {
             this.ID = boatXML.ID;

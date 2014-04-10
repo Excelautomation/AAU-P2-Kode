@@ -32,14 +32,14 @@ namespace ARK.Protokolsystem
 
             this.Closing += (sender2, e2) => admin.Close();
         }
-		
-		private void TestFTP_Click(object sender, RoutedEventArgs e)
-		{
-			 using (var db = new DbArkContext())
-              {
-                FtpInfo ftp = new FtpInfo() { Id = 1, Hostname = "ftp.test.dk", Name = "Test FTP", password = "1234password", Port = 21};
+
+        private void TestFTP_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new DbArkContext())
+            {
+                FtpInfo ftp = new FtpInfo() { Id = 1, Hostname = "ftp.test.dk", Name = "Test FTP", Password = "1234password", Port = 21 };
                 db.FTPInfo.Add(ftp);
-              } 
-		}
+            }
+        }
     }
 }
