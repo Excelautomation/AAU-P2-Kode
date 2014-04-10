@@ -9,8 +9,33 @@ namespace ARK.Model
 {
     public class Member
     {
-        public Member(XMLMembers.datarootAktiveMedlemmer medlemXML)
+        public Member()
         {
+        }
+
+        public Member(XMLMembers.datarootAktiveMedlemmer memberXML)
+        {
+            this.MemberNumber = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.MedlemsNr)]);
+            this.ID = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.ID)]);
+            this.FirstName = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Fornavn)]);
+            this.LastName = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Efternavn)]);
+            this.Address1 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Adresse1)]);
+            this.Address2 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Adresse2)]);
+            this.ZipCode = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.PostNr)]);
+            this.City = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.By)]);
+            this.Phone = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Telefon)]);
+            this.PhoneWork = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.TelefonArbejde)]);
+            this.Cellphone = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.TelefonMobil)]);
+            this.Email1 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.EMail)]);
+            this.Email2 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.EMail2)]);
+            this.Birthday = Convert.ToDateTime(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Fødselsdato)]);
+            this.Released = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Frigivet)]) == 1 ? true : false;
+            this.SwimmingTest = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Svømmeprøve)]) == 1 ? true : false;
+            this.ShortTripCox = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Korttursstyrmand)]) == 1 ? true : false;
+            this.LongTripCox = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Langtursstyrmand)]) == 1 ? true : false;
+            this.MayUseSculler = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Scullerret)]) == 1 ? true : false;
+            this.MayUseOutrigger = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Outriggerret)]) == 1 ? true : false;
+            this.MayUseKayak = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Kajakret)]) == 1 ? true : false;
         }
 
         public int MemberNumber { get; set; }
