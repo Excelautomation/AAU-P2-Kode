@@ -7,7 +7,7 @@
         MinWidth="1024" MinHeight="768" WindowState="Maximized">
 
     <Window.DataContext>
-        <VM:AdministrationssystemViewModel />
+        <VM:AdminSystemViewModel />
     </Window.DataContext>
 
     <!--Skalerer checkboxes-->

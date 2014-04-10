@@ -11,7 +11,7 @@ using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel
 {
-    class ProtokolsystemViewModel : INotifyPropertyChanged
+    class ProtocolSystemViewModel : INotifyPropertyChanged
     {
         public string HeadlineText
         {
@@ -107,7 +107,7 @@ namespace ARK.ViewModel
         private UserControl _currentPage;
         #endregion
 
-        public ProtokolsystemViewModel()
+        public ProtocolSystemViewModel()
         {
             StartTrip.Execute(null);
             HeadlineText = "Aalborg Roklubs Protokolsystem";

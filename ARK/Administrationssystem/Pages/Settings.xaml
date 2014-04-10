@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <VM:IndstillingerViewModel></VM:IndstillingerViewModel>
+        <VM:SettingsViewModel></VM:SettingsViewModel>
     </UserControl.DataContext>
     <Grid Background="White">
         <StackPanel>

@@ -5,7 +5,7 @@
         xmlns:VM="clr-namespace:ARK.ViewModel"
         Title="Protokolsystem" Height="768" Width="1024" Background="White">
     <Window.DataContext>
-        <VM:ProtokolsystemViewModel />
+        <VM:ProtocolSystemViewModel />
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="White+rounded" TargetType="{x:Type Rectangle}">
