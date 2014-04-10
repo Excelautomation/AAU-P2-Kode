@@ -9,8 +9,6 @@ namespace ARK.Model
 {
     public class Medlem
     {
-        public Medlem() { }
-
         public Medlem(XMLMedlemmer.datarootAktiveMedlemmer medlemXML)
         {
         }
