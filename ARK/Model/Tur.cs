@@ -9,7 +9,7 @@ namespace ARK.Model
 {
     public class Tur
     {
-        public Tur(XMLTrip.datarootTur tur)
+        public Tur(XMLTrips.datarootTur tur)
         {
 
         }
