@@ -18,7 +18,7 @@
     	<TextBox HorizontalAlignment="Left" Height="48.373" Margin="162.011,80.598,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}"/>
     	<Label Content="Hjemkomst" HorizontalAlignment="Left" Margin="169.476,40.686,0,0" VerticalAlignment="Top" Width="109.552" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
     	<Label Content="Afgang" HorizontalAlignment="Left" Margin="38.092,40.686,0,0" VerticalAlignment="Top" Width="73.731" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-    	<RichTextBox HorizontalAlignment="Left" Height="311.94" Margin="10,192.537,0,0" VerticalAlignment="Top" Width="280.966">
+    	<RichTextBox HorizontalAlignment="Left" Height="291.94" Margin="10,192.537,0,0" VerticalAlignment="Top" Width="280.966">
     		<FlowDocument/>
     	</RichTextBox>
     	<Label Content="Kommentarer" HorizontalAlignment="Left" Margin="82.898,148.144,0,0" VerticalAlignment="Top" Height="39.393" Width="129.194" FontSize="18.667" FontWeight="Bold"/>
