@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ARK.ViewModel
 {
-    class TimeCounter
+    public class TimeCounter
     {
         private static Stack<DateTime> stack = new Stack<DateTime>();
         public static void StartTimer()

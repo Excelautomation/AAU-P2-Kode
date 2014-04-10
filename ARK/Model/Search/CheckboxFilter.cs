@@ -26,7 +26,12 @@ namespace ARK.Model.Search
             {
                 return Control.IsChecked.GetValueOrDefault();
             }
-            set { Control.IsChecked = value; ActiveChanged(this, new EventArgs()); }
+
+            set 
+            { 
+                Control.IsChecked = value; 
+                ActiveChanged(this, new EventArgs()); 
+            }
         }
 
         public CheckBox Control
@@ -34,12 +39,16 @@ namespace ARK.Model.Search
             get { return _control; }
             private set
             {
-                if (value == null) throw new ArgumentNullException("Control");
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Control");
+                }
 
                 _control = value;
                 _control.Checked += WrapperEvent;
             }
         }
+
         public Action Filter { get; private set; }
     }
 }

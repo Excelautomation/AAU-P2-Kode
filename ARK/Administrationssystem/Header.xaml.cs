@@ -18,6 +18,16 @@ namespace ARK.Administrationssystem
 {
     public partial class Header : UserControl, INotifyPropertyChanged
     {
+        private string _title;
+
+        public Header()
+        {
+            InitializeComponent();
+
+            // Sæt datacontext
+            HeaderTitleText.DataContext = this;
+        }
+
         public string Title 
         { 
             get 
@@ -29,16 +39,6 @@ namespace ARK.Administrationssystem
                 _title = value; 
                 Notify("Title"); 
             } 
-        }
-
-        private string _title;
-
-        public Header()
-        {
-            InitializeComponent();
-
-            // Sæt datacontext
-            HeaderTitleText.DataContext = this;
         }
 
         #region Property

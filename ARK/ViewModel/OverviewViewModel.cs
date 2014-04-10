@@ -21,7 +21,7 @@ namespace ARK.ViewModel
                 {
                     new CheckboxFilter<OverviewViewModel>(new CheckBox { Content = "Langtur" }, UpdateFilter),
                     new CheckboxFilter<OverviewViewModel>(new CheckBox { Content = "Skader" }, UpdateFilter),
-                    new CheckboxFilter<OverviewViewModel>(new CheckBox { Content = "Både ude"}, UpdateFilter)
+                    new CheckboxFilter<OverviewViewModel>(new CheckBox { Content = "Både ude" }, UpdateFilter)
                 };
             }
         }
@@ -33,8 +33,7 @@ namespace ARK.ViewModel
         }
 
         private void UpdateFilter()
-        {
-            
+        {            
         }
 
         #region Property

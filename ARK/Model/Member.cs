@@ -17,17 +17,17 @@ namespace ARK.Model
         {
             this.MemberNumber = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.MedlemsNr)]);
             this.ID = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.ID)]);
-            this.FirstName = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Fornavn)]);
-            this.LastName = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Efternavn)]);
-            this.Address1 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Adresse1)]);
-            this.Address2 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Adresse2)]);
+            this.FirstName = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Fornavn)];
+            this.LastName = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Efternavn)];
+            this.Address1 = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Adresse1)];
+            this.Address2 = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Adresse2)];
             this.ZipCode = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.PostNr)]);
-            this.City = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.By)]);
-            this.Phone = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Telefon)]);
-            this.PhoneWork = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.TelefonArbejde)]);
-            this.Cellphone = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.TelefonMobil)]);
-            this.Email1 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.EMail)]);
-            this.Email2 = (string)(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.EMail2)]);
+            this.City = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.By)];
+            this.Phone = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Telefon)];
+            this.PhoneWork = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.TelefonArbejde)];
+            this.Cellphone = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.TelefonMobil)];
+            this.Email1 = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.EMail)];
+            this.Email2 = (string)memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.EMail2)];
             this.Birthday = Convert.ToDateTime(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Fødselsdato)]);
             this.Released = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Frigivet)]) == 1 ? true : false;
             this.SwimmingTest = Convert.ToInt32(memberXML.Items[Array.IndexOf(memberXML.ItemsElementName, XMLMembers.ItemsChoiceType.Svømmeprøve)]) == 1 ? true : false;

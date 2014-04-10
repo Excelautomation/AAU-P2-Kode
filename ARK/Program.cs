@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace ARK
 {
-    class Program
+    public class Program
     {
         [STAThread]
         public static void Main(string[] args)

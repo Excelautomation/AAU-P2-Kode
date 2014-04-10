@@ -11,7 +11,6 @@ namespace ARK.Model
     {
         public Trip(XMLTrips.datarootTur tripXML)
         {
-
         }
 
         public int ID { get; set; }
