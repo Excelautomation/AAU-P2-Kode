@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model.XML
 {
-    public class XMLTure
+    public class XMLTrip
     {
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
