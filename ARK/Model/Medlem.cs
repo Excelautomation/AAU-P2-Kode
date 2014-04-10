@@ -13,26 +13,26 @@ namespace ARK.Model
         {
         }
 
-        public int MedlemsNr { get; set; }
+        public int MemberNumber { get; set; }
         public int ID { get; set; }
-        public string Fornavn { get; set; }
-        public string Efternavn { get; set; }
-        public string Adresse1 { get; set; }
-        public string Adresse2 { get; set; }
-        public int PostNr { get; set; }
-        public string By { get; set; }
-        public string Telefon { get; set; }
-        public string TelefonArbejde { get; set; }
-        public string TelefonMobil { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public int ZipCode { get; set; }
+        public string City { get; set; }
+        public string Phone { get; set; }
+        public string PhoneWork { get; set; }
+        public string Cellphone { get; set; }
         public string Email1 { get; set; }
         public string Email2 { get; set; }
-        public DateTime Fødselsdato { get; set; }
-        public bool Frigivet { get; set; }
-        public bool Svømmeprøve { get; set; }
-        public bool KortTStyrmand { get; set; }
-        public bool LangTStyrmand { get; set; }
-        public bool ScullerRet { get; set; }
-        public bool OutriggerRet { get; set; }
-        public bool Kajakret { get; set; }
+        public DateTime Birthday { get; set; }
+        public bool Released { get; set; }
+        public bool SwimmingTest { get; set; }
+        public bool ShortTripCox { get; set; }
+        public bool LongTripCox { get; set; }
+        public bool MayUseSculler { get; set; }
+        public bool MayUseOutrigger { get; set; }
+        public bool MayUseKayak { get; set; }
     }
 }

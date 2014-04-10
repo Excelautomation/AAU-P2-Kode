@@ -8,10 +8,10 @@ namespace ARK.Model
 {
     public class Skadesblanket
     {
-        public DateTime Dato { get; set; }
-        public string AnmeldersNavn { get; set; }
-        public int AnmeldersMedlemsNr { get; set; }
-        public Baad SkadetBåd { get; set; }
-        public SkadeBeskrivelse Skade { get; set; }
+        public DateTime Date { get; set; }
+        public string ReportedBy { get; set; }
+        public int ReportedByNumber { get; set; }
+        public Baad DamagedBoat { get; set; }
+        public SkadeBeskrivelse Damage { get; set; }
     }
 }

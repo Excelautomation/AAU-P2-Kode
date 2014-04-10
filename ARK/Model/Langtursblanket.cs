@@ -8,11 +8,11 @@ namespace ARK.Model
 {
     public class Langtursblanket
     {
-        public int Id { get; set; }
-        public DateTime Afgangstid { get; set; }
-        public DateTime Hjemkomsttid { get; set; }
+        public int ID { get; set; }
+        public DateTime Departure { get; set; }
+        public DateTime Arrival { get; set; }
         public string Text { get; set; }
-        public virtual List<Person> Deltager { get; set; }
-        public bool Godkendt { get; set; }
+        public virtual List<Person> Persons { get; set; }
+        public bool Approved { get; set; }
     }
 }
