@@ -1,20 +1,17 @@
-﻿using System.Collections.ObjectModel;
+﻿using ARK.Administrationssystem.Pages;
 using System.ComponentModel;
-using System.Dynamic;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ARK.Administrationssystem.Pages;
-using ARK.Model;
 
 namespace ARK.ViewModel
 {
-    public class AdminSystemViewModel : INotifyPropertyChanged
+    internal class AdminSystemViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<DamageForm> _skadesblanketter = new ObservableCollection<DamageForm>();
         private PageInformation _page;
-
-        public ObservableCollection<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+        private Oversigt _pageoversigt;
+        private Blanketter _pageforms;
+        private Baede _pagebaede;
+        private Indstillinger _pagesettings;
 
         public PageInformation Page
         {
@@ -22,101 +19,42 @@ namespace ARK.ViewModel
             set { _page = value; Notify("Page"); }
         }
 
-        public ICommand MenuOverview { get { return GenerateCommand("Overview", PageOverview, FiltersOverview); } }
-        public ICommand MenuForms { get { return GenerateCommand("Forms", PageForms, FiltersForms); } }
-        public ICommand MenuBoats { get { return GenerateCommand("Boats", PageBoats, FiltersBoats); } }
-        public ICommand MenuConfigurations { get { return GenerateCommand("Configurations", PageConfigurations, FiltersConfigurations); } }
+        #region Commands
+
+        public ICommand MenuOverview { get { return GenerateCommand("Overview", PageOverview); } }
+
+        public ICommand MenuForms { get { return GenerateCommand("Forms", PageForms); } }
+
+        public ICommand MenuBoats { get { return GenerateCommand("Boats", PageBoats); } }
+
+        public ICommand MenuConfigurations { get { return GenerateCommand("Configurations", PageConfigurations); } }
+
+        #endregion Commands
 
         #region private
+
         // TODO: Implementer noget cache på objekterne
         private Oversigt PageOverview
         {
-            get
-            {
-                return new Oversigt
-                {
-                    DataContext = this
-                };
-            }
+            get { return _pageoversigt ?? (_pageoversigt = new Oversigt() { DataContext = new OverviewViewModel() }); }
         }
 
-        private Administrationssystem.Pages.Blanketter PageForms
+        private Blanketter PageForms
         {
-            get
-            {
-                return new Administrationssystem.Pages.Blanketter();
-            }
+            get { return _pageforms ?? (_pageforms = new Blanketter { DataContext = new FormsViewModel() }); }
         }
 
-        private Administrationssystem.Pages.Baede PageBoats
+        private Baede PageBoats
         {
-            get
-            {
-                return new Administrationssystem.Pages.Baede();
-            }
+            get { return _pagebaede ?? (_pagebaede = new Baede { DataContext = new BoatViewModel() }); }
         }
 
-        private Administrationssystem.Pages.Indstillinger PageConfigurations
+        private Indstillinger PageConfigurations
         {
-            get
-            {
-                return new Administrationssystem.Pages.Indstillinger();
-            }
+            get { return _pagesettings ?? (_pagesettings = new Indstillinger() { DataContext = new SettingsViewModel() }); }
         }
 
-        private ObservableCollection<Control> FiltersOverview
-        {
-            get
-            {
-                return new ObservableCollection<Control>() 
-                {
-                    new CheckBox() { Content = "Langtur" },
-                    new CheckBox() { Content = "Skader" },
-                    new CheckBox() { Content = "Både ude" }
-                };
-            }
-        }
-
-        private ObservableCollection<Control> FiltersForms
-        {
-            get
-            {
-                return new ObservableCollection<Control>
-                {
-                    new CheckBox() { Content = "Langtur" },
-                    new CheckBox() { Content = "Skader" },
-                    new Separator() { Height = 20 },
-                    new CheckBox() { Content = "Afviste" },
-                    new CheckBox() { Content = "Godkendte" }
-                };
-            }
-        }
-
-        private ObservableCollection<Control> FiltersBoats
-        {
-            get
-            {
-                return new ObservableCollection<Control>
-                {
-                    new CheckBox() { Content = "Både ude" },
-                    new CheckBox() { Content = "Både hjemme" },
-                    new Separator() { Height = 20 },
-                    new CheckBox() { Content = "Både under reparation" },
-                    new CheckBox() { Content = "Beskadigede både" },
-                    new CheckBox() { Content = "Inaktive både" },
-                    new CheckBox() { Content = "Funktionelle både" }
-                };
-            }
-        }
-
-        private ObservableCollection<Control> FiltersConfigurations
-        {
-            get
-            {
-                return new ObservableCollection<Control>();
-            }
-        }
-        #endregion
+        #endregion private
 
         public AdminSystemViewModel()
         {
@@ -126,33 +64,34 @@ namespace ARK.ViewModel
             Page = new PageInformation();
             MenuOverview.Execute(null);
 
-            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er noob" });
-            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er mere noob" });
-
             TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
 
         #region Property
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void Notify(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        #endregion
+
+        #endregion Property
+
         #region Command
-        private ICommand GenerateCommand(string pageName, UserControl page, ObservableCollection<Control> filters)
+
+        private ICommand GenerateCommand(string pageName, UserControl page)
         {
             return new DelegateCommand<object>((e) =>
             {
                 Page.PageName = pageName;
                 Page.Page = page;
-                Page.Filter = filters;
-            }, 
-            (e) => true);
+            }, (e) => true);
         }
-        #endregion
+
+        #endregion Command
     }
 }
