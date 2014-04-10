@@ -4,33 +4,22 @@ using System.Windows.Controls;
 
 namespace ARK.Model.Search
 {
-    public class CheckboxFilter<T> : IFilter<T, CheckBox>
+    public class CheckboxFilter
     {
         // TODO fix EventArgs til at indeholde active
         private CheckBox _control;
 
-        public CheckboxFilter(CheckBox checkbox, Action filter)
+        public CheckboxFilter(CheckBox checkbox, Action updateAction)
         {
             this.Control = checkbox;
-            this.Filter = filter;
-
-            WrapperEvent += (sender, e) => ActiveChanged(this, new EventArgs());
+            this.UpdateAction = updateAction;
         }
-
-        public event EventHandler ActiveChanged;
-        private event RoutedEventHandler WrapperEvent;
 
         public bool Active
         {
             get
             {
                 return Control.IsChecked.GetValueOrDefault();
-            }
-
-            set 
-            { 
-                Control.IsChecked = value; 
-                ActiveChanged(this, new EventArgs()); 
             }
         }
 
@@ -39,16 +28,14 @@ namespace ARK.Model.Search
             get { return _control; }
             private set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Control");
-                }
+                if (value == null) throw new ArgumentNullException("Control");
 
                 _control = value;
-                _control.Checked += WrapperEvent;
+                _control.Checked += (sender, e) => UpdateAction();
+                _control.Unchecked += (sender, e) => UpdateAction();
             }
         }
 
-        public Action Filter { get; private set; }
+        public Action UpdateAction { get; private set; }
     }
 }
