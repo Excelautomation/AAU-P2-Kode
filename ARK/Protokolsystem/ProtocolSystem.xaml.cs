@@ -38,7 +38,9 @@ namespace ARK.Protokolsystem
             using (var db = new DbArkContext())
             {
                 FtpInfo ftp = new FtpInfo() { Id = 1, Hostname = "ftp.test.dk", Name = "Test FTP", Password = "1234password", Port = 21 };
-                db.FTPInfo.Add(ftp);
+                db.FtpInfo.Add(ftp);
+
+                db.SaveChanges();
             }
         }
     }

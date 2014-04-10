@@ -22,15 +22,19 @@ namespace ARK
             {
                 window = new Protokolsystem.Protokolsystem();
             }
-            else if (System.Security.Principal.WindowsIdentity.GetCurrent().Name == "SAHB-WIN7\\sahb")
-            {
-                //// window = new ARK.Administrationssystem.Administrationssystem();
-
-                window = new MainWindow();
-            }
             else
             {
-                window = new MainWindow();
+                var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+                if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
+                {
+                    //// window = new ARK.Administrationssystem.Administrationssystem();
+
+                    window = new MainWindow();
+                }
+                else
+                {
+                    window = new MainWindow();
+                }
             }
 
             var app = new Application();
