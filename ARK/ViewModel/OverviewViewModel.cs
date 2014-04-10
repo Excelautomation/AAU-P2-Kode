@@ -8,9 +8,9 @@ namespace ARK.ViewModel
 {
     public class OverviewViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Skadesblanket> _skadesblanketter = new ObservableCollection<Skadesblanket>();
+        private ObservableCollection<DamageForm> _skadesblanketter = new ObservableCollection<DamageForm>();
 
-        public ObservableCollection<Skadesblanket> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+        public ObservableCollection<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
 
         public ObservableCollection<IFilter<OverviewViewModel, CheckBox>> SkadesblanketterFilters
         {
@@ -27,8 +27,8 @@ namespace ARK.ViewModel
 
         public OverviewViewModel()
         {
-            Skadesblanketter.Add(new Skadesblanket { ReportedBy = "Martin er noob" });
-            Skadesblanketter.Add(new Skadesblanket { ReportedBy = "Martin er mere noob" });
+            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er noob" });
+            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er mere noob" });
         }
 
         #region Property

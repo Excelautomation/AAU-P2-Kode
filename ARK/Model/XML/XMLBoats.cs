@@ -13,7 +13,7 @@ namespace ARK.Model.XML
     public class MoreBoats
     {
         [System.Xml.Serialization.XmlElementAttribute("BådeSpecifik")]
-        public ARK.Model.Baad[] BoatsSpecific { get; set; }
+        public ARK.Model.Boat[] BoatsSpecific { get; set; }
     }
     public class XMLBoats
     {

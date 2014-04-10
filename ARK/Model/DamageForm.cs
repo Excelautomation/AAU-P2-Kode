@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    public class Skadesblanket
+    public class DamageForm
     {
         public DateTime Date { get; set; }
         public string ReportedBy { get; set; }
         public int ReportedByNumber { get; set; }
-        public Baad DamagedBoat { get; set; }
-        public SkadeBeskrivelse Damage { get; set; }
+        public Boat DamagedBoat { get; set; }
+        public DamageDescription Damage { get; set; }
     }
 }
