@@ -124,7 +124,6 @@
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Search\CheckboxFilter.cs" />
-    <Compile Include="Model\Search\IFilter.cs" />
     <Compile Include="Model\DamageDescription.cs" />
     <Compile Include="Model\DamageForm.cs" />
     <Compile Include="Model\Trip.cs" />
@@ -164,6 +163,7 @@
     <Compile Include="ViewModel\FormsViewModel.cs" />
     <Compile Include="ViewModel\BoatViewModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\IFilter.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\OverviewViewModel.cs" />
     <Compile Include="ViewModel\PageInformation.cs" />
