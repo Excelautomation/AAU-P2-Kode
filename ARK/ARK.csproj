@@ -278,10 +278,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Fonts\arial.ttf" />
-    <Resource Include="Fonts\arialbd.ttf" />
-    <Resource Include="Fonts\arialbi.ttf" />
-    <Resource Include="Fonts\ariali.ttf" />
+    <Resource Include="Administrationssystem\Fonts\arial.ttf" />
+    <Resource Include="Administrationssystem\Fonts\arialbd.ttf" />
+    <Resource Include="Administrationssystem\Fonts\arialbi.ttf" />
+    <Resource Include="Administrationssystem\Fonts\ariali.ttf" />
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
