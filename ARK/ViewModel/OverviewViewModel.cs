@@ -49,7 +49,6 @@ namespace ARK.ViewModel
                     });
             }
         }
-
         public Visibility ShowBoatsOut
         {
             get { return _showBoatsOut; }
@@ -89,9 +88,9 @@ namespace ARK.ViewModel
             if (!selectedCheckboxFilters.Any())
                 return;
 
-            ShowBoatsOut = selectedCheckboxFilters.Any(c => c.Control.Content == "Både ude") ? Visibility.Visible : Visibility.Collapsed;
-            ShowLangtur = selectedCheckboxFilters.Any(c => c.Control.Content == "Langtur") ? Visibility.Visible : Visibility.Collapsed;
-            ShowSkader = selectedCheckboxFilters.Any(c => c.Control.Content == "Skader") ? Visibility.Visible : Visibility.Collapsed;
+            ShowBoatsOut = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Både ude") ? Visibility.Visible : Visibility.Collapsed;
+            ShowLangtur = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Langtur") ? Visibility.Visible : Visibility.Collapsed;
+            ShowSkader = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Skader") ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #region Property
