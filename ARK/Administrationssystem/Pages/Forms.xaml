@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.DataContext>
         <VM:FormsViewModel></VM:FormsViewModel>
     </UserControl.DataContext>
@@ -37,8 +37,27 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
-                            <StackPanel Name="StackpanelLeft">
-
+                            <StackPanel>
+                                <StackPanel Name="FormsDamageFormOverview" >
+                                    <ItemsControl ItemsSource="{Binding Path=DamageForms}" HorizontalAlignment="Stretch" >
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Button Background="Transparent" BorderBrush="Transparent">
+                                                        <StackPanel HorizontalAlignment="Left">
+                                                            <Label Content="{Binding Path=DamagedBoat.Name}" Margin="0,0,0,0" Padding="0"/>
+                                                            <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0"/>
+                                                            <Label Content="{Binding Path=ReportedBy}" Margin="0,0,0,0" Padding="0"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                    <Separator Margin="5,0,5,5"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Name="FormsLongTripFormOverview">
+                                </StackPanel>
                             </StackPanel>
                         </ScrollViewer>
                     </DockPanel>
@@ -59,15 +78,19 @@
                                             <StackPanel Margin="0,0,60,0">
                                                 <WrapPanel Margin="0,0,0,15">
                                                     <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Indgivet af:</Label>
-                                                    <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18"> Jon Doge Larsen</TextBox>
+                                                    <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18"> Jon Doge Larsen</TextBox>
                                                 </WrapPanel>
                                                 <WrapPanel Margin="0,0,0,15">
                                                     <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Båd:</Label>
-                                                    <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">Den Døde Baby</TextBox>
+                                                    <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18">Den Døde Baby</TextBox>
                                                 </WrapPanel>
                                                 <WrapPanel Margin="0,0,0,15">
                                                     <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Dato:</Label>
-                                                    <TextBox  BorderBrush="White" VerticalContentAlignment="Center" FontSize="18">23/11/2014</TextBox>
+                                                    <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18">23/11/2014</TextBox>
+                                                </WrapPanel>
+                                                <WrapPanel Margin="0,0,0,15">
+                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Skade:</Label>
+                                                    <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18">Hul i skroget</TextBox>
                                                 </WrapPanel>
                                             </StackPanel>
                                             <DockPanel Width="300">
