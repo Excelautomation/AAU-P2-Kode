@@ -32,7 +32,7 @@ namespace ARK.ViewModel
             {
                 Skadesblanketter = new List<DamageForm>(db.DamageForm);
             }
-            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er noob" });
+            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er noob"});
             Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er mere noob" });
 
             // Add Checkbox filter
@@ -41,6 +41,8 @@ namespace ARK.ViewModel
                                   select new CheckboxFilter((CheckBox)c, UpdateFilter);
             _checkboxFilters.AddRange(checkboxfilters);
         }
+
+        public List<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
 
         public ObservableCollection<Control> Filters
         {
@@ -73,13 +75,14 @@ namespace ARK.ViewModel
             set { _showSkader = value; Notify("ShowSkader"); }
         }
 
-        public List<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+        
         private void ResetFilter()
         {
             ShowBoatsOut = Visibility.Visible;
             ShowLangtur = Visibility.Visible;
             ShowSkader = Visibility.Visible;
         }
+
 
         private void UpdateFilter()
         {
