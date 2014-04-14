@@ -99,6 +99,7 @@
     <Compile Include="Administrationssystem\BoatItem.xaml.cs">
       <DependentUpon>BoatItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Administrationssystem\Funktioner\SMSIT.cs" />
     <Compile Include="Administrationssystem\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
@@ -129,6 +130,7 @@
     <Compile Include="Model\Search\CheckboxFilter.cs" />
     <Compile Include="Model\DamageDescription.cs" />
     <Compile Include="Model\DamageForm.cs" />
+    <Compile Include="Model\SMS.cs" />
     <Compile Include="Model\Trip.cs" />
     <Compile Include="Model\XML\MoreBoats.cs" />
     <Compile Include="Model\XML\XMLBoats.cs" />

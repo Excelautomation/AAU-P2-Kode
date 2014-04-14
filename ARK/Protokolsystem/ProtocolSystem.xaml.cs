@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.Administrationssystem.Funktioner;
 
 namespace ARK.Protokolsystem
 {
@@ -36,13 +37,8 @@ namespace ARK.Protokolsystem
 
         private void TestFTP_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new DbArkContext())
-            {
-                FtpInfo ftp = new FtpInfo() { HostName = "ftp.test.dk", Name = "Test FTP", Password = "1234password", Port = 21};
-                db.FtpInfo.Add(ftp);
-
-                db.SaveChanges();
-            }
+            SMS SMS = new SMS() { Reciever = "4522345676", Message = "Trorlrl", Name = "Nigga" };
+            SMSIT.SendSMS(SMS);
         }
     }
 }
