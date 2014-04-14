@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Model.DB;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel
 {
-    internal class AdminSystemViewModel : ViewModel
+    internal class AdminSystemViewModel : Base.ViewModel
     {
         private PageInformation _page;
         private Oversigt _pageoversigt;

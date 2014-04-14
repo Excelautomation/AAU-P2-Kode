@@ -1,9 +1,8 @@
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Base
 {
     public class PageInformation : ViewModel
     {

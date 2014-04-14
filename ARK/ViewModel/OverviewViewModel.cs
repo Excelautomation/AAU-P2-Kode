@@ -7,10 +7,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel
 {
-    internal class OverviewViewModel : ViewModel, IFilter
+    internal class OverviewViewModel : Base.ViewModel, IFilter
     {
         private readonly List<CheckboxFilter> _checkboxFilters = new List<CheckboxFilter>();
 

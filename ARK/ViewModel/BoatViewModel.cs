@@ -1,9 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel
 {
-    public class BoatViewModel : ViewModel, IFilter
+    public class BoatViewModel : Base.ViewModel, IFilter
     {
         private ObservableCollection<Control> _filters;
 
