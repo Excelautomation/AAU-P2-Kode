@@ -113,6 +113,11 @@ namespace ARK.Model.XML
                     this.itemsElementNameField = value;
                 }
             }
+
+            public object GetObjFromName(ItemsChoiceType name)
+            {
+                return Items[Array.IndexOf(ItemsElementName, name)];
+            }
         }
 
         /// <remarks/>
