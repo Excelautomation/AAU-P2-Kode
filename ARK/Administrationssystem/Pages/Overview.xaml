@@ -34,8 +34,7 @@
                         <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding Path=ReportedBy}">
-                                    </Button>
+                                    <Button Content="{Binding Path=ReportedBy}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

@@ -38,11 +38,36 @@
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
                             <StackPanel>
-                                <StackPanel Name="FormsDamageFormOverview" >
-                                    <ItemsControl ItemsSource="{Binding Path=DamageForms}" HorizontalAlignment="Stretch" >
+                                <StackPanel Name="FormsDamageFormOverview"  Margin="5,5,5,20">
+                                    <Label Margin="10,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
+                                    <Separator Margin="0" Padding="0"/>
+                                    <StackPanel>
+                                        <ItemsControl ItemsSource="{Binding Path=DamageForms}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <Button Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left">
+                                                            <StackPanel Margin="0,10,0,10">
+                                                                <Label Content="{Binding Path=DamagedBoat.Name}" Margin="0,0,0,0" Padding="0"/>
+                                                                <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0" HorizontalAlignment="Left"/>
+                                                                <Label Content="{Binding Path=ReportedBy}" Margin="0,0,0,0" Padding="0" HorizontalAlignment="Left"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                        <Separator Margin="0" Padding="0"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <StackPanel Name="FormsLongTripOverview" Margin="5,0,5,0">
+                                    <Label FontSize="16" Margin="10,0,0,0" FontWeight="Bold" Content="Langtur"/>
+                                    <Separator Margin="0" Padding="0"/>
+                                    <ItemsControl ItemsSource="{Binding Path=LongTripForms}" HorizontalAlignment="Stretch">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel>
+                                                <StackPanel HorizontalAlignment="Left">
                                                     <Button Background="Transparent" BorderBrush="Transparent">
                                                         <StackPanel HorizontalAlignment="Left">
                                                             <Label Content="{Binding Path=DamagedBoat.Name}" Margin="0,0,0,0" Padding="0"/>
@@ -55,8 +80,6 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                </StackPanel>
-                                <StackPanel Name="FormsLongTripFormOverview">
                                 </StackPanel>
                             </StackPanel>
                         </ScrollViewer>
@@ -71,40 +94,8 @@
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
                             <Border Margin="10" CornerRadius="5" Background="White">
-                                <Grid Margin="25">
-                                    <StackPanel>
-                                        <Label FontSize="40" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,40">Skadesblanket</Label>
-                                        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,30">
-                                            <StackPanel Margin="0,0,60,0">
-                                                <WrapPanel Margin="0,0,0,15">
-                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Indgivet af:</Label>
-                                                    <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18"> Jon Doge Larsen</TextBox>
-                                                </WrapPanel>
-                                                <WrapPanel Margin="0,0,0,15">
-                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Båd:</Label>
-                                                    <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18">Den Døde Baby</TextBox>
-                                                </WrapPanel>
-                                                <WrapPanel Margin="0,0,0,15">
-                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Dato:</Label>
-                                                    <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18">23/11/2014</TextBox>
-                                                </WrapPanel>
-                                                <WrapPanel Margin="0,0,0,15">
-                                                    <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Skade:</Label>
-                                                    <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18">Hul i skroget</TextBox>
-                                                </WrapPanel>
-                                            </StackPanel>
-                                            <DockPanel Width="300">
-                                                <Label DockPanel.Dock="Top" FontSize="24" FontStyle="Italic" Margin="0,0,0,10">Supplerende tekst</Label>
-                                                <Border  DockPanel.Dock="Bottom"  BorderBrush="Black" BorderThickness="1">
-                                                    <TextBlock Margin="2" FontSize="18" TextWrapping="Wrap">Der skete det, at der kom en enhjørning og gennemhullede vores båd i en sådan grad, at jeg måtte skære Søren i stykker og stoppe  hullerne til med dem for bare at få båden hjem. Og det er derfor jeg ikke kommer på arbejde i dag, chef.</TextBlock>
-                                                </Border>
-                                            </DockPanel>
-                                        </WrapPanel>
-                                        <Label FontStyle="Oblique" FontSize="20" HorizontalAlignment="Center">Her skal der være "Gør båd skadet" og "Aktiver båd" buttons.</Label>
-                                        <!--Buttons for sæt båd til skadet eller aktiv-->
-                                        
-                                        
-                                    </StackPanel>
+                                <Grid Margin="25" Name="FormsDetailContent">
+                                    <ContentControl Content="{Binding Path=Page}"/>
                                 </Grid>
                             </Border>
                         </ScrollViewer>
