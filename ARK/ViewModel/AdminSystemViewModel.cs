@@ -69,19 +69,13 @@ namespace ARK.ViewModel
             TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
 
-        #region Command
-
         private ICommand GenerateCommand(string pageName, UserControl page)
         {
-            return new DelegateCommand<object>((e) =>
+            return GetCommand<object>((e) =>
             {
                 Page.PageName = pageName;
                 Page.Page = page;
-            }, (e) => true);
+            });
         }
-
-        #endregion Command
-
-        
     }
 }
