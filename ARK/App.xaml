@@ -126,5 +126,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="ListView">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
     </Application.Resources>
 </Application>
