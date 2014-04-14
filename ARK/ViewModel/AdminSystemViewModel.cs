@@ -7,7 +7,7 @@ using ARK.Model.DB;
 
 namespace ARK.ViewModel
 {
-    internal class AdminSystemViewModel : INotifyPropertyChanged, IDisposable
+    internal class AdminSystemViewModel : INotifyPropertyChanged
     {
         private PageInformation _page;
         private Oversigt _pageoversigt;
@@ -20,8 +20,6 @@ namespace ARK.ViewModel
             get { return _page; }
             set { _page = value; Notify("Page"); }
         }
-
-        public DbArkContext DbArkContext { get; private set; }
 
         #region Commands
 
@@ -40,22 +38,22 @@ namespace ARK.ViewModel
         // TODO: Implementer noget cache på objekterne
         private Oversigt PageOverview
         {
-            get { return _pageoversigt ?? (_pageoversigt = new Oversigt() { DataContext = new OverviewViewModel() }); }
+            get { return _pageoversigt ?? (_pageoversigt = new Oversigt()); }
         }
 
         private Blanketter PageForms
         {
-            get { return _pageforms ?? (_pageforms = new Blanketter { DataContext = new FormsViewModel() }); }
+            get { return _pageforms ?? (_pageforms = new Blanketter()); }
         }
 
         private Baede PageBoats
         {
-            get { return _pagebaede ?? (_pagebaede = new Baede { DataContext = new BoatViewModel() }); }
+            get { return _pagebaede ?? (_pagebaede = new Baede()); }
         }
 
         private Indstillinger PageConfigurations
         {
-            get { return _pagesettings ?? (_pagesettings = new Indstillinger() { DataContext = new SettingsViewModel() }); }
+            get { return _pagesettings ?? (_pagesettings = new Indstillinger()); }
         }
 
         #endregion private
@@ -64,20 +62,11 @@ namespace ARK.ViewModel
         {
             TimeCounter.StartTimer();
 
-            //Opret forbindelse til DB
-            DbArkContext = new DbArkContext();
-
             // Start oversigten
             Page = new PageInformation();
             MenuOverview.Execute(null);
 
             TimeCounter.StopTime("AdministrationssystemViewModel load");
-        }
-
-        public void Dispose()
-        {
-            DbArkContext.Dispose();
-            DbArkContext = null;
         }
 
         #region Property

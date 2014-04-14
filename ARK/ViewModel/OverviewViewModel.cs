@@ -1,4 +1,5 @@
 ﻿using ARK.Model;
+using ARK.Model.DB;
 using ARK.Model.Search;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,11 +22,15 @@ namespace ARK.ViewModel
 
         private Visibility _showSkader;
 
-        private ObservableCollection<DamageForm> _skadesblanketter = new ObservableCollection<DamageForm>();
+        private List<DamageForm> _skadesblanketter = new List<DamageForm>();
 
         public OverviewViewModel()
         {
             // Load data
+            using (var db = new DbArkContext())
+            {
+                Skadesblanketter = new List<DamageForm>(db.DamageForm);
+            }
             Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er noob" });
             Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er mere noob" });
 
@@ -67,7 +72,7 @@ namespace ARK.ViewModel
             set { _showSkader = value; Notify("ShowSkader"); }
         }
 
-        public ObservableCollection<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+        public List<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
         private void ResetFilter()
         {
             ShowBoatsOut = Visibility.Visible;
