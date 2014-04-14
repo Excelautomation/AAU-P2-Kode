@@ -47,6 +47,5 @@ namespace ARK.Model
         public DateTime Date { get; set; }
         public bool LongTrip { get; set; }
         public int BoatID { get; set; }
-        public List<Member> MembersOnTrip;
     }
 }

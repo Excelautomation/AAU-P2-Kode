@@ -116,7 +116,16 @@ namespace ARK.Model.XML
 
             public object GetObjFromName(ItemsChoiceType name)
             {
-                return Items[Array.IndexOf(ItemsElementName, name)];
+                object obj;
+                try
+                {
+                    obj = Items[Array.IndexOf(ItemsElementName, name)];
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    obj = null;
+                }
+                return obj;
             }
         }
 
