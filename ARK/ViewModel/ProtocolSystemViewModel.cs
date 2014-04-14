@@ -112,16 +112,13 @@ namespace ARK.ViewModel
             HeadlineText = "Aalborg Roklubs Protokolsystem";
         }
 
-        #region Command
         private ICommand GenerateCommand(string HeadLineText, UserControl page)
         {
-            return new DelegateCommand<object>((e) =>
+            return GetCommand<object>((e) =>
             {
                 this.HeadlineText = HeadLineText;
                 CurrentPage = page;
-            }, 
-            (e) => { return true; });
+            });
         }
-        #endregion
     }
 }

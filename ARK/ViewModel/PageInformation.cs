@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace ARK.ViewModel
 {
-    public class PageInformation : INotifyPropertyChanged
+    public class PageInformation : ViewModel
     {
         private UserControl _page;
         private string _pageName;
@@ -29,18 +29,5 @@ namespace ARK.ViewModel
                 return Visibility.Visible;
             }
         }
-        #region Property
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void Notify(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion Property
     }
 }
