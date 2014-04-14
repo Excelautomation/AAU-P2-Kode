@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace ARK.ViewModel
 {
-    public class SettingsViewModel : IFilter
+    public class SettingsViewModel : ViewModel, IFilter
     {
         public ObservableCollection<Control> Filters
         {

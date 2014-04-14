@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace ARK.ViewModel
 {
-    internal class OverviewViewModel : INotifyPropertyChanged, IFilter
+    internal class OverviewViewModel : ViewModel, IFilter
     {
         private readonly List<CheckboxFilter> _checkboxFilters = new List<CheckboxFilter>();
 
@@ -97,19 +97,5 @@ namespace ARK.ViewModel
             ShowLangtur = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Langtur") ? Visibility.Visible : Visibility.Collapsed;
             ShowSkader = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Skader") ? Visibility.Visible : Visibility.Collapsed;
         }
-
-        #region Property
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void Notify(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion Property
     }
 }
