@@ -7,18 +7,14 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
     <Grid Height="600">
         <ListView x:Name="EndTripBoatsOutList" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="295" Margin="0,0,0,-3">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+			<ListViewItem>
+				Jørgen Svendsen
+			</ListViewItem>
         </ListView>
         <ListView x:Name="BoatsOutAvailableTrips" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="295" Margin="305,0,0,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+			<ListViewItem>
+				Jørgen Svendsen
+			</ListViewItem>
         </ListView>
 
     </Grid>

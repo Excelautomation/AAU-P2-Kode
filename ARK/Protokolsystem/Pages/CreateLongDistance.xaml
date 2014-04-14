@@ -7,11 +7,6 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
     <Grid>
     	<ListView HorizontalAlignment="Left" Height="536.716" Margin="310.896,53.284,0,0" VerticalAlignment="Top" Width="279.104" SelectionMode="Multiple">
-    		<ListView.View>
-    			<GridView>
-    				<GridViewColumn/>
-    			</GridView>
-    		</ListView.View>
 			<ListViewItem>
 				Jørgen Svendsen
 			</ListViewItem>
