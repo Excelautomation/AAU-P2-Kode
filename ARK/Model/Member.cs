@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ARK.Model.XML;
+using System.Text.RegularExpressions;
 
 namespace ARK.Model
 {
@@ -24,9 +25,9 @@ namespace ARK.Model
             this.Address2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2);
             this.ZipCode = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr));
             this.City = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.By);
-            this.Phone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon);
-            //this.PhoneWork = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde);
-            this.Cellphone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil);
+            this.Phone = Regex.Replace((string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon), @"^\d", "");
+            this.PhoneWork = Regex.Replace((string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde), @"^\d", "");
+            this.Cellphone = Regex.Replace((string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil), @"^\d", "");
             this.Email1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
             this.Email2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
             this.Birthday = Convert.ToDateTime(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato));
