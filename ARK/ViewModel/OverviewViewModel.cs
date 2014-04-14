@@ -32,8 +32,7 @@ namespace ARK.ViewModel
             {
                 Skadesblanketter = new List<DamageForm>(db.DamageForm);
             }
-            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er noob"});
-            Skadesblanketter.Add(new DamageForm { ReportedBy = "Martin er mere noob" });
+
 
             // Add Checkbox filter
             var checkboxfilters = from c in Filters

@@ -109,6 +109,12 @@
     <Compile Include="Administrationssystem\Pages\Forms.xaml.cs">
       <DependentUpon>Forms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Administrationssystem\Pages\FormsDamage.xaml.cs">
+      <DependentUpon>FormsDamage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Administrationssystem\Pages\FormsLongTrip.xaml.cs">
+      <DependentUpon>FormsLongTrip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Administrationssystem\Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -199,6 +205,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Administrationssystem\Pages\Forms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Administrationssystem\Pages\FormsDamage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Administrationssystem\Pages\FormsLongTrip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
