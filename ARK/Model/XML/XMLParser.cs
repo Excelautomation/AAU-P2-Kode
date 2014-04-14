@@ -18,10 +18,9 @@ namespace ARK.Model.XML
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }
 
-        public static string DlToMemFromFTP(string serverAddress, string path, NetworkCredential credentials)
+        public static string DlToMemFromFtp(Uri uri, NetworkCredential credentials)
         {
-            string filePath = String.Concat(serverAddress, path);
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(filePath);
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uri);
             string retString;
 
             request.Credentials = credentials;
@@ -38,15 +37,6 @@ namespace ARK.Model.XML
             }
 
             return retString;
-        }
-
-        public static string GetPathFromDay(string filename)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("/upload/");
-            sb.Append(DateTime.Today.DayOfWeek.ToString());
-            sb.Append(filename);
-            return sb.ToString();
         }
     }
 }

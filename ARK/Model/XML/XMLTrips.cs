@@ -9,27 +9,28 @@ namespace ARK.Model.XML
 {
     public class XMLTrips
     {
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
         public partial class dataroot
         {
 
-            private datarootTur[] tripField;
+            private datarootTur[] turField;
 
             private System.DateTime generatedField;
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute("Tur")]
-            public datarootTur[] Trip
+            public datarootTur[] Tur
             {
                 get
                 {
-                    return this.tripField;
+                    return this.turField;
                 }
                 set
                 {
-                    this.tripField = value;
+                    this.turField = value;
                 }
             }
 
@@ -80,6 +81,22 @@ namespace ARK.Model.XML
             private ushort nr5Field;
 
             private bool nr5FieldSpecified;
+
+            private ushort nr6Field;
+
+            private bool nr6FieldSpecified;
+
+            private ushort nr7Field;
+
+            private bool nr7FieldSpecified;
+
+            private ushort nr8Field;
+
+            private bool nr8FieldSpecified;
+
+            private ushort nr9Field;
+
+            private bool nr9FieldSpecified;
 
             /// <remarks/>
             public ushort ID
@@ -266,7 +283,117 @@ namespace ARK.Model.XML
                     this.nr5FieldSpecified = value;
                 }
             }
+
+            /// <remarks/>
+            public ushort Nr6
+            {
+                get
+                {
+                    return this.nr6Field;
+                }
+                set
+                {
+                    this.nr6Field = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlIgnoreAttribute()]
+            public bool Nr6Specified
+            {
+                get
+                {
+                    return this.nr6FieldSpecified;
+                }
+                set
+                {
+                    this.nr6FieldSpecified = value;
+                }
+            }
+
+            /// <remarks/>
+            public ushort Nr7
+            {
+                get
+                {
+                    return this.nr7Field;
+                }
+                set
+                {
+                    this.nr7Field = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlIgnoreAttribute()]
+            public bool Nr7Specified
+            {
+                get
+                {
+                    return this.nr7FieldSpecified;
+                }
+                set
+                {
+                    this.nr7FieldSpecified = value;
+                }
+            }
+
+            /// <remarks/>
+            public ushort Nr8
+            {
+                get
+                {
+                    return this.nr8Field;
+                }
+                set
+                {
+                    this.nr8Field = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlIgnoreAttribute()]
+            public bool Nr8Specified
+            {
+                get
+                {
+                    return this.nr8FieldSpecified;
+                }
+                set
+                {
+                    this.nr8FieldSpecified = value;
+                }
+            }
+
+            /// <remarks/>
+            public ushort Nr9
+            {
+                get
+                {
+                    return this.nr9Field;
+                }
+                set
+                {
+                    this.nr9Field = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlIgnoreAttribute()]
+            public bool Nr9Specified
+            {
+                get
+                {
+                    return this.nr9FieldSpecified;
+                }
+                set
+                {
+                    this.nr9FieldSpecified = value;
+                }
+            }
         }
+
+
     }
 }
 
