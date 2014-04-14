@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace ARK.ViewModel
 {
@@ -12,6 +14,16 @@ namespace ARK.ViewModel
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        protected ICommand GetCommand<T>(Action<T> executeMethod)
+        {
+            return GetCommand(executeMethod, (e) => true);
+        }
+
+        protected ICommand GetCommand<T>(Action<T> executeMethod, Func<T, bool> canExecute)
+        {
+            return new DelegateCommand<T>(executeMethod, canExecute);
         }
     }
 }
