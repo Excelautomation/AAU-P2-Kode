@@ -12,8 +12,6 @@ namespace ARK.Model
 {
     public class Trip
     {
-        private List<Member> _membersOnTrip;
-
         public Trip()
         {
         }
@@ -28,14 +26,18 @@ namespace ARK.Model
 
             Type type = tripXML.GetType();
             IEnumerable<PropertyInfo> props = new List<PropertyInfo>(type.GetProperties());
-            IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"nr\dField"));
+            IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"nr\d") && x.PropertyType == typeof(bool));
 
-            foreach (PropertyInfo prop in filteredProps)
+            using (DB.DbArkContext dbContext = new DB.DbArkContext())
             {
-                if ((bool)prop.GetValue(tripXML))
+                foreach (PropertyInfo prop in filteredProps)
                 {
-                    PropertyInfo elementProp = props.First(x => x.Name[2] == prop.Name[2]);
-                    ////_membersOnTrip.Add((int)elementProp.GetValue());
+                    if ((bool)prop.GetValue(tripXML))
+                    {
+                        PropertyInfo elementProp = props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
+                        Member memberRef = dbContext.Member.Find((int)elementProp.GetValue(tripXML));
+                        MembersOnTrip.Add(memberRef);
+                    }
                 }
             }
             
@@ -47,5 +49,6 @@ namespace ARK.Model
         public DateTime Date { get; set; }
         public bool LongTrip { get; set; }
         public int BoatID { get; set; }
+        public List<Member> MembersOnTrip { get; set; }
     }
 }
