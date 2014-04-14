@@ -25,7 +25,7 @@ namespace ARK.Model
             this.ZipCode = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr));
             this.City = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.By);
             this.Phone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon);
-            this.PhoneWork = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde);
+            //this.PhoneWork = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde);
             this.Cellphone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil);
             this.Email1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
             this.Email2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
