@@ -41,7 +41,7 @@ namespace ARK.ViewModel
             get
             {
                 return _filters ?? (
-                    _filters = new ObservableCollection<Control>()
+                    _filters = new ObservableCollection<Control>
                     {
                         new CheckBox {Content = "Skader"},
                         new CheckBox {Content = "Langtur"},
