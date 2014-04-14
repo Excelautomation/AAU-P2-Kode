@@ -11,7 +11,7 @@ using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel
 {
-    public class ProtocolSystemViewModel : ViewModel
+    public class ProtocolSystemViewModel : Base.ViewModel
     {
         private string _headlineText;
         private UserControl _currentPage;

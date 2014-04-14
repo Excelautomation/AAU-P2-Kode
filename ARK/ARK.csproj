@@ -166,14 +166,14 @@
     <Compile Include="ViewModel\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\FormsViewModel.cs" />
     <Compile Include="ViewModel\BoatViewModel.cs" />
-    <Compile Include="ViewModel\DelegateCommand.cs" />
-    <Compile Include="ViewModel\IFilter.cs" />
+    <Compile Include="ViewModel\Base\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Base\IFilter.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\OverviewViewModel.cs" />
-    <Compile Include="ViewModel\PageInformation.cs" />
+    <Compile Include="ViewModel\Base\PageInformation.cs" />
     <Compile Include="ViewModel\ProtocolSystemViewModel.cs" />
-    <Compile Include="ViewModel\TimeCounter.cs" />
-    <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="ViewModel\Base\TimeCounter.cs" />
+    <Compile Include="ViewModel\Base\ViewModel.cs" />
     <Page Include="Administrationssystem\AdminSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

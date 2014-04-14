@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Base
 {
     public class ViewModel : INotifyPropertyChanged
     {
