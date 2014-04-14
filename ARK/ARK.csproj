@@ -173,6 +173,7 @@
     <Compile Include="ViewModel\PageInformation.cs" />
     <Compile Include="ViewModel\ProtocolSystemViewModel.cs" />
     <Compile Include="ViewModel\TimeCounter.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
     <Page Include="Administrationssystem\AdminSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace ARK.ViewModel
 {
-    public class FormsViewModel : IFilter
+    public class FormsViewModel : ViewModel, IFilter
     {
         private ObservableCollection<Control> _filters;
 

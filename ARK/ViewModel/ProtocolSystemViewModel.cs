@@ -11,7 +11,7 @@ using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel
 {
-    public class ProtocolSystemViewModel : INotifyPropertyChanged
+    public class ProtocolSystemViewModel : ViewModel
     {
         private string _headlineText;
         private UserControl _currentPage;
@@ -112,16 +112,6 @@ namespace ARK.ViewModel
             HeadlineText = "Aalborg Roklubs Protokolsystem";
         }
 
-        #region Property
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void Notify(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
         #region Command
         private ICommand GenerateCommand(string HeadLineText, UserControl page)
         {
