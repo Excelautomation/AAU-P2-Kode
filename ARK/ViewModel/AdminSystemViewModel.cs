@@ -7,7 +7,7 @@ using ARK.Model.DB;
 
 namespace ARK.ViewModel
 {
-    internal class AdminSystemViewModel : INotifyPropertyChanged
+    internal class AdminSystemViewModel : ViewModel
     {
         private PageInformation _page;
         private Oversigt _pageoversigt;
@@ -68,20 +68,6 @@ namespace ARK.ViewModel
 
             TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
-
-        #region Property
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void Notify(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion Property
 
         #region Command
 
