@@ -47,7 +47,7 @@
         </StackPanel>
 
         <WrapPanel Grid.Column="2" VerticalAlignment="Center" Margin="10,25,202,25">
-            <Button Width="115"  x:Name="btnMenuOverview" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,20,0" Command="{Binding Path=MenuOverview}">
+            <Button Width="115"  x:Name="btnMenuOverview" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Command="{Binding Path=MenuOverview}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid x:Name="MenuOverview_bg">
@@ -74,7 +74,7 @@
                 </Button.Template>
             </Button>
 
-            <Button  Width="130" x:Name="btnMenuForms" VerticalAlignment="Center" Margin="0,0,20,0" Command="{Binding Path=MenuForms}">
+            <Button  Width="130" x:Name="btnMenuForms" VerticalAlignment="Center" Margin="0,0,5,0" Command="{Binding Path=MenuForms}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid x:Name="MenuForms_bg">
@@ -101,7 +101,7 @@
                 </Button.Template>
             </Button>
 
-            <Button Width="90" x:Name="btnMenuBoats" VerticalAlignment="Center" Margin="0,0,20,0" Command="{Binding Path=MenuBoats}">
+            <Button Width="90" x:Name="btnMenuBoats" VerticalAlignment="Center" Margin="0,0,5,0" Command="{Binding Path=MenuBoats}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid x:Name="MenuBoats_bg">
