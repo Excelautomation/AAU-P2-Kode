@@ -12,11 +12,6 @@
     </UserControl.Resources>
     <Grid>
         <ListView HorizontalAlignment="Left" Height="244.216" Margin="12.422,58.784,0,0" VerticalAlignment="Top" Width="279.104" SelectionMode="Single">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn />
-                </GridView>
-            </ListView.View>
 			<ListViewItem>
 				Jørgen Svendsen
 			</ListViewItem>
@@ -46,11 +41,6 @@
                 </Button.Background>
             </Button>
         <ListView HorizontalAlignment="Left" Height="244.216" Margin="307.922,58.784,0,0" VerticalAlignment="Top" Width="279.104" SelectionMode="Single">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn />
-                </GridView>
-            </ListView.View>
 			<ListViewItem>
 				Den bette jolle
 			</ListViewItem>

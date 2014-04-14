@@ -7,11 +7,9 @@
              d:DesignWidth="640" d:DesignHeight="480" Width="600" Height="600">
     <Grid x:Name="LayoutRoot" Width="600" Height="600">
         <ListView x:Name="AllMembersList" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="600">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+			<ListViewItem>
+				Jørgen Svendsen
+			</ListViewItem>
         </ListView>
     </Grid>
 </UserControl>

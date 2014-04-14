@@ -6,12 +6,43 @@
              mc:Ignorable="d" 
              d:DesignWidth="640" d:DesignHeight="480" Width="600" Height="600">
     <Grid Width="600" Height="600">
-        <ListView x:Name="AllBoatsList" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="600" Opacity="0.975">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+		     <Button x:Name="BeginTripNow" Content="START &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="580" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="10,510,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=StartTripNow}">
+                <Button.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFB0D141" Offset="0"/>
+                        <GradientStop Color="#FF1B4E09" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.BorderBrush>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF93C700" Offset="0"/>
+                        <GradientStop Color="#FF0E6E00" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        <ListView x:Name="AllBoatsList" HorizontalAlignment="Left" Height="445.625" VerticalAlignment="Top" Width="285.657" Opacity="0.975" Margin="10,49.004,0,0"  SelectionMode="Single">
+			<ListViewItem>
+				Stor båd
+			</ListViewItem>
+			<ListViewItem>
+				Bette båd
+			</ListViewItem>
+			<ListViewItem>
+				Giga båd
+			</ListViewItem>
         </ListView>
+        <ListView x:Name="AllBoatsList_Copy" HorizontalAlignment="Left" Height="445.625" VerticalAlignment="Top" Width="285.657" Opacity="0.975" Margin="304.343,49.004,0,0"  SelectionMode="Multiple">
+			<ListViewItem>
+				Jørgen Svendsen
+			</ListViewItem>
+			<ListViewItem>
+				Henning Hansen
+			</ListViewItem>
+			<ListViewItem>
+				Svend-Erik Thomsen
+			</ListViewItem>
+        </ListView>
+        <Label Content="Vælg båd" HorizontalAlignment="Left" Margin="90.026,0,0,0" VerticalAlignment="Top" Height="48.284" Width="129.261" FontSize="28" />
+        <Label Content="Vælg medlemmer" HorizontalAlignment="Left" Margin="336.241,-4.28,0,0" VerticalAlignment="Top" Height="48.284" Width="233.245" FontSize="28" />
     </Grid>
 </UserControl>

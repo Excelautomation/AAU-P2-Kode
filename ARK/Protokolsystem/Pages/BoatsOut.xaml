@@ -7,11 +7,9 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
     <Grid>
         <ListView x:Name="BoatsOutList" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="600">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+			<ListViewItem>
+				Jørgen Svendsen
+			</ListViewItem>
         </ListView>
 
     </Grid>
