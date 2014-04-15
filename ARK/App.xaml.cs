@@ -50,6 +50,10 @@ namespace ARK
                         var getsms = from s in db.SMS
                                      select s;
 
+                        var Noresponse = from s in db.SMS
+                                         where !s.approved && !s.Handled
+                                         select s;
+
                         foreach(var sms in smsser){
                             if (sms.Text.ToLower() == "ok")
                             {
@@ -58,30 +62,45 @@ namespace ARK
 
                                 SMS SMS = new SMS()
                                 {
-                                    Reciever = sms.From,
+                                    Reciever = sms.From.Replace("+", ""),
                                     Message = "Bekræftelsen er modtaget, venlig hilsen Aalborg Roklub"
                                 };
                                 SMSIT.SendSMS(SMS);
-
+                                sms.Handled = true;
                             }
                             else
                             {
                                 SMS SMS = new SMS()
                                 {
-                                    Reciever = sms.From,
+                                    Reciever = sms.From.Replace("+", ""),
                                     Message = "Beskeden blev ikke forstået, bekræft venligst igen, venlig hilsen Aalborg Roklub"
                                 };
                                 SMSIT.SendSMS(SMS);
+                                sms.Handled = true;
                             }
-
-                            
-                            //sms.Handled = true; 
                         }
+
+                        //Ingen response i 20 min --> Send besked til bestyrelsen
+                        foreach (var noresponse in Noresponse)
+                        {
+                            if (DateTime.Now.AddMinutes(-20) > noresponse.Time)
+                            {
+                                SMS SMS = new SMS()
+                                {
+                                    Reciever = "4522907111",
+                                    Message = "Følgende person er ikke kommet hjem " + noresponse.Name + " hans telefon nummer er " + noresponse.Reciever + ""
+                                };
+                                SMSIT.SendSMS(SMS);
+                                noresponse.Handled = true;
+                            }
+                        }
+
 
 
                         //Save til databasen
                         db.SaveChanges();
                     }
+                    Thread.Sleep(5000);
                 }
             }));
             thr.Start();
