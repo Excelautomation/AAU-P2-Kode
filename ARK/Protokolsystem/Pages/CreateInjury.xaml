@@ -12,54 +12,54 @@
     </UserControl.Resources>
     <Grid>
         <ListView HorizontalAlignment="Left" Height="244.216" Margin="12.422,58.784,0,0" VerticalAlignment="Top" Width="279.104" SelectionMode="Single">
-			<ListViewItem>
-				Jørgen Svendsen
-			</ListViewItem>
-			<ListViewItem>
-				Henning Hansen
-			</ListViewItem>
-			<ListViewItem>
-				Svend-Erik Thomsen
-			</ListViewItem>
+            <ListViewItem>
+                Jørgen Svendsen
+            </ListViewItem>
+            <ListViewItem>
+                Henning Hansen
+            </ListViewItem>
+            <ListViewItem>
+                Svend-Erik Thomsen
+            </ListViewItem>
         </ListView>
-        <Label Content="Anmelder" HorizontalAlignment="Left" Margin="88.831,10,0,0" VerticalAlignment="Top" Height="48.284" Width="129.261" FontSize="28" />
+        <Label Content="Anmelder" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Height="48" Width="277" FontSize="28" />
         <RichTextBox HorizontalAlignment="Left" Height="124.216" Margin="12.422,465.784,0,0" VerticalAlignment="Top" Width="298.604">
             <FlowDocument />
         </RichTextBox>
-            <Button x:Name="AddInjury" Content="INDSEND &#xA;SKADESRAPPORT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="372.488,484.5,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddInjury}">
-                <Button.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF004546" Offset="0"/>
-                        <GradientStop Color="#FF00B0B4" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.BorderBrush>
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF019FA2" Offset="0"/>
-                        <GradientStop Color="#FF006364" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+        <Button x:Name="AddInjury" Content="INDSEND &#xA;SKADESRAPPORT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="372.488,484.5,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddInjury}">
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF004546" Offset="0"/>
+                    <GradientStop Color="#FF00B0B4" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF019FA2" Offset="0"/>
+                    <GradientStop Color="#FF006364" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <ListView HorizontalAlignment="Left" Height="244.216" Margin="307.922,58.784,0,0" VerticalAlignment="Top" Width="279.104" SelectionMode="Single">
-			<ListViewItem>
-				Den bette jolle
-			</ListViewItem>
-			<ListViewItem>
-				Lynbåden
-			</ListViewItem>
+            <ListViewItem>
+                Den bette jolle
+            </ListViewItem>
+            <ListViewItem>
+                Lynbåden
+            </ListViewItem>
         </ListView>
-        <Label Content="Skadet båd" HorizontalAlignment="Left" Margin="378.331,10,0,0" VerticalAlignment="Top" Height="48.284" Width="150.261" FontSize="28" />
-        <Label Content="Suppplerende tekst" HorizontalAlignment="Left" Margin="36.422,416,0,0" VerticalAlignment="Top" Height="48.284" Width="252.104" FontSize="28" />
+        <Label Content="Skadet båd" HorizontalAlignment="Left" Margin="308,10,0,0" VerticalAlignment="Top" Height="48" Width="279" FontSize="28" />
+        <Label Content="Supplerende tekst" HorizontalAlignment="Left" Margin="12,416,0,0" VerticalAlignment="Top" Height="48" Width="299" FontSize="28" />
         <ComboBox HorizontalAlignment="Left" Margin="12.422,370.04,0,0" VerticalAlignment="Top" Width="279.104" Height="45.96" FontSize="21.333">
             <ComboBoxItem Content="Hul i skroget" HorizontalAlignment="Left" Width="349.104" />
             <ComboBoxItem Content="Åre knækket" HorizontalAlignment="Left" Width="349.104" />
             <ComboBoxItem Content="Båd eksploderede" HorizontalAlignment="Left" Width="349.104" />
         </ComboBox>
-        <Label Content="Vælg skade" HorizontalAlignment="Left" Margin="73.922,321.5,0,0" VerticalAlignment="Top" Height="48.284" Width="156.104" FontSize="28" />
+        <Label Content="Vælg skade" HorizontalAlignment="Left" Margin="12,322,0,0" VerticalAlignment="Top" Height="48" Width="277" FontSize="28" />
         <ComboBox HorizontalAlignment="Left" Margin="307.922,369.784,0,0" VerticalAlignment="Top" Width="279.104" Height="45.96" FontSize="21.333">
-        	<ComboBoxItem Content="Funktionel" HorizontalAlignment="Left" Width="349.104" />
-        	<ComboBoxItem Content="Kosmetisk" HorizontalAlignment="Left" Width="349.104" />
+            <ComboBoxItem Content="Funktionel" HorizontalAlignment="Left" Width="349.104" />
+            <ComboBoxItem Content="Kosmetisk" HorizontalAlignment="Left" Width="349.104" />
         </ComboBox>
-        <Label Content="Indflydelse" HorizontalAlignment="Left" Margin="372.488,321.5,0,0" VerticalAlignment="Top" Height="48.284" Width="144.104" FontSize="28" />
+        <Label Content="Indflydelse" HorizontalAlignment="Left" Margin="308,322,0,0" VerticalAlignment="Top" Height="48" Width="279" FontSize="28" />
     </Grid>
 </UserControl>
