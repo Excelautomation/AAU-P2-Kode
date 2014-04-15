@@ -121,7 +121,7 @@ namespace ARK.Model.XML
                 {
                     obj = Items[Array.IndexOf(ItemsElementName, name)];
                 }
-                catch (IndexOutOfRangeException e)
+                catch (IndexOutOfRangeException)
                 {
                     obj = null;
                 }

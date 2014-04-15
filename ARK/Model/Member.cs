@@ -25,9 +25,25 @@ namespace ARK.Model
             this.Address2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2);
             this.ZipCode = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr));
             this.City = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.By);
-            this.Phone = Regex.Replace((string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon), @"^\d", "");
-            this.PhoneWork = Regex.Replace((string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde), @"^\d", "");
-            this.Cellphone = Regex.Replace((string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil), @"^\d", "");
+
+            string phone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon);
+            if (phone != null)
+            {
+                this.Phone = Regex.Replace(phone, @"[^0-9]", "");
+            }
+
+            string phoneWork = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde);
+            if (phoneWork != null)
+            {
+                this.PhoneWork = Regex.Replace(phoneWork, @"[^0-9]", "");
+            }
+
+            string cellPhone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil);
+            if (cellPhone != null)
+            {
+                this.Cellphone = Regex.Replace(cellPhone, @"[^0-9]", "");
+            }
+
             this.Email1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
             this.Email2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
             this.Birthday = Convert.ToDateTime(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato));
