@@ -15,6 +15,7 @@ namespace ARK.ViewModel
     {
         private string _headlineText;
         private UserControl _currentPage;
+        private UserControl _currentInfo;
 
         public string HeadlineText
         {
@@ -33,6 +34,20 @@ namespace ARK.ViewModel
             {
                 this._currentPage = value;
                 Notify("CurrentPage");
+            }
+        }
+
+        public UserControl CurrentInfo
+        {
+            get
+            {
+                return this._currentInfo;
+            }
+
+            private set
+            {
+                this._currentInfo = value;
+                Notify("CurrentInfo");
             }
         }
 
@@ -124,6 +139,7 @@ namespace ARK.ViewModel
             {
                 this.HeadlineText = HeadLineText;
                 CurrentPage = page;
+                CurrentInfo = additionalInfo;
             });
         }
     }
