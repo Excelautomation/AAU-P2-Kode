@@ -20,7 +20,7 @@ namespace ARK.Model
             this.BoatId = boatXML.ID;
             this.Name = boatXML.Navn;
             this.NumberofSeats = boatXML.AntalPladser;
-            this.Aktive = boatXML.Aktiv == 1;
+            this.Active = boatXML.Aktiv == 1;
             this.SpecificBoatType = (BoatType)SpecificBoatType;
             this.Usable = boatXML.Roforbud == 1;
             this.LongTripBoat = boatXML.LangtursBåd == 1;
@@ -42,7 +42,7 @@ namespace ARK.Model
         public int BoatId { get; set; }
         public string Name { get; set; }
         public int NumberofSeats { get; set; }
-        public bool Aktive { get; set; }
+        public bool Active { get; set; }
         public BoatType SpecificBoatType { get; set; }
         public bool Usable { get; set; }
         public bool LongTripBoat { get; set; }   

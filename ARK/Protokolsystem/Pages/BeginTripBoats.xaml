@@ -32,15 +32,17 @@
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Name}"></TextBlock>
                         <WrapPanel>
-                            <TextBlock Text="Pladser: " FontSize="12px"></TextBlock>
-                            <TextBlock Text="{Binding NumberofSeats}" FontSize="12px"></TextBlock>
+                            <TextBlock Text="Pladser: " FontSize="14px"></TextBlock>
+                            <TextBlock Text="{Binding NumberofSeats}" FontSize="14px"></TextBlock>
+                            <TextBlock Text=" Kategori: " FontSize="14px"></TextBlock>
+                            <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px"></TextBlock>
                         </WrapPanel>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=SelectedChange}">
+                    <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=AllBoatsList, Path=SelectedItem}">
                     </i:InvokeCommandAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
@@ -55,7 +57,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="Vælg båd" HorizontalAlignment="Left" Margin="0,14,0,0" VerticalAlignment="Top" Height="40" Width="295" FontSize="20" Foreground="#FF3C3C3C" FontWeight="Bold" />
-        <Label Content="Vælg medlemmer" HorizontalAlignment="Left" Margin="305,14,0,0" VerticalAlignment="Top" Height="39" Width="295" FontSize="20" Foreground="#FF3C3C3C" FontWeight="Bold" />
+        <Label Content="Vælg båd" HorizontalAlignment="Left" Margin="0,14,0,0" VerticalAlignment="Top" Height="40" Width="295" FontSize="16" Foreground="#FF3C3C3C" FontWeight="Bold" />
+        <Label Content="Vælg medlemmer" HorizontalAlignment="Left" Margin="305,14,0,0" VerticalAlignment="Top" Height="39" Width="295" FontSize="16" Foreground="#FF3C3C3C" FontWeight="Bold" />
     </Grid>
 </UserControl>
