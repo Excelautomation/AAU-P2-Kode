@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using ARK.Model;
+using ARK.Model.DB;
 
 namespace ARK
 {
@@ -21,7 +23,16 @@ namespace ARK
             {
                 while (true)
                 {
-                    Debug.WriteLine("Mads er noob");
+                    using (DbArkContext db = new DbArkContext())
+                    {
+                        var sms = from s in db.GetSMS
+                                  where s.Handled
+                                      select s;
+
+
+                    }
+                    
+                    Debug.WriteLine("Søren er noob");
                     Thread.Sleep(1000);
                 }
             }));
