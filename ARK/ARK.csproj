@@ -73,6 +73,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -143,6 +144,9 @@
     <Compile Include="Model\XML\XMLParser.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Protokolsystem\Pages\AdditionalInfo.xaml.cs">
+      <DependentUpon>AdditionalInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
       <DependentUpon>BeginTripBoats.xaml</DependentUpon>
     </Compile>
@@ -171,6 +175,7 @@
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminSystemViewModel.cs" />
+    <Compile Include="ViewModel\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\FormsViewModel.cs" />
     <Compile Include="ViewModel\BoatViewModel.cs" />
     <Compile Include="ViewModel\Base\DelegateCommand.cs" />
@@ -239,6 +244,10 @@
     <Page Include="Administrationssystem\Pages\Overview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Protokolsystem\Pages\AdditionalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Protokolsystem\Pages\BeginTripBoats.xaml">
       <SubType>Designer</SubType>

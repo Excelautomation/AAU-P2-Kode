@@ -41,7 +41,7 @@ namespace ARK.ViewModel
         {
             get
             {
-                return GenerateCommand("Start rotur", PageBeginTripBoats);
+                return GenerateCommand("Start rotur", PageBeginTripBoats, PageAdditionalInfo);
             }
         }
 
@@ -103,6 +103,7 @@ namespace ARK.ViewModel
         public MembersInformation PageMembersInformation { get { return new MembersInformation(); } }
         public CreateInjury PageCreateInjury { get { return new CreateInjury(); } }
         public CreateLongDistance PageCreateLongDistance { get { return new CreateLongDistance(); } }
+        public AdditionalInfo PageAdditionalInfo { get { return new AdditionalInfo(); } }
 
         #endregion
 
@@ -113,6 +114,11 @@ namespace ARK.ViewModel
         }
 
         private ICommand GenerateCommand(string HeadLineText, UserControl page)
+        {
+            return GenerateCommand(HeadlineText, page, null);
+        }
+
+        private ICommand GenerateCommand(string HeadLineText, UserControl page, UserControl additionalInfo)
         {
             return GetCommand<object>((e) =>
             {
