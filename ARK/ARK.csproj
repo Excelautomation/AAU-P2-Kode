@@ -337,51 +337,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\langtursblanketter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\tom.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\logo.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\baadbackground.png" />
     <Resource Include="images\logud.png" />
-    <Resource Include="images\overskriftsknap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\tom-hover.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Søgebar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\menu1-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\menu2-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\menu3-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\menu4-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\menu5-1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\ark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\BlanketterIcon2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\options.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\application_side_list.png" />
