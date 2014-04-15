@@ -126,7 +126,7 @@
     <Compile Include="Model\DB\MySqlInitializer.cs" />
     <Compile Include="Model\FtpInfo.cs" />
     <Compile Include="Model\GetSMS.cs" />
-    <Compile Include="Model\LongTripForm.cs" />
+    <Compile Include="Model\LongDistanceForm.cs" />
     <Compile Include="Administrationssystem\Pages\Overview.xaml.cs">
       <DependentUpon>Overview.xaml</DependentUpon>
     </Compile>
