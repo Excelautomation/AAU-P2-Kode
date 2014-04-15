@@ -142,6 +142,7 @@
     <Compile Include="Model\XML\XMLBoats.cs" />
     <Compile Include="Model\XML\XMLMembers.cs" />
     <Compile Include="Model\XML\XMLParser.cs" />
+    <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Protokolsystem\Pages\AdditionalInfo.xaml.cs">
