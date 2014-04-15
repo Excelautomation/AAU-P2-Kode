@@ -30,6 +30,11 @@ namespace ARK.Model.DB
                 .HasForeignKey(t => t.BoatId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<DamageForm>()
+                .HasRequired(d => d.DamagedBoat)
+                .WithRequiredDependent()
+                .WillCascadeOnDelete(false);
+
             base.OnModelCreating(modelBuilder);
         }
     }
