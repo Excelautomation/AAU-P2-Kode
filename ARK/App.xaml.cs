@@ -45,10 +45,19 @@ namespace ARK
 
                         //Modtager SMS´er
                         var smsser = from s in db.GetSMS
-                                  where s.Handled
-                                      select s;
+                                     where s.Handled
+                                     select s;
+                        var getsms = from s in db.SMS
+                                     select s;
 
-                        foreach(var sms in smsser){   
+                        foreach(var sms in smsser){
+                            if (sms.Text == "ok" || sms.Text == "oK" || sms.Text == "Ok" || sms.Text == "OK")
+                            {
+                                //Mangler dato
+                                getsms.Where(e => e.Reciever == sms.From).ToList().ForEach(e => e.approved = true);
+                                
+                                
+                            }
                             //sms.Handled = true; 
                         }
 
