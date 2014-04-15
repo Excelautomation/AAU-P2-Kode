@@ -34,7 +34,7 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand SelectLongTripFormCommand
+        public ICommand SelectLongDistanceFormCommand
         {
             get
             {
@@ -49,25 +49,40 @@ namespace ARK.ViewModel
         {
             using (var db = new DbArkContext())
             {
-                DamageForms = new List<DamageForm>(db.DamageForm);
-                LongTripForms = new List<LongDistanceForm>(db.LongTripForm);
+                //DamageForms = new List<DamageForm>(db.DamageForm);
+                LongDistanceForms = new List<LongDistanceForm>(db.LongTripForm);
             }
 
             DamageForms.Add(new DamageForm { DamagedBoat = new Boat() {
                 BoatId = 100,
-                Name = "Hajen" },
+                Name = "Hajen",
+                Usable = false,
+                Aktive = false},
                 Date = new System.DateTime(2014, 4, 14),
                 ReportedBy = "John Doge Larsen",
                 Damage = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", ID = 1, NeededMaterials = "Træ, spyt og sæd"},
                 ReportedByNumber = 42
             });
+            DamageForms.Add(new DamageForm { DamagedBoat = new Boat() {
+                BoatId = 200,
+                Name = "Den Flyvende Hollænder",
+                Usable = false,
+                Aktive = false},
+                Date = new System.DateTime(2014, 4, 14),
+                ReportedBy = "Davy Jones",
+                Damage = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", ID = 1, NeededMaterials = "Træ, spyt og sæd" },
+                ReportedByNumber = 43
+            });
             
-            DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "Den Flyvende Hollænder" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Davy Jones" });
+            
+            
+            
             DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Samuel L. Jackson" });
 
-            LongTripForms.Add(new LongDistanceForm { Departure = System.DateTime.Now, Arrival = System.DateTime.Now.AddYears(10)});
+            LongDistanceForms.Add(new LongDistanceForm { Departure = new System.DateTime(2014,4,14), Arrival = new System.DateTime(2024,4,14)});
 
-            Page = new FormsDamage { DataContext = DamageForms[0] };
+            Page = new FormsLongTrip { DataContext = LongDistanceForms[0] };
+
         }
         
         
@@ -78,7 +93,7 @@ namespace ARK.ViewModel
             set { _DamageForms = value; Notify("DamageForms"); }
         }
 
-        public List<LongDistanceForm> LongTripForms
+        public List<LongDistanceForm> LongDistanceForms
         {
             get { return _LongTripForms; }
             set { _LongTripForms = value; Notify("LongTripForms"); }
