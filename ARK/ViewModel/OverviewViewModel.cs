@@ -41,7 +41,11 @@ namespace ARK.ViewModel
             _checkboxFilters.AddRange(checkboxfilters);
         }
 
-        public List<DamageForm> Skadesblanketter { get { return _skadesblanketter; } set { _skadesblanketter = value; Notify("Skadesblanketter"); } }
+        public List<DamageForm> Skadesblanketter 
+        { 
+            get { return _skadesblanketter; } 
+            set { _skadesblanketter = value; Notify("Skadesblanketter"); } 
+        }
 
         public ObservableCollection<Control> Filters
         {
