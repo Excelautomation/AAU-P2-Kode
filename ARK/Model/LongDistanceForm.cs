@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    public class LongTripForm
+    public class LongDistanceForm
     {
         [Key]
         public int ID { get; set; }
         public DateTime Departure { get; set; }
         public DateTime Arrival { get; set; }
         public string Text { get; set; }
-        public virtual List<Person> Persons { get; set; }
+        public virtual List<Member> Members { get; set; }
         public bool Approved { get; set; }
     }
 }
