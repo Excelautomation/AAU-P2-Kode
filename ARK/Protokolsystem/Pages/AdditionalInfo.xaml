@@ -14,7 +14,7 @@
     </UserControl.Resources>
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="736" Margin="3,5,0,-441" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="194" Style="{DynamicResource White+rounded}"/>
-        <GroupBox Header="Informationer" HorizontalAlignment="Left" Margin="10,10,0,-427" VerticalAlignment="Top" Height="717" Width="180" FontSize="20" FontWeight="Bold" Foreground="#FF3C3C3C" BorderBrush="{x:Null}"/>
+        <GroupBox Header="Oversigt" HorizontalAlignment="Left" Margin="10,10,0,-427" VerticalAlignment="Top" Height="717" Width="180" FontSize="20" FontWeight="Bold" Foreground="#FF3C3C3C" BorderBrush="{x:Null}"/>
 
     </Grid>
 </UserControl>
