@@ -19,5 +19,6 @@ namespace ARK.Model.DB
         public DbSet<DamageDescription> DamageDescription { get; set; }
         public DbSet<DamageForm> DamageForm { get; set; }
         public DbSet<Trip> Trip { get; set; }
+        public DbSet<GetSMS> GetSMS { get; set; }
     }
 }
