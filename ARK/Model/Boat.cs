@@ -17,13 +17,13 @@ namespace ARK.Model
 
         public Boat(XML.XMLBoats.datarootBådeSpecifik boatXML)
         {
-            this.ID = boatXML.ID;
+            this.BoatId = boatXML.ID;
             this.Name = boatXML.Navn;
             this.NumberofSeats = boatXML.AntalPladser;
-            this.Aktive = boatXML.Aktiv == 1 ? true : false;
+            this.Aktive = boatXML.Aktiv == 1;
             this.SpecificBoatType = (BoatType)SpecificBoatType;
-            this.Usable = boatXML.Roforbud == 1 ? true : false;
-            this.LongTripBoat = boatXML.LangtursBåd == 1 ? true : false;
+            this.Usable = boatXML.Roforbud == 1;
+            this.LongTripBoat = boatXML.LangtursBåd == 1;
 
         }
 
@@ -39,7 +39,7 @@ namespace ARK.Model
         }
 
         [Key]
-        public int ID { get; set; }
+        public int BoatId { get; set; }
         public string Name { get; set; }
         public int NumberofSeats { get; set; }
         public bool Aktive { get; set; }
