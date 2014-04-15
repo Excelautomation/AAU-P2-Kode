@@ -26,7 +26,7 @@ namespace ARK.Model
 
             Type type = tripXML.GetType();
             IEnumerable<PropertyInfo> props = new List<PropertyInfo>(type.GetProperties());
-            IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"nr\d") && x.PropertyType == typeof(bool));
+            IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
 
             using (DB.DbArkContext dbContext = new DB.DbArkContext())
             {
@@ -35,7 +35,7 @@ namespace ARK.Model
                     if ((bool)prop.GetValue(tripXML))
                     {
                         PropertyInfo elementProp = props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
-                        Member memberRef = dbContext.Member.Find((int)elementProp.GetValue(tripXML));
+                        Member memberRef = dbContext.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXML)));
                         MembersOnTrip.Add(memberRef);
                     }
                 }
