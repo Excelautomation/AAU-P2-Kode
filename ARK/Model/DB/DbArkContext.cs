@@ -21,5 +21,16 @@ namespace ARK.Model.DB
         public DbSet<Trip> Trip { get; set; }
         public DbSet<GetSMS> GetSMS { get; set; }
         public DbSet<SMS> SMS { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Trip>()
+                .HasRequired(t => t.Boat)
+                .WithMany()
+                .HasForeignKey(t => t.BoatId)
+                .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
