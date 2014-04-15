@@ -27,7 +27,7 @@ namespace ARK.Model.DB
             modelBuilder.Entity<Trip>()
                 .HasRequired(t => t.Boat)
                 .WithMany()
-                .HasForeignKey(t => t.BoatId)
+                .HasForeignKey(t => t.Boat_BoatId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DamageForm>()
