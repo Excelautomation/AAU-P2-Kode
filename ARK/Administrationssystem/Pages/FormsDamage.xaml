@@ -36,15 +36,15 @@
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
                 <Button Background="Transparent" BorderBrush="Transparent">
-                    <StackPanel>
+                    <StackPanel Margin="5">
                         <Image Source="../../images/accept.png" Height="32"/>
-                        <Label Content="Acepter"/>
+                        <Label Content="Sæt båden til skadet"/>
                     </StackPanel>
                 </Button>
-                <Button Background="Transparent" BorderBrush="Transparent">
-                    <StackPanel>
+                <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0" Command="{Binding Path=SetActive}">
+                    <StackPanel Margin="5">
                         <Image Source="../../images/delete.png" Height="32"/>
-                        <Label Content="Slet"/>
+                        <Label Content="Sæt båden til aktiv"/>
                     </StackPanel>
                 </Button>
                 
