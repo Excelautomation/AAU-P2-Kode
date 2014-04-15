@@ -44,20 +44,37 @@ namespace ARK
 
 
                         //Modtager SMS´er
-                        var smsser = from s in db.GetSMS
-                                     where s.Handled
-                                     select s;
+                        var smsser = (from s in db.GetSMS
+                                     where !s.Handled && s.RecievedDate.Day == DateTime.Now.Day && s.RecievedDate.Month == DateTime.Now.Month && s.RecievedDate.Year == DateTime.Now.Year
+                                     select s).ToList();
                         var getsms = from s in db.SMS
                                      select s;
 
                         foreach(var sms in smsser){
-                            if (sms.Text == "ok" || sms.Text == "oK" || sms.Text == "Ok" || sms.Text == "OK")
+                            if (sms.Text.ToLower() == "ok")
                             {
                                 //Mangler dato
-                                getsms.Where(e => e.Reciever == sms.From).ToList().ForEach(e => e.approved = true);
-                                
-                                
+                                getsms.Where(e => e.Reciever == sms.From.Replace("+", "")).ToList().ForEach(e => e.approved = true);
+
+                                SMS SMS = new SMS()
+                                {
+                                    Reciever = sms.From,
+                                    Message = "Bekræftelsen er modtaget, venlig hilsen Aalborg Roklub"
+                                };
+                                SMSIT.SendSMS(SMS);
+
                             }
+                            else
+                            {
+                                SMS SMS = new SMS()
+                                {
+                                    Reciever = sms.From,
+                                    Message = "Beskeden blev ikke forstået, bekræft venligst igen, venlig hilsen Aalborg Roklub"
+                                };
+                                SMSIT.SendSMS(SMS);
+                            }
+
+                            
                             //sms.Handled = true; 
                         }
 
