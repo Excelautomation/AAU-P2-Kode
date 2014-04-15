@@ -16,39 +16,43 @@ namespace ARK.Model
         {
         }
 
-        public Trip(XMLTrips.datarootTur tripXML)
+        public Trip(XMLTrips.datarootTur tripXml)
         {
-            ID = tripXML.ID;
-            Distance = tripXML.Kilometer;
-            Date = tripXML.Dato;
-            LongTrip = tripXML.Langtur == 1 ? true : false;
-            BoatID = tripXML.BådID;
-
-            Type type = tripXML.GetType();
-            IEnumerable<PropertyInfo> props = new List<PropertyInfo>(type.GetProperties());
-            IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
-
-            using (DB.DbArkContext dbContext = new DB.DbArkContext())
+            using (DB.DbArkContext context = new DB.DbArkContext())
             {
+                TripId = tripXml.ID;
+                Distance = tripXml.Kilometer;
+                Date = tripXml.Dato;
+                LongTrip = tripXml.Langtur == 1 ? true : false;
+                BoatId = tripXml.BådID;
+                Members = new List<Member>();
+
+                IEnumerable<PropertyInfo> props = new List<PropertyInfo>(tripXml.GetType().GetProperties());
+                IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
+
                 foreach (PropertyInfo prop in filteredProps)
                 {
-                    if ((bool)prop.GetValue(tripXML))
+                    if ((bool)prop.GetValue(tripXml))
                     {
                         PropertyInfo elementProp = props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
-                        Member memberRef = dbContext.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXML)));
-                        MembersOnTrip.Add(memberRef);
+                        Member memberRef = context.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXml)));
+                        Members.Add(memberRef);
                     }
                 }
+
+                Boat = context.Boat.Find(BoatId);
+
+                context.SaveChanges();
             }
-            
         }
 
         [Key]
-        public int ID { get; set; }
+        public int TripId { get; set; }
         public int Distance { get; set; }
         public DateTime Date { get; set; }
         public bool LongTrip { get; set; }
-        public int BoatID { get; set; }
-        public List<Member> MembersOnTrip { get; set; }
+        public int BoatId { get; set; }
+        public virtual Boat Boat { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
     }
 }
