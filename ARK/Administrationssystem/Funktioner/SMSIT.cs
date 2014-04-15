@@ -17,8 +17,8 @@ namespace ARK.Administrationssystem.Funktioner
             url_base = "http://www.smsit.dk/api/sendSms.php";
             WebClient client = new WebClient();
             var apikey = "0000000000000000";
-            var senderid = "ARK";
-            var charset = "ISO-8859-1";
+            var senderid = "22821674";
+            var charset = "UTF-8";
             var url = string.Format("{0}?apiKey={1}&senderId={2}&mobile={3}&message={4}&charset={5}", url_base, apikey, senderid, SMSInformation.Reciever, SMSInformation.Message, charset);
             return client.DownloadString(url) == "0";
         }
