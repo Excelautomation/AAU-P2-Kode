@@ -27,7 +27,14 @@ namespace ARK
                     using (DbArkContext db = new DbArkContext())
                     {
                         //SUNSET
-                        var sunset = true;
+                        var sunset = false;
+                        
+                        var SunsetTime = DateTime.Now;
+
+                        if (SunsetTime > DateTime.Now)
+                        {
+                            sunset = true;
+                        }
 
                         //Afsender SMS´er
                         var FindSMS = from s in db.SMS
