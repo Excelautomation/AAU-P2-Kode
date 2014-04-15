@@ -18,18 +18,18 @@ namespace ARK.Model
 
         public Trip(XMLTrips.datarootTur tripXml)
         {
+            this.TripId = tripXml.ID;
+            this.Distance = tripXml.Kilometer;
+            this.Date = tripXml.Dato;
+            this.LongTrip = tripXml.Langtur == 1;
+            this.BoatId = tripXml.BådID;
+            this.Members = new List<Member>();
+
+            IEnumerable<PropertyInfo> props = new List<PropertyInfo>(tripXml.GetType().GetProperties());
+            IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
+
             using (DB.DbArkContext context = new DB.DbArkContext())
             {
-                TripId = tripXml.ID;
-                Distance = tripXml.Kilometer;
-                Date = tripXml.Dato;
-                LongTrip = tripXml.Langtur == 1 ? true : false;
-                BoatId = tripXml.BådID;
-                Members = new List<Member>();
-
-                IEnumerable<PropertyInfo> props = new List<PropertyInfo>(tripXml.GetType().GetProperties());
-                IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
-
                 foreach (PropertyInfo prop in filteredProps)
                 {
                     if ((bool)prop.GetValue(tripXml))
@@ -39,10 +39,6 @@ namespace ARK.Model
                         Members.Add(memberRef);
                     }
                 }
-
-                Boat = context.Boat.Find(BoatId);
-
-                context.SaveChanges();
             }
         }
 
