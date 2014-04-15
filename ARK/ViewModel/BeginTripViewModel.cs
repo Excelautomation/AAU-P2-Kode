@@ -15,6 +15,8 @@ namespace ARK.ViewModel
         private bool _enableMembers;
         private List<Boat> _boats = new List<Boat>();
         private List<Member> _members = new List<Member>();
+        private Boat _boat;
+        private Member _member;
 
         public bool EnableMembers
         {
@@ -26,9 +28,10 @@ namespace ARK.ViewModel
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand<Boat>(e =>
                 {
                     EnableMembers = true;
+                    Boat = e;
                 });
             }
         }
@@ -53,6 +56,42 @@ namespace ARK.ViewModel
         {
             get { return _members; }
             set { _members = value; Notify("Members"); }
+        }
+
+        public string BoatHeadline { get { return "Båd"; } }
+
+        public List<Boat> BoatContent
+        {
+            get
+            {
+                if (Boat == null) return new List<Boat>();
+
+                return new List<Boat> { Boat };  
+            }
+        }
+
+        public string MemberHeadline { get { return "Deltagere"; } }
+
+        public List<Member> MemberContent
+        {
+            get
+            {
+                if (Member == null) return new List<Member>();
+
+                return new List<Member> { Member }; 
+            }
+        }
+
+        public Boat Boat 
+        {
+            get { return _boat;  }
+            set { _boat = value; Notify("Boat"); Notify("BoatContent"); }
+        }
+
+        public Member Member
+        {
+            get { return _member; }
+            set { _member = value; Notify("Member"); Notify("MemberContent"); }
         }
     }
 }

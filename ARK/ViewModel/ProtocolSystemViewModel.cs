@@ -140,6 +140,7 @@ namespace ARK.ViewModel
                 this.HeadlineText = HeadLineText;
                 CurrentPage = page;
                 CurrentInfo = additionalInfo;
+                CurrentInfo.DataContext = CurrentPage.DataContext;
             });
         }
     }
