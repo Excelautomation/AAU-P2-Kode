@@ -31,6 +31,27 @@ namespace ARK.Model.XML
             LoadFromXml<XMLTrips.dataroot, XMLTrips.datarootTur, Trip>(x => x.Trip, "/upload/monday/Tur.xml");
         }
 
+        public static void LoadSunsetFromXml()
+        {
+            DateTime now = DateTime.Today;
+            string basePath = "/sun/57.0488195/9.921746999999982";
+            string basePathEnd = "/99/0";
+            string day = now.Day.ToString();
+            string month = now.Month.ToString();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(basePath);
+            sb.Append("/");
+            sb.Append(day);
+            sb.Append("/");
+            sb.Append(month);
+            sb.Append(basePathEnd);
+
+            UriBuilder ub = new UriBuilder("ftp", "www.earthtools.org", 80, sb.ToString());
+            NetworkCredential creds = new NetworkCredential("", "");
+
+            string xml = DlToMemFromFtp(ub.Uri, creds);
+        }
+
         public static void LoadFromXml<TXml, TSubXml, TClass>(Func<DbArkContext, DbSet<TClass>> prop, string path)
             where TXml : class
             where TSubXml : class
