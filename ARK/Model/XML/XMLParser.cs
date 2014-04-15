@@ -31,7 +31,7 @@ namespace ARK.Model.XML
             LoadFromXml<XMLTrips.dataroot, XMLTrips.datarootTur, Trip>(x => x.Trip, "/upload/monday/Tur.xml");
         }
 
-        public static void LoadSunsetFromXml()
+        public static DateTime GetSunsetFromXml()
         {
             DateTime now = DateTime.Today;
             string basePath = "/sun/57.0488195/9.921746999999982";
@@ -46,10 +46,17 @@ namespace ARK.Model.XML
             sb.Append(month);
             sb.Append(basePathEnd);
 
-            UriBuilder ub = new UriBuilder("ftp", "www.earthtools.org", 80, sb.ToString());
+            UriBuilder ub = new UriBuilder("http", "www.earthtools.org", 80, sb.ToString());
             NetworkCredential creds = new NetworkCredential("", "");
 
-            string xml = DlToMemFromFtp(ub.Uri, creds);
+            string xml = DlToMem(ub.Uri, creds);
+
+            XMLSunset.sun sunXml = ParseXML<XMLSunset.sun>(xml);
+            DateTime sunset = DateTime.Today;
+            sunset = sunset.Add(sunXml.evening.twilight.nautical.TimeOfDay);
+            
+            return sunset;
+
         }
 
         public static void LoadFromXml<TXml, TSubXml, TClass>(Func<DbArkContext, DbSet<TClass>> prop, string path)
@@ -76,7 +83,7 @@ namespace ARK.Model.XML
             UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
             NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
-            string xmlString = XMLParser.DlToMemFromFtp(ub.Uri, ftpCreds);
+            string xmlString = XMLParser.DlToMem(ub.Uri, ftpCreds);
             var xmlObject = XMLParser.ParseXML<T>(xmlString);
 
             List<PropertyInfo> tProps = new List<PropertyInfo>(typeof(T).GetProperties());
@@ -96,17 +103,18 @@ namespace ARK.Model.XML
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }
 
-        public static string DlToMemFromFtp(Uri uri, NetworkCredential credentials)
+        public static string DlToMem(Uri uri, NetworkCredential credentials)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uri);
+            WebRequest request = WebRequest.Create(uri);
             string retString;
 
             request.Credentials = credentials;
-            request.UsePassive = true;
-            request.UseBinary = true;
-            request.KeepAlive = false;
+            ////request.UsePassive = true;
+            ////request.UseBinary = true;
+            ////request.KeepAlive = false;
+            request.Timeout = 10000;
 
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            using (WebResponse response = request.GetResponse())
             {
                 using (Stream responseStream = response.GetResponseStream())
                 {
