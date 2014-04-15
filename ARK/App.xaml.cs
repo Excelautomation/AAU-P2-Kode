@@ -55,7 +55,6 @@ namespace ARK
                             }
                         }
 
-
                         //Modtager SMS´er
                         var smsser = (from s in db.GetSMS
                                      where !s.Handled && s.RecievedDate.Day == DateTime.Now.Day && s.RecievedDate.Month == DateTime.Now.Month && s.RecievedDate.Year == DateTime.Now.Year
@@ -106,10 +105,6 @@ namespace ARK
                                 noresponse.Handled = true;
                             }
                         }
-
-                        
-
-
 
                         //Save til databasen
                         db.SaveChanges();
