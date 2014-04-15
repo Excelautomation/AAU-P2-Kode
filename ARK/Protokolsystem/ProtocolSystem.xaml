@@ -32,7 +32,7 @@
             <ColumnDefinition Width="609*"/>
             <ColumnDefinition Width="204*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Left" Height="601" Width="601" VerticalAlignment="Top"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
+        <StackPanel HorizontalAlignment="Left" Height="601" Width="609" VerticalAlignment="Top"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
             <ContentControl Content="{Binding Path=CurrentPage}"/>
         </StackPanel>
         <StackPanel x:Name="Buttons" Grid.Column="1" Height="84" Margin="10,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="576">
