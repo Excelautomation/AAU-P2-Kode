@@ -18,7 +18,7 @@ namespace ARK.ViewModel
         private ObservableCollection<Control> _filters;
 
         private List<DamageForm> _DamageForms = new List<DamageForm>();
-        private List<LongTripForm> _LongTripForms = new List<LongTripForm>();
+        private List<LongDistanceForm> _LongTripForms = new List<LongDistanceForm>();
         private UserControl _page;
 
         public UserControl Page { get { return _page; } set { _page = value; Notify("Page"); } }
@@ -38,7 +38,7 @@ namespace ARK.ViewModel
         {
             get
             {
-                return GetCommand<LongTripForm>(e =>
+                return GetCommand<LongDistanceForm>(e =>
                 {
                     Page.DataContext = e;
                 });
@@ -50,7 +50,7 @@ namespace ARK.ViewModel
             using (var db = new DbArkContext())
             {
                 DamageForms = new List<DamageForm>(db.DamageForm);
-                LongTripForms = new List<LongTripForm>(db.LongTripForm);
+                LongTripForms = new List<LongDistanceForm>(db.LongTripForm);
             }
 
             DamageForms.Add(new DamageForm { DamagedBoat = new Boat() {
@@ -65,7 +65,7 @@ namespace ARK.ViewModel
             DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "Den Flyvende Hollænder" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Davy Jones" });
             DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Samuel L. Jackson" });
 
-            LongTripForms.Add(new LongTripForm { Departure = System.DateTime.Now, Arrival = System.DateTime.Now.AddYears(10)});
+            LongTripForms.Add(new LongDistanceForm { Departure = System.DateTime.Now, Arrival = System.DateTime.Now.AddYears(10)});
 
             Page = new FormsDamage { DataContext = DamageForms[0] };
         }
@@ -78,7 +78,7 @@ namespace ARK.ViewModel
             set { _DamageForms = value; Notify("DamageForms"); }
         }
 
-        public List<LongTripForm> LongTripForms
+        public List<LongDistanceForm> LongTripForms
         {
             get { return _LongTripForms; }
             set { _LongTripForms = value; Notify("LongTripForms"); }

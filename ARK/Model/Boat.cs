@@ -24,7 +24,7 @@ namespace ARK.Model
             this.SpecificBoatType = (BoatType)SpecificBoatType;
             this.Usable = boatXML.Roforbud == 1;
             this.LongTripBoat = boatXML.LangtursBåd == 1;
-
+            this.DamageForms = new List<DamageForm>();
         }
 
         public enum BoatType
@@ -45,6 +45,7 @@ namespace ARK.Model
         public bool Active { get; set; }
         public BoatType SpecificBoatType { get; set; }
         public bool Usable { get; set; }
-        public bool LongTripBoat { get; set; }   
+        public bool LongTripBoat { get; set; }
+        public ICollection<DamageForm> DamageForms { get; set; }
     }
 }
