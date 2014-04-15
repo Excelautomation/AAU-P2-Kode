@@ -5,6 +5,7 @@
     <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Button Content="Administrationssystem" FontSize="20" Height="60" Width="250" Margin="20" Click="Button_Click"/>
         <Button Content="Protokolsystem" FontSize="20" Height="60" Width="250" Margin="20" Click="Button_Click_1"/>
+        <Button Content="TEST - Here be dragons" FontSize="20" Height="60" Width="250" Margin="20" Click="Button_Click_2"/>
 
     </WrapPanel>
 </Window>

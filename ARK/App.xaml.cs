@@ -10,6 +10,7 @@ using System.Windows;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Administrationssystem.Funktioner;
+using ARK.Model.XML;
 
 namespace ARK
 {
@@ -29,7 +30,7 @@ namespace ARK
                         //SUNSET
                         var sunset = false;
                         
-                        var SunsetTime = DateTime.Now;
+                        var SunsetTime = XMLParser.GetSunsetFromXml();
 
                         if (SunsetTime > DateTime.Now)
                         {
