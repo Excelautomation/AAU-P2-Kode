@@ -18,7 +18,7 @@ namespace ARK.Model
         public Member(XMLMembers.datarootAktiveMedlemmer memberXML)
         {
             this.MemberNumber = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr));
-            this.ID = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
+            this.MemberId = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
             this.FirstName = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Fornavn);
             this.LastName = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Efternavn);
             this.Address1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse1);
@@ -47,18 +47,19 @@ namespace ARK.Model
             this.Email1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
             this.Email2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
             this.Birthday = Convert.ToDateTime(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato));
-            this.Released = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Frigivet)) == 1 ? true : false;
-            this.SwimmingTest = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Svømmeprøve)) == 1 ? true : false;
-            this.ShortTripCox = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Korttursstyrmand)) == 1 ? true : false;
-            this.LongTripCox = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Langtursstyrmand)) == 1 ? true : false;
-            this.MayUseSculler = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Scullerret)) == 1 ? true : false;
-            this.MayUseOutrigger = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1 ? true : false;
-            this.MayUseKayak = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1 ? true : false;
+            this.Released = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Frigivet)) == 1;
+            this.SwimmingTest = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Svømmeprøve)) == 1;
+            this.ShortTripCox = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Korttursstyrmand)) == 1;
+            this.LongTripCox = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Langtursstyrmand)) == 1;
+            this.MayUseSculler = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Scullerret)) == 1;
+            this.MayUseOutrigger = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1;
+            this.MayUseKayak = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1;
+            this.Trips = new List<Trip>();
         }
 
         public int MemberNumber { get; set; }
         [Key]
-        public int ID { get; set; }
+        public int MemberId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address1 { get; set; }
@@ -78,5 +79,6 @@ namespace ARK.Model
         public bool MayUseSculler { get; set; }
         public bool MayUseOutrigger { get; set; }
         public bool MayUseKayak { get; set; }
+        public virtual ICollection<Trip> Trips { get; set; }
     }
 }
