@@ -21,10 +21,29 @@ namespace ARK.ViewModel
         private List<LongTripForm> _LongTripForms = new List<LongTripForm>();
         private UserControl _page;
 
-        public UserControl Page { get { return _page; } set { _page = value; Notify("Page"); } } 
-        public ICommand SelectDamageFormCommand { get { return GetCommand<DamageForm>(e => {
-            Page.DataContext = e;
-        }); } }
+        public UserControl Page { get { return _page; } set { _page = value; Notify("Page"); } }
+
+        public ICommand SelectDamageFormCommand
+        {
+            get
+            {
+                return GetCommand<DamageForm>(e =>
+                {
+                    Page.DataContext = e;
+                });
+            }
+        }
+
+        public ICommand SelectLongTripFormCommand
+        {
+            get
+            {
+                return GetCommand<LongTripForm>(e =>
+                {
+                    Page.DataContext = e;
+                });
+            }
+        }
 
         public FormsViewModel()
         {
@@ -34,12 +53,19 @@ namespace ARK.ViewModel
                 LongTripForms = new List<LongTripForm>(db.LongTripForm);
             }
 
-
-            DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "Hajen" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "John Doge Larsen"});
+            DamageForms.Add(new DamageForm { DamagedBoat = new Boat() {
+                BoatId = 100,
+                Name = "Hajen" },
+                Date = new System.DateTime(2014, 4, 14),
+                ReportedBy = "John Doge Larsen",
+                Damage = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", ID = 1, NeededMaterials = "Træ, spyt og sæd"},
+                ReportedByNumber = 42
+            });
+            
             DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "Den Flyvende Hollænder" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Davy Jones" });
             DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Samuel L. Jackson" });
 
-            //LongTripForms.Add(new LongTripForm { Departure = System.DateTime.Now, Arrival = System.DateTime.Now.AddYears(10)});
+            LongTripForms.Add(new LongTripForm { Departure = System.DateTime.Now, Arrival = System.DateTime.Now.AddYears(10)});
 
             Page = new FormsDamage { DataContext = DamageForms[0] };
         }
