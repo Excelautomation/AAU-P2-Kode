@@ -1,16 +1,16 @@
-﻿using System;
+﻿using ARK.Model.DB;
+using ARK.Model.XML;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Reflection;
-using ARK.Model.DB;
-using System.Data.Entity;
-using ARK.Model.XML;
 
 namespace ARK.Model.XML
 {
@@ -39,13 +39,6 @@ namespace ARK.Model.XML
             using (DbArkContext dbContext = new DbArkContext())
             {
                 FtpInfo ftpInfo = dbContext.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
-                /*FtpInfo ftpInfo = new FtpInfo()
-                {
-                    HostName = "ws14.surftown.dk",
-                    Username = "aauarat",
-                    Password = "aautest",
-                    Port = 21
-                };*/
                 IEnumerable<TClass> objects = XMLParser.GetObjectsFromXml<TXml, TSubXml, TClass>(ftpInfo, path);
                 var coll = prop.Invoke(dbContext);
                 coll.RemoveRange(coll);
