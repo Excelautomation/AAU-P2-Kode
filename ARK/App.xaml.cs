@@ -26,6 +26,9 @@ namespace ARK
                 {
                     using (DbArkContext db = new DbArkContext())
                     {
+                        //SUNSET
+                        var sunset = true;
+
                         //Afsender SMS´er
                         var FindSMS = from s in db.SMS
                                        where s.Dispatched == false
@@ -33,14 +36,17 @@ namespace ARK
 
                         foreach(var sms in FindSMS)
                         {
-                            SMS SMS = new SMS() { 
-                                Reciever = sms.Reciever, 
-                                Message = "Hej" +sms.Name+ "bekræft venligst med OK, at du har det godt hilsen Aalborg Roklub"
-                            };
-                            SMSIT.SendSMS(SMS);
-                            sms.Dispatched = true;
+                            if (sunset)
+                            {
+                                SMS SMS = new SMS()
+                                {
+                                    Reciever = sms.Reciever,
+                                    Message = "Hej" + sms.Name + "bekræft venligst med OK, at du har det godt hilsen Aalborg Roklub"
+                                };
+                                SMSIT.SendSMS(SMS);
+                                sms.Dispatched = true;
+                            }
                         }
-
 
 
                         //Modtager SMS´er
@@ -57,7 +63,6 @@ namespace ARK
                         foreach(var sms in smsser){
                             if (sms.Text.ToLower() == "ok")
                             {
-                                //Mangler dato
                                 getsms.Where(e => e.Reciever == sms.From.Replace("+", "")).ToList().ForEach(e => e.approved = true);
 
                                 SMS SMS = new SMS()
@@ -83,7 +88,7 @@ namespace ARK
                         //Ingen response i 20 min --> Send besked til bestyrelsen
                         foreach (var noresponse in Noresponse)
                         {
-                            if (DateTime.Now.AddMinutes(-20) > noresponse.Time)
+                            if (DateTime.Now.AddMinutes(-20) > noresponse.Time && sunset)
                             {
                                 SMS SMS = new SMS()
                                 {
@@ -95,6 +100,8 @@ namespace ARK
                             }
                         }
 
+                        
+
 
 
                         //Save til databasen
@@ -104,6 +111,11 @@ namespace ARK
                 }
             }));
             thr.Start();
+
+            Application.Current.Exit += (sender, e) =>
+            {
+                thr.Abort();
+            };
         }
     }
 }
