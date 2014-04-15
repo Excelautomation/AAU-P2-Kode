@@ -82,9 +82,6 @@ namespace ARK
                         //Save til databasen
                         db.SaveChanges();
                     }
-                    
-                    Debug.WriteLine("Søren er noob");
-                    Thread.Sleep(1000);
                 }
             }));
             thr.Start();
