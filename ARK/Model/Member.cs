@@ -18,7 +18,7 @@ namespace ARK.Model
         public Member(XMLMembers.datarootAktiveMedlemmer memberXML)
         {
             this.MemberNumber = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr));
-            this.MemberId = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
+            this.Id = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
             this.FirstName = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Fornavn);
             this.LastName = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Efternavn);
             this.Address1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse1);
@@ -55,11 +55,11 @@ namespace ARK.Model
             this.MayUseOutrigger = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1;
             this.MayUseKayak = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1;
             this.Trips = new List<Trip>();
+            this.LongDistanceForms = new List<LongDistanceForm>();
         }
 
+        public int Id { get; set; }
         public int MemberNumber { get; set; }
-        [Key]
-        public int MemberId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address1 { get; set; }
@@ -79,6 +79,8 @@ namespace ARK.Model
         public bool MayUseSculler { get; set; }
         public bool MayUseOutrigger { get; set; }
         public bool MayUseKayak { get; set; }
+
+        public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
     }
 }

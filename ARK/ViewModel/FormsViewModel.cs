@@ -53,31 +53,31 @@ namespace ARK.ViewModel
                 LongDistanceForms = new List<LongDistanceForm>(db.LongTripForm);
             }
 
-            DamageForms.Add(new DamageForm { DamagedBoat = new Boat() {
-                BoatId = 100,
+            DamageForms.Add(new DamageForm { Boat = new Boat() {
+                Id = 100,
                 Name = "Hajen",
                 Usable = false,
-                Aktive = false},
+                Active = false},
                 Date = new System.DateTime(2014, 4, 14),
                 ReportedBy = "John Doge Larsen",
-                Damage = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", ID = 1, NeededMaterials = "Træ, spyt og sæd"},
+                DamageDescription = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"},
                 ReportedByNumber = 42
             });
-            DamageForms.Add(new DamageForm { DamagedBoat = new Boat() {
-                BoatId = 200,
+            DamageForms.Add(new DamageForm { Boat = new Boat() {
+                Id = 200,
                 Name = "Den Flyvende Hollænder",
                 Usable = false,
-                Aktive = false},
+                Active = false},
                 Date = new System.DateTime(2014, 4, 14),
                 ReportedBy = "Davy Jones",
-                Damage = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", ID = 1, NeededMaterials = "Træ, spyt og sæd" },
+                DamageDescription = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" },
                 ReportedByNumber = 43
             });
             
             
             
             
-            DamageForms.Add(new DamageForm { DamagedBoat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Samuel L. Jackson" });
+            DamageForms.Add(new DamageForm { Boat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Samuel L. Jackson" });
 
             LongDistanceForms.Add(new LongDistanceForm { Departure = new System.DateTime(2014,4,14), Arrival = new System.DateTime(2024,4,14)});
 

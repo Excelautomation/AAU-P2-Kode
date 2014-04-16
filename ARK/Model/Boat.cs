@@ -17,7 +17,7 @@ namespace ARK.Model
 
         public Boat(XML.XMLBoats.datarootBådeSpecifik boatXML)
         {
-            this.BoatId = boatXML.ID;
+            this.Id = boatXML.ID;
             this.Name = boatXML.Navn;
             this.NumberofSeats = boatXML.AntalPladser;
             this.Active = boatXML.Aktiv == 1;
@@ -25,6 +25,7 @@ namespace ARK.Model
             this.Usable = boatXML.Roforbud == 1;
             this.LongTripBoat = boatXML.LangtursBåd == 1;
             this.DamageForms = new List<DamageForm>();
+            this.LongDistanceForms = new LinkedList<LongDistanceForm>();
         }
 
         public enum BoatType
@@ -38,14 +39,15 @@ namespace ARK.Model
             UNKOWN = 6
         }
 
-        [Key]
-        public int BoatId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int NumberofSeats { get; set; }
         public bool Active { get; set; }
         public BoatType SpecificBoatType { get; set; }
         public bool Usable { get; set; }
         public bool LongTripBoat { get; set; }
-        public ICollection<DamageForm> DamageForms { get; set; }
+
+        public virtual ICollection<DamageForm> DamageForms { get; set; }
+        public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
     }
 }

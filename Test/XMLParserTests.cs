@@ -11,9 +11,6 @@ namespace Test
         [TestMethod]
         public void TestMethod1()
         {
-            XMLParser.LoadBoatsFromXml();
-            XMLParser.LoadMembersFromXml();
-            XMLParser.LoadTripsFromXml();
         }
     }
 }

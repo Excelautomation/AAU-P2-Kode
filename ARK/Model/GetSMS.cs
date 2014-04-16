@@ -9,7 +9,6 @@ namespace ARK.Model
 {
     public class GetSMS
     {
-        [Key]
         public int Id { get; set; }
         public string From { get; set; }
         public string Text { get; set; }

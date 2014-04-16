@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
 using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel
