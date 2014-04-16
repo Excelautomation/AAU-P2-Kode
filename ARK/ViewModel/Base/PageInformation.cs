@@ -10,9 +10,9 @@ namespace ARK.ViewModel.Base
         private string _pageName;
         public ObservableCollection<Control> Filter { get { return ((IFilter)Page.DataContext).Filters; } }
 
-        public UserControl Page { get { return _page; } set { _page = value; Notify("Page"); Notify("Filter"); Notify("ShowFilter"); Notify("ShowSearch"); } }
+        public UserControl Page { get { return _page; } set { _page = value; Notify(); NotifyProp("Filter"); NotifyProp("ShowFilter"); NotifyProp("ShowSearch"); } }
 
-        public string PageName { get { return _pageName; } set { _pageName = value; Notify("PageName"); } }
+        public string PageName { get { return _pageName; } set { _pageName = value; Notify(); } }
         public Visibility ShowFilter
         {
             get

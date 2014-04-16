@@ -19,7 +19,7 @@ namespace ARK.ViewModel
         public PageInformation Page
         {
             get { return _page; }
-            set { _page = value; Notify("Page"); }
+            set { _page = value; Notify(); }
         }
 
         #region Commands
@@ -33,7 +33,6 @@ namespace ARK.ViewModel
         public ICommand MenuConfigurations { get { return GenerateCommand("Configurations", PageConfigurations); } }
 
         #endregion Commands
-
         #region private
 
         // TODO: Implementer noget cache på objekterne
