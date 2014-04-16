@@ -47,6 +47,7 @@ namespace ARK.Model
         public bool Usable { get; set; }
         public bool LongTripBoat { get; set; }
 
+        public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<DamageForm> DamageForms { get; set; }
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
     }

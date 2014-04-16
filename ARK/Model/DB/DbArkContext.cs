@@ -33,34 +33,21 @@ namespace ARK.Model.DB
                 .HasMany(ldf => ldf.Members)
                 .WithMany(m => m.LongDistanceForms);
 
-            modelBuilder.Entity<Member>()
-                .HasMany(m => m.Trips)
-                .WithMany(t => t.Members);
-
-            modelBuilder.Entity<Member>()
-                .HasMany(m => m.LongDistanceForms)
-                .WithMany(ldf => ldf.Members);
-
             modelBuilder.Entity<Trip>()
                 .HasRequired(t => t.Boat)
-                .WithOptional()
+                .WithMany(b => b.Trips)
+                .HasForeignKey(t => t.BoatId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Trip>()
                 .HasMany(t => t.Members)
                 .WithMany(m => m.Trips);
 
-            modelBuilder.Entity<Boat>()
-                .HasMany(b => b.DamageForms)
-                .WithRequired(df => df.Boat)
-                .HasForeignKey(df => df.BoatId)
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<Boat>()
-                .HasMany(b => b.LongDistanceForms)
-                .WithRequired(ldf => ldf.Boat)
-                .HasForeignKey(ldf => ldf.BoatId)
-                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<DamageForm>()
+                .HasRequired(df => df.Member)
+                .WithMany(m => m.DamageForms)
+                .HasForeignKey(df => df.MemberId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DamageForm>()
                 .HasRequired(df => df.Boat)

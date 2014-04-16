@@ -56,6 +56,7 @@ namespace ARK.Model
             this.MayUseKayak = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1;
             this.Trips = new List<Trip>();
             this.LongDistanceForms = new List<LongDistanceForm>();
+            this.DamageForms = new List<DamageForm>();
         }
 
         public int Id { get; set; }
@@ -80,6 +81,7 @@ namespace ARK.Model
         public bool MayUseOutrigger { get; set; }
         public bool MayUseKayak { get; set; }
 
+        public virtual ICollection<DamageForm> DamageForms { get; set; }
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
     }
