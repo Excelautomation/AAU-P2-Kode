@@ -6,13 +6,13 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
-             d:DesignWidth="640" d:DesignHeight="480" Width="600" Height="600">
+             d:DesignWidth="640" Width="600" Height="514">
     <UserControl.DataContext>
         <VM:BeginTripViewModel>
         </VM:BeginTripViewModel>
     </UserControl.DataContext>
-    <Grid Width="600" Height="600">
-        <Button x:Name="BeginTripNow" Content="PÅBEGYND &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="442,510,0,0" Height="64"  Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=StartTripNow}">
+    <Grid Width="600" Height="512">
+        <Button x:Name="BeginTripNow" Content="PÅBEGYND &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="442,323,0,0" Height="64" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=StartTripNow}">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFB0D141" Offset="0"/>
@@ -26,7 +26,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,49,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
+        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,41,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -47,7 +47,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" HorizontalAlignment="Left" Height="446" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,49,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -57,7 +57,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="Vælg båd" HorizontalAlignment="Left" Margin="0,14,0,0" VerticalAlignment="Top" Height="40" Width="295" FontSize="16" Foreground="#FF3C3C3C" FontWeight="Bold" />
-        <Label Content="Vælg medlemmer" HorizontalAlignment="Left" Margin="305,14,0,0" VerticalAlignment="Top" Height="39" Width="295" FontSize="16" Foreground="#FF3C3C3C" FontWeight="Bold" />
+        <Label Content="Vælg båd" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="16" Foreground="Black" FontWeight="Bold" />
+        <Label Content="Vælg deltagere" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="16" Foreground="Black" FontWeight="Bold" />
     </Grid>
 </UserControl>
