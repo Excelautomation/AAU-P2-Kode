@@ -18,7 +18,7 @@ namespace ARK.Model
 
         public Trip(XMLTrips.datarootTur tripXml)
         {
-            this.TripId = tripXml.ID;
+            this.Id = tripXml.ID;
             this.Distance = tripXml.Kilometer;
             this.Date = tripXml.Dato;
             this.LongTrip = tripXml.Langtur == 1;
@@ -42,13 +42,14 @@ namespace ARK.Model
             }
         }
 
-        [Key]
-        public int TripId { get; set; }
+        public int Id { get; set; }
         public int Distance { get; set; }
         public DateTime Date { get; set; }
         public bool LongTrip { get; set; }
+
         public int BoatId { get; set; }
         public virtual Boat Boat { get; set; }
+
         public virtual ICollection<Member> Members { get; set; }
     }
 }

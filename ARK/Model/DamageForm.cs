@@ -9,12 +9,15 @@ namespace ARK.Model
 {
     public class DamageForm
     {
-        [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public string ReportedBy { get; set; }
         public int ReportedByNumber { get; set; }
-        public virtual Boat DamagedBoat { get; set; }
-        public virtual DamageDescription Damage { get; set; }
+
+        public int BoatId { get; set; }
+        public virtual Boat Boat { get; set; }
+
+        public int DamagDescriptioneId { get; set; }
+        public virtual DamageDescription DamageDescription { get; set; }
     }
 }
