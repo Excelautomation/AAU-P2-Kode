@@ -178,6 +178,7 @@
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminSystemViewModel.cs" />
+    <Compile Include="ViewModel\FormsDamageViewModel.cs" />
     <Compile Include="ViewModel\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\FormsViewModel.cs" />
     <Compile Include="ViewModel\BoatViewModel.cs" />
