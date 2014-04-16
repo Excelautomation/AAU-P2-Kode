@@ -15,7 +15,7 @@ namespace ARK.Model
         public string Text { get; set; }
         public bool Approved { get; set; }
 
-        public int BoatId { get; set; }
+        //public int BoatId { get; set; }
         public virtual Boat Boat { get; set; }
 
         public virtual ICollection<Member> Members { get; set; }
