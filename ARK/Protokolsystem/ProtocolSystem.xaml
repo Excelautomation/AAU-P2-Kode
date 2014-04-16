@@ -21,27 +21,25 @@
             <GradientStop Color="#FF1B4E09" Offset="1"/>
         </LinearGradientBrush>
     </Window.BorderBrush>
-    <Grid>
+    <Grid Width="1020">
         <Grid.RowDefinitions>
             <RowDefinition Height="43*"/>
-            <RowDefinition Height="608*"/>
-            <RowDefinition Height="86*"/>
+            <RowDefinition Height="514*"/>
+            <RowDefinition Height="180*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="203*"/>
             <ColumnDefinition Width="609*"/>
             <ColumnDefinition Width="204*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Left" Height="601" Width="609" VerticalAlignment="Top"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
+        <StackPanel HorizontalAlignment="Left" Height="514" Width="609" VerticalAlignment="Top"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
             <ContentControl Content="{Binding Path=CurrentPage}"/>
         </StackPanel>
-        <StackPanel x:Name="Buttons" Grid.Column="1" Height="84" Margin="10,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="576">
-            <Button Content="Midlertidig test af SMS" Click="TestFTP_Click" />
-        </StackPanel>
+        <StackPanel x:Name="Buttons" Grid.Column="1" Height="178" Margin="0,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="609"/>
         <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="194" Grid.RowSpan="3" Background="#FFE9EAED">
             <Rectangle HorizontalAlignment="Left" Height="77" Margin="3,663,0,-3" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>
-            <Rectangle HorizontalAlignment="Left" Height="147" Margin="3,480,0,0" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>
-            <Rectangle HorizontalAlignment="Left" Height="217" Margin="3,222,0,0" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}" Stroke="#FFCDCDCD"/>
+            <Rectangle HorizontalAlignment="Left" Height="147" Margin="3,407,0,0" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>
+            <Rectangle HorizontalAlignment="Left" Height="217" Margin="3,185,0,0" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}" Stroke="#FFCDCDCD"/>
             <Rectangle HorizontalAlignment="Left" Height="176" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}" RadiusX="3" RadiusY="3" Margin="3,5,0,0"/>
             <Button x:Name="BeginTrip" Content="START &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="8,10,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=StartTrip}">
                 <Button.BorderBrush>
@@ -71,7 +69,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="boatsOverview" Content="BÅDE PÅ&#xA;VANDET" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,228,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Height="65" Command="{Binding Path=BoatsOut}">
+            <Button x:Name="boatsOverview" Content="BÅDE PÅ&#xA;VANDET" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,191,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Height="65" Command="{Binding Path=BoatsOut}">
                 <Button.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF680057" Offset="1"/>
@@ -85,7 +83,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="CreateLongDistance" Content="OPRET&#xA;LANGTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,557,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=CreateLongDistance}">
+            <Button x:Name="CreateLongDistance" Content="OPRET&#xA;LANGTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,484,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=CreateLongDistance}">
                 <Button.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF004546" Offset="1"/>
@@ -99,7 +97,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="CreateInjury" Content="OPRET&#xA;SKADE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,487,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=CreateDamage}">
+            <Button x:Name="CreateInjury" Content="OPRET&#xA;SKADE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,414,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=CreateDamage}">
                 <Button.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF004546" Offset="1"/>
@@ -127,7 +125,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="DistanceStatistics" Content="KILOMETER&#xA;STATISTIK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="65" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,298,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=StatisticsDistance}">
+            <Button x:Name="DistanceStatistics" Content="KILOMETER&#xA;STATISTIK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="65" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,261,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=StatisticsDistance}">
                 <Button.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF680057" Offset="1"/>
@@ -141,7 +139,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="MembersInformation" Content="MEDLEMS&#xA;INFORMATION" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="65" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,368,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=MemberInformation}">
+            <Button x:Name="MembersInformation" Content="MEDLEMS&#xA;INFORMATION" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="65" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" Margin="8,331,0,0" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=BeginTrip}" Padding="{Binding Padding, ElementName=BeginTrip}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Command="{Binding Path=MemberInformation}">
                 <Button.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF680057" Offset="1"/>
@@ -155,6 +153,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+            <Button Content="Midlertidig test af SMS" Click="TestFTP_Click" Margin="0,604,3,113" />
         </Grid>
         <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="200" Grid.RowSpan="3" Background="#FFE9EAED" Margin="10,0,-6,0" Grid.Column="2">
             <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Top" Width="200"/>
