@@ -22,7 +22,7 @@ namespace ARK.Model
             this.Distance = tripXml.Kilometer;
             this.Date = tripXml.Dato;
             this.LongTrip = tripXml.Langtur == 1;
-            this.BoatId = tripXml.BådID;
+            //this.BoatId = tripXml.BådID;
             this.Members = new List<Member>();
 
             IEnumerable<PropertyInfo> props = new List<PropertyInfo>(tripXml.GetType().GetProperties());
@@ -39,6 +39,8 @@ namespace ARK.Model
                         Members.Add(memberRef);
                     }
                 }
+
+                this.Boat = context.Boat.Find(tripXml.BådID);
             }
         }
 
@@ -47,7 +49,7 @@ namespace ARK.Model
         public DateTime Date { get; set; }
         public bool LongTrip { get; set; }
 
-        public int BoatId { get; set; }
+        //public int BoatId { get; set; }
         public virtual Boat Boat { get; set; }
 
         public virtual ICollection<Member> Members { get; set; }

@@ -26,7 +26,7 @@ namespace ARK.Model.DB
             modelBuilder.Entity<LongDistanceForm>()
                 .HasRequired(ldf => ldf.Boat)
                 .WithMany(b => b.LongDistanceForms)
-                .HasForeignKey(ldf => ldf.BoatId)
+                //.HasForeignKey(ldf => ldf.BoatId)
                 .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<LongDistanceForm>()
@@ -36,7 +36,7 @@ namespace ARK.Model.DB
             modelBuilder.Entity<Trip>()
                 .HasRequired(t => t.Boat)
                 .WithMany(b => b.Trips)
-                .HasForeignKey(t => t.BoatId)
+                //.HasForeignKey(t => t.BoatId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Trip>()
@@ -46,13 +46,13 @@ namespace ARK.Model.DB
             modelBuilder.Entity<DamageForm>()
                 .HasRequired(df => df.Member)
                 .WithMany(m => m.DamageForms)
-                .HasForeignKey(df => df.MemberId)
+                //.HasForeignKey(df => df.MemberId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DamageForm>()
                 .HasRequired(df => df.Boat)
                 .WithMany(b => b.DamageForms)
-                .HasForeignKey(df => df.BoatId)
+                //.HasForeignKey(df => df.BoatId)
                 .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<DamageForm>()
