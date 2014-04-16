@@ -59,9 +59,9 @@ namespace ARK.ViewModel
                 Usable = false,
                 Active = false},
                 Date = new System.DateTime(2014, 4, 14),
-                ReportedBy = "John Doge Larsen",
+                //ReportedBy = "John Doge Larsen",
                 DamageDescription = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"},
-                ReportedByNumber = 42
+                //ReportedByNumber = 42
             });
             DamageForms.Add(new DamageForm { Boat = new Boat() {
                 Id = 200,
@@ -69,15 +69,15 @@ namespace ARK.ViewModel
                 Usable = false,
                 Active = false},
                 Date = new System.DateTime(2014, 4, 14),
-                ReportedBy = "Davy Jones",
+                //ReportedBy = "Davy Jones",
                 DamageDescription = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" },
-                ReportedByNumber = 43
+                //ReportedByNumber = 43
             });
             
             
             
             
-            DamageForms.Add(new DamageForm { Boat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), ReportedBy = "Samuel L. Jackson" });
+            DamageForms.Add(new DamageForm { Boat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), /*ReportedBy = "Samuel L. Jackson"*/ });
 
             LongDistanceForms.Add(new LongDistanceForm { Departure = new System.DateTime(2014,4,14), Arrival = new System.DateTime(2024,4,14)});
 

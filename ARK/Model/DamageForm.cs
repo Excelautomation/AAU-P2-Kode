@@ -11,8 +11,9 @@ namespace ARK.Model
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public string ReportedBy { get; set; }
-        public int ReportedByNumber { get; set; }
+
+        public int MemberId { get; set; }
+        public Member Member { get; set; }
 
         public int BoatId { get; set; }
         public virtual Boat Boat { get; set; }
