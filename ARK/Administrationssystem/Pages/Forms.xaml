@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:VM="clr-namespace:ARK.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
@@ -42,22 +43,29 @@
                                     <Label Margin="10,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
                                     <Separator Margin="0" Padding="0"/>
                                     <StackPanel>
-                                        <ItemsControl ItemsSource="{Binding Path=DamageForms}">
-                                            <ItemsControl.ItemTemplate>
+                                        <ListView Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single">
+                                            <ListView.ItemTemplate>
                                                 <DataTemplate>
-                                                    <StackPanel>
-                                                        <Button Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left">
-                                                            <StackPanel Margin="0,10,0,10">
-                                                                <Label Content="{Binding Path=DamagedBoat.Name}" Margin="0,0,0,0" Padding="0"/>
-                                                                <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0"/>
-                                                                <Label Content="{Binding Path=ReportedBy}" Margin="0,0,0,0" Padding="0"/>
-                                                            </StackPanel>
-                                                        </Button>
+                                                    <StackPanel Width="500">
+                                                        <StackPanel Margin="0,10,0,10">
+                                                            <Label Content="{Binding Path=Boat.Name}" Margin="0,0,0,0" Padding="0"/>
+                                                            <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0"/>
+                                                            <WrapPanel>
+                                                                <Label Content="{Binding Path=Member.FirstName}" Margin="0,0,3,0" Padding="0"/>
+                                                                <Label Content="{Binding Path=Member.LastName}" Margin="0,0,0,0" Padding="0"/>
+                                                            </WrapPanel>
+                                                        </StackPanel>
                                                         <Separator Margin="0" Padding="0"/>
                                                     </StackPanel>
                                                 </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                                            </ListView.ItemTemplate>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}">
+                                                    </i:InvokeCommandAction>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ListView>
                                     </StackPanel>
                                 </StackPanel>
                                 
