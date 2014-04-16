@@ -41,6 +41,7 @@ namespace ARK.Model
                 }
 
                 this.Boat = context.Boat.Find(tripXml.BådID);
+                context.SaveChanges();
             }
         }
 
