@@ -113,7 +113,12 @@ namespace ARK
                     Thread.Sleep(5000);
                 }
             }));
-            thr.Start();
+            
+            var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+            if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
+            {
+                thr.Start();
+            }
 
             Application.Current.Exit += (sender, e) =>
             {
