@@ -28,10 +28,10 @@ namespace ARK.ViewModel
         public OverviewViewModel()
         {
             // Load data
-            using (var db = new DbArkContext())
-            {
-                Skadesblanketter = new List<DamageForm>(db.DamageForm);
-            }
+            //using (var db = new DbArkContext())
+            //{
+            //    Skadesblanketter = new List<DamageForm>(db.DamageForm);
+            //}
 
 
             // Add Checkbox filter

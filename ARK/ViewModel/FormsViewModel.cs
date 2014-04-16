@@ -27,10 +27,7 @@ namespace ARK.ViewModel
         {
             get
             {
-                return GetCommand<DamageForm>(e =>
-                {
-                    Page.DataContext = e;
-                });
+                return GetCommand<DamageForm>(e => { Page.DataContext = new FormsDamageViewModel { DamageForm = e }; });
             }
         }
 
@@ -38,10 +35,7 @@ namespace ARK.ViewModel
         {
             get
             {
-                return GetCommand<LongDistanceForm>(e =>
-                {
-                    Page.DataContext = e;
-                });
+                return GetCommand<LongDistanceForm>(e => {Page.DataContext = e;});
             }
         }
 
@@ -50,7 +44,7 @@ namespace ARK.ViewModel
             using (var db = new DbArkContext())
             {
                 //DamageForms = new List<DamageForm>(db.DamageForm);
-                LongDistanceForms = new List<LongDistanceForm>(db.LongTripForm);
+                //LongDistanceForms = new List<LongDistanceForm>(db.LongTripForm);
             }
 
             DamageForms.Add(new DamageForm { Boat = new Boat() {
@@ -59,9 +53,8 @@ namespace ARK.ViewModel
                 Usable = false,
                 Active = false},
                 Date = new System.DateTime(2014, 4, 14),
-                //ReportedBy = "John Doge Larsen",
-                DamageDescription = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"},
-                //ReportedByNumber = 42
+                Member = new Member() {FirstName = "Kurt", LastName = "Nørremark"},
+                DamageDescription = new DamageDescription() { Description = "SVAB!", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"}
             });
             DamageForms.Add(new DamageForm { Boat = new Boat() {
                 Id = 200,
@@ -69,20 +62,26 @@ namespace ARK.ViewModel
                 Usable = false,
                 Active = false},
                 Date = new System.DateTime(2014, 4, 14),
-                //ReportedBy = "Davy Jones",
-                DamageDescription = new DamageDescription() { Description = "Den er FUBAR", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" },
-                //ReportedByNumber = 43
+                Member = new Member() {FirstName = "Davy", LastName = "Jones"},
+                DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
+            });
+            DamageForms.Add(new DamageForm
+            {
+                Boat = new Boat()
+                {
+                    Id = 200,
+                    Name = "A Motherfucking Boat",
+                    Usable = false,
+                    Active = false
+                },
+                Date = new System.DateTime(2014, 4, 14),
+                 Member = new Member() {FirstName = "Samuel", LastName = "L. Jackson"},
+                DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
             
-            
-            
-            
-            DamageForms.Add(new DamageForm { Boat = new Boat() { Name = "A Motherfucking Boat" }, Date = new System.DateTime(2014, 4, 14), /*ReportedBy = "Samuel L. Jackson"*/ });
-
             LongDistanceForms.Add(new LongDistanceForm { Departure = new System.DateTime(2014,4,14), Arrival = new System.DateTime(2024,4,14)});
 
-            Page = new FormsLongTrip { DataContext = LongDistanceForms[0] };
-
+            Page = new FormsDamage { DataContext = new FormsDamageViewModel { DamageForm = DamageForms[0] } };
         }
         
         
