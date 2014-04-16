@@ -21,7 +21,7 @@ namespace ARK.ViewModel
         private List<LongDistanceForm> _LongTripForms = new List<LongDistanceForm>();
         private UserControl _page;
 
-        public UserControl Page { get { return _page; } set { _page = value; Notify("Page"); } }
+        public UserControl Page { get { return _page; } set { _page = value; Notify(); } }
 
         public ICommand SelectDamageFormCommand
         {
@@ -90,13 +90,13 @@ namespace ARK.ViewModel
         public List<DamageForm> DamageForms
         {
             get { return _DamageForms; }
-            set { _DamageForms = value; Notify("DamageForms"); }
+            set { _DamageForms = value; Notify(); }
         }
 
         public List<LongDistanceForm> LongDistanceForms
         {
             get { return _LongTripForms; }
-            set { _LongTripForms = value; Notify("LongTripForms"); }
+            set { _LongTripForms = value; Notify(); }
         } 
 
 

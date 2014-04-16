@@ -44,7 +44,7 @@ namespace ARK.ViewModel
         public List<DamageForm> Skadesblanketter 
         { 
             get { return _skadesblanketter; } 
-            set { _skadesblanketter = value; Notify("Skadesblanketter"); } 
+            set { _skadesblanketter = value; Notify(); } 
         }
 
         public ObservableCollection<Control> Filters
@@ -63,19 +63,19 @@ namespace ARK.ViewModel
         public Visibility ShowBoatsOut
         {
             get { return _showBoatsOut; }
-            set { _showBoatsOut = value; Notify("ShowBoatsOut"); }
+            set { _showBoatsOut = value; Notify(); }
         }
 
         public Visibility ShowLangtur
         {
             get { return _showLangtur; }
-            set { _showLangtur = value; Notify("ShowLangtur"); }
+            set { _showLangtur = value; Notify(); }
         }
 
         public Visibility ShowSkader
         {
             get { return _showSkader; }
-            set { _showSkader = value; Notify("ShowSkader"); }
+            set { _showSkader = value; Notify(); }
         }
 
         

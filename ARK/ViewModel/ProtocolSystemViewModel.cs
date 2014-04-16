@@ -20,7 +20,7 @@ namespace ARK.ViewModel
         public string HeadlineText
         {
             get { return this._headlineText; }
-            set { this._headlineText = value; Notify("HeadlineText"); }
+            set { this._headlineText = value; Notify(); }
         }
 
         public UserControl CurrentPage
@@ -33,7 +33,7 @@ namespace ARK.ViewModel
             private set
             {
                 this._currentPage = value;
-                Notify("CurrentPage");
+                Notify();
             }
         }
 
@@ -47,7 +47,7 @@ namespace ARK.ViewModel
             private set
             {
                 this._currentInfo = value;
-                Notify("CurrentInfo");
+                Notify();
             }
         }
 
