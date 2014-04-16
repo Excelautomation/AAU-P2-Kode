@@ -23,26 +23,55 @@ namespace ARK.Model.DB
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Trip>()
-                .HasRequired(t => t.Boat)
-                .WithMany()
-                .HasForeignKey(t => t.BoatId)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<LongDistanceForm>()
+                .HasRequired(ldf => ldf.Boat)
+                .WithMany(b => b.LongDistanceForms)
+                .HasForeignKey(ldf => ldf.BoatId)
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<LongDistanceForm>()
-                .HasMany(l => l.Members)
-                .WithRequired()
+                .HasMany(ldf => ldf.Members)
+                .WithMany(m => m.LongDistanceForms);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(m => m.Trips)
+                .WithMany(t => t.Members);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(m => m.LongDistanceForms)
+                .WithMany(ldf => ldf.Members);
+
+            modelBuilder.Entity<Trip>()
+                .HasRequired(t => t.Boat)
+                .WithOptional()
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DamageForm>()
-                .HasRequired(d => d.DamagedBoat)
-                .WithRequiredDependent()
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Trip>()
+                .HasMany(t => t.Members)
+                .WithMany(m => m.Trips);
+
+            modelBuilder.Entity<Boat>()
+                .HasMany(b => b.DamageForms)
+                .WithRequired(df => df.Boat)
+                .HasForeignKey(df => df.BoatId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Boat>()
+                .HasMany(b => b.LongDistanceForms)
+                .WithRequired(ldf => ldf.Boat)
+                .HasForeignKey(ldf => ldf.BoatId)
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<DamageForm>()
-                .HasRequired(d => d.Damage)
-                .WithRequiredDependent()
-                .WillCascadeOnDelete(false);
+                .HasRequired(df => df.Boat)
+                .WithMany(b => b.DamageForms)
+                .HasForeignKey(df => df.BoatId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<DamageForm>()
+                .HasRequired(df => df.DamageDescription)
+                .WithOptional()
+                .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
         }

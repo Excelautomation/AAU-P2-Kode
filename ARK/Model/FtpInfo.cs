@@ -9,9 +9,7 @@ namespace ARK.Model
 {
      public class FtpInfo
     {
-        [Key]
         public int Id { get; set; }
-
         public string Name { get; set; }
         public string HostName { get; set; }
         public string Username { get; set; }
