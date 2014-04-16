@@ -13,12 +13,11 @@ namespace ARK.Model
         public DateTime Date { get; set; }
 
         public int MemberId { get; set; }
-        public Member Member { get; set; }
+        public virtual Member Member { get; set; }
 
         public int BoatId { get; set; }
         public virtual Boat Boat { get; set; }
 
-        public int DamagDescriptioneId { get; set; }
         public virtual DamageDescription DamageDescription { get; set; }
     }
 }
