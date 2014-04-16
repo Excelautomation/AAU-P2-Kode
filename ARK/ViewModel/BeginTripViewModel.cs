@@ -21,7 +21,7 @@ namespace ARK.ViewModel
         public bool EnableMembers
         {
             get { return _enableMembers; }
-            set { _enableMembers = value; Notify("EnableMembers"); }
+            set { _enableMembers = value; Notify(); }
         }
 
         public ICommand SelectedChange
@@ -49,13 +49,13 @@ namespace ARK.ViewModel
         public List<Boat> Boats
         {
             get { return _boats; }
-            set { _boats = value; Notify("Boats"); }
+            set { _boats = value; Notify(); }
         }
 
         public List<Member> Members
         {
             get { return _members; }
-            set { _members = value; Notify("Members"); }
+            set { _members = value; Notify(); }
         }
 
         public string BoatHeadline { get { return "Båd"; } }
@@ -85,13 +85,13 @@ namespace ARK.ViewModel
         public Boat Boat 
         {
             get { return _boat;  }
-            set { _boat = value; Notify("Boat"); Notify("BoatContent"); }
+            set { _boat = value; Notify(); NotifyProp("BoatContent"); }
         }
 
         public Member Member
         {
             get { return _member; }
-            set { _member = value; Notify("Member"); Notify("MemberContent"); }
+            set { _member = value; Notify(); NotifyProp("MemberContent"); }
         }
     }
 }
