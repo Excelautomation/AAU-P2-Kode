@@ -17,22 +17,46 @@
                 <GradientStop Color="#FFF9F7F7" Offset="0.056"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <StackPanel>
-            <WrapPanel Margin="5,0,0,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <WrapPanel Margin="5,0,0,0" Grid.Row="0">
                 <Image Source="/images/setting_tools.png" Height="32"/>
                 <Label FontSize="28" Margin="0">INDSTILLINGER</Label>
             </WrapPanel>
-            <TabControl Margin="0,0,0,0" VerticalAlignment="Top" Background="#CCCCCC">
-                <TabItem Header="Skadesindstilling" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
-                    <Grid Background="White"/>
+            <TabControl Margin="0,0,0,0" Background="#CCCCCC" Grid.Row="1">
+                <TabItem Header="Generelt" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" BorderThickness="1" BorderBrush="Black">
+                        <Grid Background="Transparent">
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Blanketter" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
-                    <Grid Background="White"/>
+                <TabItem Header="Skadetyper" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
+                    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" BorderThickness="1" BorderBrush="Black">
+                        <Grid Background="White"></Grid>
+                    </ScrollViewer>
                 </TabItem>
-                <TabItem Header="Administrator" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
-                    <Grid Background="White"/>
+                <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" BorderThickness="1" BorderBrush="Black">
+                        <Grid Background="White">
+                            <WrapPanel>
+                                <DockPanel>
+                                    <Button DockPanel.Dock="Top">Opret ny administrator</Button>
+                                </DockPanel>
+                                <DockPanel>
+                                    <Grid Background="Gray">
+                                        <Button DockPanel.Dock="Bottom">Ok</Button>
+                                        <Button DockPanel.Dock="Bottom">Anullér</Button>
+                                        <Button DockPanel.Dock="Right">Slet</Button>
+                                    </Grid>
+                                </DockPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </ScrollViewer>
                 </TabItem>
             </TabControl>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
