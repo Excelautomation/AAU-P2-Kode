@@ -53,7 +53,7 @@ namespace ARK.ViewModel
                 Usable = false,
                 Active = false},
                 Date = new System.DateTime(2014, 4, 14),
-                Member = new Member() {FirstName = "Kurt", LastName = "Nørremark"},
+                RegisteringMember = new Member() {FirstName = "Kurt", LastName = "Nørremark"},
                 DamageDescription = new DamageDescription() { Description = "SVAB!", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"}
             });
             DamageForms.Add(new DamageForm { Boat = new Boat() {
@@ -62,7 +62,7 @@ namespace ARK.ViewModel
                 Usable = false,
                 Active = false},
                 Date = new System.DateTime(2014, 4, 14),
-                Member = new Member() {FirstName = "Davy", LastName = "Jones"},
+                RegisteringMember = new Member() {FirstName = "Davy", LastName = "Jones"},
                 DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
             DamageForms.Add(new DamageForm
@@ -75,7 +75,7 @@ namespace ARK.ViewModel
                     Active = false
                 },
                 Date = new System.DateTime(2014, 4, 14),
-                 Member = new Member() {FirstName = "Samuel", LastName = "L. Jackson"},
+                 RegisteringMember = new Member() {FirstName = "Samuel", LastName = "L. Jackson"},
                 DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
             
