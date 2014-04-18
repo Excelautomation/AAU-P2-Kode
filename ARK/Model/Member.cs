@@ -81,6 +81,7 @@ namespace ARK.Model
         public bool MayUseOutrigger { get; set; }
         public bool MayUseKayak { get; set; }
 
+        //Navigation properties
         public virtual ICollection<DamageForm> DamageForms { get; set; }
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
