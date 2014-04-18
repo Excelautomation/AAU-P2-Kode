@@ -18,17 +18,17 @@ namespace ARK.Model.XML
     {
         public static void LoadBoatsFromXml()
         {
-            LoadFromXml<XMLBoats.dataroot, XMLBoats.datarootBådeSpecifik, Boat>(x => x.Boat, "/upload/monday/B%E5deSpecifik.xml");
+            LoadFromXml<XMLBoats.dataroot, XMLBoats.datarootBådeSpecifik, Boat>(x => x.Boat, @"/upload/monday/BådeSpecifik.xml");
         }
 
         public static void LoadMembersFromXml()
         {
-            LoadFromXml<XMLMembers.dataroot, XMLMembers.datarootAktiveMedlemmer, Member>(x => x.Member, "/upload/monday/AktiveMedlemmer.xml");
+            LoadFromXml<XMLMembers.dataroot, XMLMembers.datarootAktiveMedlemmer, Member>(x => x.Member, @"/upload/monday/AktiveMedlemmer.xml");
         }
 
         public static void LoadTripsFromXml()
         {
-            LoadFromXml<XMLTrips.dataroot, XMLTrips.datarootTur, Trip>(x => x.Trip, "/upload/monday/Tur.xml");
+            LoadFromXml<XMLTrips.dataroot, XMLTrips.datarootTur, Trip>(x => x.Trip, @"/upload/monday/Tur.xml");
         }
 
         public static DateTime GetSunsetFromXml()
