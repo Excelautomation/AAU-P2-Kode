@@ -18,7 +18,7 @@ namespace ARK.Model.XML
     {
         public static void LoadBoatsFromXml()
         {
-            LoadFromXml<XMLBoats.dataroot, XMLBoats.datarootBådeSpecifik, Boat>(x => x.Boat, "/upload/monday/BådeSpecifik.xml");
+            LoadFromXml<XMLBoats.dataroot, XMLBoats.datarootBådeSpecifik, Boat>(x => x.Boat, "/upload/monday/B%E5deSpecifik.xml");
         }
 
         public static void LoadMembersFromXml()
@@ -107,11 +107,8 @@ namespace ARK.Model.XML
         {
             WebRequest request = WebRequest.Create(uri);
             string retString;
-
+                
             request.Credentials = credentials;
-            ////request.UsePassive = true;
-            ////request.UseBinary = true;
-            ////request.KeepAlive = false;
             request.Timeout = 10000;
 
             using (WebResponse response = request.GetResponse())
