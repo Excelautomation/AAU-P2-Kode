@@ -11,23 +11,6 @@ namespace ARK.Model
 {
     public class Boat
     {
-        public Boat()
-        {
-        }
-
-        public Boat(XML.XMLBoats.datarootBådeSpecifik boatXML)
-        {
-            this.Id = boatXML.ID;
-            this.Name = boatXML.Navn;
-            this.NumberofSeats = boatXML.AntalPladser;
-            this.Active = boatXML.Aktiv == 1;
-            this.SpecificBoatType = (BoatType)SpecificBoatType;
-            this.Usable = boatXML.Roforbud == 1;
-            this.LongTripBoat = boatXML.LangtursBåd == 1;
-            this.DamageForms = new List<DamageForm>();
-            this.LongDistanceForms = new LinkedList<LongDistanceForm>();
-        }
-
         public enum BoatType
         {
             None = 0,
