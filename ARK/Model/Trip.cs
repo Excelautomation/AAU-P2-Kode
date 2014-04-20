@@ -12,39 +12,6 @@ namespace ARK.Model
 {
     public class Trip
     {
-        public Trip()
-        {
-        }
-
-        public Trip(XMLTrips.datarootTur tripXml)
-        {
-            this.Id = tripXml.ID;
-            this.Distance = tripXml.Kilometer;
-            this.Date = tripXml.Dato;
-            this.LongTrip = tripXml.Langtur == 1;
-            this.BoatId = tripXml.BådID;
-            this.Members = new List<Member>();
-
-            IEnumerable<PropertyInfo> props = new List<PropertyInfo>(tripXml.GetType().GetProperties());
-            IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
-
-            using (DB.DbArkContext context = new DB.DbArkContext())
-            {
-                foreach (PropertyInfo prop in filteredProps)
-                {
-                    if ((bool)prop.GetValue(tripXml))
-                    {
-                        PropertyInfo elementProp = props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
-                        Member memberRef = context.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXml)));
-                        Members.Add(memberRef);
-                    }
-                }
-
-                this.Boat = context.Boat.Find(tripXml.BådID);
-                context.SaveChanges();
-            }
-        }
-
         public int Id { get; set; }
         public int Distance { get; set; }
         public DateTime Date { get; set; }

@@ -11,54 +11,6 @@ namespace ARK.Model
 {
     public class Member
     {
-        public Member()
-        {
-        }
-
-        public Member(XMLMembers.datarootAktiveMedlemmer memberXML)
-        {
-            this.MemberNumber = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr));
-            this.Id = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
-            this.FirstName = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Fornavn);
-            this.LastName = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Efternavn);
-            this.Address1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse1);
-            this.Address2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2);
-            this.ZipCode = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr));
-            this.City = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.By);
-
-            string phone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon);
-            if (phone != null)
-            {
-                this.Phone = Regex.Replace(phone, @"[^0-9]", "");
-            }
-
-            string phoneWork = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde);
-            if (phoneWork != null)
-            {
-                this.PhoneWork = Regex.Replace(phoneWork, @"[^0-9]", "");
-            }
-
-            string cellPhone = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil);
-            if (cellPhone != null)
-            {
-                this.Cellphone = Regex.Replace(cellPhone, @"[^0-9]", "");
-            }
-
-            this.Email1 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
-            this.Email2 = (string)memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
-            this.Birthday = Convert.ToDateTime(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato));
-            this.Released = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Frigivet)) == 1;
-            this.SwimmingTest = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Svømmeprøve)) == 1;
-            this.ShortTripCox = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Korttursstyrmand)) == 1;
-            this.LongTripCox = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Langtursstyrmand)) == 1;
-            this.MayUseSculler = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Scullerret)) == 1;
-            this.MayUseOutrigger = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1;
-            this.MayUseKayak = Convert.ToInt32(memberXML.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1;
-            this.Trips = new List<Trip>();
-            this.LongDistanceForms = new List<LongDistanceForm>();
-            this.DamageForms = new List<DamageForm>();
-        }
-
         public int Id { get; set; }
         public int MemberNumber { get; set; }
         public string FirstName { get; set; }
