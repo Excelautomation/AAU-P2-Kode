@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ARK.Model.DB
 {
@@ -23,6 +24,18 @@ namespace ARK.Model.DB
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Boat>()
+                .Property(b => b.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            modelBuilder.Entity<Trip>()
+                .Property(b => b.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            modelBuilder.Entity<Member>()
+                .Property(b => b.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             modelBuilder.Entity<LongDistanceForm>()
                 .HasRequired(ldf => ldf.Boat)
                 .WithMany(b => b.LongDistanceForms)
