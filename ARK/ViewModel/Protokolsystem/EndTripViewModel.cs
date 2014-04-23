@@ -6,36 +6,27 @@ using ARK.Model.DB;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Protokolsystem
 {
     class EndTripViewModel : Base.ViewModel
     {
-        private List<Boat> _boats = new List<Boat>();
-        private bool _boatsOut;
+        private List<Boat> _boatsOut = new List<Boat>();
 
         public EndTripViewModel()
         {
             // Indlæs data
             using (DbArkContext db = new DbArkContext())
             {
-                Boats = new List<Boat>(db.Boat);
+                BoatsOut = new List<Boat>(db.Boat).Where(boat => boat.BoatOut == true).ToList();
             }
         }
 
-        public bool BoatsOut
+        public List<Boat> BoatsOut
         {
-            get
-            {
-                return Boats.Any(boat => boat.BoatOut);
-            }
-        }
-
-        public List<Boat> Boats
-        {
-            get { return _boats; }
+            get { return _boatsOut; }
             set
             {
-                _boats = value;
+                _boatsOut = value;
                 Notify();
             }
         }
