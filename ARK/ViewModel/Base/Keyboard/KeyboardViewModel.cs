@@ -50,7 +50,7 @@ namespace ARK.ViewModel.Base.Keyboard
             var contentControl = sender as ContentControl;
             if (contentControl == null) return;
 
-            var dataContext = contentControl.DataContext as IKeyboardChange;
+            var dataContext = contentControl.DataContext as IKeyboardHandler;
             if (dataContext == null) return;
             
             dataContext.KeyboardToggleText = KeyboardToggled ? "SKJUL\nTASTATUR" : "VIS\nTASTATUR";

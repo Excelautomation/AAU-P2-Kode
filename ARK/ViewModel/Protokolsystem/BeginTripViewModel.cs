@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    public class BeginTripViewModel : Base.ViewModel, IKeyboardChange
+    public class BeginTripViewModel : Base.ViewModel, IKeyboardHandler
     {
         private Boat _boat;
         private List<Boat> _boats = new List<Boat>();
