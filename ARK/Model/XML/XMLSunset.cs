@@ -26,7 +26,7 @@ namespace ARK.Model.XML
             private sunEvening eveningField;
 
             /// <remarks/>
-            public decimal Version
+            public decimal version
             {
                 get
                 {
@@ -165,7 +165,7 @@ namespace ARK.Model.XML
             }
 
             /// <remarks/>
-            public byte Timezone
+            public byte timezone
             {
                 get
                 {
@@ -214,7 +214,7 @@ namespace ARK.Model.XML
             }
 
             /// <remarks/>
-            public sunMorningTwilight Ttwilight
+            public sunMorningTwilight twilight
             {
                 get
                 {
@@ -290,7 +290,7 @@ namespace ARK.Model.XML
 
             /// <remarks/>
             [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime Sunset
+            public System.DateTime sunset
             {
                 get
                 {
@@ -303,7 +303,7 @@ namespace ARK.Model.XML
             }
 
             /// <remarks/>
-            public sunEveningTwilight Twilight
+            public sunEveningTwilight twilight
             {
                 get
                 {
