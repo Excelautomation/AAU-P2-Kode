@@ -35,7 +35,18 @@ namespace ARK.Administrationssystem
             } 
         }
 
-        public string Besked { get { return _besked; } set { _besked = value; Notify("Besked"); } }
+        public string Besked 
+        { 
+            get 
+            { 
+                return _besked; 
+            } 
+            set 
+            { 
+                _besked = value; 
+                Notify("Besked"); 
+            } 
+        }
 
         #region Property
         public event PropertyChangedEventHandler PropertyChanged;

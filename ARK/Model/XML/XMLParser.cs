@@ -77,11 +77,11 @@ namespace ARK.Model.XML
                         Address2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2),
                         ZipCode = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr)),
                         City = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.By),
-                        Phone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", "") : "")
+                        Phone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
                             .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon)),
-                        PhoneWork = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", "") : "")
+                        PhoneWork = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
                             .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde)),
-                        Cellphone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", "") : "")
+                        Cellphone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
                             .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil)),
                         Email1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail),
                         Email2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2),
@@ -168,7 +168,7 @@ namespace ARK.Model.XML
             sb.Append(basePathEnd);
 
             UriBuilder ub = new UriBuilder("http", "www.earthtools.org", 80, sb.ToString());
-            NetworkCredential creds = new NetworkCredential("", "");
+            NetworkCredential creds = new NetworkCredential(string.Empty, string.Empty);
 
             string xml = DlToMem(ub.Uri, creds);
 

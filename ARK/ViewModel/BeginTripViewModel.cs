@@ -25,8 +25,15 @@ namespace ARK.ViewModel
 
         public bool EnableMembers
         {
-            get { return _enableMembers; }
-            set { _enableMembers = value; Notify(); }
+            get 
+            { 
+                return _enableMembers; 
+            }
+            set 
+            { 
+                _enableMembers = value; 
+                Notify(); 
+            }
         }
 
         public ICommand SelectedChange
@@ -43,8 +50,15 @@ namespace ARK.ViewModel
 
         public List<Boat> Boats
         {
-            get { return _boats; }
-            set { _boats = value; Notify(); }
+            get 
+            { 
+                return _boats; 
+            }
+            set 
+            { 
+                _boats = value; 
+                Notify(); 
+            }
         }
 
         public List<Member> Members
@@ -53,33 +67,45 @@ namespace ARK.ViewModel
             set { _members = value; Notify(); }
         }
 
-        public string BoatHeadline { get { return "Båd"; } }
+        public string BoatHeadline
+        {
+            get { return "Båd"; }
+        }
 
         public List<Boat> BoatContent
         {
             get
             {
-                if (Boat == null) return new List<Boat>();
+                if (Boat == null)
+                {
+                    return new List<Boat>();
+                }
 
-                return new List<Boat> { Boat };  
+                return new List<Boat> { Boat };
             }
         }
 
-        public string MemberHeadline { get { return "Deltagere"; } }
+        public string MemberHeadline
+        {
+            get { return "Deltagere"; }
+        }
 
         public List<Member> MemberContent
         {
             get
             {
-                if (Member == null) return new List<Member>();
+                if (Member == null)
+                {
+                    return new List<Member>();
+                }
 
-                return new List<Member> { Member }; 
+                return new List<Member> { Member };
             }
         }
 
-        public Boat Boat 
+        public Boat Boat
         {
-            get { return _boat;  }
+            get { return _boat; }
             set { _boat = value; Notify(); NotifyProp("BoatContent"); }
         }
 

@@ -11,6 +11,8 @@ namespace ARK.ViewModel.Base
             this.canExecuteMethod = canExecuteMethod;
         }
 
+        public event EventHandler CanExecuteChanged;
+
         public Action<T> executeMethod { get; set; }
         public Func<T, bool> canExecuteMethod { get; set; }
 
@@ -23,7 +25,5 @@ namespace ARK.ViewModel.Base
         {
             executeMethod((T)parameter);
         }
-
-        public event EventHandler CanExecuteChanged;
     }
 }
