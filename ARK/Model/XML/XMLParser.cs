@@ -174,7 +174,7 @@ namespace ARK.Model.XML
 
             XMLSunset.sun sunXml = ParseXML<XMLSunset.sun>(xml);
             DateTime sunset = DateTime.Today;
-            sunset = sunset.Add(sunXml.evening.twilight.nautical.TimeOfDay);
+            sunset = sunset.Add(sunXml.evening.Twilight.nautical.TimeOfDay);
 
             return sunset;
         }
