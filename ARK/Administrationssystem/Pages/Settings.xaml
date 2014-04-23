@@ -38,22 +38,52 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
-                    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" BorderThickness="1" BorderBrush="Black">
-                        <Grid Background="White">
-                            <WrapPanel>
-                                <DockPanel>
-                                    <Button DockPanel.Dock="Top">Opret ny administrator</Button>
-                                </DockPanel>
-                                <DockPanel>
-                                    <Grid Background="Gray">
-                                        <Button DockPanel.Dock="Bottom">Ok</Button>
-                                        <Button DockPanel.Dock="Bottom">Anullér</Button>
-                                        <Button DockPanel.Dock="Right">Slet</Button>
-                                    </Grid>
-                                </DockPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="14*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="167*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="197*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0">Opret Administrator</Button>
+                        <Label Grid.Row="0" Grid.Column="2">Detaljer</Label>
+                        <ScrollViewer Grid.Row="2" Grid.Column="0">
+                            <ListView>
+
+                            </ListView>
+                        </ScrollViewer>
+                        <DockPanel Grid.Row="2" Grid.Column="2" Background="White">
+                            <StackPanel DockPanel.Dock="Top">
+                                <WrapPanel Margin="25">
+                                    <StackPanel Margin="0,0,40,0">
+                                        <Label>Brugernavn:</Label>
+                                        <Label>Kodeord:</Label>
+                                        <Label>Fornavn:</Label>
+                                        <Label>Efternavn:</Label>
+                                        <Label>E-mail:</Label>
+                                        <Label>Telefon:</Label>
+                                    </StackPanel>
+                                    <StackPanel Width="250">
+                                        <TextBox Margin="0,4.5,0,0">Herring</TextBox>
+                                        <PasswordBox Margin="0,4.5,0,0" Password="Kode1234"></PasswordBox>
+                                        <TextBox Margin="0,4.5,0,0">Henning</TextBox>
+                                        <TextBox Margin="0,4.5,0,0">Jensen</TextBox>
+                                        <TextBox Margin="0,4.5,0,0" >Supernova@hotmail.com</TextBox>
+                                        <TextBox Margin="0,4.5,0,0">12345678</TextBox>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </StackPanel>
+                            <WrapPanel DockPanel.Dock="Bottom">
+                                <Button>Ok</Button>
+                                <Button>Anullér</Button>
+                                <Button>Slet!</Button>
                             </WrapPanel>
-                        </Grid>
-                    </ScrollViewer>
+                        </DockPanel>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>
