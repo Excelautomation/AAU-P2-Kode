@@ -12,7 +12,7 @@ namespace ARK.Model
             Kajak = 3,
             Gig = 4,
             Ergometer = 5,
-            UNKOWN = 6
+            UNKNOWN = 6
         }
 
         public int Id { get; set; }
@@ -22,6 +22,7 @@ namespace ARK.Model
         public BoatType SpecificBoatType { get; set; }
         public bool Usable { get; set; }
         public bool LongTripBoat { get; set; }
+        public bool BoatOut { get; set; }
 
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
