@@ -37,7 +37,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="MemberInfo" ItemsSource="{Binding Path=MemberCollection}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
+        <ListView x:Name="MemberInfo" ItemsSource="{Binding Path=MemberContent}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
