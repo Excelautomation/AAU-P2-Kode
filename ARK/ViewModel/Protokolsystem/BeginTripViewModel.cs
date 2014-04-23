@@ -3,6 +3,8 @@ using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
 using System.Collections.ObjectModel;
+using System.Collections;
+using System.Linq;
 
 namespace ARK.ViewModel
 {
@@ -78,9 +80,9 @@ namespace ARK.ViewModel
         {
             get
             {
-                return GetCommand<IList<Member>>(e =>
+                return GetCommand<IList>(e =>
                     {
-                        MemberCollection = new ObservableCollection<Member>(e);
+                        MemberCollection = new ObservableCollection<Member>(e.Cast<Member>());
                     });
             }
         }
