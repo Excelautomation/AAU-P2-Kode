@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ARK.ViewModel.Base.Keyboard
+namespace ARK.ViewModel.Base.Filter
 {
-    public interface IKeyboardChange
+    class FilterViewModel
     {
-        string KeyboardToggleText { get; set; }
     }
 }

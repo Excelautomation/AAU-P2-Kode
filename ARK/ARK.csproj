@@ -178,8 +178,10 @@
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
+    <Compile Include="ViewModel\Base\Filter\FilterViewModel.cs" />
     <Compile Include="ViewModel\Base\GlobalCommands.cs" />
-    <Compile Include="ViewModel\Base\Keyboard\IKeyboardChange.cs" />
+    <Compile Include="ViewModel\Base\Keyboard\IKeyboardHandler.cs" />
     <Compile Include="ViewModel\Base\Keyboard\KeyboardViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Boats.cs" />
