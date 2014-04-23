@@ -22,24 +22,29 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Navn " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="Navn: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                         <TextBlock Text="{Binding Name}" FontSize="13px"/>
-                        <TextBlock Text="Pladser " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="Pladser: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                         <TextBlock Text="{Binding NumberofSeats}" FontSize="13px"/>
-                        <TextBlock Text="Kategori " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="Kategori: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                         <TextBlock Text="{Binding SpecificBoatType}" FontSize="13px"/>
-                        <TextBlock Text="Aktiv " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="Aktiv: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                         <TextBlock Text="{Binding Active}" FontSize="13px"/>
-                        <TextBlock Text="Roforbud " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="Roforbud: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                         <TextBlock Text="{Binding Usable}" FontSize="13px"/>
-                        <TextBlock Text="Skade " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="Status: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="MemberInfo" ItemsSource="{Binding MemberContent}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
+        <ListView x:Name="MemberInfo" ItemsSource="{Binding Path=MemberCollection}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
-                <DataTemplate />
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Plads " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="{Binding Usable}" FontSize="13px"/>
+                    </StackPanel>
+                </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </Grid>

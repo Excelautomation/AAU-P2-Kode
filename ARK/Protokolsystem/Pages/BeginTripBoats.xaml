@@ -40,6 +40,11 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionMember">
+                    <i:InvokeCommandAction Command="{Binding Path=MemberSelected}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItems}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
         <Label Content="VÆLG BÅD" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" BorderThickness="1" />
         <Label Content="VÆLG DELTAGERE" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" />
