@@ -22,7 +22,7 @@
                 Svend-Erik Thomsen
             </ListViewItem>
         </ListView>
-        <Label Content="Anmelder" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Height="48" Width="277" FontSize="28" />
+        <Label Content="Anmelder" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Height="48" Width="277" FontSize="16" FontFamily="{DynamicResource FontFamilyHeadline}" FontWeight="Bold" />
         <RichTextBox HorizontalAlignment="Left" Height="124.216" Margin="12.422,465.784,0,0" VerticalAlignment="Top" Width="298.604">
             <FlowDocument />
         </RichTextBox>

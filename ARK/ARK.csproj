@@ -100,7 +100,7 @@
     <Compile Include="Administrationssystem\BoatItem.xaml.cs">
       <DependentUpon>BoatItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\Funktioner\SMSIT.cs" />
+    <Compile Include="Administrationssystem\Functions\SMSIT.cs" />
     <Compile Include="Administrationssystem\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
@@ -124,7 +124,7 @@
     <Compile Include="Model\DB\DbArkContext.cs" />
     <Compile Include="Model\DB\MySQLHistoryContext.cs" />
     <Compile Include="Model\DB\MySqlInitializer.cs" />
-    <Compile Include="Model\FtpInfo.cs" />
+    <Compile Include="Model\FTPInfo.cs" />
     <Compile Include="Model\GetSMS.cs" />
     <Compile Include="Model\LongDistanceForm.cs" />
     <Compile Include="Administrationssystem\Pages\Overview.xaml.cs">
@@ -168,8 +168,8 @@
     <Compile Include="Protokolsystem\Pages\EndTrip.xaml.cs">
       <DependentUpon>EndTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\Keyboard.xaml.cs">
-      <DependentUpon>Keyboard.xaml</DependentUpon>
+    <Compile Include="Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
+      <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Protokolsystem\Pages\MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
@@ -281,7 +281,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\Keyboard.xaml">
+    <Page Include="Protokolsystem\Pages\OnScreenKeyboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -371,6 +371,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\document_page_next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\filter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />

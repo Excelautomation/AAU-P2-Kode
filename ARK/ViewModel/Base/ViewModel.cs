@@ -7,7 +7,10 @@ namespace ARK.ViewModel.Base
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        private ViewModel _parent;
+
         public event PropertyChangedEventHandler PropertyChanged;
+        public ViewModel ParentViewModel { get { return _parent; } set { _parent = value; Notify("ParentViewModel"); } }
 
         protected void Notify([CallerMemberName] string propertyName = "")
         {

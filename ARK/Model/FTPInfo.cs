@@ -1,6 +1,6 @@
 ﻿namespace ARK.Model
 {
-     public class FtpInfo
+     public class FTPInfo
     {
         public int Id { get; set; }
         public string Name { get; set; }
