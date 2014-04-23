@@ -25,7 +25,7 @@ namespace ARK
                     {
                         //SUNSET
                         bool sunset = false;
-                        
+
                         DateTime SunsetTime = XMLParser.GetSunsetFromXml();
 
                         if (SunsetTime > DateTime.Now)
@@ -35,10 +35,10 @@ namespace ARK
 
                         //Afsender SMS´er
                         var FindSMS = from s in db.SMS
-                                       where s.Dispatched == false
-                                            select s;
+                                      where s.Dispatched == false
+                                      select s;
 
-                        foreach(SMS sms in FindSMS)
+                        foreach (SMS sms in FindSMS)
                         {
                             if (sunset)
                             {
@@ -54,8 +54,8 @@ namespace ARK
 
                         //Modtager SMS´er
                         var smsser = (from s in db.GetSMS
-                                     where !s.Handled && s.RecievedDate.Day == DateTime.Now.Day && s.RecievedDate.Month == DateTime.Now.Month && s.RecievedDate.Year == DateTime.Now.Year
-                                     select s).ToList();
+                                      where !s.Handled && s.RecievedDate.Day == DateTime.Now.Day && s.RecievedDate.Month == DateTime.Now.Month && s.RecievedDate.Year == DateTime.Now.Year
+                                      select s).ToList();
                         var getsms = from s in db.SMS
                                      select s;
 
@@ -63,14 +63,15 @@ namespace ARK
                                          where !s.approved && !s.Handled
                                          select s;
 
-                        foreach(GetSMS sms in smsser){
+                        foreach (GetSMS sms in smsser)
+                        {
                             if (sms.Text.ToLower() == "ok")
                             {
-                                getsms.Where(e => e.Reciever == sms.From.Replace("+", "")).ToList().ForEach(e => e.approved = true);
+                                getsms.Where(e => e.Reciever == sms.From.Replace("+", string.Empty)).ToList().ForEach(e => e.approved = true);
 
                                 SMS SMS = new SMS
                                 {
-                                    Reciever = sms.From.Replace("+", ""),
+                                    Reciever = sms.From.Replace("+", string.Empty),
                                     Message = "Bekræftelsen er modtaget, venlig hilsen Aalborg Roklub"
                                 };
                                 SMSIT.SendSMS(SMS);
@@ -80,7 +81,7 @@ namespace ARK
                             {
                                 SMS SMS = new SMS
                                 {
-                                    Reciever = sms.From.Replace("+", ""),
+                                    Reciever = sms.From.Replace("+", string.Empty),
                                     Message = "Beskeden blev ikke forstået, bekræft venligst igen, venlig hilsen Aalborg Roklub"
                                 };
                                 SMSIT.SendSMS(SMS);
@@ -96,7 +97,7 @@ namespace ARK
                                 SMS SMS = new SMS
                                 {
                                     Reciever = "4522907111",
-                                    Message = "Følgende person er ikke kommet hjem " + noresponse.Name + " hans telefon nummer er " + noresponse.Reciever + ""
+                                    Message = "Følgende person er ikke kommet hjem " + noresponse.Name + " hans telefon nummer er " + noresponse.Reciever + string.Empty
                                 };
                                 SMSIT.SendSMS(SMS);
                                 noresponse.Handled = true;
@@ -109,7 +110,7 @@ namespace ARK
                     Thread.Sleep(5000);
                 }
             }));
-            
+
             WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
             if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
             {

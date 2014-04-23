@@ -26,19 +26,38 @@ namespace ARK.ViewModel
 
         public PageInformation Page
         {
-            get { return _page; }
-            set { _page = value; Notify(); }
+            get 
+            { 
+                return _page; 
+            }
+            set 
+            { 
+                _page = value; 
+                Notify(); 
+            }
         }
 
         #region Commands
 
-        public ICommand MenuOverview { get { return GenerateCommand("Overview", PageOverview); } }
+        public ICommand MenuOverview
+        {
+            get { return GenerateCommand("Overview", PageOverview); }
+        }
 
-        public ICommand MenuForms { get { return GenerateCommand("Forms", PageForms); } }
+        public ICommand MenuForms
+        {
+            get { return GenerateCommand("Forms", PageForms); }
+        }
 
-        public ICommand MenuBoats { get { return GenerateCommand("Boats", PageBoats); } }
+        public ICommand MenuBoats
+        {
+            get { return GenerateCommand("Boats", PageBoats); }
+        }
 
-        public ICommand MenuConfigurations { get { return GenerateCommand("Configurations", PageConfigurations); } }
+        public ICommand MenuConfigurations
+        {
+            get { return GenerateCommand("Configurations", PageConfigurations); }
+        }
 
         #endregion Commands
 

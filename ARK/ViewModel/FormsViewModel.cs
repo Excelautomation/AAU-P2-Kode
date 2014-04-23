@@ -25,25 +25,27 @@ namespace ARK.ViewModel
                 //LongDistanceForms = new List<LongDistanceForm>(db.LongTripForm);
             }
 
-            DamageForms.Add(new DamageForm { Boat = new Boat
+            DamageForms.Add(new DamageForm { Boat = new Boat() 
             {
                 Id = 100,
                 Name = "Hajen",
                 Usable = false,
-                Active = false},
+                Active = false 
+            },
                 Date = new DateTime(2014, 4, 14),
-                RegisteringMember = new Member {FirstName = "Kurt", LastName = "Nørremark"},
-                DamageDescription = new DamageDescription { Description = "SVAB!", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"}
+                RegisteringMember = new Member() { FirstName = "Kurt", LastName = "Nørremark" },
+                DamageDescription = new DamageDescription() { Description = "SVAB!", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
-            DamageForms.Add(new DamageForm { Boat = new Boat
+            DamageForms.Add(new DamageForm { Boat = new Boat() 
             {
                 Id = 200,
                 Name = "Den Flyvende Hollænder",
                 Usable = false,
-                Active = false},
+                Active = false 
+            },
                 Date = new DateTime(2014, 4, 14),
-                RegisteringMember = new Member {FirstName = "Davy", LastName = "Jones"},
-                DamageDescription = new DamageDescription { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
+                RegisteringMember = new Member() { FirstName = "Davy", LastName = "Jones" },
+                DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
             DamageForms.Add(new DamageForm
             {
@@ -55,16 +57,18 @@ namespace ARK.ViewModel
                     Active = false
                 },
                 Date = new DateTime(2014, 4, 14),
-                RegisteringMember = new Member {FirstName = "Samuel", LastName = "L. Jackson"},
-                DamageDescription = new DamageDescription { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
+                RegisteringMember = new Member() { FirstName = "Samuel", LastName = "L. Jackson" },
+                DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
             
-            LongDistanceForms.Add(new LongDistanceForm { Departure = new DateTime(2014,4,14), Arrival = new DateTime(2024,4,14)});
+            LongDistanceForms.Add(new LongDistanceForm { Departure = new DateTime(2014, 4, 14), Arrival = new DateTime(2024, 4, 14) });
 
             Page = new FormsDamage { DataContext = new FormsDamageViewModel { DamageForm = DamageForms[0] } };
         }
 
-        public UserControl Page { get { return _page; } set { _page = value; Notify(); } }
+        public UserControl Page { 
+            get { return _page; } set { _page = value; Notify(); } 
+        }
 
         public ICommand SelectDamageFormCommand
         {
@@ -78,7 +82,7 @@ namespace ARK.ViewModel
         {
             get
             {
-                return GetCommand<LongDistanceForm>(e => {Page.DataContext = e;});
+                return GetCommand<LongDistanceForm>(e => { Page.DataContext = e; });
             }
         }
 
@@ -100,11 +104,11 @@ namespace ARK.ViewModel
             {
                 return _filters ?? (_filters = new ObservableCollection<Control>
                 {
-                    new CheckBox {Content = "Langtur"},
-                    new CheckBox {Content = "Skader"},
-                    new Separator {Height = 20},
-                    new CheckBox {Content = "Afviste"},
-                    new CheckBox {Content = "Godkendte"}
+                    new CheckBox { Content = "Langtur" },
+                    new CheckBox { Content = "Skader" },
+                    new Separator { Height = 20 },
+                    new CheckBox { Content = "Afviste" },
+                    new CheckBox { Content = "Godkendte" }
                 });
             }
         }

@@ -68,9 +68,9 @@ namespace ARK.ViewModel
                 return _filters ?? (
                     _filters = new ObservableCollection<Control>
                     {
-                        new CheckBox {Content = "Skader"},
-                        new CheckBox {Content = "Langtur"},
-                        new CheckBox {Content = "Både ude"}
+                        new CheckBox { Content = "Skader" },
+                        new CheckBox { Content = "Langtur" },
+                        new CheckBox { Content = "Både ude" }
                     });
             }
         }
@@ -81,7 +81,6 @@ namespace ARK.ViewModel
             ShowLangtur = Visibility.Visible;
             ShowSkader = Visibility.Visible;
         }
-
 
         private void UpdateFilter()
         {
@@ -94,7 +93,9 @@ namespace ARK.ViewModel
                                           select c;
 
             if (!selectedCheckboxFilters.Any())
+            {
                 return;
+            }
 
             ShowBoatsOut = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Både ude") ? Visibility.Visible : Visibility.Collapsed;
             ShowLangtur = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Langtur") ? Visibility.Visible : Visibility.Collapsed;
