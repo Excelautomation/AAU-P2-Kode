@@ -51,8 +51,7 @@
         </ListView>
         <ListView x:Name="MemberInfo" ItemsSource="{Binding MemberContent}" HorizontalAlignment="Left" Height="329" VerticalAlignment="Top" Width="184" Opacity="0.975" Margin="6,404,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                </DataTemplate>
+                <DataTemplate />
             </ListView.ItemTemplate>
         </ListView>
     </Grid>

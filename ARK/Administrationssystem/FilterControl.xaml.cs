@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ARK.Administrationssystem
 {
@@ -21,20 +9,18 @@ namespace ARK.Administrationssystem
     /// </summary>
     public partial class FilterControl : UserControl, INotifyPropertyChanged
     {
-        private bool _isChecked;
         private string _filterName;
+        private bool _isChecked;
 
         public FilterControl(string filterName)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.FilterName = filterName;
-            this.IsChecked = false;
+            FilterName = filterName;
+            IsChecked = false;
 
             knap1.DataContext = this;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string FilterName
         {
@@ -62,17 +48,19 @@ namespace ARK.Administrationssystem
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         protected void Notify(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
         private void knap1_Click(object sender, RoutedEventArgs e)
         {
-            this.IsChecked = !this.IsChecked;
+            IsChecked = !IsChecked;
         }
     }
 }

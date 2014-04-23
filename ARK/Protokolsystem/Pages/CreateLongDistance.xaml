@@ -6,8 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="475" Margin="301,41,0,0" VerticalAlignment="Top" Width="299" SelectionMode="Multiple">
-        </ListView>
+        <ListView HorizontalAlignment="Left" Height="475" Margin="301,41,0,0" VerticalAlignment="Top" Width="299" SelectionMode="Multiple" />
         <Label Content="Deltagere på turen" HorizontalAlignment="Left" Margin="301,10,0,0" VerticalAlignment="Top" Height="32" Width="279" FontSize="16" FontWeight="Bold"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="49" Margin="0,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" FontSize="29.333"/>
         <TextBox HorizontalAlignment="Left" Height="49" Margin="152,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="{Binding FontSize, ElementName=textBox}"/>

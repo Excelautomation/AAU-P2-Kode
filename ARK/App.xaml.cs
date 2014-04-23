@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
+using ARK.Administrationssystem.Funktioner;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Administrationssystem.Funktioner;
 using ARK.Model.XML;
 
 namespace ARK
@@ -21,16 +17,16 @@ namespace ARK
     {
         public App()
         {
-            var thr = new Thread(new ThreadStart(() =>
+            Thread thr = new Thread(new ThreadStart(() =>
             {
                 while (true)
                 {
                     using (DbArkContext db = new DbArkContext())
                     {
                         //SUNSET
-                        var sunset = false;
+                        bool sunset = false;
                         
-                        var SunsetTime = XMLParser.GetSunsetFromXml();
+                        DateTime SunsetTime = XMLParser.GetSunsetFromXml();
 
                         if (SunsetTime > DateTime.Now)
                         {
@@ -42,7 +38,7 @@ namespace ARK
                                        where s.Dispatched == false
                                             select s;
 
-                        foreach(var sms in FindSMS)
+                        foreach(SMS sms in FindSMS)
                         {
                             if (sunset)
                             {
@@ -67,7 +63,7 @@ namespace ARK
                                          where !s.approved && !s.Handled
                                          select s;
 
-                        foreach(var sms in smsser){
+                        foreach(GetSMS sms in smsser){
                             if (sms.Text.ToLower() == "ok")
                             {
                                 getsms.Where(e => e.Reciever == sms.From.Replace("+", "")).ToList().ForEach(e => e.approved = true);
@@ -93,7 +89,7 @@ namespace ARK
                         }
 
                         //Ingen response i 20 min --> Send besked til bestyrelsen
-                        foreach (var noresponse in Noresponse)
+                        foreach (SMS noresponse in Noresponse)
                         {
                             if (DateTime.Now.AddMinutes(-20) > noresponse.Time && sunset)
                             {
@@ -114,13 +110,13 @@ namespace ARK
                 }
             }));
             
-            var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+            WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
             if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
             {
                 thr.Start();
             }
 
-            Application.Current.Exit += (sender, e) =>
+            Current.Exit += (sender, e) =>
             {
                 thr.Abort();
             };

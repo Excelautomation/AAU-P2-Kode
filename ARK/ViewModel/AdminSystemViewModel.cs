@@ -1,9 +1,6 @@
-﻿using System;
-using ARK.Administrationssystem.Pages;
-using System.ComponentModel;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using ARK.Model.DB;
+using ARK.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel
@@ -11,10 +8,21 @@ namespace ARK.ViewModel
     internal class AdminSystemViewModel : Base.ViewModel
     {
         private PageInformation _page;
-        private Oversigt _pageoversigt;
-        private Blanketter _pageforms;
         private Baede _pagebaede;
+        private Blanketter _pageforms;
+        private Oversigt _pageoversigt;
         private Indstillinger _pagesettings;
+
+        public AdminSystemViewModel()
+        {
+            TimeCounter.StartTimer();
+
+            // Start oversigten
+            Page = new PageInformation();
+            MenuOverview.Execute(null);
+
+            TimeCounter.StopTime("AdministrationssystemViewModel load");
+        }
 
         public PageInformation Page
         {
@@ -33,6 +41,7 @@ namespace ARK.ViewModel
         public ICommand MenuConfigurations { get { return GenerateCommand("Configurations", PageConfigurations); } }
 
         #endregion Commands
+
         #region private
 
         // TODO: Implementer noget cache på objekterne
@@ -57,17 +66,6 @@ namespace ARK.ViewModel
         }
 
         #endregion private
-
-        public AdminSystemViewModel()
-        {
-            TimeCounter.StartTimer();
-
-            // Start oversigten
-            Page = new PageInformation();
-            MenuOverview.Execute(null);
-
-            TimeCounter.StopTime("AdministrationssystemViewModel load");
-        }
 
         private ICommand GenerateCommand(string pageName, UserControl page)
         {

@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.DataContext>
-        <VM:FormsViewModel></VM:FormsViewModel>
+        <VM:FormsViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.Background>
@@ -61,8 +61,7 @@
                                             </ListView.ItemTemplate>
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="SelectionChanged">
-                                                    <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}">
-                                                    </i:InvokeCommandAction>
+                                                    <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}" />
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                         </ListView>

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <VM:SettingsViewModel></VM:SettingsViewModel>
+        <VM:SettingsViewModel />
     </UserControl.DataContext>
     <Grid >
         <Grid.Background>
@@ -19,8 +19,8 @@
         </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <WrapPanel Margin="5,0,0,0" Grid.Row="0">
                 <Image Source="/images/setting_tools.png" Height="32"/>
@@ -29,13 +29,12 @@
             <TabControl Margin="0,0,0,0" Background="#CCCCCC" Grid.Row="1">
                 <TabItem Header="Generelt" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" BorderThickness="1" BorderBrush="Black">
-                        <Grid Background="Transparent">
-                        </Grid>
+                        <Grid Background="Transparent" />
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Skadetyper" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
                     <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" BorderThickness="1" BorderBrush="Black">
-                        <Grid Background="White"></Grid>
+                        <Grid Background="White" />
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
