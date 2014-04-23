@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ARK.Model
 {
@@ -12,7 +13,7 @@ namespace ARK.Model
             Kajak = 3,
             Gig = 4,
             Ergometer = 5,
-            UNKNOWN = 6
+            Ukendt = 6
         }
 
         public int Id { get; set; }
@@ -23,6 +24,8 @@ namespace ARK.Model
         public bool Usable { get; set; }
         public bool LongTripBoat { get; set; }
         public bool BoatOut { get; set; }
+        // public bool TripEnded { get; set; }
+        // public DateTime TripStartTime { get; set; }
 
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
