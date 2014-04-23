@@ -30,7 +30,7 @@ namespace ARK.Model.XML
 
                 foreach (XMLBoats.datarootBådeSpecifik boatXml in xmlObject.BådeSpecifik)
                 {
-                    Boat boat = new Boat()
+                    Boat boat = new Boat
                     {
                         Id = boatXml.ID,
                         Name = boatXml.Navn,
@@ -67,7 +67,7 @@ namespace ARK.Model.XML
 
                 foreach (XMLMembers.datarootAktiveMedlemmer memberXml in xmlObject.activeMembers)
                 {
-                    Member member = new Member()
+                    Member member = new Member
                     {
                         MemberNumber = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr)),
                         Id = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID)),
@@ -181,7 +181,7 @@ namespace ARK.Model.XML
 
         private static T ParseXML<T>(string xml) where T : class
         {
-            XmlReader reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings() { ConformanceLevel = ConformanceLevel.Auto });
+            XmlReader reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }
 
