@@ -24,10 +24,16 @@ namespace ARK.Model.Search
 
         public CheckBox Control
         {
-            get { return _control; }
+            get
+            {
+                return _control;
+            }
             private set
             {
-                if (value == null) throw new ArgumentNullException("Control");
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Control");
+                }
 
                 _control = value;
                 _control.Checked += (sender, e) => UpdateAction();

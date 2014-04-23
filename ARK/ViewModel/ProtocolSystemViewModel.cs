@@ -110,14 +110,38 @@ namespace ARK.ViewModel
 
         #region Pages
         // TODO: Implementer noget cache på objekterne
-        public BeginTripBoats PageBeginTripBoats { get { return new BeginTripBoats(); } }
-        public EndTrip PageEndTrip { get { return new EndTrip(); } }
-        public BoatsOut PageBoatsOut { get { return new BoatsOut(); } }
-        public DistanceStatistics PageDistanceStatistics { get { return new DistanceStatistics(); } }
-        public MembersInformation PageMembersInformation { get { return new MembersInformation(); } }
-        public CreateInjury PageCreateInjury { get { return new CreateInjury(); } }
-        public CreateLongDistance PageCreateLongDistance { get { return new CreateLongDistance(); } }
-        public AdditionalInfo PageAdditionalInfo { get { return new AdditionalInfo(); } }
+        public BeginTripBoats PageBeginTripBoats
+        {
+            get { return new BeginTripBoats(); }
+        }
+        public EndTrip PageEndTrip
+        { 
+            get { return new EndTrip(); } 
+        }
+        public BoatsOut PageBoatsOut 
+        { 
+            get { return new BoatsOut(); } 
+        }
+        public DistanceStatistics PageDistanceStatistics 
+        { 
+            get { return new DistanceStatistics(); } 
+        }
+        public MembersInformation PageMembersInformation 
+        { 
+            get { return new MembersInformation(); } 
+        }
+        public CreateInjury PageCreateInjury 
+        { 
+            get { return new CreateInjury(); } 
+        }
+        public CreateLongDistance PageCreateLongDistance 
+        { 
+            get { return new CreateLongDistance(); } 
+        }
+        public AdditionalInfo PageAdditionalInfo 
+        { 
+            get { return new AdditionalInfo(); } 
+        }
 
         #endregion
 
