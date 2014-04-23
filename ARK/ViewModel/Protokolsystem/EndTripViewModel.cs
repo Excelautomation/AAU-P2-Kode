@@ -10,6 +10,7 @@ namespace ARK.ViewModel
 {
     class EndTripViewModel : Base.ViewModel
     {
+        private List<Boat> _boats = new List<Boat>();
         private bool _boatsOut;
 
         public EndTripViewModel()
@@ -17,19 +18,30 @@ namespace ARK.ViewModel
             // Indlæs data
             using (DbArkContext db = new DbArkContext())
             {
-                List<Boat> Boats = new List<Boat>(db.Boat);
+                Boats = new List<Boat>(db.Boat);
             }
         }
 
-        public bool BoatsOut
-        {
-            get
-            {
-                return _boatsOut;
+        public bool BoatsOut 
+        { 
+            get 
+            { 
+                if (Boats.Any(boat => boat.BoatOut == true)) 
+                {
+                    _boatsOut = true;
+                }
             }
+            set 
+            { 
+                
+            }
+
+        public List<Boat> Boats
+        {
+            get { return _boats; }
             set
             {
-                _boatsOut = value;
+                _boats = value;
                 Notify();
             }
         }
