@@ -7,7 +7,7 @@ using ARK.Model;
 using ARK.Model.Search;
 using ARK.ViewModel.Base;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Administrationssystem
 {
     internal class OverviewViewModel : Base.ViewModel, IFilter
     {

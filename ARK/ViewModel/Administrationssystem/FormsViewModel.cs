@@ -8,7 +8,7 @@ using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsViewModel : Base.ViewModel, IFilter
     {
