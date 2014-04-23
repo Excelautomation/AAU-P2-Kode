@@ -22,19 +22,13 @@ namespace ARK.ViewModel
             }
         }
 
-        public bool BoatsOut 
-        { 
-            get 
-            { 
-                if (Boats.Any(boat => boat.BoatOut == true)) 
-                {
-                    _boatsOut = true;
-                }
+        public bool BoatsOut
+        {
+            get
+            {
+                return Boats.Any(boat => boat.BoatOut);
             }
-            set 
-            { 
-                
-            }
+        }
 
         public List<Boat> Boats
         {
