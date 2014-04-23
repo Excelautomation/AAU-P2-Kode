@@ -64,7 +64,7 @@ namespace ARK.ViewModel.Administrationssystem
             LongDistanceForms.Add(new LongDistanceForm { Departure = new DateTime(2014, 4, 14), Arrival = new DateTime(2024, 4, 14) });
 
             Page = new FormsDamage { DataContext = new FormsDamageViewModel { DamageForm = DamageForms[0] } };
-        }
+        }       
 
         public UserControl Page { 
             get { return _page; } set { _page = value; Notify(); } 

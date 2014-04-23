@@ -6,10 +6,16 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="594.417" d:DesignWidth="1121.053">
     <UserControl.DataContext>
         <administrationssystem:BoatViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="StackpanelLabels" TargetType="Label">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -50,7 +56,78 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
-                            <StackPanel Name="StackpanelRight" />
+                            <Border BorderBrush="Gray" BorderThickness="1">
+                                <DockPanel>
+                                    <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
+                                        <Border Margin="10" CornerRadius="5" Background="White">
+                                            <StackPanel Margin="25">
+                                                <TextBlock Margin="0,0,0,10" TextAlignment="Center" Text="Bådnavn" FontSize="40" FontFamily="arial" FontWeight="Bold"></TextBlock>
+                                                <WrapPanel HorizontalAlignment="Center" Margin="10">
+                                                    <WrapPanel Margin="0,0,20,0">
+                                                        <StackPanel Margin="0,0,10,0">
+                                                            <StackPanel.Resources>
+                                                                <Style BasedOn="{StaticResource StackpanelLabels}" TargetType="{x:Type Label}"/>
+                                                            </StackPanel.Resources>
+                                                            <Label Content="Kategori:"/>
+                                                            <Label Content="Subkategori:"/>
+                                                            <Label Content="Pladser:"/>
+                                                            <Label Content="Længde:"/>
+                                                            <Label Content="Bredde:"/>
+                                                            <Label Content="Status:"/>
+                                                            <Label Content="Skadestype"/>
+                                                        </StackPanel>
+                                                        <StackPanel>
+                                                            <TextBlock Margin="0,8,0,0" FontSize="18" Text="Dræberhval"/>
+                                                            <TextBlock Margin="0,20,0,0" FontSize="18" Text="Spækhukker"/>
+                                                            <TextBlock Margin="0,18,0,0" FontSize="18" Text="8"/>
+                                                            <WrapPanel Margin="0,14,0,0">
+                                                                <TextBlock VerticalAlignment="Center"  FontSize="18" Text="600" Margin="0,0,3,0"/>
+                                                                <Label FontSize="18" Content="Centimeter"/>
+                                                            </WrapPanel>
+                                                            <WrapPanel Margin="0,8,0,0">
+                                                                <TextBlock VerticalAlignment="Center" FontSize="18" Text="120" Margin="0,0,3,0"/>
+                                                                <Label FontSize="18" Content="Centimeter"/>
+                                                            </WrapPanel>
+                                                            <ComboBox Margin="0,10,0,0" DockPanel.Dock="Top" FontSize="18" Background="#EEEEEE">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Label FontSize="14"/>
+                                                                    </DataTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                                <ComboBoxItem>Aktiv</ComboBoxItem>
+                                                                <ComboBoxItem>Inaktiv</ComboBoxItem>
+                                                                <ComboBoxItem>Skadet</ComboBoxItem>
+                                                            </ComboBox>
+                                                            <ComboBox Margin="0,12,0,0" DockPanel.Dock="Top" FontSize="18" Background="#EEEEEE">
+                                                                <ComboBox.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Label FontSize="14"/>
+                                                                    </DataTemplate>
+                                                                </ComboBox.ItemTemplate>
+                                                                <ComboBoxItem>Uskadet</ComboBoxItem>
+                                                                <ComboBoxItem>Hul I skrovet</ComboBoxItem>
+                                                                <ComboBoxItem>anden type</ComboBoxItem>
+                                                                <ComboBoxItem>anden type</ComboBoxItem>
+                                                                <ComboBoxItem>anden type</ComboBoxItem>
+                                                            </ComboBox>
+                                                        </StackPanel>
+                                                    </WrapPanel>
+                                                    <DockPanel Name="DockpanelSkadestype" Width="300">
+                                                        <Label DockPanel.Dock="Top" Content="Detaljer om skade" FontSize="24" FontStyle="Italic"/>
+                                                        <Border BorderThickness="2" BorderBrush="Gray">
+                                                            <TextBox Margin="5" BorderThickness="0" FontSize="16" TextWrapping="Wrap" MaxWidth="{Binding ElementName=DockpanelSkadestype, Path=ActualWidth}" Text="Den er rimelig smadret. "/>
+                                                        </Border>
+                                                    </DockPanel>
+                                                </WrapPanel>
+                                                <WrapPanel Margin="0,20,0,0" HorizontalAlignment="Center">
+                                                    <Button Margin="0,0,150,0" FontSize="20" Content="Gem ændringer"/>
+                                                    <Button FontSize="20" Content=" Annulér ændringer"/>
+                                                </WrapPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </ScrollViewer>
+                                </DockPanel>
+                            </Border>
                         </ScrollViewer>
                     </DockPanel>
                 </Border>
