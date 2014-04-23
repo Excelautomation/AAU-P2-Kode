@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using ARK.Administrationssystem;
+using ARK.Model.XML;
 
 namespace ARK
 {
@@ -27,7 +16,7 @@ namespace ARK
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ARK.Administrationssystem.AdminSystem window = new ARK.Administrationssystem.AdminSystem();
+            AdminSystem window = new AdminSystem();
             ShowWindow(window);
         }
 
@@ -40,16 +29,16 @@ namespace ARK
         private void ShowWindow(Window window)
         {
             window.Show();
-            this.Hide();
+            Hide();
 
-            window.Closing += (sender, e) => this.Close();
+            window.Closing += (sender, e) => Close();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //ARK.Model.XML.XMLParser.LoadBoatsFromXml();
             //ARK.Model.XML.XMLParser.LoadMembersFromXml();
-            ARK.Model.XML.XMLParser.LoadTripsFromXml();
+            XMLParser.LoadTripsFromXml();
         }
     }
 }

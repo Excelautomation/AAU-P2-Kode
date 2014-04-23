@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Migrations.Infrastructure;
 
 namespace ARK.Model.DB
 {

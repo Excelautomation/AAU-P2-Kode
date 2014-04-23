@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ARK.Model
+﻿namespace ARK.Model
 {
     public class DamageDescription
     {

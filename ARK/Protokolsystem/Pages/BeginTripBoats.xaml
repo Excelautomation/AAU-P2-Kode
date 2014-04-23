@@ -8,8 +8,7 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              d:DesignWidth="640" Width="600" Height="514">
     <UserControl.DataContext>
-        <VM:BeginTripViewModel>
-        </VM:BeginTripViewModel>
+        <VM:BeginTripViewModel />
     </UserControl.DataContext>
     <Grid Width="600" Height="512">
         <Button x:Name="BeginTripNow" Content="PÅBEGYND &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="442,323,0,0" Height="64" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=StartTripNow}">
@@ -30,20 +29,19 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <TextBlock Text="{Binding Name}" />
                         <WrapPanel>
-                            <TextBlock Text="Pladser: " FontSize="14px"></TextBlock>
-                            <TextBlock Text="{Binding NumberofSeats}" FontSize="14px"></TextBlock>
-                            <TextBlock Text=" Kategori: " FontSize="14px"></TextBlock>
-                            <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px"></TextBlock>
+                            <TextBlock Text="Pladser: " FontSize="14px" />
+                            <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
+                            <TextBlock Text=" Kategori: " FontSize="14px" />
+                            <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
                         </WrapPanel>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=AllBoatsList, Path=SelectedItem}">
-                    </i:InvokeCommandAction>
+                    <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=AllBoatsList, Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
@@ -51,8 +49,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="{Binding FirstName}"></TextBlock>
-                        <TextBlock Text="{Binding LastName}"></TextBlock>
+                        <TextBlock Text="{Binding FirstName}" />
+                        <TextBlock Text="{Binding LastName}" />
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

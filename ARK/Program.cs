@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Principal;
 using System.Windows;
+using ARK.Administrationssystem;
 
 namespace ARK
 {
@@ -16,7 +15,7 @@ namespace ARK
 
             if (args.Select(e => e.ToLower()).Contains("administrationssystem"))
             {
-                window = new ARK.Administrationssystem.AdminSystem();
+                window = new AdminSystem();
             }
             else if (args.Select(e => e.ToLower()).Contains("protokolsystem"))
             {
@@ -24,7 +23,7 @@ namespace ARK
             }
             else
             {
-                var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+                WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
                 if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
                 {
                     // window = new ARK.Administrationssystem.Administrationssystem();
@@ -37,7 +36,7 @@ namespace ARK
                 }
             }
 
-            var app = new Application();
+            Application app = new Application();
             app.Run(window);
         }
     }

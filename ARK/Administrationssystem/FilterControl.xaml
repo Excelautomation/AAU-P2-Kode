@@ -9,12 +9,12 @@
     <Grid Margin="0,5">
         <Button x:Name="knap1" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="2,0,0,0" BorderBrush="{x:Null}" Click="knap1_Click">
             <Button.Background>
-                <ImageBrush ImageSource="/images/tom.png" Stretch="Uniform"></ImageBrush>
+                <ImageBrush ImageSource="/images/tom.png" Stretch="Uniform" />
             </Button.Background>
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Image x:Name="Img" Source="/images/tom.png" Stretch="Fill"></Image>
+                        <Image x:Name="Img" Source="/images/tom.png" Stretch="Fill" />
                         <TextBlock Text="{Binding FilterName}" FontFamily="Arial" FontSize="14"
                             HorizontalAlignment="Left" Foreground="White" 
                             VerticalAlignment="Center" Margin="5,0,0,0">

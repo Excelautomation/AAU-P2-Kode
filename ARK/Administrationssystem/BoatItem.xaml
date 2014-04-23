@@ -7,7 +7,7 @@
              d:DesignHeight="135" d:DesignWidth="195">
 	<DockPanel LastChildFill="False" Width="195" Height="130" Margin="0,5,0,0">
 		<DockPanel.Background>
-			<ImageBrush ImageSource="/images/baadbackground.png"></ImageBrush>
+			<ImageBrush ImageSource="/images/baadbackground.png" />
 		</DockPanel.Background>
 
 		<WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" Orientation="Vertical">

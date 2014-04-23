@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <VM:BoatViewModel></VM:BoatViewModel>
+        <VM:BoatViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.Background>
@@ -37,9 +37,7 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
-                            <StackPanel Name="StackpanelLeft">
-
-                            </StackPanel>
+                            <StackPanel Name="StackpanelLeft" />
                         </ScrollViewer>
                     </DockPanel>
                 </Border>
@@ -51,9 +49,7 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
-                            <StackPanel Name="StackpanelRight">
-
-                            </StackPanel>
+                            <StackPanel Name="StackpanelRight" />
                         </ScrollViewer>
                     </DockPanel>
                 </Border>
