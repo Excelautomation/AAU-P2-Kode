@@ -38,6 +38,7 @@
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock Text="{Binding FirstName}" />
+                        <TextBlock Text=" " />
                         <TextBlock Text="{Binding LastName}" />
                     </WrapPanel>
                 </DataTemplate>

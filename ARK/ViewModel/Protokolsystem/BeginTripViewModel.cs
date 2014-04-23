@@ -6,6 +6,7 @@ using ARK.ViewModel.Base.Keyboard;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -23,8 +24,12 @@ namespace ARK.ViewModel.Protokolsystem
             // Load data
             using (DbArkContext db = new DbArkContext())
             {
-                Boats = new List<Boat>(db.Boat);
-                Members = new List<Member>(db.Member);
+                Boats = new List<Boat>(db.Boat).Where(x => x.Active).OrderBy(x => x.NumberofSeats).ToList();
+                Members = new List<Member>(db.Member).Select(x =>
+                    {
+                        x.FirstName = x.FirstName.Trim();
+                        return x;
+                    }).OrderBy(x => x.FirstName).ToList();
             }
         }
 
