@@ -11,21 +11,7 @@
         <VM:BeginTripViewModel />
     </UserControl.DataContext>
     <Grid Width="600" Height="512">
-        <Button x:Name="BeginTripNow" Content="PÅBEGYND &#xA;ROTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="442,323,0,0" Height="64" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=StartTripNow}">
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFB0D141" Offset="0"/>
-                    <GradientStop Color="#FF1B4E09" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF93C700" Offset="0"/>
-                    <GradientStop Color="#FF0E6E00" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,41,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
+        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,41,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -45,7 +31,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -55,7 +41,61 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="Vælg båd" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="16" Foreground="Black" FontWeight="Bold" />
-        <Label Content="Vælg deltagere" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="16" Foreground="Black" FontWeight="Bold" />
+        <Label Content="VÆLG BÅD" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" BorderThickness="1" />
+        <Label Content="VÆLG DELTAGERE" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" />
+        <Button x:Name="ShowKeyboard" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="0,438,0,0" Height="64" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding ParentViewModel.ToggleKeyboard}">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF999999" Offset="0.004"/>
+                    <GradientStop Color="#FF363636" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFACACAC" Offset="0"/>
+                    <GradientStop Color="#FF252525" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/ARK;component/images/keyboard.png" Width="32" Height="28" Margin="0,5,0,0"/>
+                <TextBlock Text="{Binding Path=ParentViewModel.KeyboardText}"  Foreground="White" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="BeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="149" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="451,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFB0D141" Offset="0"/>
+                    <GradientStop Color="#FF1B4E09" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF93C700" Offset="0"/>
+                    <GradientStop Color="#FF0E6E00" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/ARK;component/images/document_page_next.png" Width="32" Height="32"/>
+                <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="8,0,0,0"><Run Text="PÅBEGYND &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="ShowFilters" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="154,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding}">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF999999" Offset="0.004"/>
+                    <GradientStop Color="#FF363636" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFACACAC" Offset="0"/>
+                    <GradientStop Color="#FF252525" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/ARK;component/images/filter.png" Width="32" Height="28" Margin="0,5,0,0"/>
+                <TextBlock Text="{Binding ParentViewModel.KeyboardText}" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>

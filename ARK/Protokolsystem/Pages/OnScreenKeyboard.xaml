@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ARK.Protokolsystem.Pages.OnScreenKeyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="182" Width="609">
+    <Grid Height="180" Margin="0,1">
+        <Button Content="Q" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Height="45" Margin="0,45,0,0" FontSize="16"/>
+        <Button Content="A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Height="45" Margin="0,90,0,0" FontSize="16"/>
+        <Button Content="Z" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Height="45" Margin="0,135,0,0" FontSize="16"/>
+        <Button Content="MELLEMRUM" HorizontalAlignment="Left" VerticalAlignment="Top" Width="223" Height="45" Margin="386,135,0,0" FontSize="16"/>
+        <Button Content="W" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Height="45" Margin="54,45,0,0" FontSize="16"/>
+        <Button Content="E" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="108,45,0,0" FontSize="16"/>
+        <Button Content="R" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="164,45,0,0" FontSize="16"/>
+        <Button Content="T" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="220,45,0,0" FontSize="16"/>
+        <Button Content="Y" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="275,45,0,0" FontSize="16"/>
+        <Button Content="U" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="330,45,0,0" FontSize="16"/>
+        <Button Content="I" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="386,45,0,0" FontSize="16"/>
+        <Button Content="O" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="442,45,0,0" FontSize="16"/>
+        <Button Content="P" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="498,45,0,0" FontSize="16"/>
+        <Button Content="Å" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="554,45,0,0" FontSize="16"/>
+        <Button Content="S" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Height="45" Margin="54,90,0,0" FontSize="16"/>
+        <Button Content="D" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="108,90,0,0" FontSize="16"/>
+        <Button Content="F" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="164,90,0,0" FontSize="16"/>
+        <Button Content="G" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="219,90,0,0" FontSize="16"/>
+        <Button Content="H" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="275,90,0,0" FontSize="16"/>
+        <Button Content="J" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="330,90,0,0" FontSize="16"/>
+        <Button Content="K" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="386,90,0,0" FontSize="16"/>
+        <Button Content="L" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="442,90,0,0" FontSize="16"/>
+        <Button Content="Æ" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="498,90,0,0" FontSize="16"/>
+        <Button Content="Ø" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="554,90,0,0" FontSize="16"/>
+        <Button Content="X" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54" Height="45" Margin="54,135,0,0" FontSize="16"/>
+        <Button Content="C" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="108,135,0,0" FontSize="16"/>
+        <Button Content="V" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="164,135,0,0" FontSize="16"/>
+        <Button Content="B" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="219,135,0,0" FontSize="16"/>
+        <Button Content="N" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Height="45" Margin="275,135,0,0" FontSize="16"/>
+        <Button Content="M" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Height="45" Margin="330,135,0,0" FontSize="16"/>
+        <TextBox HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="442" FontSize="16"/>
+        <Button Content="←" HorizontalAlignment="Left" VerticalAlignment="Top" Width="167" Height="40" Margin="442,0,0,0" FontSize="24"/>
+
+    </Grid>
+</UserControl>

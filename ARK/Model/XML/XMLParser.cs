@@ -19,7 +19,7 @@ namespace ARK.Model.XML
             using (DbArkContext context = new DbArkContext())
             {
                 string ftpPath = @"/upload/monday/BådeSpecifik.xml";
-                FtpInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
+                FTPInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
                 UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
                 NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
@@ -56,7 +56,7 @@ namespace ARK.Model.XML
             using (DbArkContext context = new DbArkContext())
             {
                 string ftpPath = @"/upload/monday/AktiveMedlemmer.xml";
-                FtpInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
+                FTPInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
                 UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
                 NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
@@ -111,7 +111,7 @@ namespace ARK.Model.XML
             string ftpPath = @"/upload/monday/Tur.xml";
             using (DbArkContext context = new DbArkContext())
             {
-                FtpInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
+                FTPInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
                 UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
                 NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
