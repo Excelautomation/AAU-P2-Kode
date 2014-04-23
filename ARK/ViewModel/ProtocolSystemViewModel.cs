@@ -128,16 +128,16 @@ namespace ARK.ViewModel
             HeadlineText = "Aalborg Roklubs Protokolsystem";
         }
 
-        private ICommand GenerateCommand(string HeadLineText, UserControl page)
+        private ICommand GenerateCommand(string headLineText, UserControl page)
         {
             return GenerateCommand(HeadlineText, page, null);
         }
 
-        private ICommand GenerateCommand(string HeadLineText, UserControl page, UserControl additionalInfo)
+        private ICommand GenerateCommand(string headLineText, UserControl page, UserControl additionalInfo)
         {
             return GetCommand<object>((e) =>
             {
-                this.HeadlineText = HeadLineText;
+                this.HeadlineText = headLineText;
                 CurrentPage = page;
                 CurrentInfo = additionalInfo;
                 CurrentInfo.DataContext = CurrentPage.DataContext;

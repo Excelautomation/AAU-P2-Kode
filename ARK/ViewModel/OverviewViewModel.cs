@@ -32,8 +32,6 @@ namespace ARK.ViewModel
             //{
             //    Skadesblanketter = new List<DamageForm>(db.DamageForm);
             //}
-
-
             // Add Checkbox filter
             var checkboxfilters = from c in Filters
                                   where c is CheckBox
@@ -77,8 +75,7 @@ namespace ARK.ViewModel
             get { return _showSkader; }
             set { _showSkader = value; Notify(); }
         }
-
-        
+       
         private void ResetFilter()
         {
             ShowBoatsOut = Visibility.Visible;

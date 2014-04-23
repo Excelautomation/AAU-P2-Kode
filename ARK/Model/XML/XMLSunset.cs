@@ -8,13 +8,11 @@ namespace ARK.Model.XML
 {
     public class XMLSunset
     {
-
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
         public partial class sun
         {
-
             private decimal versionField;
 
             private sunLocation locationField;
@@ -95,7 +93,6 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunLocation
         {
-
             private decimal latitudeField;
 
             private decimal longitudeField;
@@ -131,7 +128,6 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunDate
         {
-
             private byte dayField;
 
             private byte monthField;
@@ -197,7 +193,6 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunMorning
         {
-
             private System.DateTime sunriseField;
 
             private sunMorningTwilight twilightField;
@@ -234,7 +229,6 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunMorningTwilight
         {
-
             private System.DateTime civilField;
 
             private System.DateTime nauticalField;
@@ -288,7 +282,6 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunEvening
         {
-
             private System.DateTime sunsetField;
 
             private sunEveningTwilight twilightField;
@@ -325,7 +318,6 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunEveningTwilight
         {
-
             private System.DateTime civilField;
 
             private System.DateTime nauticalField;
@@ -374,7 +366,5 @@ namespace ARK.Model.XML
                 }
             }
         }
-
-
     }
 }
