@@ -1,16 +1,15 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
+using ARK.ViewModel.Base.Keyboard;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Protokolsystem
 {
-    public class ProtocolSystemViewModel : Base.ViewModel
+    public class ProtocolSystemViewModel : KeyboardViewModel
     {
         private string _headlineText;
-        private string _keyboardText;
         private UserControl _currentPage;
         private UserControl _currentInfo;
-        private OnScreenKeyboard _keyboard;
 
         public ProtocolSystemViewModel()
         {
@@ -22,12 +21,6 @@ namespace ARK.ViewModel
         {
             get { return _headlineText; }
             set { _headlineText = value; Notify(); }
-        }
-
-        public string KeyboardText 
-        {
-            get { return this._keyboardText; }
-            set { this._keyboardText = value; Notify("KeyboardText"); }
         }
 
         public UserControl CurrentPage
@@ -55,20 +48,6 @@ namespace ARK.ViewModel
             {
                 _currentInfo = value;
                 Notify();
-            }
-        }
-
-        public OnScreenKeyboard Keyboard
-        {
-            get
-            {
-                return this._keyboard;
-            }
-
-            private set
-            {
-                this._keyboard = value;
-                Notify("Keyboard");
             }
         }
 
@@ -129,24 +108,6 @@ namespace ARK.ViewModel
             }
         }
 
-        public ICommand ToggleKeyboard
-        {
-            get
-            {
-                if (Keyboard == null)
-                    return GetCommand<object>(e =>
-                    {
-                        KeyboardText = "VIS &#xA;TASTETUR";
-                        Keyboard = new OnScreenKeyboard();
-                    });
-                else
-                    return GetCommand<object>(e =>
-                    {
-                        KeyboardText = "SKJUL &#xA;TASTETUR";
-                        Keyboard = null;
-                    });
-            }
-        }
         #endregion
 
         #region Pages
@@ -197,9 +158,8 @@ namespace ARK.ViewModel
             {
                 HeadlineText = headLineText;
                 CurrentPage = page;
-                ((Base.ViewModel)CurrentPage.DataContext).ParentViewModel = this;
                 CurrentInfo = additionalInfo;
-                CurrentInfo.DataContext = CurrentPage.DataContext;
+                if (CurrentInfo != null) CurrentInfo.DataContext = CurrentPage.DataContext;
             });
         }
     }

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using ARK.ViewModel.Base;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : Base.ViewModel, IFilter
     {

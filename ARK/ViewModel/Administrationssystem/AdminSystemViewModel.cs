@@ -3,7 +3,7 @@ using System.Windows.Input;
 using ARK.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Administrationssystem
 {
     internal class AdminSystemViewModel : Base.ViewModel
     {
