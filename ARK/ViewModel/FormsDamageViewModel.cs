@@ -42,10 +42,5 @@ namespace ARK.ViewModel
                 });
             }
         }
-
-
-
-
-
     }
 }

@@ -177,16 +177,15 @@ namespace ARK.Model.XML
             sunset = sunset.Add(sunXml.evening.twilight.nautical.TimeOfDay);
 
             return sunset;
-
         }
 
-        public static T ParseXML<T>(string xml) where T : class
+        private static T ParseXML<T>(string xml) where T : class
         {
             var reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings() { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }
 
-        public static string DlToMem(Uri uri, NetworkCredential credentials)
+        private static string DlToMem(Uri uri, NetworkCredential credentials)
         {
             WebRequest request = WebRequest.Create(uri);
             string retString;

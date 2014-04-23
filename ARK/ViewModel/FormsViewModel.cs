@@ -17,8 +17,8 @@ namespace ARK.ViewModel
     {
         private ObservableCollection<Control> _filters;
 
-        private List<DamageForm> _DamageForms = new List<DamageForm>();
-        private List<LongDistanceForm> _LongTripForms = new List<LongDistanceForm>();
+        private List<DamageForm> _damageForms = new List<DamageForm>();
+        private List<LongDistanceForm> _longTripForms = new List<LongDistanceForm>();
         private UserControl _page;
 
         public UserControl Page { get { return _page; } set { _page = value; Notify(); } }
@@ -82,22 +82,19 @@ namespace ARK.ViewModel
             LongDistanceForms.Add(new LongDistanceForm { Departure = new System.DateTime(2014,4,14), Arrival = new System.DateTime(2024,4,14)});
 
             Page = new FormsDamage { DataContext = new FormsDamageViewModel { DamageForm = DamageForms[0] } };
-        }
-        
-        
+        }       
 
         public List<DamageForm> DamageForms
         {
-            get { return _DamageForms; }
-            set { _DamageForms = value; Notify(); }
+            get { return _damageForms; }
+            set { _damageForms = value; Notify(); }
         }
 
         public List<LongDistanceForm> LongDistanceForms
         {
-            get { return _LongTripForms; }
-            set { _LongTripForms = value; Notify(); }
+            get { return _longTripForms; }
+            set { _longTripForms = value; Notify(); }
         } 
-
 
         public ObservableCollection<Control> Filters
         {
