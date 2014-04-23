@@ -15,7 +15,7 @@ namespace ARK.ViewModel.Protokolsystem
         private List<Boat> _boats = new List<Boat>();
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
-        private Member _member;
+        private List<Member> _member;
         private string _keyboardToggleText;
 
         public BeginTripViewModel()
@@ -26,12 +26,6 @@ namespace ARK.ViewModel.Protokolsystem
                 Boats = new List<Boat>(db.Boat);
                 Members = new List<Member>(db.Member);
             }
-        }
-
-        public ObservableCollection<Member> MemberCollection
-        {
-            get;
-            set;
         }
 
         public bool EnableMembers
@@ -81,8 +75,8 @@ namespace ARK.ViewModel.Protokolsystem
             get
             {
                 return GetCommand<IList>(e =>
-        {
-                        MemberCollection = new ObservableCollection<Member>(e.Cast<Member>());
+                    {
+                        Member = e.Cast<Member>().ToList();
                     });
             }
         }
@@ -116,11 +110,11 @@ namespace ARK.ViewModel.Protokolsystem
                     return new List<Member>();
                 }
 
-                return new List<Member> {Member};
+                return new List<Member>(Member);
             }
         }
 
-        public Boat Boat
+        public Boat Boat 
         {
             get { return _boat; }
             set
@@ -131,7 +125,7 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public Member Member
+        public List<Member> Member
         {
             get { return _member; }
             set
