@@ -25,27 +25,29 @@ namespace ARK.ViewModel
                 //LongDistanceForms = new List<LongDistanceForm>(db.LongTripForm);
             }
 
-            DamageForms.Add(new DamageForm { Boat = new Boat() {
+            DamageForms.Add(new DamageForm { Boat = new Boat
+            {
                 Id = 100,
                 Name = "Hajen",
                 Usable = false,
                 Active = false},
                 Date = new DateTime(2014, 4, 14),
-                RegisteringMember = new Member() {FirstName = "Kurt", LastName = "Nørremark"},
-                DamageDescription = new DamageDescription() { Description = "SVAB!", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"}
+                RegisteringMember = new Member {FirstName = "Kurt", LastName = "Nørremark"},
+                DamageDescription = new DamageDescription { Description = "SVAB!", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd"}
             });
-            DamageForms.Add(new DamageForm { Boat = new Boat() {
+            DamageForms.Add(new DamageForm { Boat = new Boat
+            {
                 Id = 200,
                 Name = "Den Flyvende Hollænder",
                 Usable = false,
                 Active = false},
                 Date = new DateTime(2014, 4, 14),
-                RegisteringMember = new Member() {FirstName = "Davy", LastName = "Jones"},
-                DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
+                RegisteringMember = new Member {FirstName = "Davy", LastName = "Jones"},
+                DamageDescription = new DamageDescription { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
             DamageForms.Add(new DamageForm
             {
-                Boat = new Boat()
+                Boat = new Boat
                 {
                     Id = 200,
                     Name = "A Motherfucking Boat",
@@ -53,8 +55,8 @@ namespace ARK.ViewModel
                     Active = false
                 },
                 Date = new DateTime(2014, 4, 14),
-                RegisteringMember = new Member() {FirstName = "Samuel", LastName = "L. Jackson"},
-                DamageDescription = new DamageDescription() { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
+                RegisteringMember = new Member {FirstName = "Samuel", LastName = "L. Jackson"},
+                DamageDescription = new DamageDescription { Description = "Den er fooked OP", Type = "Hul i skroget", Id = 1, NeededMaterials = "Træ, spyt og sæd" }
             });
             
             LongDistanceForms.Add(new LongDistanceForm { Departure = new DateTime(2014,4,14), Arrival = new DateTime(2024,4,14)});

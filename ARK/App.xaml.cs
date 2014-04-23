@@ -17,11 +17,11 @@ namespace ARK
     {
         public App()
         {
-            Thread thr = new Thread(new ThreadStart(() =>
+            var thr = new Thread(new ThreadStart(() =>
             {
                 while (true)
                 {
-                    using (DbArkContext db = new DbArkContext())
+                    using (var db = new DbArkContext())
                     {
                         //SUNSET
                         bool sunset = false;
@@ -42,7 +42,7 @@ namespace ARK
                         {
                             if (sunset)
                             {
-                                SMS SMS = new SMS()
+                                SMS SMS = new SMS
                                 {
                                     Reciever = sms.Reciever,
                                     Message = "Hej" + sms.Name + "bekræft venligst med OK, at du har det godt hilsen Aalborg Roklub"
@@ -68,7 +68,7 @@ namespace ARK
                             {
                                 getsms.Where(e => e.Reciever == sms.From.Replace("+", "")).ToList().ForEach(e => e.approved = true);
 
-                                SMS SMS = new SMS()
+                                SMS SMS = new SMS
                                 {
                                     Reciever = sms.From.Replace("+", ""),
                                     Message = "Bekræftelsen er modtaget, venlig hilsen Aalborg Roklub"
@@ -78,7 +78,7 @@ namespace ARK
                             }
                             else
                             {
-                                SMS SMS = new SMS()
+                                SMS SMS = new SMS
                                 {
                                     Reciever = sms.From.Replace("+", ""),
                                     Message = "Beskeden blev ikke forstået, bekræft venligst igen, venlig hilsen Aalborg Roklub"
@@ -93,7 +93,7 @@ namespace ARK
                         {
                             if (DateTime.Now.AddMinutes(-20) > noresponse.Time && sunset)
                             {
-                                SMS SMS = new SMS()
+                                SMS SMS = new SMS
                                 {
                                     Reciever = "4522907111",
                                     Message = "Følgende person er ikke kommet hjem " + noresponse.Name + " hans telefon nummer er " + noresponse.Reciever + ""
@@ -116,10 +116,7 @@ namespace ARK
                 thr.Start();
             }
 
-            Current.Exit += (sender, e) =>
-            {
-                thr.Abort();
-            };
+            Current.Exit += (sender, e) => thr.Abort();
         }
     }
 }
