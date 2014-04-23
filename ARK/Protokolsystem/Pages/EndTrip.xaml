@@ -5,16 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
+             xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Base"
+             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
     <UserControl.DataContext>
-        <VM:EndTripViewModel />
+        <Protokolsystem:EndTripViewModel />
     </UserControl.DataContext>
     <Grid Height="600">
-        <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding }" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="295" Margin="0,0,0,-3">
+        <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding Path=BoatsOut}" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="295" Margin="0,0,0,-3">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <!--<TextBlock Text="{Binding Path=}"-->
+                        <TextBlock Text="{Binding Name}"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
