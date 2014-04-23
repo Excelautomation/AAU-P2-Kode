@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
+             xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <VM:SettingsViewModel />
+        <administrationssystem:SettingsViewModel />
     </UserControl.DataContext>
     <Grid >
         <Grid.Background>

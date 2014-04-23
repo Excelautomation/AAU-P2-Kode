@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:VM="clr-namespace:ARK.ViewModel"
+             xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.DataContext>
-        <VM:FormsViewModel />
+        <administrationssystem:FormsViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.Background>

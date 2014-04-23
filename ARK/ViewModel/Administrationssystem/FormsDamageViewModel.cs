@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using ARK.Model;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsDamageViewModel : Base.ViewModel
     {

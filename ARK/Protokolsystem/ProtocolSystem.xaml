@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:ARK.Protokolsystem" x:Class="ARK.Protokolsystem.Protokolsystem"
         xmlns:VM="clr-namespace:ARK.ViewModel"
+        xmlns:protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
         Title="Protokolsystem" Height="768" Width="1024" Background="White">
     <Window.DataContext>
-        <VM:ProtocolSystemViewModel />
+        <protokolsystem:ProtocolSystemViewModel />
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="White+rounded" TargetType="{x:Type Rectangle}">
@@ -25,17 +26,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="43*"/>
             <RowDefinition Height="514*"/>
-            <RowDefinition Height="180*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="203*"/>
             <ColumnDefinition Width="609*"/>
             <ColumnDefinition Width="204*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Left" Height="514" Width="609" VerticalAlignment="Top"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
-            <ContentControl Content="{Binding Path=CurrentPage}"/>
-        </StackPanel>
-        <StackPanel x:Name="Buttons" Grid.Column="1" Height="178" Margin="0,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="609">
+        <Grid HorizontalAlignment="Left" Width="609" VerticalAlignment="Stretch"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
+            <ContentControl Content="{Binding Path=CurrentPage}" VerticalAlignment="Top"/>
+        </Grid>
+        <StackPanel x:Name="Buttons" Visibility="{Binding Path=Keyboard.Visibility}" Grid.Column="1" Height="178" Margin="0,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="609">
             <ContentControl Content="{Binding Path=Keyboard}"/>
         </StackPanel>
         <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="194" Grid.RowSpan="3" Background="#FFE9EAED">

@@ -2,19 +2,21 @@
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.ViewModel.Base.Keyboard;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Protokolsystem
 {
-    public class BeginTripViewModel : Base.ViewModel
+    public class BeginTripViewModel : Base.ViewModel, IKeyboardChange
     {
         private Boat _boat;
         private List<Boat> _boats = new List<Boat>();
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
         private Member _member;
+        private string _keyboardToggleText;
 
         public BeginTripViewModel()
         {
@@ -34,10 +36,7 @@ namespace ARK.ViewModel
 
         public bool EnableMembers
         {
-            get 
-            { 
-                return _enableMembers; 
-        }
+            get { return _enableMembers; }
             set 
             { 
                 _enableMembers = value; 
@@ -59,10 +58,7 @@ namespace ARK.ViewModel
 
         public List<Boat> Boats
         {
-            get 
-            { 
-                return _boats; 
-        }
+            get { return _boats; }
             set 
             { 
                 _boats = value; 
@@ -73,7 +69,11 @@ namespace ARK.ViewModel
         public List<Member> Members
         {
             get { return _members; }
-            set { _members = value; Notify(); }
+            set
+            {
+                _members = value;
+                Notify();
+        }
         }
 
         public ICommand MemberSelected
@@ -81,7 +81,7 @@ namespace ARK.ViewModel
             get
             {
                 return GetCommand<IList>(e =>
-                    {
+        {
                         MemberCollection = new ObservableCollection<Member>(e.Cast<Member>());
                     });
             }
@@ -98,7 +98,7 @@ namespace ARK.ViewModel
                     return new List<Boat>();
                 }
 
-                return new List<Boat> { Boat };  
+                return new List<Boat> {Boat};
             }
         }
 
@@ -116,20 +116,41 @@ namespace ARK.ViewModel
                     return new List<Member>();
                 }
 
-                return new List<Member> { Member }; 
+                return new List<Member> {Member};
             }
         }
 
-        public Boat Boat 
+        public Boat Boat
         {
             get { return _boat; }
-            set { _boat = value; Notify(); NotifyProp("BoatContent"); }
+            set
+            {
+                _boat = value;
+                Notify();
+                NotifyProp("BoatContent");
+            }
         }
 
         public Member Member
         {
             get { return _member; }
-            set { _member = value; Notify(); NotifyProp("MemberContent"); }
+            set
+            {
+                _member = value;
+                Notify();
+                NotifyProp("MemberContent");
+            }
+        }
+
+        public string KeyboardToggleText
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_keyboardToggleText)) return "VIS\nTASTATUR";
+
+                return _keyboardToggleText;
+            }
+            set { _keyboardToggleText = value; Notify(); }
         }
     }
 }
