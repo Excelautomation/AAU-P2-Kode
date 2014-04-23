@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
+using System.Collections.ObjectModel;
 
 namespace ARK.ViewModel
 {
@@ -9,9 +10,9 @@ namespace ARK.ViewModel
     {
         private Boat _boat;
         private List<Boat> _boats = new List<Boat>();
+        private List<Member> _members = new List<Member>();
         private bool _enableMembers;
         private Member _member;
-        private List<Member> _members = new List<Member>();
 
         public BeginTripViewModel()
         {
@@ -23,12 +24,18 @@ namespace ARK.ViewModel
             }
         }
 
+        public ObservableCollection<Member> MemberCollection
+        {
+            get;
+            set;
+        }
+
         public bool EnableMembers
         {
             get 
             { 
                 return _enableMembers; 
-            }
+        }
             set 
             { 
                 _enableMembers = value; 
@@ -53,7 +60,7 @@ namespace ARK.ViewModel
             get 
             { 
                 return _boats; 
-            }
+        }
             set 
             { 
                 _boats = value; 
@@ -67,10 +74,18 @@ namespace ARK.ViewModel
             set { _members = value; Notify(); }
         }
 
-        public string BoatHeadline
+        public ICommand MemberSelected
         {
-            get { return "Båd"; }
+            get
+            {
+                return GetCommand<IList<Member>>(e =>
+                    {
+                        MemberCollection = new ObservableCollection<Member>(e);
+                    });
+            }
         }
+
+        public string BoatHeadline { get { return "Båd"; } }
 
         public List<Boat> BoatContent
         {
@@ -81,7 +96,7 @@ namespace ARK.ViewModel
                     return new List<Boat>();
                 }
 
-                return new List<Boat> { Boat };
+                return new List<Boat> { Boat };  
             }
         }
 
@@ -99,11 +114,11 @@ namespace ARK.ViewModel
                     return new List<Member>();
                 }
 
-                return new List<Member> { Member };
+                return new List<Member> { Member }; 
             }
         }
 
-        public Boat Boat
+        public Boat Boat 
         {
             get { return _boat; }
             set { _boat = value; Notify(); NotifyProp("BoatContent"); }
