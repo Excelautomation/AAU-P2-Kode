@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace ARK.Model.Search
@@ -11,8 +10,8 @@ namespace ARK.Model.Search
 
         public CheckboxFilter(CheckBox checkbox, Action updateAction)
         {
-            this.Control = checkbox;
-            this.UpdateAction = updateAction;
+            Control = checkbox;
+            UpdateAction = updateAction;
         }
 
         public bool Active

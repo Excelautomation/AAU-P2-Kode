@@ -20,11 +20,11 @@
                     </WrapPanel>
                     <WrapPanel Margin="0,0,0,15">
                         <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Båd:</Label>
-                        <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.Boat.Name}"></TextBox>
+                        <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.Boat.Name}" />
                     </WrapPanel>
                     <WrapPanel Margin="0,0,0,15">
                         <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Dato:</Label>
-                        <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.Date}"></TextBox>
+                        <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.Date}" />
                     </WrapPanel>
                     <WrapPanel Margin="0,0,0,15">
                         <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Skade:</Label>
@@ -46,8 +46,7 @@
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding Path=DeaktiverBåd}" CommandParameter="{Binding Path=DamageForm}">
-                            </i:InvokeCommandAction>
+                            <i:InvokeCommandAction Command="{Binding Path=DeaktiverBåd}" CommandParameter="{Binding Path=DamageForm}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
@@ -58,8 +57,7 @@
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding Path=AktiverBåd}" CommandParameter="{Binding Path=DamageForm}">
-                            </i:InvokeCommandAction>
+                            <i:InvokeCommandAction Command="{Binding Path=AktiverBåd}" CommandParameter="{Binding Path=DamageForm}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>

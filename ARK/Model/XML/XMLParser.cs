@@ -1,5 +1,4 @@
-﻿using ARK.Model.DB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
+using ARK.Model.DB;
 
 namespace ARK.Model.XML
 {
@@ -23,12 +23,12 @@ namespace ARK.Model.XML
                 UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
                 NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
-                string xmlString = XMLParser.DlToMem(ub.Uri, ftpCreds);
-                var xmlObject = XMLParser.ParseXML<XMLBoats.dataroot>(xmlString);
+                string xmlString = DlToMem(ub.Uri, ftpCreds);
+                XMLBoats.dataroot xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
 
-                List<Boat> boats = new List<Boat>();
+                var boats = new List<Boat>();
 
-                foreach (var boatXml in xmlObject.BådeSpecifik)
+                foreach (XMLBoats.datarootBådeSpecifik boatXml in xmlObject.BådeSpecifik)
                 {
                     Boat boat = new Boat()
                     {
@@ -60,12 +60,12 @@ namespace ARK.Model.XML
                 UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
                 NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
-                string xmlString = XMLParser.DlToMem(ub.Uri, ftpCreds);
-                var xmlObject = XMLParser.ParseXML<XMLMembers.dataroot>(xmlString);
+                string xmlString = DlToMem(ub.Uri, ftpCreds);
+                XMLMembers.dataroot xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
 
-                List<Member> members = new List<Member>();
+                var members = new List<Member>();
 
-                foreach (var memberXml in xmlObject.activeMembers)
+                foreach (XMLMembers.datarootAktiveMedlemmer memberXml in xmlObject.activeMembers)
                 {
                     Member member = new Member()
                     {
@@ -115,15 +115,15 @@ namespace ARK.Model.XML
                 UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
                 NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
-                string xmlString = XMLParser.DlToMem(ub.Uri, ftpCreds);
-                var xmlObject = XMLParser.ParseXML<XMLTrips.dataroot>(xmlString);
+                string xmlString = DlToMem(ub.Uri, ftpCreds);
+                XMLTrips.dataroot xmlObject = ParseXML<XMLTrips.dataroot>(xmlString);
 
-                List<Trip> trips = new List<Trip>();
+                var trips = new List<Trip>();
 
                 IEnumerable<PropertyInfo> props = new List<PropertyInfo>(typeof(XMLTrips.datarootTur).GetProperties());
-                IEnumerable<PropertyInfo> filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
+                var filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
 
-                foreach (var tripXml in xmlObject.Tur)
+                foreach (XMLTrips.datarootTur tripXml in xmlObject.Tur)
                 {
                     Trip trip = new Trip();
 
@@ -174,14 +174,14 @@ namespace ARK.Model.XML
 
             XMLSunset.sun sunXml = ParseXML<XMLSunset.sun>(xml);
             DateTime sunset = DateTime.Today;
-            sunset = sunset.Add(sunXml.evening.Twilight.nautical.TimeOfDay);
+            sunset = sunset.Add(sunXml.evening.twilight.nautical.TimeOfDay);
 
             return sunset;
         }
 
         private static T ParseXML<T>(string xml) where T : class
         {
-            var reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings() { ConformanceLevel = ConformanceLevel.Auto });
+            XmlReader reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings() { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }
 

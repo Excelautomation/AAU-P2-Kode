@@ -1,22 +1,27 @@
-﻿using ARK.Model;
-using ARK.Model.DB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
+using ARK.Model;
+using ARK.Model.DB;
 
 namespace ARK.ViewModel
 {
     public class BeginTripViewModel : Base.ViewModel
     {
-        private bool _enableMembers;
-        private List<Boat> _boats = new List<Boat>();
-        private List<Member> _members = new List<Member>();
         private Boat _boat;
+        private List<Boat> _boats = new List<Boat>();
+        private bool _enableMembers;
         private Member _member;
+        private List<Member> _members = new List<Member>();
+
+        public BeginTripViewModel()
+        {
+            // Load data
+            using (DbArkContext db = new DbArkContext())
+            {
+                Boats = new List<Boat>(db.Boat);
+                Members = new List<Member>(db.Member);
+            }
+        }
 
         public bool EnableMembers
         {
@@ -33,16 +38,6 @@ namespace ARK.ViewModel
                     EnableMembers = true;
                     Boat = e;
                 });
-            }
-        }
-        
-        public BeginTripViewModel()
-        {
-            // Load data
-            using (var db = new DbArkContext())
-            {
-                Boats = new List<Boat>(db.Boat);
-                Members = new List<Member>(db.Member);
             }
         }
 

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
 
@@ -13,26 +6,32 @@ namespace ARK.ViewModel
 {
     public class ProtocolSystemViewModel : Base.ViewModel
     {
-        private string _headlineText;
-        private UserControl _currentPage;
         private UserControl _currentInfo;
+        private UserControl _currentPage;
+        private string _headlineText;
+
+        public ProtocolSystemViewModel()
+        {
+            StartTrip.Execute(null);
+            HeadlineText = "Aalborg Roklubs Protokolsystem";
+        }
 
         public string HeadlineText
         {
-            get { return this._headlineText; }
-            set { this._headlineText = value; Notify(); }
+            get { return _headlineText; }
+            set { _headlineText = value; Notify(); }
         }
 
         public UserControl CurrentPage
         {
             get
             {
-                return this._currentPage;
+                return _currentPage;
             }
 
             private set
             {
-                this._currentPage = value;
+                _currentPage = value;
                 Notify();
             }
         }
@@ -41,12 +40,12 @@ namespace ARK.ViewModel
         {
             get
             {
-                return this._currentInfo;
+                return _currentInfo;
             }
 
             private set
             {
-                this._currentInfo = value;
+                _currentInfo = value;
                 Notify();
             }
         }
@@ -122,12 +121,6 @@ namespace ARK.ViewModel
 
         #endregion
 
-        public ProtocolSystemViewModel()
-        {
-            StartTrip.Execute(null);
-            HeadlineText = "Aalborg Roklubs Protokolsystem";
-        }
-
         private ICommand GenerateCommand(string headLineText, UserControl page)
         {
             return GenerateCommand(HeadlineText, page, null);
@@ -137,7 +130,7 @@ namespace ARK.ViewModel
         {
             return GetCommand<object>((e) =>
             {
-                this.HeadlineText = headLineText;
+                HeadlineText = headLineText;
                 CurrentPage = page;
                 CurrentInfo = additionalInfo;
                 CurrentInfo.DataContext = CurrentPage.DataContext;

@@ -1,14 +1,10 @@
+using System.Data.Entity.Migrations;
 using ARK.Model.DB;
 using MySql.Data.Entity;
 
 namespace ARK.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<ARK.Model.DB.DbArkContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DbArkContext>
     {
         public Configuration()
         {
@@ -16,7 +12,7 @@ namespace ARK.Migrations
             SetSqlGenerator("MySql.Data.MySqlClient", new MySqlMigrationSqlGenerator());
         }
 
-        protected override void Seed(ARK.Model.DB.DbArkContext context)
+        protected override void Seed(DbArkContext context)
         {
             //  This method will be called after migrating to the latest version.
 

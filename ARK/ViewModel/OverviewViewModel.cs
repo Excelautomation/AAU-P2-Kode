@@ -1,12 +1,10 @@
-﻿using ARK.Model;
-using ARK.Model.DB;
-using ARK.Model.Search;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ARK.Model;
+using ARK.Model.Search;
 using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel
@@ -45,19 +43,6 @@ namespace ARK.ViewModel
             set { _skadesblanketter = value; Notify(); } 
         }
 
-        public ObservableCollection<Control> Filters
-        {
-            get
-            {
-                return _filters ?? (
-                    _filters = new ObservableCollection<Control>
-                    {
-                        new CheckBox {Content = "Skader"},
-                        new CheckBox {Content = "Langtur"},
-                        new CheckBox {Content = "Både ude"}
-                    });
-            }
-        }
         public Visibility ShowBoatsOut
         {
             get { return _showBoatsOut; }
@@ -75,7 +60,21 @@ namespace ARK.ViewModel
             get { return _showSkader; }
             set { _showSkader = value; Notify(); }
         }
-       
+
+        public ObservableCollection<Control> Filters
+        {
+            get
+            {
+                return _filters ?? (
+                    _filters = new ObservableCollection<Control>
+                    {
+                        new CheckBox {Content = "Skader"},
+                        new CheckBox {Content = "Langtur"},
+                        new CheckBox {Content = "Både ude"}
+                    });
+            }
+        }
+
         private void ResetFilter()
         {
             ShowBoatsOut = Visibility.Visible;
