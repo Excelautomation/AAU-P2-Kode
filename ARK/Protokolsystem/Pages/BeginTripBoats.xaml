@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Base"
-             xmlns:protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
+             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              d:DesignWidth="640" Width="600" Height="514">
     <UserControl.DataContext>
-        <protokolsystem:BeginTripViewModel />
+        <Protokolsystem:BeginTripViewModel />
     </UserControl.DataContext>
     <Grid Width="600" Height="512">
         <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,41,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
