@@ -182,6 +182,8 @@
     <Compile Include="ViewModel\Base\Keyboard\IKeyboardChange.cs" />
     <Compile Include="ViewModel\Base\Keyboard\KeyboardViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Boats.cs" />
+    <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
