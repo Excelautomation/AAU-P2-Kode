@@ -35,7 +35,9 @@
         <StackPanel HorizontalAlignment="Left" Height="514" Width="609" VerticalAlignment="Top"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
             <ContentControl Content="{Binding Path=CurrentPage}"/>
         </StackPanel>
-        <StackPanel x:Name="Buttons" Grid.Column="1" Height="178" Margin="0,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="609"/>
+        <StackPanel x:Name="Buttons" Grid.Column="1" Height="178" Margin="0,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="609">
+            <ContentControl Content="{Binding Path=Keyboard}"/>
+        </StackPanel>
         <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="194" Grid.RowSpan="3" Background="#FFE9EAED">
             <Rectangle HorizontalAlignment="Left" Height="77" Margin="3,663,0,-3" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>
             <Rectangle HorizontalAlignment="Left" Height="147" Margin="3,407,0,0" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>
@@ -166,7 +168,7 @@
                 <ColumnDefinition Width="257*"/>
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Left" Height="43" Width="596" VerticalAlignment="Top" Background="White" Margin="0,-1,0,0" Grid.ColumnSpan="2">
-                <Label x:Name="HeadlineLabel" Content="START ROTUR" Height="43" FontSize="24" FontWeight="Bold" Margin="0,-5,0,0" />
+                <Label x:Name="HeadlineLabel" Content="START ROTUR" Height="43" FontSize="24" FontWeight="Bold" Margin="0,-5,0,0" FontFamily="Calibri" />
             </StackPanel>
         </Grid>
     </Grid>

@@ -11,7 +11,7 @@ namespace ARK.Model.DB
             Database.SetInitializer(new MySqlInitializer());
         }
 
-        public DbSet<FtpInfo> FtpInfo { get; set; }
+        public DbSet<FTPInfo> FtpInfo { get; set; }
         public DbSet<DamageType> DamageType { get; set; }
         public DbSet<Boat> Boat { get; set; }
         public DbSet<LongDistanceForm> LongTripForm { get; set; }

@@ -5,9 +5,9 @@ namespace ARK.Protokolsystem.Pages
     /// <summary>
     /// Interaction logic for Keyboard.xaml
     /// </summary>
-    public partial class Keyboard : UserControl
+    public partial class OnScreenKeyboard : UserControl
     {
-        public Keyboard()
+        public OnScreenKeyboard()
         {
             InitializeComponent();
         }
