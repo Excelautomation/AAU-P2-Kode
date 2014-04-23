@@ -124,7 +124,7 @@
     <Compile Include="Model\DB\DbArkContext.cs" />
     <Compile Include="Model\DB\MySQLHistoryContext.cs" />
     <Compile Include="Model\DB\MySqlInitializer.cs" />
-    <Compile Include="Model\FTPInfo.cs" />
+    <Compile Include="Model\FtpInfo.cs" />
     <Compile Include="Model\GetSMS.cs" />
     <Compile Include="Model\LongDistanceForm.cs" />
     <Compile Include="Administrationssystem\Pages\Overview.xaml.cs">
@@ -168,26 +168,27 @@
     <Compile Include="Protokolsystem\Pages\EndTrip.xaml.cs">
       <DependentUpon>EndTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
-      <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Protokolsystem\Pages\MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
+      <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Protokolsystem\ProtocolSystem.xaml.cs">
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\AdminSystemViewModel.cs" />
-    <Compile Include="ViewModel\FormsDamageViewModel.cs" />
-    <Compile Include="ViewModel\BeginTripViewModel.cs" />
-    <Compile Include="ViewModel\FormsViewModel.cs" />
-    <Compile Include="ViewModel\BoatViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
+    <Compile Include="ViewModel\Base\KeyboardViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\ProtocolSystemViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\BoatViewModel.cs" />
     <Compile Include="ViewModel\Base\DelegateCommand.cs" />
     <Compile Include="ViewModel\Base\IFilter.cs" />
-    <Compile Include="ViewModel\SettingsViewModel.cs" />
-    <Compile Include="ViewModel\OverviewViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\OverviewViewModel.cs" />
     <Compile Include="ViewModel\Base\PageInformation.cs" />
-    <Compile Include="ViewModel\ProtocolSystemViewModel.cs" />
     <Compile Include="ViewModel\Base\TimeCounter.cs" />
     <Compile Include="ViewModel\Base\ViewModel.cs" />
     <Page Include="Administrationssystem\AdminSystem.xaml">
@@ -281,13 +282,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\OnScreenKeyboard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Protokolsystem\Pages\MembersInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Protokolsystem\Pages\OnScreenKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Protokolsystem\ProtocolSystem.xaml">
       <SubType>Designer</SubType>
@@ -372,15 +373,7 @@
   <ItemGroup>
     <Resource Include="images\delete.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\keyboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\document_page_next.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\filter.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

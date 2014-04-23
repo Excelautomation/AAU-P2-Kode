@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace ARK.ViewModel.Base
 {
-    public class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         private ViewModel _parent;
 

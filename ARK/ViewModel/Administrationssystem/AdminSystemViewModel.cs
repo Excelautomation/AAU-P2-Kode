@@ -59,11 +59,19 @@ namespace ARK.ViewModel
             get { return GenerateCommand("Configurations", PageConfigurations); }
         }
 
+        private ICommand GenerateCommand(string pageName, UserControl page)
+        {
+            return GetCommand<object>((e) =>
+            {
+                Page.PageName = pageName;
+                Page.Page = page;
+            });
+        }
+
         #endregion Commands
 
         #region private
 
-        // TODO: Implementer noget cache på objekterne
         private Oversigt PageOverview
         {
             get { return _pageoversigt ?? (_pageoversigt = new Oversigt()); }
@@ -85,14 +93,5 @@ namespace ARK.ViewModel
         }
 
         #endregion private
-
-        private ICommand GenerateCommand(string pageName, UserControl page)
-        {
-            return GetCommand<object>((e) =>
-            {
-                Page.PageName = pageName;
-                Page.Page = page;
-            });
-        }
     }
 }
