@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
@@ -16,6 +17,7 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
+        <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
     </UserControl.Resources>
     <Grid>
         <Grid.Background>
@@ -80,11 +82,11 @@
                                 <DockPanel>
                                     <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
                                         <Border Margin="10" CornerRadius="5" Background="White">
-                                            <StackPanel Margin="25" >
-                                                <TextBlock Margin="0,0,0,10" TextAlignment="Center" Text="{Binding Path=Boat.Name}" FontSize="40" FontFamily="arial" FontWeight="Bold"></TextBlock>
+                                            <StackPanel Margin="25" DataContext="{Binding Path=Boat}">
+                                                <TextBlock Margin="0,0,0,10" TextAlignment="Center" Text="{Binding Path=Name}" FontSize="40" FontFamily="arial" FontWeight="Bold"></TextBlock>
                                                 <WrapPanel HorizontalAlignment="Center" Margin="10">
                                                     <WrapPanel Margin="0,0,20,0">
-                                                        <StackPanel Margin="0,0,10,0">
+                                                        <StackPanel Margin="0,0,10,0" >
                                                             <StackPanel.Resources>
                                                                 <Style BasedOn="{StaticResource StackpanelLabels}" TargetType="{x:Type Label}"/>
                                                             </StackPanel.Resources>
@@ -96,18 +98,17 @@
                                                             <Label Content="Skadestype:"/>
                                                         </StackPanel>
                                                         <StackPanel Width="100">
-                                                            <TextBlock Margin="0,5,0,0" FontSize="16" Text="{Binding Path=Boat.Id}"/>
-                                                            <TextBlock Margin="0,11,0,0" FontSize="16" Text="{Binding Path=Boat.SpecificBoatType}"/>
-                                                            <TextBlock Margin="0,10,0,0" FontSize="16" Text="{Binding Path=Boat.NumberofSeats}"/>
-                                                            <ComboBox Margin="0,6,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
-                                                                <ComboBox.ItemTemplate>
-                                                                    <DataTemplate>
-                                                                        <Label FontSize="14"/>
-                                                                    </DataTemplate>
-                                                                </ComboBox.ItemTemplate>
-                                                                <ComboBoxItem>Ja</ComboBoxItem>
-                                                                <ComboBoxItem>Nej</ComboBoxItem>
-                                                            </ComboBox>
+                                                            <TextBlock Margin="0,5,0,0" FontSize="16" Text="{Binding Path=Id}"/>
+                                                            <TextBlock Margin="0,11,0,0" FontSize="16" Text="{Binding Path=SpecificBoatType}"/>
+                                                            <TextBlock Margin="0,10,0,0" FontSize="16" Text="{Binding Path=Active, Converter={StaticResource YesNo}}"/>
+
+                                                                <Grid>
+                                                                    <ComboBox x:Name="AktivBox" SelectedItem="{Binding Path=Active, Converter={StaticResource YesNo}}" Margin="0,6,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
+                                                                    <ComboBoxItem Content="Ja"/>
+                                                                        <ComboBoxItem Content="Nej"/>
+                                                                </ComboBox>
+                                                                <!--<TextBlock Margin="6.5,9,0,0" TextAlignment="Left" FontSize="16" Text="{Binding Path=Active, Converter={StaticResource YesNo}}" IsHitTestVisible="False"/>-->
+                                                            </Grid>
                                                             <ComboBox Margin="0,4,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
                                                                 <ComboBox.ItemTemplate>
                                                                     <DataTemplate>
@@ -132,7 +133,7 @@
                                                         </StackPanel>
                                                     </WrapPanel>
                                                     <DockPanel Name="DockpanelSkadestype" Width="300">
-                                                        <Label DockPanel.Dock="Top" Content="Detaljer om skade" FontSize="16" FontStyle="Italic"/>
+                                                        <Label DockPanel.Dock="Top" FontSize="16" FontStyle="Italic"/>
                                                         <Border BorderThickness="2" BorderBrush="Gray">
                                                             <TextBox Margin="5" BorderThickness="0" FontSize="14" TextWrapping="Wrap" Text="Den er rimelig smadret. "/>
                                                         </Border>

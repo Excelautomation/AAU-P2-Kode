@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using ARK.ViewModel.Base;
 using ARK.Model;
 using ARK.Model.DB;
+using System;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -16,7 +17,16 @@ namespace ARK.ViewModel.Administrationssystem
         private ObservableCollection<Control> _filters;
         private Boat _Boat;
         private List<Boat> _Boats = new List<Boat>();
+        private bool _ActiveBoat;
 
+        public bool StringToBool(string str)
+        {
+            if (str.ToLower() == "ja" || str.ToLower() == "true")
+                return true;
+            else if (str.ToLower() == "nej" || str.ToLower() == "false")
+                return false;
+            else throw new ArgumentNullException();
+        }
 
         public BoatViewModel()
         {
@@ -31,10 +41,6 @@ namespace ARK.ViewModel.Administrationssystem
                 Boat = Boats[0];
             }
         }
-
-
-
-
 
         public List<Boat> Boats
         {
@@ -67,6 +73,18 @@ namespace ARK.ViewModel.Administrationssystem
                 });
             }
         }
+
+        public bool ActiveBoat
+        {
+            get { return _ActiveBoat; }
+            set {
+                _ActiveBoat = value;
+                Notify();
+            }
+        }
+
+
+
 
         public ObservableCollection<Control> Filters
         {
