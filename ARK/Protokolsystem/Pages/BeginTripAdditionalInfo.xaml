@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
     xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem"
-             x:Class="ARK.Protokolsystem.Pages.AdditionalInfo"
+             x:Class="ARK.Protokolsystem.Pages.BeginTripsAdditionalInfo"
              mc:Ignorable="d" Width="200" Height="743">
     <UserControl.DataContext>
         <VM:BeginTripAdditionalInfoViewModel></VM:BeginTripAdditionalInfoViewModel>

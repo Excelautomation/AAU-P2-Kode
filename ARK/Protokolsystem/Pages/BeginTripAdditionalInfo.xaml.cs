@@ -3,11 +3,11 @@
 namespace ARK.Protokolsystem.Pages
 {
     /// <summary>
-    /// Interaction logic for AdditionalInfo.xaml
+    /// Interaction logic for BeginTripsAdditionalInfo.xaml
     /// </summary>
-    public partial class AdditionalInfo : UserControl
+    public partial class BeginTripsAdditionalInfo : UserControl
     {
-        public AdditionalInfo()
+        public BeginTripsAdditionalInfo()
         {
             InitializeComponent();
         }
