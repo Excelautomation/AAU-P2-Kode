@@ -31,20 +31,17 @@
                 <TabItem Header="SMS-Modul" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="33*"/>
-                            <RowDefinition Height="121*"/>
-                            <RowDefinition Height="39*"/>
-                            <RowDefinition Height="325*"/>
+                            <RowDefinition Height="137*"/>
+                            <RowDefinition Height="386*"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0">Generelt</Label>
-                        <Border Grid.Row="1" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10,0,10,10">
+                        <Border Grid.Row="0" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10,10,10.2,8.8">
                             <StackPanel>
                                 <DockPanel>
                                     <TextBlock Margin="0,0,3,0" Background="Transparent">I dag forventes mørkets frembrud klokken:</TextBlock>
                                     <TextBox Margin="0,0,3,0" Width="34" Background="White">22</TextBox>
                                     <TextBlock Margin="0,0,3,0">:</TextBlock>
                                     <TextBox Margin="0,0,3,0" Width="34" Background="White">58</TextBox>
-                                    <CheckBox HorizontalAlignment="Right" Width="230">Automatisk opdatering.</CheckBox>
+                                    <CheckBox FontSize="14" HorizontalAlignment="Right" Width="230">Automatisk opdatering.</CheckBox>
                                 </DockPanel>
                                 <DockPanel>
                                     <TextBlock Background="Transparent">Send mørke-besked til udrejste både</TextBlock>
@@ -58,8 +55,7 @@
                                 </DockPanel>
                             </StackPanel>
                         </Border>
-                        <Label Margin="10,0,0,0" Grid.Row="2">Kontaktpersoner</Label>
-                        <Border Grid.Row="3" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10,0,10,10">
+                        <Border Grid.Row="1" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10,11.2,10.2,10.4">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="9*"/>
@@ -92,9 +88,62 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Skadetyper" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
-                    <ScrollViewer PanningMode="VerticalOnly" Padding="0,0,0,0" BorderThickness="1" BorderBrush="Black">
-                        <Grid Background="White" />
-                    </ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="14*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="167*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="197*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0">Opret ny skadetype</Button>
+                        <Label Grid.Row="0" Grid.Column="2">Detaljer</Label>
+                        <ScrollViewer Grid.Row="2" Grid.Column="0">
+                            <ListView Name="Skadetyper" SelectionMode="Single">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Width="500">
+                                            <StackPanel Margin="0,10,0,10">
+                                                <Label Content="{Binding Path=Brugernavn}" Margin="0,0,0,0" Padding="0"/>
+                                                <WrapPanel>
+                                                    <Label Content="{Binding Path=Member.FirstName}" Margin="0,0,3,0" Padding="0"/>
+                                                    <Label Content="{Binding Path=Member.LastName}" Margin="0,0,0,0" Padding="0"/>
+                                                </WrapPanel>
+                                            </StackPanel>
+                                            <Separator Margin="0" Padding="0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </ScrollViewer>
+                        <DockPanel Grid.Row="2" Grid.Column="2" Background="White">
+                            <StackPanel DockPanel.Dock="Top">
+                                <WrapPanel Margin="25">
+                                    <StackPanel Margin="0,0,40,0">
+                                        <Label>Skadenavn:</Label>
+                                        <Label>Alvorlighed:</Label>
+                                        <Label>Beskrivelse:</Label>
+                                    </StackPanel>
+                                    <StackPanel VerticalAlignment="Center" Width="250">
+                                        <TextBox Margin="4">Rorskade</TextBox>
+                                        <WrapPanel Margin="4">
+                                            <TextBlock>Er båden sejlbar?</TextBlock>
+                                            <CheckBox/>
+                                        </WrapPanel>
+                                        <TextBox Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </StackPanel>
+                            <WrapPanel DockPanel.Dock="Bottom" Margin="25">
+                                <Button>Gem</Button>
+                                <Button Margin="10,0,0,0">Anullér</Button>
+                                <Button Margin="250,0,0,0">Slet!</Button>
+                            </WrapPanel>
+                        </DockPanel>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
@@ -108,10 +157,10 @@
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="197*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0">Opret Administrator</Button>
+                        <Button Grid.Row="0" Grid.Column="0">Opret ny administrator</Button>
                         <Label Grid.Row="0" Grid.Column="2">Detaljer</Label>
                         <ScrollViewer Grid.Row="2" Grid.Column="0">
-                            <ListView Name="KontaktListe" SelectionMode="Single">
+                            <ListView Name="Administratorer" SelectionMode="Single">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Width="500">
@@ -139,13 +188,13 @@
                                         <Label>E-mail:</Label>
                                         <Label>Telefon:</Label>
                                     </StackPanel>
-                                    <StackPanel Width="250">
-                                        <TextBox Margin="0,4.5,0,0">FFS</TextBox>
-                                        <PasswordBox Margin="0,4.5,0,0" Password="Kode1234"></PasswordBox>
-                                        <TextBox Margin="0,4.5,0,0">Bobby</TextBox>
-                                        <TextBox Margin="0,4.5,0,0">Olsen</TextBox>
-                                        <TextBox Margin="0,4.5,0,0" >Supernova@hotmail.com</TextBox>
-                                        <TextBox Margin="0,4.5,0,0">12345678</TextBox>
+                                    <StackPanel VerticalAlignment="Center" Width="250">
+                                        <TextBox Margin="4">FFS</TextBox>
+                                        <PasswordBox Margin="4" Password="Kode1234"></PasswordBox>
+                                        <TextBox Margin="4">Bobby</TextBox>
+                                        <TextBox Margin="4">Olsen</TextBox>
+                                        <TextBox Margin="4">Supernova@hotmail.com</TextBox>
+                                        <TextBox Margin="4">12345678</TextBox>
                                     </StackPanel>
                                 </WrapPanel>
                             </StackPanel>
