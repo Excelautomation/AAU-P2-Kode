@@ -21,6 +21,7 @@ namespace ARK.Model.DB
         public DbSet<Trip> Trip { get; set; }
         public DbSet<GetSMS> GetSMS { get; set; }
         public DbSet<SMS> SMS { get; set; }
+        public DbSet<StandardTrip> StandardTrip { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

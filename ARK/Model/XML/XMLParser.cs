@@ -129,7 +129,8 @@ namespace ARK.Model.XML
 
                     trip.Id = tripXml.ID;
                     trip.Distance = tripXml.Kilometer;
-                    // trip.Date = tripXml.Dato;
+                    trip.TripStartTime = tripXml.Dato;
+                    trip.TripEndedTime = tripXml.Dato;
                     trip.LongTrip = tripXml.Langtur == 1;
                     trip.BoatId = tripXml.BådID;
                     trip.Members = new List<Member>();
