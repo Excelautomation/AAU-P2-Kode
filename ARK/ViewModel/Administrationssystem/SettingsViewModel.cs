@@ -4,7 +4,7 @@ using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class SettingsViewModel : Base.ViewModel, IFilter
+    public class SettingsViewModel : ViewModelBase, IFilter
     {
         public ObservableCollection<Control> Filters
         {

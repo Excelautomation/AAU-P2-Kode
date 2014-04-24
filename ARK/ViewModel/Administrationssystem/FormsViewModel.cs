@@ -10,7 +10,7 @@ using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class FormsViewModel : Base.ViewModel, IFilter
+    public class FormsViewModel : ViewModelBase, IFilter
     {
         private List<DamageForm> _damageForms = new List<DamageForm>();
         private ObservableCollection<Control> _filters;

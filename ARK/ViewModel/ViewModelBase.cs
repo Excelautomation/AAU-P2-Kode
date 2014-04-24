@@ -2,19 +2,20 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using ARK.ViewModel.Base;
 
-namespace ARK.ViewModel.Base
+namespace ARK.ViewModel
 {
-    public abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModelBase : IViewModelBase
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void Notify([CallerMemberName] string propertyName = "")
         {
-            NotifyProp(propertyName);
+            NotifyCustom(propertyName);
         }
 
-        protected void NotifyProp(string propertyName = "")
+        protected void NotifyCustom(string propertyName = "")
         {
             if (PropertyChanged != null)
             {

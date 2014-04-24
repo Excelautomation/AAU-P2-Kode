@@ -145,8 +145,8 @@
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Protokolsystem\Pages\AdditionalInfo.xaml.cs">
-      <DependentUpon>AdditionalInfo.xaml</DependentUpon>
+    <Compile Include="Protokolsystem\Pages\BeginTripAdditionalInfo.xaml.cs">
+      <DependentUpon>BeginTripAdditionalInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
       <DependentUpon>BeginTripBoats.xaml</DependentUpon>
@@ -180,24 +180,31 @@
     </Compile>
     <Compile Include="ValueConverters\BoolToValueConverter.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
-    <Compile Include="ViewModel\Base\Filter\FilterViewModel.cs" />
-    <Compile Include="ViewModel\Base\GlobalCommands.cs" />
-    <Compile Include="ViewModel\Base\Keyboard\IKeyboardHandler.cs" />
-    <Compile Include="ViewModel\Base\Keyboard\KeyboardViewModel.cs" />
+    <Compile Include="ViewModel\Filter\FilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\Boats.cs" />
+    <Compile Include="ViewModel\ContentViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\IContentViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\IFilterContainerViewModel.cs" />
+    <Compile Include="ViewModel\Base\IInfoContainerViewModel.cs" />
+    <Compile Include="ViewModel\Base\IInfoContentViewModel.cs" />
+    <Compile Include="ViewModel\Base\IKeyboardContainerViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\IPageContainerViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\IViewModelBase.cs" />
+    <Compile Include="ViewModel\KeyboardContentViewModelBase.cs" />
+    <Compile Include="ViewModel\PageContainerViewModelBase.cs" />
+    <Compile Include="ViewModel\Protokolsystem\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\ProtocolSystemViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\BoatViewModel.cs" />
-    <Compile Include="ViewModel\Base\DelegateCommand.cs" />
-    <Compile Include="ViewModel\Base\IFilter.cs" />
+    <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Filter\IFilter.cs" />
     <Compile Include="ViewModel\Administrationssystem\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\OverviewViewModel.cs" />
-    <Compile Include="ViewModel\Base\PageInformation.cs" />
-    <Compile Include="ViewModel\Base\TimeCounter.cs" />
-    <Compile Include="ViewModel\Base\ViewModel.cs" />
+    <Compile Include="ViewModel\PageInformation.cs" />
+    <Compile Include="ViewModel\TimeCounter.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="Administrationssystem\AdminSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,7 +264,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Protokolsystem\Pages\AdditionalInfo.xaml">
+    <Page Include="Protokolsystem\Pages\BeginTripAdditionalInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ARK.ViewModel.Base
+namespace ARK.ViewModel
 {
     public class DelegateCommand<T> : ICommand
     {
@@ -12,6 +12,12 @@ namespace ARK.ViewModel.Base
         }
 
         public event EventHandler CanExecuteChanged;
+
+        public virtual void OnCanExecuteChanged()
+        {
+            EventHandler handler = CanExecuteChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
 
         public Action<T> executeMethod { get; set; }
         public Func<T, bool> canExecuteMethod { get; set; }
