@@ -170,9 +170,9 @@ namespace ARK.ViewModel.Administrationssystem
 
                 if (FilterActive(bådeUnderReparationText, selectedCheckboxFilters))
                 {
-                    throw new NotImplementedException();
-
+                    // TODO - rigitig implementation?
                     var output = from boat in _boatsNonFiltered
+                                 where !boat.Usable
                                  select boat;
                     UpdateBoatsFilter(ref listUpdated, output);
                 }

@@ -5,12 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
-             xmlns:VM="clr-namespace:ARK.ViewModel"
-             xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
+             xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
              d:DesignHeight="594.417" d:DesignWidth="1121.053">
     <UserControl.DataContext>
-        <administrationssystem:BoatViewModel />
+        <VM:BoatViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
         <Style x:Key="StackpanelLabels" TargetType="Label">
@@ -98,12 +97,12 @@
                                                             <Label Content="Skadestype:"/>
                                                         </StackPanel>
                                                         <StackPanel Width="100">
-                                                            <TextBlock Margin="0,5,0,0" FontSize="16" Text="{Binding Path=Id}"/>
-                                                            <TextBlock Margin="0,11,0,0" FontSize="16" Text="{Binding Path=SpecificBoatType}"/>
-                                                            <TextBlock Margin="0,10,0,0" FontSize="16" Text="{Binding Path=Active, Converter={StaticResource YesNo}}"/>
+                                                            <TextBlock Margin="0,5,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Id}"/>
+                                                            <TextBlock Margin="0,11,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
+                                                            <TextBlock Margin="0,10,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Active, Converter={StaticResource YesNo}}"/>
 
                                                                 <Grid>
-                                                                    <ComboBox x:Name="AktivBox" SelectedItem="{Binding Path=Active, Converter={StaticResource YesNo}}" Margin="0,6,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
+                                                                <ComboBox x:Name="AktivBox" SelectedItem="{Binding Path=CurrentBoat.Active, Converter={StaticResource YesNo}}" Margin="0,6,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
                                                                     <ComboBoxItem Content="Ja"/>
                                                                         <ComboBoxItem Content="Nej"/>
                                                             </ComboBox>
