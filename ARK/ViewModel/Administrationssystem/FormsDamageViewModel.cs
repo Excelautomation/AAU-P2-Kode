@@ -1,10 +1,9 @@
 ﻿using System.Windows.Input;
 using ARK.Model;
-using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class FormsDamageViewModel : ViewModelBase
+    public class FormsDamageViewModel : ContentViewModelBase
     {
         public DamageForm DamageForm { get; set; }
 

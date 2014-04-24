@@ -3,45 +3,81 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using ARK.Model;
+using ARK.Model.DB;
 using ARK.Model.Search;
 using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    internal class OverviewViewModel : ViewModelBase, IFilter
+    public class OverviewViewModel : FilterContentViewModelBase
     {
-        private readonly List<CheckboxFilter> _checkboxFilters = new List<CheckboxFilter>();
-
-        private ObservableCollection<Control> _filters;
-
         private Visibility _showBoatsOut;
-
         private Visibility _showLangtur;
-
         private Visibility _showSkader;
 
-        private List<DamageForm> _skadesblanketter = new List<DamageForm>();
+        private IEnumerable<DamageForm> _skadesblanketter;
+        private readonly List<DamageForm> _skadesblanketterNonFiltered;
+        private IEnumerable<LongDistanceForm> _longDistanceForms;
+        private readonly List<LongDistanceForm> _longDistanceFormsNonFiltered;
+        private IEnumerable<Boat> _boatsOut;
+        private readonly List<Boat> _boatsOutNonFiltered; 
 
         public OverviewViewModel()
         {
             // Load data
-            //using (var db = new DbArkContext())
-            //{
-            //    Skadesblanketter = new List<DamageForm>(db.DamageForm);
-            //}
-            // Add Checkbox filter
-            var checkboxfilters = from c in Filters
-                                  where c is CheckBox
-                                  select new CheckboxFilter((CheckBox)c, UpdateFilter);
-            _checkboxFilters.AddRange(checkboxfilters);
+            using (var db = new DbArkContext())
+            {
+                _skadesblanketterNonFiltered = db.DamageForm.ToList();
+                _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
+                _boatsOutNonFiltered = db.Boat.ToList();
+            }
+
+            // Aktiver filtre
+            ParentAttached += (sender, args) =>
+            {
+                FilterContainer.EnableSearch = true;
+                FilterContainer.EnableFilters = true;
+
+                // Opdater filtre
+                FilterContainer.Filters.Clear();
+
+                FilterContainer.Filters.Add(new CheckBox {Content = "Skader"});
+                FilterContainer.Filters.Add(new CheckBox {Content = "Langtur"});
+                FilterContainer.Filters.Add(new CheckBox {Content = "Både ude"});
+
+                // Opret checkbox filters
+                CheckboxFilters = FilterContainer.Filters.Select(element => new CheckboxFilter(element as CheckBox, UpdateFilter)).ToList();
+
+                // Bind til søgeevent
+                FilterContainer.SearchTextChanged += (o, eventArgs) =>
+                {
+                    SearchText = eventArgs.SearchText;
+                    UpdateFilter();
+                };
+
+                // Opdater filter
+                UpdateFilter();
+            };
         }
 
-        public List<DamageForm> Skadesblanketter 
+        private List<CheckboxFilter> CheckboxFilters { get; set; }
+        private string SearchText { get; set; }
+
+        public IEnumerable<DamageForm> Skadesblanketter 
         { 
             get { return _skadesblanketter; } 
-            set { _skadesblanketter = value; Notify(); } 
+            private set { _skadesblanketter = value; Notify(); } 
         }
+
+        public IEnumerable<LongDistanceForm> LongDistanceForms
+        {
+            get { return _longDistanceForms; }
+            private set { _longDistanceForms = value; Notify(); }
+        }
+
+        public IEnumerable<Boat> BoatsOut { get { return _boatsOut; } private set { _boatsOut = value; Notify(); } }
 
         public Visibility ShowBoatsOut
         {
@@ -61,25 +97,15 @@ namespace ARK.ViewModel.Administrationssystem
             set { _showSkader = value; Notify(); }
         }
 
-        public ObservableCollection<Control> Filters
-        {
-            get
-            {
-                return _filters ?? (
-                    _filters = new ObservableCollection<Control>
-                    {
-                        new CheckBox { Content = "Skader" },
-                        new CheckBox { Content = "Langtur" },
-                        new CheckBox { Content = "Både ude" }
-                    });
-            }
-        }
-
         private void ResetFilter()
         {
             ShowBoatsOut = Visibility.Visible;
             ShowLangtur = Visibility.Visible;
             ShowSkader = Visibility.Visible;
+
+            Skadesblanketter = _skadesblanketterNonFiltered.AsReadOnly();
+            LongDistanceForms = _longDistanceFormsNonFiltered.AsReadOnly();
+            BoatsOut = _boatsOutNonFiltered.AsReadOnly();
         }
 
         private void UpdateFilter()
@@ -88,18 +114,41 @@ namespace ARK.ViewModel.Administrationssystem
             ResetFilter();
 
             // Indlæs de valgte checkbox filtre
-            var selectedCheckboxFilters = from c in _checkboxFilters
-                                          where c.Active
-                                          select c;
+            var selectedCheckboxFilters = (from filter in CheckboxFilters
+                where filter.Active
+                select filter).ToList();
 
-            if (!selectedCheckboxFilters.Any())
-            {
+            // Tjek om en af filtertyperne er aktive
+            if (!selectedCheckboxFilters.Any() && string.IsNullOrEmpty(SearchText))
                 return;
+
+
+            // Tjek filter
+            if (selectedCheckboxFilters.Any())
+            {
+                ShowBoatsOut = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Både ude")
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+                ShowLangtur = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Langtur")
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+                ShowSkader = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Skader")
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
             }
 
-            ShowBoatsOut = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Både ude") ? Visibility.Visible : Visibility.Collapsed;
-            ShowLangtur = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Langtur") ? Visibility.Visible : Visibility.Collapsed;
-            ShowSkader = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Skader") ? Visibility.Visible : Visibility.Collapsed;
+            // Tjek søgning
+            if (!string.IsNullOrEmpty(SearchText))
+            {
+                Skadesblanketter = from skade in Skadesblanketter
+                    where skade.Boat.Name.Contains(SearchText) ||
+                          skade.Description.Contains(SearchText)
+                    select skade;
+
+                ShowSkader = Skadesblanketter.Any() ? Visibility.Visible
+                    : Visibility.Collapsed;
+            }
+            
         }
     }
 }

@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <VM:FormsLongTripViewModel></VM:FormsLongTripViewModel>
+    </UserControl.DataContext>
     <Grid>
         <StackPanel>
             <Label FontSize="40" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,20">Langtursblanket</Label>
@@ -13,12 +17,12 @@
                     <WrapPanel Margin="0,30,0,10">
                         <StackPanel Margin="0,0,20,0">
                             <Label Content="Afgang" HorizontalAlignment="Center" VerticalAlignment="Top" Width="73.731" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-                            <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="48.373" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="20" Text="{Binding Path=Departure}"/>
+                            <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="48.373" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="20" Text="{Binding Path=LongDistanceForm.Departure}"/>
                         </StackPanel>
 
                         <StackPanel>
                             <Label Content="Hjemkomst" HorizontalAlignment="Center" VerticalAlignment="Top" Width="109.552" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-                            <TextBox HorizontalAlignment="Center" Height="48.373" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}" Text="{Binding Path=Arrival}"/>
+                            <TextBox HorizontalAlignment="Center" Height="48.373" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}" Text="{Binding Path=LongDistanceForm.Arrival}"/>
                         </StackPanel>
                     </WrapPanel>
                     <StackPanel>
@@ -31,7 +35,7 @@
                 <StackPanel>
                     <StackPanel Margin="0,0,0,10">
                         <Label FontSize="28" Margin="0,0,0,0">Deltagere på turen</Label>
-                        <ListView Height="155">
+                        <ListView Height="155" ItemsSource="{Binding Path=LongDistanceForm.Members}">
                             <ListViewItem>
                                 Jørgen Svendsen
                             </ListViewItem>
@@ -56,7 +60,7 @@
                         <Label Content="Godkend Langtursblanket"/>
                     </StackPanel>
                 </Button>
-                <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0" Command="{Binding Path=SetActive}">
+                <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0">
                     <StackPanel Margin="5">
                         <Image Source="../../images/delete.png" Height="32"/>
                         <Label Content="Afvis Langtursblanket"/>

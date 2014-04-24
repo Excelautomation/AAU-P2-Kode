@@ -106,7 +106,7 @@
                                                                     <ComboBox x:Name="AktivBox" SelectedItem="{Binding Path=Active, Converter={StaticResource YesNo}}" Margin="0,6,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
                                                                     <ComboBoxItem Content="Ja"/>
                                                                         <ComboBoxItem Content="Nej"/>
-                                                                </ComboBox>
+                                                            </ComboBox>
                                                                 <!--<TextBlock Margin="6.5,9,0,0" TextAlignment="Left" FontSize="16" Text="{Binding Path=Active, Converter={StaticResource YesNo}}" IsHitTestVisible="False"/>-->
                                                             </Grid>
                                                             <ComboBox Margin="0,4,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">

@@ -1,7 +1,26 @@
-﻿namespace ARK.ViewModel.Base
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
+
+namespace ARK.ViewModel.Base
 {
+    public class SearchEventArgs : EventArgs
+    {
+        public string SearchText { get; private set; }
+
+        public SearchEventArgs(string searchText)
+        {
+            this.SearchText = searchText;
+        }
+    }
+
     public interface IFilterContainerViewModel : IViewModelBase
     {
-        void Filter();
+        event EventHandler<SearchEventArgs> SearchTextChanged;
+
+        bool EnableSearch { get; set; }
+        bool EnableFilters { get; set; }
+
+        ObservableCollection<FrameworkElement> Filters { get; } 
     }
 }

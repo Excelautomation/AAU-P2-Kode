@@ -1,13 +1,17 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using ARK.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    internal class AdminSystemViewModel : ViewModelBase
+    public class AdminSystemViewModel : PageContainerViewModelBase, IFilterContainerViewModel
     {
-        private PageInformation _page;
+        private readonly ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
+        private bool _enableFilters;
+        private bool _enableSearch;
         private Baede _pagebaede;
         private Blanketter _pageforms;
         private Oversigt _pageoversigt;
@@ -18,59 +22,41 @@ namespace ARK.ViewModel.Administrationssystem
             TimeCounter.StartTimer();
 
             // Start oversigten
-            Page = new PageInformation();
             MenuOverview.Execute(null);
 
             TimeCounter.StopTime("AdministrationssystemViewModel load");
         }
 
-        public PageInformation Page
+        public override void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)
         {
-            get 
-            { 
-                return _page; 
-            }
-            set 
-            { 
-                _page = value; 
-                Notify(); 
-            }
+            EnableSearch = false;
+            EnableFilters = false;
+            Filters.Clear();
+
+            base.NavigateToPage(page, pageTitle);
         }
 
-        #region Commands
+        #region Pages
 
         public ICommand MenuOverview
         {
-            get { return GenerateCommand("Overview", PageOverview); }
+            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageOverview), "Overview"); }
         }
 
         public ICommand MenuForms
         {
-            get { return GenerateCommand("Forms", PageForms); }
+            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageForms), "Forms"); }
         }
 
         public ICommand MenuBoats
         {
-            get { return GenerateCommand("Boats", PageBoats); }
+            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageBoats), "Boats"); }
         }
 
         public ICommand MenuConfigurations
         {
-            get { return GenerateCommand("Configurations", PageConfigurations); }
+            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageConfigurations), "Configurations"); }
         }
-
-        private ICommand GenerateCommand(string pageName, UserControl page)
-        {
-            return GetCommand<object>((e) =>
-            {
-                Page.PageName = pageName;
-                Page.Page = page;
-            });
-        }
-
-        #endregion Commands
-
-        #region private
 
         private Oversigt PageOverview
         {
@@ -93,5 +79,82 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         #endregion private
+
+        #region Filter
+
+        public ICommand SearchChangedCommand
+        {
+            get
+            {
+                return
+                    GetCommand<string>(
+                        s => { if (SearchTextChanged != null) SearchTextChanged(this, new SearchEventArgs(s)); });
+            }
+        }
+
+        public Visibility SearchVisibility
+        {
+            get { return EnableSearch ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public Visibility FiltersVisibility
+        {
+            get { return EnableFilters ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public Visibility FilterBarVisibility
+        {
+            get { return EnableSearch && EnableFilters ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public int ContentRow
+        {
+            get { return EnableSearch && EnableFilters ? 2 : 0; }
+        }
+
+        public int ContentRowSpan
+        {
+            get { return EnableSearch && EnableFilters ? 1 : 3; }
+        }
+
+        private void NotifyFilter()
+        {
+            NotifyCustom("SearchVisibility");
+            NotifyCustom("FiltersVisibility");
+            NotifyCustom("FilterBarVisibility");
+            NotifyCustom("ContentRow");
+            NotifyCustom("ContentRowSpan");
+        }
+
+        public event EventHandler<SearchEventArgs> SearchTextChanged;
+
+        public bool EnableSearch
+        {
+            get { return _enableSearch; }
+            set
+            {
+                _enableSearch = value;
+                Notify();
+                NotifyFilter();
+            }
+        }
+
+        public bool EnableFilters
+        {
+            get { return _enableFilters; }
+            set
+            {
+                _enableFilters = value;
+                Notify();
+                NotifyFilter();
+            }
+        }
+
+        public ObservableCollection<FrameworkElement> Filters
+        {
+            get { return _filters; }
+        }
+
+        #endregion
     }
 }
