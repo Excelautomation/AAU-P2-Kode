@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ARK.Model
 {
-    public class Member : IEquatable<Member>
+    public class Member : IEquatable<Member>, IComparable<Member>
     {
         public int Id { get; set; }
         public int MemberNumber { get; set; }
@@ -85,6 +85,11 @@ namespace ARK.Model
         public static IEqualityComparer<Member> IdComparer
         {
             get { return IdComparerInstance; }
+        }
+
+        public int CompareTo(Member other)
+        {
+            return this.Id.CompareTo(other.Id);
         }
     }
 }
