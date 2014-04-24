@@ -5,7 +5,7 @@ using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    internal class AdminSystemViewModel : Base.ViewModel
+    internal class AdminSystemViewModel : ViewModelBase
     {
         private PageInformation _page;
         private Baede _pagebaede;

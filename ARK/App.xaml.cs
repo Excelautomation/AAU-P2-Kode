@@ -112,7 +112,7 @@ namespace ARK
             }));
 
             WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
-            if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
+            if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb1")
             {
                 thr.Start();
             }

@@ -1,24 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.ViewModel.Base.Keyboard;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System;
+using ARK.Protokolsystem.Pages;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    public class BeginTripViewModel : Base.ViewModel, IKeyboardHandler
+    public class BeginTripViewModel : KeyboardContentViewModelBase
     {
         private Boat _selectedBoat;
         private List<Boat> _boats = new List<Boat>();
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
         private readonly ObservableCollection<Member> _selectedMembers;
-        private string _keyboardToggleText;
+        private FrameworkElement _infoPage;
 
         public BeginTripViewModel()
         {
@@ -33,6 +35,26 @@ namespace ARK.ViewModel.Protokolsystem
                     }).OrderBy(x => x.FirstName).ToList();
                 _selectedMembers = new ObservableCollection<Member>();
             }
+
+            ParentAttached += (sender, args) =>
+            {
+                // Bind på keyboard toggle changed
+                Keyboard.PropertyChanged += (senderKeyboard, keyboardArgs) =>
+                {
+                    // Tjek om toggled er ændret
+                    if (keyboardArgs.PropertyName == "KeyboardToggled")
+                        NotifyCustom("KeyboardToggleText");
+                };
+
+                // Notify at parent er ændret
+                NotifyCustom("Keyboard");
+                NotifyCustom("KeyboardToggleText");
+            };
+        }
+
+        public IInfoContainerViewModel GetInfoContainerViewModel
+        {
+            get { return Parent as IInfoContainerViewModel; }
         }
 
         public bool EnableMembers
@@ -73,6 +95,7 @@ namespace ARK.ViewModel.Protokolsystem
                 {
                     EnableMembers = true;
                     Boat = e;
+                    UpdateInfo();
                 });
             }
         }
@@ -82,21 +105,9 @@ namespace ARK.ViewModel.Protokolsystem
             get
             {
                 return GetCommand<IList>(e =>
-                    {
-                    });
-            }
-        }
-
-        public ObservableCollection<Boat> SelectedBoat
-        {
-            get
-            {
-                if (Boat == null)
                 {
-                    return new ObservableCollection<Boat>();
-                }
-
-                return new ObservableCollection<Boat> { Boat };
+                    UpdateInfo();
+                });
             }
         }
 
@@ -107,27 +118,30 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 _selectedBoat = value;
                 Notify();
-                NotifyProp("BoatContent");
             }
         }
 
-        public ObservableCollection<Member> SelectedMembers
+        public FrameworkElement InfoPage
         {
-            get 
-            {
-                return _selectedMembers; 
-            }
+            get { return _infoPage ?? (_infoPage = new AdditionalInfo()); }
+        }
+
+        public BeginTripAdditionalInfoViewModel Info
+        {
+            get { return InfoPage.DataContext as BeginTripAdditionalInfoViewModel; }
+        }
+
+        public void UpdateInfo()
+        {
+            Info.SelectedBoat = new ObservableCollection<Boat> {Boat};
+            Info.SelectedMembers = new ObservableCollection<Member>(Members);
+
+            GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
 
         public string KeyboardToggleText
         {
-            get
-            {
-                if (string.IsNullOrEmpty(_keyboardToggleText)) return "VIS\nTASTATUR";
-
-                return _keyboardToggleText;
-            }
-            set { _keyboardToggleText = value; Notify(); }
+            get { return Keyboard.KeyboardToggled ? "SKJUL\nTASTATUR" : "VIS\nTASTATUR"; }
         }
     }
 }
