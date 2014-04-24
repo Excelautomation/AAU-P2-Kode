@@ -24,8 +24,8 @@ namespace ARK.Model
         public bool Usable { get; set; }
         public bool LongTripBoat { get; set; }
         public bool BoatOut { get; set; }
-        // public bool TripEnded { get; set; }
-        // public DateTime TripStartTime { get; set; }
+        public DateTime TripStartTime { get; set; }
+        public DateTime TripEndedTime { get; set; }
 
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
