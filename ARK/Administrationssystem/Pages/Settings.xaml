@@ -34,7 +34,7 @@
                             <RowDefinition Height="137*"/>
                             <RowDefinition Height="386*"/>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10,10,10.2,8.8">
+                        <Border Grid.Row="0" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
                             <StackPanel>
                                 <DockPanel>
                                     <TextBlock Margin="0,0,3,0" Background="Transparent">I dag forventes mørkets frembrud klokken:</TextBlock>
@@ -71,18 +71,12 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0">Aktive kontaktpersoner</Label>
                                 <Label Grid.Row="0" Grid.Column="4">Ikke-aktive kontakpersoner</Label>
-                                <StackPanel Grid.Row="2" Grid.Column="2">
-                                    <WrapPanel VerticalAlignment="Center">
-                                        <Button>((---</Button>
-                                        <Button>---))</Button>
-                                    </WrapPanel>
+                                <StackPanel VerticalAlignment="Center" Grid.Row="2" Grid.Column="2">
+                                    <Button>((---</Button>
+                                    <Button>---))</Button>
                                 </StackPanel>
-                                <ScrollViewer Grid.Row="2" Grid.Column="0">
-                                    <ListView></ListView>
-                                </ScrollViewer>
-                                <ScrollViewer Grid.Row="2" Grid.Column="4">
-                                    <ListView></ListView>
-                                </ScrollViewer>
+                                <ListView Grid.Row="2" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
+                                <ListView Grid.Row="2" Grid.Column="4" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
                             </Grid>
                         </Border>
                     </Grid>
@@ -119,30 +113,32 @@
                                 </ListView.ItemTemplate>
                             </ListView>
                         </ScrollViewer>
-                        <DockPanel Grid.Row="2" Grid.Column="2" Background="White">
-                            <StackPanel DockPanel.Dock="Top">
-                                <WrapPanel Margin="25">
-                                    <StackPanel Margin="0,0,40,0">
-                                        <Label>Skadenavn:</Label>
-                                        <Label>Alvorlighed:</Label>
-                                        <Label>Beskrivelse:</Label>
-                                    </StackPanel>
-                                    <StackPanel VerticalAlignment="Center" Width="250">
-                                        <TextBox Margin="4">Rorskade</TextBox>
-                                        <WrapPanel Margin="4">
-                                            <TextBlock>Er båden sejlbar?</TextBlock>
-                                            <CheckBox/>
-                                        </WrapPanel>
-                                        <TextBox Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
-                                    </StackPanel>
+                        <Border Grid.Row="2" Grid.Column="2" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top">
+                                    <WrapPanel Margin="25">
+                                        <StackPanel Margin="0,0,40,0">
+                                            <Label>Skadenavn:</Label>
+                                            <Label>Alvorlighed:</Label>
+                                            <Label>Beskrivelse:</Label>
+                                        </StackPanel>
+                                        <StackPanel VerticalAlignment="Center" Width="270">
+                                            <TextBox Margin="5">Rorskade</TextBox>
+                                            <WrapPanel>
+                                                <TextBlock Margin="5">Er båden funktionsdygtig?</TextBlock>
+                                                <CheckBox Margin="5" VerticalAlignment="Center"/>
+                                            </WrapPanel>
+                                            <TextBox Margin="5" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </StackPanel>
+                                <WrapPanel DockPanel.Dock="Bottom" Margin="25">
+                                    <Button>Gem</Button>
+                                    <Button Margin="10,0,0,0">Anullér</Button>
+                                    <Button Margin="250,0,0,0">Slet!</Button>
                                 </WrapPanel>
-                            </StackPanel>
-                            <WrapPanel DockPanel.Dock="Bottom" Margin="25">
-                                <Button>Gem</Button>
-                                <Button Margin="10,0,0,0">Anullér</Button>
-                                <Button Margin="250,0,0,0">Slet!</Button>
-                            </WrapPanel>
-                        </DockPanel>
+                            </DockPanel>
+                        </Border>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
@@ -177,33 +173,35 @@
                                 </ListView.ItemTemplate>
                             </ListView>
                         </ScrollViewer>
-                        <DockPanel Grid.Row="2" Grid.Column="2" Background="White">
-                            <StackPanel DockPanel.Dock="Top">
-                                <WrapPanel Margin="25">
-                                    <StackPanel Margin="0,0,40,0">
-                                        <Label>Brugernavn:</Label>
-                                        <Label>Kodeord:</Label>
-                                        <Label>Fornavn:</Label>
-                                        <Label>Efternavn:</Label>
-                                        <Label>E-mail:</Label>
-                                        <Label>Telefon:</Label>
-                                    </StackPanel>
-                                    <StackPanel VerticalAlignment="Center" Width="250">
-                                        <TextBox Margin="4">FFS</TextBox>
-                                        <PasswordBox Margin="4" Password="Kode1234"></PasswordBox>
-                                        <TextBox Margin="4">Bobby</TextBox>
-                                        <TextBox Margin="4">Olsen</TextBox>
-                                        <TextBox Margin="4">Supernova@hotmail.com</TextBox>
-                                        <TextBox Margin="4">12345678</TextBox>
-                                    </StackPanel>
+                        <Border Grid.Row="2" Grid.Column="2" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top">
+                                    <WrapPanel Margin="25">
+                                        <StackPanel Margin="0,0,40,0">
+                                            <Label>Brugernavn:</Label>
+                                            <Label>Kodeord:</Label>
+                                            <Label>Fornavn:</Label>
+                                            <Label>Efternavn:</Label>
+                                            <Label>E-mail:</Label>
+                                            <Label>Telefon:</Label>
+                                        </StackPanel>
+                                        <StackPanel VerticalAlignment="Center" Width="250">
+                                            <TextBox Margin="4">Doge</TextBox>
+                                            <PasswordBox Margin="4" Password="Kode1234"></PasswordBox>
+                                            <TextBox Margin="4">Bobby</TextBox>
+                                            <TextBox Margin="4">Olsen</TextBox>
+                                            <TextBox Margin="4">Supernova@hotmail.com</TextBox>
+                                            <TextBox Margin="4">12345678</TextBox>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </StackPanel>
+                                <WrapPanel DockPanel.Dock="Bottom" Margin="25">
+                                    <Button>Gem</Button>
+                                    <Button Margin="10,0,0,0">Anullér</Button>
+                                    <Button Margin="250,0,0,0">Slet!</Button>
                                 </WrapPanel>
-                            </StackPanel>
-                            <WrapPanel DockPanel.Dock="Bottom" Margin="25">
-                                <Button>Gem</Button>
-                                <Button Margin="10,0,0,0">Anullér</Button>
-                                <Button Margin="250,0,0,0">Slet!</Button>
-                            </WrapPanel>
-                        </DockPanel>
+                            </DockPanel>
+                        </Border>
                     </Grid>
                 </TabItem>
             </TabControl>
