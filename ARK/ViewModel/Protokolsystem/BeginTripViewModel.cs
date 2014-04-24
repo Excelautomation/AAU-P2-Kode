@@ -12,11 +12,11 @@ namespace ARK.ViewModel.Protokolsystem
 {
     public class BeginTripViewModel : Base.ViewModel, IKeyboardHandler
     {
-        private Boat _boat;
+        private Boat _selectedBoat;
         private List<Boat> _boats = new List<Boat>();
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
-        private List<Member> _member;
+        private readonly ObservableCollection<Member> _selectedMembers;
         private string _keyboardToggleText;
 
         public BeginTripViewModel()
@@ -30,20 +30,41 @@ namespace ARK.ViewModel.Protokolsystem
                         x.FirstName = x.FirstName.Trim();
                         return x;
                     }).OrderBy(x => x.FirstName).ToList();
+                _selectedMembers = new ObservableCollection<Member>();
             }
         }
 
         public bool EnableMembers
         {
             get { return _enableMembers; }
-            set 
-            { 
-                _enableMembers = value; 
-                Notify(); 
+            set
+            {
+                _enableMembers = value;
+                Notify();
             }
         }
 
-        public ICommand SelectedChange
+        public List<Boat> Boats
+        {
+            get { return _boats; }
+            set
+            {
+                _boats = value;
+                Notify();
+            }
+        }
+
+        public List<Member> Members
+        {
+            get { return _members; }
+            set
+            {
+                _members = value;
+                Notify();
+            }
+        }
+
+        public ICommand BoatSelected
         {
             get
             {
@@ -55,90 +76,52 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public List<Boat> Boats
-        {
-            get { return _boats; }
-            set 
-            { 
-                _boats = value; 
-                Notify(); 
-            }
-        }
-
-        public List<Member> Members
-        {
-            get { return _members; }
-            set
-            {
-                _members = value;
-                Notify();
-        }
-        }
-
         public ICommand MemberSelected
         {
             get
             {
-                return GetCommand<IList>(e =>
+                return GetCommand<Member>(e =>
                     {
-                        Member = e.Cast<Member>().ToList();
+                        if (SelectedMembers.Contains(e))
+                        {
+                            SelectedMembers.Remove(e);
+                        }
+                        else
+                        {
+                            SelectedMembers.Add(e);
+                        }
+
                     });
             }
         }
 
-        public string BoatHeadline { get { return "Båd"; } }
-
-        public List<Boat> BoatContent
+        public ObservableCollection<Boat> SelectedBoat
         {
             get
             {
                 if (Boat == null)
                 {
-                    return new List<Boat>();
+                    return new ObservableCollection<Boat>();
                 }
 
-                return new List<Boat> {Boat};
+                return new ObservableCollection<Boat> { Boat };
             }
         }
 
-        public string MemberHeadline
+        public Boat Boat
         {
-            get { return "Deltagere"; }
-        }
-
-        public List<Member> MemberContent
-        {
-            get
-            {
-                if (Member == null)
-                {
-                    return new List<Member>();
-                }
-
-                return new List<Member>(Member);
-            }
-        }
-
-        public Boat Boat 
-        {
-            get { return _boat; }
+            get { return _selectedBoat; }
             set
             {
-                _boat = value;
+                _selectedBoat = value;
                 Notify();
                 NotifyProp("BoatContent");
             }
         }
 
-        public List<Member> Member
+        public ObservableCollection<Member> SelectedMembers
         {
-            get { return _member; }
-            set
-            {
-                _member = value;
-                Notify();
-                NotifyProp("MemberContent");
-            }
+            get { return _selectedMembers; }
         }
 
         public string KeyboardToggleText

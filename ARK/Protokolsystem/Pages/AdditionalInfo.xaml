@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="ARK.Protokolsystem.Pages.AdditionalInfo" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
+             x:Class="ARK.Protokolsystem.Pages.AdditionalInfo"
              mc:Ignorable="d" Width="200" Height="743">
     <UserControl.Resources>
         <Style x:Key="White+rounded" TargetType="{x:Type Rectangle}">
@@ -12,13 +14,14 @@
             <Setter Property="RadiusX" Value="3"/>
             <Setter Property="RadiusY" Value="3"/>
         </Style>
+        <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
     </UserControl.Resources>
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="736" Margin="3,5,0,-441" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="194" Style="{DynamicResource White+rounded}" Fill="#FFE9EAED" RadiusX="1" RadiusY="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="4,7,0,0" TextWrapping="Wrap" Text="{Binding Path=BoatHeadline}" VerticalAlignment="Top" Width="192" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri"/>
-        <TextBlock HorizontalAlignment="Left" Margin="4,368,0,0" TextWrapping="Wrap" Text="{Binding Path=MemberHeadline}" VerticalAlignment="Top" Width="192" FontWeight="Bold" FontSize="18" Foreground="Black" Background="White" Padding="5,0,0,0" FontFamily="Calibri"/>
+        <TextBlock HorizontalAlignment="Left" Margin="4,7,0,0" TextWrapping="Wrap" Text="Båd" VerticalAlignment="Top" Width="192" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri"/>
+        <TextBlock HorizontalAlignment="Left" Margin="4,368,0,0" TextWrapping="Wrap" Text="Besætning" VerticalAlignment="Top" Width="192" FontWeight="Bold" FontSize="18" Foreground="Black" Background="White" Padding="5,0,0,0" FontFamily="Calibri"/>
 
-        <ListView x:Name="BoatInfo" ItemsSource="{Binding Path=BoatContent}" HorizontalAlignment="Left" Height="334" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,27,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
+        <ListView x:Name="BoatInfo" ItemsSource="{Binding Path=SelectedBoat}" HorizontalAlignment="Left" Height="334" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,27,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -29,20 +32,32 @@
                         <TextBlock Text="Kategori: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                         <TextBlock Text="{Binding SpecificBoatType}" FontSize="13px"/>
                         <TextBlock Text="Aktiv: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
-                        <TextBlock Text="{Binding Active}" FontSize="13px"/>
+                        <TextBlock Text="{Binding Path=Active, Converter={StaticResource YesNo}}" FontSize="13px"/>
                         <TextBlock Text="Roforbud: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
-                        <TextBlock Text="{Binding Usable}" FontSize="13px"/>
+                        <TextBlock Text="{Binding Path=Usable, Converter={StaticResource YesNo}}" FontSize="13px"/>
                         <TextBlock Text="Status: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="MemberInfo" ItemsSource="{Binding Path=MemberContent}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
+        <ListView x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Plads " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
-                        <TextBlock Text="{Binding Usable}" FontSize="13px"/>
+                        <WrapPanel Margin="0,0,0,0">
+                            <TextBlock Text="{Binding MemberNumber}" FontSize="13px" FontWeight="Bold" Margin="0,0,0,0"/>
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding FirstName}" FontSize="13px" FontWeight="Normal" Margin="0,0,0,0"/>
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding LastName}" FontSize="13px" FontWeight="Normal" Margin="0,0,0,0"/>
+                        </WrapPanel>
+                        <WrapPanel Margin="0,0,0,5">
+                            <TextBlock Text="    Langtursstyrmand: " FontSize="10px" FontWeight="Normal"  Margin="0,0,0,0"/>
+                            <TextBlock Text="{Binding Path=LongTripCox, Converter={StaticResource YesNo}}" FontSize="10px" FontWeight="Bold" Margin="0,0,0,0"/>
+                        </WrapPanel>
+                        <StackPanel.InputBindings>
+                            <MouseBinding Gesture="LeftClick"  Command=""/>
+                        </StackPanel.InputBindings>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
