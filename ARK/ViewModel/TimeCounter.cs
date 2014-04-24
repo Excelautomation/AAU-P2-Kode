@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace ARK.ViewModel
 {
-    public class TimeCounter
+    public static class TimeCounter
     {
         private static readonly Stack<DateTime> stack = new Stack<DateTime>();
 
@@ -20,9 +20,14 @@ namespace ARK.ViewModel
 
         public static void StopTime(string name)
         {
+            StopTime(name, m => Debug.WriteLine(m));
+        }
+
+        public static void StopTime(string name, Action<string> outputMethod)
+        {
             TimeSpan span = StopTime();
 
-            Debug.WriteLine(name + " took " + span.TotalMilliseconds + " ms to execute");
+            outputMethod(name + " took " + span.TotalMilliseconds + " ms to execute");
         }
     }
 }
