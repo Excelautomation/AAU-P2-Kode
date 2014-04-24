@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <VM:FormsDamageViewModel></VM:FormsDamageViewModel>
+    </UserControl.DataContext>
     <Grid>
         <StackPanel>
             <Label FontSize="40" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,40">Skadesblanket</Label>
@@ -14,8 +18,8 @@
                     <WrapPanel Margin="0,0,0,15">
                         <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Indgivet af:</Label>
                         <WrapPanel VerticalAlignment="Center">
-                            <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" Margin="0,0,3,0" FontSize="18" Text="{Binding Path=DamageForm.Member.FirstName}" />
-                            <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.Member.LastName}" />
+                            <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" Margin="0,0,3,0" FontSize="18" Text="{Binding Path=DamageForm.RegisteringMember.FirstName}" />
+                            <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.RegisteringMember.LastName}" />
                         </WrapPanel>
                     </WrapPanel>
                     <WrapPanel Margin="0,0,0,15">
@@ -39,32 +43,19 @@
                 </DockPanel>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
-                <Button Background="Transparent" BorderBrush="Transparent">
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeaktiverBåd}" CommandParameter="{Binding Path=DamageForm}">
                     <StackPanel Margin="5">
                         <Image Source="../../images/accept.png" Height="32"/>
                         <Label Content="Sæt båden til skadet"/>
                     </StackPanel>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding Path=DeaktiverBåd}" CommandParameter="{Binding Path=DamageForm}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                 </Button>
-                <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0" Command="{Binding Path=SetActive}">
+                <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0" Command="{Binding Path=AktiverBåd}" CommandParameter="{Binding Path=DamageForm}">
                     <StackPanel Margin="5">
                         <Image Source="../../images/delete.png" Height="32"/>
                         <Label Content="Sæt båden til aktiv"/>
                     </StackPanel>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding Path=AktiverBåd}" CommandParameter="{Binding Path=DamageForm}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                 </Button>
-                
             </WrapPanel>
-
-
         </StackPanel>
     </Grid>
 </UserControl>

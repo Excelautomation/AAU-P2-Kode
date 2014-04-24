@@ -35,7 +35,7 @@
                         <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding Path=ReportedBy}"/>
+                                    <Button Content="{Binding Path=RegisteringMember.FirstName}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -46,7 +46,13 @@
                             <Image Source="/images/application_side_list.png" Height="24" />
                             <Label FontSize="18">Langtursblanketter</Label>
                         </WrapPanel>
-                        <StackPanel Margin="0,0,0,10" Orientation="Horizontal" />
+                        <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding Path=Boat.Name}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
 
                     <StackPanel Visibility="{Binding Path=ShowBoatsOut}">
@@ -54,7 +60,13 @@
                             <Image Source="/images/yacht.png" Height="24" />
                             <Label FontSize="18">Både ude</Label>
                         </WrapPanel>
-                        <StackPanel Margin="0,0,0,10" Orientation="Horizontal" />
+                        <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=BoatsOut}" VerticalAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding Path=Name}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
