@@ -65,7 +65,7 @@
                                 <Setter TargetName="MenuOverview_border" Property="BorderBrush" Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/house.png"/>-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Overview">
+                            <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="Overview">
                                 <Setter TargetName="MenuOverview_bg" Property="Background" Value="#c1deec" />
                                 <Setter TargetName="MenuOverview_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
@@ -92,7 +92,7 @@
                                 <Setter TargetName="MenuForms_border" Property="BorderBrush"   Value="#e5eef2"/>
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/application_side_list.png" />-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Forms">
+                            <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="Forms">
                                 <Setter TargetName="MenuForms_bg" Property="Background" Value="#c1deec" />
                                 <Setter TargetName="MenuForms_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
@@ -120,7 +120,7 @@
                                 <!--<Setter TargetName="MenuBaede_bg" Property="BorderBrush"/>-->
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/application_side_list.png" />-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Boats">
+                            <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="Boats">
                                 <Setter TargetName="MenuBoats_bg" Property="Background" Value="#c1deec" />
                                 <Setter TargetName="MenuBoats_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
@@ -148,7 +148,7 @@
                                 <!--<Setter TargetName="Img" Property="Source" Value="/images/setting_tools.png" />
                                 <Setter TargetName="btnMenuIndstillinger" Property="Background" Value="black"/>-->
                             </Trigger>
-                            <DataTrigger Binding="{Binding Path=Page.PageName}" Value="Configurations">
+                            <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="Configurations">
                                 <Setter TargetName="MenuConfigurations_bg" Property="Background" Value="#c1deec" />
                                 <Setter TargetName="MenuConfigurations_border" Property="Background" Value="#b7d4e2" />
                             </DataTrigger>
