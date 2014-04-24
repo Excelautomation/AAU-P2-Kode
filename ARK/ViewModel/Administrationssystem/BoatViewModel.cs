@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,7 +15,6 @@ namespace ARK.ViewModel.Administrationssystem
         private bool _activeBoat;
         private Boat _currentBoat;
         private IEnumerable<Boat> _boats;
-        private ObservableCollection<Control> _filters;
 
         const string bådeUdeText = "Både ude";
         const string bådeHjemmeText = "Både hjemme";
@@ -30,7 +28,7 @@ namespace ARK.ViewModel.Administrationssystem
             // Load data
             using (var db = new DbArkContext())
             {
-                _boatsNonFiltered = new List<Boat>(db.Boat).Where(x => x.Active).OrderBy(x => x.NumberofSeats).ToList();
+                _boatsNonFiltered = db.Boat.ToList();
             }
 
             // Aktiver filtre
@@ -120,7 +118,7 @@ namespace ARK.ViewModel.Administrationssystem
                 return true;
             if (str.ToLower() == "nej" || str.ToLower() == "false")
                 return false;
-            throw new ArgumentNullException();
+            throw new ArgumentOutOfRangeException();
         }
 
         #region Search
