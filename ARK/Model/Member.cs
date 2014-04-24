@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ARK.Model
 {
-    public class Member
+    public class Member : IEquatable<Member>
     {
         public int Id { get; set; }
         public int MemberNumber { get; set; }
@@ -31,5 +31,36 @@ namespace ARK.Model
         public virtual ICollection<DamageForm> DamageForms { get; set; }
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
+
+        // Equals
+        public bool Equals(Member other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Member) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
+        public static bool operator ==(Member left, Member right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Member left, Member right)
+        {
+            return !Equals(left, right);
+        }
     }
 }
