@@ -23,8 +23,12 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ProtocolSystemMainViewModel()
         {
+            TimeCounter.StartTimer();
+
             KeyboardEnabled = true;
             StartTrip.Execute(null);
+
+            TimeCounter.StopTime("ProtocolSystemMainViewModel constructor");
         }
 
         #region Pages

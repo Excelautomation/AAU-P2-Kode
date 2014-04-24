@@ -24,6 +24,8 @@ namespace ARK.ViewModel.Protokolsystem
 
         public BeginTripViewModel()
         {
+            TimeCounter.StartTimer();
+
             // Load data
             using (DbArkContext db = new DbArkContext())
             {
@@ -50,6 +52,8 @@ namespace ARK.ViewModel.Protokolsystem
                 NotifyCustom("Keyboard");
                 NotifyCustom("KeyboardToggleText");
             };
+
+            TimeCounter.StopTime("BeginTripViewModel constructor");
         }
 
         public IInfoContainerViewModel GetInfoContainerViewModel
