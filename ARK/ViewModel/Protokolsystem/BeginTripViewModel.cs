@@ -18,7 +18,6 @@ namespace ARK.ViewModel.Protokolsystem
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
         private readonly ObservableCollection<Member> _selectedMembers;
-        private IList _test;
         private string _keyboardToggleText;
 
         public BeginTripViewModel()
@@ -84,7 +83,6 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<IList>(e =>
                     {
-                        _test = e;
                     });
             }
         }
@@ -117,11 +115,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get 
             {
-                if (_test == null)
-                {
-                    return new ObservableCollection<Member>();
-                }
-                return new ObservableCollection<Member>(_test.Cast<Member>()); 
+                return _selectedMembers; 
             }
         }
 
