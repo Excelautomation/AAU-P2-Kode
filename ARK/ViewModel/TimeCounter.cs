@@ -6,7 +6,8 @@ namespace ARK.ViewModel
 {
     public class TimeCounter
     {
-        private static Stack<DateTime> stack = new Stack<DateTime>();
+        private static readonly Stack<DateTime> stack = new Stack<DateTime>();
+
         public static void StartTimer()
         {
             stack.Push(DateTime.Now);
