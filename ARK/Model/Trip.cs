@@ -7,8 +7,9 @@ namespace ARK.Model
     {
         public int Id { get; set; }
         public int Distance { get; set; }
-        public DateTime Date { get; set; }
         public bool LongTrip { get; set; }
+        public DateTime TripStartTime { get; set; }
+        public DateTime TripEndedTime { get; set; }
 
         //Foreign key
         public int BoatId { get; set; }
