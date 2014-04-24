@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
@@ -20,6 +21,9 @@ namespace ARK.ViewModel.Protokolsystem
         private ICommand _memberInformation;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
+        private readonly ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
+        private bool _enableSearch;
+        private bool _enableFilters;
 
         public ProtocolSystemMainViewModel()
         {
@@ -95,6 +99,11 @@ namespace ARK.ViewModel.Protokolsystem
 
         public override void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)
         {
+            // Deaktiver filter
+            EnableSearch = false;
+            EnableFilters = false;
+            Filters.Clear();
+
             // Skjul keyboard
             KeyboardHide();
 
@@ -150,7 +159,11 @@ namespace ARK.ViewModel.Protokolsystem
 
         public void KeyboardShow()
         {
-            Keyboard.Visibility = Visibility.Visible;
+            if (KeyboardEnabled)
+                Keyboard.Visibility = Visibility.Visible;
+            else
+                KeyboardHide();
+
             NotifyCustom("KeyboardToggled");
         }
 
@@ -180,7 +193,7 @@ namespace ARK.ViewModel.Protokolsystem
                         KeyboardHide();
                     else
                         KeyboardShow();
-                }, o => KeyboardEnabled);
+                });
             }
         }
 
@@ -188,9 +201,41 @@ namespace ARK.ViewModel.Protokolsystem
 
         #region Filter
 
-        public void Filter()
+        public ICommand SearchChangedCommand
         {
-            throw new NotImplementedException();
+            get
+            {
+                return
+                    GetCommand<string>(
+                        s => { if (SearchTextChanged != null) SearchTextChanged(this, new SearchEventArgs(s)); });
+            }
+        }
+
+        public event EventHandler<SearchEventArgs> SearchTextChanged;
+
+        public bool EnableSearch
+        {
+            get { return _enableSearch; }
+            set
+            {
+                _enableSearch = value;
+                Notify();
+            }
+        }
+
+        public bool EnableFilters
+        {
+            get { return _enableFilters; }
+            set
+            {
+                _enableFilters = value;
+                Notify();
+            }
+        }
+
+        public ObservableCollection<FrameworkElement> Filters
+        {
+            get { return _filters; }
         }
 
         #endregion

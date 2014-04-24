@@ -179,6 +179,8 @@
     </Compile>
     <Compile Include="ValueConverters\BoolToValueConverter.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\FormsLongTripViewModel.cs" />
+    <Compile Include="ViewModel\FilterContentViewModelBase.cs" />
     <Compile Include="ViewModel\Filter\FilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
     <Compile Include="ViewModel\ContentViewModelBase.cs" />

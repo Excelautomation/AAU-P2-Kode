@@ -4,11 +4,8 @@ using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class SettingsViewModel : ViewModelBase, IFilter
+    public class SettingsViewModel : ContentViewModelBase
     {
-        public ObservableCollection<Control> Filters
-        {
-            get { return new ObservableCollection<Control>(); }
-        }
+
     }
 }

@@ -40,7 +40,7 @@
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
                             <StackPanel>
-                                <StackPanel Name="FormsDamageFormOverview"  Margin="5,5,5,20">
+                                <StackPanel Name="FormsDamageFormOverview" Margin="5,5,5,20" Visibility="{Binding Path=ShowDamageForms}">
                                     <Label Margin="10,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
                                     <Separator Margin="0" Padding="0"/>
                                     <StackPanel>
@@ -52,8 +52,8 @@
                                                             <Label Content="{Binding Path=Boat.Name}" Margin="0,0,0,0" Padding="0"/>
                                                             <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0"/>
                                                             <WrapPanel>
-                                                                <Label Content="{Binding Path=Member.FirstName}" Margin="0,0,3,0" Padding="0"/>
-                                                                <Label Content="{Binding Path=Member.LastName}" Margin="0,0,0,0" Padding="0"/>
+                                                                <Label Content="{Binding Path=RegisteringMember.FirstName}" Margin="0,0,3,0" Padding="0"/>
+                                                                <Label Content="{Binding Path=RegisteringMember.LastName}" Margin="0,0,0,0" Padding="0"/>
                                                             </WrapPanel>
                                                         </StackPanel>
                                                         <Separator Margin="0" Padding="0"/>
@@ -69,11 +69,11 @@
                                     </StackPanel>
                                 </StackPanel>
                                 
-                                <StackPanel Name="FormsLongTripOverview" Margin="5,0,5,0">
+                                <StackPanel Name="FormsLongTripOverview" Margin="5,0,5,0" Visibility="{Binding Path=ShowLongDistanceForms}">
                                     <Label FontSize="16" Margin="10,0,0,0" FontWeight="Bold" Content="Langtur"/>
                                     <Separator Margin="0" Padding="0"/>
-                                    <ItemsControl ItemsSource="{Binding Path=LongTripForms}" HorizontalAlignment="Stretch">
-                                        <ItemsControl.ItemTemplate>
+                                    <ListView Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
+                                        <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel HorizontalAlignment="Left">
                                                     <Button Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left">
@@ -85,8 +85,13 @@
                                                     <Separator Margin="0" Padding="0"/>
                                                 </StackPanel>
                                             </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                        </ListView.ItemTemplate>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding Path=SelectLongDistanceFormCommand}" CommandParameter="{Binding ElementName=LongDistanceListView, Path=SelectedItem}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListView>
                                 </StackPanel>
                             </StackPanel>
                         </ScrollViewer>
@@ -102,7 +107,7 @@
                         <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
                             <Border Margin="10" CornerRadius="5" Background="White">
                                 <Grid Margin="25" Name="FormsDetailContent">
-                                    <ContentControl Content="{Binding Path=Page}"/>
+                                    <ContentControl Content="{Binding Path=CurrentPage}"/>
                                 </Grid>
                             </Border>
                         </ScrollViewer>
