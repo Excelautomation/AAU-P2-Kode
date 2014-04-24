@@ -31,49 +31,54 @@
                 <TabItem Header="SMS-Modul" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="137*"/>
-                            <RowDefinition Height="386*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                        <Border Grid.Row="0" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10,10,10.2,11.4">
                             <StackPanel>
                                 <DockPanel>
-                                    <TextBlock Margin="0,0,3,0" Background="Transparent">I dag forventes mørkets frembrud klokken:</TextBlock>
-                                    <TextBox Margin="0,0,3,0" Width="34" Background="White">22</TextBox>
-                                    <TextBlock Margin="0,0,3,0">:</TextBlock>
-                                    <TextBox Margin="0,0,3,0" Width="34" Background="White">58</TextBox>
-                                    <CheckBox FontSize="14" HorizontalAlignment="Right" Width="230">Automatisk opdatering.</CheckBox>
+                                    <TextBlock Margin="4" Background="Transparent">I dag forventes mørkets frembrud klokken:</TextBlock>
+                                    <TextBox Margin="4" Width="34" Background="White">22</TextBox>
+                                    <TextBlock Margin="4">:</TextBlock>
+                                    <TextBox Margin="4" Width="34" Background="White">58</TextBox>
+                                    <WrapPanel HorizontalAlignment="Right">
+                                        <TextBlock Margin="4">Håndtér automatisk</TextBlock>
+                                        <CheckBox Margin="4" VerticalAlignment="Center"></CheckBox>
+                                    </WrapPanel>
                                 </DockPanel>
                                 <DockPanel>
-                                    <TextBlock Background="Transparent">Send mørke-besked til udrejste både</TextBlock>
-                                    <ComboBox>Tissemand</ComboBox>
-                                    <TextBlock Background="Transparent">minutter efter mørkets frembrud.</TextBlock>
+                                    <TextBlock Margin="4">Besked ved mørkets frembrud til udrejste både skal forsinkes med:</TextBlock>
+                                    <ComboBox Margin="4" SelectedIndex="0" Width="90" HorizontalAlignment="Right">5 min</ComboBox>
                                 </DockPanel>
                                 <DockPanel>
-                                    <TextBlock Background="Transparent">En båds reaktion på en mørke-besked skal ske indenfor</TextBlock>
-                                    <ComboBox>Tissekone</ComboBox>
-                                    <TextBlock Background="Transparent">minutter.</TextBlock>
+                                    <TextBlock Margin="4">En båds reaktion på en besked ved mørkets frembrud skal ske indenfor:</TextBlock>
+                                    <ComboBox Margin="4" SelectedIndex="0" Width="90" HorizontalAlignment="Right">15 min</ComboBox>
                                 </DockPanel>
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="1" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10,11.2,10.2,10.4">
+                        <Border Grid.Row="1" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="9*"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="75*"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="4"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="207*"/>
-                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="200*"/>
+                                    <ColumnDefinition Width="4"/>
                                     <ColumnDefinition Width="25*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="228*"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="200*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0">Aktive kontaktpersoner</Label>
-                                <Label Grid.Row="0" Grid.Column="4">Ikke-aktive kontakpersoner</Label>
+                                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Aktive kontaktpersoner</Label>
+                                <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center">Ikke-aktive kontakpersoner</Label>
                                 <StackPanel VerticalAlignment="Center" Grid.Row="2" Grid.Column="2">
-                                    <Button>((---</Button>
-                                    <Button>---))</Button>
+                                    <Button>
+                                        <Image Source="/images/arrow_left.png"></Image>
+                                    </Button>
+                                    <Button>
+                                        <Image Source="/images/arrow_right.png"></Image>
+                                    </Button>
                                 </StackPanel>
                                 <ListView Grid.Row="2" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
                                 <ListView Grid.Row="2" Grid.Column="4" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
