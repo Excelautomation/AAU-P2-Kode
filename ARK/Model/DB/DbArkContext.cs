@@ -16,7 +16,6 @@ namespace ARK.Model.DB
         public DbSet<Boat> Boat { get; set; }
         public DbSet<LongDistanceForm> LongTripForm { get; set; }
         public DbSet<Member> Member { get; set; }
-        public DbSet<DamageDescription> DamageDescription { get; set; }
         public DbSet<DamageForm> DamageForm { get; set; }
         public DbSet<Trip> Trip { get; set; }
         public DbSet<GetSMS> GetSMS { get; set; }
@@ -67,11 +66,6 @@ namespace ARK.Model.DB
                 .HasRequired(df => df.Boat)
                 .WithMany(b => b.DamageForms)
                 .HasForeignKey(df => df.BoatId)
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<DamageForm>()
-                .HasRequired(df => df.DamageDescription)
-                .WithOptional()
                 .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
