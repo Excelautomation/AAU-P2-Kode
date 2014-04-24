@@ -13,13 +13,21 @@ namespace ARK.ViewModel
         public FrameworkElement CurrentPage
         {
             get { return _currentPage; }
-            protected set { _currentPage = value; Notify(); }
+            protected set
+            {
+                _currentPage = value;
+                Notify();
+            }
         }
 
         public string CurrentPageTitle
         {
             get { return _currentPageTitle; }
-            protected set { _currentPageTitle = value; Notify(); }
+            protected set
+            {
+                _currentPageTitle = value;
+                Notify();
+            }
         }
 
         public virtual void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)

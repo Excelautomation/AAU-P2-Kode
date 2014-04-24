@@ -6,10 +6,7 @@ namespace ARK.ViewModel
     {
         public IKeyboardContainerViewModelBase Keyboard
         {
-            get
-            {
-                return Parent as IKeyboardContainerViewModelBase;
-            }
+            get { return Parent as IKeyboardContainerViewModelBase; }
         }
     }
 }

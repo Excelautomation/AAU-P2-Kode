@@ -9,6 +9,5 @@ namespace ARK.ViewModel.Base
         FrameworkElement CurrentPage { get; }
 
         void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle);
-
     }
 }

@@ -25,7 +25,7 @@ namespace ARK.ViewModel
 
         protected ICommand GetCommand<T>(Action<T> executeMethod)
         {
-            return GetCommand(executeMethod, (e) => true);
+            return GetCommand(executeMethod, e => true);
         }
 
         protected ICommand GetCommand<T>(Action<T> executeMethod, Func<T, bool> canExecute)
