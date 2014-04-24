@@ -1,10 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using ARK.ViewModel.Base;
 
-namespace ARK.ViewModel.Base
+namespace ARK.ViewModel
 {
-    public class PageInformation : ViewModel
+    public class PageInformation : ViewModelBase
     {
         private UserControl _page;
         private string _pageName;
@@ -22,9 +23,9 @@ namespace ARK.ViewModel.Base
             { 
                 _page = value; 
                 Notify(); 
-                NotifyProp("Filter"); 
-                NotifyProp("ShowFilter"); 
-                NotifyProp("ShowSearch"); 
+                NotifyCustom("Filter"); 
+                NotifyCustom("ShowFilter"); 
+                NotifyCustom("ShowSearch"); 
             } 
         }
 

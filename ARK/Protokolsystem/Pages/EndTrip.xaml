@@ -65,7 +65,7 @@
                 <TextBlock Text="{Binding ParentViewModel.KeyboardText}" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
             </StackPanel>
         </Button>
-        <Button x:Name="ShowKeyboard" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="0,438,0,0" Height="64" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="GlobalComm:GlobalCommands.ToggleKeyboard">
+        <Button x:Name="ShowKeyboard" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="0,438,0,0" Height="64" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=Keyboard.KeyboardToggle}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF1F1F1" Offset="0.004"/>
@@ -80,7 +80,7 @@
             </Button.BorderBrush>
             <StackPanel Orientation="Horizontal">
                 <Image Source="/ARK;component/images/keyboard_add.png" Width="32" Height="28" Margin="0,5,0,0"/>
-                <TextBlock Text="{Binding KeyboardToggleText}"  Foreground="White" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
+                <TextBlock Text="{Binding Path=KeyboardToggleText}"  Foreground="White" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
             </StackPanel>
         </Button>
         <Button x:Name="AddDestination" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="305,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding}">

@@ -11,7 +11,7 @@ using ARK.Model.DB;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class BoatViewModel : Base.ViewModel, IFilter
+    public class BoatViewModel : ViewModelBase, IFilter
     {
         private ObservableCollection<Control> _filters;
         private Boat _Boat;

@@ -9,7 +9,7 @@ using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    internal class OverviewViewModel : Base.ViewModel, IFilter
+    internal class OverviewViewModel : ViewModelBase, IFilter
     {
         private readonly List<CheckboxFilter> _checkboxFilters = new List<CheckboxFilter>();
 

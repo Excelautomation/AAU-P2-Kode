@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace ARK.ViewModel.Base
+namespace ARK.ViewModel
 {
     public class TimeCounter
     {
