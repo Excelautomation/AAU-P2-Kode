@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARK", "ARK\ARK.csproj", "{813CD1E8-C513-433E-8123-3826C66895EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{06672D10-FDA0-4953-9787-3F6B652E5A1F}"
@@ -11,9 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6AAB08
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelectedItemsBinding", "..\..\Users\SelectedItemsBinding\SelectedItemsBinding.csproj", "{7DA5A107-B474-4AC0-B861-63A489DB0C02}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://edelskjold.dk:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -23,6 +27,9 @@ Global
 		SccProjectUniqueName2 = Test\\Test.csproj
 		SccProjectName2 = Test
 		SccLocalPath2 = Test
+		SccProjectUniqueName3 = ..\\..\\Users\\SelectedItemsBinding\\SelectedItemsBinding.csproj
+		SccProjectName3 = SelectedItemsBinding
+		SccLocalPath3 = ..\\..\\Users\\SelectedItemsBinding
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +44,10 @@ Global
 		{06672D10-FDA0-4953-9787-3F6B652E5A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06672D10-FDA0-4953-9787-3F6B652E5A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06672D10-FDA0-4953-9787-3F6B652E5A1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DA5A107-B474-4AC0-B861-63A489DB0C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DA5A107-B474-4AC0-B861-63A489DB0C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DA5A107-B474-4AC0-B861-63A489DB0C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DA5A107-B474-4AC0-B861-63A489DB0C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

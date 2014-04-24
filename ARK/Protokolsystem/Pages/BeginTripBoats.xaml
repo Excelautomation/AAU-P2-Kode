@@ -45,7 +45,7 @@
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=MemberSelected}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItem}" />
+                    <i:InvokeCommandAction Command="{Binding Path=MemberSelected}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItems}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>

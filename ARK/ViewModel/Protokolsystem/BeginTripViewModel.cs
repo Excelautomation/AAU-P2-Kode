@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -17,6 +18,7 @@ namespace ARK.ViewModel.Protokolsystem
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
         private readonly ObservableCollection<Member> _selectedMembers;
+        private IList _test;
         private string _keyboardToggleText;
 
         public BeginTripViewModel()
@@ -80,17 +82,9 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return GetCommand<Member>(e =>
+                return GetCommand<IList>(e =>
                     {
-                        if (SelectedMembers.Contains(e))
-                        {
-                            SelectedMembers.Remove(e);
-                        }
-                        else
-                        {
-                            SelectedMembers.Add(e);
-                        }
-
+                        _test = e;
                     });
             }
         }
@@ -121,7 +115,14 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ObservableCollection<Member> SelectedMembers
         {
-            get { return _selectedMembers; }
+            get 
+            {
+                if (_test == null)
+                {
+                    return new ObservableCollection<Member>();
+                }
+                return new ObservableCollection<Member>(_test.Cast<Member>()); 
+            }
         }
 
         public string KeyboardToggleText
