@@ -62,5 +62,29 @@ namespace ARK.Model
         {
             return !Equals(left, right);
         }
+
+        private sealed class IdEqualityComparer : IEqualityComparer<Member>
+        {
+            public bool Equals(Member x, Member y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id;
+            }
+
+            public int GetHashCode(Member obj)
+            {
+                return obj.Id;
+            }
+        }
+
+        private static readonly IEqualityComparer<Member> IdComparerInstance = new IdEqualityComparer();
+
+        public static IEqualityComparer<Member> IdComparer
+        {
+            get { return IdComparerInstance; }
+        }
     }
 }
