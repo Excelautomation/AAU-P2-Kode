@@ -6,12 +6,11 @@ namespace ARK.ViewModel.Base
     {
         bool KeyboardEnabled { get; }
         bool KeyboardToggled { get; }
+        ICommand KeyboardToggle { get; }
 
         void KeyboardShow();
         void KeyboardHide();
         void KeyboardEnable();
         void KeyboardDisable();
-
-        ICommand KeyboardToggle { get; }
     }
 }

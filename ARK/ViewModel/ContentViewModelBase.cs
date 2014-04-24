@@ -17,7 +17,7 @@ namespace ARK.ViewModel
                 if (ParentAttached != null) ParentAttached(this, new EventArgs());
             }
         }
-        
+
         public event EventHandler ParentAttached;
     }
 }
