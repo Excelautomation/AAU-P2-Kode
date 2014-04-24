@@ -4,7 +4,11 @@
         xmlns:local="clr-namespace:ARK.Protokolsystem" x:Class="ARK.Protokolsystem.Protokolsystem"
         xmlns:VM="clr-namespace:ARK.ViewModel"
         xmlns:protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-        Title="Protokolsystem" Height="768" Width="1024" Background="White">
+        Title="Protokolsystem" Height="768" Width="1024" Background="White"
+        Left="0" Top="0"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="Manual">    
     <Window.DataContext>
         <protokolsystem:ProtocolSystemViewModel />
     </Window.DataContext>

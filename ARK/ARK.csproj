@@ -177,6 +177,7 @@
     <Compile Include="Protokolsystem\ProtocolSystem.xaml.cs">
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValueConverters\BoolToValueConverter.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterViewModel.cs" />
     <Compile Include="ViewModel\Base\GlobalCommands.cs" />
