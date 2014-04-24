@@ -127,7 +127,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public FrameworkElement InfoPage
         {
-            get { return _infoPage ?? (_infoPage = new AdditionalInfo()); }
+            get { return _infoPage ?? (_infoPage = new BeginTripsAdditionalInfo()); }
         }
 
         public BeginTripAdditionalInfoViewModel Info
