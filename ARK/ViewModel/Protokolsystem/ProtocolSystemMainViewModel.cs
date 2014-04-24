@@ -98,6 +98,9 @@ namespace ARK.ViewModel.Protokolsystem
             // Skjul keyboard
             KeyboardHide();
 
+            // Fjern info
+            CurrentInfo = null;
+
             base.NavigateToPage(page, pageTitle);
         }
 
