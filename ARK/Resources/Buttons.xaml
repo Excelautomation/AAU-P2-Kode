@@ -27,8 +27,9 @@
                             <Border>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="{Binding ElementName=ShowFilter, Path=BorderBrush}" Offset="0"/>
-                                        <GradientStop Color="#FF938F8F" Offset="1"/>
+                                        <GradientStop Color="#FFC3C3C3" Offset="0"/>
+                                        <GradientStop Color="#FF636363" Offset="0.5"/>
+                                        <GradientStop Color="#FF636363" Offset="1"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
                             </Border>
@@ -65,6 +66,7 @@
     <!--<GradientStop Color="#FFD8D8D8" Offset="0"/>-->
     <!--Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ShowFilter}}-->
     <!--{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type AddressControl}}, Path=StreetTextBox.(Validation.HasError)}" Value="false"-->
+    <!--<GradientStop Color="#FF938F8F" Offset="1"/>-->
 
 </ResourceDictionary>
     
