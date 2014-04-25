@@ -47,11 +47,5 @@ namespace ARK.ViewModel.Protokolsystem
                 Notify();
             }
         }
-
-        public string KeyboardToggleText
-        {
-            get { return Keyboard.KeyboardToggled ? "SKJUL\nTASTATUR" : "VIS\nTASTATUR"; }
-        }
-
     }
 }
