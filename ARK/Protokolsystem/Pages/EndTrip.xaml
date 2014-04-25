@@ -27,14 +27,12 @@
         </ListView>
         <ListView x:Name="BoatsOutAvailableTrips" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="305,41,0,0">
         </ListView>
-        <Label Content="VÆLG BÅD (UDE)" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" BorderThickness="1" />
-        <Label Content="VÆLG TUR" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" />
+        <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,9,0,0" />
+        <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,10,0,0" />
         <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,98" Command="{Binding Path=Keyboard.KeyboardToggle}">
         <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/keyboard_add.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=KeyboardToggleText}">
-                    <!--<Run Text="VIS"/><LineBreak/>
-                    <Run Text="TASTATUR"/>-->
                 </TextBlock>
             </StackPanel>
         </Button>
