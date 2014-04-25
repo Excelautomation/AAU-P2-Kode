@@ -18,7 +18,8 @@ namespace ARK.ViewModel.Protokolsystem
             // Indlæs data
             using (DbArkContext db = new DbArkContext())
             {
-               // BoatsOut = new List<Boat>(db.Boat).Where(boat => boat.BoatOut == true && boat.TripEndedTime != null).OrderBy(boat => boat.TripEndedTime).ToList();
+                BoatsOut = db.Boat.Where(boat => boat.BoatOut == false)
+                    .OrderByDescending(boat => boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
             }
 
             ParentAttached += (sender, args) =>
