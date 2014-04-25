@@ -31,8 +31,8 @@
         <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,10,0,0" />
         <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,98" Command="{Binding Path=Keyboard.KeyboardToggle}">
         <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/keyboard_add.png"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=KeyboardToggleText}">
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}">
                 </TextBlock>
             </StackPanel>
         </Button>
