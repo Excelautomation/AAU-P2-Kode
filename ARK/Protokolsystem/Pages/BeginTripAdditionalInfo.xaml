@@ -48,10 +48,10 @@
         <ListView x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel.InputBindings>
-                            <MouseBinding Gesture="LeftClick"  Command=""/>
-                        </StackPanel.InputBindings>
+                    <StackPanel Orientation="Vertical" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
+                        <!--<StackPanel.InputBindings>
+                            <MouseBinding Gesture="LeftClick"  Command="{Binding ElementName=MemberInfo, Path=DataContext.MemberClicked}" CommandParameter="{Binding ElementName=MemberInfo, Path=SelectedItem}" />
+                        </StackPanel.InputBindings>-->
                         <WrapPanel Margin="0,0,0,0">
                             <TextBlock Text="{Binding MemberNumber}" FontSize="13px" FontWeight="Bold" Margin="0,0,0,0"/>
                             <TextBlock Text=" " />
@@ -66,6 +66,11 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Path=MemberClicked}" CommandParameter="{Binding ElementName=MemberInfo, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
         </ListView>
     </Grid>
 </UserControl>

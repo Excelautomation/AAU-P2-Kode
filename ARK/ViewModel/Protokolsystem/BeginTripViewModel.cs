@@ -39,6 +39,14 @@ namespace ARK.ViewModel.Protokolsystem
 
             _selectedMembers = new ObservableCollection<Member>();
 
+            SelectedMembers.CollectionChanged += (sender, args) =>
+                {
+                    //if (SelectedMembers.Count > Boat.NumberofSeats)
+                    //{
+
+                    //}
+                };
+
             ParentAttached += (sender, args) =>
             {
                 // Bind på keyboard toggle changed
@@ -100,17 +108,6 @@ namespace ARK.ViewModel.Protokolsystem
                 {
                     EnableMembers = true;
                     Boat = e;
-                    UpdateInfo();
-                });
-            }
-        }
-
-        public ICommand MemberSelected
-        {
-            get
-            {
-                return GetCommand<IList>(e =>
-                {
                     UpdateInfo();
                 });
             }

@@ -38,15 +38,9 @@ namespace ARK.ViewModel.Protokolsystem
             set { _selectedMembers = value; Notify(); }
         }
 
-        public ICommand MemberClicked
+        public void RemoveMember(Member member)
         {
-            get
-            {
-                return GetCommand<Member>(x =>
-                    {
-                        SelectedMembers.Remove(x);
-                    });
-            }
+            SelectedMembers.Remove(member);
         }
     }
 }
