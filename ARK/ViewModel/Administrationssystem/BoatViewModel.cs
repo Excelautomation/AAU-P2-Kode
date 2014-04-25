@@ -31,6 +31,7 @@ namespace ARK.ViewModel.Administrationssystem
             _boatsNonFiltered = _dbArkContext.Boat.ToList();
 
             // Aktiver filtre
+            #region filtre
             ParentAttached += (sender, args) =>
             {
                 FilterContainer.EnableSearch = true;
@@ -64,12 +65,14 @@ namespace ARK.ViewModel.Administrationssystem
 
                 // Opdater filter
                 UpdateFilter();
+            #endregion
 
                 // Sæt valgt båd
-                if (Boats.Count() != 0)
-                {
-                    CurrentBoat = Boats.First();
-                }
+            if (Boats.Count() != 0)
+            {
+                CurrentBoat = Boats.First();
+                _activeBoat = CurrentBoat.Active;
+            }
             };
         }
 
@@ -92,33 +95,34 @@ namespace ARK.ViewModel.Administrationssystem
             set
             {
                 _currentBoat = value;
+                //if (_currentBoat != null)
+                //  _activeBoat = _currentBoat.Active;
                 Notify();
             }
         }
 
         public ICommand SelectedChange
         {
-            get { return GetCommand<Boat>(e => { CurrentBoat = e; }); }
+            get 
+            { 
+                return GetCommand<Boat>(e => { CurrentBoat = e; }); 
+            }
+            
         }
 
-        public bool ActiveBoat
+        public int ActiveBoat
         {
-            get { return _activeBoat; }
+            get { if (_activeBoat == true) return 0; else return 1; }
             set
             {
-                _activeBoat = value;
+                if (value == 0) _activeBoat = true;
+                else _activeBoat = false;
                 Notify();
             }
         }
 
-        public bool StringToBool(string str)
-        {
-            if (str.ToLower() == "ja" || str.ToLower() == "true")
-                return true;
-            if (str.ToLower() == "nej" || str.ToLower() == "false")
-                return false;
-            throw new ArgumentOutOfRangeException();
-        }
+
+
 
         #region Search
         private void ResetFilter()

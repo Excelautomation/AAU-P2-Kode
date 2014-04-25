@@ -112,7 +112,7 @@
                         </DockPanel>
                         <StackPanel Grid.Row="2" Grid.Column="2">
                             <Label Margin="4">Detaljer</Label>
-                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" HorizontalAlignment="Left">
                                 <StackPanel>
                                     <StackPanel>
                                         <WrapPanel Margin="4">
@@ -169,7 +169,7 @@
                         </DockPanel>
                         <StackPanel Grid.Row="2" Grid.Column="2">
                             <Label Margin="4">Detaljer</Label>
-                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" Width="auto" HorizontalAlignment="Left">
                                 <StackPanel>
                                     <StackPanel>
                                         <WrapPanel Margin="4">
@@ -209,7 +209,7 @@
                         </DockPanel>
                         <StackPanel Grid.Column="2">
                             <Label Margin="4">Detaljer</Label>
-                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                            <Border HorizontalAlignment="Left" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" Width="auto">
                                 <StackPanel>
                                     <StackPanel>
                                         <WrapPanel Margin="4">

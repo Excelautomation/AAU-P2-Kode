@@ -13,7 +13,7 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <Style x:Key="StackpanelLabels" TargetType="Label">
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
         <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
@@ -79,69 +79,61 @@
                         <ScrollViewer DockPanel.Dock="Bottom">
                             <Border BorderBrush="Gray" BorderThickness="1">
                                 <DockPanel>
-                                    <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
-                                        <Border Margin="10" CornerRadius="5" Background="White">
-                                            <StackPanel Margin="25">
-                                                <TextBlock Margin="0,0,0,10" TextAlignment="Center" Text="{Binding Path=CurrentBoat.Name}" FontSize="40" FontFamily="arial" FontWeight="Bold"></TextBlock>
-                                                <WrapPanel HorizontalAlignment="Center" Margin="10">
-                                                    <WrapPanel Margin="0,0,20,0">
-                                                        <StackPanel Margin="0,0,10,0" >
+                                    <ScrollViewer DockPanel.Dock="Bottom" Background="White">
+                                        <Border Margin="25" CornerRadius="15" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                            <StackPanel>
+                                                <!--<TextBlock Margin="20,0,0,0" TextAlignment="Left" Text="{Binding Path=CurrentBoat.Name}" FontSize="2+" FontFamily="arial" FontWeight="Bold"></TextBlock> -->
+                                                <WrapPanel HorizontalAlignment="Left" Margin="10">
+                                                    <WrapPanel Margin="0,0,2,0">
+                                                        <StackPanel Margin="0,0,30,0" >
                                                             <StackPanel.Resources>
                                                                 <Style BasedOn="{StaticResource StackpanelLabels}" TargetType="{x:Type Label}"/>
                                                             </StackPanel.Resources>
+                                                            <Label Content="Navn:" />
                                                             <Label Content="Båd-Id:"/>
                                                             <Label Content="Kategori:"/>
                                                             <Label Content="Pladser:"/>
-                                                            <Label Content="Aktiv:"/>
-                                                            <Label Content="Skadet:"/>
-                                                            <Label Content="Skadestype:"/>
+                                                            <Label Content="Status:"/>
+                                                            <!--<Label Content="Skadet:"/>
+                                                            <Label Content="Skadestype:"/> -->
                                                         </StackPanel>
-                                                        <StackPanel Width="100">
-                                                            <TextBlock Margin="0,5,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Id}"/>
-                                                            <TextBlock Margin="0,11,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
-                                                            <TextBlock Margin="0,10,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Active, Converter={StaticResource YesNo}}"/>
-
-                                                                <Grid>
-                                                                <ComboBox x:Name="AktivBox" SelectedItem="{Binding Path=CurrentBoat.Active, Converter={StaticResource YesNo}}" Margin="0,6,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
-                                                                    <ComboBoxItem Content="Ja"/>
-                                                                        <ComboBoxItem Content="Nej"/>
-                                                            </ComboBox>
-                                                                <!--<TextBlock Margin="6.5,9,0,0" TextAlignment="Left" FontSize="16" Text="{Binding Path=Active, Converter={StaticResource YesNo}}" IsHitTestVisible="False"/>-->
+                                                        <StackPanel Width="150">
+                                                            
+                                                            <TextBlock Margin="0,9,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Name}"/>
+                                                            <TextBlock Margin="0,15,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Id}"/>
+                                                            <TextBlock Margin="0,17,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
+                                                            <TextBlock Margin="0,16,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.NumberofSeats}"/>
+                                                            <Grid>
+                                                                <ComboBox x:Name="AktivBox" Margin="0,13,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
+                                                                    <ComboBoxItem Content="Funktionel" />
+                                                                    <ComboBoxItem Content="Inaktiv"/>
+                                                                    <ComboBoxItem Content="Beskadiget"/>
+                                                                </ComboBox>
                                                             </Grid>
-                                                            <ComboBox Margin="0,4,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
-                                                                <ComboBox.ItemTemplate>
-                                                                    <DataTemplate>
-                                                                        <Label FontSize="14"/>
-                                                                    </DataTemplate>
-                                                                </ComboBox.ItemTemplate>
+                                                            <!-- <ComboBox Margin="0,4,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
                                                                 <ComboBoxItem>Ja</ComboBoxItem>
                                                                 <ComboBoxItem>Nej</ComboBoxItem>
                                                             </ComboBox>
-                                                            <ComboBox Margin="0,4,0,0" DockPanel.Dock="Top" FontSize="18" Background="#EEEEEE">
-                                                                <ComboBox.ItemTemplate>
-                                                                    <DataTemplate>
-                                                                        <Label FontSize="14"/>
-                                                                    </DataTemplate>
-                                                                </ComboBox.ItemTemplate>
+                                                            <ComboBox Margin="0,4,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
                                                                 <ComboBoxItem>Uskadet</ComboBoxItem>
                                                                 <ComboBoxItem>Hul I skrovet</ComboBoxItem>
                                                                 <ComboBoxItem>anden type</ComboBoxItem>
                                                                 <ComboBoxItem>anden type</ComboBoxItem>
                                                                 <ComboBoxItem>anden type</ComboBoxItem>
-                                                            </ComboBox>
+                                                            </ComboBox> -->
                                                         </StackPanel>
                                                     </WrapPanel>
-                                                    <DockPanel Name="DockpanelSkadestype" Width="300">
+                                                    <!--<DockPanel Name="DockpanelSkadestype">
                                                         <Label DockPanel.Dock="Top" FontSize="16" FontStyle="Italic"/>
                                                         <Border BorderThickness="2" BorderBrush="Gray">
-                                                            <TextBox Margin="5" BorderThickness="0" FontSize="14" TextWrapping="Wrap" Text="Den er rimelig smadret. "/>
+                                                            <TextBox Margin="5" BorderThickness="0" FontSize="14" TextWrapping="Wrap" Text="Den er rimelig smadret." Width="200"/>
                                                         </Border>
-                                                    </DockPanel>
+                                                    </DockPanel>-->
                                                 </WrapPanel>
-                                                <WrapPanel Margin="0,20,0,0" HorizontalAlignment="Center">
-                                                    <Button Margin="0,0,150,0" FontSize="20" Content="Gem ændringer"/>
-                                                    <Button FontSize="20" Content=" Annulér ændringer"/>
-                                                </WrapPanel>
+                                                <DockPanel Margin="10">
+                                                    <Button Margin="0,0,0,0" FontSize="20" Content="Gem"/>
+                                                    <Button FontSize="20" HorizontalAlignment="Right" Content="Annulér"/>
+                                                </DockPanel>
                                             </StackPanel>
                                         </Border>
                                     </ScrollViewer>
