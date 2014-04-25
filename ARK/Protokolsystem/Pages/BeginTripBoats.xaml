@@ -70,7 +70,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="BeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="460,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
+        <Button x:Name="BeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="460,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFB0D141" Offset="0"/>
@@ -88,7 +88,7 @@
                 <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="8,0,0,0"><Run Text="BEGYND &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ShowFilters" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="154,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding}">
+        <Button x:Name="ShowFilters" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="154,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF999999" Offset="0.004"/>

@@ -29,78 +29,41 @@
         </ListView>
         <Label Content="VÆLG BÅD (UDE)" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" BorderThickness="1" />
         <Label Content="VÆLG TUR" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" />
-        <Button x:Name="EndTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" FontFamily="{Binding FontFamily, ElementName=BeginTrip}" Style="{DynamicResource SmallShadow}" BorderThickness="{Binding BorderThickness, ElementName=BeginTrip}" FontWeight="Bold" Margin="460,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding EndTripNow}">
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF46050E" Offset="1"/>
-                    <GradientStop Color="#FFCB4C4F"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFD41419" Offset="0"/>
-                    <GradientStop Color="#FF6C000E" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
+        <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,98" Command="GlobalComm:GlobalCommands.ToggleKeyboard">
         <StackPanel Orientation="Horizontal">
-                <Image Source="/ARK;component/images/flag_finish.png" Width="32" Height="32" Margin="0,2,0,0"/>
-                <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="12,2,0,0"><Run Text="AFSLUT &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/keyboard_add.png"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
+                    <Run Text="VIS"/><LineBreak/>
+                    <Run Text="TASTATUR"/>
+                </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ShowFilters" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="154,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF999999" Offset="0.004"/>
-                    <GradientStop Color="#FF363636" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFACACAC" Offset="0"/>
-                    <GradientStop Color="#FF252525" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
+        <Button x:Name="ShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" BorderBrush="Black" Margin="155,438,305,98">
             <StackPanel Orientation="Horizontal">
-                <Image Source="/ARK;component/images/filter.png" Width="32" Height="28" Margin="0,5,0,0"/>
-                <TextBlock Text="{Binding ParentViewModel.KeyboardText}" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/filter_add.png"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
+                    <Run Text="VIS"/><LineBreak/>
+                    <Run Text="FILTRE"/>
+                </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ShowKeyboard" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="0,438,0,0" Height="64" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=Keyboard.KeyboardToggle}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFF1F1F1" Offset="0.004"/>
-                    <GradientStop Color="#FFC5C5C5" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFE0E0E0" Offset="0"/>
-                    <GradientStop Color="#FFA4A4A4" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
+        <Button x:Name="AddDestination" Style="{DynamicResource ResourceKey=btnFilter}" BorderBrush="#FFD8D8D8" Margin="305,438,155,98">
             <StackPanel Orientation="Horizontal">
-                <Image Source="/ARK;component/images/keyboard_add.png" Width="32" Height="28" Margin="0,5,0,0"/>
-                <TextBlock Text="{Binding Path=KeyboardToggleText}"  Foreground="White" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/map_add.png"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
+                    <Run Text="ANGIV"/><LineBreak/>
+                    <Run Text="DISTANCE"/>
+                </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="AddDestination" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="305,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding}">
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF004546" Offset="1"/>
-                    <GradientStop Color="#FF00B0B4"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF019FA2" Offset="0"/>
-                    <GradientStop Color="#FF006364" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
+        <Button x:Name="AddDestination2" Style="{DynamicResource ResourceKey=btnFilter}" BorderBrush="#FFD8D8D8" Margin="460,438,0,98" Command="{Binding EndTripNow}">
             <StackPanel Orientation="Horizontal">
-                <Image Source="/ARK;component/images/map_add.png" Width="32" Height="28" Margin="0,0,0,0"/>
-                <TextBlock FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"><Run Language="da-dk" Text="ANGIV"/><LineBreak/><Run Language="da-dk" Text="DISTANCE"/></TextBlock>
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/flag_finish.png"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
+                    <Run Text="AFSLUT"/><LineBreak/>
+                    <Run Text="TUR"/>
+                </TextBlock>
             </StackPanel>
         </Button>
-
     </Grid>
 </UserControl>
