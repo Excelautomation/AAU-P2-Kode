@@ -24,7 +24,7 @@ namespace ARK.Model
         public BoatType SpecificBoatType { get; set; }
         public bool LongTripBoat { get; set; }
         public bool BoatOut { get; set; }
-        public bool Usable
+        public bool Usable 
         {
             get
             {
