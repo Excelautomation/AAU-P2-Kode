@@ -25,7 +25,8 @@ namespace ARK.Model.DB
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Boat>()
-                .Ignore(b => b.Usable);
+                .Ignore(b => b.Usable)
+                .Ignore(b => b.Damaged);
 
             modelBuilder.Entity<Boat>()
                 .Property(b => b.Id)
