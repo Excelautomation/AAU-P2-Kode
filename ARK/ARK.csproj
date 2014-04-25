@@ -107,13 +107,7 @@
     <Compile Include="Administrationssystem\AdminLogin.xaml.cs">
       <DependentUpon>AdminLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\BoatItem.xaml.cs">
-      <DependentUpon>BoatItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Administrationssystem\Functions\SMSIT.cs" />
-    <Compile Include="Administrationssystem\Header.xaml.cs">
-      <DependentUpon>Header.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Administrationssystem\Pages\Boats.xaml.cs">
       <DependentUpon>Boats.xaml</DependentUpon>
     </Compile>
@@ -222,18 +216,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Administrationssystem\BoatItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Administrationssystem\FilterControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Administrationssystem\Header.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Administrationssystem\Pages\Boats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -265,9 +247,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Administrationssystem\FilterControl.xaml.cs">
-      <DependentUpon>FilterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

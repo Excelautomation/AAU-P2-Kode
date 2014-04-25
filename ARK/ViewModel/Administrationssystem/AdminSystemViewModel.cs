@@ -24,7 +24,7 @@ namespace ARK.ViewModel.Administrationssystem
             // Start oversigten
             MenuOverview.Execute(null);
 
-            TimeCounter.StopTime("AdministrationssystemViewModel load");
+            TimeCounter.StopTime();
         }
 
         public override void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)
