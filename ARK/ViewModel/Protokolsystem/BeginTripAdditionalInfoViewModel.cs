@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARK.Model;
 using ARK.ViewModel.Base;
+using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -19,8 +20,8 @@ namespace ARK.ViewModel.Protokolsystem
             get { return this; }
             set
             {
-                this.SelectedBoat = Info.SelectedBoat;
-                this.SelectedMembers = Info.SelectedMembers;
+                this.SelectedBoat = value.SelectedBoat;
+                this.SelectedMembers = value.SelectedMembers;
                 Notify(); 
             }
         }
@@ -35,6 +36,17 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get { return _selectedMembers; }
             set { _selectedMembers = value; Notify(); }
+        }
+
+        public ICommand MemberClicked
+        {
+            get
+            {
+                return GetCommand<Member>(x =>
+                    {
+
+                    });
+            }
         }
     }
 }
