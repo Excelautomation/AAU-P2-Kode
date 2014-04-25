@@ -39,13 +39,13 @@ namespace ARK.ViewModel.Protokolsystem
 
             _selectedMembers = new ObservableCollection<Member>();
 
-            SelectedMembers.CollectionChanged += (sender, args) =>
-                {
-                    //if (SelectedMembers.Count > Boat.NumberofSeats)
-                    //{
-
-                    //}
-                };
+            //SelectedMembers.CollectionChanged += (sender, args) =>
+            //    {
+            //        if (Boat != null && SelectedMembers.Count > Boat.NumberofSeats)
+            //        {
+            //            SelectedMembers.Remove((Member)args.NewItems[0]);
+            //        }
+            //    };
 
             ParentAttached += (sender, args) =>
             {
