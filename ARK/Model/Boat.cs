@@ -22,15 +22,22 @@ namespace ARK.Model
         public int NumberofSeats { get; set; }
         public bool Active { get; set; }
         public BoatType SpecificBoatType { get; set; }
-        public bool Usable 
+        public bool LongTripBoat { get; set; }
+        public bool BoatOut { get; set; }
+        public bool Usable
         {
             get
             {
                 return this.Active && this.DamageForms != null && !this.DamageForms.Any(x => !x.Functional && !x.Closed);
             }
         }
-        public bool LongTripBoat { get; set; }
-        public bool BoatOut { get; set; }
+        public bool Damaged 
+        {
+            get
+            {
+                return this.DamageForms != null && this.DamageForms.Count != 0;
+            }
+        }
 
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
