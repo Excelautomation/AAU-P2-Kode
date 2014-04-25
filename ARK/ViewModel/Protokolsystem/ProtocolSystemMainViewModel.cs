@@ -32,7 +32,7 @@ namespace ARK.ViewModel.Protokolsystem
             KeyboardEnabled = true;
             StartTrip.Execute(null);
 
-            TimeCounter.StopTime("ProtocolSystemMainViewModel constructor");
+            TimeCounter.StopTime();
         }
 
         #region Pages

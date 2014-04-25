@@ -54,7 +54,7 @@ namespace ARK.ViewModel.Protokolsystem
                 NotifyCustom("KeyboardToggleText");
             };
 
-            TimeCounter.StopTime("BeginTripViewModel constructor");
+            TimeCounter.StopTime();
         }
 
         public IInfoContainerViewModel GetInfoContainerViewModel

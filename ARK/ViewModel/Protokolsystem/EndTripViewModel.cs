@@ -15,6 +15,8 @@ namespace ARK.ViewModel.Protokolsystem
 
         public EndTripViewModel()
         {
+            TimeCounter.StartTimer();
+
             // Indlæs data
             using (DbArkContext db = new DbArkContext())
             {
@@ -36,6 +38,8 @@ namespace ARK.ViewModel.Protokolsystem
                 NotifyCustom("Keyboard");
                 NotifyCustom("KeyboardToggleText");
             };
+
+            TimeCounter.StopTime();
         }
 
         public List<Boat> BoatsOut
