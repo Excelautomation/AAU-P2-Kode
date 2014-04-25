@@ -16,7 +16,7 @@
             <FlowDocument/>
         </RichTextBox>
         <Label Content="Kommentarer" HorizontalAlignment="Left" Margin="0,95,0,0" VerticalAlignment="Top" Height="33" Width="208" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="AddLongDistance" Content="INDSEND &#xA;LANGTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" Style="{StaticResource SmallShadow}" BorderThickness="2" Margin="426,526,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddLongDistance}">
+        <Button x:Name="AddLongDistance" Content="INDSEND &#xA;LANGTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" BorderThickness="2" Margin="426,526,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddLongDistance}">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF004546" Offset="0"/>
