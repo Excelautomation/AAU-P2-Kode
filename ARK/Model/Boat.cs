@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ARK.Model
 {
@@ -21,7 +22,13 @@ namespace ARK.Model
         public int NumberofSeats { get; set; }
         public bool Active { get; set; }
         public BoatType SpecificBoatType { get; set; }
-        public bool Usable { get; set; }
+        public bool Usable 
+        {
+            get
+            {
+                return this.Active && this.DamageForms != null && this.DamageForms.Any(x => !x.Functional && !x.Closed);
+            }
+        }
         public bool LongTripBoat { get; set; }
         public bool BoatOut { get; set; }
 

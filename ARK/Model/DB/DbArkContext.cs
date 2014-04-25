@@ -25,6 +25,9 @@ namespace ARK.Model.DB
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Boat>()
+                .Ignore(b => b.Usable);
+
+            modelBuilder.Entity<Boat>()
                 .Property(b => b.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
