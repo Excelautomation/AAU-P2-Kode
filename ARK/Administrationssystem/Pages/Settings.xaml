@@ -38,10 +38,10 @@
                             <StackPanel>
                                 <DockPanel>
                                     <TextBlock Margin="4" Background="Transparent">I dag forventes mørkets frembrud klokken:</TextBlock>
-                                    <TextBox Margin="4" MaxLength="2" IsEnabled="False">22:58</TextBox>
+                                    <TextBox Name="TimeOfDarkTextBox" IsEnabled="False" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center"/>
                                     <WrapPanel HorizontalAlignment="Right">
                                         <TextBlock Margin="4">Håndtér automatisk</TextBlock>
-                                        <CheckBox Margin="4" VerticalAlignment="Center"/>
+                                        <CheckBox Name="TimeOfDarkCheckBox" IsChecked="True" Margin="4" VerticalAlignment="Center" Click="TimeOfDarkCheckBox_Click"/>
                                     </WrapPanel>
                                 </DockPanel>
                                 <DockPanel>
@@ -78,8 +78,8 @@
                                         <Image Source="/images/arrow_right.png"></Image>
                                     </Button>
                                 </StackPanel>
-                                <ListView Grid.Row="2" Grid.Column="0" Margin="4" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
-                                <ListView Grid.Row="2" Grid.Column="4" Margin="4" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
+                                <ListView Name="KontaktPersonerListeVenstre" Grid.Row="2" Grid.Column="0" Margin="4" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
+                                <ListView Name="KontaktPersonerListeHøjre" Grid.Row="2" Grid.Column="4" Margin="4" ScrollViewer.VerticalScrollBarVisibility="Visible"></ListView>
                             </Grid>
                         </Border>
                     </Grid>
@@ -227,7 +227,7 @@
                                                 <TextBox Margin="4">John</TextBox>
                                                 <TextBox Margin="4">Doge Larsen</TextBox>
                                                 <TextBox Margin="4">formand@ark.dk</TextBox>
-                                                <TextBox Margin="4">12345678</TextBox>
+                                                <TextBox Margin="4" MaxLength="8">12345678</TextBox>
                                             </StackPanel>
                                         </WrapPanel>
                                     </StackPanel>
