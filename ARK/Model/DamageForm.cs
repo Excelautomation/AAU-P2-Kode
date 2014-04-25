@@ -9,6 +9,7 @@ namespace ARK.Model
         public string Type { get; set; }
         public string Description { get; set; }
         public string NeededMaterials { get; set; }
+        public bool Functional { get; set; }
         public bool Closed { get; set; }
 
         //Foreign Keys

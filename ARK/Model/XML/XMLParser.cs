@@ -37,7 +37,6 @@ namespace ARK.Model.XML
                         NumberofSeats = boatXml.AntalPladser,
                         Active = boatXml.Aktiv == 1,
                         SpecificBoatType = (Boat.BoatType)boatXml.SpecifikBådType,
-                        Usable = boatXml.Roforbud == 1,
                         LongTripBoat = boatXml.LangtursBåd == 1,
                         DamageForms = new List<DamageForm>(),
                         LongDistanceForms = new LinkedList<LongDistanceForm>()
