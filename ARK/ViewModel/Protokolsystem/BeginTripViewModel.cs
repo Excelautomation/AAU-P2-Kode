@@ -138,14 +138,16 @@ namespace ARK.ViewModel.Protokolsystem
         public void UpdateInfo()
         {
             Info.SelectedBoat = new ObservableCollection<Boat> {Boat};
-            Info.SelectedMembers = new ObservableCollection<Member>(Members);
+            Info.SelectedMembers = SelectedMembers;
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
 
         public string KeyboardToggleText
         {
-            get { return Keyboard.KeyboardToggled ? "SKJUL\nTASTATUR" : "VIS\nTASTATUR"; }
+            get {
+                if (Keyboard == null) return "";
+                return Keyboard.KeyboardToggled ? "SKJUL\nTASTATUR" : "VIS\nTASTATUR"; }
         }
     }
 }
