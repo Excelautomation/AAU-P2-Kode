@@ -19,7 +19,6 @@ namespace ARK.ViewModel.Protokolsystem
         private List<Boat> _boats = new List<Boat>();
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
-        private readonly ObservableCollection<Member> _selectedMembers;
         private FrameworkElement _infoPage;
 
         public BeginTripViewModel()
@@ -29,13 +28,12 @@ namespace ARK.ViewModel.Protokolsystem
             // Load data
             using (DbArkContext db = new DbArkContext())
             {
-                Boats = new List<Boat>(db.Boat).Where(x => x.Active).OrderBy(x => x.NumberofSeats).ToList();
+                Boats = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
                 Members = new List<Member>(db.Member).Select(x =>
                     {
                         x.FirstName = x.FirstName.Trim();
                         return x;
                     }).OrderBy(x => x.FirstName).ToList();
-                _selectedMembers = new ObservableCollection<Member>();
             }
 
             ParentAttached += (sender, args) =>
@@ -124,6 +122,8 @@ namespace ARK.ViewModel.Protokolsystem
                 Notify();
             }
         }
+
+        public ObservableCollection<Member> SelectedMembers { get; set; }
 
         public FrameworkElement InfoPage
         {

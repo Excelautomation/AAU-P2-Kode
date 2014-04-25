@@ -8,6 +8,7 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Base"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
+             xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding"
              d:DesignWidth="640" Width="600" Height="514">
     <UserControl.DataContext>
         <Protokolsystem:BeginTripViewModel />
@@ -33,7 +34,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"  HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -43,11 +44,6 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=MemberSelected}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItems}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </ListView>
         <Label Content="VÆLG BÅD" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" BorderThickness="1" />
         <Label Content="VÆLG DELTAGERE" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Height="32" Width="295" FontSize="18" Foreground="Black" FontWeight="Bold" FontFamily="Calibri" />

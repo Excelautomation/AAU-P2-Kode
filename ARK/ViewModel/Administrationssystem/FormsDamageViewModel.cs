@@ -15,7 +15,6 @@ namespace ARK.ViewModel.Administrationssystem
                 { 
                     DamageForm = e; 
                     DamageForm.Boat.Active = false; 
-                    DamageForm.Boat.Usable = false;
                 });
             }
         }
@@ -28,7 +27,6 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     DamageForm = e;
                     DamageForm.Boat.Active = true;
-                    DamageForm.Boat.Usable = true;
                 });
             }
         }
