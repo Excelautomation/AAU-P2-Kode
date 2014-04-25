@@ -6,6 +6,7 @@ namespace ARK.Model
     public class Member : IEquatable<Member>, IComparable<Member>
     {
         public int Id { get; set; }
+        public bool Active { get; set; }
         public int MemberNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
