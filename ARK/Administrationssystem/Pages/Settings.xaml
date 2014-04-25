@@ -64,17 +64,17 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200*"/>
                                     <ColumnDefinition Width="4"/>
-                                    <ColumnDefinition Width="25*"/>
+                                    <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="4"/>
                                     <ColumnDefinition Width="200*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Aktive kontaktpersoner</Label>
                                 <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center">Ikke-aktive kontakpersoner</Label>
                                 <StackPanel VerticalAlignment="Center" Grid.Row="2" Grid.Column="2">
-                                    <Button Margin="4">
+                                    <Button Margin="4" Width="32">
                                         <Image Source="/images/arrow_left.png"></Image>
                                     </Button>
-                                    <Button Margin="4">
+                                    <Button Margin="4" Width="32">
                                         <Image Source="/images/arrow_right.png"></Image>
                                     </Button>
                                 </StackPanel>
@@ -115,7 +115,7 @@
                             <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
                                 <StackPanel>
                                     <StackPanel>
-                                        <WrapPanel Margin="10">
+                                        <WrapPanel Margin="4">
                                             <StackPanel Margin="4">
                                                 <Label>Skadenavn:</Label>
                                                 <Label>Alvorlighed:</Label>
@@ -127,6 +127,60 @@
                                                     <TextBlock Margin="4">Er båden funktionsdygtig?</TextBlock>
                                                     <CheckBox Margin="4" VerticalAlignment="Center"/>
                                                 </WrapPanel>
+                                                <TextBox Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                                            </StackPanel>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                    <DockPanel Margin="10" >
+                                        <Button Margin="4">Gem</Button>
+                                        <Button Margin="4">Anullér</Button>
+                                        <Button Margin="4" HorizontalAlignment="Right">Slet!</Button>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Standardture" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="4"/>
+                            <ColumnDefinition Width="200*"/>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Column="0">
+                            <Button Margin="4" DockPanel.Dock="Top" Width="220">Opret ny standardtur</Button>
+                            <ListView Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Width="500">
+                                            <StackPanel Margin="0,10,0,10">
+                                                <Label Content="{Binding Path=Brugernavn}" Margin="0,0,0,0" Padding="0"/>
+                                                <WrapPanel>
+                                                    <Label Content="{Binding Path=Member.FirstName}" Margin="0,0,3,0" Padding="0"/>
+                                                    <Label Content="{Binding Path=Member.LastName}" Margin="0,0,0,0" Padding="0"/>
+                                                </WrapPanel>
+                                            </StackPanel>
+                                            <Separator Margin="0" Padding="0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </DockPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="2">
+                            <Label Margin="4">Detaljer</Label>
+                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                                <StackPanel>
+                                    <StackPanel>
+                                        <WrapPanel Margin="4">
+                                            <StackPanel Margin="4">
+                                                <Label>Turnavn:</Label>
+                                                <Label>Distance:</Label>
+                                                <Label>Beskrivelse:</Label>
+                                            </StackPanel>
+                                            <StackPanel Margin="4" Width="270">
+                                                <TextBox Margin="4">Nord om Egholm</TextBox>
+                                                <TextBox Margin="4">5 km</TextBox>
                                                 <TextBox Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
                                             </StackPanel>
                                         </WrapPanel>
