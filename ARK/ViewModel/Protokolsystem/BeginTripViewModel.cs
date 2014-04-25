@@ -151,12 +151,5 @@ namespace ARK.ViewModel.Protokolsystem
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
-
-        public string KeyboardToggleText
-        {
-            get {
-                if (Keyboard == null) return "";
-                return Keyboard.KeyboardToggled ? "SKJUL\nTASTATUR" : "VIS\nTASTATUR"; }
-        }
     }
 }
