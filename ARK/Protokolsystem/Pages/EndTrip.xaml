@@ -12,13 +12,13 @@
         <Protokolsystem:EndTripViewModel />
     </UserControl.DataContext>
     <Grid Height="600">
-        <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding Path=BoatsOut}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="0,41,0,-3">
+        <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding Path=BoatsOut}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="0,41,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}"/>
+                    <WrapPanel Orientation="Vertical" Style="{DynamicResource ResourceKey=lstItems}" >
+                        <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
                         <WrapPanel>
-                            <TextBlock Text="Tid: " FontSize="14px" />
+                            <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContent}"/>
                             <!--<TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />-->
                         </WrapPanel>
                     </WrapPanel>
@@ -36,7 +36,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" BorderBrush="Black" Margin="155,438,305,98">
+        <Button x:Name="ShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="155,438,305,98">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/filter_add.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
