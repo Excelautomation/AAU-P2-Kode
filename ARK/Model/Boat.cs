@@ -26,7 +26,7 @@ namespace ARK.Model
         {
             get
             {
-                return this.Active && this.DamageForms != null && this.DamageForms.Any(x => !x.Functional && !x.Closed);
+                return this.Active && this.DamageForms != null && !this.DamageForms.Any(x => !x.Functional && !x.Closed);
             }
         }
         public bool LongTripBoat { get; set; }
