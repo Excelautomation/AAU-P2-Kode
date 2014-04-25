@@ -49,6 +49,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
+                        <StackPanel.InputBindings>
+                            <MouseBinding Gesture="LeftClick"  Command=""/>
+                        </StackPanel.InputBindings>
                         <WrapPanel Margin="0,0,0,0">
                             <TextBlock Text="{Binding MemberNumber}" FontSize="13px" FontWeight="Bold" Margin="0,0,0,0"/>
                             <TextBlock Text=" " />
@@ -60,9 +63,6 @@
                             <TextBlock Text="    Langtursstyrmand: " FontSize="10px" FontWeight="Normal"  Margin="0,0,0,0"/>
                             <TextBlock Text="{Binding Path=LongTripCox, Converter={StaticResource YesNo}}" FontSize="10px" FontWeight="Bold" Margin="0,0,0,0"/>
                         </WrapPanel>
-                        <StackPanel.InputBindings>
-                            <MouseBinding Gesture="LeftClick"  Command="MemberClicked"/>
-                        </StackPanel.InputBindings>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

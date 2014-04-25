@@ -21,6 +21,7 @@ namespace ARK.Model.DB
         public DbSet<GetSMS> GetSMS { get; set; }
         public DbSet<SMS> SMS { get; set; }
         public DbSet<StandardTrip> StandardTrip { get; set; }
+        public DbSet<Admin> Admin { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -70,6 +71,11 @@ namespace ARK.Model.DB
                 .HasRequired(df => df.Boat)
                 .WithMany(b => b.DamageForms)
                 .HasForeignKey(df => df.BoatId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Admin>()
+                .HasRequired(a => a.Member)
+                .WithOptional()
                 .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);

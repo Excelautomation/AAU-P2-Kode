@@ -130,6 +130,7 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\DamageType.cs" />
     <Compile Include="Model\DB\DbArkContext.cs" />
     <Compile Include="Model\DB\MySQLHistoryContext.cs" />
