@@ -61,7 +61,7 @@
                             <TextBlock Text="{Binding Path=LongTripCox, Converter={StaticResource YesNo}}" FontSize="10px" FontWeight="Bold" Margin="0,0,0,0"/>
                         </WrapPanel>
                         <StackPanel.InputBindings>
-                            <MouseBinding Gesture="LeftClick"  Command=""/>
+                            <MouseBinding Gesture="LeftClick"  Command="MemberClicked"/>
                         </StackPanel.InputBindings>
                     </StackPanel>
                 </DataTemplate>

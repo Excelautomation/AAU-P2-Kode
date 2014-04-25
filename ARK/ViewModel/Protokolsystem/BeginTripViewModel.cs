@@ -20,6 +20,7 @@ namespace ARK.ViewModel.Protokolsystem
         private List<Member> _members = new List<Member>();
         private bool _enableMembers;
         private FrameworkElement _infoPage;
+        private ObservableCollection<Member> _selectedMembers;
 
         public BeginTripViewModel()
         {
@@ -35,6 +36,8 @@ namespace ARK.ViewModel.Protokolsystem
                         return x;
                     }).OrderBy(x => x.FirstName).ToList();
             }
+
+            _selectedMembers = new ObservableCollection<Member>();
 
             ParentAttached += (sender, args) =>
             {
@@ -123,7 +126,13 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public ObservableCollection<Member> SelectedMembers { get; set; }
+        public ObservableCollection<Member> SelectedMembers 
+        { 
+            get
+            {
+                return _selectedMembers;
+            }
+        }
 
         public FrameworkElement InfoPage
         {
