@@ -9,12 +9,13 @@ using ARK.Model.Search;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class BoatViewModel : FilterContentViewModelBase
+    public class BoatViewModel : FilterContentViewModelBase, IDisposable
     {
         private readonly List<Boat> _boatsNonFiltered;
         private bool _activeBoat;
         private Boat _currentBoat;
         private IEnumerable<Boat> _boats;
+        private DbArkContext _dbArkContext;
 
         const string bådeUdeText = "Både ude";
         const string bådeHjemmeText = "Både hjemme";
@@ -26,10 +27,8 @@ namespace ARK.ViewModel.Administrationssystem
         public BoatViewModel()
         {
             // Load data
-            using (var db = new DbArkContext())
-            {
-                _boatsNonFiltered = db.Boat.ToList();
-            }
+            _dbArkContext = new DbArkContext();
+            _boatsNonFiltered = _dbArkContext.Boat.ToList();
 
             // Aktiver filtre
             ParentAttached += (sender, args) =>
@@ -238,5 +237,10 @@ namespace ARK.ViewModel.Administrationssystem
             return outputList;
         }
         #endregion
+
+        public void Dispose()
+        {
+            _dbArkContext.Dispose();
+        }
     }
 }
