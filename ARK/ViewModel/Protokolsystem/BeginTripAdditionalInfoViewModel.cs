@@ -20,8 +20,8 @@ namespace ARK.ViewModel.Protokolsystem
             get { return this; }
             set
             {
-                this.SelectedBoat = value.SelectedBoat;
-                this.SelectedMembers = value.SelectedMembers;
+                this.SelectedBoat = Info.SelectedBoat;
+                this.SelectedMembers = Info.SelectedMembers;
                 Notify(); 
             }
         }
@@ -44,7 +44,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<Member>(x =>
                     {
-
+                        SelectedMembers.Remove(x);
                     });
             }
         }
