@@ -39,6 +39,7 @@
                                               Width="120"/>
                         </Grid>
                     </Border>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -62,11 +63,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--<GradientStop Color="#FFD8D8D8" Offset="0"/>-->
-    <!--Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ShowFilter}}-->
-    <!--{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type AddressControl}}, Path=StreetTextBox.(Validation.HasError)}" Value="false"-->
-    <!--<GradientStop Color="#FF938F8F" Offset="1"/>-->
 
 </ResourceDictionary>
     

@@ -8,11 +8,12 @@
              xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Base"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
+
     <UserControl.DataContext>
         <Protokolsystem:EndTripViewModel />
     </UserControl.DataContext>
     <Grid Height="600">
-        <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding Path=BoatsOut}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="0,41,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding Path=BoatsOut}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="0,41,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" Style="{DynamicResource ResourceKey=lstItems}" >
@@ -25,15 +26,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="BoatsOutAvailableTrips" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="305,41,0,0">
-        </ListView>
+
+        <ListView x:Name="BoatsOutAvailableTrips" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="305,41,0,0"/>
         <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,9,0,0" />
         <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,10,0,0" />
         <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,98" Command="{Binding Path=Keyboard.KeyboardToggle}">
         <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}">
-                </TextBlock>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}"/>
             </StackPanel>
         </Button>
         <Button x:Name="ShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="155,438,305,98">
