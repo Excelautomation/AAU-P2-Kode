@@ -18,6 +18,12 @@
         <Setter Property="Foreground" Value="#FF4A8DB8"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="FontWeight" Value="Bold"/>
+        <Style.Resources>
+            <!-- Background of selected item when focussed -->
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
+            <!-- Background of selected item when not focussed -->
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Green" />
+        </Style.Resources>
     </Style>
 
     <!--ListView Indhold-->
@@ -26,6 +32,7 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="Padding" Value="0"/>
+
     </Style>
 
     <Style x:Key="lstItems" TargetType="WrapPanel">
@@ -34,4 +41,9 @@
         <Setter Property="Margin" Value="-3, -3, 0, 0"/>
     </Style>
 
+
+
 </ResourceDictionary>
+
+
+
