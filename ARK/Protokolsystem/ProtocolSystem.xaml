@@ -7,7 +7,7 @@
         Left="0" Top="0"
         WindowStyle="None"
         ResizeMode="NoResize"
-        WindowStartupLocation="Manual">    
+        WindowStartupLocation="Manual">
     <Window.DataContext>
         <protokolsystem:ProtocolSystemMainViewModel />
     </Window.DataContext>
