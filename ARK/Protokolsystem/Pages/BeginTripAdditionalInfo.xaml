@@ -24,8 +24,8 @@
         <Style x:Key="WhiteRounded" TargetType="Rectangle" BasedOn="{StaticResource RectWidth}">
             <Setter Property="Stroke" Value="#FFCDCDCD"/>
             <Setter Property="Fill" Value="#FFE9EAED"/>
-            <Setter Property="RadiusX" Value="1"/>
-            <Setter Property="RadiusY" Value="1"/>
+            <Setter Property="RadiusX" Value="3"/>
+            <Setter Property="RadiusY" Value="3"/>
         </Style>
         <Style x:Key="stcbgcolor" TargetType="StackPanel">
             <Style.Triggers>
@@ -39,10 +39,10 @@
         </Style>
         <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
     </UserControl.Resources>
-    
+
     <Grid Height="768" Margin="3,5,3,0">
-        <Rectangle HorizontalAlignment="Left" Height="768" Margin="0" VerticalAlignment="Top" Style="{StaticResource WhiteRounded}"/>
-        <TextBlock x:Name="textBlock" Style="{StaticResource elwidth}" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="Båd" VerticalAlignment="Top" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="186"/>
+        <Rectangle HorizontalAlignment="Left" Height="763" Margin="0" VerticalAlignment="Top" Style="{StaticResource WhiteRounded}" Width="194"/>
+        <TextBlock x:Name="textBlock" Style="{StaticResource elwidth}" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="Båd" VerticalAlignment="Top" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="190"/>
         <TextBlock Style="{StaticResource elwidth}" HorizontalAlignment="Left" Margin="2,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="Black" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
                 Besætning ( <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> / <Run Text="{Binding Path=SelectedBoat[0].NumberofSeats, Mode=OneWay}"/> )
         </TextBlock>
@@ -55,26 +55,26 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Margin="0,3,0,0">
-                            <Run Text="Navn: " Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
+                            <Run Text="Navn: " FontWeight="Bold"/>
                             <Run Text="{Binding Name}"/>
                         </TextBlock>
-                        <TextBlock FontSize="13px"  Margin="0,3,0,0">
+                        <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Margin="0,3,0,0">
                             <Run Text="Pladser: " FontWeight="Bold"/>
                             <Run Text="{Binding NumberofSeats}"/>
                         </TextBlock>
-                        <TextBlock FontSize="13px"  Margin="0,3,0,0">
+                        <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Margin="0,3,0,0">
                             <Run Text="Bådtype: " FontWeight="Bold"/>
                             <Run Text="{Binding SpecificBoatType}"/>
                         </TextBlock>
-                        <TextBlock FontSize="13px"  Margin="0,3,0,0">
+                        <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Margin="0,3,0,0">
                             <Run Text="Aktiv: " FontWeight="Bold"/>
                             <Run Text="{Binding Path=Active, Converter={StaticResource YesNo}}"/>
                         </TextBlock>
-                        <TextBlock FontSize="13px"  Margin="0,3,0,0">
+                        <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Margin="0,3,0,0">
                             <Run Text="Funktionsdygtig: " FontWeight="Bold"/>
                             <Run Text="{Binding Path=Usable, Converter={StaticResource YesNo}, Mode=OneWay}"/>
                         </TextBlock>
-                        <TextBlock Text="Åbne skadesanmeldelser: " FontSize="13px" FontWeight="Bold" Margin="0,3,0,0"/>
+                        <TextBlock Text="Åbne skadesanmeldelser: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold" Margin="0,3,0,0"/>
                         <ListView ItemsSource="{Binding Path=DamageForms}" BorderBrush="{x:Null}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -90,8 +90,8 @@
         </ListView>
 
         <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" Style="{StaticResource elwidth}" 
-                      HorizontalAlignment="Left" Opacity="0.975" Margin="2,383,0,29" 
-                      FontSize="18" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Background="White" 
+                      HorizontalAlignment="Left" Opacity="0.975" Margin="2,383,0,7" 
+                      FontSize="18" BorderBrush="{x:Null}" Background="White" 
                       Width="{Binding ActualWidth, ElementName=BoatInfo, Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -105,15 +105,15 @@
                         </Grid.RowDefinitions>
                         <StackPanel Style="{StaticResource stcbgcolor}" Margin="5,5,0,0" HorizontalAlignment="Stretch" Orientation="Vertical">
                             <StackPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                <TextBlock Text="{Binding MemberNumber}" FontSize="13px" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding MemberNumber}" Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
                                 <TextBlock Text=" " />
-                                <TextBlock Text="{Binding FirstName}" FontSize="13px" FontWeight="Normal"/>
+                                <TextBlock Text="{Binding FirstName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                                 <TextBlock Text=" " />
-                                <TextBlock Text="{Binding LastName}" FontSize="13px" FontWeight="Normal"/>
+                                <TextBlock Text="{Binding LastName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Text="    Korttursstyrmand: " FontSize="10px" FontWeight="Normal"/>
-                                <TextBlock Text="{Binding Path=ShortTripCox, Converter={StaticResource YesNo}}" FontSize="10px" FontWeight="Bold"/>
+                                <TextBlock Text="    Korttursstyrmand: " FontSize="12px" FontWeight="Normal"/>
+                                <TextBlock Text="{Binding Path=ShortTripCox, Converter={StaticResource YesNo}}" FontSize="12px" FontWeight="Bold"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
