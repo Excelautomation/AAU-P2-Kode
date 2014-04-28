@@ -16,13 +16,13 @@ namespace ARK
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AdminSystem window = new AdminSystem();
+            var window = new AdminSystem();
             ShowWindow(window);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Protokolsystem.Protokolsystem window = new Protokolsystem.Protokolsystem();
+            var window = new Protokolsystem.Protokolsystem();
             ShowWindow(window);
         }
 

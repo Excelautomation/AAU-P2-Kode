@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Search;
 using ARK.ViewModel.Base;
+using CheckBox = System.Windows.Controls.CheckBox;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -18,21 +21,37 @@ namespace ARK.ViewModel.Administrationssystem
         private Visibility _showSkader;
 
         private IEnumerable<DamageForm> _skadesblanketter;
-        private readonly List<DamageForm> _skadesblanketterNonFiltered;
+        private List<DamageForm> _skadesblanketterNonFiltered;
         private IEnumerable<LongDistanceForm> _longDistanceForms;
-        private readonly List<LongDistanceForm> _longDistanceFormsNonFiltered;
+        private List<LongDistanceForm> _longDistanceFormsNonFiltered;
         private IEnumerable<Boat> _boatsOut;
-        private readonly List<Boat> _boatsOutNonFiltered; 
+        private List<Boat> _boatsOutNonFiltered;
+        private bool _loadingData;
 
         public OverviewViewModel()
         {
+            // Instaliser lister så lazy ikke fejler
+            _skadesblanketterNonFiltered = new List<DamageForm>();
+            _longDistanceFormsNonFiltered = new List<LongDistanceForm>();
+            _boatsOutNonFiltered = new List<Boat>();
+
             // Load data
-            using (var db = new DbArkContext())
+            Task.Factory.StartNew(() =>
             {
-                _skadesblanketterNonFiltered = db.DamageForm.ToList();
-                _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
-                _boatsOutNonFiltered = db.Boat.ToList();
-            }
+                LoadingData = true;
+
+                using (var db = new DbArkContext())
+                {
+                    _skadesblanketterNonFiltered = db.DamageForm.ToList();
+                    _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
+                    _boatsOutNonFiltered = db.Boat.ToList();
+
+                    // Opdater filter
+                    UpdateFilter();
+                }
+
+                LoadingData = false;
+            });
 
             // Aktiver filtre
             ParentAttached += (sender, args) =>
@@ -56,10 +75,13 @@ namespace ARK.ViewModel.Administrationssystem
                     SearchText = eventArgs.SearchText;
                     UpdateFilter();
                 };
-
-                // Opdater filter
-                UpdateFilter();
             };
+        }
+
+        public bool LoadingData
+        {
+            get { return _loadingData; }
+            set { _loadingData = value; Notify(); }
         }
 
         private List<CheckboxFilter> CheckboxFilters { get; set; }
@@ -145,7 +167,22 @@ namespace ARK.ViewModel.Administrationssystem
                           skade.Description.Contains(SearchText)
                     select skade;
 
+                LongDistanceForms = from distanceform in LongDistanceForms
+                    where distanceform.Boat.Name.Contains(SearchText) ||
+                          distanceform.Text.Contains(SearchText)
+                    select distanceform;
+
+                BoatsOut = from boat in BoatsOut
+                    where boat.Name.ToLower().Contains(SearchText.ToLower())
+                    select boat;
+
                 ShowSkader = Skadesblanketter.Any() ? Visibility.Visible
+                    : Visibility.Collapsed;
+
+                ShowLangtur = LongDistanceForms.Any() ? Visibility.Visible
+                    : Visibility.Collapsed;
+
+                ShowBoatsOut = BoatsOut.Any() ? Visibility.Visible
                     : Visibility.Collapsed;
             }
             
