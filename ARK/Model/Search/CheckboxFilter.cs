@@ -18,7 +18,8 @@ namespace ARK.Model.Search
         {
             get
             {
-                return Control.IsChecked.GetValueOrDefault();
+                if (Control.Dispatcher.CheckAccess()) return Control.IsChecked.GetValueOrDefault();
+                else return Control.Dispatcher.Invoke(() => Active);
             }
         }
 
