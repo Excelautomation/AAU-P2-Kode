@@ -16,6 +16,7 @@ namespace ARK.ViewModel.Administrationssystem
         private Blanketter _pageforms;
         private Oversigt _pageoversigt;
         private Indstillinger _pagesettings;
+        private string _searchText;
 
         public AdminSystemViewModel()
         {
@@ -32,6 +33,7 @@ namespace ARK.ViewModel.Administrationssystem
             EnableSearch = false;
             EnableFilters = false;
             Filters.Clear();
+            SearchText = "";
 
             base.NavigateToPage(page, pageTitle);
         }
@@ -81,6 +83,12 @@ namespace ARK.ViewModel.Administrationssystem
         #endregion private
 
         #region Filter
+
+        public string SearchText
+        {
+            get { return _searchText; }
+            set { _searchText = value; Notify(); }
+        }
 
         public ICommand SearchChangedCommand
         {
