@@ -3,12 +3,16 @@
     <!--Button-->
     <Style x:Key="btnFilter" TargetType="Button">
         <Setter Property="FontSize" Value="18"/>
+        <Setter Property="BorderThickness" Value="0, 0, 1, 1"/>
+        <Setter Property="Padding" Value="2"/>
         <Setter Property="Height" Value="64"/>
-        <Setter Property="Width" Value="140"/>
+        <Setter Property="Width" Value="150"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -22,14 +26,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="btnFilterBorder"
-                            BorderThickness="2,2,2,2" 
-                            Padding="2"
+                            BorderThickness="{TemplateBinding Property=BorderThickness}" 
+                            Padding="{TemplateBinding Property=Padding}"
+                            Width="{TemplateBinding Property=Width}"
+                            Height="{TemplateBinding Property=Height}"
                             Background="{TemplateBinding Property=Background}">
                         <Grid>
                             <Border>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFC3C3C3" Offset="0"/>
+                                        <GradientStop Color="#FF6C6A6A" Offset="0"/>
                                         <GradientStop Color="#FF444040" Offset="0.5"/>
                                         <GradientStop Color="#FF515151" Offset="1"/>
                                     </LinearGradientBrush>

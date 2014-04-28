@@ -9,12 +9,18 @@
              xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Base"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding"
-             d:DesignWidth="640" Width="600" Height="514">
+             Style="{DynamicResource ResourceKey=ucContent}">
+
     <UserControl.DataContext>
         <Protokolsystem:BeginTripViewModel />
     </UserControl.DataContext>
-    <Grid Width="600" Height="512">
-        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="402" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,31,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
+
+    <!--Indhold-->
+    <Grid Style="{DynamicResource ResourceKey=gridContent}">
+        <Label Content="VÆLG BÅD" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,0,0,0"/>
+        <Label Content="VÆLG DELTAGERE" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="309,0,0,0"/>
+        
+        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Margin="0,32,319,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -34,32 +40,39 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"  HorizontalAlignment="Left" Height="402" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,31,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged">
+        
+        <ListView x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
+                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" Margin="309,32,10,77" SelectionMode="Multiple" 
+                  IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="{Binding FirstName}" Style="{DynamicResource ResourceKey=lstListViewHeadline}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding LastName}" Style="{DynamicResource ResourceKey=lstListViewHeadline}" />
+                        <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
+                            <Run Text="{Binding FirstName}"/>
+                            <Run Text=" "/>
+                            <Run Text="{Binding LastName}"/>
+                        </TextBlock>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="VÆLG BÅD" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,0,0,0"/>
-        <Label Content="VÆLG DELTAGERE" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,0,0,0" />
-        <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,10" Command="{Binding Path=Keyboard.KeyboardToggle}" Height="Auto">
+
+        <!--Knapper-->
+        <Button x:Name="btnShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,467,471,-1" Command="{Binding Path=Keyboard.KeyboardToggle}">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="ShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="155,438,305,10" Command="{Binding Keyboard.KeyboardToggle}" Height="Auto">
+
+        <Button x:Name="btnShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="155,467,316,0">
             <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Keyboard.KeyboardImage}"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Keyboard.KeyboardToggleText}"/>
+                <!--<Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}"/>-->
             </StackPanel>
         </Button>
-        <Button x:Name="BeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="460,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
+
+        <Button x:Name="btnBeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="471,468,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFB0D141" Offset="0"/>

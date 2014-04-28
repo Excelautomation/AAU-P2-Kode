@@ -53,7 +53,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _startTrip ??
                        (_startTrip =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new BeginTripBoats()), "Start rotur"));
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new BeginTripBoats()), "START ROTUR"));
             }
         }
 
@@ -62,7 +62,7 @@ namespace ARK.ViewModel.Protokolsystem
             get
             {
                 return _endTrip ??
-                       (_endTrip = GetNavigateCommand(new Lazy<FrameworkElement>(() => new EndTrip()), "Afslut rotur"));
+                       (_endTrip = GetNavigateCommand(new Lazy<FrameworkElement>(() => new EndTrip()), "AFSLUT ROTUR"));
             }
         }
 
@@ -72,7 +72,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _boatsOut ??
                        (_boatsOut =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new BoatsOut()), "Både på vandet"));
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new BoatsOut()), "BÅDE PÅ VANDET"));
             }
         }
 
