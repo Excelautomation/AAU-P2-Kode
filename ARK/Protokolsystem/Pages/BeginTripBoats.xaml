@@ -14,7 +14,7 @@
         <Protokolsystem:BeginTripViewModel />
     </UserControl.DataContext>
     <Grid Width="600" Height="512">
-        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,41,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
+        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Left" Height="402" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="0,31,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="#FFB9B9B9">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -34,7 +34,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"  HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"  HorizontalAlignment="Left" Height="402" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,31,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -45,25 +45,18 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="VÆLG BÅD" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,10,0,0"/>
-        <Label Content="VÆLG DELTAGERE" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,10,0,0" />
-        <Button x:Name="ShowKeyboard" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="0,438,0,0" Height="64" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=Keyboard.KeyboardToggle}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF999999" Offset="0.004"/>
-                    <GradientStop Color="#FF363636" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFACACAC" Offset="0"/>
-                    <GradientStop Color="#FF252525" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
+        <Label Content="VÆLG BÅD" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,0,0,0"/>
+        <Label Content="VÆLG DELTAGERE" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,0,0,0" />
+        <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,10" Command="{Binding Path=Keyboard.KeyboardToggle}" Height="Auto">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding Path=Keyboard.KeyboardImage}" Width="32" Height="28" Margin="0,5,0,0"/>
-                <TextBlock Text="{Binding Path=Keyboard.KeyboardToggleText}"  Foreground="White" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0">
-                </TextBlock>
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="ShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="155,438,305,10" Command="{Binding Keyboard.KeyboardToggle}" Height="Auto">
+            <StackPanel Orientation="Horizontal">
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Keyboard.KeyboardImage}"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Keyboard.KeyboardToggleText}"/>
             </StackPanel>
         </Button>
         <Button x:Name="BeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="460,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
@@ -82,24 +75,6 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/ARK;component/images/document_page_next.png" Width="32" Height="32"/>
                 <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="8,0,0,0"><Run Text="BEGYND &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
-            </StackPanel>
-        </Button>
-        <Button x:Name="ShowFilters" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="154,438,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding}">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF999999" Offset="0.004"/>
-                    <GradientStop Color="#FF363636" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFACACAC" Offset="0"/>
-                    <GradientStop Color="#FF252525" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/ARK;component/images/filter.png" Width="32" Height="28" Margin="0,5,0,0"/>
-                <TextBlock Text="{Binding ParentViewModel.KeyboardText}" FontSize="16" FontWeight="Bold" FontFamily="/Protokolsystem;component/Fonts/#Arial" Margin="8,0,0,0"/>
             </StackPanel>
         </Button>
     </Grid>
