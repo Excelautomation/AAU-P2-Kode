@@ -10,12 +10,12 @@
              Style="{DynamicResource ResourceKey=ucContent}">
 
     <UserControl.DataContext>
-        <Protokolsystem:EndTripViewModel />
+        <Protokolsystem:EndTripViewModel/>
     </UserControl.DataContext>
 
     <!--Indhold-->
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
-        <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" />
+        <Label Content="VÆLG BÅD (X UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" />
         <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="310,0,0,0" />
         
         <ListView x:Name="EndTripBoatsOutList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=BoatsOut}" Margin="0,31,319,77">

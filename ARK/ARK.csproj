@@ -208,6 +208,7 @@
     <Compile Include="ViewModel\KeyboardContentViewModelBase.cs" />
     <Compile Include="ViewModel\PageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripAdditionalInfoViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
