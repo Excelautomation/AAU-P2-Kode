@@ -38,10 +38,24 @@
                             <StackPanel>
                                 <DockPanel>
                                     <TextBlock Margin="4" Background="Transparent">I dag forventes mørkets frembrud klokken:</TextBlock>
-                                    <TextBox Name="TimeOfDarkTextBox" IsEnabled="False" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center"/>
+                                    <TextBox Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=TimeOfDarkCheckBox, Path=IsChecked}" Value="True">
+                                                        <Setter Property="IsEnabled" Value="False"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=TimeOfDarkCheckBox, Path=IsChecked}" Value="False">
+                                                        <Setter Property="IsEnabled" Value="True"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
                                     <WrapPanel HorizontalAlignment="Right">
                                         <TextBlock Margin="4">Håndtér automatisk</TextBlock>
-                                        <CheckBox Name="TimeOfDarkCheckBox" IsChecked="True" Margin="4" VerticalAlignment="Center" Click="TimeOfDarkCheckBox_Click"/>
+                                        <CheckBox Name="TimeOfDarkCheckBox" IsChecked="True" Margin="4" VerticalAlignment="Center">
+                                        </CheckBox>
                                     </WrapPanel>
                                 </DockPanel>
                                 <DockPanel>
@@ -93,7 +107,7 @@
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0">
                             <Button Margin="4" DockPanel.Dock="Top" Width="200">Opret ny skadetype</Button>
-                            <ListView Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <ListView Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Width="500">
