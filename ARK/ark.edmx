@@ -397,7 +397,7 @@
           <Property Name="Password" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="Port" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="GetSM">
+        <EntityType Name="GetSMS">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -446,12 +446,11 @@
           <Property Name="MayUseOutrigger" Type="Boolean" Nullable="false" />
           <Property Name="MayUseKayak" Type="Boolean" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Admin" Relationship="Self.FK_Admins_Members_Id" FromRole="Members" ToRole="Admins" />
           <NavigationProperty Name="DamageForms" Relationship="Self.FK_DamageForms_Members_RegisteringMemberId" FromRole="Members" ToRole="DamageForms" />
           <NavigationProperty Name="LongDistanceForms" Relationship="Self.LongDistanceFormMembers" FromRole="Members" ToRole="LongDistanceForms" />
           <NavigationProperty Name="Trips" Relationship="Self.TripMembers" FromRole="Members" ToRole="Trips" />
         </EntityType>
-        <EntityType Name="SM">
+        <EntityType Name="SMS">
           <Key>
             <PropertyRef Name="Reciever" />
           </Key>
@@ -567,10 +566,10 @@
           <EntitySet Name="DamageForms" EntityType="Self.DamageForm" />
           <EntitySet Name="DamageTypes" EntityType="Self.DamageType" />
           <EntitySet Name="FTPInfoes" EntityType="Self.FTPInfo" />
-          <EntitySet Name="GetSMS" EntityType="Self.GetSM" />
+          <EntitySet Name="GetSMS" EntityType="arkModel.GetSMS" />
           <EntitySet Name="LongDistanceForms" EntityType="Self.LongDistanceForm" />
           <EntitySet Name="Members" EntityType="Self.Member" />
-          <EntitySet Name="SMS" EntityType="Self.SM" />
+          <EntitySet Name="SMS" EntityType="arkModel.SMS" />
           <EntitySet Name="StandardTrips" EntityType="Self.StandardTrip" />
           <EntitySet Name="Trips" EntityType="Self.Trip" />
           <AssociationSet Name="FK_Admins_Members_Id" Association="Self.FK_Admins_Members_Id">
@@ -669,7 +668,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GetSMS">
-            <EntityTypeMapping TypeName="arkModel.GetSM">
+            <EntityTypeMapping TypeName="arkModel.GetSMS">
               <MappingFragment StoreEntitySet="GetSMS">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="From" ColumnName="From" />
@@ -720,7 +719,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SMS">
-            <EntityTypeMapping TypeName="arkModel.SM">
+            <EntityTypeMapping TypeName="arkModel.SMS">
               <MappingFragment StoreEntitySet="SMS">
                 <ScalarProperty Name="Reciever" ColumnName="Reciever" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
