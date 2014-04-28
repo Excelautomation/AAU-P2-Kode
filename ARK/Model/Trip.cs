@@ -11,6 +11,18 @@ namespace ARK.Model
         public DateTime TripStartTime { get; set; }
         public DateTime TripEndedTime { get; set; }
 
+        public TimeSpan TimeBoatOut
+        {
+            get
+            {
+                if (TripEndedTime != null)
+                {
+                    return DateTime.Now.Subtract(this.TripStartTime);
+                }
+                return TimeBoatOut;
+            }
+        }
+
         //Foreign key
         public int BoatId { get; set; }
 
