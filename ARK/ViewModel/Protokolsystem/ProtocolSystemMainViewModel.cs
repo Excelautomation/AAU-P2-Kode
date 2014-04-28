@@ -83,7 +83,7 @@ namespace ARK.ViewModel.Protokolsystem
                 return _statisticsDistance ??
                        (_statisticsDistance =
                            GetNavigateCommand(new Lazy<FrameworkElement>(() => new DistanceStatistics()),
-                               "Kilometerstatistik"));
+                               "KILOMETERSTATISTIK"));
             }
         }
 
@@ -94,7 +94,7 @@ namespace ARK.ViewModel.Protokolsystem
                 return _memberInformation ??
                        (_memberInformation =
                            GetNavigateCommand(new Lazy<FrameworkElement>(() => new MembersInformation()),
-                               "Medlemsinformation"));
+                               "MEDLEMSINFORMATION"));
             }
         }
 
@@ -105,7 +105,7 @@ namespace ARK.ViewModel.Protokolsystem
                 return _createDamage ??
                        (_createDamage =
                            GetNavigateCommand(new Lazy<FrameworkElement>(() => new CreateInjury()),
-                               "Opret blanket ► Skade"));
+                               "OPRET BLANKET ► SKADE"));
             }
         }
 
@@ -116,7 +116,7 @@ namespace ARK.ViewModel.Protokolsystem
                 return _createLongDistance ??
                        (_createLongDistance =
                            GetNavigateCommand(new Lazy<FrameworkElement>(() => new CreateLongDistance()),
-                               "Opret blanket ► Langtur"));
+                               "OPRET BLANKET ► LANGTUR"));
             }
         }
 

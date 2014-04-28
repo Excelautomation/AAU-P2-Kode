@@ -41,7 +41,7 @@
     </UserControl.Resources>
 
     <Grid Height="768" Margin="3,5,3,0">
-        <Rectangle HorizontalAlignment="Left" Height="763" Margin="0" VerticalAlignment="Top" Style="{StaticResource WhiteRounded}" Width="194"/>
+        <Rectangle HorizontalAlignment="Left" Height="763" Margin="0" VerticalAlignment="Top" Style="{StaticResource WhiteRounded}" Width="194" Fill="#FFFBFBFB"/>
         <TextBlock x:Name="textBlock" Style="{StaticResource elwidth}" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="Båd" VerticalAlignment="Top" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="190"/>
         <TextBlock Style="{StaticResource elwidth}" HorizontalAlignment="Left" Margin="2,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="Black" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
                 Besætning ( <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> / <Run Text="{Binding Path=SelectedBoat[0].NumberofSeats, Mode=OneWay}"/> )
@@ -112,8 +112,8 @@
                                 <TextBlock Text="{Binding LastName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Text="    Korttursstyrmand: " FontSize="12px" FontWeight="Normal"/>
-                                <TextBlock Text="{Binding Path=ShortTripCox, Converter={StaticResource YesNo}}" FontSize="12px" FontWeight="Bold"/>
+                                <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
+                                <TextBlock Text="{Binding Path=ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

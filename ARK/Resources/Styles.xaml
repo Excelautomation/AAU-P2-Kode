@@ -27,7 +27,7 @@
         <Setter Property="Height" Value="32"/>
         <Setter Property="Background" Value="#FF8B8B8B"/>
         <Setter Property="BorderBrush" Value="#FF0D476C"/>
-        <Setter Property="BorderThickness" Value="0, 0, 0, 2"/>
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
         <Setter Property="Padding" Value="10,4,0,0"/>
     </Style>
     
