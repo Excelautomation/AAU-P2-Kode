@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using ARK.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
+using ARK.Model;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -38,6 +39,14 @@ namespace ARK.ViewModel.Administrationssystem
             base.NavigateToPage(page, pageTitle);
         }
 
+        private Admin currentLoggetInUser;
+
+        public Admin CurrentLoggedInUser
+        {
+            get { return currentLoggetInUser; }
+            set { currentLoggetInUser = value; Notify(); }
+        }
+        
         #region Pages
 
         public ICommand MenuOverview

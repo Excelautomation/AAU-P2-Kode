@@ -192,6 +192,7 @@
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueConverters\BoolToValueConverter.cs" />
+    <Compile Include="ViewModel\Administrationssystem\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsLongTripViewModel.cs" />
     <Compile Include="ViewModel\FilterContentViewModelBase.cs" />

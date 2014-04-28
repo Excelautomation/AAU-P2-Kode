@@ -11,12 +11,5 @@ namespace ARK.Administrationssystem
         {
             InitializeComponent();
         }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new AdminSystem();
-            window.Show();
-            this.Close();
-        }
     }
 }
