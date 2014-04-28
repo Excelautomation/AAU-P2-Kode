@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
@@ -10,7 +11,7 @@
     <UserControl.DataContext>
         <administrationssystem:SettingsViewModel />
     </UserControl.DataContext>
-    <Grid >
+    <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="White" Offset="0.118"/>
@@ -107,21 +108,21 @@
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0">
                             <Button Margin="4" DockPanel.Dock="Top" Width="200">Opret ny skadetype</Button>
-                            <ListView Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}">
+                            <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Width="500">
-                                            <StackPanel Margin="0,10,0,10">
-                                                <Label Content="{Binding Path=Brugernavn}" Margin="0,0,0,0" Padding="0"/>
-                                                <WrapPanel>
-                                                    <Label Content="{Binding Path=Member.FirstName}" Margin="0,0,3,0" Padding="0"/>
-                                                    <Label Content="{Binding Path=Member.LastName}" Margin="0,0,0,0" Padding="0"/>
-                                                </WrapPanel>
-                                            </StackPanel>
-                                            <Separator Margin="0" Padding="0"/>
+                                        <StackPanel Background="AntiqueWhite">
+                                            <Separator/>
+                                            <Label HorizontalAlignment="Center" Content="{Binding Path=Title}"/>
+                                            <Separator/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=DamageTypeList, Path=SelectedItem}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ListView>
                         </DockPanel>
                         <StackPanel Grid.Row="2" Grid.Column="2">
@@ -135,13 +136,13 @@
                                                 <Label>Alvorlighed:</Label>
                                                 <Label>Beskrivelse:</Label>
                                             </StackPanel>
-                                            <StackPanel Margin="4" Width="270">
-                                                <TextBox Margin="4">Rorskade</TextBox>
+                                            <StackPanel Margin="4" Width="320">
+                                                <TextBox Margin="4" Text="{Binding Path=CurrentDamageType.Title}"></TextBox>
                                                 <WrapPanel>
                                                     <TextBlock Margin="4">Er båden funktionsdygtig?</TextBlock>
-                                                    <CheckBox Margin="4" VerticalAlignment="Center"/>
+                                                    <CheckBox Margin="4" VerticalAlignment="Center" IsChecked="{Binding Path=CurrentDamageType.IsFunctional}"/>
                                                 </WrapPanel>
-                                                <TextBox Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                                                <TextBox Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=CurrentDamageType.Description}"></TextBox>
                                             </StackPanel>
                                         </WrapPanel>
                                     </StackPanel>
