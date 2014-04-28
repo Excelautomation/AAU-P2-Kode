@@ -161,8 +161,11 @@
 
         <Grid Height="100" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="165">
 
-            <TextBlock Margin="0,-40,5,0" Height="40" FontSize="20" FontFamily="Arial"><Run Text="Jon Doge Larsen" FontFamily="Arial"/></TextBlock>
-            <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial"><Run Text="Formand" FontFamily="Arial"/></TextBlock>
+            <TextBlock Margin="0,-40,5,0" Height="40" FontSize="20" FontFamily="Arial">
+                <Run Text="{Binding Path=CurrentLoggedInUser.Member.FirstName}" />
+                <Run Text="{Binding Path=CurrentLoggedInUser.Member.LastName}" />
+            </TextBlock>
+            <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial"/>
             <Button x:Name="btnMenuLogout" Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="50,70,20,0" FontFamily="Arial">
                 <Button.Background>
                     <ImageBrush ImageSource="/images/logud.png"/>
