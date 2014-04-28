@@ -13,33 +13,76 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : ContentViewModelBase
     {
-
-
         #region Skadetyper
         private ObservableCollection<DamageType> _damageTypes;
-        private DamageType _CurrentDamageType;
-
         public ObservableCollection<DamageType> DamageTypes
         {
             get { return _damageTypes; }
             set { _damageTypes = value; Notify(); }
         }
 
+        private DamageType _currentDamageType;
         public DamageType CurrentDamageType
         {
-            get { return _CurrentDamageType; }
-            set { _CurrentDamageType = value; Notify(); }
+            get { return _currentDamageType; }
+            set { _currentDamageType = value; Notify(); }
         }
 
-        public ICommand SelectedChange
+        public ICommand SelectedChangeDamageType
         {
             get
             {
                 return GetCommand<DamageType>(e => { CurrentDamageType = e; });
             }
         }
+        #endregion
 
+        #region Standardture
+        private ObservableCollection<StandardTrip> _standardTrips;
+        public ObservableCollection<StandardTrip> StandardTrips
+        {
+            get { return _standardTrips; }
+            set { _standardTrips = value; Notify(); }
+        }
 
+        private StandardTrip _currentStandardTrip;
+        public StandardTrip CurrentStandardTrip
+        {
+            get { return _currentStandardTrip; }
+            set { _currentStandardTrip = value; Notify(); }
+        }
+
+        public ICommand SelectedChangeStandardTrip
+        {
+            get
+            {
+                return GetCommand<StandardTrip>(e => { CurrentStandardTrip = e; });
+            }
+        }
+        #endregion
+
+        #region Administratorer
+        private ObservableCollection<Admin> _admins;
+        public ObservableCollection<Admin> Admins
+        {
+            get { return _admins; }
+            set { _admins = value; Notify(); }
+        }
+
+        private Admin _currentAdmin;
+        public Admin CurrentAdmin
+        {
+            get { return _currentAdmin; }
+            set { _currentAdmin = value; Notify(); }
+        }
+
+        public ICommand SelectedChangeAdmin
+        {
+            get
+            {
+                return GetCommand<Admin>(e => { CurrentAdmin = e; });
+            }
+        }
         #endregion
 
         #region Constructor
@@ -48,6 +91,8 @@ namespace ARK.ViewModel.Administrationssystem
             using (var dbcontext = new DbArkContext())
             {
                 DamageTypes = new ObservableCollection<DamageType>(dbcontext.DamageType);
+                StandardTrips = new ObservableCollection<StandardTrip>(dbcontext.StandardTrip);
+                Admins = new ObservableCollection<Admin>(dbcontext.Admin);
             }
         }
         #endregion
