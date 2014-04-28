@@ -7,6 +7,6 @@
         <Label Content="Kodeord:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="102" FontFamily="Arial" FontSize="16"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Margin="131,13,0,0" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="16"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Margin="131,42,0,0" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="16"/>
-        <Button x:Name="button" Content="Login" HorizontalAlignment="Left" Margin="261.5,78.04,0,0" VerticalAlignment="Top" Width="73.5" Height="43.96" UseLayoutRounding="False"/>
+        <Button x:Name="button" Content="Login" HorizontalAlignment="Left" Margin="261.5,78.04,0,0" VerticalAlignment="Top" Width="73.5" Height="43.96" UseLayoutRounding="False" Click="button_Click"/>
     </Grid>
 </Window>
