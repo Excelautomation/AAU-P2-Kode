@@ -13,7 +13,7 @@ namespace ARK.ViewModel.Administrationssystem
     public class BoatViewModel : FilterContentViewModelBase, IDisposable
     {
         private readonly List<Boat> _boatsNonFiltered;
-        private bool _activeBoat;
+        private bool _LocalActiveBoat;
         private Boat _currentBoat;
         private IEnumerable<Boat> _boats;
         private DbArkContext _dbArkContext;
@@ -66,15 +66,18 @@ namespace ARK.ViewModel.Administrationssystem
 
                 // Opdater filter
                 UpdateFilter();
+            };
             #endregion
 
-            // Sæt valgt båd
+            ResetFilter();
+
+                // Sæt valgt båd
             if (Boats.Count() != 0)
             {
                 CurrentBoat = Boats.First();
-                _activeBoat = CurrentBoat.Active;
+                LocalActiveBoat = CurrentBoat.Active;
             }
-            };
+            
         }
 
         private List<CheckboxFilter> CheckboxFilters { get; set; }
@@ -96,8 +99,7 @@ namespace ARK.ViewModel.Administrationssystem
             set
             {
                 _currentBoat = value;
-                //if (_currentBoat != null)
-                //  _activeBoat = _currentBoat.Active;
+                LocalActiveBoat = value.Active;
                 Notify();
             }
         }
@@ -106,21 +108,53 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get 
             { 
-                return GetCommand<Boat>(e => { CurrentBoat = e; }); 
+                return GetCommand<Boat>(e => 
+                { 
+                    CurrentBoat = e;
+
+                }); 
             }
-            
         }
 
-        public int ActiveBoat
+        public ICommand SaveChanges
         {
-            get { if (_activeBoat) return 0; else return 1; }
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    CurrentBoat.Active = LocalActiveBoat;
+                    Boat tempboat = CurrentBoat;
+                    _dbArkContext.SaveChanges();
+                    Boats = _dbArkContext.Boat.ToList();
+                    CurrentBoat = tempboat;
+                    System.Windows.MessageBox.Show("Ændringer gemt.");
+                });
+            }
+            }
+            
+        public ICommand CancelChanges
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    LocalActiveBoat = CurrentBoat.Active;
+                    System.Windows.MessageBox.Show("Ændringer annulleret");
+                    // messagebox der siger "Ændringer er annulleret."
+                });
+            }
+        }
+
+        public bool LocalActiveBoat
+        {
+            get { return _LocalActiveBoat; }
             set
             {
-                if (value == 0) _activeBoat = true;
-                else _activeBoat = false;
+                _LocalActiveBoat = value;
                 Notify();
             }
         }
+
 
 
         #region Search
