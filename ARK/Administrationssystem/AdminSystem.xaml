@@ -176,7 +176,7 @@
                         <Label Margin="0,0,0,-10" FontSize="18">Søgning</Label>
                         <Rectangle Margin="5,5,5,5" Height="1" Fill="Gray"/>
 
-                        <Administrationssystem:SearchTextBox x:Name="SearchTextBox"  Margin="5,0,5,5" SearchEventTimeDelay="00:00:00.20" Height="25">
+                        <Administrationssystem:SearchTextBox x:Name="SearchTextBox"  Margin="5,0,5,5" SearchEventTimeDelay="00:00:00.20" Height="25" Text="{Binding Path=SearchText}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Search">
                                     <i:InvokeCommandAction Command="{Binding Path=SearchChangedCommand}" CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
