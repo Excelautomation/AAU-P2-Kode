@@ -148,15 +148,14 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek filter
             if (selectedCheckboxFilters.Any())
             {
-                ShowBoatsOut = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Både ude")
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
-                ShowLangtur = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Langtur")
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
-                ShowSkader = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Skader")
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
+                if (selectedCheckboxFilters.All(c => (string) c.Control.Content != "Både ude"))
+                    BoatsOut = new List<Boat>();
+
+                if (selectedCheckboxFilters.All(c => (string) c.Control.Content != "Langtur"))
+                    LongDistanceForms = new List<LongDistanceForm>();
+
+                if (selectedCheckboxFilters.All(c => (string) c.Control.Content != "Skader"))
+                    Skadesblanketter = new List<DamageForm>();
             }
 
             // Tjek søgning
@@ -175,17 +174,16 @@ namespace ARK.ViewModel.Administrationssystem
                 BoatsOut = from boat in BoatsOut
                     where boat.Name.ToLower().Contains(SearchText.ToLower())
                     select boat;
-
-                ShowSkader = Skadesblanketter.Any() ? Visibility.Visible
-                    : Visibility.Collapsed;
-
-                ShowLangtur = LongDistanceForms.Any() ? Visibility.Visible
-                    : Visibility.Collapsed;
-
-                ShowBoatsOut = BoatsOut.Any() ? Visibility.Visible
-                    : Visibility.Collapsed;
             }
-            
+
+            ShowSkader = Skadesblanketter.Any() ? Visibility.Visible
+                    : Visibility.Collapsed;
+
+            ShowLangtur = LongDistanceForms.Any() ? Visibility.Visible
+                : Visibility.Collapsed;
+
+            ShowBoatsOut = BoatsOut.Any() ? Visibility.Visible
+                : Visibility.Collapsed;
         }
     }
 }
