@@ -34,7 +34,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"  HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"  HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Opacity="0.975" Margin="305,41,0,0"  SelectionMode="Multiple" FontSize="18" BorderBrush="#FFB9B9B9" IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
