@@ -32,17 +32,17 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="203*"/>
-            <ColumnDefinition Width="609*"/>
-            <ColumnDefinition Width="204*"/>
+            <ColumnDefinition Width="194*"/>
+            <ColumnDefinition Width="621*"/>
+            <ColumnDefinition Width="205*"/>
         </Grid.ColumnDefinitions>
-        <Grid HorizontalAlignment="Left" Width="609" VerticalAlignment="Stretch"  Background="White" Grid.Column="1" Margin="0,40,0,0" Grid.RowSpan="2">
+        <Grid HorizontalAlignment="Left" Width="621" VerticalAlignment="Stretch" Background="White" Grid.Column="1" Grid.Row="1">
             <ContentControl Content="{Binding Path=CurrentPage}" VerticalAlignment="Top"/>
         </Grid>
-        <StackPanel x:Name="Buttons" Visibility="{Binding Path=Keyboard.Visibility}" Grid.Column="1" Height="178" Margin="0,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="609">
+        <StackPanel x:Name="Buttons" Visibility="{Binding Path=Keyboard.Visibility}" Grid.Column="1" Height="178" Margin="5,2,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="609">
             <ContentControl Content="{Binding Path=Keyboard}"/>
         </StackPanel>
-        <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="194" Grid.Row="0" Grid.RowSpan="3" Background="#FFE9EAED">
+        <Grid HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="194" Grid.Row="0" Grid.RowSpan="3" Background="#FFEEEEEE">
             <Rectangle HorizontalAlignment="Left" Height="77" Margin="3,663,0,-3" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>
             <Rectangle HorizontalAlignment="Left" Height="147" Margin="3,407,0,0" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>
             <Rectangle HorizontalAlignment="Left" Height="217" Margin="3,185,0,0" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}" Stroke="#FFCDCDCD"/>
@@ -161,19 +161,11 @@
             </Button>
             <Button Content="Midlertidig test af SMS" Click="TestFTP_Click" Margin="0,604,3,113" />
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Bottom" Width="200" Grid.RowSpan="3" Background="#FFE9EAED" Margin="10,0,-6,0" Grid.Column="2">
-            <Grid HorizontalAlignment="Left" Height="737" VerticalAlignment="Top" Width="200"/>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Width="210" Grid.RowSpan="3" Background="#FFEEEEEE" Margin="0,0,-5,0" Grid.Column="2">
             <ContentControl Content="{Binding Path=CurrentInfo}"/>
         </Grid>
-
-        <Grid Grid.Row="0" Grid.Column="1" Margin="0,5,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="339*"/>
-                <ColumnDefinition Width="257*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel HorizontalAlignment="Left" Height="43" Width="596" VerticalAlignment="Top" Background="White" Margin="0,-1,0,0" Grid.ColumnSpan="2">
-                <Label x:Name="HeadlineLabel" Content="{Binding Path=CurrentPageTitle}" Height="43" FontSize="24" FontWeight="Bold" Margin="0,-5,0,0" FontFamily="Calibri" />
-            </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Label x:Name="HeadlineLabel" Content="{Binding Path=CurrentPageTitle}" VerticalAlignment="Top" Background="#FFEEEEEE" Height="40" Width="Auto" FontSize="24" FontWeight="Bold" FontFamily="Calibri"/>
         </Grid>
     </Grid>
 </Window>

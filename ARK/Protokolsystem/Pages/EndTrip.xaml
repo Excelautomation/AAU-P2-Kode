@@ -53,10 +53,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,9,0,0" />
+        <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,10,0,0" />
         <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,10,0,0" />
         <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,98" Command="{Binding Path=Keyboard.KeyboardToggle}">
-        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}"/>
             </StackPanel>
@@ -70,7 +70,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="AddDestination" Style="{DynamicResource ResourceKey=btnFilter}" BorderBrush="#FFD8D8D8" Margin="305,438,155,98">
+        <Button x:Name="AddDestination" Style="{DynamicResource ResourceKey=btnFilter}" Margin="305,438,155,98">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/map_add.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
@@ -79,7 +79,7 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="AddDestination2" Style="{DynamicResource ResourceKey=btnFilter}" BorderBrush="#FFD8D8D8" Margin="460,438,0,98" Command="{Binding EndTripNow}">
+        <Button x:Name="AddDestination2" Style="{DynamicResource ResourceKey=btnFilter}" Margin="460,438,0,98" Command="{Binding EndTripNow}">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/flag_finish.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
