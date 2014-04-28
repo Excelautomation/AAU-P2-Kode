@@ -7,13 +7,18 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Base"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
+             Style="{DynamicResource ResourceKey=ucContent}">
 
     <UserControl.DataContext>
         <Protokolsystem:EndTripViewModel />
     </UserControl.DataContext>
-    <Grid Height="600">
-        <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding Path=BoatsOut}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="0,41,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+
+    <!--Indhold-->
+    <Grid Style="{DynamicResource ResourceKey=gridContent}">
+        <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" />
+        <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="310,0,0,0" />
+        
+        <ListView x:Name="EndTripBoatsOutList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=BoatsOut}" Margin="0,31,319,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" >
@@ -26,8 +31,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <ListView x:Name="BoatsOutAvailableTrips" ItemsSource="{Binding Path=StandardTrip}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="305,41,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        
+        <ListView x:Name="BoatsOutAvailableTrips" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrip}" Margin="310,32,9,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -38,7 +43,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Retning: " Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
@@ -53,15 +58,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,10,0,0" />
-        <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,10,0,0" />
-        <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,98" Command="{Binding Path=Keyboard.KeyboardToggle}">
+
+        <!--Knapper-->
+        <Button x:Name="btnShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,467,471,-1" Command="{Binding Path=Keyboard.KeyboardToggle}">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}"/>
             </StackPanel>
         </Button>
-        <Button x:Name="ShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="155,438,305,98">
+
+        <Button x:Name="btnShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="153,467,319,-1">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/filter_add.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
@@ -70,7 +76,8 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="AddDestination" Style="{DynamicResource ResourceKey=btnFilter}" Margin="305,438,155,98">
+
+        <Button x:Name="btnAddDestination" Style="{DynamicResource ResourceKey=btnFilter}" Margin="309,467,162,-1">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/map_add.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
@@ -79,7 +86,8 @@
                 </TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="AddDestination2" Style="{DynamicResource ResourceKey=btnFilter}" Margin="460,438,0,98" Command="{Binding EndTripNow}">
+        
+        <Button x:Name="btnEndTrip" Style="{DynamicResource ResourceKey=btnFilter}" Margin="462,467,9,-1" Command="{Binding EndTripNow}">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/flag_finish.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">

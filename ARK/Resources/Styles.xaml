@@ -2,6 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:l="clr-namespace:ARK.Administrationssystem">
 
+    <!--UserControl-->
+    <Style x:Key="ucContent" TargetType="UserControl">
+        <Setter Property="Height" Value="540"/>
+        <Setter Property="Width" Value="621"/>
+    </Style>
+
+    <!--Grid-->
+    <Style x:Key="gridContent" TargetType="Grid">
+        <Setter Property="Height" Value="540"/>
+        <Setter Property="Width" Value="621"/>
+        <Setter Property="Margin" Value="4, 0, 4, 10"/>
+    </Style>
+    
     <!--Label-->
     <Style x:Key="lblHeadline" TargetType="Label">
         <Setter Property="FontSize" Value="18"/>
@@ -9,12 +22,13 @@
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="VerticalAlignment" Value="Top"/>  
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Width" Value="295"/>
+        <Setter Property="Width" Value="302"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Height" Value="32"/>
-        <Setter Property="Background" Value="#FF8EC300"/>
+        <Setter Property="Background" Value="#FF6A6A6A"/>
         <Setter Property="BorderBrush" Value="#FF0D476C"/>
         <Setter Property="BorderThickness" Value="0, 0, 0, 2"/>
+        <Setter Property="Padding" Value="10, 4, 0, 0"/>
     </Style>
     
     <!--ListView Overskrift-->
@@ -25,6 +39,13 @@
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
+    <!--ListView-->
+    <Style x:Key="lstView" TargetType="ListView">
+        <Setter Property="Height" Value="431"/>
+        <Setter Property="Width" Value="302"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+    </Style>
+
     <!--ListView Indhold-->
     <Style x:Key="lstViewContent" TargetType="TextBlock">
         <Setter Property="FontSize" Value="14"/>
@@ -33,7 +54,7 @@
         <Setter Property="Padding" Value="0"/>
     </Style>
 
-    <!--ListView Indhold-->
+    <!--ListView Indholdsbeskrivelse-->
     <Style x:Key="lstViewContentDescription" TargetType="TextBlock">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="Black"/>
@@ -42,4 +63,7 @@
         <Setter Property="Padding" Value="0"/>
     </Style>
 
+    <!--AdditionalInfo-->
+    <!--<Style--> 
+    
 </ResourceDictionary>
