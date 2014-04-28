@@ -16,18 +16,43 @@
         <ListView x:Name="EndTripBoatsOutList" ItemsSource="{Binding Path=BoatsOut}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="0,41,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical" Style="{DynamicResource ResourceKey=lstItems}" >
+                    <WrapPanel Orientation="Vertical" >
                         <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
                         <WrapPanel>
-                            <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContent}"/>
-                            <!--<TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />-->
+                            <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
+                            <TextBlock Text="{Binding Time}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                         </WrapPanel>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="BoatsOutAvailableTrips" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="305,41,0,0"/>
+        <ListView x:Name="BoatsOutAvailableTrips" ItemsSource="{Binding Path=StandardTrip}" HorizontalAlignment="Left" Height="386" VerticalAlignment="Top" Width="295" Margin="305,41,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Retning: " Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Description}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Distance: " Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
+                                <Run Text="{Binding Distance}"/>
+                                <Run Text=" km"/>
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,9,0,0" />
         <Label Content="VÆLG TUR" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="305,10,0,0" />
         <Button x:Name="ShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,438,460,98" Command="{Binding Path=Keyboard.KeyboardToggle}">
