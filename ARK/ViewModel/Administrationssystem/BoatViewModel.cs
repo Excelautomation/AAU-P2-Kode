@@ -68,7 +68,7 @@ namespace ARK.ViewModel.Administrationssystem
                 UpdateFilter();
             #endregion
 
-                // Sæt valgt båd
+            // Sæt valgt båd
             if (Boats.Count() != 0)
             {
                 CurrentBoat = Boats.First();
