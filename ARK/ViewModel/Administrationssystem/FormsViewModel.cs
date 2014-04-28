@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Administrationssystem.Pages;
+using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Search;
@@ -216,14 +217,21 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek søgning
             if (!string.IsNullOrEmpty(SearchText))
             {
-                throw new NotImplementedException();
-                /*Skadesblanketter = from skade in Skadesblanketter
-                                   where skade.Boat.Name.Contains(SearchText) ||
-                                         skade.DamageDescription.Description.Contains(SearchText)
-                                   select skade;
+                DamageForms = from damage in DamageForms
+                                   where damage.FilterDamageForms(SearchText)
+                                   select damage;
 
-                ShowSkader = Skadesblanketter.Any() ? Visibility.Visible
-                    : Visibility.Collapsed;*/
+                LongDistanceForms = from form in LongDistanceForms
+                    where form.FilterLongDistanceForm(SearchText)
+                    select form;
+
+                ShowDamageForms = DamageForms.Any() 
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+
+                ShowLongDistanceForms = LongDistanceForms.Any()
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
             }
         }
 
