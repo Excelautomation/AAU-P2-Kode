@@ -39,14 +39,6 @@ namespace ARK.ViewModel.Protokolsystem
 
             _selectedMembers = new ObservableCollection<Member>();
 
-            //SelectedMembers.CollectionChanged += (sender, args) =>
-            //    {
-            //        if (Boat != null && SelectedMembers.Count > Boat.NumberofSeats)
-            //        {
-            //            SelectedMembers.Remove((Member)args.NewItems[0]);
-            //        }
-            //    };
-
             ParentAttached += (sender, args) =>
             {
                 // Bind på keyboard toggle changed
@@ -108,6 +100,7 @@ namespace ARK.ViewModel.Protokolsystem
                 {
                     EnableMembers = true;
                     Boat = e;
+                    this.SelectedMembers.Clear();
                     UpdateInfo();
                 });
             }
