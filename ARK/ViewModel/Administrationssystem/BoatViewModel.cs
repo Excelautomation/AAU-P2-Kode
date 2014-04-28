@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Search;
@@ -112,7 +113,7 @@ namespace ARK.ViewModel.Administrationssystem
 
         public int ActiveBoat
         {
-            get { if (_activeBoat == true) return 0; else return 1; }
+            get { if (_activeBoat) return 0; else return 1; }
             set
             {
                 if (value == 0) _activeBoat = true;
@@ -120,8 +121,6 @@ namespace ARK.ViewModel.Administrationssystem
                 Notify();
             }
         }
-
-
 
 
         #region Search
@@ -150,8 +149,6 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek filter
             if (selectedCheckboxFilters.Any())
             {
-                // TODO: Problem ved valg af kun bla/bla
-
                 if (FilterActive(bådeUdeText, selectedCheckboxFilters))
                 {
                     Boats = from boat in _boatsNonFiltered
@@ -171,7 +168,6 @@ namespace ARK.ViewModel.Administrationssystem
 
                 if (FilterActive(bådeUnderReparationText, selectedCheckboxFilters))
                 {
-                    // TODO - rigitig implementation?
                     var output = from boat in _boatsNonFiltered
                                  where !boat.Usable
                                  select boat;
@@ -206,8 +202,9 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek søgning
             if (!string.IsNullOrEmpty(SearchText))
             {
-                throw new NotImplementedException();
-                
+                Boats = from boat in Boats
+                    where boat.FilterBoat(SearchText)
+                    select boat;
             }
         }
 

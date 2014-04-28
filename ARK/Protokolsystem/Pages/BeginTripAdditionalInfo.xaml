@@ -45,32 +45,39 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0"  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}">
-            <ListView.ItemTemplate>
+        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0" FontSize="18" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
+                    <Grid MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
                         <!--<StackPanel.InputBindings>
                             <MouseBinding Gesture="LeftClick"  Command="{Binding ElementName=MemberInfo, Path=DataContext.MemberClicked}" CommandParameter="{Binding ElementName=MemberInfo, Path=SelectedItem}" />
                         </StackPanel.InputBindings>-->
-                        <WrapPanel Margin="0,0,0,0">
+                        <StackPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" Orientation="Horizontal">
                             <TextBlock Text="{Binding MemberNumber}" FontSize="13px" FontWeight="Bold" Margin="0,0,0,0"/>
                             <TextBlock Text=" " />
                             <TextBlock Text="{Binding FirstName}" FontSize="13px" FontWeight="Normal" Margin="0,0,0,0"/>
                             <TextBlock Text=" " />
                             <TextBlock Text="{Binding LastName}" FontSize="13px" FontWeight="Normal" Margin="0,0,0,0"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="0,0,0,5">
+                        </StackPanel>
+                        <StackPanel Margin="0,0,0,5" HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
                             <TextBlock Text="    Langtursstyrmand: " FontSize="10px" FontWeight="Normal"  Margin="0,0,0,0"/>
                             <TextBlock Text="{Binding Path=LongTripCox, Converter={StaticResource YesNo}}" FontSize="10px" FontWeight="Bold" Margin="0,0,0,0"/>
-                        </WrapPanel>
-                    </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ItemsControl.ItemTemplate>
             <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction Command="{Binding Path=MemberClicked}" CommandParameter="{Binding ElementName=MemberInfo, Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>-->
-        </ListView>
+        </ItemsControl>
     </Grid>
 </UserControl>
