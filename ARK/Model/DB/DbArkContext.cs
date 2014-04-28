@@ -74,6 +74,9 @@ namespace ARK.Model.DB
                 .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Admin>()
+                .HasKey(a => a.Username);
+
+            modelBuilder.Entity<Admin>()
                 .HasRequired(a => a.Member)
                 .WithOptional()
                 .WillCascadeOnDelete(true);
