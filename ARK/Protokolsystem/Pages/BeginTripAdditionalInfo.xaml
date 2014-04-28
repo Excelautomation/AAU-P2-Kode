@@ -12,7 +12,7 @@
     <UserControl.DataContext>
         <VM:BeginTripAdditionalInfoViewModel></VM:BeginTripAdditionalInfoViewModel>
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <Style x:Key="White+rounded" TargetType="{x:Type Rectangle}">
             <Setter Property="Stroke" Value="#FF292929"/>
@@ -60,10 +60,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="3,388,0,0" FontSize="18" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch">
+        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" HorizontalAlignment="Left" Height="353" VerticalAlignment="Top" Width="194" Opacity="0.975" Margin="20,388,0,0" FontSize="18" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
+                    <Grid Opacity="0.975" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -71,17 +71,19 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <StackPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" Orientation="Horizontal">
-                            <TextBlock Text="{Binding MemberNumber}" FontSize="13px" FontWeight="Bold" Margin="0,0,0,0"/>
-                            <TextBlock Text=" " />
-                            <TextBlock Text="{Binding FirstName}" FontSize="13px" FontWeight="Normal" Margin="0,0,0,0"/>
-                            <TextBlock Text=" " />
-                            <TextBlock Text="{Binding LastName}" FontSize="13px" FontWeight="Normal" Margin="0,0,0,0"/>
+                        <StackPanel Style="{StaticResource stcbgcolor}" Margin="0,0,0,5" HorizontalAlignment="Stretch" Orientation="Vertical">
+                            <StackPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" Orientation="Horizontal">
+                                <TextBlock Text="{Binding MemberNumber}" FontSize="13px" FontWeight="Bold"/>
+                                <TextBlock Text=" " />
+                                <TextBlock Text="{Binding FirstName}" FontSize="13px" FontWeight="Normal"/>
+                                <TextBlock Text=" " />
+                                <TextBlock Text="{Binding LastName}" FontSize="13px" FontWeight="Normal"/>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="    Korttursstyrmand: " FontSize="10px" FontWeight="Normal"/>
+                                <TextBlock Text="{Binding Path=ShortTripCox, Converter={StaticResource YesNo}}" FontSize="10px" FontWeight="Bold"/>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Margin="0,0,0,5" HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                            <TextBlock Text="    Langtursstyrmand: " FontSize="10px" FontWeight="Normal"  Margin="0,0,0,0"/>
-                            <TextBlock Text="{Binding Path=LongTripCox, Converter={StaticResource YesNo}}" FontSize="10px" FontWeight="Bold" Margin="0,0,0,0"/>
-                    </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
