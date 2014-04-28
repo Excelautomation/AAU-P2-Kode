@@ -3,14 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
-    <Grid>
-        <ListView x:Name="DistanceStatisticsList" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="600">
-			<ListViewItem>
-				Jørgen Svendsen
-			</ListViewItem>
-        </ListView>
+             Style="{DynamicResource ResourceKey=ucContent}">
 
+    <!--Indhold-->
+    <Grid Style="{DynamicResource ResourceKey=gridContent}">
+        <ListView x:Name="MembersStatistics" ItemsSource="{Binding Path=BoatsOut}" Margin="0,0,10,78">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <Button x:Name="btnShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,467,471,0" Command="{Binding Keyboard.KeyboardToggle}">
+            <StackPanel Orientation="Horizontal">
+                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Keyboard.KeyboardImage}"/>
+                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Keyboard.KeyboardToggleText}"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>
