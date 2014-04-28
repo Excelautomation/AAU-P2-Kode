@@ -21,14 +21,5 @@ namespace ARK.Administrationssystem.Pages
                 TimeOfDarkTextBox.IsEnabled = true;
         }
         #endregion
-
-        #region Skadetyper
-        #endregion
-
-        #region Standardture
-        #endregion
-
-        #region Administratorer
-        #endregion
     }
 }
