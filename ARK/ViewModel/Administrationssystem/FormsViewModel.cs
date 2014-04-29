@@ -14,7 +14,7 @@ using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase
+    public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase, IDisposable
     {
         private readonly List<DamageForm> _damageFormsNonFiltered;
         private readonly List<LongDistanceForm> _longTripFormsNonFiltered;
@@ -23,13 +23,15 @@ namespace ARK.ViewModel.Administrationssystem
         private Visibility _showDamageForms;
         private Visibility _showLongTripForms;
 
+        private DbArkContext _dbArkContext;
+
         public FormsViewModel()
         {
-            using (var db = new DbArkContext())
-            {
-                _damageFormsNonFiltered = db.DamageForm.ToList();
-                _longTripFormsNonFiltered = db.LongTripForm.ToList();
-            }
+            _dbArkContext = new DbArkContext();
+
+            // Indlæs data
+            _damageFormsNonFiltered = _dbArkContext.DamageForm.ToList();
+            _longTripFormsNonFiltered = _dbArkContext.LongTripForm.ToList();
 
             // Nulstil filter
             ResetFilter();
@@ -38,6 +40,11 @@ namespace ARK.ViewModel.Administrationssystem
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true, Filters());
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
+        }
+
+        public void Dispose()
+        {
+            _dbArkContext.Dispose();
         }
 
         public ICommand SelectDamageFormCommand
@@ -238,5 +245,7 @@ namespace ARK.ViewModel.Administrationssystem
         public event EventHandler ParentAttached;
 
         #endregion
+
+        
     }
 }

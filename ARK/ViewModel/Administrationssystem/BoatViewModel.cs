@@ -8,6 +8,7 @@ using System.Windows.Input;
 using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
+using System.ComponentModel;
 using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
@@ -24,6 +25,8 @@ namespace ARK.ViewModel.Administrationssystem
         private readonly DbArkContext _dbArkContext;
         private bool _LocalActiveBoat;
         private IEnumerable<Boat> _boats;
+        private bool _RecentSave = false;
+        private bool _RecentCancel = false;
         private Boat _currentBoat;
 
         public BoatViewModel()
@@ -40,17 +43,44 @@ namespace ARK.ViewModel.Administrationssystem
             filterController.EnableFilter(true, true, Filters());
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
-            // Sæt valgt båd
+                // Sæt valgt båd
             if (Boats.Count() != 0)
             {
                 CurrentBoat = Boats.First();
                 LocalActiveBoat = CurrentBoat.Active;
             }
+
+            
         }
 
-        public void Dispose()
+        public bool RecentSave 
+        { 
+            get { return _RecentSave; }
+            set 
+            {
+                if (value != _RecentSave)
+                {
+                    _RecentSave = value;
+                    _RecentCancel = false;
+                    Notify("RecentCancel");
+                }
+                Notify();
+            }
+        }
+            
+        public bool RecentCancel
         {
-            _dbArkContext.Dispose();
+            get { return _RecentCancel; }
+            set
+            {
+                if (value != _RecentCancel)
+                {
+                    _RecentCancel = value;
+                    _RecentSave = false;
+                    Notify("RecentSave");
+                }
+                Notify();
+            }
         }
 
         public IEnumerable<Boat> Boats
@@ -69,7 +99,10 @@ namespace ARK.ViewModel.Administrationssystem
             set
             {
                 _currentBoat = value;
-                LocalActiveBoat = value.Active;
+                if (value != null)
+                    LocalActiveBoat = value.Active;
+                RecentSave = false;
+                RecentCancel = false;
                 Notify();
             }
         }
@@ -81,7 +114,6 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<Boat>(e => 
                 { 
                     CurrentBoat = e;
-
                 }); 
             }
         }
@@ -92,12 +124,14 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    if (CurrentBoat.Active != LocalActiveBoat) { 
                     CurrentBoat.Active = LocalActiveBoat;
                     Boat tempboat = CurrentBoat;
                     _dbArkContext.SaveChanges();
                     Boats = _dbArkContext.Boat.ToList();
                     CurrentBoat = tempboat;
-                    System.Windows.MessageBox.Show("Ændringer gemt.");
+                        RecentSave = true;
+                    }
                 });
             }
             }
@@ -108,9 +142,11 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    if (CurrentBoat.Active != LocalActiveBoat)
+                    {
                     LocalActiveBoat = CurrentBoat.Active;
-                    System.Windows.MessageBox.Show("Ændringer annulleret");
-                    // messagebox der siger "Ændringer er annulleret."
+                        RecentCancel = true;
+                    }
                 });
             }
         }
@@ -147,7 +183,7 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek filter
             if (args.Filters.Any())
             {
-                if (args.Filters.All(c => c != bådeUdeText))
+                if (args.Filters.Any(c => c == bådeUdeText))
                 {
                     Boats = from boat in _boatsNonFiltered
                                         where boat.BoatOut
@@ -156,7 +192,7 @@ namespace ARK.ViewModel.Administrationssystem
                     listUpdated = true;
                 }
 
-                if (args.Filters.All(c => c != bådeHjemmeText))
+                if (args.Filters.Any(c => c == bådeHjemmeText))
                 {
                     IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                                            where boat.BoatOut == false
@@ -164,7 +200,7 @@ namespace ARK.ViewModel.Administrationssystem
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (args.Filters.All(c => c != bådeUnderReparationText))
+                if (args.Filters.Any(c => c == bådeUnderReparationText))
                 {
                     IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where !boat.Usable
@@ -172,7 +208,7 @@ namespace ARK.ViewModel.Administrationssystem
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (args.Filters.All(c => c != beskadigedeBådeText))
+                if (args.Filters.Any(c => c == beskadigedeBådeText))
                 {
                     IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where boat.Active
@@ -180,7 +216,7 @@ namespace ARK.ViewModel.Administrationssystem
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (args.Filters.All(c => c != inaktiveBådeText))
+                if (args.Filters.Any(c => c == inaktiveBådeText))
                 {
                     IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where !boat.Active
@@ -188,7 +224,7 @@ namespace ARK.ViewModel.Administrationssystem
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (args.Filters.All(c => c != funktionelleBådeText))
+                if (args.Filters.Any(c => c == funktionelleBådeText))
                 {
                     IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where boat.Usable
@@ -236,6 +272,9 @@ namespace ARK.ViewModel.Administrationssystem
 
         #endregion
 
-        
+        public void Dispose()
+        {
+            _dbArkContext.Dispose();
+        }
     }
 }
