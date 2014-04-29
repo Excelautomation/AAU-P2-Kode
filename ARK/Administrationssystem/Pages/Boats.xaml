@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="594.417" d:DesignWidth="1121.053">
     <UserControl.DataContext>
-        <VM:BoatViewModel></VM:BoatViewModel>
+        <VM:BoatViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
         <Style x:Key="StackpanelLabels" TargetType="Label">
@@ -17,6 +17,7 @@
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
         <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.Background>
@@ -122,11 +123,47 @@
                                                     </WrapPanel>
                                                 </WrapPanel>
                                                 <DockPanel Margin="10">
-                                                    <Button Margin="0,0,0,0" Padding="5" FontSize="20" Content="Gem" Command="{Binding Path=SaveChanges}">
-                                                    </Button>
-
-                                                    <Button FontSize="20" Padding="5" HorizontalAlignment="Right" Content="Annulér" Command="{Binding Path=CancelChanges}"/>
+                                                    <Button Margin="0,0,0,0" Padding="5" FontSize="20" Content="Gem" Command="{Binding Path=SaveChanges}"/>
+                                                    <Button FontSize="20" Padding="5" HorizontalAlignment="Right" Content="Annuller" Command="{Binding Path=CancelChanges}"/>
                                                 </DockPanel>
+                                                <Grid>
+                                                <WrapPanel Margin="10" HorizontalAlignment="Center">
+                                                        <Image Height="24">
+                                                        <Image.Style>
+                                                            <Style TargetType="Image">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                                        <Setter Property="Source" Value="../../images/accept.png"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding RecentCancel, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                                        <Setter Property="Source" Value="../../images/cross.png"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Image.Style>
+                                                    </Image>
+                                                    <TextBlock FontSize="16" Margin="8,0,0,0" VerticalAlignment="Center" > 
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Path=RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                                        <Setter Property="Foreground" Value="Green"/>
+                                                                        <Setter Property="Text" Value="Ændringer gemt"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Path=RecentCancel, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                                        <Setter Property="Foreground" Value="Red"/>
+                                                                        <Setter Property="Text" Value="Ændringer annulleret"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </WrapPanel>
+                                                    <WrapPanel Margin="10" HorizontalAlignment="Center" Visibility="Collapsed">
+                                                        <Image Height="24" Margin="0,0,5,0" Source="../../images/cross.png"/>
+                                                        <TextBlock FontSize="16" Margin="0,0,0,0" Text="Ændringer annulleret" VerticalAlignment="Center" Foreground="Red" />
+                                                    </WrapPanel>
+                                                </Grid>
                                             </StackPanel>
                                         </Border>
                                     </ScrollViewer>

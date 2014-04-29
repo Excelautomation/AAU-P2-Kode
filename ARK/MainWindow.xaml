@@ -1,10 +1,10 @@
 ﻿<Window x:Class="ARK.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <WrapPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-
-        <Button Content="Administrationssystem" FontSize="20" Height="60" Width="250" Margin="20" Command="{Binding Path=MenuOverview}" Click="Button_Click"/>
+        Title="MainWindow" Height="550" Width="525">
+    <WrapPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Height="434" Margin="20" Width="388">
+        <Button Content="Administrationssystem (Uden login)" FontSize="20" Height="60" Width="326" Margin="20" Command="{Binding MenuOverview}" Click="Button_Click"/>
+        <Button Content="Administrationssystem" FontSize="20" Height="60" Width="250" Margin="20" Command="{Binding MenuOverview}" Click="Button_Click"/>
         <Button Content="Protokolsystem" FontSize="20" Height="60" Width="250" Margin="20" Click="Button_Click_1"/>
         <Button Content="TEST - Here be dragons" FontSize="20" Height="60" Width="250" Margin="20" Click="Button_Click_2"/>
 
