@@ -55,7 +55,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Margin="0,32,319,77">
+        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Margin="0,32,319,135" Height="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -75,10 +75,10 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        
+
         <ListView x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
-                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" Margin="309,32,10,77" SelectionMode="Multiple" 
-                  IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged">
+                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" Margin="309,32,10,135" SelectionMode="Multiple" 
+                  IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
@@ -105,7 +105,7 @@
                                     <Setter Property="Source" Value="/images/keyboard_add.png"></Setter>
                                 </DataTrigger>
                             </Style.Triggers>
-                        </Style>  
+                        </Style>
                     </Image.Style>
                 </Image>
                 <TextBlock>
@@ -150,5 +150,25 @@
                 <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="8,0,0,0"><Run Text="BEGYND &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
             </StackPanel>
         </Button>
+        <Border HorizontalAlignment="Left" Height="52" Margin="0,410,0,0" VerticalAlignment="Top" Width="611">
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="9"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" Content="Øst"/>
+                <RadioButton Grid.Column="1" >
+                    <TextBlock>
+                        <Run Text="VEST - NORD"/><LineBreak/>
+                        <Run Text="OM EGHOLM"/>
+                    </TextBlock>
+                </RadioButton>
+                <RadioButton Grid.Column="3" Content="Vest - Syd om Egholm"/>
+                <RadioButton Grid.Column="4" Content="Langtur"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

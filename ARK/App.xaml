@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="/Resources/Buttons.xaml"/>
                 <ResourceDictionary Source="/Resources/Styles.xaml"/>
                 <ResourceDictionary Source="/Resources/Search.xaml"/>
+                <ResourceDictionary Source="/Resources/RadioButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
