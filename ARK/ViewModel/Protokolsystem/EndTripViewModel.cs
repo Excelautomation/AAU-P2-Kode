@@ -23,8 +23,8 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 StandardTrip = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
 
-                BoatsOut = db.Boat.Where(boat => boat.BoatOut == false)
-                    .OrderByDescending(boat => boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
+                BoatsOut = db.Boat.ToList().Where(boat => boat.BoatOut)
+                    .OrderByDescending(boat => boat.GetActiveTrip.TripStartTime).ToList();
             }
 
             ParentAttached += (sender, args) =>
