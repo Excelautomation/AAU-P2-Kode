@@ -40,6 +40,9 @@ namespace ARK.ViewModel.Administrationssystem
                     _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
                     _boatsOutNonFiltered = db.Boat.ToList();
                 }
+
+                // Nulstil filter
+                ResetFilter();
             });
 
             // Nulstil filter
@@ -134,13 +137,13 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek filter
             if (args.Filters.Any())
             {
-                if (args.Filters.All(c => c != "Både ude"))
+                if (!args.Filters.Any(c => c == "Både ude"))
                      BoatsOut = new List<Boat>();
 
-                if (args.Filters.All(c => c != "Langtur"))
+                if (!args.Filters.Any(c => c == "Langtur"))
                     LongDistanceForms = new List<LongDistanceForm>();
 
-                if (args.Filters.All(c => c != "Skader"))
+                if (!args.Filters.Any(c => c == "Skader"))
                     Skadesblanketter = new List<DamageForm>();
             }
 
