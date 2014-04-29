@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ARK.ViewModel.Base
 {
@@ -21,6 +22,6 @@ namespace ARK.ViewModel.Base
         bool EnableSearch { get; set; }
         bool EnableFilters { get; set; }
 
-        ObservableCollection<FrameworkElement> Filters { get; set; } 
+        ObservableCollection<FrameworkElement> Filters { get; set; }
     }
 }
