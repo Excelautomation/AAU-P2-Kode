@@ -47,7 +47,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="1,333,0,0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="0,313,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -60,7 +60,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="311,333,0,0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="0,389,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -73,22 +73,7 @@
             </WrapPanel>
         </Border>
 
-        <Button x:Name="AddInjury" Content="INDSEND &#xA;SKADESRAPPORT" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="80" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" BorderThickness="2" Margin="437,443,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddInjury}">
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF004546" Offset="0"/>
-                    <GradientStop Color="#FF00B0B4" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF019FA2" Offset="0"/>
-                    <GradientStop Color="#FF006364" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="1,411,0,0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="312,313,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -101,7 +86,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="ShowMembers" Style="{DynamicResource ResourceKey=lstView}" Height="285" Margin="0,32,319,223">
+        <ListView x:Name="ShowMembers" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="0,32,319,240">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -114,7 +99,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="ShowBoats" Style="{DynamicResource ResourceKey=lstView}" Height="285" Margin="311,32,8,223">
+        <ListView x:Name="ShowBoats" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="311,32,8,240">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -127,15 +112,15 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <RichTextBox HorizontalAlignment="Left" Height="74" Margin="0,443,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
+        <RichTextBox HorizontalAlignment="Left" Height="108" Margin="311,345,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
 
-        <ComboBox HorizontalAlignment="Left" Margin="1,365,0,0" VerticalAlignment="Top" Width="301" Height="32" FontSize="21.333">
+        <ComboBox HorizontalAlignment="Left" Margin="0,345,0,0" VerticalAlignment="Top" Width="301" Height="32" FontSize="21.333" Background="White">
             <ComboBoxItem Content="Hul i skroget" HorizontalAlignment="Left" Width="349.104" />
             <ComboBoxItem Content="Åre knækket" HorizontalAlignment="Left" Width="349.104" />
             <ComboBoxItem Content="Båd eksploderede" HorizontalAlignment="Left" Width="349.104" />
         </ComboBox>
-        
-        <ComboBox HorizontalAlignment="Left" Margin="311,365,0,0" VerticalAlignment="Top" Width="302" Height="32" FontSize="21.333">
+
+        <ComboBox HorizontalAlignment="Left" Margin="0,421,0,0" VerticalAlignment="Top" Width="302" Height="32" FontSize="21.333" Background="White">
             <ComboBoxItem Content="Funktionel" HorizontalAlignment="Left" Width="349.104" />
             <ComboBoxItem Content="Kosmetisk" HorizontalAlignment="Left" Width="349.104" />
         </ComboBox>
