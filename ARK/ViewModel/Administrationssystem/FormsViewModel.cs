@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,8 +9,8 @@ using ARK.Administrationssystem.Pages;
 using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Model.Search;
 using ARK.ViewModel.Base;
+using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -30,37 +31,13 @@ namespace ARK.ViewModel.Administrationssystem
                 _longTripFormsNonFiltered = db.LongTripForm.ToList();
             }
 
-            // Aktiver filtre
-            ParentAttached += (sender, args) =>
-            {
-                FilterContainer.EnableSearch = true;
-                FilterContainer.EnableFilters = true;
+            // Nulstil filter
+            ResetFilter();
 
-                // Opdater filtre
-                FilterContainer.Filters.Clear();
-
-                FilterContainer.Filters.Add(new CheckBox {Content = "Langtur"});
-                FilterContainer.Filters.Add(new CheckBox {Content = "Skader"});
-                FilterContainer.Filters.Add(new Separator {Height = 20});
-                FilterContainer.Filters.Add(new CheckBox {Content = "Afviste"});
-                FilterContainer.Filters.Add(new CheckBox {Content = "Godkendte"});
-
-                // Opret checkbox filters
-                CheckboxFilters =
-                    FilterContainer.Filters.Where(e => e is CheckBox)
-                        .Select(element => new CheckboxFilter(element as CheckBox, UpdateFilter))
-                        .ToList();
-
-                // Bind til søgeevent
-                FilterContainer.SearchTextChanged += (o, eventArgs) =>
-                {
-                    SearchText = eventArgs.SearchText;
-                    UpdateFilter();
-                };
-
-                // Opdater filter
-                UpdateFilter();
-            };
+            // Setup filter
+            var filterController = new FilterContent(this);
+            filterController.EnableFilter(true, true, Filters());
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
         public ICommand SelectDamageFormCommand
@@ -106,9 +83,6 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get { return Parent as IFilterContainerViewModel; }
         }
-
-        private List<CheckboxFilter> CheckboxFilters { get; set; }
-        private string SearchText { get; set; }
 
         public IEnumerable<DamageForm> DamageForms
         {
@@ -159,35 +133,32 @@ namespace ARK.ViewModel.Administrationssystem
             LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly();
         }
 
-        private void UpdateFilter()
+        private void UpdateFilter(FilterEventArgs args)
         {
             // Nulstil filter
             ResetFilter();
 
-            // Indlæs de valgte checkbox filtre
-            List<CheckboxFilter> selectedCheckboxFilters = (from filter in CheckboxFilters
-                where filter.Active
-                select filter).ToList();
-
             // Tjek om en af filtertyperne er aktive
-            if (!selectedCheckboxFilters.Any() && string.IsNullOrEmpty(SearchText))
+            if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
                 return;
 
             // Bool variablel der husker på om listen er blevet opdateret
             bool listUpdated = false;
 
             // Tjek filter
-            if (selectedCheckboxFilters.Any())
+            if (args.Filters.Any())
             {
-                ShowDamageForms = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Skader")
+                ShowDamageForms = args.Filters.Any(c => c == "Skader")
                     ? Visibility.Visible
                     : Visibility.Collapsed;
-                ShowLongDistanceForms = selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Langtur")
+
+                ShowLongDistanceForms = args.Filters.Any(c => c == "Langtur")
                     ? Visibility.Visible
                     : Visibility.Collapsed;
+
                 // TODO: Problem ved valg af kun godkendte/afviste
 
-                if (selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Afviste"))
+                if (args.Filters.Any(c => c == "Afviste"))
                 {
                     LongDistanceForms = from form in _longTripFormsNonFiltered
                         where form.Approved == false
@@ -196,7 +167,7 @@ namespace ARK.ViewModel.Administrationssystem
                     listUpdated = true;
                 }
 
-                if (selectedCheckboxFilters.Any(c => (string) c.Control.Content == "Godkendte"))
+                if (args.Filters.Any(c => c == "Godkendte"))
                 {
                     IEnumerable<LongDistanceForm> output = from form in _longTripFormsNonFiltered
                         where form.Approved == false
@@ -209,20 +180,20 @@ namespace ARK.ViewModel.Administrationssystem
                     }
                     else
                     {
-                        LongDistanceForms = MergeLists(LongDistanceForms, output);
+                        LongDistanceForms = FilterContent.MergeLists(LongDistanceForms, output);
                     }
                 }
             }
 
             // Tjek søgning
-            if (!string.IsNullOrEmpty(SearchText))
+            if (!string.IsNullOrEmpty(args.SearchText))
             {
                 DamageForms = from damage in DamageForms
-                                   where damage.FilterDamageForms(SearchText)
+                              where damage.FilterDamageForms(args.SearchText)
                                    select damage;
 
                 LongDistanceForms = from form in LongDistanceForms
-                    where form.FilterLongDistanceForm(SearchText)
+                                    where form.FilterLongDistanceForm(args.SearchText)
                     select form;
 
                 ShowDamageForms = DamageForms.Any() 
@@ -235,15 +206,16 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        private IEnumerable<T> MergeLists<T>(IEnumerable<T> list1, IEnumerable<T> list2)
+        private IEnumerable<FrameworkElement> Filters()
         {
-            var outputList = new List<T>(list1);
-
-            foreach (T elm in list2)
-                if (!outputList.Any(e => e.Equals(elm)))
-                    outputList.Add(elm);
-
-            return outputList;
+            return new ObservableCollection<FrameworkElement>
+            {
+                new CheckBox {Content = "Langtur"},
+                new CheckBox {Content = "Skader"},
+                new Separator {Height = 20},
+                new CheckBox {Content = "Afviste"},
+                new CheckBox {Content = "Godkendte"}
+            };
         }
 
         #endregion
