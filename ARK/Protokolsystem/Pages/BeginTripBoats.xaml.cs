@@ -18,7 +18,7 @@ namespace ARK.Protokolsystem.Pages
             var vm = (BeginTripViewModel)this.DataContext;
             var selectedMembers = this.AllMembersList.SelectedItems;
 
-            if (selectedMembers.Count > vm.Boat.NumberofSeats)
+            if (selectedMembers.Count > vm.SelectedBoat.NumberofSeats)
             {
                 selectedMembers.Remove(e.AddedItems[0]);
             }
