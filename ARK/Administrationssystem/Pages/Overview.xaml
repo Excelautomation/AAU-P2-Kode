@@ -29,7 +29,7 @@
                 <StackPanel>
                     <StackPanel Visibility="{Binding Path=ShowSkader}">
                         <WrapPanel>
-                            <Image Source="/images/application_side_list.png" Height="24" />
+                            <Image Source="/images/application_side_list_red.png" Height="24" />
                             <Label FontSize="18">Skadesblanketter</Label>
                         </WrapPanel>
                         <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch">
@@ -43,7 +43,7 @@
 
                     <StackPanel Visibility="{Binding Path=ShowLangtur}">
                         <WrapPanel>
-                            <Image Source="/images/application_side_list.png" Height="24" />
+                            <Image Source="/images/application_side_list_blue.png" Height="24" />
                             <Label FontSize="18">Langtursblanketter</Label>
                         </WrapPanel>
                         <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch">
