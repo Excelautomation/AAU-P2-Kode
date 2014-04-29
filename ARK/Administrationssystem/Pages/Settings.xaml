@@ -69,7 +69,7 @@
                                 </DockPanel>
                             </StackPanel>
                         </Border>
-                        <Border Grid.Row="1" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10">
+                        <Border Grid.Row="1" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" Width="700">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
@@ -99,15 +99,19 @@
                         </Border>
                     </Grid>
                 </TabItem>
+                
+                
                 <TabItem Header="Skadetyper" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
                     <Grid>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="4"/>
                             <ColumnDefinition Width="200*"/>
                         </Grid.ColumnDefinitions>
+                        
                         <DockPanel Grid.Column="0">
-                            <Button Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200">Opret ny skadetype</Button>
+                            <Button Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
                             <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -123,17 +127,20 @@
                                 </i:Interaction.Triggers>
                             </ListView>
                         </DockPanel>
+                        
                         <StackPanel Grid.Row="2" Grid.Column="2">
                             <Label Margin="4">Detaljer</Label>
                             <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" HorizontalAlignment="Left">
                                 <StackPanel>
                                     <StackPanel>
                                         <WrapPanel Margin="4">
+                                            
                                             <StackPanel Margin="4">
                                                 <Label>Skadenavn:</Label>
                                                 <Label>Alvorlighed:</Label>
                                                 <Label>Beskrivelse:</Label>
                                             </StackPanel>
+                                            
                                             <StackPanel Margin="4" Width="320">
                                                 <TextBox Margin="4" Text="{Binding Path=CurrentDamageType.Title, Mode=TwoWay}"/>
                                                 <WrapPanel>
@@ -142,6 +149,7 @@
                                                 </WrapPanel>
                                                 <TextBox Text="{Binding Path=CurrentDamageType.Description, Mode=TwoWay}" Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
                                             </StackPanel>
+                                            
                                         </WrapPanel>
                                     </StackPanel>
                                     <DockPanel Margin="10" >
@@ -152,8 +160,11 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
+                        
                     </Grid>
                 </TabItem>
+                
+                
                 <TabItem Header="Standardture" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -162,7 +173,7 @@
                             <ColumnDefinition Width="200*"/>
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0">
-                            <Button Margin="4" DockPanel.Dock="Top" Width="220">Opret ny standardtur</Button>
+                            <Button Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="220" Content="Opret ny standardtur"/>
                             <ListView x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=StandardTrips}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -197,9 +208,9 @@
                                         </WrapPanel>
                                     </StackPanel>
                                     <DockPanel Margin="10" >
-                                        <Button Margin="4">Gem</Button>
-                                        <Button Margin="4">Anullér</Button>
-                                        <Button Margin="4" HorizontalAlignment="Right">Slet!</Button>
+                                        <Button Margin="4" Content="Gem" Command="{Binding Path=SaveChangesStandardTrips}"/>
+                                        <Button Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesStandardTrips}"/>
+                                        <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteStandarTrip}" HorizontalAlignment="Right"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Border>
