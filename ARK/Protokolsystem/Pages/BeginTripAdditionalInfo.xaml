@@ -105,7 +105,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Style="{StaticResource stcbgcolor}" Margin="5,5,0,0" HorizontalAlignment="Stretch" Orientation="Vertical">
                             <StackPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                <TextBlock Text="{Binding MemberNumber}" Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
+                                <TextBlock Text="{Binding MemberNumber}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                                 <TextBlock Text=" " />
                                 <TextBlock Text="{Binding FirstName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                                 <TextBlock Text=" " />

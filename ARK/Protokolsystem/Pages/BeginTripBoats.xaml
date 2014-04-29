@@ -39,9 +39,9 @@
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}" />
                         <WrapPanel>
-                            <TextBlock Text="Pladser: " Style="{DynamicResource ResourceKey=lstViewContentDescription}" />
+                            <TextBlock Text="Pladser: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold" />
                             <TextBlock Text="{Binding NumberofSeats}" Style="{DynamicResource ResourceKey=lstViewContent}" />
-                            <TextBlock Text=" Kategori: " Style="{DynamicResource ResourceKey=lstViewContentDescription}" />
+                            <TextBlock Text=" Kategori: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold" />
                             <TextBlock Text="{Binding SpecificBoatType}" Style="{DynamicResource ResourceKey=lstViewContent}" />
                         </WrapPanel>
                     </WrapPanel>

@@ -4,12 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignWidth="640" d:DesignHeight="480" Width="600" Height="600">
-    <Grid x:Name="LayoutRoot" Width="600" Height="600">
-        <ListView x:Name="AllMembersList" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="600">
-			<ListViewItem>
-				Jørgen Svendsen
-			</ListViewItem>
+             Style="{DynamicResource ResourceKey=ucContent}">
+    
+    <!--Indhold-->
+    <Grid Style="{DynamicResource ResourceKey=gridContent}">
+        <Label Style="{DynamicResource ResourceKey=lblHeadline}" Width="613">
+            <TextBlock>
+                <Run Text="VÆLG MEDLEM ( ANTAL: "/>
+                <Run Text="{Binding Items.Count, ElementName=AllMembersList, Mode=OneWay}"/>
+                <Run Text=")"/>
+            </TextBlock>
+        </Label>
+
+        <ListView x:Name="AllMembersList" Margin="0,32,8,10" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Orientation="Vertical">
+                        
+                        <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
+                            <Run Text="{Binding MemberNumber}"/>
+                            <Run Text=" "/>
+                            <Run Text="{Binding FirstName}"/>
+                            <Run Text="{Binding LastName}"/>
+                        </TextBlock>
+                        
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}" Text="{Binding Address1}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}">
+                            <Run Text="{Binding ZipCode}"/>
+                            <Run Text=" "/>
+                            <Run Text="{Binding City}"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="0" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
+                            <Run Text="Tlf: "/>
+                            <Run Text="{Binding Cellphone}"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
+                            <Run Text="Email: "/>
+                            <Run Text="{Binding Email1}" FontWeight="Bold"/>
+                        </TextBlock>
+                        
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </UserControl>

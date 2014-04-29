@@ -27,9 +27,9 @@
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
                         <WrapPanel>
-                            <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
+                            <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
                             <TextBlock Text="{Binding Time}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
-                            <TextBlock Text="Pladser: " Style="{DynamicResource ResourceKey=lstViewContentDescription}"/>
+                            <TextBlock Text="Pladser: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
                             <TextBlock Text="{Binding NumberofSeats}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                         </WrapPanel>
                     </WrapPanel>
