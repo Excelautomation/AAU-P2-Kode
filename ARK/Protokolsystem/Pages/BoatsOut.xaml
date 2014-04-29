@@ -8,11 +8,19 @@
              Style="{DynamicResource ResourceKey=ucContent}">
 
     <UserControl.DataContext>
-        <Protokolsystem:EndTripViewModel/>
+        <Protokolsystem:BoatsOutViewModel/>
     </UserControl.DataContext>
 
     <!--Indhold-->
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
+        <Label Style="{DynamicResource ResourceKey=lblHeadline}" Width="613">
+            <TextBlock>
+                <Run Text="VÆLG BÅD ( ANTAL: "/>
+                <Run Text="{Binding ElementName=BoatsOutList, Path=Items.Count, Mode=OneWay}"/>
+                <Run Text=")"/>
+            </TextBlock>
+        </Label>
+
         <ListView x:Name="BoatsOutList" ItemsSource="{Binding Path=BoatsOut}" Margin="0,32,8,10">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -28,6 +36,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Content="VÆLG BÅD (UDE)" Style="{DynamicResource ResourceKey=lblHeadline}" Width="613" />
     </Grid>
 </UserControl>
