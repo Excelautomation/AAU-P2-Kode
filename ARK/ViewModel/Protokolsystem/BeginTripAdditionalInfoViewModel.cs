@@ -20,8 +20,8 @@ namespace ARK.ViewModel.Protokolsystem
             get { return this; }
             set
             {
-                this.SelectedBoat = Info.SelectedBoat;
-                this.SelectedMembers = Info.SelectedMembers;
+                this.SelectedBoat = value.SelectedBoat;
+                this.SelectedMembers = value.SelectedMembers;
                 Notify(); 
             }
         }

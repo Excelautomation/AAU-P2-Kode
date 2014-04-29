@@ -1,9 +1,14 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 
 namespace ARK.ViewModel.Base
 {
     public interface IKeyboardContainerViewModelBase : IViewModelBase
     {
+        event EventHandler KeyboardTextChanged;
+        string KeyboardText { get; }
+        void KeyboardClear();
+
         bool KeyboardEnabled { get; }
         bool KeyboardToggled { get; }
         ICommand KeyboardToggle { get; }

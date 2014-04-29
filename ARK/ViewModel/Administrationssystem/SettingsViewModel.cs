@@ -7,7 +7,6 @@ using System.Windows.Input;
 using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Model.Search;
 
 namespace ARK.ViewModel.Administrationssystem
 {

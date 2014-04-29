@@ -10,7 +10,7 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class AdminSystemViewModel : PageContainerViewModelBase, IFilterContainerViewModel
     {
-        private readonly ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
+        private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
         private bool _enableFilters;
         private bool _enableSearch;
         private Baede _pagebaede;
@@ -170,6 +170,7 @@ namespace ARK.ViewModel.Administrationssystem
         public ObservableCollection<FrameworkElement> Filters
         {
             get { return _filters; }
+            set { _filters = value; Notify(); }
         }
 
         #endregion

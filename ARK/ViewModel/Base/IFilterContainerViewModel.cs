@@ -21,6 +21,6 @@ namespace ARK.ViewModel.Base
         bool EnableSearch { get; set; }
         bool EnableFilters { get; set; }
 
-        ObservableCollection<FrameworkElement> Filters { get; } 
+        ObservableCollection<FrameworkElement> Filters { get; set; } 
     }
 }

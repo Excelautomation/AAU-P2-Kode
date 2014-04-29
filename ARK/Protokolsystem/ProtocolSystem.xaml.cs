@@ -25,7 +25,7 @@ namespace ARK.Protokolsystem
 
         private void TestFTP_Click(object sender, RoutedEventArgs e)
         {
-            SMS sms = new SMS { Reciever = "4522345676", Message = "Trorlrl", Name = "Nigga" };
+            var sms = new SMS { Reciever = "4522345676", Message = "Trorlrl", Name = "Nigga" };
             SMSIT.SendSMS(sms);
         }
     }
