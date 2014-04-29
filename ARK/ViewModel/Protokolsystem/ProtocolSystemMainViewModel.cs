@@ -228,21 +228,9 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public string KeyboardToggleText
-        {
-            get { return KeyboardToggled ? "SKJUL\nTASTATUR" : "VIS\nTASTATUR"; }
-        }
-
-        public string KeyboardImage
-        {
-            get { return KeyboardToggled ? "/images/keyboard_delete.png" : "/images/keyboard_add.png"; }
-        }
-
         private void NotifyKeyboard()
         {
             NotifyCustom("KeyboardToggled");
-            NotifyCustom("KeyboardToggleText");
-            NotifyCustom("KeyboardImage");
         }
 
         public event EventHandler KeyboardTextChanged
