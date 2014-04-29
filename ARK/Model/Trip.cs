@@ -6,7 +6,7 @@ namespace ARK.Model
     public class Trip
     {
         public int Id { get; set; }
-        public int Distance { get; set; }
+        public double Distance { get; set; }
         public bool LongTrip { get; set; }
         public DateTime TripStartTime { get; set; }
         public DateTime TripEndedTime { get; set; }
