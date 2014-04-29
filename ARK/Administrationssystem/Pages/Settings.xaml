@@ -219,8 +219,10 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="0,2,0,2">
-                                            <Label Content="{Binding Path=Member.FirstName}"/>
-                                            <Label Content="{Binding Path=Member.LastName}"/>
+                                            <WrapPanel>
+                                                <Label Content="{Binding Path=Member.FirstName}"/>
+                                                <Label Content="{Binding Path=Member.LastName}"/>
+                                            </WrapPanel>
                                             <Label Content="{Binding Path=Username}"/>
                                         </StackPanel>
                                     </DataTemplate>
@@ -241,7 +243,7 @@
                                             <StackPanel Margin="4">
                                                 <Label>Brugernavn:</Label>
                                                 <Label>Kodeord:</Label>
-                                                <Label>Nyt Kodeord:</Label>
+                                                <Label>Medlemsnr.:</Label>
                                                 <Label>Fornavn:</Label>
                                                 <Label>Efternavn:</Label>
                                                 <Label>E-mail:</Label>
@@ -249,12 +251,12 @@
                                             </StackPanel>
                                             <StackPanel Margin="4" VerticalAlignment="Center" Width="250">
                                                 <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Username}"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Password}"/>
-                                                <PasswordBox Margin="4"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Member.FirstName}"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Member.LastName}"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Member.Email1}"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Member.Phone}" MaxLength="8"/>
+                                                <Button Content="Skift kodeord"/>
+                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Member.Id}"/>
+                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.FirstName}"/>
+                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.LastName}"/>
+                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Email1}"/>
+                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Phone}"/>
                                             </StackPanel>
                                         </WrapPanel>
                                     </StackPanel>
