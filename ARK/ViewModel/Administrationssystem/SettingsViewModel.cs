@@ -27,9 +27,9 @@ namespace ARK.ViewModel.Administrationssystem
             DamageTypeTemplate.Title = "Ny skadetype";
             DamageTypeTemplate.IsFunctional = true;
             DamageTypeTemplate.Description = "En beskrivelse.";
-            StandardTripTemplate.Title = "Ny standardtur";
+            StandardTripTemplate.Description = "Ny standardtur";
             StandardTripTemplate.Distance = 0;
-            StandardTripTemplate.Description = "En beskrivelse.";
+            StandardTripTemplate.Direction = "En beskrivelse.";
             AdminTemplate.Username = "Ny administrator";
             AdminTemplate.Contact = false;
             AdminTemplate.Password = "kode1234";

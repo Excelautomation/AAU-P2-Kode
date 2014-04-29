@@ -10,6 +10,8 @@ namespace ARK.Model
         public bool LongTrip { get; set; }
         public DateTime TripStartTime { get; set; }
         public DateTime TripEndedTime { get; set; }
+        public string Direction { get; set; }
+        public string Description { get; set; }
 
         public TimeSpan TimeBoatOut
         {
