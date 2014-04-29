@@ -40,7 +40,7 @@ namespace ARK.ViewModel.Administrationssystem
                         }
                         else
                         {
-                            ErrorLabel = "Brugernavn eller Adgangskode forkert";
+                            ErrorLabel = "Brugernavn eller adgangskode ugyldig";
                         }
                     }
                 });

@@ -8,11 +8,15 @@
     <Window.DataContext>
         <VM:AdminLoginViewModel></VM:AdminLoginViewModel>
     </Window.DataContext>
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=UserBox}">
         <Label Content="Brugernavn:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="102" FontFamily="Arial" FontSize="16"/>
         <Label Content="Kodeord:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="102" FontFamily="Arial" FontSize="16"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Margin="131,13,0,0" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="16" Text="{Binding Path=Username, Mode=TwoWay}"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Margin="131,42,0,0" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="16" Text="{Binding Path=Password, Mode=TwoWay}"/>
+        <TextBox x:Name="UserBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Margin="131,13,0,0" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="16" Text="{Binding Path=Username, Mode=TwoWay}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Margin="131,42,0,0" FontFamily="/Protokolsystem;component/Fonts/#Arial" FontSize="16" Text="{Binding Path=Password, Mode=TwoWay}">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminWindow}"/>
+            </TextBox.InputBindings>
+        </TextBox>
         <Button x:Name="button" Content="Login" HorizontalAlignment="Left" Margin="261.5,78.04,0,0" VerticalAlignment="Top" Width="73.5" Height="43.96" UseLayoutRounding="False" Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminWindow}"/>
         <Label Content="{Binding Path=ErrorLabel}" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="44" Width="246" Foreground="#FFFF5F5F"/>
     </Grid>
