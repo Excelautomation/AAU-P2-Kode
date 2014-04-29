@@ -10,7 +10,7 @@ namespace ARK.ViewModel.Protokolsystem
     public class ProtocolSystemMainViewModel : PageContainerViewModelBase, IKeyboardContainerViewModelBase,
         IFilterContainerViewModel, IInfoContainerViewModel
     {
-        private readonly ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
+        private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
         private ICommand _boatsOut;
         private ICommand _createDamage;
         private ICommand _createLongDistance;
@@ -31,6 +31,13 @@ namespace ARK.ViewModel.Protokolsystem
 
             KeyboardEnabled = true;
             StartTrip.Execute(null);
+
+            KeyboardTextChanged +=
+                (sender, args) =>
+                {
+                    if (SearchTextChanged != null)
+                        SearchTextChanged(sender, new SearchEventArgs(KeyboardText));
+                };
 
             TimeCounter.StopTime();
         }
@@ -127,8 +134,9 @@ namespace ARK.ViewModel.Protokolsystem
             EnableFilters = false;
             Filters.Clear();
 
-            // Skjul keyboard
+            // Skjul og clear keyboard
             KeyboardHide();
+            KeyboardText = "";
 
             // Fjern info
             CurrentInfo = null;
@@ -237,6 +245,23 @@ namespace ARK.ViewModel.Protokolsystem
             NotifyCustom("KeyboardImage");
         }
 
+        public event EventHandler KeyboardTextChanged
+        {
+            add { ((KeyboardViewModel)Keyboard.DataContext).TextChanged += value; }
+            remove { ((KeyboardViewModel)Keyboard.DataContext).TextChanged -= value; }
+        }
+
+        public string KeyboardText
+        {
+            get { return ((KeyboardViewModel) Keyboard.DataContext).Text; }
+            private set { ((KeyboardViewModel) Keyboard.DataContext).Text = value; }
+        }
+
+        public void KeyboardClear()
+        {
+            KeyboardText = "";
+        }
+
         #endregion
 
         #region Filter
@@ -276,6 +301,7 @@ namespace ARK.ViewModel.Protokolsystem
         public ObservableCollection<FrameworkElement> Filters
         {
             get { return _filters; }
+            set { _filters = value; Notify(); }
         }
 
         #endregion

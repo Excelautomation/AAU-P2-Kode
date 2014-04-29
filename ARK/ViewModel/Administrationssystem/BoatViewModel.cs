@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Model.Search;
+using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class BoatViewModel : FilterContentViewModelBase, IDisposable
+    public class BoatViewModel : ContentViewModelBase, IDisposable
     {
+        private const string bådeUdeText = "Både ude";
+        private const string bådeHjemmeText = "Både hjemme";
+        private const string bådeUnderReparationText = "Både under reparation";
+        private const string beskadigedeBådeText = "Beskadigede både";
+        private const string inaktiveBådeText = "Inaktive både";
+        private const string funktionelleBådeText = "Funktionelle både";
         private readonly List<Boat> _boatsNonFiltered;
+        private readonly DbArkContext _dbArkContext;
         private bool _LocalActiveBoat;
-        private Boat _currentBoat;
         private IEnumerable<Boat> _boats;
-        private DbArkContext _dbArkContext;
-
-        const string bådeUdeText = "Både ude";
-        const string bådeHjemmeText = "Både hjemme";
-        const string bådeUnderReparationText = "Både under reparation";
-        const string beskadigedeBådeText = "Beskadigede både";
-        const string inaktiveBådeText = "Inaktive både";
-        const string funktionelleBådeText = "Funktionelle både";
+        private Boat _currentBoat;
 
         public BoatViewModel()
         {
@@ -31,57 +32,26 @@ namespace ARK.ViewModel.Administrationssystem
             _dbArkContext = new DbArkContext();
             _boatsNonFiltered = _dbArkContext.Boat.ToList();
 
-            // Aktiver filtre
-            #region filtre
-            ParentAttached += (sender, args) =>
-            {
-                FilterContainer.EnableSearch = true;
-                FilterContainer.EnableFilters = true;
-
-                // Opdater filtre
-                FilterContainer.Filters.Clear();
-
-                FilterContainer.Filters.Add(new CheckBox { Content = bådeUdeText });
-                FilterContainer.Filters.Add(new CheckBox { Content = bådeHjemmeText });
-
-                FilterContainer.Filters.Add(new Separator { Height = 20 });
-                
-                FilterContainer.Filters.Add(new CheckBox { Content = bådeUnderReparationText });
-                FilterContainer.Filters.Add(new CheckBox { Content = beskadigedeBådeText });
-                FilterContainer.Filters.Add(new CheckBox { Content = inaktiveBådeText });
-                FilterContainer.Filters.Add(new CheckBox { Content = funktionelleBådeText });
-
-                // Opret checkbox filters
-                CheckboxFilters =
-                    FilterContainer.Filters.Where(e => e is CheckBox)
-                        .Select(element => new CheckboxFilter(element as CheckBox, UpdateFilter))
-                        .ToList();
-
-                // Bind til søgeevent
-                FilterContainer.SearchTextChanged += (o, eventArgs) =>
-                {
-                    SearchText = eventArgs.SearchText;
-                    UpdateFilter();
-                };
-
-                // Opdater filter
-                UpdateFilter();
-            };
-            #endregion
-
+            // Nulstil filter
             ResetFilter();
 
-                // Sæt valgt båd
+            // Setup filter
+            var filterController = new FilterContent(this);
+            filterController.EnableFilter(true, true, Filters());
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
+
+            // Sæt valgt båd
             if (Boats.Count() != 0)
             {
                 CurrentBoat = Boats.First();
                 LocalActiveBoat = CurrentBoat.Active;
             }
-            
         }
 
-        private List<CheckboxFilter> CheckboxFilters { get; set; }
-        private string SearchText { get; set; }
+        public void Dispose()
+        {
+            _dbArkContext.Dispose();
+        }
 
         public IEnumerable<Boat> Boats
         {
@@ -155,35 +125,29 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-
-
         #region Search
+
         private void ResetFilter()
         {
             Boats = _boatsNonFiltered.AsReadOnly();
         }
 
-        private void UpdateFilter()
+        private void UpdateFilter(FilterEventArgs args)
         {
             // Nulstil filter
             ResetFilter();
 
-            // Indlæs de valgte checkbox filtre
-            List<CheckboxFilter> selectedCheckboxFilters = (from filter in CheckboxFilters
-                                                            where filter.Active
-                                                            select filter).ToList();
-
             // Tjek om en af filtertyperne er aktive
-            if (!selectedCheckboxFilters.Any() && string.IsNullOrEmpty(SearchText))
+            if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
                 return;
 
             // Bool variablel der husker på om listen er blevet opdateret
             bool listUpdated = false;
 
             // Tjek filter
-            if (selectedCheckboxFilters.Any())
+            if (args.Filters.Any())
             {
-                if (FilterActive(bådeUdeText, selectedCheckboxFilters))
+                if (args.Filters.All(c => c != bådeUdeText))
                 {
                     Boats = from boat in _boatsNonFiltered
                                         where boat.BoatOut
@@ -192,41 +156,41 @@ namespace ARK.ViewModel.Administrationssystem
                     listUpdated = true;
                 }
 
-                if (FilterActive(bådeHjemmeText, selectedCheckboxFilters))
+                if (args.Filters.All(c => c != bådeHjemmeText))
                 {
-                    var output = from boat in _boatsNonFiltered
+                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                                            where boat.BoatOut == false
                                                            select boat;
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (FilterActive(bådeUnderReparationText, selectedCheckboxFilters))
+                if (args.Filters.All(c => c != bådeUnderReparationText))
                 {
-                    var output = from boat in _boatsNonFiltered
+                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where !boat.Usable
                                  select boat;
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (FilterActive(beskadigedeBådeText, selectedCheckboxFilters))
+                if (args.Filters.All(c => c != beskadigedeBådeText))
                 {
-                    var output = from boat in _boatsNonFiltered
+                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where boat.Active
                                  select boat;
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (FilterActive(inaktiveBådeText, selectedCheckboxFilters))
+                if (args.Filters.All(c => c != inaktiveBådeText))
                 {
-                    var output = from boat in _boatsNonFiltered
+                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where !boat.Active
                                  select boat;
                     UpdateBoatsFilter(ref listUpdated, output);
                 }
 
-                if (FilterActive(funktionelleBådeText, selectedCheckboxFilters))
+                if (args.Filters.All(c => c != funktionelleBådeText))
                 {
-                    var output = from boat in _boatsNonFiltered
+                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
                                  where boat.Usable
                                  select boat;
                     UpdateBoatsFilter(ref listUpdated, output);
@@ -234,10 +198,10 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             // Tjek søgning
-            if (!string.IsNullOrEmpty(SearchText))
+            if (!string.IsNullOrEmpty(args.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.FilterBoat(SearchText)
+                    where boat.FilterBoat(args.SearchText)
                     select boat;
             }
         }
@@ -252,30 +216,26 @@ namespace ARK.ViewModel.Administrationssystem
             }
             else
             {
-                Boats = MergeLists(Boats, output);
+                Boats = FilterContent.MergeLists(Boats, output);
             }
         }
 
-        private bool FilterActive(string filter, List<CheckboxFilter> selectedCheckboxFilters)
+        private ObservableCollection<FrameworkElement> Filters()
         {
-            return selectedCheckboxFilters.Any(c => (string) c.Control.Content == filter);
+            return new ObservableCollection<FrameworkElement>
+        {
+                new CheckBox {Content = bådeUdeText},
+                new CheckBox {Content = bådeHjemmeText},
+                new Separator {Height = 20},
+                new CheckBox {Content = bådeUnderReparationText},
+                new CheckBox {Content = beskadigedeBådeText},
+                new CheckBox {Content = inaktiveBådeText},
+                new CheckBox {Content = funktionelleBådeText}
+            };
         }
 
-        private IEnumerable<T> MergeLists<T>(IEnumerable<T> list1, IEnumerable<T> list2)
-        {
-            var outputList = new List<T>(list1);
-
-            foreach (T elm in list2)
-                if (!outputList.Any(e => e.Equals(elm)))
-                    outputList.Add(elm);
-
-            return outputList;
-        }
         #endregion
 
-        public void Dispose()
-        {
-            _dbArkContext.Dispose();
-        }
+        
     }
 }

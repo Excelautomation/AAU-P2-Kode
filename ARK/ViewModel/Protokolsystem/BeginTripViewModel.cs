@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
 using System.Collections.ObjectModel;
@@ -10,14 +11,19 @@ using System.Text.RegularExpressions;
 using System;
 using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
+using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Protokolsystem
 {
     public class BeginTripViewModel : KeyboardContentViewModelBase
     {
         private Boat _selectedBoat;
-        private List<Boat> _boats = new List<Boat>();
-        private List<Member> _members = new List<Member>();
+
+        private IEnumerable<Member> _members;
+        private IEnumerable<Boat> _boats;
+        private List<Member> _membersNonFiltered;
+        private List<Boat> _boatsNonFiltered; 
+
         private bool _enableMembers;
         private FrameworkElement _infoPage;
         private ObservableCollection<Member> _selectedMembers;
@@ -29,8 +35,8 @@ namespace ARK.ViewModel.Protokolsystem
             // Load data
             using (DbArkContext db = new DbArkContext())
             {
-                Boats = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
-                Members = new List<Member>(db.Member).Select(x =>
+                _boatsNonFiltered = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
+                _membersNonFiltered = new List<Member>(db.Member).Select(x =>
                     {
                         x.FirstName = x.FirstName.Trim();
                         return x;
@@ -39,6 +45,15 @@ namespace ARK.ViewModel.Protokolsystem
 
             _selectedMembers = new ObservableCollection<Member>();
 
+            // Nulstil filter
+            ResetFilter();
+
+            // Setup filter
+            var filterController = new FilterContent(this);
+            filterController.EnableFilter(true, false, null);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
+
+            // Sæt keyboard op
             ParentAttached += (sender, args) =>
             {
                 // Bind på keyboard toggle changed
@@ -72,7 +87,7 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public List<Boat> Boats
+        public IEnumerable<Boat> Boats
         {
             get { return _boats; }
             set
@@ -82,7 +97,7 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public List<Member> Members
+        public IEnumerable<Member> Members
         {
             get { return _members; }
             set
@@ -98,8 +113,13 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<Boat>(e =>
                 {
+                    if (e == null)
+                        return;
+
                     EnableMembers = true;
                     Boat = e;
+                    Keyboard.KeyboardClear();
+
                     this.SelectedMembers.Clear();
                     UpdateInfo();
                 });
@@ -141,5 +161,41 @@ namespace ARK.ViewModel.Protokolsystem
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
+
+        #region Filter
+        private void ResetFilter()
+        {
+            Boats = new ObservableCollection<Boat>(_boatsNonFiltered);
+            Members = new ObservableCollection<Member>(_membersNonFiltered);
+        }
+
+        private void UpdateFilter(FilterEventArgs args)
+        {
+            // Nulstil filter
+            ResetFilter();
+
+            // Tjek om en af filtertyperne er aktive
+            if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
+                return;
+
+            // Tjek filter
+            if (args.Filters.Any())
+            {
+                
+            }
+
+            // Tjek søgning
+            if (!string.IsNullOrEmpty(args.SearchText))
+            {
+                Boats = from boat in Boats
+                    where boat.FilterBoat(args.SearchText)
+                    select boat;
+                Members = from member in Members
+                    where member.FilterMembers(args.SearchText)
+                    select member;
+            }
+        }
+
+        #endregion
     }
 }

@@ -128,6 +128,7 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Administrationssystem\SearchTextBox.cs" />
+    <Compile Include="Extensions\MembersExtention.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\DamageType.cs" />
@@ -147,7 +148,6 @@
     <Compile Include="Model\Boat.cs" />
     <Compile Include="Model\Member.cs" />
     <Compile Include="Model\DB\MySqlConfiguration.cs" />
-    <Compile Include="Model\Search\CheckboxFilter.cs" />
     <Compile Include="Model\DamageForm.cs" />
     <Compile Include="Model\SMS.cs" />
     <Compile Include="Model\StandardTrip.cs" />
@@ -195,9 +195,8 @@
     <Compile Include="ViewModel\Administrationssystem\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsLongTripViewModel.cs" />
-    <Compile Include="ViewModel\BoatsViewModelBase.cs" />
-    <Compile Include="ViewModel\FilterContentViewModelBase.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
+    <Compile Include="ViewModel\BoatsViewModelBase.cs" />
     <Compile Include="ViewModel\ContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\IContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\IFilterContainerViewModel.cs" />
@@ -206,12 +205,15 @@
     <Compile Include="ViewModel\Base\IKeyboardContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Base\IPageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Base\IViewModelBase.cs" />
+    <Compile Include="ViewModel\Filter\FilterContent.cs" />
+    <Compile Include="ViewModel\Filter\FilterEventArgs.cs" />
     <Compile Include="ViewModel\KeyboardContentViewModelBase.cs" />
     <Compile Include="ViewModel\PageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\KeyboardViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
