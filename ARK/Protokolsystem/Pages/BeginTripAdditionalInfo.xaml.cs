@@ -18,7 +18,7 @@ namespace ARK.Protokolsystem.Pages
         private void StackPanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var vm = (BeginTripAdditionalInfoViewModel)this.DataContext;
-            var member = (Member)((FrameworkElement)sender).DataContext;
+            var member = (MemberViewModel)((FrameworkElement)sender).DataContext;
             vm.RemoveMember(member);
         }
     }
