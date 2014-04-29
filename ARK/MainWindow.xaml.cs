@@ -38,8 +38,8 @@ namespace ARK
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
-            //XMLParser.LoadBoatsFromXml();
-            //XMLParser.LoadMembersFromXml();
+            XMLParser.LoadBoatsFromXml();
+            XMLParser.LoadMembersFromXml();
             XMLParser.LoadTripsFromXml();
         }
     }
