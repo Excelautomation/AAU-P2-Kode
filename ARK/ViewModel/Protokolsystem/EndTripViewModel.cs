@@ -6,6 +6,7 @@ using ARK.Model.DB;
 using ARK.ViewModel.Interfaces;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -21,7 +22,7 @@ namespace ARK.ViewModel.Protokolsystem
             // Indlæs data
             using (DbArkContext db = new DbArkContext())
             {
-                StandardTrip = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
+                StandardTrips = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
 
                 BoatsOut = db.Boat.ToList().Where(boat => boat.BoatOut)
                     .OrderByDescending(boat => boat.GetActiveTrip.TripStartTime).ToList();
@@ -45,7 +46,7 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StopTime();
         }
 
-        public List<StandardTrip> StandardTrip
+        public List<StandardTrip> StandardTrips
         {
             get { return _standardTrips; }
             set
@@ -54,6 +55,8 @@ namespace ARK.ViewModel.Protokolsystem
                 Notify();
             }
         }
+
+        public StandardTrip StdTrip { get; set; }
 
         public List<Boat> BoatsOut
         {
@@ -64,5 +67,30 @@ namespace ARK.ViewModel.Protokolsystem
                 Notify();
             }
         }
+
+        public ICommand EndTrip
+        {
+            get
+            {
+                return GetCommand<Object>(e =>
+                {
+                    Trip trip = new Trip();
+
+                    if (StandardTrips != null)
+                    {
+                        trip.Distance = StdTrip.Distance;
+                        trip.Description = StdTrip.Description;
+                        trip.Direction = StdTrip.Direction;   
+                    }
+                    //
+                    using (DbArkContext db = new DbArkContext())
+                    {
+                        db.Trip.Add(trip);
+                    }
+                    //
+                });
+            }
+        } 
+
     }
 }
