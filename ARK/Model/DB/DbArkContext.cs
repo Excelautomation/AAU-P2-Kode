@@ -27,7 +27,9 @@ namespace ARK.Model.DB
         {
             modelBuilder.Entity<Boat>()
                 .Ignore(b => b.Usable)
-                .Ignore(b => b.Damaged);
+                .Ignore(b => b.Damaged)
+                .Ignore(b => b.GetActiveTrip)
+                .Ignore(b => b.BoatOut);
 
             modelBuilder.Entity<Boat>()
                 .Property(b => b.Id)
