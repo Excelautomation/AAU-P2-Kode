@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ARK.ViewModel.Base
+namespace ARK.ViewModel.Interfaces
 {
     public interface IKeyboardContainerViewModelBase : IViewModelBase
     {

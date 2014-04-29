@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using ARK.Administrationssystem.Pages;
-using ARK.ViewModel.Base;
+using ARK.ViewModel.Interfaces;
 using ARK.Model;
 
 namespace ARK.ViewModel.Administrationssystem

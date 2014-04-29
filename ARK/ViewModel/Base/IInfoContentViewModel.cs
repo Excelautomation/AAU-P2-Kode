@@ -1,4 +1,4 @@
-﻿namespace ARK.ViewModel.Base
+﻿namespace ARK.ViewModel.Interfaces
 {
     public interface IInfoContentViewModel<T> : IContentViewModelBase
     {

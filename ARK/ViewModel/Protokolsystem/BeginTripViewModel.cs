@@ -10,23 +10,24 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System;
 using ARK.Protokolsystem.Pages;
-using ARK.ViewModel.Base;
+using ARK.Interfaces;
+using ARK.ViewModel.Interfaces;
 using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Protokolsystem
 {
     public class BeginTripViewModel : KeyboardContentViewModelBase, IDisposable
     {
+        private IEnumerable<Member> _members;   // All members
+        private IEnumerable<Boat> _boats;       // All boats
         private Boat _selectedBoat;
 
-        private IEnumerable<Member> _members;
-        private IEnumerable<Boat> _boats;
-        private List<Member> _membersNonFiltered;
-        private List<Boat> _boatsNonFiltered;
+        private IEnumerable<Member> _membersFiltered;   // members to display
+        private IEnumerable<Boat> _boatsFiltered;       // boats to display
+        private ObservableCollection<Member> _selectedMembers;  // members in boat
 
         private bool _enableMembers;
         private FrameworkElement _infoPage;
-        private ObservableCollection<Member> _selectedMembers;
 
         private DbArkContext db = new DbArkContext();
 
@@ -35,12 +36,12 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StartTimer();
 
             // Load data
-            _boatsNonFiltered = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
-            _membersNonFiltered = new List<Member>(db.Member).Select(x =>
-                {
-                    x.FirstName = x.FirstName.Trim();
-                    return x;
-                }).OrderBy(x => x.FirstName).ToList();
+                _boatsFiltered = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
+                _membersFiltered = new List<Member>(db.Member).Select(x =>
+                    {
+                        x.FirstName = x.FirstName.Trim();
+                        return x;
+                    }).OrderBy(x => x.FirstName).ToList();
 
             _selectedMembers = new ObservableCollection<Member>();
 
@@ -73,21 +74,7 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StopTime();
         }
 
-        public IInfoContainerViewModel GetInfoContainerViewModel
-        {
-            get { return Parent as IInfoContainerViewModel; }
-        }
-
-        public bool EnableMembers
-        {
-            get { return _enableMembers; }
-            set
-            {
-                _enableMembers = value;
-                Notify();
-            }
-        }
-
+        // properties
         public IEnumerable<Boat> Boats
         {
             get { return _boats; }
@@ -96,6 +83,12 @@ namespace ARK.ViewModel.Protokolsystem
                 _boats = value;
                 Notify();
             }
+        }
+
+        public Boat SelectedBoat
+        {
+            get { return _selectedBoat; }
+            set { _selectedBoat = value; Notify(); }
         }
 
         public IEnumerable<Member> Members
@@ -108,22 +101,11 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public ICommand BoatSelected
+        public ObservableCollection<Member> SelectedMembers
         {
             get
             {
-                return GetCommand<Boat>(e =>
-                {
-                    if (e == null)
-                        return;
-
-                    EnableMembers = true;
-                    Boat = e;
-                    Keyboard.KeyboardClear();
-
-                    this.SelectedMembers.Clear();
-                    UpdateInfo();
-                });
+                return _selectedMembers;
             }
         }
 
@@ -147,15 +129,21 @@ namespace ARK.ViewModel.Protokolsystem
             set
             {
                 _selectedBoat = value;
-                Notify();
             }
         }
 
-        public ObservableCollection<Member> SelectedMembers
+        public IInfoContainerViewModel GetInfoContainerViewModel
         {
-            get
+            get { return Parent as IInfoContainerViewModel; }
+        }
+
+        public bool EnableMembers
+        { 
+            get { return _enableMembers; }
+            set
             {
-                return _selectedMembers;
+                _enableMembers = value;
+                Notify();
             }
         }
 
@@ -169,9 +157,27 @@ namespace ARK.ViewModel.Protokolsystem
             get { return InfoPage.DataContext as BeginTripAdditionalInfoViewModel; }
         }
 
+        public ICommand BoatSelected
+        {
+            get
+            {
+                return GetCommand<Boat>(e =>
+                {
+                    if (e == null)
+                        return;
+
+                    EnableMembers = true;
+                    SelectedBoat = e;
+                    Keyboard.KeyboardClear();
+                    this.SelectedMembers.Clear();
+                    UpdateInfo();
+                });
+            }
+        }
+
         public void UpdateInfo()
         {
-            Info.SelectedBoat = new ObservableCollection<Boat> { Boat };
+            Info.SelectedBoat = new ObservableCollection<Boat> {SelectedBoat};
             Info.SelectedMembers = SelectedMembers;
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
@@ -180,8 +186,8 @@ namespace ARK.ViewModel.Protokolsystem
         #region Filter
         private void ResetFilter()
         {
-            Boats = new ObservableCollection<Boat>(_boatsNonFiltered);
-            Members = new ObservableCollection<Member>(_membersNonFiltered);
+            _boatsFiltered = new ObservableCollection<Boat>(Boats);
+            _membersFiltered = new ObservableCollection<Member>(Members);
         }
 
         private void UpdateFilter(FilterEventArgs args)
@@ -196,21 +202,32 @@ namespace ARK.ViewModel.Protokolsystem
             // Tjek filter
             if (args.Filters.Any())
             {
-
+                
             }
 
             // Tjek søgning
             if (!string.IsNullOrEmpty(args.SearchText))
             {
-                Boats = from boat in Boats
-                        where boat.FilterBoat(args.SearchText)
-                        select boat;
-                Members = from member in Members
-                          where member.FilterMembers(args.SearchText)
-                          select member;
+                _boatsFiltered = from boat in Boats
+                    where boat.FilterBoat(args.SearchText)
+                    select boat;
+                _membersFiltered = from member in Members
+                    where member.FilterMembers(args.SearchText)
+                    select member;
             }
         }
 
+        #endregion
+
+        #region sort
+        void SortBoats(Func<Boat, string> predicate)
+        {
+            Boats = Boats.OrderBy(predicate);
+        }
+        void SortMembers(Func<Member, string> predicate)
+        {
+            Members = Members.OrderBy(predicate);
+        }
         #endregion
 
         public void Dispose()

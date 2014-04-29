@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using ARK.ViewModel.Base;
+using ARK.ViewModel.Interfaces;
 
 namespace ARK.ViewModel
 {

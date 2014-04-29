@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ARK.ViewModel.Base
+namespace ARK.ViewModel.Interfaces
 {
     public interface IContentViewModelBase : IViewModelBase
     {
