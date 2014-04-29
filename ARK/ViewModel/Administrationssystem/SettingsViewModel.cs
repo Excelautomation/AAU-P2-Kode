@@ -11,8 +11,26 @@ using ARK.Model.Search;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class SettingsViewModel : ContentViewModelBase
+    public class SettingsViewModel : ContentViewModelBase, IDisposable
     {
+        private DbArkContext dbcontext;
+
+        #region Constructor
+        public SettingsViewModel()
+        {
+            dbcontext = new DbArkContext();
+
+            DamageTypes = new ObservableCollection<DamageType>(dbcontext.DamageType);
+            StandardTrips = new ObservableCollection<StandardTrip>(dbcontext.StandardTrip);
+            Admins = new ObservableCollection<Admin>(dbcontext.Admin);
+        }
+        #endregion
+
+        public void Dispose()
+        {
+            dbcontext.Dispose();
+        }
+
         #region Skadetyper
         private ObservableCollection<DamageType> _damageTypes;
         public ObservableCollection<DamageType> DamageTypes
@@ -76,23 +94,21 @@ namespace ARK.ViewModel.Administrationssystem
             set { _currentAdmin = value; Notify(); }
         }
 
+        private Member _currentAdminMember;
+        public Member CurrentAdminMember
+        {
+            get
+            {
+                return _currentAdmin.Member;
+            }
+        }
+
+
         public ICommand SelectedChangeAdmin
         {
             get
             {
                 return GetCommand<Admin>(e => { CurrentAdmin = e; });
-            }
-        }
-        #endregion
-
-        #region Constructor
-        public SettingsViewModel()
-        {
-            using (var dbcontext = new DbArkContext())
-            {
-                DamageTypes = new ObservableCollection<DamageType>(dbcontext.DamageType);
-                StandardTrips = new ObservableCollection<StandardTrip>(dbcontext.StandardTrip);
-                Admins = new ObservableCollection<Admin>(dbcontext.Admin);
             }
         }
         #endregion
