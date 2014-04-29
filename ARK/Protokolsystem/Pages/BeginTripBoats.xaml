@@ -90,8 +90,34 @@
         <!--Knapper-->
         <Button x:Name="btnShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,467,471,-1" Command="{Binding Path=Keyboard.KeyboardToggle}">
             <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Path=Keyboard.KeyboardImage}"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Path=Keyboard.KeyboardToggleText}"/>
+                <Image>
+                    <Image.Style>
+                        <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="True">
+                                    <Setter Property="Source" Value="/images/keyboard_delete.png"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="False">
+                                    <Setter Property="Source" Value="/images/keyboard_add.png"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>  
+                    </Image.Style>
+                </Image>
+                <TextBlock>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=btnButtons}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="True">
+                                    <Setter Property="Text" Value="SKJUL&#10;TASTATUR"></Setter>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="False">
+                                    <Setter Property="Text" Value="VIS&#10;TASTATUR"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
             </StackPanel>
         </Button>
 

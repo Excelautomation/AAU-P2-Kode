@@ -17,8 +17,5 @@ namespace ARK.ViewModel.Base
         void KeyboardHide();
         void KeyboardEnable();
         void KeyboardDisable();
-
-        string KeyboardToggleText { get; }
-        string KeyboardImage { get; }
     }
 }
