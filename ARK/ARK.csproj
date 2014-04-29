@@ -196,7 +196,6 @@
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsLongTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
-    <Compile Include="ViewModel\BoatsViewModelBase.cs" />
     <Compile Include="ViewModel\ContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\IContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\IFilterContainerViewModel.cs" />
