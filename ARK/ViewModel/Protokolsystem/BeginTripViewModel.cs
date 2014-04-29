@@ -47,7 +47,7 @@ namespace ARK.ViewModel.Protokolsystem
             ResetFilter();
 
             // Setup filter
-            var filterController = new FilterContent(this);
+            FilterContent filterController = new FilterContent(this);
             filterController.EnableFilter(true, false, null);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
@@ -110,7 +110,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand StartTripNow
         {
-            get { return GetCommand<object>(x => { var trip = new Trip(); }); }
+            get { return GetCommand<object>(x => { Trip trip = new Trip(); }); }
         }
 
         public IInfoContainerViewModel GetInfoContainerViewModel

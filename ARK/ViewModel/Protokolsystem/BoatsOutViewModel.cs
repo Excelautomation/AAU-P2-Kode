@@ -1,14 +1,11 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ARK.Model;
 using ARK.Model.DB;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    class BoatsOutViewModel : KeyboardContentViewModelBase
+    internal class BoatsOutViewModel : KeyboardContentViewModelBase
     {
         private List<Boat> _boatsOut = new List<Boat>();
 
@@ -20,7 +17,8 @@ namespace ARK.ViewModel.Protokolsystem
             using (DbArkContext db = new DbArkContext())
             {
                 BoatsOut = db.Boat.Where(boat => boat.BoatOut == true)
-                    .OrderByDescending(boat => boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
+                    .OrderByDescending(
+                        boat => boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
             }
         }
 
@@ -38,7 +36,11 @@ namespace ARK.ViewModel.Protokolsystem
         public Boat SelectedBoat
         {
             get { return _selectedBoat; }
-            set { _selectedBoat = value; Notify(); }
+            set
+            {
+                _selectedBoat = value;
+                Notify();
+            }
         }
 
         // Methods
