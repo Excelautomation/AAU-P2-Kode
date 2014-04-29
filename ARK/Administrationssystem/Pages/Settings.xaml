@@ -107,7 +107,7 @@
                             <ColumnDefinition Width="200*"/>
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0">
-                            <Button Margin="4" DockPanel.Dock="Top" Width="200">Opret ny skadetype</Button>
+                            <Button Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200">Opret ny skadetype</Button>
                             <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -135,19 +135,19 @@
                                                 <Label>Beskrivelse:</Label>
                                             </StackPanel>
                                             <StackPanel Margin="4" Width="320">
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentDamageType.Title}"/>
+                                                <TextBox Margin="4" Text="{Binding Path=CurrentDamageType.Title, Mode=TwoWay}"/>
                                                 <WrapPanel>
                                                     <TextBlock Margin="4">Er båden funktionsdygtig?</TextBlock>
-                                                    <CheckBox Margin="4" VerticalAlignment="Center" IsChecked="{Binding Path=CurrentDamageType.IsFunctional}"/>
+                                                    <CheckBox IsChecked="{Binding Path=CurrentDamageType.IsFunctional, Mode=TwoWay}" Margin="4" VerticalAlignment="Center"/>
                                                 </WrapPanel>
-                                                <TextBox Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=CurrentDamageType.Description}"/>
+                                                <TextBox Text="{Binding Path=CurrentDamageType.Description, Mode=TwoWay}" Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
                                             </StackPanel>
                                         </WrapPanel>
                                     </StackPanel>
                                     <DockPanel Margin="10" >
-                                        <Button Margin="4">Gem</Button>
-                                        <Button Margin="4">Anullér</Button>
-                                        <Button Margin="4" HorizontalAlignment="Right">Slet!</Button>
+                                        <Button Margin="4" Content="Gem" Command="{Binding Path=SaveChangesSkadeTyper}"/>
+                                        <Button Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesSkadeTyper}"/>
+                                        <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteSkadeType}" HorizontalAlignment="Right"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Border>

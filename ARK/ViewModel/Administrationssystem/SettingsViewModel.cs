@@ -12,25 +12,29 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : ContentViewModelBase, IDisposable
     {
-        private DbArkContext dbcontext;
+        #region Generelt
+        private DbArkContext _dbcontext;
 
-        #region Constructor
         public SettingsViewModel()
         {
-            dbcontext = new DbArkContext();
+            _dbcontext = new DbArkContext();
 
-            DamageTypes = new ObservableCollection<DamageType>(dbcontext.DamageType);
-            StandardTrips = new ObservableCollection<StandardTrip>(dbcontext.StandardTrip);
-            Admins = new ObservableCollection<Admin>(dbcontext.Admin);
+            DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
+            StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
+            Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
+
+            DamageTypeTemplate.Title = "Ny skadetype";
+            DamageTypeTemplate.IsFunctional = true;
+            DamageTypeTemplate.Description = "En beskrivelse.";
+        }
+        public void Dispose()
+        {
+            _dbcontext.Dispose();
         }
         #endregion
 
-        public void Dispose()
-        {
-            dbcontext.Dispose();
-        }
-
         #region Skadetyper
+        private DamageType DamageTypeTemplate = new DamageType();
         private ObservableCollection<DamageType> _damageTypes;
         public ObservableCollection<DamageType> DamageTypes
         {
@@ -49,7 +53,61 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<DamageType>(e => { CurrentDamageType = e; });
+                return GetCommand<DamageType>(e =>
+                {
+                    CurrentDamageType = e;
+                });
+            }
+        }
+
+        public ICommand SaveChangesSkadeTyper
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.SaveChanges();
+                    System.Windows.MessageBox.Show("Gem knap");
+                });
+            }
+        }
+
+        public ICommand CancelChangesSkadeTyper
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    System.Windows.MessageBox.Show("Annulér knap");
+                });
+            }
+        }
+
+        public ICommand CreateSkadeType
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.DamageType.Add(DamageTypeTemplate);
+                    _dbcontext.SaveChanges();
+                    DamageTypes.Add(DamageTypeTemplate);
+                    System.Windows.MessageBox.Show("Opret knap");
+                });
+            }
+        }
+
+        public ICommand DeleteSkadeType
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.DamageType.Remove(CurrentDamageType);
+                    _dbcontext.SaveChanges();
+                    DamageTypes.Remove(CurrentDamageType);
+                    System.Windows.MessageBox.Show("Slet knap");
+                });
             }
         }
         #endregion
