@@ -33,7 +33,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="252*" MinWidth="200" MaxWidth="500"/>
+            <ColumnDefinition Width="450*" MinWidth="300" MaxWidth="500"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
@@ -50,17 +50,21 @@
                             <ListView x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <WrapPanel Orientation="Vertical" Name="ItemWrapPanel" Width="750">
-                                            <TextBlock Text="{Binding Name}" FontSize="16"/>
-                                            <WrapPanel>
-                                                <TextBlock Text="Pladser: " FontSize="14px" />
-                                                <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
-                                                <TextBlock Text=" Kategori: " FontSize="14px" />
-                                                <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
+                                        <Grid Width="750">
+                                            <TextBlock VerticalAlignment="Center" Margin="0,0,15,0" Text="{Binding Name}" FontSize="18"/>
+                                            <WrapPanel Margin="200,0,0,0" Orientation="Vertical">
+                                                <WrapPanel>
+                                                    <TextBlock Margin="0,0,5,0" Text="Pladser: " FontSize="14px" />
+                                                    <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
+                                                </WrapPanel>
+                                                <WrapPanel>
+                                                    <TextBlock Margin="-4,0,5,0" Text=" Kategori: " FontSize="14px" />
+                                                    <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
+                                                </WrapPanel>
                                             </WrapPanel>
-                                            <WrapPanel.Style>
+                                            <Grid.Style>
                                                 <!-- Gør listview item rød hvis båden er inaktiv-->
-                                                <Style TargetType="WrapPanel">
+                                                <Style TargetType="Grid">
                                                     <Setter Property="Background" Value="#CCFFCC"/>
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Path=Active}" Value="False">
@@ -68,9 +72,8 @@
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
-                                            </WrapPanel.Style>
-
-                                        </WrapPanel>
+                                            </Grid.Style>
+                                        </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                                 <i:Interaction.Triggers>
@@ -122,9 +125,9 @@
                                                         </StackPanel>
                                                     </WrapPanel>
                                                 </WrapPanel>
-                                                <DockPanel Margin="10">
-                                                    <Button Margin="0,0,0,0" Padding="5" FontSize="20" Content="Gem" Command="{Binding Path=SaveChanges}"/>
-                                                    <Button FontSize="20" Padding="5" HorizontalAlignment="Right" Content="Annuller" Command="{Binding Path=CancelChanges}"/>
+                                                <DockPanel Margin="10" Width="250">
+                                                    <Button Margin="0,0,0,0" Padding="5" FontSize="20" Content="Gem" Command="{Binding Path=SaveChanges}" Background="#CCFFCC"/>
+                                                    <Button FontSize="20" Padding="5" HorizontalAlignment="Right" Content="Annuller" Command="{Binding Path=CancelChanges}" Background="#FFDEDE"/>
                                                 </DockPanel>
                                                 <Grid>
                                                 <WrapPanel Margin="10" HorizontalAlignment="Center">
