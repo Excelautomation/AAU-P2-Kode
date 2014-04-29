@@ -13,7 +13,7 @@ namespace ARK.ViewModel.Protokolsystem
     public class BeginTripAdditionalInfoViewModel : ContentViewModelBase, IInfoContentViewModel<BeginTripAdditionalInfoViewModel>
     {
         private ObservableCollection<Boat> _selectedBoat;
-        private ObservableCollection<Member> _selectedMembers;
+        private ObservableCollection<MemberViewModel> _selectedMembers;
 
         public BeginTripAdditionalInfoViewModel Info
         {
@@ -32,13 +32,13 @@ namespace ARK.ViewModel.Protokolsystem
             set { _selectedBoat = value; Notify(); }
         }
 
-        public ObservableCollection<Member> SelectedMembers
+        public ObservableCollection<MemberViewModel> SelectedMembers
         {
             get { return _selectedMembers; }
             set { _selectedMembers = value; Notify(); }
         }
 
-        public void RemoveMember(Member member)
+        public void RemoveMember(MemberViewModel member)
         {
             SelectedMembers.Remove(member);
         }
