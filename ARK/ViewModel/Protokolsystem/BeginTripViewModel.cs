@@ -15,33 +15,32 @@ using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    public class BeginTripViewModel : KeyboardContentViewModelBase
+    public class BeginTripViewModel : KeyboardContentViewModelBase, IDisposable
     {
         private Boat _selectedBoat;
 
         private IEnumerable<Member> _members;
         private IEnumerable<Boat> _boats;
         private List<Member> _membersNonFiltered;
-        private List<Boat> _boatsNonFiltered; 
+        private List<Boat> _boatsNonFiltered;
 
         private bool _enableMembers;
         private FrameworkElement _infoPage;
         private ObservableCollection<Member> _selectedMembers;
+
+        private DbArkContext db = new DbArkContext();
 
         public BeginTripViewModel()
         {
             TimeCounter.StartTimer();
 
             // Load data
-            using (DbArkContext db = new DbArkContext())
-            {
-                _boatsNonFiltered = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
-                _membersNonFiltered = new List<Member>(db.Member).Select(x =>
-                    {
-                        x.FirstName = x.FirstName.Trim();
-                        return x;
-                    }).OrderBy(x => x.FirstName).ToList();
-            }
+            _boatsNonFiltered = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
+            _membersNonFiltered = new List<Member>(db.Member).Select(x =>
+                {
+                    x.FirstName = x.FirstName.Trim();
+                    return x;
+                }).OrderBy(x => x.FirstName).ToList();
 
             _selectedMembers = new ObservableCollection<Member>();
 
@@ -128,6 +127,20 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
+        public ICommand StartTripNow
+        {
+            get
+            {
+                return GetCommand<object>(x =>
+                    {
+                        Trip trip = new Trip()
+                            {
+                                
+                            };
+                    });
+            }
+        }
+
         public Boat Boat
         {
             get { return _selectedBoat; }
@@ -138,8 +151,8 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public ObservableCollection<Member> SelectedMembers 
-        { 
+        public ObservableCollection<Member> SelectedMembers
+        {
             get
             {
                 return _selectedMembers;
@@ -158,7 +171,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public void UpdateInfo()
         {
-            Info.SelectedBoat = new ObservableCollection<Boat> {Boat};
+            Info.SelectedBoat = new ObservableCollection<Boat> { Boat };
             Info.SelectedMembers = SelectedMembers;
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
@@ -183,21 +196,26 @@ namespace ARK.ViewModel.Protokolsystem
             // Tjek filter
             if (args.Filters.Any())
             {
-                
+
             }
 
             // Tjek søgning
             if (!string.IsNullOrEmpty(args.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.FilterBoat(args.SearchText)
-                    select boat;
+                        where boat.FilterBoat(args.SearchText)
+                        select boat;
                 Members = from member in Members
-                    where member.FilterMembers(args.SearchText)
-                    select member;
+                          where member.FilterMembers(args.SearchText)
+                          select member;
             }
         }
 
         #endregion
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
     }
 }
