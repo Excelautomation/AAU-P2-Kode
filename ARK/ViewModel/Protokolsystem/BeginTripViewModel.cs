@@ -100,7 +100,13 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 _membersFiltered = value;
                 Notify();
+                NotifyCustom("MembersCount");
             }
+        }
+
+        public int MembersCount
+        {
+            get { return Members.Count(member => member.Visible); }
         }
 
         public ObservableCollection<MemberViewModel> SelectedMembers
