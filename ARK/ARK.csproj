@@ -195,6 +195,7 @@
     <Compile Include="ViewModel\Administrationssystem\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsLongTripViewModel.cs" />
+    <Compile Include="ViewModel\BoatsViewModelBase.cs" />
     <Compile Include="ViewModel\FilterContentViewModelBase.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
     <Compile Include="ViewModel\ContentViewModelBase.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="ViewModel\KeyboardContentViewModelBase.cs" />
     <Compile Include="ViewModel\PageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripAdditionalInfoViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />

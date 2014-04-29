@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    class EndTripViewModel : KeyboardContentViewModelBase
+    class EndTripViewModel : BoatsViewModelBase
     {
-        private List<Boat> _boatsOut = new List<Boat>();
         private List<StandardTrip> _standardTrips = new List<StandardTrip>();
 
         public EndTripViewModel()
@@ -21,9 +20,6 @@ namespace ARK.ViewModel.Protokolsystem
             // Indlæs data
             using (DbArkContext db = new DbArkContext())
             {
-                BoatsOut = db.Boat.Where(boat => boat.BoatOut == false)
-                    .OrderByDescending(boat => boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
-
                 StandardTrip = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
             }
 
@@ -43,16 +39,6 @@ namespace ARK.ViewModel.Protokolsystem
             };
 
             TimeCounter.StopTime();
-        }
-
-        public List<Boat> BoatsOut
-        {
-            get { return _boatsOut; }
-            set
-            {
-                _boatsOut = value;
-                Notify();
-            }
         }
 
         public List<StandardTrip> StandardTrip
