@@ -34,9 +34,9 @@ namespace ARK.Model
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
 
-        public decimal GetTotalDistance()
+        public double GetTotalDistance()
         {
-            return this.Trips.Aggregate(0, (a,b) => a + b.Distance);
+            return this.Trips.Aggregate(0d, (a,b) => a + b.Distance);
         }
 
         // Equals
