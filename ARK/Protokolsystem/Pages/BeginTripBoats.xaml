@@ -14,6 +14,10 @@
     <UserControl.DataContext>
         <Protokolsystem:BeginTripViewModel />
     </UserControl.DataContext>
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
 
     <!--Indhold-->
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
@@ -77,10 +81,10 @@
                   IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
+                    <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
                         <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
-                            <Run Text="{Binding FirstName}"/>
-                            <Run Text="{Binding LastName}"/>
+                            <Run Text="{Binding Path=Member.FirstName}"/>
+                            <Run Text="{Binding Path=Member.LastName}"/>
                         </TextBlock>
                     </WrapPanel>
                 </DataTemplate>

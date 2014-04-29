@@ -13,6 +13,7 @@ using ARK.Protokolsystem.Pages;
 using ARK.Interfaces;
 using ARK.ViewModel.Interfaces;
 using ARK.ViewModel.Filter;
+using ARK.ViewModel.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -22,9 +23,9 @@ namespace ARK.ViewModel.Protokolsystem
         private IEnumerable<Boat> _boats;       // All boats
         private Boat _selectedBoat;
 
-        private IEnumerable<Member> _membersFiltered;   // members to display
+        private IEnumerable<MemberViewModel> _membersFiltered;   // members to display
         private IEnumerable<Boat> _boatsFiltered;       // boats to display
-        private ObservableCollection<Member> _selectedMembers;  // members in boat
+        private ObservableCollection<MemberViewModel> _selectedMembers;  // members in boat
 
         private bool _enableMembers;
         private FrameworkElement _infoPage;
@@ -36,14 +37,15 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StartTimer();
 
             // Load data
-                _boatsFiltered = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
-                _membersFiltered = new List<Member>(db.Member).Select(x =>
-                    {
-                        x.FirstName = x.FirstName.Trim();
-                        return x;
-                    }).OrderBy(x => x.FirstName).ToList();
+            _boats = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
+            _members = new List<Member>(db.Member).Select(x =>
+            {
+                x.FirstName = x.FirstName.Trim();
+                return x;
+            }).OrderBy(x => x.FirstName).ToList();
 
-            _selectedMembers = new ObservableCollection<Member>();
+            _selectedMembers = new ObservableCollection<MemberViewModel>();
+            Members = new ObservableCollection<MemberViewModel>(_members.Select(member => new MemberViewModel(member)));
 
             // Nulstil filter
             ResetFilter();
@@ -77,10 +79,10 @@ namespace ARK.ViewModel.Protokolsystem
         // properties
         public IEnumerable<Boat> Boats
         {
-            get { return _boats; }
+            get { return _boatsFiltered; }
             set
             {
-                _boats = value;
+                _boatsFiltered = value;
                 Notify();
             }
         }
@@ -91,17 +93,17 @@ namespace ARK.ViewModel.Protokolsystem
             set { _selectedBoat = value; Notify(); }
         }
 
-        public IEnumerable<Member> Members
+        public IEnumerable<MemberViewModel> Members
         {
-            get { return _members; }
+            get { return _membersFiltered; }
             set
             {
-                _members = value;
+                _membersFiltered = value;
                 Notify();
             }
         }
 
-        public ObservableCollection<Member> SelectedMembers
+        public ObservableCollection<MemberViewModel> SelectedMembers
         {
             get
             {
@@ -130,7 +132,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 _selectedBoat = value;
             }
-        }
+            }
 
         public IInfoContainerViewModel GetInfoContainerViewModel
         {
@@ -138,7 +140,7 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         public bool EnableMembers
-        { 
+        {
             get { return _enableMembers; }
             set
             {
@@ -186,8 +188,9 @@ namespace ARK.ViewModel.Protokolsystem
         #region Filter
         private void ResetFilter()
         {
-            _boatsFiltered = new ObservableCollection<Boat>(Boats);
-            _membersFiltered = new ObservableCollection<Member>(Members);
+            Boats = new ObservableCollection<Boat>(_boats);
+            foreach (var member in Members)
+                member.Visible = true;
         }
 
         private void UpdateFilter(FilterEventArgs args)
@@ -202,32 +205,32 @@ namespace ARK.ViewModel.Protokolsystem
             // Tjek filter
             if (args.Filters.Any())
             {
-                
+
             }
 
             // Tjek søgning
             if (!string.IsNullOrEmpty(args.SearchText))
             {
-                _boatsFiltered = from boat in Boats
-                    where boat.FilterBoat(args.SearchText)
-                    select boat;
-                _membersFiltered = from member in Members
-                    where member.FilterMembers(args.SearchText)
-                    select member;
+                Boats = from boat in Boats
+                        where boat.FilterBoat(args.SearchText)
+                        select boat;
+
+                foreach (var member in Members.Where(member => !member.Member.FilterMembers(args.SearchText)))
+                    member.Visible = false;
             }
         }
 
         #endregion
 
         #region sort
-        void SortBoats(Func<Boat, string> predicate)
+        /*void SortBoats(Func<Boat, string> predicate)
         {
             Boats = Boats.OrderBy(predicate);
         }
         void SortMembers(Func<Member, string> predicate)
         {
             Members = Members.OrderBy(predicate);
-        }
+        }*/
         #endregion
 
         public void Dispose()

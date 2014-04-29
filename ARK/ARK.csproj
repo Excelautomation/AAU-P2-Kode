@@ -221,6 +221,7 @@
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\KeyboardViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />

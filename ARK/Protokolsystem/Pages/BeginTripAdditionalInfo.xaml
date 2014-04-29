@@ -105,15 +105,15 @@
                         </Grid.RowDefinitions>
                         <StackPanel Style="{StaticResource stcbgcolor}" Margin="5,5,0,0" HorizontalAlignment="Stretch" Orientation="Vertical">
                             <StackPanel Margin="0,0,0,0" HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                <TextBlock Text="{Binding MemberNumber}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
+                                <TextBlock Text="{Binding Path=Member.MemberNumber}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                                 <TextBlock Text=" " />
-                                <TextBlock Text="{Binding FirstName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
+                                <TextBlock Text="{Binding Path=Member.FirstName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                                 <TextBlock Text=" " />
-                                <TextBlock Text="{Binding LastName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
+                                <TextBlock Text="{Binding Path=Member.LastName}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
                                 <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
-                                <TextBlock Text="{Binding Path=ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Path=Member.ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
