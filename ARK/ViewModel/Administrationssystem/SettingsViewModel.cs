@@ -23,9 +23,16 @@ namespace ARK.ViewModel.Administrationssystem
             StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
             Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
 
+            // Templates til oprettelse af entries
             DamageTypeTemplate.Title = "Ny skadetype";
             DamageTypeTemplate.IsFunctional = true;
             DamageTypeTemplate.Description = "En beskrivelse.";
+            StandardTripTemplate.Title = "Ny standardtur";
+            StandardTripTemplate.Distance = 0;
+            StandardTripTemplate.Description = "En beskrivelse.";
+            AdminTemplate.Username = "Ny administrator";
+            AdminTemplate.Contact = false;
+            AdminTemplate.Password = "kode1234";
         }
         public void Dispose()
         {
@@ -113,6 +120,7 @@ namespace ARK.ViewModel.Administrationssystem
         #endregion
 
         #region Standardture
+        private StandardTrip StandardTripTemplate = new StandardTrip();
         private ObservableCollection<StandardTrip> _standardTrips;
         public ObservableCollection<StandardTrip> StandardTrips
         {
@@ -131,12 +139,67 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<StandardTrip>(e => { CurrentStandardTrip = e; });
+                return GetCommand<StandardTrip>(e =>
+                {
+                    CurrentStandardTrip = e;
+                });
+            }
+        }
+
+        public ICommand SaveChangesStandardTrips
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.SaveChanges();
+                    System.Windows.MessageBox.Show("Gem knap");
+                });
+            }
+        }
+
+        public ICommand CancelChangesStandardTrips
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    System.Windows.MessageBox.Show("Annulér knap");
+                });
+            }
+        }
+
+        public ICommand CreateStandardTrip
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.StandardTrip.Add(StandardTripTemplate);
+                    _dbcontext.SaveChanges();
+                    StandardTrips.Add(StandardTripTemplate);
+                    System.Windows.MessageBox.Show("Opret knap");
+                });
+            }
+        }
+
+        public ICommand DeleteStandarTrip
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.StandardTrip.Remove(CurrentStandardTrip);
+                    _dbcontext.SaveChanges();
+                    StandardTrips.Remove(CurrentStandardTrip);
+                    System.Windows.MessageBox.Show("Slet knap");
+                });
             }
         }
         #endregion
 
         #region Administratorer
+        private Admin AdminTemplate = new Admin();
         private ObservableCollection<Admin> _admins;
         public ObservableCollection<Admin> Admins
         {
@@ -151,21 +214,62 @@ namespace ARK.ViewModel.Administrationssystem
             set { _currentAdmin = value; Notify(); }
         }
 
-        private Member _currentAdminMember;
-        public Member CurrentAdminMember
-        {
-            get
-            {
-                return _currentAdmin.Member;
-            }
-        }
-
-
         public ICommand SelectedChangeAdmin
         {
             get
             {
                 return GetCommand<Admin>(e => { CurrentAdmin = e; });
+            }
+        }
+
+        public ICommand SaveChangesAdmins
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.SaveChanges();
+                    System.Windows.MessageBox.Show("Gem knap");
+                });
+            }
+        }
+
+        public ICommand CancelChangesAdmins
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    System.Windows.MessageBox.Show("Annulér knap");
+                });
+            }
+        }
+
+        public ICommand CreateAdmin
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.Admin.Add(AdminTemplate);
+                    _dbcontext.SaveChanges();
+                    Admins.Add(AdminTemplate);
+                    System.Windows.MessageBox.Show("Opret knap");
+                });
+            }
+        }
+
+        public ICommand DeleteAdmin
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.Admin.Remove(CurrentAdmin);
+                    _dbcontext.SaveChanges();
+                    Admins.Remove(CurrentAdmin);
+                    System.Windows.MessageBox.Show("Slet knap");
+                });
             }
         }
         #endregion
