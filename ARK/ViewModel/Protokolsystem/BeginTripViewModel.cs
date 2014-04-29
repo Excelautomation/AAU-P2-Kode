@@ -67,6 +67,8 @@ namespace ARK.ViewModel.Protokolsystem
                 // Notify at parent er ændret
                 NotifyCustom("Keyboard");
                 NotifyCustom("KeyboardToggleText");
+
+                UpdateInfo();
             };
 
             TimeCounter.StopTime();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ARK.Model
 {
@@ -32,6 +33,11 @@ namespace ARK.Model
         public virtual ICollection<DamageForm> DamageForms { get; set; }
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
+
+        public decimal GetTotalDistance()
+        {
+            return this.Trips.Aggregate(0, (a,b) => a + b.Distance);
+        }
 
         // Equals
         public bool Equals(Member other)
