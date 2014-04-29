@@ -9,11 +9,20 @@
     <!--Indhold-->
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
         <Label Style="{DynamicResource ResourceKey=lblHeadline}" Width="613">
-            <TextBlock>
-                <Run Text="VÆLG MEDLEM ( ANTAL: "/>
-                <Run Text="{Binding Items.Count, ElementName=AllMembersList, Mode=OneWay}"/>
-                <Run Text=")"/>
-            </TextBlock>
+            <WrapPanel Margin="0,2,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Column="1">
+                        <Run Text="VÆLG MEDLEM ( ANTAL: "/>
+                        <Run Text="{Binding Items.Count, ElementName=AllMembersList, Mode=OneWay}"/>
+                        <Run Text=")"/>
+                    </TextBlock>
+                </Grid>
+            </WrapPanel>
         </Label>
 
         <ListView x:Name="AllMembersList" Margin="0,32,8,10" >
