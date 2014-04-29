@@ -40,7 +40,7 @@ namespace ARK
 
             //XMLParser.LoadBoatsFromXml();
             //XMLParser.LoadMembersFromXml();
-            //XMLParser.LoadTripsFromXml();
+            XMLParser.LoadTripsFromXml();
         }
     }
 }
