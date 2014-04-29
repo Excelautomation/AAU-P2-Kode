@@ -53,17 +53,5 @@
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
-
-    <!--ListView Indholdsbeskrivelse-->
-    <Style x:Key="lstViewContentDescription" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontFamily" Value="Calibri"/>
-        <Setter Property="Padding" Value="0"/>
-    </Style>
-
-    <!--AdditionalInfo-->
-    <!--<Style--> 
     
 </ResourceDictionary>
