@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
-             xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Base"
+             xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Interfaces"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding"
              Style="{DynamicResource ResourceKey=ucContent}">

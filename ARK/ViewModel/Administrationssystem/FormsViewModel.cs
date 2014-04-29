@@ -9,8 +9,8 @@ using ARK.Administrationssystem.Pages;
 using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.ViewModel.Base;
 using ARK.ViewModel.Filter;
+using ARK.ViewModel.Interfaces;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -216,7 +216,7 @@ namespace ARK.ViewModel.Administrationssystem
         private IEnumerable<FrameworkElement> Filters()
         {
             return new ObservableCollection<FrameworkElement>
-            {
+        {
                 new CheckBox {Content = "Langtur"},
                 new CheckBox {Content = "Skader"},
                 new Separator {Height = 20},
