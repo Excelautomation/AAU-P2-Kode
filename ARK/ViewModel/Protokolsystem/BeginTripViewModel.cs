@@ -32,6 +32,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         private DbArkContext db = new DbArkContext();
 
+        // Constructor
         public BeginTripViewModel()
         {
             TimeCounter.StartTimer();
@@ -39,10 +40,10 @@ namespace ARK.ViewModel.Protokolsystem
             // Load data
             _boats = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
             _members = new List<Member>(db.Member).Select(x =>
-            {
-                x.FirstName = x.FirstName.Trim();
-                return x;
-            }).OrderBy(x => x.FirstName).ToList();
+                    {
+                        x.FirstName = x.FirstName.Trim();
+                        return x;
+                    }).OrderBy(x => x.FirstName).ToList();
 
             _selectedMembers = new ObservableCollection<MemberViewModel>();
             Members = new ObservableCollection<MemberViewModel>(_members.Select(member => new MemberViewModel(member)));
@@ -125,22 +126,13 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public Boat Boat
-        {
-            get { return _selectedBoat; }
-            set
-            {
-                _selectedBoat = value;
-            }
-            }
-
         public IInfoContainerViewModel GetInfoContainerViewModel
         {
             get { return Parent as IInfoContainerViewModel; }
         }
 
         public bool EnableMembers
-        {
+        { 
             get { return _enableMembers; }
             set
             {
@@ -205,15 +197,15 @@ namespace ARK.ViewModel.Protokolsystem
             // Tjek filter
             if (args.Filters.Any())
             {
-
+                
             }
 
             // Tjek søgning
             if (!string.IsNullOrEmpty(args.SearchText))
             {
                 Boats = from boat in Boats
-                        where boat.FilterBoat(args.SearchText)
-                        select boat;
+                    where boat.FilterBoat(args.SearchText)
+                    select boat;
 
                 foreach (var member in Members.Where(member => !member.Member.FilterMembers(args.SearchText)))
                     member.Visible = false;
