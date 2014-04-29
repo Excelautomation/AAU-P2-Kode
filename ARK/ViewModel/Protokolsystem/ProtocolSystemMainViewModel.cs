@@ -10,18 +10,25 @@ namespace ARK.ViewModel.Protokolsystem
     public class ProtocolSystemMainViewModel : PageContainerViewModelBase, IKeyboardContainerViewModelBase,
         IFilterContainerViewModel, IInfoContainerViewModel
     {
-        private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
+        private BeginTripBoats _beginTripBoatsPage;
         private ICommand _boatsOut;
+        private BoatsOut _boatsOutPage;
         private ICommand _createDamage;
+        private CreateInjury _createInjuryPage;
         private ICommand _createLongDistance;
+        private CreateLongDistance _createLongDistancePage;
         private FrameworkElement _currentInfo;
+        private DistanceStatistics _distanceStatisticsPage;
         private bool _enableFilters;
         private bool _enableSearch;
         private ICommand _endTrip;
+        private EndTrip _endTripPage;
+        private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
         private string _headlineText;
         private OnScreenKeyboard _keyboard;
         private bool _keyboardEnabled;
         private ICommand _memberInformation;
+        private MembersInformation _membersInformationPage;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
 
@@ -39,6 +46,10 @@ namespace ARK.ViewModel.Protokolsystem
                         SearchTextChanged(sender, new SearchEventArgs(KeyboardText));
                 };
 
+#if !DEBUG
+            LoadPages();
+#endif
+
             TimeCounter.StopTime();
         }
 
@@ -54,13 +65,48 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
+        public BeginTripBoats BeginTripBoatsPage
+        {
+            get { return _beginTripBoatsPage ?? (_beginTripBoatsPage = new BeginTripBoats()); }
+        }
+
+        public EndTrip EndTripPage
+        {
+            get { return _endTripPage ?? (_endTripPage = new EndTrip()); }
+        }
+
+        public BoatsOut BoatsOutPage
+        {
+            get { return _boatsOutPage ?? (_boatsOutPage = new BoatsOut()); }
+        }
+
+        public DistanceStatistics DistanceStatisticsPage
+        {
+            get { return _distanceStatisticsPage ?? (_distanceStatisticsPage = new DistanceStatistics()); }
+        }
+
+        public MembersInformation MembersInformationPage
+        {
+            get { return _membersInformationPage ?? (_membersInformationPage = new MembersInformation()); }
+        }
+
+        public CreateInjury CreateInjuryPage
+        {
+            get { return _createInjuryPage ?? (_createInjuryPage = new CreateInjury()); }
+        }
+
+        public CreateLongDistance CreateLongDistancePage
+        {
+            get { return _createLongDistancePage ?? (_createLongDistancePage = new CreateLongDistance()); }
+        }
+
         public ICommand StartTrip
         {
             get
             {
                 return _startTrip ??
                        (_startTrip =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new BeginTripBoats()), "START ROTUR"));
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => BeginTripBoatsPage), "START ROTUR"));
             }
         }
 
@@ -69,7 +115,7 @@ namespace ARK.ViewModel.Protokolsystem
             get
             {
                 return _endTrip ??
-                       (_endTrip = GetNavigateCommand(new Lazy<FrameworkElement>(() => new EndTrip()), "AFSLUT ROTUR"));
+                       (_endTrip = GetNavigateCommand(new Lazy<FrameworkElement>(() => EndTripPage), "AFSLUT ROTUR"));
             }
         }
 
@@ -79,7 +125,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _boatsOut ??
                        (_boatsOut =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new BoatsOut()), "BÅDE PÅ VANDET"));
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => BoatsOutPage), "BÅDE PÅ VANDET"));
             }
         }
 
@@ -89,7 +135,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _statisticsDistance ??
                        (_statisticsDistance =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new DistanceStatistics()),
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => DistanceStatisticsPage),
                                "KILOMETERSTATISTIK"));
             }
         }
@@ -100,7 +146,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _memberInformation ??
                        (_memberInformation =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new MembersInformation()),
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => MembersInformationPage),
                                "MEDLEMSINFORMATION"));
             }
         }
@@ -111,7 +157,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createDamage ??
                        (_createDamage =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new CreateInjury()),
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => CreateInjuryPage),
                                "OPRET BLANKET ► SKADE"));
             }
         }
@@ -122,9 +168,21 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createLongDistance ??
                        (_createLongDistance =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => new CreateLongDistance()),
+                           GetNavigateCommand(new Lazy<FrameworkElement>(() => CreateLongDistancePage),
                                "OPRET BLANKET ► LANGTUR"));
             }
+        }
+
+        public void LoadPages()
+        {
+            object a;
+            a = BeginTripBoatsPage;
+            a = EndTripPage;
+            a = BoatsOutPage;
+            a = DistanceStatisticsPage;
+            a = MembersInformationPage;
+            a = CreateInjuryPage;
+            a = CreateLongDistancePage;
         }
 
         public override void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)
@@ -228,15 +286,10 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        private void NotifyKeyboard()
-        {
-            NotifyCustom("KeyboardToggled");
-        }
-
         public event EventHandler KeyboardTextChanged
         {
-            add { ((KeyboardViewModel)Keyboard.DataContext).TextChanged += value; }
-            remove { ((KeyboardViewModel)Keyboard.DataContext).TextChanged -= value; }
+            add { ((KeyboardViewModel) Keyboard.DataContext).TextChanged += value; }
+            remove { ((KeyboardViewModel) Keyboard.DataContext).TextChanged -= value; }
         }
 
         public string KeyboardText
@@ -248,6 +301,11 @@ namespace ARK.ViewModel.Protokolsystem
         public void KeyboardClear()
         {
             KeyboardText = "";
+        }
+
+        private void NotifyKeyboard()
+        {
+            NotifyCustom("KeyboardToggled");
         }
 
         #endregion
@@ -289,7 +347,11 @@ namespace ARK.ViewModel.Protokolsystem
         public ObservableCollection<FrameworkElement> Filters
         {
             get { return _filters; }
-            set { _filters = value; Notify(); }
+            set
+            {
+                _filters = value;
+                Notify();
+            }
         }
 
         #endregion
