@@ -17,9 +17,22 @@
 
     <!--Indhold-->
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
-        <Label Content="VÆLG BÅD" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,0,0,0"/>
-        <Label Content="VÆLG DELTAGERE" Style="{DynamicResource ResourceKey=lblHeadline}" Margin="309,0,0,0"/>
-        
+        <Label Style="{DynamicResource ResourceKey=lblHeadline}" Margin="0,0,0,0">
+            <TextBlock>
+                <Run Text="VÆLG BÅD ( ANTAL: "/>
+                <Run Text="{Binding ElementName=AllBoatsList, Path=Items.Count, Mode=OneWay}"/>
+                <Run Text=")"/>
+            </TextBlock>
+        </Label>
+
+        <Label Style="{DynamicResource ResourceKey=lblHeadline}" Margin="309,0,0,0">
+            <TextBlock>
+                <Run Text="VÆLG DELTAGERE ( ANTAL: "/>
+                <Run Text="{Binding ElementName=AllMembersList, Path=Items.Count, Mode=OneWay}"/>
+                <Run Text=")"/>
+            </TextBlock>
+        </Label>
+
         <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Margin="0,32,319,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
