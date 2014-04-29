@@ -1,5 +1,5 @@
 ﻿using System;
-using ARK.ViewModel.Base;
+using ARK.ViewModel.Interfaces;
 
 namespace ARK.ViewModel
 {

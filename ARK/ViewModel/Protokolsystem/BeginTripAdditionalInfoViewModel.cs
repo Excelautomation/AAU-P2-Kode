@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ARK.Model;
-using ARK.ViewModel.Base;
+using ARK.ViewModel.Interfaces;
 using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem

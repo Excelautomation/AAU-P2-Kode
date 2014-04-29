@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
-namespace ARK.ViewModel.Base
+namespace ARK.ViewModel.Interfaces
 {
     public class SearchEventArgs : EventArgs
     {

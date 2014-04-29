@@ -128,6 +128,13 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Administrationssystem\SearchTextBox.cs" />
+    <Compile Include="ark.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ark.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IBoatCollection.cs" />
+    <Compile Include="Interfaces\IMemberCollection.cs" />
     <Compile Include="Extensions\MembersExtention.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
@@ -212,6 +219,7 @@
     <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\KeyboardViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />

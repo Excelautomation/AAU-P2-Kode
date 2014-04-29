@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.ViewModel.Base;
+using ARK.ViewModel.Interfaces;
 using System.Text;
 using System.Threading.Tasks;
 

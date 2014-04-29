@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.ViewModel.Interfaces;
+using CheckBox = System.Windows.Controls.CheckBox;
 using ARK.ViewModel.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
