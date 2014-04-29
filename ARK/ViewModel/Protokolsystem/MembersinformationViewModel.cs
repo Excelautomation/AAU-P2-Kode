@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ARK.Interfaces;
 using ARK.Model;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    class MembersinformationViewModel<T> : ViewModelBase, IMemberCollection<T>
+    internal class MembersinformationViewModel<T> : ViewModelBase, IMemberCollection<T>
     {
-        MembersinformationViewModel(Func<Member, T> predicate)
+        private MembersinformationViewModel(Func<Member, T> predicate)
         {
             Sort(predicate);
         }
