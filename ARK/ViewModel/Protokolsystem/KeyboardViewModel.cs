@@ -5,7 +5,6 @@ namespace ARK.ViewModel.Protokolsystem
 {
     public class KeyboardViewModel : ContentViewModelBase
     {
-        public event EventHandler TextChanged;
         private string _text;
 
         public string Text
@@ -42,5 +41,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get { return GetCommand<string>(s => { Text = ""; }); }
         }
+
+        public event EventHandler TextChanged;
     }
 }
