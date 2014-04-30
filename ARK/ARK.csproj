@@ -165,7 +165,6 @@
     <Compile Include="Model\XML\XMLParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Protokolsystem\Pages\BeginTripAdditionalInfo.xaml.cs">
       <DependentUpon>BeginTripAdditionalInfo.xaml</DependentUpon>
     </Compile>

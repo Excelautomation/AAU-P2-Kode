@@ -10,6 +10,8 @@ namespace ARK.ViewModel.Protokolsystem
     public class ProtocolSystemMainViewModel : PageContainerViewModelBase, IKeyboardContainerViewModelBase,
         IFilterContainerViewModel, IInfoContainerViewModel
     {
+        #region PrivateFields
+
         private BeginTripBoats _beginTripBoatsPage;
         private ICommand _boatsOut;
         private BoatsOut _boatsOutPage;
@@ -26,17 +28,18 @@ namespace ARK.ViewModel.Protokolsystem
         private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
         private string _headlineText;
         private OnScreenKeyboard _keyboard;
-        private bool _keyboardEnabled;
         private ICommand _memberInformation;
         private MembersInformation _membersInformationPage;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
 
+        #endregion
+
+
         public ProtocolSystemMainViewModel()
         {
             TimeCounter.StartTimer();
 
-            KeyboardEnabled = true;
             StartTrip.Execute(null);
 
             KeyboardTextChanged +=
@@ -215,29 +218,13 @@ namespace ARK.ViewModel.Protokolsystem
                 Keyboard = new OnScreenKeyboard();
                 KeyboardHide();
 
-                // Vil kalde sig selv igen
+                // Kalder sig selv igen for at få nyt resultat
                 return Keyboard;
             }
             set
             {
                 _keyboard = value;
                 Notify();
-            }
-        }
-
-        public bool KeyboardEnabled
-        {
-            get { return _keyboardEnabled; }
-            private set
-            {
-                _keyboardEnabled = value;
-                if (KeyboardToggled) KeyboardHide();
-                Notify();
-
-                // Opdater onexecute changed
-                var kCommand = KeyboardToggle as DelegateCommand<object>;
-                if (kCommand != null)
-                    kCommand.OnCanExecuteChanged();
             }
         }
 
@@ -248,11 +235,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public void KeyboardShow()
         {
-            if (KeyboardEnabled)
-                Keyboard.Visibility = Visibility.Visible;
-            else
-                KeyboardHide();
-
+            Keyboard.Visibility = Visibility.Visible;
             NotifyKeyboard();
         }
 
@@ -260,16 +243,6 @@ namespace ARK.ViewModel.Protokolsystem
         {
             Keyboard.Visibility = Visibility.Collapsed;
             NotifyKeyboard();
-        }
-
-        public void KeyboardEnable()
-        {
-            KeyboardEnabled = true;
-        }
-
-        public void KeyboardDisable()
-        {
-            KeyboardEnabled = false;
         }
 
         public ICommand KeyboardToggle
