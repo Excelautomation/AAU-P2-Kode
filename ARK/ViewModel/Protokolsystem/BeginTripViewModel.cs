@@ -58,7 +58,7 @@ namespace ARK.ViewModel.Protokolsystem
                 // Bind on keyboard toggle changed
                 Keyboard.PropertyChanged += (senderKeyboard, keyboardArgs) =>
                 {
-                    // Check wheather or not the toggle has changed
+                    // Check whether or not the toggle has changed
                     if (keyboardArgs.PropertyName == "KeyboardToggled")
                         NotifyCustom("KeyboardToggleText");
                 };
