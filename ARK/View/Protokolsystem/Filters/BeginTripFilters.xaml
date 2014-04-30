@@ -19,7 +19,7 @@
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
-                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kategori}"/>
+                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="True"/>
                     <RadioButton Content="Inrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}"/>
                     <RadioButton Content="Outrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}"/>
                 </DockPanel>
@@ -38,7 +38,7 @@
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
-                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Type}"/>
+                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Type}" IsChecked="True"/>
                     <RadioButton Content="2'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}"/>
                     <RadioButton Content="1'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}"/>
                 </DockPanel>
