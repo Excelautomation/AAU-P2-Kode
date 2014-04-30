@@ -2,6 +2,7 @@
 using System.Linq;
 using ARK.Model;
 using ARK.Model.DB;
+using System.Data.Entity;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -16,9 +17,9 @@ namespace ARK.ViewModel.Protokolsystem
         {
             using (DbArkContext db = new DbArkContext())
             {
-                BoatsOut = db.Boat.Where(boat => boat.BoatOut == true)
-                    .OrderByDescending(
-                        boat => boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
+                BoatsOut = db.Boat.AsEnumerable().Where(boat => boat.BoatOut)
+                    .OrderByDescending(boat => 
+                        boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
             }
         }
 
