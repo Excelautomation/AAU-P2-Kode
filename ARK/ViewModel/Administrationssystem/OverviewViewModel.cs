@@ -15,16 +15,15 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class OverviewViewModel : ContentViewModelBase
     {
-        private IEnumerable<Boat> _boatsOut;
-        private List<Boat> _boatsOutNonFiltered;
+        private IEnumerable<DamageForm> _skadesblanketter;
+        private List<DamageForm> _skadesblanketterNonFiltered;
         private IEnumerable<LongDistanceForm> _longDistanceForms;
         private List<LongDistanceForm> _longDistanceFormsNonFiltered;
+        private IEnumerable<Boat> _boatsOut;
+        private List<Boat> _boatsOutNonFiltered;
         private Visibility _showBoatsOut;
         private Visibility _showLangtur;
         private Visibility _showSkader;
-
-        private IEnumerable<DamageForm> _skadesblanketter;
-        private List<DamageForm> _skadesblanketterNonFiltered;
 
         public OverviewViewModel()
         {

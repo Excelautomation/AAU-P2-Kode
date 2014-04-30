@@ -62,7 +62,7 @@
                                         <WrapPanel Grid.Column="1" Orientation="Vertical">
                                             <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
                                             <WrapPanel>
-                                                <TextBlock Text="{Binding RegisteringMember.Active}" FontSize="14px" />
+                                                <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
                                                 <TextBlock Margin="3,0,0,0" Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
                                             </WrapPanel>
                                         </WrapPanel>
