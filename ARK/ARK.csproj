@@ -106,36 +106,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Administrationssystem\AdminSystem.xaml.cs">
+    <Compile Include="View\Administrationssystem\AdminSystem.xaml.cs">
       <DependentUpon>AdminSystem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\AdminLogin.xaml.cs">
+    <Compile Include="View\Administrationssystem\AdminLogin.xaml.cs">
       <DependentUpon>AdminLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\Functions\SMSIT.cs" />
-    <Compile Include="Administrationssystem\Pages\Boats.xaml.cs">
+    <Compile Include="View\Administrationssystem\Functions\SMSIT.cs" />
+    <Compile Include="View\Administrationssystem\Pages\Boats.xaml.cs">
       <DependentUpon>Boats.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\Pages\Forms.xaml.cs">
+    <Compile Include="View\Administrationssystem\Pages\Forms.xaml.cs">
       <DependentUpon>Forms.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\Pages\FormsDamage.xaml.cs">
+    <Compile Include="View\Administrationssystem\Pages\FormsDamage.xaml.cs">
       <DependentUpon>FormsDamage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\Pages\FormsLongTrip.xaml.cs">
+    <Compile Include="View\Administrationssystem\Pages\FormsLongTrip.xaml.cs">
       <DependentUpon>FormsLongTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\Pages\Settings.xaml.cs">
+    <Compile Include="View\Administrationssystem\Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Administrationssystem\SearchTextBox.cs" />
+    <Compile Include="View\Administrationssystem\SearchTextBox.cs" />
     <Compile Include="ark.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ark.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IBoatCollection.cs" />
-    <Compile Include="Interfaces\IMemberCollection.cs" />
     <Compile Include="Model\Extensions\MembersExtention.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
@@ -150,7 +148,7 @@
     <Compile Include="Model\FtpInfo.cs" />
     <Compile Include="Model\GetSMS.cs" />
     <Compile Include="Model\LongDistanceForm.cs" />
-    <Compile Include="Administrationssystem\Pages\Overview.xaml.cs">
+    <Compile Include="View\Administrationssystem\Pages\Overview.xaml.cs">
       <DependentUpon>Overview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Boat.cs" />
@@ -165,43 +163,43 @@
     <Compile Include="Model\XML\XMLParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
-    <Compile Include="Protokolsystem\Pages\BeginTripAdditionalInfo.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\BeginTripAdditionalInfo.xaml.cs">
       <DependentUpon>BeginTripAdditionalInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\BeginTripBoats.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\BeginTripBoats.xaml.cs">
       <DependentUpon>BeginTripBoats.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\BoatsOut.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\BoatsOut.xaml.cs">
       <DependentUpon>BoatsOut.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\CreateInjury.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\CreateInjury.xaml.cs">
       <DependentUpon>CreateInjury.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\CreateLongDistance.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\CreateLongDistance.xaml.cs">
       <DependentUpon>CreateLongDistance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Filters\DistanceStatisticFilterss.xaml.cs">
+    <Compile Include="View\Protokolsystem\Filters\DistanceStatisticFilterss.xaml.cs">
       <DependentUpon>DistanceStatisticFilterss.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\DistanceStatistics.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\DistanceStatistics.xaml.cs">
       <DependentUpon>DistanceStatistics.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\EndTrip.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\EndTrip.xaml.cs">
       <DependentUpon>EndTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\MembersInformation.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\OnScreenFilters.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\OnScreenFilters.xaml.cs">
       <DependentUpon>OnScreenFilters.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
+    <Compile Include="View\Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
       <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\ProtocolSystem.xaml.cs">
+    <Compile Include="View\Protokolsystem\ProtocolSystem.xaml.cs">
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ValueConverters\BoolToValueConverter.cs" />
+    <Compile Include="View\ValueConverters\BoolToValueConverter.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsLongTripViewModel.cs" />
@@ -223,7 +221,6 @@
     <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\KeyboardViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />
@@ -235,39 +232,39 @@
     <Compile Include="ViewModel\Administrationssystem\OverviewViewModel.cs" />
     <Compile Include="ViewModel\Base\TimeCounter.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
-    <Page Include="Administrationssystem\AdminSystem.xaml">
+    <Page Include="View\Administrationssystem\AdminSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Administrationssystem\AdminLogin.xaml">
+    <Page Include="View\Administrationssystem\AdminLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Administrationssystem\Pages\Boats.xaml">
+    <Page Include="View\Administrationssystem\Pages\Boats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Administrationssystem\Pages\Forms.xaml">
+    <Page Include="View\Administrationssystem\Pages\Forms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Administrationssystem\Pages\FormsDamage.xaml">
+    <Page Include="View\Administrationssystem\Pages\FormsDamage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Administrationssystem\Pages\FormsLongTrip.xaml">
+    <Page Include="View\Administrationssystem\Pages\FormsLongTrip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Administrationssystem\Pages\Settings.xaml">
+    <Page Include="View\Administrationssystem\Pages\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\OnScreenFilters.xaml">
+    <Page Include="View\Protokolsystem\Pages\OnScreenFilters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Buttons.xaml">
+    <Page Include="View\Resources\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,63 +280,63 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Administrationssystem\Pages\Overview.xaml">
+    <Page Include="View\Administrationssystem\Pages\Overview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Protokolsystem\Pages\BeginTripAdditionalInfo.xaml">
+    <Page Include="View\Protokolsystem\Pages\BeginTripAdditionalInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\BeginTripBoats.xaml">
+    <Page Include="View\Protokolsystem\Pages\BeginTripBoats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\BoatsOut.xaml">
+    <Page Include="View\Protokolsystem\Pages\BoatsOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\CreateInjury.xaml">
+    <Page Include="View\Protokolsystem\Pages\CreateInjury.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\CreateLongDistance.xaml">
+    <Page Include="View\Protokolsystem\Pages\CreateLongDistance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Filters\DistanceStatisticFilterss.xaml">
+    <Page Include="View\Protokolsystem\Filters\DistanceStatisticFilterss.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\DistanceStatistics.xaml">
+    <Page Include="View\Protokolsystem\Pages\DistanceStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\EndTrip.xaml">
+    <Page Include="View\Protokolsystem\Pages\EndTrip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\MembersInformation.xaml">
+    <Page Include="View\Protokolsystem\Pages\MembersInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\OnScreenKeyboard.xaml">
+    <Page Include="View\Protokolsystem\Pages\OnScreenKeyboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Protokolsystem\ProtocolSystem.xaml">
+    <Page Include="View\Protokolsystem\ProtocolSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\RadioButton.xaml">
+    <Page Include="View\Resources\RadioButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Search.xaml">
+    <Page Include="View\Resources\Search.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Styles.xaml">
+    <Page Include="View\Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -362,10 +359,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Administrationssystem\Fonts\arial.ttf" />
-    <Resource Include="Administrationssystem\Fonts\arialbd.ttf" />
-    <Resource Include="Administrationssystem\Fonts\arialbi.ttf" />
-    <Resource Include="Administrationssystem\Fonts\ariali.ttf" />
+    <Resource Include="View\Administrationssystem\Fonts\arial.ttf" />
+    <Resource Include="View\Administrationssystem\Fonts\arialbd.ttf" />
+    <Resource Include="View\Administrationssystem\Fonts\arialbi.ttf" />
+    <Resource Include="View\Administrationssystem\Fonts\ariali.ttf" />
     <None Include="ark.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ark.Designer.cs</LastGenOutput>
@@ -402,103 +399,49 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\logo.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\logud.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\application_side_list.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\setting_tools.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\house.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\yacht.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\accept.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\keyboard_add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\keyboard_delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\map_add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\application_home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\flag_finish.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\arrow_left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\arrow_right.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\SelectedItemsBinding\SelectedItemsBinding.csproj">
       <Project>{7da5a107-b474-4ac0-b861-63a489db0c02}</Project>
       <Name>SelectedItemsBinding</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\filter_add.png" />
-    <Resource Include="images\filter_delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\clear.png" />
-    <Resource Include="images\search.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\cross.png" />
+    <Folder Include="View\Protokolsystem\Additional\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\user.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\chart_up_color.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\medal_award_bronze.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\medal_award_gold.png" />
-    <Resource Include="images\medal_award_silver.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\user_striper.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\yacht_small.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\cash_terminal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\application_side_list_red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\application_side_list_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Protokolsystem\Additional\" />
+    <Resource Include="View\images\accept.png" />
+    <Resource Include="View\images\application_home.png" />
+    <Resource Include="View\images\application_side_list.png" />
+    <Resource Include="View\images\application_side_list_blue.png" />
+    <Resource Include="View\images\application_side_list_red.png" />
+    <Resource Include="View\images\ark.png" />
+    <Resource Include="View\images\arrow_left.png" />
+    <Resource Include="View\images\arrow_right.png" />
+    <Resource Include="View\images\cash_terminal.png" />
+    <Resource Include="View\images\chart_up_color.png" />
+    <Resource Include="View\images\clear.png" />
+    <Resource Include="View\images\cross.png" />
+    <Resource Include="View\images\delete.png" />
+    <Resource Include="View\images\filter_add.png" />
+    <Resource Include="View\images\filter_delete.png" />
+    <Resource Include="View\images\flag_finish.png" />
+    <Resource Include="View\images\house.png" />
+    <Resource Include="View\images\keyboard_add.png" />
+    <Resource Include="View\images\keyboard_delete.png" />
+    <Resource Include="View\images\logo.gif" />
+    <Resource Include="View\images\logud.png" />
+    <Resource Include="View\images\map_add.png" />
+    <Resource Include="View\images\medal_award_bronze.png" />
+    <Resource Include="View\images\medal_award_gold.png" />
+    <Resource Include="View\images\medal_award_silver.png" />
+    <Resource Include="View\images\search.png" />
+    <Resource Include="View\images\setting_tools.png" />
+    <Resource Include="View\images\user.png" />
+    <Resource Include="View\images\user_striper.png" />
+    <Resource Include="View\images\yacht.png" />
+    <Resource Include="View\images\yacht_small.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
