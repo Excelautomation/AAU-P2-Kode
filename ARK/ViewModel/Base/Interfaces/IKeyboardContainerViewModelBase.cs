@@ -5,12 +5,12 @@ namespace ARK.ViewModel.Base.Interfaces
 {
     public interface IKeyboardContainerViewModelBase : IViewModelBase
     {
-        event EventHandler KeyboardTextChanged;
         string KeyboardText { get; }
-        void KeyboardClear();
 
         bool KeyboardToggled { get; }
         ICommand KeyboardToggle { get; }
+        event EventHandler KeyboardTextChanged;
+        void KeyboardClear();
 
         void KeyboardShow();
         void KeyboardHide();

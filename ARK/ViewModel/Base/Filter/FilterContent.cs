@@ -60,7 +60,7 @@ namespace ARK.ViewModel.Base.Filter
 
                 // Bind checkbox changed
                 if (Filters != null)
-                    foreach (var checkbox in Filters.Where(c => c is CheckBox).Cast<CheckBox>())
+                    foreach (CheckBox checkbox in Filters.Where(c => c is CheckBox).Cast<CheckBox>())
                     {
                         checkbox.Checked += (s, e) => UpdateFilter();
                         checkbox.Unchecked += (s, e) => UpdateFilter();
@@ -79,8 +79,13 @@ namespace ARK.ViewModel.Base.Filter
 
             IEnumerable<string> checkboxFilters = null;
             if (Filters != null)
-                checkboxFilters= Filters.Where(c => c is CheckBox).Cast<CheckBox>().Where(c => c.IsChecked.GetValueOrDefault()).Select(c => (string) c.Content).ToList();
-            
+                checkboxFilters =
+                    Filters.Where(c => c is CheckBox)
+                        .Cast<CheckBox>()
+                        .Where(c => c.IsChecked.GetValueOrDefault())
+                        .Select(c => (string) c.Content)
+                        .ToList();
+
             FilterChanged(this, new FilterEventArgs(searchText, checkboxFilters));
 
             TimeCounter.StopTime();

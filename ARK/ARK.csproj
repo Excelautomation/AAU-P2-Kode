@@ -216,6 +216,7 @@
     <Compile Include="ViewModel\Base\Interfaces\IViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterContent.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterEventArgs.cs" />
+    <Compile Include="ViewModel\Base\Filter\SearchEventArgs.cs" />
     <Compile Include="ViewModel\Base\KeyboardContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\PageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripAdditionalInfoViewModel.cs" />
