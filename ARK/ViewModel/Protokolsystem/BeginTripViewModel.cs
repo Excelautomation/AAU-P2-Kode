@@ -35,7 +35,7 @@ namespace ARK.ViewModel.Protokolsystem
             // Establish connection to DB
             db = DbArkContext.GetDbContext();
 
-            // Load data
+            // Load data. Check the boats activitylevel on a 8-day-basis
             _boats = db.Boat.AsEnumerable().Where(x => x.Active).OrderByDescending(x => 
                 db.Trip.OrderByDescending(t => t.Id).Take(50).Count(y => y.BoatId == x.Id)).ToList();
             _members = db.Member.OrderBy(x => x.FirstName).ToList();
