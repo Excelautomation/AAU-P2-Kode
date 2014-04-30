@@ -33,6 +33,8 @@ namespace ARK.Model.DB
 
         protected override void Dispose(bool disposing)
         {
+            // TODO Fjern denne
+
             Debug.WriteLine("Disposing DBContext");
             base.Dispose(disposing);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,9 +32,12 @@ namespace ARK.ViewModel.Administrationssystem
         {
             _dbArkContext = DbArkContext.GetDbContext();
 
-            // Indlæs data
-            _damageFormsNonFiltered = _dbArkContext.DamageForm.ToList();
-            _longTripFormsNonFiltered = _dbArkContext.LongTripForm.ToList();
+            lock (_dbArkContext)
+            {
+                // Indlæs data
+                _damageFormsNonFiltered = _dbArkContext.DamageForm.ToListAsync().Result;
+                _longTripFormsNonFiltered = _dbArkContext.LongTripForm.ToListAsync().Result;
+            }
 
             // Nulstil filter
             ResetFilter();
