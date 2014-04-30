@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ARK.Model
 {
-    public class Boat
+    public class Boat : IEquatable<Boat>
     {
         public enum BoatType
         {
@@ -48,5 +48,35 @@ namespace ARK.Model
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<DamageForm> DamageForms { get; set; }
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
+
+        public bool Equals(Boat other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Boat) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
+        public static bool operator ==(Boat left, Boat right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Boat left, Boat right)
+        {
+            return !Equals(left, right);
+        }
     }
 }
