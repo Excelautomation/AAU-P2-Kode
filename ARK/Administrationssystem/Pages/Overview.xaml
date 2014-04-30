@@ -42,7 +42,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Margin="2" Padding="10" Background="Transparent" BorderBrush="Transparent" >
+                                    <Button Margin="1" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
                                     <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="65"/>
@@ -89,10 +89,51 @@
                             <Image Source="/images/application_side_list_blue.png" Height="24" />
                             <Label FontSize="18">Langtursblanketter</Label>
                         </WrapPanel>
-                        <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch">
+                        <ItemsControl Margin="20" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    </WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Content="{Binding Path=Boat.Name}"/>
+                                    <Button Margin="1" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
+                                        <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="65"/>
+                                                <ColumnDefinition Width="125"/>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <WrapPanel Grid.Column="0" Orientation="Vertical">
+                                                <TextBlock Text="Båd:" FontSize="14px" />
+                                                <TextBlock Text="Medlem:" FontSize="14px" />
+                                            </WrapPanel>
+
+                                            <WrapPanel Grid.Column="1" Orientation="Vertical">
+                                                <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
+                                                <WrapPanel>
+                                                    <TextBlock Text="ubundet" FontSize="14px" />
+                                                </WrapPanel>
+                                            </WrapPanel>
+
+                                            <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
+                                                <TextBlock Text="Afgang: " FontSize="14px" />
+                                                <TextBlock Text="Hjemkomst: " FontSize="14px" />
+                                            </WrapPanel>
+
+                                            <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
+                                                <TextBlock Text="{Binding Departure, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock Text="{Binding Arrival, StringFormat=d}" FontSize="14px" />
+                                            </WrapPanel>
+
+                                        </Grid>
+                                    </Button>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -104,7 +145,7 @@
                             <Label FontSize="18">Både ude</Label>
                         </WrapPanel>
                         
-                        <ItemsControl ItemsSource="{Binding Path=BoatsOut}">
+                        <ItemsControl Margin="20" ItemsSource="{Binding Path=BoatsOut}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Stretch">
@@ -113,33 +154,30 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,0,30,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                                            <ColumnDefinition Width="100"></ColumnDefinition>
-                                            <ColumnDefinition Width="80"></ColumnDefinition>
-                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                        </Grid.RowDefinitions>
+                                    <Button Margin="1" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
+                                        <Grid HorizontalAlignment="Stretch" Width="400" Margin="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                                <ColumnDefinition Width="80"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
                                         
-                                        <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" FontSize="25px" />
+                                            <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" FontSize="18px" />
 
-                                        <WrapPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                                            <TextBlock Text="Pladser: " FontSize="14px" />
-                                            <TextBlock Text="Kategori: " FontSize="14px" />
-                                        </WrapPanel>
+                                            <WrapPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                                                <TextBlock Text="Kategori: " FontSize="14px" />
+                                                <TextBlock Text="Pladser: " FontSize="14px" />
+                                            </WrapPanel>
                                         
-                                        <WrapPanel Grid.Column="2" Orientation="Vertical" Margin="10,0,0,0"  HorizontalAlignment="Left">
-                                            <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
-                                            <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
-                                        </WrapPanel>
-                                        
-                                        <WrapPanel Grid.Column="3">
-                                            <Button VerticalAlignment="Stretch">Test</Button>
-                                        </WrapPanel>
-                                    </Grid>
+                                            <WrapPanel Grid.Column="2" Orientation="Vertical" Margin="10,0,0,0"  HorizontalAlignment="Left">
+                                                <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
+                                                <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
+                                            </WrapPanel>
+                                        </Grid>
+                                    </Button>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
