@@ -106,6 +106,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Protokolsystem\Filters\BeginTripFiltersViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Filters\EndTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
     <Compile Include="View\Administrationssystem\AdminSystem.xaml.cs">
       <DependentUpon>AdminSystem.xaml</DependentUpon>
@@ -424,7 +427,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\Protokolsystem\Additional\" />
-    <Folder Include="ViewModel\Protokolsystem\Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\images\accept.png" />

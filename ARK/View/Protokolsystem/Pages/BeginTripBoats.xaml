@@ -144,7 +144,7 @@
                 </LinearGradientBrush>
             </Button.Background>
             <StackPanel Orientation="Horizontal">
-                <Image Source="/ARK;component/images/document_page_next.png" Width="32" Height="32"/>
+                <Image Source="/View/images/document_page_next.png" Width="32" Height="32"/>
                 <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="8,0,0,0"><Run Text="BEGYND &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
             </StackPanel>
         </Button>
