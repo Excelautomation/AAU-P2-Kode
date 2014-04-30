@@ -36,12 +36,11 @@ namespace ARK.ViewModel.Administrationssystem
             // Load data
             Task.Factory.StartNew(() =>
             {
-                using (var db = new DbArkContext())
-                {
-                    _skadesblanketterNonFiltered = db.DamageForm.ToList();
-                    _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
-                    _boatsOutNonFiltered = db.Boat.ToList();
-                }
+                var db = DbArkContext.GetDbContext();
+
+                _skadesblanketterNonFiltered = db.DamageForm.ToList();
+                _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
+                _boatsOutNonFiltered = db.Boat.ToList();
 
                 // Nulstil filter
                 ResetFilter();

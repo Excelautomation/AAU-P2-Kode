@@ -10,14 +10,14 @@ using ARK.Model.DB;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class SettingsViewModel : ContentViewModelBase, IDisposable
+    public class SettingsViewModel : ContentViewModelBase
     {
         #region Generelt
         private DbArkContext _dbcontext;
 
         public SettingsViewModel()
         {
-            _dbcontext = new DbArkContext();
+            _dbcontext = DbArkContext.GetDbContext();
 
             // Templates til oprettelse af entries
             DamageTypeTemplate.Title = "Ny skadetype";
@@ -36,10 +36,6 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 LoadData();
             };
-        }
-        public void Dispose()
-        {
-            _dbcontext.Dispose();
         }
 
         private void LoadData()
