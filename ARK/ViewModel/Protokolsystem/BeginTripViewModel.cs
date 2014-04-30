@@ -27,7 +27,7 @@ namespace ARK.ViewModel.Protokolsystem
         private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
         private Boat _selectedBoat; // Holds the selected boat
 
-        // Constructor
+        #region Constructors
         public BeginTripViewModel()
         {
             TimeCounter.StartTimer();
@@ -72,8 +72,9 @@ namespace ARK.ViewModel.Protokolsystem
 
             TimeCounter.StopTime();
         }
+        #endregion
 
-        // Properties
+        #region Properties
         public bool LongTrip { get; set; }
 
         public string Direction { get; set; }
@@ -127,7 +128,6 @@ namespace ARK.ViewModel.Protokolsystem
                 trip.TripStartTime = DateTime.Now;
                 trip.Members = new List<Member>();
 
-
                 // Add selected members to trip
                 foreach (var m in SelectedMembers.Select(member => member.Member))
                 {
@@ -140,7 +140,6 @@ namespace ARK.ViewModel.Protokolsystem
 
                 db.Trip.Add(trip);
 
-                // For clearing screen for new boat. - Other option could be confirmationbox for trip accepted.
                 SelectedBoat = null;
             }); }
         }
@@ -195,9 +194,9 @@ namespace ARK.ViewModel.Protokolsystem
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
+        #endregion
 
         #region Filter
-
         private void ResetFilter()
         {
             Boats = new ObservableCollection<Boat>(_boats);
@@ -207,20 +206,20 @@ namespace ARK.ViewModel.Protokolsystem
 
         private void UpdateFilter(FilterEventArgs args)
         {
-            // Nulstil filter
+            // Reset filters
             ResetFilter();
 
-            // Tjek om en af filtertyperne er aktive
+            // Check if the filters is active
             if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
                 return;
 
-            // Tjek filter
+            // Check Filter
             if (args.Filters.Any())
             {
 
             }
 
-            // Tjek søgning
+            // Check search
             if (!string.IsNullOrEmpty(args.SearchText))
             {
                 Boats = from boat in Boats
@@ -232,11 +231,9 @@ namespace ARK.ViewModel.Protokolsystem
                     member.Visible = false;
             }
         }
-
         #endregion
 
-        #region sort
-
+        #region Sorting
         void SortBoats(Func<Boat, string> predicate)
         {
             Boats = Boats.OrderBy(predicate);
@@ -245,7 +242,6 @@ namespace ARK.ViewModel.Protokolsystem
         {
             Members = Members.OrderBy(predicate);
         }
-
         #endregion
     }
 }

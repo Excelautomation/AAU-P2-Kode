@@ -163,7 +163,7 @@ namespace ARK.ViewModel.Protokolsystem
                 return _createDamage ??
                        (_createDamage =
                            GetNavigateCommand(new Lazy<FrameworkElement>(() => CreateInjuryPage),
-                               "OPRET BLANKET ► SKADE"));
+                               "SKADE-BLANKET"));
             }
         }
 
@@ -174,7 +174,7 @@ namespace ARK.ViewModel.Protokolsystem
                 return _createLongDistance ??
                        (_createLongDistance =
                            GetNavigateCommand(new Lazy<FrameworkElement>(() => CreateLongDistancePage),
-                               "OPRET BLANKET ► LANGTUR"));
+                               "LANGTUR-BLANKET"));
             }
         }
 
