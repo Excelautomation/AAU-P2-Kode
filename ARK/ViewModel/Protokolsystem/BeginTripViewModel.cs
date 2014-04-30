@@ -47,7 +47,7 @@ namespace ARK.ViewModel.Protokolsystem
             ResetFilter();
 
             // Setup filter
-            FilterContent filterController = new FilterContent(this);
+            var filterController = new FilterContent(this);
             filterController.EnableFilter(true, false, null);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
@@ -72,7 +72,6 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StopTime();
         }
 
-        // properties
         public IEnumerable<Boat> Boats
         {
             get { return _boatsFiltered; }
@@ -196,6 +195,7 @@ namespace ARK.ViewModel.Protokolsystem
             // Tjek filter
             if (args.Filters.Any())
             {
+
             }
 
             // Tjek søgning
@@ -206,7 +206,7 @@ namespace ARK.ViewModel.Protokolsystem
                     select boat;
 
                 foreach (
-                    MemberViewModel member in Members.Where(member => !member.Member.FilterMembers(args.SearchText)))
+                    var member in Members.Where(member => !member.Member.FilterMembers(args.SearchText)))
                     member.Visible = false;
             }
         }
@@ -215,14 +215,14 @@ namespace ARK.ViewModel.Protokolsystem
 
         #region sort
 
-        /*void SortBoats(Func<Boat, string> predicate)
+        void SortBoats(Func<Boat, string> predicate)
         {
             Boats = Boats.OrderBy(predicate);
         }
-        void SortMembers(Func<Member, string> predicate)
+        void SortMembers(Func<MemberViewModel, string> predicate)
         {
             Members = Members.OrderBy(predicate);
-        }*/
+        }
 
         #endregion
     }
