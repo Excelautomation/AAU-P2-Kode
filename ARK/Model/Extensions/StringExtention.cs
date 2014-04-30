@@ -1,4 +1,4 @@
-namespace ARK.Extensions
+namespace ARK.Model.Extensions
 {
     public static class StringExtention
     {

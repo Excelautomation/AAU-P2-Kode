@@ -1,6 +1,4 @@
-using ARK.Model;
-
-namespace ARK.Extensions
+namespace ARK.Model.Extensions
 {
     public static class DamageFormsExtention
     {

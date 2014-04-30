@@ -15,7 +15,7 @@ namespace ARK.Model
         //Foreign Keys
         public int RegisteringMemberId { get; set; }
         public int BoatId { get; set; }
-        
+
         //Navigation properties
         public virtual Boat Boat { get; set; }
         public virtual Member RegisteringMember { get; set; }

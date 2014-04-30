@@ -136,17 +136,17 @@
     </Compile>
     <Compile Include="Interfaces\IBoatCollection.cs" />
     <Compile Include="Interfaces\IMemberCollection.cs" />
-    <Compile Include="Extensions\MembersExtention.cs" />
+    <Compile Include="Model\Extensions\MembersExtention.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\DamageType.cs" />
     <Compile Include="Model\DB\DbArkContext.cs" />
     <Compile Include="Model\DB\MySQLHistoryContext.cs" />
     <Compile Include="Model\DB\MySqlInitializer.cs" />
-    <Compile Include="Extensions\BoatExtention.cs" />
-    <Compile Include="Extensions\DamageFormsExtention.cs" />
-    <Compile Include="Extensions\LongDistanceFormExtention.cs" />
-    <Compile Include="Extensions\StringExtention.cs" />
+    <Compile Include="Model\Extensions\BoatExtention.cs" />
+    <Compile Include="Model\Extensions\DamageFormsExtention.cs" />
+    <Compile Include="Model\Extensions\LongDistanceFormExtention.cs" />
+    <Compile Include="Model\Extensions\StringExtention.cs" />
     <Compile Include="Model\FtpInfo.cs" />
     <Compile Include="Model\GetSMS.cs" />
     <Compile Include="Model\LongDistanceForm.cs" />

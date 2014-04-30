@@ -19,7 +19,7 @@ namespace ARK.Model
             {
                 if (TripEndedTime != null)
                 {
-                    return DateTime.Now.Subtract(this.TripStartTime);
+                    return DateTime.Now.Subtract(TripStartTime);
                 }
                 return TimeBoatOut;
             }

@@ -23,33 +23,25 @@ namespace ARK.Model
         public bool Active { get; set; }
         public BoatType SpecificBoatType { get; set; }
         public bool LongTripBoat { get; set; }
+
         public bool Usable
         {
-            get
-            {
-                return this.Active && this.DamageForms != null && !this.DamageForms.Any(x => !x.Functional && !x.Closed);
-            }
+            get { return Active && DamageForms != null && !DamageForms.Any(x => !x.Functional && !x.Closed); }
         }
+
         public bool Damaged
         {
-            get
-            {
-                return this.DamageForms != null && this.DamageForms.Count != 0;
-            }
+            get { return DamageForms != null && DamageForms.Count != 0; }
         }
+
         public Trip GetActiveTrip
         {
-            get
-            {
-                return Trips.FirstOrDefault(x => x.TripEndedTime == default(DateTime));
-            }
+            get { return Trips.FirstOrDefault(x => x.TripEndedTime == default(DateTime)); }
         }
-        public bool BoatOut 
+
+        public bool BoatOut
         {
-            get
-            {
-                return this.GetActiveTrip != default(Trip);
-            }
+            get { return GetActiveTrip != default(Trip); }
         }
 
         //Navigation properties
