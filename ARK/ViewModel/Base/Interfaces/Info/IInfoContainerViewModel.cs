@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ARK.ViewModel.Base.Interfaces
+namespace ARK.ViewModel.Base.Interfaces.Info
 {
     public interface IInfoContainerViewModel : IViewModelBase
     {
