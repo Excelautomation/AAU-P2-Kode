@@ -18,9 +18,13 @@ namespace ARK.ViewModel.Administrationssystem
         public SettingsViewModel()
         {
             _dbcontext = DbArkContext.GetDbContext();
-            DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
-            StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
-            Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
+
+            lock (_dbcontext)
+            {
+                DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
+                StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
+                Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
+            }
 
             // Templates til oprettelse af entries
             StandardTripTemplate.Description = "Ny standardtur";
