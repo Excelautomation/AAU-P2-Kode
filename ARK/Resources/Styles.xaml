@@ -53,7 +53,7 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
     </Style>
 
-    <!--ListView Indhold-->
+    <!--ListView Indhold & Retning i StartTrip-->
     <Style x:Key="lstViewContent" TargetType="TextBlock">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Foreground" Value="Black"/>
