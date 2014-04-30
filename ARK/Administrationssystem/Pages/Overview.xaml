@@ -32,8 +32,8 @@
                             <Image Source="/images/application_side_list_red.png" Height="24" />
                             <Label FontSize="18">Skadesblanketter</Label>
                         </WrapPanel>
-                        
-                        <ItemsControl Margin="20" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch">
+
+                        <ItemsControl Margin="5,5,5,20" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Stretch">
@@ -89,7 +89,7 @@
                             <Image Source="/images/application_side_list_blue.png" Height="24" />
                             <Label FontSize="18">Langtursblanketter</Label>
                         </WrapPanel>
-                        <ItemsControl Margin="20" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch">
+                        <ItemsControl Margin="5,5,5,20" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Stretch">
@@ -145,7 +145,7 @@
                             <Label FontSize="18">Både ude</Label>
                         </WrapPanel>
                         
-                        <ItemsControl Margin="20" ItemsSource="{Binding Path=BoatsOut}">
+                        <ItemsControl Margin="5,5,5,20" ItemsSource="{Binding Path=BoatsOut}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel IsItemsHost="True" Orientation="Horizontal" HorizontalAlignment="Stretch">
