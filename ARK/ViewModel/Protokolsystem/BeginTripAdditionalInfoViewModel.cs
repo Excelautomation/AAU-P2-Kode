@@ -2,6 +2,7 @@
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
+using ARK.ViewModel.Base.Interfaces.Info;
 
 namespace ARK.ViewModel.Protokolsystem
 {
