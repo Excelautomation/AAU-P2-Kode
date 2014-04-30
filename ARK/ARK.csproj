@@ -182,9 +182,6 @@
     <Compile Include="View\Protokolsystem\Pages\CreateLongDistance.xaml.cs">
       <DependentUpon>CreateLongDistance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Filters\DistanceStatisticFilters.xaml.cs">
-      <DependentUpon>DistanceStatisticFilters.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Protokolsystem\Pages\DistanceStatistics.xaml.cs">
       <DependentUpon>DistanceStatistics.xaml</DependentUpon>
     </Compile>
@@ -316,10 +313,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Protokolsystem\Pages\CreateLongDistance.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Protokolsystem\Filters\DistanceStatisticFilters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
