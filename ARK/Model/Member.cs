@@ -6,6 +6,7 @@ namespace ARK.Model
 {
     public class Member : IEquatable<Member>, IComparable<Member>
     {
+        private static readonly IEqualityComparer<Member> IdComparerInstance = new IdEqualityComparer();
         public int Id { get; set; }
         public bool Active { get; set; }
         public int MemberNumber { get; set; }
@@ -34,9 +35,14 @@ namespace ARK.Model
         public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
 
-        public double GetTotalDistance()
+        public static IEqualityComparer<Member> IdComparer
         {
-            return this.Trips.Aggregate(0d, (a,b) => a + b.Distance);
+            get { return IdComparerInstance; }
+        }
+
+        public int CompareTo(Member other)
+        {
+            return Id.CompareTo(other.Id);
         }
 
         // Equals
@@ -47,11 +53,16 @@ namespace ARK.Model
             return Id == other.Id;
         }
 
+        public double GetTotalDistance()
+        {
+            return Trips.Aggregate(0d, (a, b) => a + b.Distance);
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Member) obj);
         }
 
@@ -85,18 +96,6 @@ namespace ARK.Model
             {
                 return obj.Id;
             }
-        }
-
-        private static readonly IEqualityComparer<Member> IdComparerInstance = new IdEqualityComparer();
-
-        public static IEqualityComparer<Member> IdComparer
-        {
-            get { return IdComparerInstance; }
-        }
-
-        public int CompareTo(Member other)
-        {
-            return this.Id.CompareTo(other.Id);
         }
     }
 }

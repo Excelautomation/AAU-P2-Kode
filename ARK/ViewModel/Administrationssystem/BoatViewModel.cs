@@ -5,10 +5,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
 using System.ComponentModel;
+using ARK.Model.Extensions;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 
