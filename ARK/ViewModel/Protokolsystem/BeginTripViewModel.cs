@@ -166,7 +166,7 @@ namespace ARK.ViewModel.Protokolsystem
             db.Dispose();
         }
 
-        public void UpdateInfo()
+        private void UpdateInfo()
         {
             Info.SelectedBoat = new ObservableCollection<Boat> {SelectedBoat};
             Info.SelectedMembers = SelectedMembers;
