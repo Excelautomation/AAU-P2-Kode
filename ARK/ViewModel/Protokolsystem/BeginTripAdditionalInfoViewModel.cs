@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using ARK.Model;
-using ARK.ViewModel.Interfaces;
+using ARK.ViewModel.Base;
+using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem
 {

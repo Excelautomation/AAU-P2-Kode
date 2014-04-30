@@ -1,4 +1,5 @@
 ﻿using ARK.Model;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Protokolsystem
 {

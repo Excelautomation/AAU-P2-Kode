@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using ARK.ViewModel.Interfaces;
+using ARK.ViewModel.Base.Interfaces;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Base
 {
     public abstract class PageContainerViewModelBase : ViewModelBase, IPageContainerViewModelBase
     {

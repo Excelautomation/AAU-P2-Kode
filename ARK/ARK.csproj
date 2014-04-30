@@ -206,18 +206,18 @@
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsLongTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsDamageViewModel.cs" />
-    <Compile Include="ViewModel\ContentViewModelBase.cs" />
-    <Compile Include="ViewModel\Base\IContentViewModelBase.cs" />
-    <Compile Include="ViewModel\Base\IFilterContainerViewModel.cs" />
-    <Compile Include="ViewModel\Base\IInfoContainerViewModel.cs" />
-    <Compile Include="ViewModel\Base\IInfoContentViewModel.cs" />
-    <Compile Include="ViewModel\Base\IKeyboardContainerViewModelBase.cs" />
-    <Compile Include="ViewModel\Base\IPageContainerViewModelBase.cs" />
-    <Compile Include="ViewModel\Base\IViewModelBase.cs" />
-    <Compile Include="ViewModel\Filter\FilterContent.cs" />
-    <Compile Include="ViewModel\Filter\FilterEventArgs.cs" />
-    <Compile Include="ViewModel\KeyboardContentViewModelBase.cs" />
-    <Compile Include="ViewModel\PageContainerViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\ContentViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IContentViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IFilterContainerViewModel.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IInfoContainerViewModel.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IInfoContentViewModel.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IKeyboardContainerViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IPageContainerViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\Filter\FilterContent.cs" />
+    <Compile Include="ViewModel\Base\Filter\FilterEventArgs.cs" />
+    <Compile Include="ViewModel\Base\KeyboardContentViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\PageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Protokolsystem\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
@@ -229,11 +229,11 @@
     <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\BoatViewModel.cs" />
-    <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Base\DelegateCommand.cs" />
     <Compile Include="ViewModel\Administrationssystem\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\OverviewViewModel.cs" />
-    <Compile Include="ViewModel\TimeCounter.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Base\TimeCounter.cs" />
+    <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Page Include="Administrationssystem\AdminSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,12 +1,12 @@
-﻿using ARK.ViewModel.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ARK.ViewModel.Base.Interfaces;
 
-namespace ARK.ViewModel.Filter
+namespace ARK.ViewModel.Base.Filter
 {
     public class FilterContent : ViewModelBase
     {
