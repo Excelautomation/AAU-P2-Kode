@@ -26,22 +26,21 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<Window>(e =>
                 {
-                    using (DbArkContext db = new DbArkContext())
+                    DbArkContext db = DbArkContext.GetDbContext();
+                    
+                    Admin admin = db.Admin.Find(Username);
+
+                    if (admin != null && admin.Username == Username && admin.Password == Password)
                     {
-                        Admin admin = db.Admin.Find(Username);
+                        AdminSystem window = new AdminSystem();
+                        window.Show();
+                        ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
 
-                        if (admin != null && admin.Username == Username && admin.Password == Password)
-                        {
-                            AdminSystem window = new AdminSystem();
-                            window.Show();
-                            ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
-
-                            e.Close();
-                        }
-                        else
-                        {
-                            ErrorLabel = "Brugernavn eller adgangskode ugyldig";
-                        }
+                        e.Close();
+                    }
+                    else
+                    {
+                        ErrorLabel = "Brugernavn eller adgangskode ugyldig";
                     }
                 });
             }

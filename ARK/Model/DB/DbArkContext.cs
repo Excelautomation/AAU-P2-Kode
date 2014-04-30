@@ -5,7 +5,9 @@ namespace ARK.Model.DB
 {
     public class DbArkContext : DbContext
     {
-        public DbArkContext() : base("MikkelsNoobDB")
+        private static DbArkContext _dbContext;
+
+        private DbArkContext() : base("MikkelsNoobDB")
         {
             //Database.SetInitializer<DbArkContext>(new DropCreateDatabaseAlways<DbArkContext>());
             Database.SetInitializer(new MySqlInitializer());
@@ -22,6 +24,11 @@ namespace ARK.Model.DB
         public DbSet<SMS> SMS { get; set; }
         public DbSet<StandardTrip> StandardTrip { get; set; }
         public DbSet<Admin> Admin { get; set; }
+
+        public static DbArkContext GetDbContext()
+        {
+            return _dbContext ?? (_dbContext = new DbArkContext());
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

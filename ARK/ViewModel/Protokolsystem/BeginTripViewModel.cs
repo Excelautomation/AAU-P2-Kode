@@ -13,11 +13,11 @@ using ARK.ViewModel.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    public class BeginTripViewModel : KeyboardContentViewModelBase, IDisposable
+    public class BeginTripViewModel : KeyboardContentViewModelBase
     {
         private readonly IEnumerable<Boat> _boats; // All boats
         private readonly ObservableCollection<MemberViewModel> _selectedMembers; // members in boat
-        private readonly DbArkContext db = new DbArkContext();
+        private readonly DbArkContext db;
         private IEnumerable<Boat> _boatsFiltered; // boats to display
 
         private bool _enableMembers;
@@ -30,6 +30,9 @@ namespace ARK.ViewModel.Protokolsystem
         public BeginTripViewModel()
         {
             TimeCounter.StartTimer();
+
+            // Opret forbindelse til DB
+            db = DbArkContext.GetDbContext();
 
             // Load data
             _boats = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
@@ -159,11 +162,6 @@ namespace ARK.ViewModel.Protokolsystem
                     UpdateInfo();
                 });
             }
-        }
-
-        public void Dispose()
-        {
-            db.Dispose();
         }
 
         private void UpdateInfo()

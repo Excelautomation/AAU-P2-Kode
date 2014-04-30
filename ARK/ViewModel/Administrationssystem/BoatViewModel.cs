@@ -32,7 +32,7 @@ namespace ARK.ViewModel.Administrationssystem
         public BoatViewModel()
         {
             // Load data
-            _dbArkContext = new DbArkContext();
+            _dbArkContext = DbArkContext.GetDbContext();
             _boatsNonFiltered = _dbArkContext.Boat.ToList();
 
             // Nulstil filter
