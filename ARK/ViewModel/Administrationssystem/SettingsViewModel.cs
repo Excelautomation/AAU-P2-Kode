@@ -19,10 +19,6 @@ namespace ARK.ViewModel.Administrationssystem
         {
             _dbcontext = new DbArkContext();
 
-            DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
-            StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
-            Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
-
             // Templates til oprettelse af entries
             DamageTypeTemplate.Title = "Ny skadetype";
             DamageTypeTemplate.IsFunctional = true;
@@ -33,10 +29,37 @@ namespace ARK.ViewModel.Administrationssystem
             AdminTemplate.Username = "Ny administrator";
             AdminTemplate.Contact = false;
             AdminTemplate.Password = "kode1234";
+
+            // Virker vidst ikke -> Ingen forskel, hvis LoadData står alane.
+            // Funktionen skulle gerne refreshe indhold af entries ved menu-skift.
+            ParentAttached += (sender, e) =>
+            {
+                LoadData();
+            };
         }
         public void Dispose()
         {
             _dbcontext.Dispose();
+        }
+
+        private void LoadData()
+        {
+            DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
+            StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
+            Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
+        }
+
+
+        public ICommand ChangeTab
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    LoadData();
+                    Notify();
+                });
+            }
         }
         #endregion
 
@@ -63,6 +86,7 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<DamageType>(e =>
                 {
                     CurrentDamageType = e;
+                    Notify();
                 });
             }
         }
@@ -251,9 +275,12 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.Admin.Add(AdminTemplate);
+                    // Virker ikke! Der lader til at være problemer ved at binde foreign (Medlemmer)key til admin.
+                    Admin NewAdmin = new Admin();
+                    NewAdmin.Member = _dbcontext.Member.Find(855);
+                    _dbcontext.Admin.Add(NewAdmin);
                     _dbcontext.SaveChanges();
-                    Admins.Add(AdminTemplate);
+                    Admins.Add(NewAdmin);
                     System.Windows.MessageBox.Show("Opret knap");
                 });
             }
