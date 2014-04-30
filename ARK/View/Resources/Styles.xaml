@@ -44,7 +44,7 @@
     </Style>
     
     <!--ListView Overskrift-->
-    <Style x:Key="lstListViewHeadline" TargetType="Control">
+    <Style x:Key="lstListViewHeadline" TargetType="TextBlock">
         <Setter Property="FontSize" Value="17"/>
         <Setter Property="Foreground" Value="#FF0D476C"/>
         <Setter Property="FontFamily" Value="Calibri"/>
