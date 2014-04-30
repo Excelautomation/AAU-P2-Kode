@@ -13,6 +13,12 @@
         <Setter Property="Width" Value="621"/>
         <Setter Property="Margin" Value="4,0,4,10"/>
     </Style>
+    
+    <!--Filters-->
+    <Style x:Key="ucFilters" TargetType="UserControl">
+        <Setter Property="Height" Value="182"/>
+        <Setter Property="Width" Value="609"/>
+    </Style>
 
     <!--Headline TextBlock-->
     <Style x:Key="txbHeadline" TargetType="TextBlock">
@@ -38,7 +44,7 @@
     </Style>
     
     <!--ListView Overskrift-->
-    <Style x:Key="lstListViewHeadline" TargetType="TextBlock">
+    <Style x:Key="lstListViewHeadline" TargetType="Control">
         <Setter Property="FontSize" Value="17"/>
         <Setter Property="Foreground" Value="#FF0D476C"/>
         <Setter Property="FontFamily" Value="Calibri"/>
