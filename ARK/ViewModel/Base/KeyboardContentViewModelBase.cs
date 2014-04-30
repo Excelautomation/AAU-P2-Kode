@@ -1,6 +1,6 @@
-﻿using ARK.ViewModel.Interfaces;
+﻿using ARK.ViewModel.Base.Interfaces;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Base
 {
     public abstract class KeyboardContentViewModelBase : ContentViewModelBase
     {

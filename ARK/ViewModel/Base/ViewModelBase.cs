@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using ARK.ViewModel.Interfaces;
+using ARK.ViewModel.Base.Interfaces;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Base
 {
     public abstract class ViewModelBase : IViewModelBase
     {

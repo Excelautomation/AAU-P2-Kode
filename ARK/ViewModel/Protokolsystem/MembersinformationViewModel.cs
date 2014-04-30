@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ARK.Interfaces;
 using ARK.Model;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Protokolsystem
 {

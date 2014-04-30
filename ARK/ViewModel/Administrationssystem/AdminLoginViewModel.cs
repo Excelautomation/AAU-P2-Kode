@@ -8,6 +8,7 @@ using System.Windows.Input;
 using ARK.Model.DB;
 using ARK.Model;
 using ARK.Administrationssystem;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {

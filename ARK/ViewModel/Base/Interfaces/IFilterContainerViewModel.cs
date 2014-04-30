@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 
-namespace ARK.ViewModel.Interfaces
+namespace ARK.ViewModel.Base.Interfaces
 {
     public class SearchEventArgs : EventArgs
     {
