@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace ARK.Model.DB
 {
@@ -28,6 +29,12 @@ namespace ARK.Model.DB
         public static DbArkContext GetDbContext()
         {
             return _dbContext ?? (_dbContext = new DbArkContext());
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Debug.WriteLine("Disposing DBContext");
+            base.Dispose(disposing);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
