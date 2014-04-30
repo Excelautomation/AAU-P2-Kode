@@ -8,6 +8,6 @@ namespace ARK.ViewModel.Base.Interfaces.Filter
 {
     public interface IFilterViewModel
     {
-
+        IFilterContainerViewModel FilterContainer { get; set; }
     }
 }
