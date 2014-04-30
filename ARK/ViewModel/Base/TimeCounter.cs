@@ -24,7 +24,7 @@ namespace ARK.ViewModel.Base
             [CallerLineNumber] int sourceLineNumber = 0)
         {
             StopTime("File: " + sourceFilePath + ":" + sourceLineNumber + "\n" + memberName
-            , m => Debug.WriteLine(m));
+                , m => Debug.WriteLine(m));
         }
 
         public static void StopTime(string name, Action<string> outputMethod)

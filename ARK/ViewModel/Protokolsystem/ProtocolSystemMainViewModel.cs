@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
+using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem
