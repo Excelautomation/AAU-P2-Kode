@@ -74,6 +74,11 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StopTime();
         }
 
+        // Properties
+        public bool LongTrip { get; set; }
+
+        public string Direction { get; set; }
+
         public IEnumerable<Boat> Boats
         {
             get { return _boatsFiltered; }
@@ -117,7 +122,28 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand StartTripNow
         {
-            get { return GetCommand<object>(x => { Trip trip = new Trip(); }); }
+            get { return GetCommand<object>(x => 
+            { 
+                Trip trip = new Trip();
+                trip.TripStartTime = DateTime.Now;
+                trip.Members = new List<Member>();
+
+
+                // Add selected members to trip
+                foreach (var m in SelectedMembers.Select(member => member.Member))
+                {
+                    trip.Members.Add(m);
+                }
+
+                trip.LongTrip = LongTrip;
+                trip.Direction = Direction;
+                DbArkContext db = DbArkContext.GetDbContext();
+
+                db.Trip.Add(trip);
+
+                // For clearing screen for new boat. - Other option could be confirmationbox for trip accepted.
+                SelectedBoat = null;
+            }); }
         }
 
         public IInfoContainerViewModel GetInfoContainerViewModel
