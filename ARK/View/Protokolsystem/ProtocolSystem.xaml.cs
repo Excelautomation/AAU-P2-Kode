@@ -3,14 +3,14 @@ using ARK.Administrationssystem;
 using ARK.Administrationssystem.Funktioner;
 using ARK.Model;
 
-namespace ARK.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem
 {
     /// <summary>
     /// Interaction logic for Protokolsystem.xaml
     /// </summary>
-    public partial class Protokolsystem : Window
+    public partial class ProtocolSystem : Window
     {
-        public Protokolsystem()
+        public ProtocolSystem()
         {
             InitializeComponent();
         }
