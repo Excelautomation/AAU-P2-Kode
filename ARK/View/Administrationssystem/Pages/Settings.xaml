@@ -113,8 +113,8 @@
                         </Grid.ColumnDefinitions>
                         
                         <DockPanel Grid.Column="0">
-                            <Button Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
-                            <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}">
+                            <Button Padding="5" Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
+                            <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}" SelectedItem="{Binding Path=CurrentDamageType}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="0,2,0,2">
@@ -131,33 +131,30 @@
                         </DockPanel>
                         
                         <StackPanel Grid.Row="2" Grid.Column="2">
-                            <Label Margin="4">Detaljer</Label>
-                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" HorizontalAlignment="Left">
+                            <Border CornerRadius="15" Background="#EEEEEE" Padding="15" Margin="10" HorizontalAlignment="Left">
                                 <StackPanel>
-                                    <StackPanel>
-                                        <WrapPanel Margin="4">
-                                            
-                                            <StackPanel Margin="4">
-                                                <Label>Skadenavn:</Label>
-                                                <Label>Alvorlighed:</Label>
-                                                <Label>Beskrivelse:</Label>
-                                            </StackPanel>
-                                            
-                                            <StackPanel Margin="4" Width="320">
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentDamageType.Title, Mode=TwoWay}"/>
-                                                <WrapPanel>
-                                                    <TextBlock Margin="4">Er båden funktionsdygtig?</TextBlock>
-                                                    <CheckBox IsChecked="{Binding Path=CurrentDamageType.IsFunctional, Mode=TwoWay}" Margin="4" VerticalAlignment="Center"/>
-                                                </WrapPanel>
-                                                <TextBox Text="{Binding Path=CurrentDamageType.Description, Mode=TwoWay}" Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
-                                            </StackPanel>
-                                            
-                                        </WrapPanel>
-                                    </StackPanel>
-                                    <DockPanel Margin="10" >
-                                        <Button Margin="4" Content="Gem" Command="{Binding Path=SaveChangesSkadeTyper}"/>
-                                        <Button Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesSkadeTyper}"/>
-                                        <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteSkadeType}" HorizontalAlignment="Right"/>
+                                    
+                                    <WrapPanel>
+                                        <StackPanel Width="160">
+                                            <Label HorizontalAlignment="Right">Skadenavn:</Label>
+                                            <Label HorizontalAlignment="Right">Alvorlighed:</Label>
+                                            <Label HorizontalAlignment="Right">Beskrivelse:</Label>
+                                        </StackPanel>
+
+                                        <StackPanel Width="360">
+                                            <TextBox Margin="4" Text="{Binding Path=CurrentDamageType.Title}"/>
+                                            <WrapPanel Margin="4">
+                                                <TextBlock>Er båden funktionsdygtig?</TextBlock>
+                                                <CheckBox IsChecked="{Binding Path=CurrentDamageType.IsFunctional}" Margin="4" VerticalAlignment="Center"/>
+                                            </WrapPanel>
+                                            <TextBox Text="{Binding Path=CurrentDamageType.Description}" Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                    
+                                    <DockPanel>
+                                        <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Gem" Command="{Binding Path=SaveChangesSkadeTyper}"/>
+                                        <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesSkadeTyper}"/>
+                                        <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet" Command="{Binding Path=DeleteSkadeType}" HorizontalAlignment="Right"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Border>

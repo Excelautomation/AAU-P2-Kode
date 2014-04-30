@@ -18,49 +18,31 @@ namespace ARK.ViewModel.Administrationssystem
         public SettingsViewModel()
         {
             _dbcontext = DbArkContext.GetDbContext();
+            DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
+            StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
+            Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
 
             // Templates til oprettelse af entries
-            DamageTypeTemplate.Title = "Ny skadetype";
-            DamageTypeTemplate.IsFunctional = true;
-            DamageTypeTemplate.Description = "En beskrivelse.";
             StandardTripTemplate.Description = "Ny standardtur";
             StandardTripTemplate.Distance = 0;
             StandardTripTemplate.Direction = "En beskrivelse.";
             AdminTemplate.Username = "Ny administrator";
             AdminTemplate.Contact = false;
             AdminTemplate.Password = "kode1234";
-
-            // Virker vidst ikke -> Ingen forskel, hvis LoadData står alane.
-            // Funktionen skulle gerne refreshe indhold af entries ved menu-skift.
-            ParentAttached += (sender, e) =>
-            {
-                LoadData();
-            };
-        }
-
-        private void LoadData()
-        {
-            DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
-            StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
-            Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
+            AdminTemplate.Member = _dbcontext.Member.ToList().Find(m => m.Id == 30);
         }
 
 
-        public ICommand ChangeTab
-        {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                    LoadData();
-                    Notify();
-                });
-            }
-        }
         #endregion
 
         #region Skadetyper
-        private DamageType DamageTypeTemplate = new DamageType();
+        private DamageType DamageTypeTemplate = new DamageType()
+        {
+            Title = "Nye skadetype",
+            IsFunctional = true,
+            Description = "En beskrivelse."
+        };
+        private DamageType ReferenceToCurrentDamageType;
         private ObservableCollection<DamageType> _damageTypes;
         public ObservableCollection<DamageType> DamageTypes
         {
@@ -81,7 +63,14 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<DamageType>(e =>
                 {
-                    CurrentDamageType = e;
+                    CurrentDamageType = new DamageType()
+                    {
+                        Description = e.Description,
+                        IsFunctional = e.IsFunctional,
+                        Title = e.Title
+                    };
+                    ReferenceToCurrentDamageType = e;
+
                     Notify();
                 });
             }
@@ -91,10 +80,15 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand<DamageType>(e =>
                 {
+                    ReferenceToCurrentDamageType.Description = CurrentDamageType.Description;
+                    ReferenceToCurrentDamageType.Title = CurrentDamageType.Title;
+                    ReferenceToCurrentDamageType.IsFunctional = CurrentDamageType.IsFunctional;
+                    //DamageTypes[DamageTypes.IndexOf(e)] = CurrentDamageType;
                     _dbcontext.SaveChanges();
                     System.Windows.MessageBox.Show("Gem knap");
+                    Notify();
                 });
             }
         }
@@ -271,12 +265,9 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    // Virker ikke! Der lader til at være problemer ved at binde foreign (Medlemmer)key til admin.
-                    Admin NewAdmin = new Admin();
-                    NewAdmin.Member = _dbcontext.Member.Find(855);
-                    _dbcontext.Admin.Add(NewAdmin);
+                    _dbcontext.Admin.Add(AdminTemplate);
                     _dbcontext.SaveChanges();
-                    Admins.Add(NewAdmin);
+                    Admins.Add(AdminTemplate);
                     System.Windows.MessageBox.Show("Opret knap");
                 });
             }
