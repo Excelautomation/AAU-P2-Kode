@@ -7,6 +7,7 @@ using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Protokolsystem
 {
+    // Hvis personen der lavet GUI mangler noget i denne fil henvend dig til Mads Gadeberg hvis du vil have det lavet!
     internal class BoatsOutViewModel : KeyboardContentViewModelBase
     {
         private List<Boat> _boatsOut = new List<Boat>();
@@ -19,9 +20,9 @@ namespace ARK.ViewModel.Protokolsystem
             var db = DbArkContext.GetDbContext();
 
             BoatsOut = db.Boat.AsEnumerable().Where(boat => boat.BoatOut)
-                .OrderByDescending(boat => 
-                    boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
-        }
+                    .OrderByDescending(boat => 
+                        boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
+            }
 
         public List<Boat> BoatsOut
         {
@@ -44,5 +45,6 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         // Methods
+
     }
 }

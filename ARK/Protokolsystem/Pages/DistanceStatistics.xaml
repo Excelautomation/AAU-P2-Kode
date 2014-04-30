@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              Style="{DynamicResource ResourceKey=ucContent}">
 
@@ -60,9 +61,15 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=MemberSelectionChanged}" CommandParameter="{Binding ElementName=Members, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="LastTrips" Style="{DynamicResource lstView}" Margin="311,31,8,78">
+        <ListView x:Name="LastTrips" Style="{DynamicResource lstView}" ItemsSource="{Binding Path=Trips}" Margin="311,31,8,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
