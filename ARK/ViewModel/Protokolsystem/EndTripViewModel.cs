@@ -15,6 +15,14 @@ namespace ARK.ViewModel.Protokolsystem
         private List<StandardTrip> _standardTrips = new List<StandardTrip>();
         private List<Boat> _boatsOut = new List<Boat>();
 
+        private double _customDistance;
+
+        public double CustomDistance
+        {
+            get { return _customDistance; }
+            set { _customDistance = value; Notify(); }
+        }
+
         public EndTripViewModel()
         {
             TimeCounter.StartTimer();
@@ -22,10 +30,10 @@ namespace ARK.ViewModel.Protokolsystem
             // Indlæs data
             DbArkContext db = DbArkContext.GetDbContext();
             
-            StandardTrips = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
+                StandardTrips = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
 
-            BoatsOut = db.Boat.ToList().Where(boat => boat.BoatOut)
-                .OrderByDescending(boat => boat.GetActiveTrip.TripStartTime).ToList();
+                BoatsOut = db.Boat.ToList().Where(boat => boat.BoatOut)
+                    .OrderByDescending(boat => boat.GetActiveTrip.TripStartTime).ToList();
             
 
             ParentAttached += (sender, args) =>
@@ -82,6 +90,9 @@ namespace ARK.ViewModel.Protokolsystem
                         trip.Description = StdTrip.Description;
                         trip.Direction = StdTrip.Direction;   
                     }
+                                        // set Custom distance if different from default
+                    if (CustomDistance > 0)
+                        trip.Distance = CustomDistance;
                     //
                     DbArkContext db = DbArkContext.GetDbContext();
                     db.Trip.Add(trip);
@@ -89,6 +100,5 @@ namespace ARK.ViewModel.Protokolsystem
                 });
             }
         } 
-
     }
 }
