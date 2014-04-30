@@ -163,7 +163,7 @@
     <Compile Include="Model\XML\XMLParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
-    <Compile Include="View\Protokolsystem\Pages\BeginTripAdditionalInfo.xaml.cs">
+    <Compile Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml.cs">
       <DependentUpon>BeginTripAdditionalInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Pages\BeginTripBoats.xaml.cs">
@@ -284,7 +284,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Protokolsystem\Pages\BeginTripAdditionalInfo.xaml">
+    <Page Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -407,9 +407,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Protokolsystem\Additional\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="View\images\accept.png" />
     <Resource Include="View\images\application_home.png" />

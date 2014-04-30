@@ -80,7 +80,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
-                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="False">
+                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding Path=EnableMembers}">
                             <Run Text="{Binding Path=Member.FirstName}"/>
                             <Run Text="{Binding Path=Member.LastName}"/>
                         </TextBlock>

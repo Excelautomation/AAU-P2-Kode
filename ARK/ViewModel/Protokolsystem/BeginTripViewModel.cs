@@ -11,29 +11,28 @@ using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
-using System.Data.Entity;
 
 namespace ARK.ViewModel.Protokolsystem
 {
     public class BeginTripViewModel : KeyboardContentViewModelBase
     {
         private readonly IEnumerable<Boat> _boats; // All boats
-        private readonly ObservableCollection<MemberViewModel> _selectedMembers; // members in boat
-        private readonly DbArkContext db;
-        private IEnumerable<Boat> _boatsFiltered; // boats to display
+        private readonly ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
+        private readonly DbArkContext db; // Database
+        private IEnumerable<Boat> _boatsFiltered; // Boats to display
 
-        private bool _enableMembers;
-        private FrameworkElement _infoPage;
+        private bool _enableMembers; // Used to determine whether the members-listview should be enabled
+        private FrameworkElement _infoPage; // Informationpage
         private IEnumerable<Member> _members; // All members
-        private IEnumerable<MemberViewModel> _membersFiltered; // members to display
-        private Boat _selectedBoat;
+        private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
+        private Boat _selectedBoat; // Holds the selected boat
 
         // Constructor
         public BeginTripViewModel()
         {
             TimeCounter.StartTimer();
 
-            // Opret forbindelse til DB
+            // Establish connection to DB
             db = DbArkContext.GetDbContext();
 
             // Load data
@@ -41,11 +40,11 @@ namespace ARK.ViewModel.Protokolsystem
                 db.Trip.OrderByDescending(t => t.Id).Take(50).Count(y => y.BoatId == x.Id)).ToList();
             _members = db.Member.OrderBy(x => x.FirstName).ToList();
 
-            // Instaliser lister og sæt members
+            // Initialize lists and set members
             _selectedMembers = new ObservableCollection<MemberViewModel>();
             Members = new ObservableCollection<MemberViewModel>(_members.Select(member => new MemberViewModel(member)));
 
-            // Nulstil filter
+            // Reset filter
             ResetFilter();
 
             // Setup filter
@@ -53,18 +52,18 @@ namespace ARK.ViewModel.Protokolsystem
             filterController.EnableFilter(true, false, null);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
-            // Sæt keyboard op
+            // Configurate the keyboard
             ParentAttached += (sender, args) =>
             {
-                // Bind på keyboard toggle changed
+                // Bind on keyboard toggle changed
                 Keyboard.PropertyChanged += (senderKeyboard, keyboardArgs) =>
                 {
-                    // Tjek om toggled er ændret
+                    // Check wheather or not the toggle has changed
                     if (keyboardArgs.PropertyName == "KeyboardToggled")
                         NotifyCustom("KeyboardToggleText");
                 };
 
-                // Notify at parent er ændret
+                // Notify that parent has changed
                 NotifyCustom("Keyboard");
                 NotifyCustom("KeyboardToggleText");
 
