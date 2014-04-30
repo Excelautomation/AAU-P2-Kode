@@ -46,7 +46,7 @@
                     <Image Source="/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}">
                         <Run Text="VÆLG BESÆTNING ( ANTAL: "/>
-                        <Run Text="{Binding Path=MembersCount}"/>
+                        <Run Text="{Binding Path=MembersCount, Mode=OneWay}"/>
                         <Run Text=")"/>
                     </TextBlock>
                 </Grid>
