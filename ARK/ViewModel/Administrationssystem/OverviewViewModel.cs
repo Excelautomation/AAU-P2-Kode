@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,9 +38,17 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 var db = DbArkContext.GetDbContext();
 
-                _skadesblanketterNonFiltered = db.DamageForm.ToList();
-                _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
-                _boatsOutNonFiltered = db.Boat.ToList();
+                lock (db)
+                {
+                    // Opret forbindelser Async
+                    var damageforms = db.DamageForm.ToListAsync();
+                    var longDistanceForms = db.LongTripForm.ToListAsync();
+                    var boatsOut = db.Boat.ToListAsync();
+
+                    _skadesblanketterNonFiltered = damageforms.Result;
+                    _longDistanceFormsNonFiltered = longDistanceForms.Result;
+                    _boatsOutNonFiltered = boatsOut.Result;
+                }
 
                 // Nulstil filter
                 ResetFilter();

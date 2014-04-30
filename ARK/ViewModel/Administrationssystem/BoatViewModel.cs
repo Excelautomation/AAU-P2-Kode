@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,7 +35,9 @@ namespace ARK.ViewModel.Administrationssystem
         {
             // Load data
             _dbArkContext = DbArkContext.GetDbContext();
-            _boatsNonFiltered = _dbArkContext.Boat.ToList();
+
+            lock (_dbArkContext)
+                _boatsNonFiltered = _dbArkContext.Boat.ToListAsync().Result;
 
             // Nulstil filter
             ResetFilter();
