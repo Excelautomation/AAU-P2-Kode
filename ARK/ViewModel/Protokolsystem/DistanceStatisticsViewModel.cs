@@ -47,7 +47,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             DbArkContext db = DbArkContext.GetDbContext();
             
-            Trips = db.Trip.Take(10).ToList();
+            Trips = db.Trip.ToList().Where(t => t.Members.Contains(SelectedMember)).ToList();
         }
 
         public List<Trip> Trips
