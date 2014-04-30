@@ -58,7 +58,15 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    
+    <!--GroupBox-->
+    <Style x:Key="grbProperty" TargetType="{x:Type GroupBox}">
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="Foreground" Value="#FF0D476C"/>
+        <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    
     <!--ListView-->
     <Style x:Key="lstView" TargetType="ListView">
         <Setter Property="Height" Value="431"/>
