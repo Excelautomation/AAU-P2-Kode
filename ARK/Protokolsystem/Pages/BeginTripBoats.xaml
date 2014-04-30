@@ -130,7 +130,7 @@
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnBeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="471,468,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
+        <Button x:Name="btnBeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="461,466,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFB0D141" Offset="0"/>
@@ -148,8 +148,8 @@
                 <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="8,0,0,0"><Run Text="BEGYND &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
             </StackPanel>
         </Button>
-        <Border HorizontalAlignment="Left" Height="52" Margin="0,410,0,0" VerticalAlignment="Top" Width="611">
-            <Grid VerticalAlignment="Center">
+        <Border HorizontalAlignment="Left" Height="52" Margin="0,410,0,0" VerticalAlignment="Top" Width="611" BorderBrush="#FFABADB3" BorderThickness="1,1,1,2">
+            <Grid Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
@@ -157,15 +157,10 @@
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" Content="Øst"/>
-                <RadioButton Grid.Column="1" >
-                    <TextBlock>
-                        <Run Text="VEST - NORD"/><LineBreak/>
-                        <Run Text="OM EGHOLM"/>
-                    </TextBlock>
-                </RadioButton>
-                <RadioButton Grid.Column="3" Content="Vest - Syd om Egholm"/>
-                <RadioButton Grid.Column="4" Content="Langtur"/>
+                <RadioButton Grid.Column="0" Content="ØST" Margin="3,0,0,0"/>
+                <RadioButton Grid.Column="1" Content="VEST - NORD&#10;OM EGHOLM"/>
+                <RadioButton Grid.Column="3" Content="VEST - SYD&#10;OM EGHOLM"/>
+                <RadioButton Grid.Column="4" Content="LANGTUR"/>
             </Grid>
         </Border>
     </Grid>
