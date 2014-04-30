@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              Style="{DynamicResource ResourceKey=ucContent}">
     
@@ -68,6 +69,12 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=MemberSelected}" CommandParameter="{Binding ElementName=Members, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
     </Grid>
 </UserControl>
