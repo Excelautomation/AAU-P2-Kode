@@ -43,6 +43,14 @@
         <Setter Property="Foreground" Value="#FF0D476C"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="FontWeight" Value="Bold"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#FFCDCDCD"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Foreground" Value="#FF0D476C"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!--ListView-->

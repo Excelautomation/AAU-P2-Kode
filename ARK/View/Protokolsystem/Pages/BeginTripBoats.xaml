@@ -53,7 +53,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Margin="0,32,319,135" Height="Auto">
+        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Margin="0,32,319,124" Height="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -75,12 +75,12 @@
         </ListView>
 
         <ListView x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
-                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" Margin="309,32,10,135" SelectionMode="Multiple" 
+                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" Margin="309,32,10,124" SelectionMode="Multiple" 
                   IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
-                        <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
+                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="False">
                             <Run Text="{Binding Path=Member.FirstName}"/>
                             <Run Text="{Binding Path=Member.LastName}"/>
                         </TextBlock>
@@ -130,7 +130,7 @@
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnBeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="461,466,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
+        <Button x:Name="btnBeginTripNow" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Effect="{Binding Effect, ElementName=EndTrip}" BorderThickness="2" Margin="461,467,0,0" Height="64" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" Command="{Binding Path=StartTripNow}">
             <Button.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFB0D141" Offset="0"/>
@@ -148,7 +148,7 @@
                 <TextBlock FontSize="16" FontWeight="Bold" FontFamily="Administrationssystem/Fonts/#Arial" Margin="8,0,0,0"><Run Text="BEGYND &#xA;"/><Run Language="da-dk" Text="RO"/><Run Text="TUR"/></TextBlock>
             </StackPanel>
         </Button>
-        <Border HorizontalAlignment="Left" Height="52" Margin="0,410,0,0" VerticalAlignment="Top" Width="611" BorderBrush="#FFABADB3" BorderThickness="1,1,1,2">
+        <Border HorizontalAlignment="Left" Height="40" Margin="0,421,0,0" VerticalAlignment="Top" Width="611" BorderBrush="#FFABADB3" BorderThickness="1">
             <Grid Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
