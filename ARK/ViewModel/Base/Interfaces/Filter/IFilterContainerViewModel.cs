@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using ARK.ViewModel.Base.Filter;
 
-namespace ARK.ViewModel.Base.Interfaces
+namespace ARK.ViewModel.Base.Interfaces.Filter
 {
     public interface IFilterContainerViewModel : IViewModelBase
     {

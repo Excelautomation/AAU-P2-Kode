@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ARK.ViewModel.Base.Interfaces;
+using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Base.Filter
 {

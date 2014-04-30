@@ -12,6 +12,7 @@ using ARK.Model.Extensions;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
+using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
