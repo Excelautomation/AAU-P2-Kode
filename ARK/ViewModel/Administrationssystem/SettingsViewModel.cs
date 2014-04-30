@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
