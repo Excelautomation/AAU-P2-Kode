@@ -11,6 +11,7 @@ using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
+using System.Data.Entity;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -36,12 +37,9 @@ namespace ARK.ViewModel.Protokolsystem
             db = DbArkContext.GetDbContext();
 
             // Load data
-            _boats = new List<Boat>(db.Boat).Where(x => x.Usable).OrderBy(x => x.NumberofSeats).ToList();
-            _members = new List<Member>(db.Member).Select(x =>
-            {
-                x.FirstName = x.FirstName.Trim();
-                return x;
-            }).OrderBy(x => x.FirstName).ToList();
+            _boats = db.Boat.AsEnumerable().Where(x => x.Active).OrderByDescending(x => 
+                db.Trip.OrderByDescending(t => t.Id).Take(50).Count(y => y.BoatId == x.Id)).ToList();
+            _members = db.Member.OrderBy(x => x.FirstName).ToList();
 
             // Instaliser lister og sæt members
             _selectedMembers = new ObservableCollection<MemberViewModel>();
