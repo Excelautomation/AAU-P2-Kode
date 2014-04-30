@@ -16,7 +16,7 @@ using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase, IDisposable
+    public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase
     {
         private readonly List<DamageForm> _damageFormsNonFiltered;
         private readonly List<LongDistanceForm> _longTripFormsNonFiltered;
@@ -42,11 +42,6 @@ namespace ARK.ViewModel.Administrationssystem
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true, Filters());
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
-        }
-
-        public void Dispose()
-        {
-            _dbArkContext.Dispose();
         }
 
         public ICommand SelectDamageFormCommand

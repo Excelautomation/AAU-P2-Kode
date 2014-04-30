@@ -36,6 +36,7 @@ namespace ARK.ViewModel.Protokolsystem
         private MembersInformation _membersInformationPage;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
+        private FrameworkElement _filter;
 
         #endregion
 
@@ -288,6 +289,16 @@ namespace ARK.ViewModel.Protokolsystem
         #endregion
 
         #region Filter
+
+        public FrameworkElement Filter
+        {
+            get { return _filter; }
+            set { 
+                _filter = value;
+
+                Notify();
+            }
+        }
 
         public ICommand SearchChangedCommand
         {

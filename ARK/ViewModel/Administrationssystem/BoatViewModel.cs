@@ -14,7 +14,7 @@ using ARK.ViewModel.Base.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class BoatViewModel : ContentViewModelBase, IDisposable
+    public class BoatViewModel : ContentViewModelBase
     {
         private const string bådeUdeText = "Både ude";
         private const string bådeHjemmeText = "Både hjemme";
@@ -272,10 +272,5 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         #endregion
-
-        public void Dispose()
-        {
-            _dbArkContext.Dispose();
-        }
     }
 }
