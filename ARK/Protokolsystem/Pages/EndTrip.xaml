@@ -134,7 +134,7 @@
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnAddDestination" Style="{DynamicResource ResourceKey=btnFilter}" Margin="309,467,162,-1">
+        <Button x:Name="btnAddDistance" Style="{DynamicResource ResourceKey=btnFilter}" Margin="309,467,162,-1">
             <StackPanel Orientation="Horizontal">
                 <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/images/map_add.png"/>
                 <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
