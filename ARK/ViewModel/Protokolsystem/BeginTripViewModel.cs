@@ -214,7 +214,7 @@ namespace ARK.ViewModel.Protokolsystem
             if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
                 return;
 
-            // Check Filter
+            // Check filter
             if (args.Filters.Any())
             {
 

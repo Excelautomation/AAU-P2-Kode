@@ -12,7 +12,6 @@
                                 <Border Name="RadioMark" CornerRadius="0" Margin="4" Background="#FF8DCD03" Visibility="Hidden" />
                             </Grid>
                         </BulletDecorator.Bullet>
-
                         <TextBlock Margin="8,0,0,0" Style="{DynamicResource ResourceKey=lstViewContent}" VerticalAlignment="Center" FontWeight="Bold">
                             <ContentPresenter></ContentPresenter>
                         </TextBlock>

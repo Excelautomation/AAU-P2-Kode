@@ -194,8 +194,8 @@
     <Compile Include="View\Protokolsystem\Pages\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Pages\OnScreenFilters.xaml.cs">
-      <DependentUpon>OnScreenFilters.xaml</DependentUpon>
+    <Compile Include="View\Protokolsystem\Filters\BeginTripFilters.xaml.cs">
+      <DependentUpon>BeginTripFilters.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
       <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
@@ -268,7 +268,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Protokolsystem\Pages\OnScreenFilters.xaml">
+    <Page Include="View\Protokolsystem\Filters\BeginTripFilters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -415,7 +415,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\Protokolsystem\Additional\" />
+    <Folder Include="ViewModel\Protokolsystem\Filters\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="View\images\accept.png" />
     <Resource Include="View\images\application_home.png" />
