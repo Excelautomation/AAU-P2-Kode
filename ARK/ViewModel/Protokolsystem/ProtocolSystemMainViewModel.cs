@@ -6,6 +6,8 @@ using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
+using ARK.ViewModel.Base.Interfaces.Info;
+using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Protokolsystem
 {
