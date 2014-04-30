@@ -11,9 +11,7 @@ namespace ARK.ViewModel.Protokolsystem
         public DistanceStatisticsViewModel()
         {
             // Load data
-            using (DbArkContext db = new DbArkContext())
-            {
-            }
+            
         }
 
         public List<Member> Members

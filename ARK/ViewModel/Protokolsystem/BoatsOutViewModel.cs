@@ -12,18 +12,16 @@ namespace ARK.ViewModel.Protokolsystem
 
         private Boat _selectedBoat;
 
-        // Constructor
         public BoatsOutViewModel()
         {
-            using (DbArkContext db = new DbArkContext())
-            {
-                BoatsOut = db.Boat.AsEnumerable().Where(boat => boat.BoatOut)
-                    .OrderByDescending(boat => 
-                        boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
-            }
+            // Load data
+            var db = DbArkContext.GetDbContext();
+
+            BoatsOut = db.Boat.AsEnumerable().Where(boat => boat.BoatOut)
+                .OrderByDescending(boat => 
+                    boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
         }
 
-        // Properties
         public List<Boat> BoatsOut
         {
             get { return _boatsOut; }

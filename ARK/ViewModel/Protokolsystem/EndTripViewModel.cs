@@ -20,13 +20,13 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StartTimer();
 
             // Indlæs data
-            using (DbArkContext db = new DbArkContext())
-            {
-                StandardTrips = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
+            DbArkContext db = DbArkContext.GetDbContext();
+            
+            StandardTrips = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
 
-                BoatsOut = db.Boat.ToList().Where(boat => boat.BoatOut)
-                    .OrderByDescending(boat => boat.GetActiveTrip.TripStartTime).ToList();
-            }
+            BoatsOut = db.Boat.ToList().Where(boat => boat.BoatOut)
+                .OrderByDescending(boat => boat.GetActiveTrip.TripStartTime).ToList();
+            
 
             ParentAttached += (sender, args) =>
             {
@@ -83,10 +83,8 @@ namespace ARK.ViewModel.Protokolsystem
                         trip.Direction = StdTrip.Direction;   
                     }
                     //
-                    using (DbArkContext db = new DbArkContext())
-                    {
-                        db.Trip.Add(trip);
-                    }
+                    DbArkContext db = DbArkContext.GetDbContext();
+                    db.Trip.Add(trip);
                     //
                 });
             }

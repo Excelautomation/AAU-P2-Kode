@@ -27,7 +27,7 @@ namespace ARK.ViewModel.Administrationssystem
 
         public FormsViewModel()
         {
-            _dbArkContext = new DbArkContext();
+            _dbArkContext = DbArkContext.GetDbContext();
 
             // Indlæs data
             _damageFormsNonFiltered = _dbArkContext.DamageForm.ToList();
