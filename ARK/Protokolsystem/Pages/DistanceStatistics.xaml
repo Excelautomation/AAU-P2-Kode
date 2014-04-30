@@ -8,6 +8,10 @@
              Style="{DynamicResource ResourceKey=ucContent}">
 
     <!--Indhold-->
+    <UserControl.DataContext>
+        <Protokolsystem:DistanceStatisticsViewModel/>
+    </UserControl.DataContext>
+    
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
         <Border Style="{DynamicResource ResourceKey=brdHeadline}">
             <WrapPanel Margin="0,2,0,0">
@@ -43,7 +47,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="MembersStatistics" Style="{DynamicResource ResourceKey=lstView}" Margin="0,31,319,78">
+        <ListView x:Name="Members" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" Margin="0,31,319,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
