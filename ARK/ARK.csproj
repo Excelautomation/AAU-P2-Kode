@@ -181,7 +181,7 @@
     <Compile Include="Protokolsystem\Pages\CreateLongDistance.xaml.cs">
       <DependentUpon>CreateLongDistance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Protokolsystem\Pages\DistanceStatisticFilterss.xaml.cs">
+    <Compile Include="Protokolsystem\Filters\DistanceStatisticFilterss.xaml.cs">
       <DependentUpon>DistanceStatisticFilterss.xaml</DependentUpon>
     </Compile>
     <Compile Include="Protokolsystem\Pages\DistanceStatistics.xaml.cs">
@@ -192,6 +192,9 @@
     </Compile>
     <Compile Include="Protokolsystem\Pages\MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protokolsystem\Pages\OnScreenFilters.xaml.cs">
+      <DependentUpon>OnScreenFilters.xaml</DependentUpon>
     </Compile>
     <Compile Include="Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
       <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
@@ -260,6 +263,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Protokolsystem\Pages\OnScreenFilters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -300,7 +307,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Protokolsystem\Pages\DistanceStatisticFilterss.xaml">
+    <Page Include="Protokolsystem\Filters\DistanceStatisticFilterss.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -489,6 +496,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\application_side_list_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Protokolsystem\Additional\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
