@@ -10,52 +10,68 @@
     <UserControl.DataContext>
         <VM:FormsDamageViewModel></VM:FormsDamageViewModel>
     </UserControl.DataContext>
-    <Grid>
-        <StackPanel>
-            <Label FontSize="40" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,40">Skadesblanket</Label>
-            <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,30">
-                <StackPanel Margin="0,0,60,0">
-                    <WrapPanel Margin="0,0,0,15">
-                        <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Indgivet af:</Label>
-                        <WrapPanel VerticalAlignment="Center">
-                            <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" Margin="0,0,3,0" FontSize="18" Text="{Binding Path=DamageForm.RegisteringMember.FirstName}" />
-                            <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.RegisteringMember.LastName}" />
-                        </WrapPanel>
-                    </WrapPanel>
-                    <WrapPanel Margin="0,0,0,15">
-                        <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Båd:</Label>
-                        <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.Boat.Name}" />
-                    </WrapPanel>
-                    <WrapPanel Margin="0,0,0,15">
-                        <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Dato:</Label>
-                        <TextBox  BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.Date}" />
-                    </WrapPanel>
-                    <WrapPanel Margin="0,0,0,15">
-                        <Label FontSize="24" Margin="0,0,15,0" VerticalContentAlignment="Center" FontStyle="Italic">Skade:</Label>
-                        <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" FontSize="18" Text="{Binding Path=DamageForm.DamageDescription.Type}"/>
-                    </WrapPanel>
-                </StackPanel>
-                <DockPanel Width="300">
-                    <Label DockPanel.Dock="Top" FontSize="24" FontStyle="Italic" Margin="0,0,0,10">Supplerende tekst</Label>
-                    <Border  DockPanel.Dock="Bottom"  BorderBrush="Gray" BorderThickness="1">
-                        <TextBlock Margin="2" FontSize="16" TextWrapping="Wrap" Text="{Binding Path=DamageForm.DamageDescription.Description}"/>
-                    </Border>
-                </DockPanel>
-            </WrapPanel>
-            <WrapPanel HorizontalAlignment="Center">
-                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeaktiverBåd}" CommandParameter="{Binding Path=DamageForm}">
-                    <StackPanel Margin="5">
-                        <Image Source="../../images/accept.png" Height="32"/>
-                        <Label Content="Sæt båden til skadet"/>
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <Label FontSize="30" HorizontalAlignment="Left" FontFamily="arial" FontWeight="Bold" Margin="20,0,0,20">Skadesblanket</Label>
+        <Grid Margin="0,0,0,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Margin="0,0,20,0" Grid.Row="0" Grid.Column="0">
+                <Label>Indgiver:</Label>
+                <Label>Båd:</Label>
+                <Label>Dato:</Label>
+                <Label>Skade:</Label>
+            </StackPanel>
+            
+            <StackPanel Margin="0,0,20,0" Grid.Row="0" Grid.Column="1">
+                <WrapPanel VerticalAlignment="Center">
+                    <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" Margin="0,0,3,0" Text="{Binding Path=DamageForm.RegisteringMember.FirstName}" />
+                    <TextBox BorderBrush="White" IsHitTestVisible="False" VerticalContentAlignment="Center" Text="{Binding Path=DamageForm.RegisteringMember.LastName}" />
+                </WrapPanel>
+                <TextBox BorderBrush="White" IsHitTestVisible="False" Text="{Binding Path=DamageForm.DamageDescription.Type}"/>
+                <TextBox  BorderBrush="White" IsHitTestVisible="False" Text="{Binding Path=DamageForm.Date}" />
+                <TextBox  BorderBrush="White" IsHitTestVisible="False" Text="{Binding Path=DamageForm.Boat.Name}" />
+            </StackPanel>
+            
+            <DockPanel Grid.Column="2" Grid.Row="0">
+                <Label DockPanel.Dock="Top" Margin="0,0,0,00">Supplerende tekst</Label>
+                <Border  DockPanel.Dock="Bottom"  BorderBrush="Gray" BorderThickness="1">
+                    <TextBlock Margin="2" FontSize="16" TextWrapping="Wrap" Text="{Binding Path=DamageForm.DamageDescription.Description}"/>
+                </Border>
+            </DockPanel>
+        
+            <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
+                <Button Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeaktiverBåd}">
+                    <StackPanel>
+                        <Image Source="../../images/accept.png" Height="24"/>
+                        <Label Content="Sæt båden til skadet" FontSize="14" FontStyle="Normal"/>
                     </StackPanel>
                 </Button>
-                <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0" Command="{Binding Path=AktiverBåd}" CommandParameter="{Binding Path=DamageForm}">
-                    <StackPanel Margin="5">
-                        <Image Source="../../images/delete.png" Height="32"/>
-                        <Label Content="Sæt båden til aktiv"/>
+                <Button HorizontalAlignment="Right" Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=AktiverBåd}">
+                    <StackPanel Margin="0">
+                        <Image Source="../../images/delete.png" Height="24"/>
+                        <Label Content="Sæt båden til aktiv" FontSize="14" FontStyle="Normal"/>
                     </StackPanel>
                 </Button>
-            </WrapPanel>
-        </StackPanel>
-    </Grid>
+            </DockPanel>
+        </Grid>
+    </StackPanel>
 </UserControl>

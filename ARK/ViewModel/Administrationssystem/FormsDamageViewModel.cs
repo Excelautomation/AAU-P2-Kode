@@ -6,15 +6,18 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsDamageViewModel : ContentViewModelBase
     {
-        public DamageForm DamageForm { get; set; }
+        private DamageForm _damageForm;
+        public DamageForm DamageForm { get { return _damageForm; } 
+            set { 
+                _damageForm = value; Notify(); 
+            } }
 
         public ICommand DeaktiverBåd
         {
             get
             {
-                return GetCommand<DamageForm>(e => 
-                { 
-                    DamageForm = e; 
+                return GetCommand<object>(e => 
+                {  
                     DamageForm.Boat.Active = false; 
                 });
             }
@@ -24,9 +27,8 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<DamageForm>(e =>
+                return GetCommand<object>(e =>
                 {
-                    DamageForm = e;
                     DamageForm.Boat.Active = true;
                 });
             }

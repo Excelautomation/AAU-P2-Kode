@@ -33,7 +33,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="450*" MinWidth="300" MaxWidth="500"/>
+            <ColumnDefinition Width="500*" MinWidth="150" MaxWidth="500"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
@@ -47,12 +47,12 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer>
-                            <ListView x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True">
+                            <ListView x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Width="750">
-                                            <TextBlock VerticalAlignment="Center" Margin="0,0,15,0" Text="{Binding Name}" FontSize="18"/>
-                                            <WrapPanel Margin="200,0,0,0" Orientation="Vertical">
+                                            <TextBlock VerticalAlignment="Center" Margin="5,0,15,0" Text="{Binding Name}" FontSize="18"/>
+                                            <WrapPanel Margin="195,0,0,0" Orientation="Vertical">
                                                 <WrapPanel>
                                                     <TextBlock Margin="0,0,5,0" Text="Pladser: " FontSize="14px" />
                                                     <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
