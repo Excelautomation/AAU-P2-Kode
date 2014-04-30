@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ARK.ViewModel.Filter
+namespace ARK.ViewModel.Base.Filter
 {
     public class FilterEventArgs : EventArgs
     {

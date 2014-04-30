@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
-             xmlns:GlobalComm="clr-namespace:ARK.ViewModel.Interfaces"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              Style="{DynamicResource ResourceKey=ucContent}">
 

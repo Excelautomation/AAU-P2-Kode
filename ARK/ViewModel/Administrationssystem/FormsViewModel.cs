@@ -9,8 +9,9 @@ using ARK.Administrationssystem.Pages;
 using ARK.Extensions;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.ViewModel.Filter;
-using ARK.ViewModel.Interfaces;
+using ARK.ViewModel.Base;
+using ARK.ViewModel.Base.Filter;
+using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Administrationssystem
 {

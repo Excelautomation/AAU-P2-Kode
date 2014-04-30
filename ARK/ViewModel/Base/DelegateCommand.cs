@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ARK.ViewModel
+namespace ARK.ViewModel.Base
 {
     public class DelegateCommand<T> : ICommand
     {

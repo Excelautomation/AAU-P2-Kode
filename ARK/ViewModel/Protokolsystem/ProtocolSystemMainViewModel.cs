@@ -3,7 +3,8 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
-using ARK.ViewModel.Interfaces;
+using ARK.ViewModel.Base;
+using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem
 {
