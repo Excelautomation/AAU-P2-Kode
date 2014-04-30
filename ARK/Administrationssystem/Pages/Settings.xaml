@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="605.97" d:DesignWidth="941.791">
     <UserControl.DataContext>
-        <administrationssystem:SettingsViewModel />
+        <administrationssystem:SettingsViewModel/>
     </UserControl.DataContext>
     <Grid>
         <Grid.Background>
@@ -29,6 +29,8 @@
                 <Label FontSize="28" Margin="0">INDSTILLINGER</Label>
             </WrapPanel>
             <TabControl Margin="0,0,0,0" Background="Transparent" Grid.Row="1">
+
+
                 <TabItem Header="SMS-Modul" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -167,11 +169,13 @@
                 
                 <TabItem Header="Standardture" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="4"/>
                             <ColumnDefinition Width="200*"/>
                         </Grid.ColumnDefinitions>
+                        
                         <DockPanel Grid.Column="0">
                             <Button Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="220" Content="Opret ny standardtur"/>
                             <ListView x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=StandardTrips}">
@@ -189,11 +193,13 @@
                                 </i:Interaction.Triggers>
                             </ListView>
                         </DockPanel>
+                        
                         <StackPanel Grid.Row="2" Grid.Column="2">
                             <Label Margin="4">Detaljer</Label>
                             <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" Width="auto" HorizontalAlignment="Left">
                                 <StackPanel>
                                     <StackPanel>
+                                        
                                         <WrapPanel Margin="4">
                                             <StackPanel Margin="4">
                                                 <Label>Turnavn:</Label>
@@ -206,6 +212,7 @@
                                                 <TextBox Margin="4" Text="{Binding Path=CurrentStandardTrip.Description}" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
                                             </StackPanel>
                                         </WrapPanel>
+                                        
                                     </StackPanel>
                                     <DockPanel Margin="10" >
                                         <Button Margin="4" Content="Gem" Command="{Binding Path=SaveChangesStandardTrips}"/>
@@ -215,17 +222,22 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
+                        
                     </Grid>
                 </TabItem>
+                
+                
                 <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"/>
                             <ColumnDefinition Width="4"/>
                             <ColumnDefinition Width="200*"/>
                         </Grid.ColumnDefinitions>
+                        
                         <DockPanel Grid.Column="0">
-                            <Button Margin="4" Width="230" DockPanel.Dock="Top">Opret ny administrator</Button>
+                            <Button Command="{Binding Path=CreateAdmin}" Margin="4" Width="230" DockPanel.Dock="Top" Content="Opret ny administrator"/>
                             <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=Admins}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -245,11 +257,13 @@
                                 </i:Interaction.Triggers>
                             </ListView>
                         </DockPanel>
+                        
                         <StackPanel Grid.Column="2">
                             <Label Margin="4">Detaljer</Label>
                             <Border HorizontalAlignment="Left" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" Width="auto">
                                 <StackPanel>
                                     <StackPanel>
+                                        
                                         <WrapPanel Margin="4">
                                             <StackPanel Margin="4">
                                                 <Label>Brugernavn:</Label>
@@ -260,10 +274,11 @@
                                                 <Label>E-mail:</Label>
                                                 <Label>Telefon:</Label>
                                             </StackPanel>
+                                            
                                             <StackPanel Margin="4" VerticalAlignment="Center" Width="250">
                                                 <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Username}"/>
                                                 <Button Content="Skift kodeord"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Member.Id}"/>
+                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Id}"/>
                                                 <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.FirstName}"/>
                                                 <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.LastName}"/>
                                                 <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Email1}"/>
@@ -271,16 +286,20 @@
                                             </StackPanel>
                                         </WrapPanel>
                                     </StackPanel>
+                                    
                                     <DockPanel Margin="10">
-                                        <Button Margin="4">Gem</Button>
-                                        <Button Margin="4">Anullér</Button>
-                                        <Button Margin="4" HorizontalAlignment="Right">Slet!</Button>
+                                        <Button Margin="4" Content="Gem" Command="{Binding Path=SaveChangesAdmins}"/>
+                                        <Button Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesAdmins}"/>
+                                        <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteAdmin}" HorizontalAlignment="Right"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
+                        
                     </Grid>
                 </TabItem>
+                
+                
             </TabControl>
         </Grid>
     </Grid>
