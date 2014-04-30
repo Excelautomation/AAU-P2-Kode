@@ -167,6 +167,9 @@
     <Compile Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml.cs">
       <DependentUpon>BeginTripAdditionalInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml.cs">
+      <DependentUpon>DistanceStatisticsFilters.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Protokolsystem\Filters\EndTripFilters.xaml.cs">
       <DependentUpon>EndTripFilters.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
     <Page Include="View\Administrationssystem\Pages\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Protokolsystem\Filters\EndTripFilters.xaml">
       <Generator>MSBuild:Compile</Generator>

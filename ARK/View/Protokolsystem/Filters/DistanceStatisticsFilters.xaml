@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="ARK.View.Protokolsystem.Filters.DistanceStatisticsFilters"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Style="{StaticResource ResourceKey=ucFilters}">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Name="Kilometerstatistik" Header="Kilometerstatistik" Grid.Column="0" Style="{StaticResource ResourceKey=lstListViewHeadline}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="162" Width="284">
+            <Grid Margin="4,8,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="0">
+                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="True"/>
+                </DockPanel>
+                <DockPanel Grid.Column="1">
+                    <RadioButton Content="Ergometer" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometerstatistik}"/>
+                    <RadioButton Content="Robåde" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometerstatistik}"/>
+                    <RadioButton Content="Kajakker" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometerstatistik}"/>
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox Name="Bådtype" Header="Statistik på bådtype" Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="162" Width="285">
+            <Grid Margin="4,8,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="0">
+                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Type}" IsChecked="True"/>
+                </DockPanel>
+                <DockPanel Grid.Column="1">
+                    <RadioButton Content="Inrigger" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Bådtype}"/>
+                    <RadioButton Content="Outrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Bådtype}"/>
+                    <RadioButton Content="Gig" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Bådtype}"/>
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
