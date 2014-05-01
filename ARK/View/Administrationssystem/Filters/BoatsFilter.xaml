@@ -10,12 +10,12 @@
         <VMFilter:BoatFilterViewModel></VMFilter:BoatFilterViewModel>
     </UserControl.DataContext>
     <StackPanel>
-        <CheckBox Content="Både ude"></CheckBox>
-        <CheckBox Content="Både hjemme"></CheckBox>
+        <CheckBox Content="Både ude" IsChecked="{Binding Path=ShowBoatsOut, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Både hjemme" IsChecked="{Binding Path=ShowBoatsHome, Mode=TwoWay}"></CheckBox>
         <Separator Height="20"></Separator>
-        <CheckBox Content="Både under reparation"></CheckBox>
-        <CheckBox Content="Beskadige både"></CheckBox>
-        <CheckBox Content="Inaktive både"></CheckBox>
-        <CheckBox Content="Funktionelle både"></CheckBox>
+        <CheckBox Content="Både under reparation" IsChecked="{Binding Path=ShowBoatsUnderService, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Beskadige både" IsChecked="{Binding Path=ShowBoatsDamaged, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Inaktive både" IsChecked="{Binding Path=ShowInactiveBoats, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Funktionelle både" IsChecked="{Binding Path=ShowFunctionalBoats, Mode=TwoWay}"></CheckBox>
     </StackPanel>
 </UserControl>
