@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using ARK.Administrationssystem;
 using ARK.Model.XML;
 using ARK.View.Protokolsystem;
@@ -24,7 +25,7 @@ namespace ARK
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var window = new View.Protokolsystem.Protokolsystem();
+            var window = new ProtocolSystem();
             ShowWindow(window);
         }
 
