@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
-    class MembersinformationAdditionalOnfoViewModel : ContentViewModelBase,
-        IInfoContentViewModel<MembersinformationAdditionalOnfoViewModel>
+    class MembersinformationAdditionalInfoViewModel : ContentViewModelBase,
+        IInfoContentViewModel<MembersinformationAdditionalInfoViewModel>
     {
         // Fields
         private Member _selectedMember;
@@ -25,7 +25,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         }
 
         // Methods
-        public MembersinformationAdditionalOnfoViewModel Info
+        public MembersinformationAdditionalInfoViewModel Info
         {
             get
             {
