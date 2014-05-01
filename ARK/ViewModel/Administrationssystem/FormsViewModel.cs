@@ -27,6 +27,7 @@ namespace ARK.ViewModel.Administrationssystem
         private IEnumerable<LongDistanceForm> _longTripForms;
         private Visibility _showDamageForms;
         private Visibility _showLongTripForms;
+        private int _SelectedIndexDamageForms;
 
         private DbArkContext _dbArkContext;
 
@@ -63,6 +64,21 @@ namespace ARK.ViewModel.Administrationssystem
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
+
+            if (DamageForms.Count() != 0)
+            {
+                SelectedIndexDamageForms = 0;
+                
+            }
+
+
+
+        }
+
+        public int SelectedIndexDamageForms
+        {
+            get { return _SelectedIndexDamageForms; }
+            set { _SelectedIndexDamageForms = value; Notify(); }
         }
 
         public ICommand SelectDamageFormCommand
@@ -176,7 +192,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             // Tjek søgning
-            if (!string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
+            if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 DamageForms = from damage in DamageForms
                               where damage.FilterDamageForms(args.SearchEventArgs.SearchText)
