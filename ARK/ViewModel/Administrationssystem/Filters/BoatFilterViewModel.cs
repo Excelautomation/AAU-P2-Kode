@@ -123,7 +123,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                 if (ShowBoatsHome)
                     output = FilterContent.MergeLists(output, boats.Where(boat => !boat.BoatOut)).ToList();
                 if (ShowBoatsUnderService)
-                    throw new NotImplementedException();
+                    output = FilterContent.MergeLists(output, boats.Where(boat => boat.Damaged && !boat.Usable)).ToList();
                 if (ShowBoatsDamaged)
                     output = FilterContent.MergeLists(output, boats.Where(boat => boat.Damaged)).ToList();
                 if (ShowInactiveBoats)

@@ -32,14 +32,16 @@ namespace ARK.ViewModel.Administrationssystem
             TimeCounter.StopTime();
         }
 
-        public override void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)
+        public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
+            FrameworkElement element = page();
+
             EnableSearch = false;
             EnableFilters = false;
             SearchText = "";
 
             // Sæt filter
-            var viewModelbase = page.Value.DataContext as IFilterContentViewModel;
+            var viewModelbase = element.DataContext as IFilterContentViewModel;
             if (viewModelbase != null)
             {
                 Filter = viewModelbase.Filter;
@@ -47,7 +49,7 @@ namespace ARK.ViewModel.Administrationssystem
             else
                 Filter = null;
 
-            base.NavigateToPage(page, pageTitle);
+            base.NavigateToPage(() => element, pageTitle);
         }
 
         private Admin currentLoggetInUser;
@@ -62,42 +64,42 @@ namespace ARK.ViewModel.Administrationssystem
 
         public ICommand MenuOverview
         {
-            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageOverview), "Overview"); }
+            get { return GetNavigateCommand(() => PageOverview, "Overview"); }
         }
 
         public ICommand MenuForms
         {
-            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageForms), "Forms"); }
+            get { return GetNavigateCommand(() => PageForms, "Forms"); }
         }
 
         public ICommand MenuBoats
         {
-            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageBoats), "Boats"); }
+            get { return GetNavigateCommand(() => PageBoats, "Boats"); }
         }
 
         public ICommand MenuConfigurations
         {
-            get { return GetNavigateCommand(new Lazy<FrameworkElement>(() => PageConfigurations), "Configurations"); }
+            get { return GetNavigateCommand(() => PageConfigurations, "Configurations"); }
         }
 
         private Oversigt PageOverview
         {
-            get { return _pageoversigt ?? (_pageoversigt = new Oversigt()); }
+            get { return new Oversigt(); }
         }
 
         private Blanketter PageForms
         {
-            get { return _pageforms ?? (_pageforms = new Blanketter()); }
+            get { return new Blanketter(); }
         }
 
         private Baede PageBoats
         {
-            get { return _pagebaede ?? (_pagebaede = new Baede()); }
+            get { return new Baede(); }
         }
 
         private Indstillinger PageConfigurations
         {
-            get { return _pagesettings ?? (_pagesettings = new Indstillinger()); }
+            get { return new Indstillinger(); }
         }
 
         #endregion private
