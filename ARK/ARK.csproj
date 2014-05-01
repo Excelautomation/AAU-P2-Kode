@@ -106,10 +106,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Protokolsystem\Additional\MembersinformationAdditionalOnfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\BeginTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\EndTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
     <Compile Include="View\Administrationssystem\AdminSystem.xaml.cs">
       <DependentUpon>AdminSystem.xaml</DependentUpon>
@@ -171,6 +173,9 @@
     <Compile Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml.cs">
       <DependentUpon>BeginTripAdditionalInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Protokolsystem\Additional\MembersInformationAdditionalInfo.xaml.cs">
+      <DependentUpon>MembersInformationAdditionalInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml.cs">
       <DependentUpon>DistanceStatisticsFilters.xaml</DependentUpon>
     </Compile>
@@ -228,7 +233,7 @@
     <Compile Include="ViewModel\Base\Filter\SearchEventArgs.cs" />
     <Compile Include="ViewModel\Base\KeyboardContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\PageContainerViewModelBase.cs" />
-    <Compile Include="ViewModel\Protokolsystem\BeginTripAdditionalInfoViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
@@ -270,6 +275,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Protokolsystem\Additional\MembersInformationAdditionalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -305,10 +318,6 @@
     <Page Include="View\Administrationssystem\Pages\Overview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Protokolsystem\Pages\BeginTripBoats.xaml">
       <SubType>Designer</SubType>
@@ -425,9 +434,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\Protokolsystem\Additional\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="View\images\accept.png" />
     <Resource Include="View\images\application_home.png" />
