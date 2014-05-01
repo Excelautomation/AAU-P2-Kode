@@ -122,7 +122,7 @@ namespace ARK.ViewModel.Administrationssystem
                 Notify();
             }
         }
-
+        #region Seach and filters
         private void ResetFilter()
         {
             ShowBoatsOut = Visibility.Visible;
@@ -200,5 +200,6 @@ namespace ARK.ViewModel.Administrationssystem
                 new CheckBox {Content = "Både ude"}
             };
         }
+        #endregion
     }
 }
