@@ -24,10 +24,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             TimeCounter.StartTimer();
 
-            // Indlæs data
-            StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
-
-            ActiveTrips = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
+            GetData();
 
             ParentAttached += (sender, args) =>
             {
@@ -113,5 +110,13 @@ namespace ARK.ViewModel.Protokolsystem
         private Trip SelectedTrip { get; set; }
 
         private StandardTrip SelectedStdTrip { get; set; }
+
+        private void GetData()
+        {
+            // Indlæs data
+            StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
+
+            ActiveTrips = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
+        }
     }
 }
