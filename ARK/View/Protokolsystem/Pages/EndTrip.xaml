@@ -53,10 +53,14 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" >
-                        <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Text="{Binding Boat.Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
                         <WrapPanel>
                             <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Time}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
+                            <TextBlock  Style="{DynamicResource ResourceKey=lstViewContent}">
+                                <Run Text="{Binding TimeBoatOut, Mode=OneWay}"/>
+                                <!--<Run Text="{Binding Time}"/>
+                                <Run Text="{Binding Distance}"/>-->
+                            </TextBlock>
                         </WrapPanel>
                     </WrapPanel>
                 </DataTemplate>
@@ -67,10 +71,10 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        
 
 
-        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StdTrips}" Margin="311,32,8,77">
+
+        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrips}" Margin="311,32,8,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
