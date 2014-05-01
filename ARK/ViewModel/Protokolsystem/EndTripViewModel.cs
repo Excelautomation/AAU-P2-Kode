@@ -12,12 +12,14 @@ namespace ARK.ViewModel.Protokolsystem
 {
     class EndTripViewModel : KeyboardContentViewModelBase
     {
+        // Fields
         private List<StandardTrip> _standardTrips = new List<StandardTrip>();
         private List<Trip> _activeTrips = new List<Trip>();
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
 
         private double _customDistance;
 
+        // Constructor
         public EndTripViewModel()
         {
             TimeCounter.StartTimer();
@@ -26,7 +28,6 @@ namespace ARK.ViewModel.Protokolsystem
             StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
 
             ActiveTrips = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
-
 
             ParentAttached += (sender, args) =>
             {
@@ -46,6 +47,7 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StopTime();
         }
 
+        // Props
         public List<StandardTrip> StandardTrips
         {
             get { return _standardTrips; }
