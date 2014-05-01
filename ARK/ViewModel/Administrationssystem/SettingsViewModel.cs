@@ -30,10 +30,10 @@ namespace ARK.ViewModel.Administrationssystem
             StandardTripTemplate.Description = "Ny standardtur";
             StandardTripTemplate.Distance = 0;
             StandardTripTemplate.Direction = "En beskrivelse.";
-            AdminTemplate.Username = "Ny administrator";
-            AdminTemplate.Contact = false;
-            AdminTemplate.Password = "kode1234";
-            AdminTemplate.Member = _dbcontext.Member.ToList().Find(m => m.Id == 30);
+            NewAdmin.Username = "Ny administrator";
+            NewAdmin.Contact = false;
+            NewAdmin.Password = "kode1234";
+            NewAdmin.Member = null;
         }
 
 
@@ -221,26 +221,50 @@ namespace ARK.ViewModel.Administrationssystem
         #endregion
 
         #region Administratorer
-        private Admin AdminTemplate = new Admin();
+
+        private Admin NewAdmin = new Admin();
+        private bool _NewAdminBool = false;
         private ObservableCollection<Admin> _admins;
+        private Admin _currentAdmin;
+
+        public bool NewAdminBool
+        {
+            get { return _NewAdminBool; }
+            set 
+            { 
+                _NewAdminBool = value;
+                Notify();
+            }
+        }
+
         public ObservableCollection<Admin> Admins
         {
             get { return _admins; }
             set { _admins = value; Notify(); }
         }
 
-        private Admin _currentAdmin;
         public Admin CurrentAdmin
         {
             get { return _currentAdmin; }
             set { _currentAdmin = value; Notify(); }
         }
-
         public ICommand SelectedChangeAdmin
         {
+
             get
             {
-                return GetCommand<Admin>(e => { CurrentAdmin = e; });
+                return GetCommand<Admin>(e => 
+                { 
+                    CurrentAdmin = e;
+                    if (e != null)
+                    {
+                        if (e.Member != null)
+                            NewAdminBool = false;
+                        else
+                            NewAdminBool = true;
+                        Notify("NewAdminBool");
+                    }
+                });
             }
         }
 
@@ -273,10 +297,8 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.Admin.Add(AdminTemplate);
-                    _dbcontext.SaveChanges();
-                    Admins.Add(AdminTemplate);
-                    System.Windows.MessageBox.Show("Opret knap");
+                    Admins.Add(NewAdmin);
+                    //System.Windows.MessageBox.Show("Opret knap");
                 });
             }
         }
@@ -287,8 +309,6 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.Admin.Remove(CurrentAdmin);
-                    _dbcontext.SaveChanges();
                     Admins.Remove(CurrentAdmin);
                     System.Windows.MessageBox.Show("Slet knap");
                 });
