@@ -33,7 +33,7 @@ namespace ARK.ViewModel.Protokolsystem
             .OrderBy(x => x.FirstName)
             .ToList();
 
-            UpdateInfo();
+            ParentAttached += (sender, args) => UpdateInfo();
         }
 
         // Properties
@@ -71,7 +71,7 @@ namespace ARK.ViewModel.Protokolsystem
                 return GetCommand<Member>(e =>
                 {
                     SelectedMember = e;
-                    //UpdateInfo();
+                    UpdateInfo();
                 });
             }
         }
