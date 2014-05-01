@@ -25,7 +25,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="252*" MinWidth="200" MaxWidth="500"/>
+            <ColumnDefinition Width="500*" MinWidth="200" MaxWidth="500"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
@@ -49,7 +49,44 @@
                                     <ListView Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
-                                                <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+
+                                                <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="65"/>
+                                                        <ColumnDefinition Width="125"/>
+                                                        <ColumnDefinition Width="55"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="auto"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <WrapPanel Grid.Column="0" Orientation="Vertical">
+                                                        <TextBlock Text="Båd:" FontSize="14px" />
+                                                        <TextBlock Text="Medlem:" FontSize="14px" />
+                                                    </WrapPanel>
+
+                                                    <WrapPanel Grid.Column="1" Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
+                                                        <WrapPanel>
+                                                            <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
+                                                            <TextBlock Margin="3,0,0,0" Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
+                                                        </WrapPanel>
+                                                    </WrapPanel>
+
+                                                    <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
+                                                        <TextBlock Text="Type: " FontSize="14px" />
+                                                        <TextBlock Text="Dato: " FontSize="14px" />
+                                                    </WrapPanel>
+
+                                                    <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
+                                                        <TextBlock Text="{Binding Type}" FontSize="14px" />
+                                                        <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
+                                                    </WrapPanel>
+
+                                                </Grid>
+
+                                                <!--<WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                                                     <StackPanel Margin="0" HorizontalAlignment="Stretch">
                                                         <Label Content="{Binding Path=Boat.Name}" Margin="0,0,0,0" Padding="0"/>
                                                         <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0"/>
@@ -58,7 +95,7 @@
                                                             <Label Content="{Binding Path=RegisteringMember.LastName}" Margin="0,0,0,0" Padding="0"/>
                                                         </WrapPanel>
                                                     </StackPanel>
-                                                </WrapPanel>
+                                                </WrapPanel>-->
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                         <i:Interaction.Triggers>
@@ -78,15 +115,40 @@
                                     <ListView Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel HorizontalAlignment="Left">
-                                                    <Button Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Left">
-                                                        <StackPanel HorizontalAlignment="Left">
-                                                            <Label Content="{Binding Path=Departure}" Margin="0,0,0,0" Padding="0"/>
-                                                            <Label Content="{Binding Path=Arrival}" Margin="0,0,0,0" Padding="0"/>
-                                                        </StackPanel>
-                                                    </Button>
-                                                    <Separator Margin="0" Padding="0"/>
-                                                </StackPanel>
+                                                <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="65"/>
+                                                        <ColumnDefinition Width="125"/>
+                                                        <ColumnDefinition Width="90"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="auto"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <WrapPanel Grid.Column="0" Orientation="Vertical">
+                                                        <TextBlock Text="Båd:" FontSize="14px" />
+                                                        <TextBlock Text="Medlem:" FontSize="14px" />
+                                                    </WrapPanel>
+
+                                                    <WrapPanel Grid.Column="1" Orientation="Vertical">
+                                                        <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
+                                                        <WrapPanel>
+                                                            <TextBlock Text="ubundet" FontSize="14px" />
+                                                        </WrapPanel>
+                                                    </WrapPanel>
+
+                                                    <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
+                                                        <TextBlock Text="Afgang: " FontSize="14px" />
+                                                        <TextBlock Text="Hjemkomst: " FontSize="14px" />
+                                                    </WrapPanel>
+
+                                                    <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
+                                                        <TextBlock Text="{Binding Departure, StringFormat=d}" FontSize="14px" />
+                                                        <TextBlock Text="{Binding Arrival, StringFormat=d}" FontSize="14px" />
+                                                    </WrapPanel>
+
+                                                </Grid>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                         <i:Interaction.Triggers>
