@@ -261,6 +261,21 @@
                                 <StackPanel>
                                     <StackPanel>
                                         
+                                        <Button>
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Content" Value="Tildel medlem"/>
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding NewAdminBool}" Value="true">
+                                                            <Setter Property="Visibility"  Value="Visible"/>
+
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        
                                         <WrapPanel Margin="4">
                                             <StackPanel Margin="4">
                                                 <Label>Brugernavn:</Label>
