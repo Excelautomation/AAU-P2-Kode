@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,8 +21,8 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase, IFilterContentViewModel
     {
-        private readonly List<DamageForm> _damageFormsNonFiltered;
-        private readonly List<LongDistanceForm> _longTripFormsNonFiltered;
+        private List<DamageForm> _damageFormsNonFiltered;
+        private List<LongDistanceForm> _longTripFormsNonFiltered;
         private IEnumerable<DamageForm> _damageForms;
         private IEnumerable<LongDistanceForm> _longTripForms;
         private Visibility _showDamageForms;
@@ -31,14 +32,29 @@ namespace ARK.ViewModel.Administrationssystem
 
         public FormsViewModel()
         {
+            // Instaliser lister
+            _damageFormsNonFiltered = new List<DamageForm>();
+            _longTripFormsNonFiltered = new List<LongDistanceForm>();
+
+            // Opret dbcontext
             _dbArkContext = DbArkContext.GetDbContext();
 
-            lock (_dbArkContext)
+            // Load data
+            Task.Factory.StartNew(() =>
             {
-                // Indlæs data
-                _damageFormsNonFiltered = _dbArkContext.DamageForm.ToListAsync().Result;
-                _longTripFormsNonFiltered = _dbArkContext.LongTripForm.ToListAsync().Result;
-            }
+                lock (_dbArkContext)
+                {
+                    // Opret forbindelser Async
+                    Task<List<DamageForm>> damageforms = _dbArkContext.DamageForm.ToListAsync();
+                    Task<List<LongDistanceForm>> longDistanceForms = _dbArkContext.LongTripForm.ToListAsync();
+
+                    _damageFormsNonFiltered = damageforms.Result.ToList();
+                    _longTripFormsNonFiltered = longDistanceForms.Result.ToList();
+                }
+
+                // Nulstil filter
+                ResetFilter();
+            });
 
             // Nulstil filter
             ResetFilter();
