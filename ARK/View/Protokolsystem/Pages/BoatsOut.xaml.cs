@@ -3,7 +3,7 @@
 namespace ARK.Protokolsystem.Pages
 {
     /// <summary>
-    /// Interaction logic for BoatsOut.xaml
+    /// Interaction logic for ActiveTrips.xaml
     /// </summary>
     public partial class BoatsOut : UserControl
     {
