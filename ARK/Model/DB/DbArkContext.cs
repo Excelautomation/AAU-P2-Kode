@@ -8,10 +8,6 @@ namespace ARK.Model.DB
     public class DbArkContext : DbContext, IDbContextFactory<DbArkContext>
     {
         private static DbArkContext _dbContext;
-        static DbArkContext()
-        {
-            
-        }
 
         private DbArkContext() : base("MikkelsNoobDB")
         {
