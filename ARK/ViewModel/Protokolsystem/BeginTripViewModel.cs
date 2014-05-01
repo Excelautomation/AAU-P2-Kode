@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Data.Entity;
 using ARK.Model;
@@ -22,8 +23,8 @@ namespace ARK.ViewModel.Protokolsystem
 {
     public class BeginTripViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
-        private readonly IEnumerable<Boat> _boats; // All boats
-        private readonly ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
+        private IEnumerable<Boat> _boats; // All boats
+        private ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
         private readonly DbArkContext _db = DbArkContext.GetDbContext(); // Database
         private IEnumerable<Boat> _boatsFiltered; // Boats to display
 
@@ -38,21 +39,22 @@ namespace ARK.ViewModel.Protokolsystem
         public BeginTripViewModel()
         {
             TimeCounter.StartTimer();
+            TimeCounter.StartTimer();
 
             // Load data. Check the boats activitylevel on a 8-day-basis
             DateTime limit = DateTime.Now.AddDays(-8);
-            _boats = _db.Boat
+
+            // Async start load
+            var boatsAsync = _db.Boat
                 .Where(b => b.Active)
-                .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit));
+                .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit)).ToListAsync();
+            var membersAync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
 
-            _members = _db.Member.OrderBy(x => x.FirstName).ToList();
-
-            // Initialize lists and set members
+            // Instaliser lister
+            _boats = new List<Boat>();
+            _members = new List<Member>();
             _selectedMembers = new ObservableCollection<MemberViewModel>();
-            Members = new ObservableCollection<MemberViewModel>(_members.Select(member => new MemberViewModel(member)));
-
-            // Reset filter
-            ResetFilter();
+            Members = new ObservableCollection<MemberViewModel>();
 
             // Setup filter
             var filterController = new FilterContent(this);
@@ -62,6 +64,20 @@ namespace ARK.ViewModel.Protokolsystem
             // Configurate the keyboard
             ParentAttached += (sender, args) =>
             {
+                TimeCounter.StopTime();
+
+                // Indlæs data
+                _boats = boatsAsync.Result;
+                _members = membersAync.Result;
+
+                TimeCounter.StopTime();
+
+                // Initialize lists and set members
+                Members = new ObservableCollection<MemberViewModel>(_members.Select(member => new MemberViewModel(member)));
+
+                // Reset filter
+                ResetFilter();
+
                 // Bind on keyboard toggle changed
                 Keyboard.PropertyChanged += (senderKeyboard, keyboardArgs) =>
                 {
@@ -76,8 +92,6 @@ namespace ARK.ViewModel.Protokolsystem
 
                 UpdateInfo();
             };
-
-            TimeCounter.StopTime();
         }
         #endregion
 

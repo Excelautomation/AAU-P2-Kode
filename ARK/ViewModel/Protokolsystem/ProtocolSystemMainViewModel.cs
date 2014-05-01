@@ -60,18 +60,13 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        private BeginTripBoats _Page;
-        private BeginTripBoats Page
-        {
-            get { return _Page ?? (_Page = new BeginTripBoats()); }
-        }
         public ICommand StartTrip
         {
             get
             {
                 return _startTrip ??
                        (_startTrip =
-                           GetNavigateCommand(() => Page, "START ROTUR"));
+                           GetNavigateCommand(() => new BeginTripBoats(), "START ROTUR"));
             }
         }
 
