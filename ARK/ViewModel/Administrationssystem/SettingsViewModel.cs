@@ -113,6 +113,12 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    CurrentDamageType = new DamageType()
+                    {
+                        Description = ReferenceToCurrentDamageType.Description,
+                        IsFunctional = ReferenceToCurrentDamageType.IsFunctional,
+                        Title = ReferenceToCurrentDamageType.Title
+                    };
                     FeedbackDamageType = Feedback.Cancel;
                 });
             }
@@ -122,7 +128,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand<DamageType>(e =>
                 {
                     DamageType DamageTypeTemplate = new DamageType()
                     {
