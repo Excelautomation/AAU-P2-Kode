@@ -30,7 +30,6 @@ namespace ARK.ViewModel.Protokolsystem
 
         private bool _enableMembers; // Used to determine whether the members-listview should be enabled
         private FrameworkElement _infoPage; // Informationpage
-        private IEnumerable<Member> _members; // All members
         private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
         private Boat _selectedBoat; // Holds the selected boat
         private FrameworkElement _filter;
@@ -52,7 +51,6 @@ namespace ARK.ViewModel.Protokolsystem
 
             // Instaliser lister
             _boats = new List<Boat>();
-            _members = new List<Member>();
             _selectedMembers = new ObservableCollection<MemberViewModel>();
             Members = new ObservableCollection<MemberViewModel>();
 
@@ -68,12 +66,10 @@ namespace ARK.ViewModel.Protokolsystem
 
                 // Indlæs data
                 _boats = boatsAsync.Result;
-                _members = membersAync.Result;
+                Members = new ObservableCollection<MemberViewModel>(
+                    membersAync.Result.Select(member => new MemberViewModel(member)));
 
                 TimeCounter.StopTime();
-
-                // Initialize lists and set members
-                Members = new ObservableCollection<MemberViewModel>(_members.Select(member => new MemberViewModel(member)));
 
                 // Reset filter
                 ResetFilter();
