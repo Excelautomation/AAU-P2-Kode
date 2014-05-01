@@ -49,7 +49,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="EndTripBoatsOutList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=BoatsOut}" Margin="0,31,319,77">
+        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" Margin="0,31,319,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" >
@@ -63,14 +63,14 @@
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=BoatSelected}" CommandParameter="{Binding ElementName=BoatsOut, Path=SelectedItem}" />
+                    <i:InvokeCommandAction Command="{Binding Path=TripSelected}" CommandParameter="{Binding Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
 
 
 
-        <ListView x:Name="BoatsOutAvailableTrips" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrip}" Margin="311,32,8,77">
+        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StdTrips}" Margin="311,32,8,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -95,6 +95,11 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=StdTripSelected}" CommandParameter="{Binding Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
 
         <!--Knapper-->
