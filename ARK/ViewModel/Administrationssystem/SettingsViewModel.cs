@@ -394,8 +394,8 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     Admins.Remove(CurrentAdmin);
-                    CurrentAdmin = Admins[0];
-                    System.Windows.MessageBox.Show("Slet knap");
+                    CurrentAdmin = Admins[Admins.Count - 1];
+                    CurrentAdminInt = Admins.Count - 1;
                 });
             }
         }
