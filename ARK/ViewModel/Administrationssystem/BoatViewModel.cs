@@ -10,12 +10,14 @@ using ARK.Model;
 using ARK.Model.DB;
 using System.ComponentModel;
 using ARK.Model.Extensions;
+using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
+using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class BoatViewModel : ContentViewModelBase
+    public class BoatViewModel : ContentViewModelBase, IFilterContentViewModel
     {
         private readonly List<Boat> _boatsNonFiltered;
         private readonly DbArkContext _dbArkContext;
@@ -24,6 +26,7 @@ namespace ARK.ViewModel.Administrationssystem
         private bool _RecentSave = false;
         private bool _RecentCancel = false;
         private Boat _currentBoat;
+        private FrameworkElement _filter;
 
         public BoatViewModel()
         {
@@ -172,64 +175,14 @@ namespace ARK.ViewModel.Administrationssystem
             ResetFilter();
 
             // Tjek om en af filtertyperne er aktive
-            if (!args.FilterEventArgs.Filters.Any() && string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
+            if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
+               (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
                 return;
 
-            // Bool variablel der husker på om listen er blevet opdateret
-            bool listUpdated = false;
-
             // Tjek filter
-            if (args.FilterEventArgs.Filters.Any())
+            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                /*
-                if (args.Filters.Any(c => c == bådeUdeText))
-                {
-                    Boats = from boat in _boatsNonFiltered
-                                        where boat.BoatOut
-                                        select boat;
-
-                    listUpdated = true;
-                }
-
-                if (args.Filters.Any(c => c == bådeHjemmeText))
-                {
-                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
-                                                           where boat.BoatOut == false
-                                                           select boat;
-                    UpdateBoatsFilter(ref listUpdated, output);
-                }
-
-                if (args.Filters.Any(c => c == bådeUnderReparationText))
-                {
-                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
-                                 where !boat.Usable
-                                 select boat;
-                    UpdateBoatsFilter(ref listUpdated, output);
-                }
-
-                if (args.Filters.Any(c => c == beskadigedeBådeText))
-                {
-                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
-                                 where boat.Active
-                                 select boat;
-                    UpdateBoatsFilter(ref listUpdated, output);
-                }
-
-                if (args.Filters.Any(c => c == inaktiveBådeText))
-                {
-                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
-                                 where !boat.Active
-                                 select boat;
-                    UpdateBoatsFilter(ref listUpdated, output);
-                }
-
-                if (args.Filters.Any(c => c == funktionelleBådeText))
-                {
-                    IEnumerable<Boat> output = from boat in _boatsNonFiltered
-                                 where boat.Usable
-                                 select boat;
-                    UpdateBoatsFilter(ref listUpdated, output);
-                }*/
+                Boats = FilterContent.FilterItems(Boats, args.FilterEventArgs);
             }
 
             // Tjek søgning
@@ -240,21 +193,11 @@ namespace ARK.ViewModel.Administrationssystem
                     select boat;
             }
         }
-
-        private void UpdateBoatsFilter(ref bool listUpdated, IEnumerable<Boat> output)
-        {
-            if (!listUpdated)
-            {
-                Boats = output;
-
-                listUpdated = true;
-            }
-            else
-            {
-                Boats = FilterContent.MergeLists(Boats, output);
-            }
-        }
-
         #endregion
+
+        public FrameworkElement Filter
+        {
+            get { return _filter ?? (_filter = new BoatsFilter()); }
+        }
     }
 }
