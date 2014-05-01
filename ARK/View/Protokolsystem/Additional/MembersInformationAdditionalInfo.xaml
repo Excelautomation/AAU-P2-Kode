@@ -3,13 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
+
              xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" >
     <UserControl.DataContext>
         <VM:MembersinformationAdditionalInfoViewModel/>
     </UserControl.DataContext>
-    <Grid>
-        <Button Content="{Binding Path=SelectedMember.FirstName}"></Button>
+    
+    <Grid Height="768" Margin="3,5,3,0">
+        <Rectangle HorizontalAlignment="Left" Height="763" Margin="0" VerticalAlignment="Top"  Width="194" Fill="#FFFBFBFB"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="Medlems Info" VerticalAlignment="Top" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="190"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="2,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="Black" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
+                Besætning ( <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> / <Run Text="{Binding Path=SelectedBoat[0].NumberofSeats, Mode=OneWay}"/> )
+        </TextBlock>
+
+        <ListView x:Name="BoatInfo" ItemsSource="{Binding SelectedBoat}" 
+                  HorizontalAlignment="Left" Height="334" VerticalAlignment="Top" Opacity="0.975" Margin="2,24,0,0" 
+                  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}" BorderThickness="0" 
+                  Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
+            <TextBlock Name="someTxt">
+                <Run Text="Navn"/>
+                <Run Text="{Binding Path=SelectedMember.FirstName}"/>
+            </TextBlock>
+            <TextBlock Name="sknvjd">
+                <Run Text="Medlems Nr."/>
+                <Run Text="{Binding Path=SelectedMember.MemberNumber}"/>
+            </TextBlock>
+            <TextBlock Name="sfv">
+                <Run Text="Må bruge Outriger: "/>
+                <Run Text="{Binding Path=SelectedMember.MayUseOutrigger}"/>
+            </TextBlock>
+
+        </ListView>
+
+        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
+                      HorizontalAlignment="Left" Opacity="0.975" Margin="2,383,0,7" 
+                      FontSize="18" BorderBrush="{x:Null}" Background="White" 
+                      Width="{Binding ActualWidth, ElementName=BoatInfo, Mode=OneWay}">
+            
+        </ItemsControl>
     </Grid>
 </UserControl>
