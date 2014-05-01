@@ -109,25 +109,26 @@
         <!--Buttons-->
         <Grid Margin="0,461,10,5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="9"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
             </Grid.ColumnDefinitions>
 
             <Button x:Name="btnShowKeyboard" Grid.Column="0"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=Keyboard.KeyboardToggle}"
                     Background="{StaticResource SearchFilterBG}"
-                    BorderBrush="{StaticResource SearchFilterBorder}">
+                    BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="32"/>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" HorizontalAlignment="Left">
+                    <Image Grid.Column="1" HorizontalAlignment="Left">
                         <Image.Style>
                             <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
                                 <Style.Triggers>
@@ -141,7 +142,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <TextBlock Grid.Column="2">
+                    <TextBlock Grid.Column="3">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
@@ -162,14 +163,15 @@
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=Filter.FilterToggle}"
                     Background="{StaticResource SearchFilterBG}"
-                    BorderBrush="{StaticResource SearchFilterBorder}">
+                    BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="32"/>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0">
+                    <Image Grid.Column="1">
                         <Image.Style>
                             <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
                                 <Style.Triggers>
@@ -183,7 +185,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <TextBlock>
+                    <TextBlock Grid.Column="3">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
@@ -207,18 +209,19 @@
                     BorderBrush="{StaticResource BeginBorder}" Height="Auto" Margin="0,0,-4,0" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="32"/>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="/View/images/document_page_next.png" Style="{StaticResource ResourceKey=btnImage}"/>
-                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ButtonStyle}">
+                    <Image Grid.Column="1" Source="/View/images/document_page_next.png" Style="{StaticResource ResourceKey=btnImage}"/>
+                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ButtonStyle}">
                         <Run Text="BEGYND"/><LineBreak/>
                         <Run Text="ROTUR"/>
                     </TextBlock>
                 </Grid>
             </Button>
-            
+
         </Grid>
 
     </Grid>
