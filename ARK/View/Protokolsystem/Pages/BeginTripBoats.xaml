@@ -143,7 +143,7 @@
                     </Image>
                     <TextBlock Grid.Column="2">
                         <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=btnButtons}">
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="True">
                                         <Setter Property="Text" Value="SKJUL&#10;TASTATUR"/>
@@ -185,7 +185,7 @@
                     </Image>
                     <TextBlock>
                         <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=btnButtons}">
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=Filter.FilterToggled}" Value="True">
                                         <Setter Property="Text" Value="SKJUL&#10;FILTER"/>
