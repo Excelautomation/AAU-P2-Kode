@@ -48,13 +48,15 @@ namespace ARK.ViewModel.Administrationssystem
         };
         private DamageType ReferenceToCurrentDamageType;
         private ObservableCollection<DamageType> _damageTypes;
+        private DamageType _currentDamageType;
+        public string ImageFeedbackDamageType { get; set; }
+
         public ObservableCollection<DamageType> DamageTypes
         {
             get { return _damageTypes; }
             set { _damageTypes = value; Notify(); }
         }
 
-        private DamageType _currentDamageType;
         public DamageType CurrentDamageType
         {
             get { return _currentDamageType; }
@@ -74,8 +76,6 @@ namespace ARK.ViewModel.Administrationssystem
                         Title = e.Title
                     };
                     ReferenceToCurrentDamageType = e;
-
-                    Notify();
                 });
             }
         }
@@ -89,10 +89,12 @@ namespace ARK.ViewModel.Administrationssystem
                     ReferenceToCurrentDamageType.Description = CurrentDamageType.Description;
                     ReferenceToCurrentDamageType.Title = CurrentDamageType.Title;
                     ReferenceToCurrentDamageType.IsFunctional = CurrentDamageType.IsFunctional;
-                    //DamageTypes[DamageTypes.IndexOf(e)] = CurrentDamageType;
                     _dbcontext.SaveChanges();
                     System.Windows.MessageBox.Show("Gem knap");
-                    Notify();
+
+                    // Loader igen fra HELE databasen, og sætter ind i listview.
+                    // Bør optimseres til kun at loade den ændrede query.
+                    DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType.ToList());
                 });
             }
         }
@@ -128,9 +130,9 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.DamageType.Remove(CurrentDamageType);
+                    _dbcontext.DamageType.Remove(ReferenceToCurrentDamageType);
                     _dbcontext.SaveChanges();
-                    DamageTypes.Remove(CurrentDamageType);
+                    DamageTypes.Remove(ReferenceToCurrentDamageType);
                     System.Windows.MessageBox.Show("Slet knap");
                 });
             }
