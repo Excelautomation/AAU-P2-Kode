@@ -13,7 +13,7 @@
         <Protokolsystem:EndTripViewModel/>
     </UserControl.DataContext>
 
-    <!--Indhold-->
+    <!--Content-->
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
         <Border Style="{DynamicResource ResourceKey=brdHeadline}">
             <WrapPanel Margin="0,2,0,0">
@@ -72,8 +72,6 @@
             </i:Interaction.Triggers>
         </ListView>
 
-
-
         <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrips}" Margin="311,32,8,77">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -106,68 +104,92 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <!--Knapper-->
-        <Button x:Name="btnShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,467,471,-1" Command="{Binding Path=Keyboard.KeyboardToggle}">
-            <StackPanel Orientation="Horizontal">
-                <Image>
-                    <Image.Style>
-                        <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="True">
-                                    <Setter Property="Source" Value="/View/images/keyboard_delete.png"></Setter>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="False">
-                                    <Setter Property="Source" Value="/View/images/keyboard_add.png"></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-                <TextBlock>
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=btnButtons}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="True">
-                                    <Setter Property="Text" Value="SKJUL&#10;TASTATUR"></Setter>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="False">
-                                    <Setter Property="Text" Value="VIS&#10;TASTATUR"></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </StackPanel>
-        </Button>
+        <!--Buttons-->
+        <Grid Margin="0,461,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+            </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="153,467,319,-1">
-            <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/View/images/filter_add.png"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
-                    <Run Text="VIS"/><LineBreak/>
-                    <Run Text="FILTRE"/>
-                </TextBlock>
-            </StackPanel>
-        </Button>
+            <Button x:Name="btnShowKeyboardEndTrip" Grid.Column="0"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleKeyboard}"
+        		Background="{StaticResource SearchFilterBG}"
+        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/ARK;component/View/images/keyboard_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="VIS&#xA;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
+                </Grid>
+            </Button>
 
-        <Button x:Name="btnAddDistance" Style="{DynamicResource ResourceKey=btnFilter}" Margin="309,467,162,-1">
-            <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/View/images/map_add.png"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
-                    <Run Text="ANGIV"/><LineBreak/>
-                    <Run Text="DISTANCE"/>
-                </TextBlock>
-            </StackPanel>
-        </Button>
-        
-        <Button x:Name="btnEndTrip" Style="{DynamicResource ResourceKey=btnFilter}" Margin="462,467,9,-1" Command="{Binding EndTripNow}">
-            <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="/View/images/flag_finish.png"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}">
-                    <Run Text="AFSLUT"/><LineBreak/>
-                    <Run Text="TUR"/>
-                </TextBlock>
-            </StackPanel>
-        </Button>
+            <Button x:Name="btnShowFilterEndTrip" Grid.Column="1"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleFilter}"
+        		Background="{StaticResource SearchFilterBG}"
+        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/filter_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="VIS&#xA;FILTER" />
+                </Grid>
+            </Button>
+
+            <Button x:Name="btnCustomDistance" Grid.Column="3"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleFilter}"
+        		Background="{StaticResource CustomBG}"
+        		BorderBrush="{StaticResource CustomBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/map_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ANGIV&#xA;DISTANCE" />
+                </Grid>
+            </Button>
+            
+            <Button x:Name="btnEndTripNow" Grid.Column="4"
+        		Command="{Binding EndTripNow}"
+        		Background="{StaticResource EndBG}"
+        		BorderBrush="{StaticResource EndBorder}" Height="Auto" Margin="0,0,-4,0" Width="Auto">
+
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=btnFilter}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedItem, ElementName=AllMembersList}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Source="/ARK;component/View/images/house.png" Style="{StaticResource ResourceKey=btnImage}"/>
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}"><Run Text="AFSLUT"/><LineBreak/><Run Text="ROTUR"/></TextBlock>
+                </Grid>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

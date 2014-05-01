@@ -10,13 +10,6 @@
     </Style>
 
     <!--
-    Style TextBlock
-    -->
-    <Style x:Key="btnButtons" TargetType="TextBlock">
-        <Setter Property="Margin" Value="8,0,0,0"/>
-    </Style>
-
-    <!--
     Customize the TextBlock on the Button
     -->
     <Style x:Key="ButtonStyle" TargetType="{x:Type FrameworkElement}">
@@ -25,7 +18,7 @@
         <Setter Property="TextBlock.FontWeight" Value="Bold"/>
         <Setter Property="TextBlock.FontFamily" Value="Calibri"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
     <!--
@@ -56,6 +49,36 @@
         <GradientStop Color="#FF1B4E09" Offset="1"/>
     </LinearGradientBrush>
 
+    <!--
+    End (Red)
+    Background & Border
+    -->
+    <LinearGradientBrush x:Key="EndBG" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFEE252A" Offset="0"/>
+        <GradientStop Color="#FFD61F24" Offset="0.5"/>
+        <GradientStop Color="#FF6C000E" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="EndBorder" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF952937" Offset="0"/>
+        <GradientStop Color="#FFE03C40" Offset="0.5"/>
+        <GradientStop Color="#FF5F0410" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!--
+    Custom (Blue)
+    Background & Border
+    -->
+    <LinearGradientBrush x:Key="CustomBG" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF9786FB" Offset="0"/>
+        <GradientStop Color="#FF644DF1" Offset="0.5"/>
+        <GradientStop Color="#FF2F1CA8" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CustomBorder" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF5B4BBD" Offset="0"/>
+        <GradientStop Color="#FF7D68FB" Offset="0.5"/>
+        <GradientStop Color="#FF2D1E87" Offset="1"/>
+    </LinearGradientBrush>
+    
     <!--
     Trigger: IsPressed
     Background & Border

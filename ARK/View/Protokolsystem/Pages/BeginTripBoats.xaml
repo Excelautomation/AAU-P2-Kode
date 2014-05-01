@@ -133,7 +133,7 @@
                 </Grid>
         </Button>
 
-            <Button x:Name="btnShowFilter" Grid.Column="1"
+            <Button Name="btnShowFilter" Grid.Column="1"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=ToggleFilter}"
                     Background="{StaticResource SearchFilterBG}"
@@ -151,7 +151,6 @@
         </Button>
 
             <Button x:Name="btnBeginTripNow" Grid.Column="4"
-                    Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=StartTripNow}"
                     Background="{StaticResource BeginBG}"
                     BorderBrush="{StaticResource BeginBorder}" Height="Auto" Margin="0,0,-4,0" Width="Auto">
@@ -163,11 +162,21 @@
                         <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Source="/View/images/document_page_next.png" Style="{StaticResource ResourceKey=btnImage}"/>
-                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ButtonStyle}">
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}">
                         <Run Text="BEGYND"/><LineBreak/>
                         <Run Text="ROTUR"/>
                     </TextBlock>
                 </Grid>
+                
+                <!--<Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedItem, ElementName=AllMembersList}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>-->
             </Button>
 
             </Grid>
