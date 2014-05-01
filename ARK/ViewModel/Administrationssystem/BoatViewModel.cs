@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,7 +20,7 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class BoatViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        private readonly List<Boat> _boatsNonFiltered;
+        private List<Boat> _boatsNonFiltered;
         private readonly DbArkContext _dbArkContext;
         private bool _LocalActiveBoat;
         private IEnumerable<Boat> _boats;
@@ -30,11 +31,26 @@ namespace ARK.ViewModel.Administrationssystem
 
         public BoatViewModel()
         {
+            // Instaliser lister så lazy ikke fejler
+            _boatsNonFiltered = new List<Boat>();
+            
             // Load data
             _dbArkContext = DbArkContext.GetDbContext();
+            Task.Factory.StartNew(() =>
+            {
+                DbArkContext db = DbArkContext.GetDbContext();
 
-            lock (_dbArkContext)
-                _boatsNonFiltered = _dbArkContext.Boat.ToListAsync().Result;
+                lock (db)
+                {
+                    // Opret forbindelser Async
+                    Task<List<Boat>> boatsOut = db.Boat.ToListAsync();
+
+                    _boatsNonFiltered = boatsOut.Result;
+                }
+
+                // Nulstil filter
+                ResetFilter();
+            });
 
             // Nulstil filter
             ResetFilter();

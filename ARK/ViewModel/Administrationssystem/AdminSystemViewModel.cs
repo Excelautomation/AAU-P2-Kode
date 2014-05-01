@@ -13,13 +13,8 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class AdminSystemViewModel : PageContainerViewModelBase, IFilterContainerViewModel
     {
-        private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
         private bool _enableFilters;
         private bool _enableSearch;
-        private Baede _pagebaede;
-        private Blanketter _pageforms;
-        private Oversigt _pageoversigt;
-        private Indstillinger _pagesettings;
         private string _searchText;
 
         public AdminSystemViewModel()
