@@ -110,6 +110,7 @@
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\EndTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
     <Compile Include="View\Administrationssystem\AdminSystem.xaml.cs">
       <DependentUpon>AdminSystem.xaml</DependentUpon>
     </Compile>
