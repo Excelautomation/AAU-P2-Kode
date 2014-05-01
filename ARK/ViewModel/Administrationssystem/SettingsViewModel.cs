@@ -34,7 +34,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             // Templates til oprettelse af entries
-            StandardTripTemplate.Description = "Ny standardtur";
+            StandardTripTemplate.Title = "Ny standardtur";
             StandardTripTemplate.Distance = 0;
             StandardTripTemplate.Direction = "En beskrivelse.";
             NewAdmin.Username = "Ny administrator";

@@ -19,9 +19,9 @@ namespace ARK.ViewModel.Protokolsystem
             // Load data
             var db = DbArkContext.GetDbContext();
 
-            BoatsOut = db.Boat.AsEnumerable().Where(boat => boat.BoatOut)
-                    .OrderByDescending(boat => 
-                        boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
+            //BoatsOut = db.Boat.AsEnumerable().Where(boat => boat.BoatOut)
+            //        .OrderByDescending(boat => 
+            //            boat.Trips.FirstOrDefault(trip => trip.TripEndedTime == null).TripStartTime).ToList();
             }
 
         public List<Boat> BoatsOut

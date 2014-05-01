@@ -78,7 +78,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<object>(e =>
                 {
-                    SelectedTrip.Description = SelectedStdTrip.Description;
+                    SelectedTrip.Description = SelectedStdTrip.Title;
                     SelectedTrip.Direction = SelectedStdTrip.Direction;
                     // set Custom distance if different from default
                     SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : SelectedStdTrip.Distance;
