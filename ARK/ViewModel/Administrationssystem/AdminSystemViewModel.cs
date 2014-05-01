@@ -36,8 +36,16 @@ namespace ARK.ViewModel.Administrationssystem
         {
             EnableSearch = false;
             EnableFilters = false;
-            Filters.Clear();
             SearchText = "";
+
+            // Sæt filter
+            var viewModelbase = page.Value.DataContext as IFilterContentViewModel;
+            if (viewModelbase != null)
+            {
+                Filter = viewModelbase.Filter;
+            }
+            else
+                Filter = null;
 
             base.NavigateToPage(page, pageTitle);
         }
@@ -96,6 +104,40 @@ namespace ARK.ViewModel.Administrationssystem
 
         #region Filter
 
+        public FrameworkElement Filter
+        {
+            get { return _filter; }
+            set
+            {
+                IFilterViewModel filterViewModel;
+
+                if (_filter != null)
+                {
+                    // Unbind event
+                    filterViewModel = _filter.DataContext as IFilterViewModel;
+                    if (filterViewModel != null) filterViewModel.FilterChanged -= filter_FilterChanged;
+                }
+
+                _filter = value;
+
+                // Tjek at filter ikke er null
+                if (_filter != null)
+                {
+                    // Bind event
+                    filterViewModel = _filter.DataContext as IFilterViewModel;
+                    if (filterViewModel != null) filterViewModel.FilterChanged += filter_FilterChanged;
+                }
+
+                Notify();
+            }
+        }
+
+        private void filter_FilterChanged(object sender, FilterEventArgs e)
+        {
+            if (FilterTextChanged != null)
+                FilterTextChanged(sender, e);
+        }
+
         public string SearchText
         {
             get { return _searchText; }
@@ -147,6 +189,8 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         public event EventHandler<SearchEventArgs> SearchTextChanged;
+        public event EventHandler<FilterEventArgs> FilterTextChanged;
+        private FrameworkElement _filter;
 
         public bool EnableSearch
         {
@@ -170,12 +214,9 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public ObservableCollection<FrameworkElement> Filters
-        {
-            get { return _filters; }
-            set { _filters = value; Notify(); }
-        }
-
         #endregion
+
+
+        
     }
 }

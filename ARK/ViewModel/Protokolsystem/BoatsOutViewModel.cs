@@ -8,7 +8,7 @@ using ARK.ViewModel.Base;
 namespace ARK.ViewModel.Protokolsystem
 {
     // Hvis personen der lavet GUI mangler noget i denne fil henvend dig til Mads Gadeberg hvis du vil have det lavet!
-    internal class BoatsOutViewModel : KeyboardContentViewModelBase
+    internal class BoatsOutViewModel : ProtokolsystemContentViewModelBase
     {
         private List<Boat> _boatsOut = new List<Boat>();
 

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
 
@@ -33,19 +30,10 @@ namespace ARK.ViewModel.Base.Filter
             get { return ContentViewModel.Parent as IFilterContainerViewModel; }
         }
 
-        public IEnumerable<FrameworkElement> Filters
-        {
-            get { return FilterContainer.Filters; }
-            set
-            {
-                if (value == null)
-                    FilterContainer.Filters = new ObservableCollection<FrameworkElement>();
-                else
-                    FilterContainer.Filters = new ObservableCollection<FrameworkElement>(value);
-            }
-        }
+        private SearchEventArgs LastSearchEventArgs { get; set; }
+        private FilterEventArgs LastFilterEventArgs { get; set; }
 
-        public void EnableFilter(bool enableSearch, bool enableFilters, IEnumerable<FrameworkElement> filters)
+        public void EnableFilter(bool enableSearch, bool enableFilters)
         {
             ContentViewModel.ParentAttached += (sender, args) =>
             {
@@ -53,46 +41,51 @@ namespace ARK.ViewModel.Base.Filter
                 FilterContainer.EnableSearch = enableSearch;
                 FilterContainer.EnableFilters = enableFilters;
 
-                // Add Filters
-                Filters = filters;
-
                 // Bind til søgeevent
-                FilterContainer.SearchTextChanged += (o, eventArgs) => UpdateFilter(eventArgs.SearchText);
+                FilterContainer.SearchTextChanged += FilterContainerOnSearchTextChanged;
 
-                // Bind checkbox changed
-                if (Filters != null)
-                    foreach (CheckBox checkbox in Filters.Where(c => c is CheckBox).Cast<CheckBox>())
-                    {
-                        checkbox.Checked += (s, e) => UpdateFilter();
-                        checkbox.Unchecked += (s, e) => UpdateFilter();
-                    }
+                // Bind til filterEvent
+                FilterContainer.FilterTextChanged += FilterContainerOnFilterTextChanged;
             };
         }
 
-        public void UpdateFilter()
+        private void FilterContainerOnSearchTextChanged(object sender, SearchEventArgs e)
         {
-            UpdateFilter("");
+            LastSearchEventArgs = e;
+
+            OnFilterChanged();
         }
 
-        public void UpdateFilter(string searchText)
+        private void FilterContainerOnFilterTextChanged(object sender, FilterEventArgs e)
         {
-            TimeCounter.StartTimer();
+            LastFilterEventArgs = e;
 
-            IEnumerable<string> checkboxFilters = null;
-            if (Filters != null)
-                checkboxFilters =
-                    Filters.Where(c => c is CheckBox)
-                        .Cast<CheckBox>()
-                        .Where(c => c.IsChecked.GetValueOrDefault())
-                        .Select(c => (string) c.Content)
-                        .ToList();
-
-            FilterChanged(this, new FilterEventArgs(searchText, checkboxFilters));
-
-            TimeCounter.StopTime();
+            OnFilterChanged();
         }
 
-        public event EventHandler<FilterEventArgs> FilterChanged;
+        private void OnFilterChanged()
+        {
+            if (FilterChanged != null)
+                FilterChanged(this, new FilterChangedEventArgs(LastFilterEventArgs, LastSearchEventArgs));
+        }
+
+        public event EventHandler<FilterChangedEventArgs> FilterChanged;
+
+        public static IEnumerable<T> FilterItems<T>(IEnumerable<T> items, FilterEventArgs filterEventArgs)
+        {
+            var filters = filterEventArgs.Filters.Where(filter => filter != null && filter.CanFilter(items)).ToList();
+
+            if (!filters.Any())
+                return items;
+
+            IEnumerable<T> output = new List<T>();
+            IEnumerable<T> allItems = items.ToList();
+
+            foreach (var filter in filters)
+                output = MergeLists<T>(filter.FilterItems<T>(allItems), output);
+
+            return output;
+        } 
 
         public static IEnumerable<T> MergeLists<T>(IEnumerable<T> list1, IEnumerable<T> list2)
         {

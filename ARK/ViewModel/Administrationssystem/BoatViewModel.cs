@@ -17,12 +17,6 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class BoatViewModel : ContentViewModelBase
     {
-        private const string bådeUdeText = "Både ude";
-        private const string bådeHjemmeText = "Både hjemme";
-        private const string bådeUnderReparationText = "Både under reparation";
-        private const string beskadigedeBådeText = "Beskadigede både";
-        private const string inaktiveBådeText = "Inaktive både";
-        private const string funktionelleBådeText = "Funktionelle både";
         private readonly List<Boat> _boatsNonFiltered;
         private readonly DbArkContext _dbArkContext;
         private bool _LocalActiveBoat;
@@ -44,7 +38,7 @@ namespace ARK.ViewModel.Administrationssystem
 
             // Setup filter
             var filterController = new FilterContent(this);
-            filterController.EnableFilter(true, true, Filters());
+            filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
                 // Sæt valgt båd
@@ -172,21 +166,22 @@ namespace ARK.ViewModel.Administrationssystem
             Boats = _boatsNonFiltered.AsReadOnly();
         }
 
-        private void UpdateFilter(FilterEventArgs args)
+        private void UpdateFilter(FilterChangedEventArgs args)
         {
             // Nulstil filter
             ResetFilter();
 
             // Tjek om en af filtertyperne er aktive
-            if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
+            if (!args.FilterEventArgs.Filters.Any() && string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
                 return;
 
             // Bool variablel der husker på om listen er blevet opdateret
             bool listUpdated = false;
 
             // Tjek filter
-            if (args.Filters.Any())
+            if (args.FilterEventArgs.Filters.Any())
             {
+                /*
                 if (args.Filters.Any(c => c == bådeUdeText))
                 {
                     Boats = from boat in _boatsNonFiltered
@@ -234,14 +229,14 @@ namespace ARK.ViewModel.Administrationssystem
                                  where boat.Usable
                                  select boat;
                     UpdateBoatsFilter(ref listUpdated, output);
-                }
+                }*/
             }
 
             // Tjek søgning
-            if (!string.IsNullOrEmpty(args.SearchText))
+            if (!string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.FilterBoat(args.SearchText)
+                    where boat.FilterBoat(args.SearchEventArgs.SearchText)
                     select boat;
             }
         }
@@ -258,20 +253,6 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 Boats = FilterContent.MergeLists(Boats, output);
             }
-        }
-
-        private ObservableCollection<FrameworkElement> Filters()
-        {
-            return new ObservableCollection<FrameworkElement>
-        {
-                new CheckBox {Content = bådeUdeText},
-                new CheckBox {Content = bådeHjemmeText},
-                new Separator {Height = 20},
-                new CheckBox {Content = bådeUnderReparationText},
-                new CheckBox {Content = beskadigedeBådeText},
-                new CheckBox {Content = inaktiveBådeText},
-                new CheckBox {Content = funktionelleBådeText}
-            };
         }
 
         #endregion
