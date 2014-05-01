@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms.VisualStyles;
 
 namespace ARK.Model
 {
@@ -17,7 +18,8 @@ namespace ARK.Model
         {
             get
             {
-                return DateTime.Now.Subtract(TripStartTime);
+                var temp = DateTime.Now.Subtract(TripStartTime);
+                return new TimeSpan(temp.Hours, temp.Minutes, temp.Seconds);
             }
         }
 
