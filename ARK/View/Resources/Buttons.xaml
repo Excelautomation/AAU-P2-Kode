@@ -1,5 +1,21 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+    Style Image
+    -->
+    <Style x:Key="btnImage" TargetType="Image">
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+    </Style>
+
+    <!--
+    Style TextBlock
+    -->
+    <Style x:Key="btnButtons" TargetType="TextBlock">
+        <Setter Property="Margin" Value="8,0,0,0"/>
+    </Style>
+
     <!--
     Customize the TextBlock on the Button
     -->
@@ -84,17 +100,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-   
-    <!--Image-->
-    <Style x:Key="btnImage" TargetType="Image">
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
-    </Style>
-
-    <!--TextBlock-->
-    <Style x:Key="btnButtons" TargetType="TextBlock">
-        <Setter Property="Margin" Value="8,0,0,0"/>
     </Style>
 
 </ResourceDictionary>
