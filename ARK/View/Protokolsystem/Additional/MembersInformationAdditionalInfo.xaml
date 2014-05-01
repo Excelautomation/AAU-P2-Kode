@@ -10,6 +10,6 @@
         <VM:MembersinformationAdditionalInfoViewModel/>
     </UserControl.DataContext>
     <Grid>
-            
+        <Button Content="{Binding Path=SelectedMember.FirstName}"></Button>
     </Grid>
 </UserControl>
