@@ -126,8 +126,10 @@ namespace ARK.ViewModel.Protokolsystem
             get { return GetCommand<object>(x => 
             { 
                 Trip trip = new Trip();
+                trip.Id = db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1;
                 trip.TripStartTime = DateTime.Now;
                 trip.Members = new List<Member>();
+                trip.BoatId = SelectedBoat.Id;
 
                 // Add selected members to trip
                 foreach (var m in SelectedMembers.Select(member => member.Member))
@@ -137,9 +139,9 @@ namespace ARK.ViewModel.Protokolsystem
 
                 trip.LongTrip = LongTrip;
                 trip.Direction = Direction;
-                DbArkContext db = DbArkContext.GetDbContext();
 
                 db.Trip.Add(trip);
+                db.SaveChanges();
 
                 SelectedBoat = null;
             }); }
