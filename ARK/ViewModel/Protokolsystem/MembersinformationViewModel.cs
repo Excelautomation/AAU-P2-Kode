@@ -54,9 +54,9 @@ namespace ARK.ViewModel.Protokolsystem
             get { return _additionalInfoPage ?? (_additionalInfoPage = new MembersInformationAdditionalInfo()); }
         }
 
-        public MembersinformationAdditionalOnfoViewModel Info
+        public MembersinformationAdditionalInfoViewModel Info
         {
-            get { return InfoPage.DataContext as MembersinformationAdditionalOnfoViewModel; }
+            get { return InfoPage.DataContext as MembersinformationAdditionalInfoViewModel; }
         }
 
         public IInfoContainerViewModel GetInfoContainerViewModel
