@@ -3,7 +3,7 @@ using ARK.Administrationssystem;
 using ARK.Administrationssystem.Funktioner;
 using ARK.Model;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.View.Protokolsystem
 {
     /// <summary>
     /// Interaction logic for Protokolsystem.xaml

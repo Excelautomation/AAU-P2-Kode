@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Data.Entity;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
@@ -23,7 +24,7 @@ namespace ARK.ViewModel.Protokolsystem
     {
         private readonly IEnumerable<Boat> _boats; // All boats
         private readonly ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
-        private readonly DbArkContext db; // Database
+        private readonly DbArkContext _db = DbArkContext.GetDbContext(); // Database
         private IEnumerable<Boat> _boatsFiltered; // Boats to display
 
         private bool _enableMembers; // Used to determine whether the members-listview should be enabled
@@ -38,26 +39,13 @@ namespace ARK.ViewModel.Protokolsystem
         {
             TimeCounter.StartTimer();
 
-            // Establish connection to DB
-            db = DbArkContext.GetDbContext();
-
             // Load data. Check the boats activitylevel on a 8-day-basis
-            _boats = db.Boat.AsEnumerable().Where(x => x.Active).OrderByDescending(x => 
-                db.Trip.OrderByDescending(t => t.Id).Take(50).Count(y => y.BoatId == x.Id)).ToList();
-            //var temp = _db.Boat
-            //    .Where(x => x.Active)
-            //    .Include(x => x.Trips);
+            DateTime limit = DateTime.Now.AddDays(-8);
+            _boats = _db.Boat
+                .Where(b => b.Active)
+                .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit));
 
-            //var temp2 = temp
-            //    .Select(b => b.Trips
-            //        .Where(t => t.TripStartTime > limit));
-
-            //var temp3 = temp2
-            //    .Select(x => x.Aggregate(0, (a, b) => a + 1));
-
-            //_boats = temp3.AsEnumerable()
-            //    .Select((a, b) => temp.ElementAt(b));
-            _members = db.Member.OrderBy(x => x.FirstName).ToList();
+            _members = _db.Member.OrderBy(x => x.FirstName).ToList();
 
             // Initialize lists and set members
             _selectedMembers = new ObservableCollection<MemberViewModel>();
@@ -144,7 +132,7 @@ namespace ARK.ViewModel.Protokolsystem
             get { return GetCommand<object>(x => 
             { 
                 Trip trip = new Trip();
-                trip.Id = db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1;
+                trip.Id = _db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1;
                 trip.TripStartTime = DateTime.Now;
                 trip.Members = new List<Member>();
                 trip.BoatId = SelectedBoat.Id;
@@ -158,8 +146,8 @@ namespace ARK.ViewModel.Protokolsystem
                 trip.LongTrip = LongTrip;
                 trip.Direction = Direction;
 
-                db.Trip.Add(trip);
-                db.SaveChanges();
+                _db.Trip.Add(trip);
+                _db.SaveChanges();
 
                 SelectedBoat = null;
             }); }
