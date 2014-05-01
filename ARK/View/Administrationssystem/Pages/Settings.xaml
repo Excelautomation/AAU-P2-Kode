@@ -312,7 +312,7 @@
                         
                         <DockPanel Grid.Column="0">
                             <Button Command="{Binding Path=CreateAdmin}" Margin="4" Width="230" DockPanel.Dock="Top" Content="Opret ny administrator"/>
-                            <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=Admins}">
+                            <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ItemsSource="{Binding Path=Admins, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True" SelectedIndex="{Binding Path=CurrentAdminInt}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="0,2,0,2">
@@ -338,7 +338,7 @@
                                 <StackPanel>
                                     <StackPanel>
                                         
-                                        <Button>
+                                        <Button Command="{Binding ShowMembers}">
                                             <Button.Style>
                                                 <Style TargetType="Button">
                                                     <Setter Property="Content" Value="Tildel medlem"/>
