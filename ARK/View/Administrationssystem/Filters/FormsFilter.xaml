@@ -11,10 +11,10 @@
     </UserControl.DataContext>
     
     <StackPanel>
-        <CheckBox Content="Langtur"></CheckBox>
-        <CheckBox Content="Skader"></CheckBox>
+        <CheckBox Content="Langtur" IsChecked="{Binding Path=ShowLongDistanceForm, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Skader" IsChecked="{Binding Path=ShowDamageTypes, Mode=TwoWay}"></CheckBox>
         <Separator Height="20"></Separator>
-        <CheckBox Content="Afviste"></CheckBox>
-        <CheckBox Content="Godkendte"></CheckBox>
+        <CheckBox Content="Afviste" IsChecked="{Binding Path=ShowDenied, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Godkendte" IsChecked="{Binding Path=ShowAccepted, Mode=TwoWay}"></CheckBox>
     </StackPanel>
 </UserControl>
