@@ -69,6 +69,8 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<DamageType>(e =>
                 {
+                    if (e == null) return;
+
                     CurrentDamageType = new DamageType()
                     {
                         Description = e.Description,
