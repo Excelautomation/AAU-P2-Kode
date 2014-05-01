@@ -74,18 +74,6 @@ namespace ARK.ViewModel.Protokolsystem
                 // Reset filter
                 ResetFilter();
 
-                // Bind on keyboard toggle changed
-                Keyboard.PropertyChanged += (senderKeyboard, keyboardArgs) =>
-                {
-                    // Check whether or not the toggle has changed
-                    if (keyboardArgs.PropertyName == "KeyboardToggled")
-                        NotifyCustom("KeyboardToggleText");
-                };
-
-                // Notify that parent has changed
-                NotifyCustom("Keyboard");
-                NotifyCustom("KeyboardToggleText");
-
                 UpdateInfo();
             };
         }
