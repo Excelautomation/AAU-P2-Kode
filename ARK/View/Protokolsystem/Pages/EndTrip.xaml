@@ -67,7 +67,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-
+        
 
 
         <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StdTrips}" Margin="311,32,8,77">

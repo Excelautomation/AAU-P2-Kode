@@ -13,28 +13,20 @@ namespace ARK.ViewModel.Protokolsystem
     class EndTripViewModel : KeyboardContentViewModelBase
     {
         private List<StandardTrip> _standardTrips = new List<StandardTrip>();
-        private List<Boat> _boatsOut = new List<Boat>();
+        private List<Trip> _activeTrips = new List<Trip>();
+        private readonly DbArkContext _db = DbArkContext.GetDbContext();
 
         private double _customDistance;
-
-        public double CustomDistance
-        {
-            get { return _customDistance; }
-            set { _customDistance = value; Notify(); }
-        }
 
         public EndTripViewModel()
         {
             TimeCounter.StartTimer();
 
             // Indlæs data
-            DbArkContext db = DbArkContext.GetDbContext();
-            
-                StandardTrips = db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
+            StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
 
-                BoatsOut = db.Boat.ToList().Where(boat => boat.BoatOut)
-                    .OrderByDescending(boat => boat.GetActiveTrip.TripStartTime).ToList();
-            
+            ActiveTrips = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
+
 
             ParentAttached += (sender, args) =>
             {
@@ -64,14 +56,18 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public StandardTrip StdTrip { get; set; }
-
-        public List<Boat> BoatsOut
+        public double CustomDistance
         {
-            get { return _boatsOut; }
+            get { return _customDistance; }
+            set { _customDistance = value; Notify(); }
+        }
+
+        public List<Trip> ActiveTrips
+        {
+            get { return _activeTrips; }
             set
             {
-                _boatsOut = value;
+                _activeTrips = value;
                 Notify();
             }
         }
@@ -80,25 +76,40 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return GetCommand<Object>(e =>
+                return GetCommand<object>(e =>
                 {
-                    Trip trip = new Trip();
-
-                    if (StandardTrips != null)
-                    {
-                        trip.Distance = StdTrip.Distance;
-                        trip.Description = StdTrip.Description;
-                        trip.Direction = StdTrip.Direction;   
-                    }
-                                        // set Custom distance if different from default
-                    if (CustomDistance > 0)
-                        trip.Distance = CustomDistance;
-                    //
-                    DbArkContext db = DbArkContext.GetDbContext();
-                    db.Trip.Add(trip);
-                    //
+                    SelectedTrip.Description = SelectedStdTrip.Description;
+                    SelectedTrip.Direction = SelectedStdTrip.Direction;
+                    // set Custom distance if different from default
+                    SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : SelectedStdTrip.Distance;
                 });
             }
-        } 
+        }
+
+        public ICommand TripSelected
+        {
+            get
+            {
+                return GetCommand<Trip>(t =>
+                {
+                    SelectedTrip = t;
+                });
+            }
+        }
+
+        public ICommand StdTripSelected
+        {
+            get
+            {
+                return GetCommand<StandardTrip>(st =>
+                {
+                    SelectedStdTrip = st;
+                });
+            }
+        }
+
+        private Trip SelectedTrip { get; set; }
+
+        private StandardTrip SelectedStdTrip { get; set; }
     }
 }

@@ -132,7 +132,7 @@ namespace ARK.ViewModel.Administrationssystem
             Skadesblanketter = _skadesblanketterNonFiltered.AsReadOnly();
             LongDistanceForms = _longDistanceFormsNonFiltered.AsReadOnly();
             BoatsOut = _boatsOutNonFiltered.AsReadOnly();
-            //BoatsOut =
+            //ActiveTrips =
             //    from boat in _boatsOutNonFiltered.AsReadOnly()
             //    where boat.BoatOut == true
             //    orderby boat.Name ascending
