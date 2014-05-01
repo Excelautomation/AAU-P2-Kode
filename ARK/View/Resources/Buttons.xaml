@@ -1,60 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--Button--><!--
-    <Style x:Key="btnFilter" TargetType="Button">
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="BorderThickness" Value="0, 0, 1, 1"/>
-        <Setter Property="Padding" Value="2"/>
-        <Setter Property="Height" Value="64"/>
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontFamily" Value="Calibri"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        --><!--<Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFE0E0E0" Offset="0"/>
-                    <GradientStop Color="#FF4D3D3D" Offset="0.5"/>
-                    <GradientStop Color="#FFAC7C7C" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>--><!--
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="btnFilterBorder"
-                            BorderThickness="{TemplateBinding Property=BorderThickness}" 
-                            Padding="{TemplateBinding Property=Padding}"
-                            Width="{TemplateBinding Property=Width}"
-                            Height="{TemplateBinding Property=Height}"
-                            Background="{TemplateBinding Property=Background}">
-                        <Grid>
-                            <Border>
-
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FF6C6A6A" Offset="0"/>
-                                        <GradientStop Color="#FF444040" Offset="0.5"/>
-                                        <GradientStop Color="#FF515151" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
-                            <ContentPresenter x:Name="btnFilterContentPresenter"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Center"
-                                              Width="120"/>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
-
-
-
+    
     <!--Button-->
     <Style x:Key="btnFilter" TargetType="Button">
         <Setter Property="Height" Value="64"/>
@@ -66,7 +12,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Border Grid.Column="0"
+                        <Border x:Name="btnBorder" 
                                 Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
@@ -75,6 +21,12 @@
                         <ContentPresenter x:Name="btnFilterContentPresenter"
                                           Style="{StaticResource ResourceKey=ButtonStyle}" />
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource PressedBG}" TargetName="btnBorder"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource PressedBorder}" TargetName="btnBorder"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -116,32 +68,32 @@
         <GradientStop Color="#FFB0D141" Offset="0"/>
         <GradientStop Color="#FF1B4E09" Offset="1"/>
     </LinearGradientBrush>
-    
-    
-    <LinearGradientBrush x:Key="NormalBrush" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FFF" Offset="0.0"/>
-        <GradientStop Color="#CCC" Offset="1.0"/>
+
+    <!--
+    Trigger: IsPressed
+    Background & Border
+    -->
+    <LinearGradientBrush x:Key="PressedBG" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#444" Offset="0.0"/>
+        <GradientStop Color="#888" Offset="1.0"/>
     </LinearGradientBrush>
-    <LinearGradientBrush x:Key="PressedBrush" EndPoint="0,1" StartPoint="0,0">
+    <LinearGradientBrush x:Key="PressedBorder" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#BBB" Offset="0.0"/>
         <GradientStop Color="#EEE" Offset="0.1"/>
         <GradientStop Color="#EEE" Offset="0.9"/>
         <GradientStop Color="#FFF" Offset="1.0"/>
     </LinearGradientBrush>
-    <LinearGradientBrush x:Key="NormalBorderBrush" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FFB9B9B9" Offset="0.0"/>
-        <GradientStop Color="#444" Offset="0.5"/>
-        <GradientStop Color="#FFB9B9B9" Offset="1.0"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="BorderBrush" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#CCC" Offset="0.0"/>
-        <GradientStop Color="#444" Offset="1.0"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="PressedBorderBrush" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#444" Offset="0.0"/>
-        <GradientStop Color="#888" Offset="1.0"/>
-    </LinearGradientBrush>
 
+
+
+    
+    
+    
+    
+    
+    
+    
+    
     <Style x:Key="Button" TargetType="{x:Type Button}">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
