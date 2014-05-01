@@ -24,14 +24,14 @@
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
-                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="True"/>
-                    <RadioButton Content="Inrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}"/>
-                    <RadioButton Content="Outrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}"/>
+                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="{Binding Path=CategoryAllChecked, Mode=TwoWay}" />
+                    <RadioButton Content="Inrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="{Binding Path=CategoryInriggerChecked, Mode=TwoWay}" />
+                    <RadioButton Content="Outrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="{Binding Path=CategoryOutriggerChecked, Mode=TwoWay}" />
                 </DockPanel>
                 <DockPanel Grid.Column="1">
-                    <RadioButton Content="Kajak" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kategori}"/>
-                    <RadioButton Content="Gig" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}"/>
-                    <RadioButton Content="Ergometer" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}"/>
+                    <RadioButton Content="Kajak" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="{Binding Path=CategoryKajakChecked, Mode=TwoWay}"/>
+                    <RadioButton Content="Gig" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="{Binding Path=CategoryGigChecked, Mode=TwoWay}" />
+                    <RadioButton Content="Ergometer" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kategori}" IsChecked="{Binding Path=CategoryErgometerChecked, Mode=TwoWay}" />
                 </DockPanel>
             </Grid>
         </GroupBox>

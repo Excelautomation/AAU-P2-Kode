@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    class EndTripViewModel : KeyboardContentViewModelBase
+    class EndTripViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
         private List<StandardTrip> _standardTrips = new List<StandardTrip>();

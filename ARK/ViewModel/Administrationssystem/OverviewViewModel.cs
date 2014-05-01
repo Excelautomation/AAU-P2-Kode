@@ -1,30 +1,30 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
+using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
-using CheckBox = System.Windows.Controls.CheckBox;
+using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class OverviewViewModel : ContentViewModelBase
+    public class OverviewViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        private IEnumerable<DamageForm> _skadesblanketter;
-        private List<DamageForm> _skadesblanketterNonFiltered;
-        private IEnumerable<LongDistanceForm> _longDistanceForms;
-        private List<LongDistanceForm> _longDistanceFormsNonFiltered;
         private IEnumerable<Boat> _boatsOut;
         private List<Boat> _boatsOutNonFiltered;
+        private OverviewFilter _filter;
+        private IEnumerable<LongDistanceForm> _longDistanceForms;
+        private List<LongDistanceForm> _longDistanceFormsNonFiltered;
         private Visibility _showBoatsOut;
         private Visibility _showLangtur;
         private Visibility _showSkader;
+        private IEnumerable<DamageForm> _skadesblanketter;
+        private List<DamageForm> _skadesblanketterNonFiltered;
 
         public OverviewViewModel()
         {
@@ -36,14 +36,14 @@ namespace ARK.ViewModel.Administrationssystem
             // Load data
             Task.Factory.StartNew(() =>
             {
-                var db = DbArkContext.GetDbContext();
+                DbArkContext db = DbArkContext.GetDbContext();
 
                 lock (db)
                 {
                     // Opret forbindelser Async
-                    var damageforms = db.DamageForm.ToListAsync();
-                    var longDistanceForms = db.LongTripForm.ToListAsync();
-                    var boatsOut = db.Boat.ToListAsync();
+                    Task<List<DamageForm>> damageforms = db.DamageForm.ToListAsync();
+                    Task<List<LongDistanceForm>> longDistanceForms = db.LongTripForm.ToListAsync();
+                    Task<List<Boat>> boatsOut = db.Boat.ToListAsync();
 
                     _skadesblanketterNonFiltered = damageforms.Result;
                     _longDistanceFormsNonFiltered = longDistanceForms.Result;
@@ -59,7 +59,7 @@ namespace ARK.ViewModel.Administrationssystem
 
             // Setup filter
             var filterController = new FilterContent(this);
-            filterController.EnableFilter(true, true, Filters());
+            filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
@@ -122,7 +122,16 @@ namespace ARK.ViewModel.Administrationssystem
                 Notify();
             }
         }
+
         #region Seach and filters
+        public FrameworkElement Filter
+        {
+            get
+            {
+                return _filter ?? (_filter = new OverviewFilter());
+            }
+        }
+
         private void ResetFilter()
         {
             ShowBoatsOut = Visibility.Visible;
@@ -132,48 +141,38 @@ namespace ARK.ViewModel.Administrationssystem
             Skadesblanketter = _skadesblanketterNonFiltered.AsReadOnly();
             LongDistanceForms = _longDistanceFormsNonFiltered.AsReadOnly();
             BoatsOut = _boatsOutNonFiltered.AsReadOnly();
-            //ActiveTrips =
-            //    from boat in _boatsOutNonFiltered.AsReadOnly()
-            //    where boat.BoatOut == true
-            //    orderby boat.Name ascending
-            //    select boat;
         }
 
-        private void UpdateFilter(FilterEventArgs args)
+        private void UpdateFilter(FilterChangedEventArgs args)
         {
-            // Nulstil filter
+            // Reset filters
             ResetFilter();
 
-            // Tjek om en af filtertyperne er aktive
-            if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
+            if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
+                (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
                 return;
 
-            // Tjek filter
-            if (args.Filters.Any())
+            // Filter
+            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                if (!args.Filters.Any(c => c == "Både ude"))
-                     BoatsOut = new List<Boat>();
-
-                if (!args.Filters.Any(c => c == "Langtur"))
-                    LongDistanceForms = new List<LongDistanceForm>();
-
-                if (!args.Filters.Any(c => c == "Skader"))
-                    Skadesblanketter = new List<DamageForm>();
+                BoatsOut = FilterContent.FilterItems(BoatsOut, args.FilterEventArgs);
+                LongDistanceForms = FilterContent.FilterItems(LongDistanceForms, args.FilterEventArgs);
+                Skadesblanketter = FilterContent.FilterItems(Skadesblanketter, args.FilterEventArgs);
             }
 
             // Tjek søgning
-            if (!string.IsNullOrEmpty(args.SearchText))
+            if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Skadesblanketter = from skade in Skadesblanketter
-                                   where skade.FilterDamageForms(args.SearchText)
+                    where skade.FilterDamageForms(args.SearchEventArgs.SearchText)
                     select skade;
 
                 LongDistanceForms = from distanceform in LongDistanceForms
-                    where distanceform.FilterLongDistanceForm(args.SearchText)
+                    where distanceform.FilterLongDistanceForm(args.SearchEventArgs.SearchText)
                     select distanceform;
 
                 BoatsOut = from boat in BoatsOut
-                    where boat.FilterBoat(args.SearchText)
+                    where boat.FilterBoat(args.SearchEventArgs.SearchText)
                     select boat;
             }
 
@@ -189,16 +188,6 @@ namespace ARK.ViewModel.Administrationssystem
             ShowBoatsOut = BoatsOut.Any()
                 ? Visibility.Visible
                 : Visibility.Collapsed;
-        }
-
-        private IEnumerable<FrameworkElement> Filters()
-        {
-            return new ObservableCollection<FrameworkElement>
-            {
-                new CheckBox {Content = "Skader"},
-                new CheckBox {Content = "Langtur"},
-                new CheckBox {Content = "Både ude"}
-            };
         }
         #endregion
     }

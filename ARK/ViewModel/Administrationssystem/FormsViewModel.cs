@@ -44,7 +44,7 @@ namespace ARK.ViewModel.Administrationssystem
 
             // Setup filter
             var filterController = new FilterContent(this);
-            filterController.EnableFilter(true, true, Filters());
+            filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
@@ -141,8 +141,9 @@ namespace ARK.ViewModel.Administrationssystem
             LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly();
         }
 
-        private void UpdateFilter(FilterEventArgs args)
+        private void UpdateFilter(FilterChangedEventArgs args)
         {
+            /*
             // Nulstil filter
             ResetFilter();
 
@@ -211,7 +212,7 @@ namespace ARK.ViewModel.Administrationssystem
                 ShowLongDistanceForms = LongDistanceForms.Any()
                     ? Visibility.Visible
                     : Visibility.Collapsed;
-            }
+            }*/
         }
 
         private IEnumerable<FrameworkElement> Filters()

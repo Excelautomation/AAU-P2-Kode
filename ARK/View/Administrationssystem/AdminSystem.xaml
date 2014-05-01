@@ -193,9 +193,7 @@
                         <Label FontSize="18">Filter</Label>
 
                         <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
-                        <StackPanel x:Name="Stackpanelfilter" Margin="5,0,5,5">
-                            <ItemsControl ItemsSource="{Binding Path=Filters}" />
-                        </StackPanel>
+                        <ContentControl Content="{Binding Path=Filter}" Margin="5,0,5,5" />
                     </StackPanel>
                 </Border>
             </StackPanel>

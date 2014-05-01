@@ -8,7 +8,6 @@ namespace ARK.ViewModel.Base.Interfaces
         string KeyboardText { get; }
 
         bool KeyboardToggled { get; }
-        ICommand KeyboardToggle { get; }
         event EventHandler KeyboardTextChanged;
         void KeyboardClear();
 

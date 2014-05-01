@@ -106,6 +106,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Administrationssystem\Filters\BoatFilterViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\Filters\FormsFilterViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs" />
+    <Compile Include="ViewModel\Base\Filter\Filter.cs" />
+    <Compile Include="ViewModel\Base\Filter\FilterChangedEventArgs.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContentViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\MembersinformationAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\BeginTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
@@ -113,11 +120,21 @@
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\ProtokolsystemContentViewModelBase.cs" />
     <Compile Include="View\Administrationssystem\AdminSystem.xaml.cs">
       <DependentUpon>AdminSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Administrationssystem\AdminLogin.xaml.cs">
       <DependentUpon>AdminLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Administrationssystem\Filters\BoatsFilter.xaml.cs">
+      <DependentUpon>BoatsFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Administrationssystem\Filters\FormsFilter.xaml.cs">
+      <DependentUpon>FormsFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Administrationssystem\Filters\OverviewFilter.xaml.cs">
+      <DependentUpon>OverviewFilter.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Administrationssystem\Functions\SMSIT.cs" />
     <Compile Include="View\Administrationssystem\Pages\Boats.xaml.cs">
@@ -234,9 +251,7 @@
     <Compile Include="ViewModel\Base\Filter\FilterContent.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterEventArgs.cs" />
     <Compile Include="ViewModel\Base\Filter\SearchEventArgs.cs" />
-    <Compile Include="ViewModel\Base\KeyboardContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\PageContainerViewModelBase.cs" />
-    <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
@@ -258,6 +273,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Administrationssystem\Filters\BoatsFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrationssystem\Filters\FormsFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrationssystem\Filters\OverviewFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Administrationssystem\Pages\Boats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,18 +302,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Administrationssystem\Pages\MembersListWindow.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Administrationssystem\Pages\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Protokolsystem\Additional\MembersInformationAdditionalInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
