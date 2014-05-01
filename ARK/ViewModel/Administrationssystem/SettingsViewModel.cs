@@ -7,6 +7,8 @@ using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
+using System.Windows;
+using ARK.View.Administrationssystem.Pages;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -28,6 +30,7 @@ namespace ARK.ViewModel.Administrationssystem
                 DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
                 StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
                 Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
+                Members = new ObservableCollection<Member>(_dbcontext.Member);
             }
 
             // Templates til oprettelse af entries
@@ -38,6 +41,16 @@ namespace ARK.ViewModel.Administrationssystem
             NewAdmin.Contact = false;
             NewAdmin.Password = "kode1234";
             NewAdmin.Member = null;
+
+            if (Admins.Count != 0)
+            {
+                CurrentAdmin = Admins[0];
+                CurrentAdminInt = 0;
+                NotifyCustom("CurrentAdmin");
+                NotifyCustom("CurrentAdminInt");
+            }
+                
+                
         }
 
 
@@ -244,6 +257,9 @@ namespace ARK.ViewModel.Administrationssystem
         private bool _NewAdminBool = false;
         private ObservableCollection<Admin> _admins;
         private Admin _currentAdmin;
+        private ObservableCollection<Member> _members;
+        public MembersListWindow MembersListWindow;
+        private int _CurrentAdminInt;
 
         public bool NewAdminBool
         {
@@ -252,8 +268,17 @@ namespace ARK.ViewModel.Administrationssystem
             { 
                 _NewAdminBool = value;
                 Notify();
+                
             }
         }
+
+                public int CurrentAdminInt
+        { 
+            get { return _CurrentAdminInt; }
+            set { _CurrentAdminInt = value; Notify(); }
+        
+        }
+
 
         public ObservableCollection<Admin> Admins
         {
@@ -261,11 +286,48 @@ namespace ARK.ViewModel.Administrationssystem
             set { _admins = value; Notify(); }
         }
 
+        public ObservableCollection<Member> Members
+        {
+            get { return _members; }
+            set { _members = value; Notify(); }
+        }
+
         public Admin CurrentAdmin
         {
             get { return _currentAdmin; }
             set { _currentAdmin = value; Notify(); }
         }
+
+        #region ShowMembers related
+        public ICommand ShowMembers
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    MembersListWindow = new View.Administrationssystem.Pages.MembersListWindow();
+                    MembersListWindow.DataContext = this;
+                    MembersListWindow.ShowDialog();
+                });
+            }
+        }
+
+        public ICommand ShowMembersContinue
+        {
+            get
+            {
+                return GetCommand<Member>(e =>
+                {
+                    CurrentAdmin.Member = e;
+                    MembersListWindow.Close();
+                    NewAdminBool = false;
+                    NotifyCustom("CurrentAdmin");
+                });
+            }
+        }
+
+        #endregion
+
         public ICommand SelectedChangeAdmin
         {
 
@@ -315,8 +377,12 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    CurrentAdmin = null;
                     Admins.Add(NewAdmin);
-                    //System.Windows.MessageBox.Show("Opret knap");
+                    NewAdminBool = true;
+                    CurrentAdminInt = Admins.Count - 1;
+                    NotifyCustom("Admins");
+                    CurrentAdmin = Admins[Admins.Count - 1];
                 });
             }
         }
@@ -328,6 +394,7 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     Admins.Remove(CurrentAdmin);
+                    CurrentAdmin = Admins[0];
                     System.Windows.MessageBox.Show("Slet knap");
                 });
             }
