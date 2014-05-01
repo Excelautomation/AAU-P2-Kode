@@ -52,7 +52,7 @@
                                     <DataTemplate>
                                         <Grid Width="750">
                                             <TextBlock VerticalAlignment="Center" Margin="5,0,15,0" Text="{Binding Name}" FontSize="18"/>
-                                            <WrapPanel Margin="195,0,0,0" Orientation="Vertical">
+                                            <WrapPanel Margin="195,5,0,5" Orientation="Vertical">
                                                 <WrapPanel>
                                                     <TextBlock Margin="0,0,5,0" Text="Pladser: " FontSize="14px" />
                                                     <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
