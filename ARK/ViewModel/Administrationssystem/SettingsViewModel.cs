@@ -34,9 +34,6 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             // Templates til oprettelse af entries
-            StandardTripTemplate.Title = "Ny standardtur";
-            StandardTripTemplate.Distance = 0;
-            StandardTripTemplate.Direction = "En beskrivelse.";
             NewAdmin.Username = "Ny administrator";
             NewAdmin.Contact = false;
             NewAdmin.Password = "kode1234";
@@ -185,8 +182,12 @@ namespace ARK.ViewModel.Administrationssystem
         }
         #endregion
 
+
+
+
+
+
         #region Standardture
-        private StandardTrip StandardTripTemplate = new StandardTrip();
         private ObservableCollection<StandardTrip> _standardTrips;
         public ObservableCollection<StandardTrip> StandardTrips
         {
@@ -241,6 +242,11 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    StandardTrip StandardTripTemplate = new StandardTrip();
+                    StandardTripTemplate.Title = "Ny standardtur";
+                    StandardTripTemplate.Distance = 0;
+                    StandardTripTemplate.Direction = "En retning.";
+                    
                     _dbcontext.StandardTrip.Add(StandardTripTemplate);
                     _dbcontext.SaveChanges();
                     StandardTrips.Add(StandardTripTemplate);
@@ -249,7 +255,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public ICommand DeleteStandarTrip
+        public ICommand DeleteStandardTrip
         {
             get
             {
