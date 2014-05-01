@@ -10,7 +10,7 @@
              Style="{DynamicResource ResourceKey=ucContent}">
 
     <UserControl.DataContext>
-        <Protokolsystem:BeginTripViewModel />
+        <Protokolsystem:BeginTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
     
     <UserControl.Resources>
@@ -80,7 +80,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
-                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding Path=EnableMembers}">
+                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
                             <Run Text="{Binding Path=Member.FirstName}"/>
                             <Run Text="{Binding Path=Member.LastName}"/>
                         </TextBlock>

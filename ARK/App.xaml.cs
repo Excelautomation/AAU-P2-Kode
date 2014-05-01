@@ -116,7 +116,11 @@ namespace ARK
                 thr.Start();
             }
 
-            Current.Exit += (sender, e) => thr.Abort();
+            Current.Exit += (sender, e) =>
+            {
+                if (thr.ThreadState == ThreadState.Running)
+                    thr.Abort();
+            };
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
