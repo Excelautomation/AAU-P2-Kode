@@ -13,6 +13,10 @@ namespace ARK.ViewModel.Administrationssystem
     public class SettingsViewModel : ContentViewModelBase
     {
         #region Generelt
+        public enum Feedback
+        {
+            Default, Save, Cancel, Delete, Create
+        }
         private DbArkContext _dbcontext;
 
         public SettingsViewModel()
@@ -40,16 +44,16 @@ namespace ARK.ViewModel.Administrationssystem
         #endregion
 
         #region Skadetyper
-        private DamageType DamageTypeTemplate = new DamageType()
-        {
-            Title = "Nye skadetype",
-            IsFunctional = true,
-            Description = "En beskrivelse."
-        };
         private DamageType ReferenceToCurrentDamageType;
         private ObservableCollection<DamageType> _damageTypes;
         private DamageType _currentDamageType;
-        public string ImageFeedbackDamageType { get; set; }
+        private Feedback _feedbackDamageType;
+
+        public Feedback FeedbackDamageType
+        {
+            get { return _feedbackDamageType; }
+            set { _feedbackDamageType = value; Notify(); }
+        }
 
         public ObservableCollection<DamageType> DamageTypes
         {
@@ -78,6 +82,8 @@ namespace ARK.ViewModel.Administrationssystem
                         Title = e.Title
                     };
                     ReferenceToCurrentDamageType = e;
+
+                    FeedbackDamageType = Feedback.Default;
                 });
             }
         }
@@ -92,11 +98,11 @@ namespace ARK.ViewModel.Administrationssystem
                     ReferenceToCurrentDamageType.Title = CurrentDamageType.Title;
                     ReferenceToCurrentDamageType.IsFunctional = CurrentDamageType.IsFunctional;
                     _dbcontext.SaveChanges();
-                    System.Windows.MessageBox.Show("Gem knap");
 
                     // Loader igen fra HELE databasen, og sætter ind i listview.
                     // Bør optimseres til kun at loade den ændrede query.
                     DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType.ToList());
+                    FeedbackDamageType = Feedback.Save;
                 });
             }
         }
@@ -107,7 +113,7 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    System.Windows.MessageBox.Show("Annulér knap");
+                    FeedbackDamageType = Feedback.Cancel;
                 });
             }
         }
@@ -118,10 +124,16 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    DamageType DamageTypeTemplate = new DamageType()
+                    {
+                        Title = "Ny skadetype",
+                        IsFunctional = true,
+                        Description = "En beskrivelse."
+                    };
                     _dbcontext.DamageType.Add(DamageTypeTemplate);
                     _dbcontext.SaveChanges();
                     DamageTypes.Add(DamageTypeTemplate);
-                    System.Windows.MessageBox.Show("Opret knap");
+                    FeedbackDamageType = Feedback.Create;
                 });
             }
         }
@@ -135,7 +147,7 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.DamageType.Remove(ReferenceToCurrentDamageType);
                     _dbcontext.SaveChanges();
                     DamageTypes.Remove(ReferenceToCurrentDamageType);
-                    System.Windows.MessageBox.Show("Slet knap");
+                    FeedbackDamageType = Feedback.Delete;
                 });
             }
         }
