@@ -17,11 +17,7 @@ namespace ARK.Model
         {
             get
             {
-                if (TripEndedTime != null)
-                {
-                    return DateTime.Now.Subtract(TripStartTime);
-                }
-                return TimeBoatOut;
+                return DateTime.Now.Subtract(TripStartTime);
             }
         }
 
@@ -44,7 +40,7 @@ namespace ARK.Model
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Trip) obj);
+            return Equals((Trip)obj);
         }
 
         public override int GetHashCode()
