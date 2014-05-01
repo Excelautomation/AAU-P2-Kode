@@ -202,7 +202,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             // Tjek søgning
-            if (!string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
+            if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
                     where boat.FilterBoat(args.SearchEventArgs.SearchText)

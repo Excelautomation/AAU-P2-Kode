@@ -41,36 +41,39 @@
                         <ScrollViewer DockPanel.Dock="Bottom">
                             <StackPanel>
                                 <StackPanel Name="FormsDamageFormOverview" Margin="5,5,5,20" Visibility="{Binding Path=ShowDamageForms}">
-                                    <Label Margin="10,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
-                                    <Separator Margin="0" Padding="0"/>
-                                    <StackPanel>
-                                        <ListView Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single">
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Width="500">
-                                                        <StackPanel Margin="0,10,0,10">
-                                                            <Label Content="{Binding Path=Boat.Name}" Margin="0,0,0,0" Padding="0"/>
-                                                            <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0"/>
-                                                            <WrapPanel>
-                                                                <Label Content="{Binding Path=RegisteringMember.FirstName}" Margin="0,0,3,0" Padding="0"/>
-                                                                <Label Content="{Binding Path=RegisteringMember.LastName}" Margin="0,0,0,0" Padding="0"/>
-                                                            </WrapPanel>
-                                                        </StackPanel>
-                                                        <Separator Margin="0" Padding="0"/>
+                                    <WrapPanel>
+                                        <Image Margin="5,0,0,0" Source="../../images/application_side_list_red.png" Height="24"/>
+                                        <Label Margin="5,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
+                                    </WrapPanel>
+
+                                    <ListView Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <WrapPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                                    <StackPanel Margin="0" HorizontalAlignment="Stretch">
+                                                        <Label Content="{Binding Path=Boat.Name}" Margin="0,0,0,0" Padding="0"/>
+                                                        <Label Content="{Binding Path=Date}" Margin="0,0,0,0" Padding="0"/>
+                                                        <WrapPanel>
+                                                            <Label Content="{Binding Path=RegisteringMember.FirstName}" Margin="0,0,3,0" Padding="0"/>
+                                                            <Label Content="{Binding Path=RegisteringMember.LastName}" Margin="0,0,0,0" Padding="0"/>
+                                                        </WrapPanel>
                                                     </StackPanel>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="SelectionChanged">
-                                                    <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}" />
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </ListView>
-                                    </StackPanel>
+                                                </WrapPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListView>
                                 </StackPanel>
-                                
+
                                 <StackPanel Name="FormsLongTripOverview" Margin="5,0,5,0" Visibility="{Binding Path=ShowLongDistanceForms}">
-                                    <Label FontSize="16" Margin="10,0,0,0" FontWeight="Bold" Content="Langtur"/>
+                                    <WrapPanel>
+                                        <Image Margin="5,0,0,0" Source="../../images/application_side_list_blue.png" Height="24"/>
+                                        <Label Margin="5,0,0,0" FontSize="16" Content="Langtur" FontWeight="Bold"/>
+                                    </WrapPanel>
                                     <Separator Margin="0" Padding="0"/>
                                     <ListView Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
                                         <ListView.ItemTemplate>
