@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using ARK.Administrationssystem;
 using ARK.Model.XML;
+using ARK.View;
 using ARK.View.Protokolsystem;
 using ARK.ViewModel.Protokolsystem;
 
@@ -39,10 +40,13 @@ namespace ARK
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            var window = new Windows8Fuck();
+            ShowWindow(window);
 
+            /*
             XMLParser.LoadBoatsFromXml();
             XMLParser.LoadMembersFromXml();
-            XMLParser.LoadTripsFromXml();
+            XMLParser.LoadTripsFromXml();*/
         }
     }
 }
