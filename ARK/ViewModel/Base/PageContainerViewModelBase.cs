@@ -30,13 +30,13 @@ namespace ARK.ViewModel.Base
             }
         }
 
-        public virtual void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)
+        public virtual void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
             // Tjek page
             if (page == null) throw new ArgumentNullException("page");
 
             // Sæt nuværende side og tekst
-            CurrentPage = page.Value;
+            CurrentPage = page();
             CurrentPageTitle = pageTitle;
 
             // Tjek viewModel
@@ -46,7 +46,7 @@ namespace ARK.ViewModel.Base
             if (viewModel != null) viewModel.Parent = this;
         }
 
-        protected ICommand GetNavigateCommand(Lazy<FrameworkElement> page, string pageTitle)
+        protected ICommand GetNavigateCommand(Func<FrameworkElement> page, string pageTitle)
         {
             return GetCommand<object>(obj => NavigateToPage(page, pageTitle));
         }

@@ -8,6 +8,6 @@ namespace ARK.ViewModel.Base.Interfaces
         string CurrentPageTitle { get; }
         FrameworkElement CurrentPage { get; }
 
-        void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle);
+        void NavigateToPage(Func<FrameworkElement> page, string pageTitle);
     }
 }

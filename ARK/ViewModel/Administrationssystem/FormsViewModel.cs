@@ -10,6 +10,7 @@ using ARK.Administrationssystem.Pages;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
+using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
@@ -17,7 +18,7 @@ using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase
+    public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase, IFilterContentViewModel
     {
         private readonly List<DamageForm> _damageFormsNonFiltered;
         private readonly List<LongDistanceForm> _longTripFormsNonFiltered;
@@ -56,7 +57,7 @@ namespace ARK.ViewModel.Administrationssystem
                     GetCommand<DamageForm>(
                         e =>
                         {
-                            NavigateToPage(new Lazy<FrameworkElement>(() => new FormsDamage()),
+                            NavigateToPage(new Func<FrameworkElement>(() => new FormsDamage()),
                                 e.Description);
 
                             // Sæt damageform
@@ -75,7 +76,7 @@ namespace ARK.ViewModel.Administrationssystem
                     GetCommand<LongDistanceForm>(
                         e =>
                         {
-                            NavigateToPage(new Lazy<FrameworkElement>(() => new FormsLongTrip()),
+                            NavigateToPage(new Func<FrameworkElement>(() => new FormsLongTrip()),
                                 e.Text);
 
                             var vm = CurrentPage.DataContext as FormsLongTripViewModel;
@@ -143,88 +144,45 @@ namespace ARK.ViewModel.Administrationssystem
 
         private void UpdateFilter(FilterChangedEventArgs args)
         {
-            /*
             // Nulstil filter
             ResetFilter();
 
             // Tjek om en af filtertyperne er aktive
-            if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
+            if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
+               (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
                 return;
 
-            // Bool variablel der husker på om listen er blevet opdateret
-            bool listUpdated = false;
-
             // Tjek filter
-            if (args.Filters.Any())
+            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                ShowDamageForms = args.Filters.Any(c => c == "Skader")
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
-
-                ShowLongDistanceForms = args.Filters.Any(c => c == "Langtur")
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
-
-                // TODO: Problem ved valg af kun godkendte/afviste
-
-                if (args.Filters.Any(c => c == "Afviste"))
-                {
-                    LongDistanceForms = from form in _longTripFormsNonFiltered
-                        where form.Approved == false
-                        select form;
-
-                    listUpdated = true;
-                }
-
-                if (args.Filters.Any(c => c == "Godkendte"))
-                {
-                    IEnumerable<LongDistanceForm> output = from form in _longTripFormsNonFiltered
-                        where form.Approved == false
-                        select form;
-                    if (!listUpdated)
-                    {
-                        LongDistanceForms = output;
-
-                        listUpdated = true;
-                    }
-                    else
-                    {
-                        LongDistanceForms = FilterContent.MergeLists(LongDistanceForms, output);
-                    }
-                }
+                LongDistanceForms = FilterContent.FilterItems(LongDistanceForms, args.FilterEventArgs);
+                DamageForms = FilterContent.FilterItems(DamageForms, args.FilterEventArgs);
             }
 
             // Tjek søgning
-            if (!string.IsNullOrEmpty(args.SearchText))
+            if (!string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 DamageForms = from damage in DamageForms
-                              where damage.FilterDamageForms(args.SearchText)
+                              where damage.FilterDamageForms(args.SearchEventArgs.SearchText)
                                    select damage;
 
                 LongDistanceForms = from form in LongDistanceForms
-                                    where form.FilterLongDistanceForm(args.SearchText)
+                                    where form.FilterLongDistanceForm(args.SearchEventArgs.SearchText)
                     select form;
+            }
 
-                ShowDamageForms = DamageForms.Any() 
+            ShowDamageForms = DamageForms.Any()
                     ? Visibility.Visible
                     : Visibility.Collapsed;
 
-                ShowLongDistanceForms = LongDistanceForms.Any()
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
-            }*/
+            ShowLongDistanceForms = LongDistanceForms.Any()
+                ? Visibility.Visible
+                : Visibility.Collapsed;
         }
 
-        private IEnumerable<FrameworkElement> Filters()
+        public FrameworkElement Filter
         {
-            return new ObservableCollection<FrameworkElement>
-        {
-                new CheckBox {Content = "Langtur"},
-                new CheckBox {Content = "Skader"},
-                new Separator {Height = 20},
-                new CheckBox {Content = "Afviste"},
-                new CheckBox {Content = "Godkendte"}
-            };
+            get { return new FormsFilter(); }
         }
 
         #endregion
@@ -247,6 +205,8 @@ namespace ARK.ViewModel.Administrationssystem
         public event EventHandler ParentAttached;
 
         #endregion
+
+
 
         
     }

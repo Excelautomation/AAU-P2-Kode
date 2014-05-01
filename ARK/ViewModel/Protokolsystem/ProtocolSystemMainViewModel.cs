@@ -16,25 +16,17 @@ namespace ARK.ViewModel.Protokolsystem
     {
         #region PrivateFields
 
-        private BeginTripBoats _beginTripBoatsPage;
         private ICommand _boatsOut;
-        private BoatsOut _boatsOutPage;
         private ICommand _createDamage;
-        private CreateInjury _createInjuryPage;
         private ICommand _createLongDistance;
-        private CreateLongDistance _createLongDistancePage;
         private FrameworkElement _currentInfo;
-        private DistanceStatistics _distanceStatisticsPage;
         private bool _enableFilters;
         private bool _enableSearch;
         private ICommand _endTrip;
-        private EndTrip _endTripPage;
         private FrameworkElement _filter;
-        private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
         private string _headlineText;
         private OnScreenKeyboard _keyboard;
         private ICommand _memberInformation;
-        private MembersInformation _membersInformationPage;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
 
@@ -53,10 +45,6 @@ namespace ARK.ViewModel.Protokolsystem
                         SearchTextChanged(sender, new SearchEventArgs(KeyboardText));
                 };
 
-#if !DEBUG
-            LoadPages();
-#endif
-
             TimeCounter.StopTime();
         }
 
@@ -72,48 +60,13 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public BeginTripBoats BeginTripBoatsPage
-        {
-            get { return _beginTripBoatsPage ?? (_beginTripBoatsPage = new BeginTripBoats()); }
-        }
-
-        public EndTrip EndTripPage
-        {
-            get { return _endTripPage ?? (_endTripPage = new EndTrip()); }
-        }
-
-        public BoatsOut BoatsOutPage
-        {
-            get { return _boatsOutPage ?? (_boatsOutPage = new BoatsOut()); }
-        }
-
-        public DistanceStatistics DistanceStatisticsPage
-        {
-            get { return _distanceStatisticsPage ?? (_distanceStatisticsPage = new DistanceStatistics()); }
-        }
-
-        public MembersInformation MembersInformationPage
-        {
-            get { return _membersInformationPage ?? (_membersInformationPage = new MembersInformation()); }
-        }
-
-        public CreateInjury CreateInjuryPage
-        {
-            get { return _createInjuryPage ?? (_createInjuryPage = new CreateInjury()); }
-        }
-
-        public CreateLongDistance CreateLongDistancePage
-        {
-            get { return _createLongDistancePage ?? (_createLongDistancePage = new CreateLongDistance()); }
-        }
-
         public ICommand StartTrip
         {
             get
             {
                 return _startTrip ??
                        (_startTrip =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => BeginTripBoatsPage), "START ROTUR"));
+                           GetNavigateCommand(() => new BeginTripBoats(), "START ROTUR"));
             }
         }
 
@@ -122,7 +75,7 @@ namespace ARK.ViewModel.Protokolsystem
             get
             {
                 return _endTrip ??
-                       (_endTrip = GetNavigateCommand(new Lazy<FrameworkElement>(() => EndTripPage), "AFSLUT ROTUR"));
+                       (_endTrip = GetNavigateCommand(() => new EndTrip(), "AFSLUT ROTUR"));
             }
         }
 
@@ -132,7 +85,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _boatsOut ??
                        (_boatsOut =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => BoatsOutPage), "BÅDE PÅ VANDET"));
+                           GetNavigateCommand(() => new BoatsOut(), "BÅDE PÅ VANDET"));
             }
         }
 
@@ -142,7 +95,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _statisticsDistance ??
                        (_statisticsDistance =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => DistanceStatisticsPage),
+                           GetNavigateCommand(() => new DistanceStatistics(), 
                                "KILOMETERSTATISTIK"));
             }
         }
@@ -153,7 +106,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _memberInformation ??
                        (_memberInformation =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => MembersInformationPage),
+                           GetNavigateCommand(() => new MembersInformation(), 
                                "MEDLEMSINFORMATION"));
             }
         }
@@ -164,7 +117,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createDamage ??
                        (_createDamage =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => CreateInjuryPage),
+                           GetNavigateCommand(() => new CreateInjury(), 
                                "SKADE-BLANKET"));
             }
         }
@@ -175,31 +128,21 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createLongDistance ??
                        (_createLongDistance =
-                           GetNavigateCommand(new Lazy<FrameworkElement>(() => CreateLongDistancePage),
+                           GetNavigateCommand(() => new CreateLongDistance(), 
                                "LANGTUR-BLANKET"));
             }
         }
 
-        public void LoadPages()
+        public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
-            object a;
-            a = BeginTripBoatsPage;
-            a = EndTripPage;
-            a = BoatsOutPage;
-            a = DistanceStatisticsPage;
-            a = MembersInformationPage;
-            a = CreateInjuryPage;
-            a = CreateLongDistancePage;
-        }
+            FrameworkElement element = page();
 
-        public override void NavigateToPage(Lazy<FrameworkElement> page, string pageTitle)
-        {
             // Deaktiver filter
             EnableSearch = false;
             EnableFilters = false;
 
             // Sæt filter
-            var viewModelbase = page.Value.DataContext as IFilterContentViewModel;
+            var viewModelbase = element.DataContext as IFilterContentViewModel;
             if (viewModelbase != null)
             {
                 Filter = viewModelbase.Filter;
@@ -213,7 +156,7 @@ namespace ARK.ViewModel.Protokolsystem
             // Fjern info
             CurrentInfo = null;
 
-            base.NavigateToPage(page, pageTitle);
+            base.NavigateToPage(() => element, pageTitle);
         }
 
         #endregion
