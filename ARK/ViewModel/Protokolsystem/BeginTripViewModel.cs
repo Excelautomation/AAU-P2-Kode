@@ -44,6 +44,19 @@ namespace ARK.ViewModel.Protokolsystem
             // Load data. Check the boats activitylevel on a 8-day-basis
             _boats = db.Boat.AsEnumerable().Where(x => x.Active).OrderByDescending(x => 
                 db.Trip.OrderByDescending(t => t.Id).Take(50).Count(y => y.BoatId == x.Id)).ToList();
+            //var temp = _db.Boat
+            //    .Where(x => x.Active)
+            //    .Include(x => x.Trips);
+
+            //var temp2 = temp
+            //    .Select(b => b.Trips
+            //        .Where(t => t.TripStartTime > limit));
+
+            //var temp3 = temp2
+            //    .Select(x => x.Aggregate(0, (a, b) => a + 1));
+
+            //_boats = temp3.AsEnumerable()
+            //    .Select((a, b) => temp.ElementAt(b));
             _members = db.Member.OrderBy(x => x.FirstName).ToList();
 
             // Initialize lists and set members
