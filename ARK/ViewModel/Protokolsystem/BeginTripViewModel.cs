@@ -1,40 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
-using ARK.Protokolsystem.Pages;
+using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
-using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Base.Interfaces.Info;
 using ARK.ViewModel.Protokolsystem.Additional;
-using ARK.View.Protokolsystem.Additional;
 
 namespace ARK.ViewModel.Protokolsystem
 {
     public class BeginTripViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
-        private IEnumerable<Boat> _boats; // All boats
-        private ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
         private readonly DbArkContext _db = DbArkContext.GetDbContext(); // Database
+        private readonly ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
+        private IEnumerable<Boat> _boats; // All boats
         private IEnumerable<Boat> _boatsFiltered; // Boats to display
+        private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
 
         private bool _enableMembers; // Used to determine whether the members-listview should be enabled
-        private FrameworkElement _infoPage; // Informationpage
-        private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
-        private Boat _selectedBoat; // Holds the selected boat
         private FrameworkElement _filter;
+        private FrameworkElement _infoPage; // Informationpage
+        private Boat _selectedBoat; // Holds the selected boat
 
         #region Constructors
+
         public BeginTripViewModel()
         {
             TimeCounter.StartTimer();
@@ -44,10 +43,10 @@ namespace ARK.ViewModel.Protokolsystem
             DateTime limit = DateTime.Now.AddDays(-8);
 
             // Async start load
-            var boatsAsync = _db.Boat
+            Task<List<Boat>> boatsAsync = _db.Boat
                 .Where(b => b.Active)
                 .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit)).ToListAsync();
-            var membersAync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
+            Task<List<Member>> membersAync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
 
             // Instaliser lister
             _boats = new List<Boat>();
@@ -77,9 +76,11 @@ namespace ARK.ViewModel.Protokolsystem
                 UpdateInfo();
             };
         }
+
         #endregion
 
         #region Properties
+
         public bool LongTrip { get; set; }
 
         public string Direction { get; set; }
@@ -127,28 +128,31 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand StartTripNow
         {
-            get { return GetCommand<object>(x => 
-            { 
-                Trip trip = new Trip();
-                trip.Id = _db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1;
-                trip.TripStartTime = DateTime.Now;
-                trip.Members = new List<Member>();
-                trip.BoatId = SelectedBoat.Id;
-
-                // Add selected members to trip
-                foreach (var m in SelectedMembers.Select(member => member.Member))
+            get
+            {
+                return GetCommand<object>(x =>
                 {
-                    trip.Members.Add(m);
-                }
+                    var trip = new Trip();
+                    trip.Id = _db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1;
+                    trip.TripStartTime = DateTime.Now;
+                    trip.Members = new List<Member>();
+                    trip.BoatId = SelectedBoat.Id;
 
-                trip.LongTrip = LongTrip;
-                trip.Direction = Direction;
+                    // Add selected members to trip
+                    foreach (Member m in SelectedMembers.Select(member => member.Member))
+                    {
+                        trip.Members.Add(m);
+                    }
 
-                _db.Trip.Add(trip);
-                _db.SaveChanges();
+                    trip.LongTrip = LongTrip;
+                    trip.Direction = Direction;
 
-                SelectedBoat = null;
-            }); }
+                    _db.Trip.Add(trip);
+                    _db.SaveChanges();
+
+                    SelectedBoat = null;
+                });
+            }
         }
 
         public IInfoContainerViewModel GetInfoContainerViewModel
@@ -198,7 +202,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         private void UpdateInfo()
         {
-            Info.SelectedBoat = new ObservableCollection<Boat> { SelectedBoat };
+            Info.SelectedBoat = new ObservableCollection<Boat> {SelectedBoat};
             Info.SelectedMembers = SelectedMembers;
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
@@ -237,27 +241,30 @@ namespace ARK.ViewModel.Protokolsystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                        where boat.FilterBoat(args.SearchEventArgs.SearchText)
+                    where boat.FilterBoat(args.SearchEventArgs.SearchText)
                     select boat;
 
                 foreach (
-                    var member in Members.Where(member => !member.Member.FilterMembers(args.SearchEventArgs.SearchText)))
+                    MemberViewModel member in
+                        Members.Where(member => !member.Member.FilterMembers(args.SearchEventArgs.SearchText)))
                     member.Visible = false;
             }
         }
+
         #endregion
 
         #region Sorting
-        void SortBoats(Func<Boat, string> predicate)
+
+        private void SortBoats(Func<Boat, string> predicate)
         {
             Boats = Boats.OrderBy(predicate);
         }
-        void SortMembers(Func<MemberViewModel, string> predicate)
+
+        private void SortMembers(Func<MemberViewModel, string> predicate)
         {
             Members = Members.OrderBy(predicate);
         }
-        #endregion
 
-        
+        #endregion
     }
 }
