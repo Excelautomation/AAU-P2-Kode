@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
 
 namespace ARK.Model.DB
 {
-    public class DbArkContext : DbContext
+    public class DbArkContext : DbContext, IDbContextFactory<DbArkContext>
     {
         private static DbArkContext _dbContext;
 
@@ -100,6 +101,11 @@ namespace ARK.Model.DB
                 .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        DbArkContext IDbContextFactory<DbArkContext>.Create()
+        {
+            return new DbArkContext();
         }
     }
 }
