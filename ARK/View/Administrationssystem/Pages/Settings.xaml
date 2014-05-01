@@ -275,8 +275,8 @@
                                 <Border Margin="4" CornerRadius="15" Background="#EEEEEE" Padding="15" HorizontalAlignment="Left">
                                     <StackPanel Width="auto">
                                         <WrapPanel>
-                                            <Label Width="150" Margin="4" Content="Beskrivelse:"/>
-                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentDamageType.Title}"/>
+                                            <Label Width="150" Margin="4" Content="Titel:"/>
+                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Title}"/>
                                         </WrapPanel>
                                         <WrapPanel>
                                             <Label Width="150" Margin="4" Content="Retning:"/>
