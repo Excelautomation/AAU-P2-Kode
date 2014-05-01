@@ -132,32 +132,92 @@
                         
                         <StackPanel Grid.Row="2" Grid.Column="2">
                             <Border CornerRadius="15" Background="#EEEEEE" Padding="15" Margin="10" HorizontalAlignment="Left">
-                                <StackPanel>
-                                    
+                                <StackPanel Width="auto">
                                     <WrapPanel>
-                                        <StackPanel Width="160">
-                                            <Label HorizontalAlignment="Right">Skadenavn:</Label>
-                                            <Label HorizontalAlignment="Right">Alvorlighed:</Label>
-                                            <Label HorizontalAlignment="Right">Beskrivelse:</Label>
-                                        </StackPanel>
-
-                                        <StackPanel Width="360">
-                                            <TextBox Margin="4" Text="{Binding Path=CurrentDamageType.Title}"/>
-                                            <WrapPanel Margin="4">
-                                                <TextBlock>Er båden funktionsdygtig?</TextBlock>
-                                                <CheckBox IsChecked="{Binding Path=CurrentDamageType.IsFunctional}" Margin="4" VerticalAlignment="Center"/>
-                                            </WrapPanel>
-                                            <TextBox Text="{Binding Path=CurrentDamageType.Description}" Margin="4" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
-                                        </StackPanel>
+                                        <Label Width="150" Margin="4" Content="Skadenavn:"/>
+                                        <TextBox Width="400" Margin="4" Text="{Binding Path=CurrentDamageType.Title}"/>
                                     </WrapPanel>
-                                    
+                                    <WrapPanel>
+                                        <Label Width="150" Margin="4" Content="Alvorlighed:"/>
+                                        <WrapPanel Width="400" Margin="4">
+                                            <Label Content="Er båden funktionsdygtig?"/>
+                                            <CheckBox IsChecked="{Binding Path=CurrentDamageType.IsFunctional}" VerticalAlignment="Center"/>
+                                        </WrapPanel>
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Label Width="150" Margin="4" Content="Beskrivelse:"/>
+                                        <TextBox Width="400" Margin="4" Text="{Binding Path=CurrentDamageType.Description}" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
+                                    </WrapPanel>
+                                        
                                     <DockPanel>
                                         <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Gem" Command="{Binding Path=SaveChangesSkadeTyper}"/>
                                         <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesSkadeTyper}"/>
-                                        <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet" Command="{Binding Path=DeleteSkadeType}" HorizontalAlignment="Right"/>
+                                        <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet skadetype" Command="{Binding Path=DeleteSkadeType}" HorizontalAlignment="Right"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Border>
+                            
+                            <WrapPanel Margin="10">
+                                <Image Height="32" Margin="0,0,10,0">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <Setter Property="Source" Value="/View/images/accept.png"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <Setter Property="Source" Value="/View/images/cancel.png"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <Setter Property="Source" Value="/View/images/add.png"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <Setter Property="Source" Value="/View/images/delete.png"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <TextBlock VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <Setter Property="Foreground" Value="Green"/>
+                                                    <Setter Property="Text" Value="Ændringer gemt"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <Setter Property="Foreground" Value="Red"/>
+                                                    <Setter Property="Text" Value="Ændringer annulleret"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <Setter Property="Foreground" Value="Green"/>
+                                                    <Setter Property="Text" Value="Skadetype oprettet"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <Setter Property="Foreground" Value="Red"/>
+                                                    <Setter Property="Text" Value="Skadetype slettet"/>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </WrapPanel>
+                            
                         </StackPanel>
                         
                     </Grid>
