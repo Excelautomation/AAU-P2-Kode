@@ -132,6 +132,9 @@
     <Compile Include="View\Administrationssystem\Pages\FormsLongTrip.xaml.cs">
       <DependentUpon>FormsLongTrip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Administrationssystem\Pages\MembersListWindow.xaml.cs">
+      <DependentUpon>MembersListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Administrationssystem\Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -268,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Administrationssystem\Pages\FormsLongTrip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrationssystem\Pages\MembersListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
