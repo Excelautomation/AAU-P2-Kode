@@ -1,4 +1,5 @@
-﻿using ARK.Model;
+﻿using System.Data.Entity;
+using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
 using System.Collections.Generic;
@@ -18,12 +19,12 @@ namespace ARK.ViewModel.Protokolsystem
         public DistanceStatisticsViewModel()
         {
             var db = DbArkContext.GetDbContext();
-            
+
             // Load data
-            _members = new List<Member>(db.Member)
-            .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
-            .OrderBy(x => x.FirstName)
-            .ToList();
+            _members = db.Member
+                .OrderBy(x => x.FirstName)
+                .Include(m => m.Trips)
+                .ToList();
         }
 
         // Properties
@@ -40,14 +41,12 @@ namespace ARK.ViewModel.Protokolsystem
         public Member SelectedMember
         {
             get { return _selectedMember; }
-            set { _selectedMember = value; Notify(); getLatestTrips(); }
+            set { _selectedMember = value; Notify(); GetLatestTrips(); }
         }
 
-        private void getLatestTrips()
+        private void GetLatestTrips()
         {
-            DbArkContext db = DbArkContext.GetDbContext();
-            
-            Trips = db.Trip.ToList().Where(t => t.Members.Contains(SelectedMember)).ToList();
+            Trips = SelectedMember.Trips.ToList();
         }
 
         public List<Trip> Trips
