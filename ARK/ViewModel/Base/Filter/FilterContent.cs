@@ -95,7 +95,7 @@ namespace ARK.ViewModel.Base.Filter
                 if (!outputList.Any(e => e.Equals(elm)))
                     outputList.Add(elm);
 
-            return outputList;
+            return outputList.ToList();
         }
     }
 }

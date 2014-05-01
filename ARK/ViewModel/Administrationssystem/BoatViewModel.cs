@@ -43,7 +43,7 @@ namespace ARK.ViewModel.Administrationssystem
                 lock (db)
                 {
                     // Opret forbindelser Async
-                    Task<List<Boat>> boatsOut = db.Boat.ToListAsync();
+                    Task<List<Boat>> boatsOut = db.Boat.Include(e => e.DamageForms).Include(e => e.Trips).ToListAsync();
 
                     _boatsNonFiltered = boatsOut.Result;
                 }

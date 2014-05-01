@@ -235,6 +235,9 @@
     <Compile Include="View\Protokolsystem\ProtocolSystem.xaml.cs">
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Protokolsystem\Protokolsystem.xaml.cs">
+      <DependentUpon>Protokolsystem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ValueConverters\BoolToValueConverter.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
@@ -333,6 +336,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Protokolsystem\ProtocolSystem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Protokolsystem\Protokolsystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Resources\Buttons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -384,10 +395,6 @@
     <Page Include="View\Protokolsystem\Pages\OnScreenKeyboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Protokolsystem\ProtocolSystem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Resources\RadioButton.xaml">
       <SubType>Designer</SubType>
@@ -468,7 +475,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="View\images\top_shadow.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="View\images\accept.png" />
     <Resource Include="View\images\application_home.png" />
