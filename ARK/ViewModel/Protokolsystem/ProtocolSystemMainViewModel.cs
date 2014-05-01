@@ -6,8 +6,8 @@ using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
-using ARK.ViewModel.Base.Interfaces.Info;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.ViewModel.Base.Interfaces.Info;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -29,6 +29,7 @@ namespace ARK.ViewModel.Protokolsystem
         private bool _enableSearch;
         private ICommand _endTrip;
         private EndTrip _endTripPage;
+        private FrameworkElement _filter;
         private ObservableCollection<FrameworkElement> _filters = new ObservableCollection<FrameworkElement>();
         private string _headlineText;
         private OnScreenKeyboard _keyboard;
@@ -36,10 +37,8 @@ namespace ARK.ViewModel.Protokolsystem
         private MembersInformation _membersInformationPage;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
-        private FrameworkElement _filter;
 
         #endregion
-
 
         public ProtocolSystemMainViewModel()
         {
@@ -198,10 +197,17 @@ namespace ARK.ViewModel.Protokolsystem
             // Deaktiver filter
             EnableSearch = false;
             EnableFilters = false;
-            Filters.Clear();
+
+            // Sæt filter
+            var viewModelbase = page.Value.DataContext as IFilterContentViewModel;
+            if (viewModelbase != null)
+            {
+                Filter = viewModelbase.Filter;
+            }
+            else
+                Filter = null;
 
             // Skjul og clear keyboard
-            KeyboardHide();
             KeyboardText = "";
 
             // Fjern info
@@ -235,33 +241,17 @@ namespace ARK.ViewModel.Protokolsystem
 
         public bool KeyboardToggled
         {
-            get { return Keyboard.Visibility == Visibility.Visible; }
+            get { return EnableSearch; }
         }
 
         public void KeyboardShow()
         {
-            Keyboard.Visibility = Visibility.Visible;
-            NotifyKeyboard();
+            EnableSearch = true;
         }
 
         public void KeyboardHide()
         {
-            Keyboard.Visibility = Visibility.Collapsed;
-            NotifyKeyboard();
-        }
-
-        public ICommand KeyboardToggle
-        {
-            get
-            {
-                return GetCommand<object>(o =>
-                {
-                    if (KeyboardToggled)
-                        KeyboardHide();
-                    else
-                        KeyboardShow();
-                });
-            }
+            EnableSearch = false;
         }
 
         public event EventHandler KeyboardTextChanged
@@ -280,12 +270,6 @@ namespace ARK.ViewModel.Protokolsystem
         {
             KeyboardText = "";
         }
-
-        private void NotifyKeyboard()
-        {
-            NotifyCustom("KeyboardToggled");
-        }
-
         #endregion
 
         #region Filter
@@ -293,24 +277,39 @@ namespace ARK.ViewModel.Protokolsystem
         public FrameworkElement Filter
         {
             get { return _filter; }
-            set { 
+            set
+            {
+                IFilterViewModel filterViewModel;
+
+                if (_filter != null)
+                {
+                    // Unbind event
+                    filterViewModel = _filter.DataContext as IFilterViewModel;
+                    if (filterViewModel != null) filterViewModel.FilterChanged -= filter_FilterChanged;
+                }
+
                 _filter = value;
+
+                // Tjek at filter ikke er null
+                if (_filter != null)
+                {
+                    // Bind event
+                    filterViewModel = _filter.DataContext as IFilterViewModel;
+                    if (filterViewModel != null) filterViewModel.FilterChanged += filter_FilterChanged;
+                }
 
                 Notify();
             }
         }
 
-        public ICommand SearchChangedCommand
+        private void filter_FilterChanged(object sender, FilterEventArgs e)
         {
-            get
-            {
-                return
-                    GetCommand<string>(
-                        s => { if (SearchTextChanged != null) SearchTextChanged(this, new SearchEventArgs(s)); });
-            }
+            if (FilterTextChanged != null)
+                FilterTextChanged(sender, e);
         }
 
         public event EventHandler<SearchEventArgs> SearchTextChanged;
+        public event EventHandler<FilterEventArgs> FilterTextChanged;
 
         public bool EnableSearch
         {
@@ -319,6 +318,12 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 _enableSearch = value;
                 Notify();
+
+                // Hvis keyboard er blevet aktiveret
+                if (value)
+                {
+                    EnableFilters = false;
+                }
             }
         }
 
@@ -329,16 +334,11 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 _enableFilters = value;
                 Notify();
-            }
-        }
 
-        public ObservableCollection<FrameworkElement> Filters
-        {
-            get { return _filters; }
-            set
-            {
-                _filters = value;
-                Notify();
+                if (value)
+                {
+                    EnableSearch = false;
+                }
             }
         }
 

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    internal class DistanceStatisticsViewModel : KeyboardContentViewModelBase
+    internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
         private List<Member> _members = new List<Member>();

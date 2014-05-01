@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    internal class MembersinformationViewModel : KeyboardContentViewModelBase
+    internal class MembersinformationViewModel : ProtokolsystemContentViewModelBase
     {
         private List<Member> _members;
 

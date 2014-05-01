@@ -10,7 +10,7 @@ namespace ARK.ViewModel.Base.Interfaces.Filter
         bool EnableSearch { get; set; }
         bool EnableFilters { get; set; }
 
-        ObservableCollection<FrameworkElement> Filters { get; set; }
+        event EventHandler<FilterEventArgs> FilterTextChanged;
         event EventHandler<SearchEventArgs> SearchTextChanged;
     }
 }

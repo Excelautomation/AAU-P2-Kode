@@ -11,8 +11,10 @@
     <Window.DataContext>
         <Protokolsystem:ProtocolSystemMainViewModel />
     </Window.DataContext>
-    
+
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
         <Style x:Key="White+rounded" TargetType="{x:Type Rectangle}">
             <Setter Property="Stroke" Value="#FF292929"/>
             <Setter Property="Fill" Value="White"/>
@@ -40,9 +42,9 @@
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="621" Background="White" Grid.Column="1" Grid.Row="1">
             <ContentControl Content="{Binding Path=CurrentPage}" VerticalAlignment="Top"/>
         </Grid>
-        <StackPanel x:Name="Buttons" Visibility="{Binding Path=Keyboard.Visibility}" Grid.Column="1" Height="182" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="621">
-            <ContentControl Content="{Binding Path=Keyboard}"/>
-            <ContentControl Content="{Binding Path=Filter}"/>
+        <StackPanel x:Name="Buttons" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="621">
+            <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=EnableSearch, Converter={StaticResource BoolToVis}}" Height="182"/>
+            <ContentControl Content="{Binding Path=Filter}" Visibility="{Binding Path=EnableFilters, Converter={StaticResource BoolToVis}}" Height="182"/>
         </StackPanel>
         <Grid HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="194" Grid.Row="0" Grid.RowSpan="3" Background="#FFFBFBFB">
             <Rectangle HorizontalAlignment="Left" Height="77" Margin="3,687,0,0" Stroke="#FFCDCDCD" VerticalAlignment="Top" Width="188" Style="{DynamicResource White+rounded}"/>

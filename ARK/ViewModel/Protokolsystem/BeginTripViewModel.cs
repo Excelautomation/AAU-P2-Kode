@@ -8,16 +8,18 @@ using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.Protokolsystem.Pages;
+using ARK.View.Protokolsystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
+using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Base.Interfaces.Info;
 using ARK.ViewModel.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Additional;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    public class BeginTripViewModel : KeyboardContentViewModelBase
+    public class BeginTripViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         private readonly IEnumerable<Boat> _boats; // All boats
         private readonly ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
@@ -29,6 +31,7 @@ namespace ARK.ViewModel.Protokolsystem
         private IEnumerable<Member> _members; // All members
         private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
         private Boat _selectedBoat; // Holds the selected boat
+        private FrameworkElement _filter;
 
         #region Constructors
         public BeginTripViewModel()
@@ -52,7 +55,7 @@ namespace ARK.ViewModel.Protokolsystem
 
             // Setup filter
             var filterController = new FilterContent(this);
-            filterController.EnableFilter(true, false, null);
+            filterController.EnableFilter(true, false);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
             // Configurate the keyboard
@@ -203,6 +206,12 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         #region Filter
+
+        public FrameworkElement Filter
+        {
+            get { return _filter ?? (_filter = new BeginTripFilters()); }
+        }
+
         private void ResetFilter()
         {
             Boats = new ObservableCollection<Boat>(_boats);
@@ -210,30 +219,30 @@ namespace ARK.ViewModel.Protokolsystem
                 member.Visible = true;
         }
 
-        private void UpdateFilter(FilterEventArgs args)
+        private void UpdateFilter(FilterChangedEventArgs args)
         {
             // Reset filters
             ResetFilter();
 
-            // Check if the filters is active
-            if (!args.Filters.Any() && string.IsNullOrEmpty(args.SearchText))
+            if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
+                (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
                 return;
 
-            // Check filter
-            if (args.Filters.Any())
+            // Filter only boats
+            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-
+                Boats = FilterContent.FilterItems(Boats, args.FilterEventArgs);
             }
 
             // Check search
-            if (!string.IsNullOrEmpty(args.SearchText))
+            if (!string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.FilterBoat(args.SearchText)
+                        where boat.FilterBoat(args.SearchEventArgs.SearchText)
                     select boat;
 
                 foreach (
-                    var member in Members.Where(member => !member.Member.FilterMembers(args.SearchText)))
+                    var member in Members.Where(member => !member.Member.FilterMembers(args.SearchEventArgs.SearchText)))
                     member.Visible = false;
             }
         }
@@ -249,5 +258,7 @@ namespace ARK.ViewModel.Protokolsystem
             Members = Members.OrderBy(predicate);
         }
         #endregion
+
+        
     }
 }

@@ -12,7 +12,7 @@
     <UserControl.DataContext>
         <Protokolsystem:BeginTripViewModel />
     </UserControl.DataContext>
-
+    
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
@@ -118,7 +118,7 @@
 
             <Button x:Name="btnShowKeyboard" Grid.Column="0"
                     Style="{StaticResource ResourceKey=btnFilter}" 
-                    Command="{Binding Path=Keyboard.KeyboardToggle}"
+                    Command="{Binding Path=ToggleKeyboard}"
                     Background="{StaticResource SearchFilterBG}"
                     BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
                 <Grid>
@@ -128,40 +128,14 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left">
-                        <Image.Style>
-                            <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/keyboard_add.png"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <TextBlock Grid.Column="3">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=Keyboard.KeyboardToggled}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;TASTATUR"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/keyboard_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="VIS&#10;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
                 </Grid>
-            </Button>
+        </Button>
 
             <Button x:Name="btnShowFilter" Grid.Column="1"
                     Style="{StaticResource ResourceKey=btnFilter}" 
-                    Command="{Binding Path=Filter.FilterToggle}"
+                    Command="{Binding Path=ToggleFilter}"
                     Background="{StaticResource SearchFilterBG}"
                     BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
                 <Grid>
@@ -171,36 +145,10 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1">
-                        <Image.Style>
-                            <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=Filter.FilterToggled}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/filter_delete.png"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=Filter.FilterToggled}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/filter_add.png"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <TextBlock Grid.Column="3">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=Filter.FilterToggled}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;FILTER"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=Filter.FilterToggled}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;FILTER"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/filter_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="VIS&#10;FILTER" />
                 </Grid>
-            </Button>
+        </Button>
 
             <Button x:Name="btnBeginTripNow" Grid.Column="4"
                     Style="{StaticResource ResourceKey=btnFilter}" 
@@ -208,12 +156,12 @@
                     Background="{StaticResource BeginBG}"
                     BorderBrush="{StaticResource BeginBorder}" Height="Auto" Margin="0,0,-4,0" Width="Auto">
                 <Grid>
-                    <Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="32"/>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Source="/View/images/document_page_next.png" Style="{StaticResource ResourceKey=btnImage}"/>
                     <TextBlock Grid.Column="3" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=ButtonStyle}">
                         <Run Text="BEGYND"/><LineBreak/>
@@ -222,7 +170,7 @@
                 </Grid>
             </Button>
 
-        </Grid>
+            </Grid>
 
     </Grid>
 </UserControl>
