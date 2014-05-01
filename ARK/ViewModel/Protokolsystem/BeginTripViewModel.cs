@@ -12,6 +12,8 @@ using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Info;
+using ARK.ViewModel.Protokolsystem.Additional;
+using ARK.View.Protokolsystem.Additional;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -164,7 +166,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public FrameworkElement InfoPage
         {
-            get { return _infoPage ?? (_infoPage = new BeginTripsAdditionalInfo()); }
+            get { return _infoPage ?? (_infoPage = new BeginTripAdditionalInfo()); }
         }
 
         public BeginTripAdditionalInfoViewModel Info
@@ -190,14 +192,15 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
+        #endregion
+
         private void UpdateInfo()
         {
-            Info.SelectedBoat = new ObservableCollection<Boat> {SelectedBoat};
+            Info.SelectedBoat = new ObservableCollection<Boat> { SelectedBoat };
             Info.SelectedMembers = SelectedMembers;
 
             GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
-        #endregion
 
         #region Filter
         private void ResetFilter()

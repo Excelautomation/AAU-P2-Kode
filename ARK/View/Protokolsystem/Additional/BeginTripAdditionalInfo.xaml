@@ -6,8 +6,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
-    xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem"
-             x:Class="ARK.Protokolsystem.Pages.BeginTripsAdditionalInfo"
+             xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
+             x:Class="ARK.View.Protokolsystem.Additional.BeginTripAdditionalInfo"
              mc:Ignorable="d" Width="200" Height="768">
 
     <UserControl.DataContext>
@@ -98,7 +98,7 @@
                       Width="{Binding ActualWidth, ElementName=BoatInfo, Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
