@@ -6,6 +6,7 @@
              xmlns:VMFilter="clr-namespace:ARK.ViewModel.Protokolsystem.Filters"
              mc:Ignorable="d" 
              Style="{StaticResource ResourceKey=ucFilters}">
+    
     <UserControl.DataContext>
         <VMFilter:BeginTripFiltersViewModel></VMFilter:BeginTripFiltersViewModel>
     </UserControl.DataContext>
