@@ -44,13 +44,17 @@ namespace ARK.ViewModel.Administrationssystem
 
             if (Admins.Count != 0)
             {
-                CurrentAdmin = Admins[0];
                 CurrentAdminInt = 0;
-                NotifyCustom("CurrentAdmin");
-                NotifyCustom("CurrentAdminInt");
             }
-                
-                
+            if (DamageTypes.Count != 0)
+            {
+                SelectedListItemDamageTypes = 0;
+                CurrentDamageType = DamageTypes[0];
+            }
+            
+
+
+
         }
 
 
@@ -61,6 +65,13 @@ namespace ARK.ViewModel.Administrationssystem
         private ObservableCollection<DamageType> _damageTypes;
         private DamageType _currentDamageType;
         private Feedback _feedbackDamageType;
+        private int _SelectedListItemDamageTypes;
+
+        public int SelectedListItemDamageTypes
+        {
+            get { return _SelectedListItemDamageTypes; }
+            set { _SelectedListItemDamageTypes = value; Notify(); }    
+        }
 
         public Feedback FeedbackDamageType
         {
@@ -153,6 +164,7 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.SaveChanges();
                     DamageTypes.Add(DamageTypeTemplate);
                     FeedbackDamageType = Feedback.Create;
+                    SelectedListItemDamageTypes = DamageTypes.Count - 1;
                 });
             }
         }
@@ -167,6 +179,7 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.SaveChanges();
                     DamageTypes.Remove(ReferenceToCurrentDamageType);
                     FeedbackDamageType = Feedback.Delete;
+                    SelectedListItemDamageTypes = DamageTypes.Count - 1;
                 });
             }
         }

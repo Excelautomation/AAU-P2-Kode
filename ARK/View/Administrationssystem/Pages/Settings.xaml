@@ -129,7 +129,8 @@
                         
                             <DockPanel Grid.Column="0" Margin="4">
                                 <Button Padding="5" Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
-                                <ListView VerticalAlignment="Stretch" x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=DamageTypes}" SelectedItem="{Binding Path=CurrentDamageType}">
+                                <ListView VerticalAlignment="Stretch" x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
+                                          ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedListItemDamageTypes}" SelectedItem="{Binding Path=CurrentDamageType}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Margin="0,2,0,2">
@@ -365,7 +366,7 @@
                                             </StackPanel>
                                             
                                             <StackPanel Margin="4" VerticalAlignment="Center" Width="250">
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Username}"/>
+                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Username, UpdateSourceTrigger=PropertyChanged}"/>
                                                 <Button Content="Skift kodeord"/>
                                                 <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Id}"/>
                                                 <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.FirstName}"/>
