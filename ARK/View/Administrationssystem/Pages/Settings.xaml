@@ -243,62 +243,61 @@
                 
                 
                 <TabItem Header="Standardture" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <DockPanel HorizontalAlignment="Center" Margin="10">
                     <Grid>
                         
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="320"/>
                             <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="200*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
-                        <DockPanel Grid.Column="0">
-                            <Button Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="220" Content="Opret ny standardtur"/>
-                            <ListView x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Path=StandardTrips}">
+                            <DockPanel Grid.Column="0" Margin="4">
+                                <Button Padding="5" Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny standardtur"/>
+                                <ListView VerticalAlignment="Stretch" x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ItemsSource="{Binding Path=StandardTrips}" SelectedItem="{Binding Path=CurrentStandardTrip}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Margin="0,2,0,2">
-                                            <Label Content="{Binding Path=Title}"/>
-                                        </StackPanel>
+                                            <WrapPanel Margin="0,2,0,2">
+                                                <Label Content="{Binding Path=Title}"/>
+                                            </WrapPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding Path=SelectedChangeStandardTrip}" CommandParameter="{Binding ElementName=StandardTripList, Path=SelectedItem}" />
+                                            <i:InvokeCommandAction Command="{Binding Path=SelectedChangeStandardTrip}" CommandParameter="{Binding ElementName=StandardTripList, Path=SelectedItem}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ListView>
                         </DockPanel>
                         
-                        <StackPanel Grid.Row="2" Grid.Column="2">
-                            <Label Margin="4">Detaljer</Label>
-                            <Border CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" Width="auto" HorizontalAlignment="Left">
-                                <StackPanel>
-                                    <StackPanel>
-                                        
-                                        <WrapPanel Margin="4">
-                                            <StackPanel Margin="4">
-                                                <Label>Turnavn:</Label>
-                                                <Label>Distance:</Label>
-                                                <Label>Beskrivelse:</Label>
-                                            </StackPanel>
-                                            <StackPanel Margin="4" Width="320">
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentStandardTrip.Title}"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentStandardTrip.Title}" VerticalScrollBarVisibility="Auto" MinLines="4" MaxLines="4" TextWrapping="Wrap" AcceptsReturn="True"/>
-                                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="4">
+                                <Label FontStyle="Italic" HorizontalAlignment="Center" Margin="4" Content="Detaljer om valgte standardtur"/>
+                                <Border Margin="4" CornerRadius="15" Background="#EEEEEE" Padding="15" HorizontalAlignment="Left">
+                                    <StackPanel Width="auto">
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="Beskrivelse:"/>
+                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentDamageType.Title}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="Retning:"/>
+                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Direction}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="Distance:"/>
+                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
                                         </WrapPanel>
                                         
-                                    </StackPanel>
-                                    <DockPanel Margin="10" >
-                                        <Button Margin="4" Content="Gem" Command="{Binding Path=SaveChangesStandardTrips}"/>
-                                        <Button Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesStandardTrips}"/>
-                                        <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteStandarTrip}" HorizontalAlignment="Right"/>
+                                        <DockPanel Style="{StaticResource GreyWhNotSelected}">
+                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Gem" Command="{Binding Path=SaveChangesStandardTrips}"/>
+                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesStandardTrips}"/>
+                                            <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet skadetype" Command="{Binding Path=DeleteStandardTrip}" HorizontalAlignment="Right"/>
                                     </DockPanel>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                         
                     </Grid>
+                    </DockPanel>
                 </TabItem>
                 
                 
