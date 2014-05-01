@@ -13,6 +13,7 @@ namespace ARK.Model.DB
         {
             //Database.SetInitializer<DbArkContext>(new DropCreateDatabaseAlways<DbArkContext>());
             Database.SetInitializer(new MySqlInitializer());
+            Database.Log = s => Debug.WriteLine("DBContext: " + s);
         }
 
         public DbSet<FTPInfo> FtpInfo { get; set; }

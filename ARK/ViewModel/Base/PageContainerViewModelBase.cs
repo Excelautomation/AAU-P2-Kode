@@ -35,6 +35,13 @@ namespace ARK.ViewModel.Base
             // Tjek page
             if (page == null) throw new ArgumentNullException("page");
 
+            // Tjek om currentpage ikke er null og cleanup denne hvis den er
+            if (CurrentPage != null)
+            {
+                var vm = CurrentPage.DataContext as IContentViewModelBase;
+                if (vm != null) vm.ParentDetached();
+            }
+
             // Sæt nuværende side og tekst
             CurrentPage = page();
             CurrentPageTitle = pageTitle;

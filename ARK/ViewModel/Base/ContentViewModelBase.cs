@@ -14,10 +14,15 @@ namespace ARK.ViewModel.Base
             {
                 _parent = value;
 
-                if (ParentAttached != null) ParentAttached(this, new EventArgs());
+                if (ParentAttached != null && _parent != null) ParentAttached(this, new EventArgs());
             }
         }
 
         public event EventHandler ParentAttached;
+
+        public virtual void ParentDetached()
+        {
+            _parent = null;
+        }
     }
 }

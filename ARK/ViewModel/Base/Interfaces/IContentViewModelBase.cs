@@ -6,5 +6,6 @@ namespace ARK.ViewModel.Base.Interfaces
     {
         IViewModelBase Parent { get; set; }
         event EventHandler ParentAttached;
+        void ParentDetached();
     }
 }
