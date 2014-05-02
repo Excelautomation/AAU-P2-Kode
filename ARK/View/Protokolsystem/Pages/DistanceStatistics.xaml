@@ -6,7 +6,7 @@
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             Style="{DynamicResource ResourceKey=ucContent}">
+             Style="{StaticResource ResourceKey=ucContent}">
 
     <!--Indhold-->
     <UserControl.DataContext>
@@ -31,7 +31,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="311,0,0,0">
+        <Border Style="{StaticResource ResourceKey=brdHeadline}" Margin="311,0,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -48,16 +48,16 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="Members" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=MemberKmCollection}" Margin="0,31,319,78">
+        <ListView x:Name="Members" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=MemberKmCollection}" Margin="0,31,319,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
-                        <Image Height="16" Width="16" VerticalAlignment="Center"/>
-                        <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
+                        <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}">
+                            <!--<Run Text="{Binding MemberKmCollection}"/>-->
+                            <!--Distance metode er ikke done - SKAL VÆRE HER-->
                             <Run Text="{Binding Item1.FirstName}"/>
                             <Run Text="{Binding Item1.LastName}"/>
                         </TextBlock>
-                        <TextBlock Text="{Binding Item2}" HorizontalAlignment="Right"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -69,35 +69,65 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="LastTrips" Style="{DynamicResource lstView}" ItemsSource="{Binding Path=Trips}" Margin="311,31,8,78">
+        <ListView x:Name="LastTrips" Style="{StaticResource lstView}" ItemsSource="{Binding Path=Trips}" Margin="311,31,8,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
                         <!--Vis kun 10 (Fjern kommentarer)-->
                         <!--Kilometer-->
-                        <TextBlock Text="{Binding}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Text="{Binding}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
                         <!--Title-->
-                        <TextBlock Text="{Binding}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Text="{Binding}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
                         <!--Description-->
-                        <TextBlock Text="{Binding}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Text="{Binding}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Grid Margin="0,461,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+            </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnShowKeyboard" Style="{DynamicResource ResourceKey=btnFilter}" Margin="0,467,471,0" Command="{Binding Keyboard.KeyboardToggle}">
-            <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Keyboard.KeyboardImage}"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Keyboard.KeyboardToggleText}"/>
-            </StackPanel>
-        </Button>
-        
-        <Button x:Name="btnShowFilter" Style="{DynamicResource ResourceKey=btnFilter}" Margin="152,467,319,0" Command="{Binding Keyboard.KeyboardToggle}">
-            <StackPanel Orientation="Horizontal">
-                <Image Style="{DynamicResource ResourceKey=btnImage}" Source="{Binding Keyboard.KeyboardImage}"/>
-                <TextBlock Style="{DynamicResource ResourceKey=btnButtons}" Text="{Binding Keyboard.KeyboardToggleText}"/>
-            </StackPanel>
-        </Button>
+            <Button x:Name="btnShowKeyboard" Grid.Column="0"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleKeyboard}"
+        		Background="{StaticResource SearchFilterBG}"
+        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/ARK;component/View/images/keyboard_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="VIS&#xA;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
+                </Grid>
+            </Button>
+
+            <Button x:Name="btnShowFilter" Grid.Column="1"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleFilter}"
+        		Background="{StaticResource SearchFilterBG}"
+        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/filter_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="VIS&#xA;FILTER" />
+                </Grid>
+            </Button>
+
+        </Grid>
 
     </Grid>
 </UserControl>

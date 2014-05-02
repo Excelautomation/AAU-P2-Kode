@@ -159,7 +159,7 @@
             <Button x:Name="btnBeginTripNow" Grid.Column="4"
                     Command="{Binding Path=StartTripNow}"
                     Background="{StaticResource BeginBG}"
-                    BorderBrush="{StaticResource BeginBorder}" Height="Auto" Margin="0,0,-4,0" Width="Auto">
+                    BorderBrush="{StaticResource BeginBorder}" Height="Auto" Margin="0,5,-4,0" Width="Auto">
                 <Grid>
                 <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
