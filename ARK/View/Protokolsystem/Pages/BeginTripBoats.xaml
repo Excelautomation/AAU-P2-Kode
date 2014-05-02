@@ -15,6 +15,11 @@
     
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Visibility" 
+                Value="{Binding Visible, 
+                        Converter={StaticResource BoolToVis}}"/>
+        </Style>
     </UserControl.Resources>
 
     <!--Content-->
@@ -76,7 +81,8 @@
 
         <ListView x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
                   ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" Margin="309,32,6,124" SelectionMode="Multiple" 
-                  IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto">
+                  IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto"
+                  ItemContainerStyle="{StaticResource ItemContainerStyle}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
