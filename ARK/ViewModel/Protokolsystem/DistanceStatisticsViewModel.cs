@@ -16,7 +16,7 @@ namespace ARK.ViewModel.Protokolsystem
         // Fields
         private readonly ObservableCollection<Tuple<Member, double>> _memberKmCollection;
         private Member _selectedMember;
-        private List<Trip> _trips;
+        private List<Trip> _trips = new List<Trip>();
 
         // Constructor
         public DistanceStatisticsViewModel()
