@@ -36,7 +36,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             TimeCounter.StartTimer();
 
-            StartTrip.Execute(null);
+            StatisticsDistance.Execute(null);
 
             KeyboardTextChanged +=
                 (sender, args) =>
