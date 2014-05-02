@@ -68,6 +68,27 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+
+        public IEnumerable<DamageForm> DamageForms
+        {
+            get { return _damageForms; }
+            private set
+            {
+                _damageForms = value;
+                Notify();
+            }
+        }
+
+        public IEnumerable<LongDistanceForm> LongDistanceForms
+        {
+            get { return _longTripForms; }
+            private set
+            {
+                _longTripForms = value;
+                Notify();
+            }
+        }
+
         #region Commands
 
         public int SelectedIndexDamageForms
@@ -128,26 +149,6 @@ namespace ARK.ViewModel.Administrationssystem
         public IFilterContainerViewModel FilterContainer
         {
             get { return Parent as IFilterContainerViewModel; }
-        }
-
-        public IEnumerable<DamageForm> DamageForms
-        {
-            get { return _damageForms; }
-            private set
-            {
-                _damageForms = value;
-                Notify();
-            }
-        }
-
-        public IEnumerable<LongDistanceForm> LongDistanceForms
-        {
-            get { return _longTripForms; }
-            private set
-            {
-                _longTripForms = value;
-                Notify();
-            }
         }
 
         public Visibility ShowDamageForms
