@@ -35,13 +35,13 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
-                        <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
-                            <Run Text="{Binding MemberNumber}"/>
-                            <Run Text=" "/>
+                        <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+                            <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}" DockPanel.Dock="Left" Text="{Binding MemberNumber}" Width="32"/>
+                            <TextBlock Width="200" Style="{DynamicResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding FirstName}"/>
                             <Run Text="{Binding LastName}"/>
-                        </TextBlock>
-                        
+                            </TextBlock>
+                        </DockPanel>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
