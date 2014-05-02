@@ -31,16 +31,16 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" Margin="0,32,8,77" Width="613">
+        <ListView x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" Margin="0,32,8,77" Width="613">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
-                        <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
-                            <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}" DockPanel.Dock="Left" Text="{Binding MemberNumber}" Width="32"/>
-                            <TextBlock Width="200" Style="{DynamicResource ResourceKey=lstListViewHeadline}">
+                        <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}">
+                            <Run Text="{Binding MemberNumber}"/>
+                            <Run Text=" "/>
                             <Run Text="{Binding FirstName}"/>
                             <Run Text="{Binding LastName}"/>
-                            </TextBlock>
+                        </TextBlock>
                         </DockPanel>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -48,28 +48,31 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100*"/>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                        </Grid>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}" Text="{Binding Address1}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=lstViewContent}" >
+                                <Run Text="Adresse:" FontWeight="Bold"/>
+                                <Run Text="{Binding Address1}"/>
+                            </TextBlock>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}">
+                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="Postnr./By:" FontWeight="Bold"/>
                             <Run Text="{Binding ZipCode}"/>
-                            <Run Text=" "/>
                             <Run Text="{Binding City}"/>
                         </TextBlock>
 
-                        <TextBlock Grid.Row="0" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
-                            <Run Text="Tlf: "/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="Tlf:" FontWeight="Bold"/>
                             <Run Text="{Binding Cellphone}"/>
                         </TextBlock>
 
-                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
-                            <Run Text="Email: "/>
-                            <Run Text="{Binding Email1}" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="Email:" FontWeight="Bold"/>
+                                <Run Text="{Binding Email1}"/>
                         </TextBlock>
+                        </Grid>
                         
                     </WrapPanel>
                 </DataTemplate>
@@ -81,5 +84,49 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
+        <Grid Margin="0,461,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnShowKeyboard" Grid.Column="0"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleKeyboard}"
+        		Background="{StaticResource SearchFilterBG}"
+        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/ARK;component/View/images/keyboard_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="VIS&#xA;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
+                </Grid>
+            </Button>
+
+            <Button x:Name="btnShowFilter" Grid.Column="1"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleFilter}"
+        		Background="{StaticResource SearchFilterBG}"
+        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/filter_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="VIS&#xA;FILTER" />
+                </Grid>
+            </Button>
+
+        </Grid>
     </Grid>
 </UserControl>
