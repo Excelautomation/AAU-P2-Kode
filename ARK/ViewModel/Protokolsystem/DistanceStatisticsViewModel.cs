@@ -1,4 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Windows.Forms.VisualStyles;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
@@ -11,7 +14,7 @@ namespace ARK.ViewModel.Protokolsystem
     internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        private List<Member> _members = new List<Member>();
+        private readonly ObservableCollection<Tuple<Member, double>> _memberKmCollection;
         private Member _selectedMember;
         private List<Trip> _trips;
 
@@ -19,29 +22,35 @@ namespace ARK.ViewModel.Protokolsystem
         public DistanceStatisticsViewModel()
         {
             var db = DbArkContext.GetDbContext();
+            var db2 = DbArkContext.GetDbContext();
 
+            DateTime limit = new DateTime();
             // Load data
-            _members = db.Member
+            var temp = db.Member
                 .OrderBy(x => x.FirstName)
                 .Include(m => m.Trips)
-                .ToList();
-        }
+                .AsEnumerable();
 
-        // Properties
-        public List<Member> Members
-        {
-            get { return _members; }
-            set
-            {
-                _members = value;
-                Notify();
-            }
+            //var test = temp
+            //    .Select(m => m.Trips.Where(t => t.TripStartTime > limit).Aggregate(0d, (acc, val) => acc + val.Distance))
+            //    .ToList();
+
+            _memberKmCollection =
+                new ObservableCollection<Tuple<Member, double>>
+                    (temp.Select((val, i) => new Tuple<Member, double>(val, val.Trips
+                        .Where(t => t.TripStartTime > limit)
+                        .Sum(t => t.Distance))));
         }
 
         public Member SelectedMember
         {
             get { return _selectedMember; }
             set { _selectedMember = value; Notify(); GetLatestTrips(); }
+        }
+
+        public ObservableCollection<Tuple<Member, double>> MemberKmCollection
+        {
+            get { return _memberKmCollection; }
         }
 
         private void GetLatestTrips()
@@ -55,7 +64,6 @@ namespace ARK.ViewModel.Protokolsystem
             set { _trips = value; Notify(); }
         }
 
-        //
         public ICommand MemberSelectionChanged
         {
             get

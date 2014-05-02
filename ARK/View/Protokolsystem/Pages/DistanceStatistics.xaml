@@ -48,23 +48,23 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="Members" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" Margin="0,31,319,78">
+        <ListView x:Name="Members" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=MemberKmCollection}" Margin="0,31,319,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
                         <Image Height="16" Width="16" VerticalAlignment="Center"/>
                         <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
-                            <Run Text="{Binding FirstName}"/>
-                            <Run Text="{Binding LastName}"/>
+                            <Run Text="{Binding Item1.FirstName}"/>
+                            <Run Text="{Binding Item1.LastName}"/>
                         </TextBlock>
-                        <TextBlock Text="{Binding GetTotalDistance}" Style="{DynamicResource ResourceKey=lstListViewHeadline}" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding Item2}" HorizontalAlignment="Right"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=MemberSelectionChanged}" CommandParameter="{Binding ElementName=Members, Path=SelectedItem}" />
+                    <i:InvokeCommandAction Command="{Binding Path=MemberSelectionChanged}" CommandParameter="{Binding ElementName=Members, Path=SelectedItem.Item1}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
