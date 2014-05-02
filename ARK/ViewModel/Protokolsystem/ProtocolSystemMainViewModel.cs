@@ -8,6 +8,7 @@ using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Base.Interfaces.Info;
+using ARK.View.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -16,6 +17,7 @@ namespace ARK.ViewModel.Protokolsystem
     {
         #region PrivateFields
 
+        private ICommand _infoScreen;
         private ICommand _boatsOut;
         private ICommand _createDamage;
         private ICommand _createLongDistance;
@@ -57,6 +59,14 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 _headlineText = value;
                 Notify();
+            }
+        }
+
+        public ICommand InfoScreen // overview screen..
+        {
+            get
+            {
+                return _infoScreen ?? (_infoScreen = GetNavigateCommand(() => new MainPage(), "InfoScreen"));
             }
         }
 
@@ -233,7 +243,6 @@ namespace ARK.ViewModel.Protokolsystem
 
                 _filter = value;
 
-                // Tjek at filter ikke er null
                 if (_filter != null)
                 {
                     // Bind event
@@ -262,7 +271,7 @@ namespace ARK.ViewModel.Protokolsystem
                 _enableSearch = value;
                 Notify();
 
-                // Hvis keyboard er blevet aktiveret
+                // If Keyboard is active
                 if (value)
                 {
                     EnableFilters = false;
