@@ -167,8 +167,8 @@
                                         </WrapPanel>
 
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}">
-                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Gem" Command="{Binding Path=SaveChangesSkadeTyper}"/>
-                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesSkadeTyper}"/>
+                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesSkadeTyper}"/>
+                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesSkadeTyper}"/>
                                             <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet skadetype" Command="{Binding Path=DeleteSkadeType}" HorizontalAlignment="Right"/>
                                         </DockPanel>
                                     </StackPanel>
@@ -288,13 +288,75 @@
                                         </WrapPanel>
                                         
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}">
-                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Gem" Command="{Binding Path=SaveChangesStandardTrips}"/>
-                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesStandardTrips}"/>
+                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesStandardTrips}"/>
+                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesStandardTrips}"/>
                                             <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet skadetype" Command="{Binding Path=DeleteStandardTrip}" HorizontalAlignment="Right"/>
-                                    </DockPanel>
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </Border>
+
+                                <WrapPanel Margin="4">
+                                    <Image Height="32" Margin="0,0,10,0">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                        <Setter Property="Source" Value="/View/images/accept.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                        <Setter Property="Source" Value="/View/images/cancel.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                        <Setter Property="Source" Value="/View/images/add.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                        <Setter Property="Source" Value="/View/images/delete.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <TextBlock VerticalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                        <Setter Property="Text" Value="Ændringer gemt"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                        <Setter Property="Text" Value="Ændringer annulleret"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                        <Setter Property="Text" Value="Standardtur oprettet"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                        <Setter Property="Text" Value="Standardtur slettet"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </WrapPanel>
+
+                            </StackPanel>
                         
                     </Grid>
                     </DockPanel>
