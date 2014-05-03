@@ -41,7 +41,6 @@
                             <Run Text="{Binding FirstName}"/>
                             <Run Text="{Binding LastName}"/>
                         </TextBlock>
-                        </DockPanel>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
