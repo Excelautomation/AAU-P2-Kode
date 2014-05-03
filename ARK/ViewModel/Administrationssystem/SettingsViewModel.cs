@@ -48,6 +48,11 @@ namespace ARK.ViewModel.Administrationssystem
                 SelectedListItemDamageTypes = 0;
                 CurrentDamageType = DamageTypes[0];
             }
+            if (StandardTrips.Count != 0)
+            {
+                SelectedListItemStandardTrips = 0;
+                CurrentStandardTrip = StandardTrips[0];
+            }
             
 
 
@@ -62,12 +67,12 @@ namespace ARK.ViewModel.Administrationssystem
         private ObservableCollection<DamageType> _damageTypes;
         private DamageType _currentDamageType;
         private Feedback _feedbackDamageType;
-        private int _SelectedListItemDamageTypes;
+        private int _selectedListItemDamageTypes;
 
         public int SelectedListItemDamageTypes
         {
-            get { return _SelectedListItemDamageTypes; }
-            set { _SelectedListItemDamageTypes = value; Notify(); }    
+            get { return _selectedListItemDamageTypes; }
+            set { _selectedListItemDamageTypes = value; Notify(); }    
         }
 
         public Feedback FeedbackDamageType
@@ -182,20 +187,34 @@ namespace ARK.ViewModel.Administrationssystem
         }
         #endregion
 
-
-
-
-
-
         #region Standardture
+        private StandardTrip ReferenceToCurrentStandardTrip;
         private ObservableCollection<StandardTrip> _standardTrips;
+        private StandardTrip _currentStandardTrip;
+        private Feedback _feedbackStandardTrip;
+        private int _selectedListItemStandardTrips;
+
+        public int SelectedListItemStandardTrips
+        {
+            get { return _selectedListItemStandardTrips; }
+            set { _selectedListItemStandardTrips = value; Notify(); }
+        }
+
+
+        public Feedback FeedbackStandardTrip
+        {
+            get { return _feedbackStandardTrip; }
+            set { _feedbackStandardTrip = value; Notify(); }
+        }
+
+
         public ObservableCollection<StandardTrip> StandardTrips
         {
             get { return _standardTrips; }
             set { _standardTrips = value; Notify(); }
         }
 
-        private StandardTrip _currentStandardTrip;
+        
         public StandardTrip CurrentStandardTrip
         {
             get { return _currentStandardTrip; }
@@ -208,7 +227,17 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<StandardTrip>(e =>
                 {
-                    CurrentStandardTrip = e;
+                    if (e == null) return;
+
+                    CurrentStandardTrip = new StandardTrip()
+                    {
+                        Distance = e.Distance,
+                        Direction = e.Direction,
+                        Title = e.Title
+                    };
+                    ReferenceToCurrentStandardTrip = e;
+
+                    FeedbackStandardTrip = Feedback.Default;
                 });
             }
         }
@@ -217,10 +246,17 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand<StandardTrip>(e =>
                 {
+                    ReferenceToCurrentStandardTrip.Distance = CurrentStandardTrip.Distance;
+                    ReferenceToCurrentStandardTrip.Title = CurrentStandardTrip.Title;
+                    ReferenceToCurrentStandardTrip.Direction = CurrentStandardTrip.Direction;
                     _dbcontext.SaveChanges();
-                    System.Windows.MessageBox.Show("Gem knap");
+
+                    // Loader igen fra HELE databasen, og sætter ind i listview.
+                    // Bør optimseres til kun at loade den ændrede query.
+                    StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip.ToList());
+                    FeedbackStandardTrip = Feedback.Save;
                 });
             }
         }
@@ -231,7 +267,13 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    System.Windows.MessageBox.Show("Annulér knap");
+                    CurrentStandardTrip = new StandardTrip()
+                    {
+                        Distance = ReferenceToCurrentStandardTrip.Distance,
+                        Direction = ReferenceToCurrentStandardTrip.Direction,
+                        Title = ReferenceToCurrentStandardTrip.Title
+                    };
+                    FeedbackStandardTrip = Feedback.Cancel;
                 });
             }
         }
@@ -240,17 +282,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand<StandardTrip>(e =>
                 {
-                    StandardTrip StandardTripTemplate = new StandardTrip();
-                    StandardTripTemplate.Title = "Ny standardtur";
-                    StandardTripTemplate.Distance = 0;
-                    StandardTripTemplate.Direction = "En retning.";
-                    
+                    StandardTrip StandardTripTemplate = new StandardTrip()
+                    {
+                        Title = "Ny standardtur",
+                        Direction = "Vest",
+                        Distance = 5
+                    };
                     _dbcontext.StandardTrip.Add(StandardTripTemplate);
                     _dbcontext.SaveChanges();
                     StandardTrips.Add(StandardTripTemplate);
-                    System.Windows.MessageBox.Show("Opret knap");
+                    FeedbackStandardTrip = Feedback.Create;
+                    SelectedListItemStandardTrips = StandardTrips.Count - 1;
                 });
             }
         }
@@ -261,10 +305,11 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.StandardTrip.Remove(CurrentStandardTrip);
+                    _dbcontext.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
                     _dbcontext.SaveChanges();
-                    StandardTrips.Remove(CurrentStandardTrip);
-                    System.Windows.MessageBox.Show("Slet knap");
+                    StandardTrips.Remove(ReferenceToCurrentStandardTrip);
+                    FeedbackDamageType = Feedback.Delete;
+                    SelectedListItemStandardTrips = StandardTrips.Count - 1;
                 });
             }
         }
