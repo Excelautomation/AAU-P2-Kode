@@ -12,19 +12,40 @@
     <UserControl.DataContext>
         <Protokolsystem:BeginTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}">
             <Setter Property="Visibility" 
-                Value="{Binding Visible, 
-                        Converter={StaticResource BoolToVis}}"/>
+                Value="{Binding Visible, Converter={StaticResource BoolToVis}}"/>
+        </Style>
+        
+        <Style x:Key="DeactivateAddButtons" TargetType="Button">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding EnableMembers}" Value="true"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="IsEnabled" Value="True" />
+                </MultiDataTrigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
     <!--Content-->
-    <Grid Style="{DynamicResource ResourceKey=gridContent}">
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}">
+    <Grid Style="{DynamicResource ResourceKey=gridContent}" Margin="4,0,0,8" Width="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="391"/>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="76"/>
+        </Grid.RowDefinitions>
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0" Width="300">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -41,7 +62,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="309,0,0,0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0" Width="309">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -58,7 +79,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Margin="0,32,319,124" Height="Auto">
+        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -79,25 +100,70 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
-                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" Margin="309,32,6,124" SelectionMode="Multiple" 
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="340"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="AllMembersList" Grid.Row="0" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
+                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
                   IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto"
-                  ItemContainerStyle="{StaticResource ItemContainerStyle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
-                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
+                  ItemContainerStyle="{StaticResource ItemContainerStyle}" Width="Auto" Margin="0,0,0,5">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
+                            <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
                             <Run Text="{Binding Path=Member.FirstName}"/>
                             <Run Text="{Binding Path=Member.LastName}"/>
-                        </TextBlock>
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                            </TextBlock>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnAddGuest" Grid.Column="0" VerticalAlignment="Top"
+                    IsEnabled="{Binding EnableMembers}"
+                    Command="{Binding Path=ToggleKeyboard}"
+                    Background="{DynamicResource AddBG}"
+                    BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                        <TextBlock Grid.Column="3" Text="TILFØJ&#10;GÆST" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
+                    </Grid>
+                </Button>
+                <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
+                    IsEnabled="{Binding EnableMembers}"
+                    Command="{Binding Path=ToggleKeyboard}"
+                    Background="{DynamicResource AddBG}"
+                    BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/shape_square_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                        <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
+                    </Grid>
+                </Button>
+            </Grid>
+        </Grid>
 
         <!--Direction-->
-        <Border Name="Filters" HorizontalAlignment="Left" Height="40" Margin="0,421,0,0" VerticalAlignment="Top" Width="613" BorderBrush="#FFABADB3" BorderThickness="1">
-            <Grid Background="White">
+        <Border Name="Filters" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" BorderBrush="#FFABADB3" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="2" Width="617">
+            <Grid Background="#FFFBFBFB">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
@@ -105,7 +171,7 @@
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <RadioButton Grid.Column="0" Content="ØST" Margin="3,0,0,0" GroupName="{Binding Name, ElementName=Filters}"/>
+                <RadioButton Name="hej" Grid.Column="0" Content="ØST" Margin="3,0,0,0" GroupName="{Binding Name, ElementName=Filters}"/>
                 <RadioButton Grid.Column="1" Content="VEST - NORD&#10;OM EGHOLM" GroupName="{Binding Name, ElementName=Filters}"/>
                 <RadioButton Grid.Column="3" Content="VEST - SYD&#10;OM EGHOLM" GroupName="{Binding Name, ElementName=Filters}"/>
                 <RadioButton Grid.Column="4" Content="LANGTUR" GroupName="{Binding Name, ElementName=Filters}"/>
@@ -113,20 +179,20 @@
         </Border>
 
         <!--Buttons-->
-        <Grid Margin="0,461,10,5">
+        <Grid Grid.ColumnSpan="2" Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="3"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="153"/>
+                <ColumnDefinition Width="153"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="btnShowKeyboard" Grid.Column="0"
+            <Button x:Name="btnShowKeyboard" Grid.Column="0" VerticalAlignment="Top"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=ToggleKeyboard}"
                     Background="{StaticResource SearchFilterBG}"
-                    BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+                    BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -134,16 +200,16 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/keyboard_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/keyboard.png" Style="{StaticResource ResourceKey=btnImage}" />
                     <TextBlock Grid.Column="3" Text="VIS&#10;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
                 </Grid>
-        </Button>
+            </Button>
 
-            <Button Name="btnShowFilter" Grid.Column="1"
+            <Button Name="btnShowFilter" Grid.Column="1" VerticalAlignment="Top"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=ToggleFilter}"
                     Background="{StaticResource SearchFilterBG}"
-                    BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                    BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -151,41 +217,27 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/filter_add.png" />
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/filter.png" />
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="VIS&#10;FILTER" />
                 </Grid>
-        </Button>
+            </Button>
 
-            <Button x:Name="btnBeginTripNow" Grid.Column="4"
-                    Command="{Binding Path=StartTripNow}"
-                    Background="{StaticResource BeginBG}"
-                    BorderBrush="{StaticResource BeginBorder}" Height="Auto" Margin="0,5,-4,0" Width="Auto">
-                <Grid>
-                <Grid.ColumnDefinitions>
+            <Button x:Name="btnBeginTripNow" Grid.Column="4" VerticalAlignment="Top" 
+            	Style="{StaticResource ResourceKey=btnFilter}"  
+            	Command="{Binding StartTripNow}"
+            	Background="{StaticResource BeginBG}"
+            	BorderBrush="{StaticResource BeginBorder}" Margin="0,0,0,0" Width="Auto">
+                <Grid Margin="0,0,-2,0">
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="32"/>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Source="/View/images/document_page_next.png" Style="{StaticResource ResourceKey=btnImage}"/>
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}">
-                        <Run Text="BEGYND"/><LineBreak/>
-                        <Run Text="ROTUR"/>
-                    </TextBlock>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/document_page_next.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="BEGYND&#xA;ROTUR" />
                 </Grid>
-                
-                <!--<Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedItem, ElementName=AllMembersList}" Value="{x:Null}">
-                                <Setter Property="IsEnabled" Value="False" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>-->
             </Button>
-
-            </Grid>
-
+        </Grid>
     </Grid>
 </UserControl>

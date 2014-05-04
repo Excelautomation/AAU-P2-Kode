@@ -147,11 +147,11 @@ namespace ARK.ViewModel.Protokolsystem
         {
             FrameworkElement element = page();
 
-            // Deaktiver filter
+            // Deactivate filter
             EnableSearch = false;
             EnableFilters = false;
 
-            // Sæt filter
+            // Set filter
             var viewModelbase = element.DataContext as IFilterContentViewModel;
             if (viewModelbase != null)
             {
@@ -160,10 +160,10 @@ namespace ARK.ViewModel.Protokolsystem
             else
                 Filter = null;
 
-            // Skjul og clear keyboard
+            // Hide and clear keyboard
             KeyboardText = "";
 
-            // Fjern info
+            // Remove information
             CurrentInfo = null;
 
             base.NavigateToPage(() => element, pageTitle);
@@ -182,7 +182,6 @@ namespace ARK.ViewModel.Protokolsystem
                 Keyboard = new OnScreenKeyboard();
                 KeyboardHide();
 
-                // Kalder sig selv igen for at få nyt resultat
                 return Keyboard;
             }
             set
@@ -310,16 +309,16 @@ namespace ARK.ViewModel.Protokolsystem
 
         public void ChangeInfo<T>(FrameworkElement infopage, T info)
         {
-            // Tjek page
+            // Check page
             if (infopage == null) throw new ArgumentNullException("infopage");
 
-            // Sæt nuværende info
+            // Set the correct infopage
             CurrentInfo = infopage;
 
-            // Tjek viewModel
+            // Check ViewModel
             var viewModel = infopage.DataContext as IInfoContentViewModel<T>;
 
-            // Sæt parent
+            // Set parent
             if (viewModel == null) return;
 
             viewModel.Parent = this;
