@@ -80,7 +80,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                 if (!ShowLongDistanceForm && !ShowDamageTypes)
                     return items;
 
-                if (typeof(DamageForm) == typeof(T))
+                if (typeof (DamageForm) == typeof (T))
                     if (ShowDamageTypes)
                         return items;
                     else
@@ -99,20 +99,22 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                         throw new NotImplementedException();
 
                     if (ShowAccepted)
-                        return items.Cast<LongDistanceForm>().Where(form => form.Approved.GetValueOrDefault()).ToList().Cast<T>();
+                        return
+                            items.Cast<LongDistanceForm>()
+                                .Where(form => form.Approved.GetValueOrDefault())
+                                .ToList()
+                                .Cast<T>();
                     else if (ShowDenied)
-                        return items.Cast<LongDistanceForm>().Where(form => !form.Approved.GetValueOrDefault()).ToList().Cast<T>();
+                        return
+                            items.Cast<LongDistanceForm>()
+                                .Where(form => !form.Approved.GetValueOrDefault())
+                                .ToList()
+                                .Cast<T>();
 
                     return items;
                 }
 
                 return items;
-            }
-
-            public override bool CanFilter<T>(System.Collections.Generic.IEnumerable<T> items)
-            {
-                return typeof (LongDistanceForm) == typeof (T) ||
-                       typeof(DamageForm) == typeof(T);
             }
         }
     }

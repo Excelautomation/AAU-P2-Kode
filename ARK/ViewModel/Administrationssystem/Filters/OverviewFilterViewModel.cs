@@ -86,13 +86,6 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
                 return new List<T>();
             }
-
-            public override bool CanFilter<T>(IEnumerable<T> items)
-            {
-                return typeof (DamageForm) == typeof (T) ||
-                       typeof (LongDistanceForm) == typeof (T) ||
-                       typeof (Boat) == typeof (T);
-            }
         }
     }
 }
