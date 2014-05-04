@@ -10,6 +10,7 @@ namespace ARK.Model
         public DateTime Arrival { get; set; }
         public string Text { get; set; }
         public bool? Approved { get; set; }
+        //public bool Rejected { get; set; }
 
         //Foreign key
         public int BoatId { get; set; }
