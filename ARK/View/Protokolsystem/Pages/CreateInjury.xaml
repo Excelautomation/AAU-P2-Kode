@@ -7,9 +7,18 @@
              Style="{DynamicResource ResourceKey=ucContent}">
 
     <UserControl.Resources>
-        <Style TargetType="{x:Type DatePickerTextBox}">
-            <Setter Property="Text" Value="Vælg dato" />
-        </Style>
+        <!--<Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <Grid>
+                        <
+                    </Grid>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
     </UserControl.Resources>
 
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
@@ -113,17 +122,34 @@
         </ListView>
 
         <RichTextBox HorizontalAlignment="Left" Height="108" Margin="311,345,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="0,421,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
+        <ComboBox HorizontalAlignment="Left" Margin="0,345,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
+        <Grid Margin="0,461,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnCustomDistance" Grid.Column="4"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding ToggleFilter}"
+        		Background="{StaticResource CustomBG}"
+        		BorderBrush="{StaticResource CustomBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/map_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ÆNDRE&#xA;DISTANCE" />
+                </Grid>
+            </Button>
 
-        <ComboBox HorizontalAlignment="Left" Margin="0,345,0,0" VerticalAlignment="Top" Width="301" Height="32" FontSize="21.333" Background="White">
-            <ComboBoxItem Content="Hul i skroget" HorizontalAlignment="Left" Width="349.104" />
-            <ComboBoxItem Content="Åre knækket" HorizontalAlignment="Left" Width="349.104" />
-            <ComboBoxItem Content="Båd eksploderede" HorizontalAlignment="Left" Width="349.104" />
-        </ComboBox>
-
-        <ComboBox HorizontalAlignment="Left" Margin="0,421,0,0" VerticalAlignment="Top" Width="302" Height="32" FontSize="21.333" Background="White">
-            <ComboBoxItem Content="Funktionel" HorizontalAlignment="Left" Width="349.104" />
-            <ComboBoxItem Content="Kosmetisk" HorizontalAlignment="Left" Width="349.104" />
-        </ComboBox>
+        </Grid>
 
     </Grid>
 </UserControl>
