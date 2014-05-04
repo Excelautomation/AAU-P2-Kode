@@ -56,7 +56,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="0,313,0,0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="0,324,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -69,7 +69,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="0,389,0,0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="0,396,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -82,7 +82,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="312,313,0,0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="311,324,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -95,7 +95,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="ShowMembers" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="0,32,319,240">
+        <ListView x:Name="ShowMembers" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="0,32,319,221">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -108,7 +108,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="ShowBoats" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="311,32,8,240">
+        <ListView x:Name="ShowBoats" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="311,32,8,221">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -121,9 +121,9 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <RichTextBox HorizontalAlignment="Left" Height="108" Margin="311,345,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
-        <ComboBox HorizontalAlignment="Left" Margin="0,421,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
-        <ComboBox HorizontalAlignment="Left" Margin="0,345,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
+        <RichTextBox HorizontalAlignment="Left" Height="105" Margin="311,356,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="0,428,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
+        <ComboBox HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
         <Grid Margin="0,461,10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
@@ -135,8 +135,8 @@
             <Button x:Name="btnCustomDistance" Grid.Column="4"
         		Style="{StaticResource ResourceKey=btnFilter}" 
         		Command="{Binding ToggleFilter}"
-        		Background="{StaticResource CustomBG}"
-        		BorderBrush="{StaticResource CustomBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+        		Background="{StaticResource InputBG}"
+        		BorderBrush="{StaticResource InputBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -144,8 +144,56 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/map_add.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ÆNDRE&#xA;DISTANCE" />
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_white_go.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;SKADE" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnShowKeyboard" Grid.Column="0"
+            	Style="{StaticResource ResourceKey=btnFilter}" 
+            	Command="{Binding ToggleKeyboard}"
+            	Background="{StaticResource SearchFilterBG}"
+            	BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/ARK;component/View/images/keyboard.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="VIS&#xA;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnCustomDistance_Copy" Grid.Column="1"
+            	Style="{StaticResource ResourceKey=btnFilter}" 
+            	Command="{Binding ToggleFilter}"
+            	Background="{StaticResource InfoBG}"
+            	BorderBrush="{StaticResource InfoBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/document_inspector.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="SE AKTIVE&#xA;SKADER" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnCustomDistance_Copy1" Grid.Column="3"
+            	Style="{StaticResource ResourceKey=btnFilter}" 
+            	Command="{Binding ToggleFilter}"
+            	Background="{StaticResource AddBG}"
+            	BorderBrush="{StaticResource AddBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/error_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;SKADE" />
                 </Grid>
             </Button>
 

@@ -15,45 +15,67 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <Style x:Key="elwidth" TargetType="FrameworkElement">
-            <Setter Property="Width" Value="188"/>
+        <Style x:Key="brdHeader" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="BorderBrush" Value="#FF0D476C"/>
         </Style>
-        <Style x:Key="RectWidth" TargetType="Rectangle">
-            <Setter Property="Width" Value="190"/>
+        
+        <Style x:Key="txbHeader" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=txbHeadline}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
-        <Style x:Key="WhiteRounded" TargetType="Rectangle" BasedOn="{StaticResource RectWidth}">
-            <Setter Property="Stroke" Value="#FFCDCDCD"/>
-            <Setter Property="Fill" Value="#FFE9EAED"/>
-            <Setter Property="RadiusX" Value="3"/>
-            <Setter Property="RadiusY" Value="3"/>
+
+        <Style x:Key="lstContent" TargetType="ListView">
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
+
         <Style x:Key="Stcbgcolor" TargetType="StackPanel">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Member.ShortTripCox}">
                     <DataTrigger.Value>
                         <sys:Boolean>True</sys:Boolean>
                     </DataTrigger.Value>
-                        <Setter Property="Background" Value="LightGreen"/>
+                    <Setter Property="Background" Value="LightGreen"/>
                 </DataTrigger>
             </Style.Triggers>
             <Style.Resources>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource lstViewContent}"/>
             </Style.Resources>
         </Style>
+
         <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
+
     </UserControl.Resources>
 
     <Grid Height="768" Margin="3,5,3,0">
-        <Rectangle HorizontalAlignment="Left" Height="763" Margin="0" VerticalAlignment="Top" Style="{StaticResource WhiteRounded}" Width="194" Fill="#FFFBFBFB"/>
-        <TextBlock x:Name="textBlock" Style="{StaticResource elwidth}" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="Båd" VerticalAlignment="Top" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="190"/>
-        <TextBlock Style="{StaticResource elwidth}" HorizontalAlignment="Left" Margin="2,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="Black" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
-                Besætning ( <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> / <Run Text="{Binding Path=SelectedBoat[0].NumberofSeats, Mode=OneWay}"/> )
-        </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
 
-        <ListView x:Name="BoatInfo" ItemsSource="{Binding SelectedBoat}" 
-                  HorizontalAlignment="Left" Height="334" VerticalAlignment="Top" Opacity="0.975" Margin="2,24,0,0" 
-                  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}" BorderThickness="0" 
-                  Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
+        <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="0">
+            <TextBlock Text="BÅD" Style="{StaticResource ResourceKey=txbHeader}"/>
+        </Border>
+
+        <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
+            <TextBlock Style="{StaticResource ResourceKey=txbHeader}">
+                <Run Text="BESÆTNING"/>
+                <Run Text="(" FontWeight="Normal"/>
+                <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> 
+                <Run Text=" / " FontWeight="Normal"/>
+                <Run Text="{Binding Path=SelectedBoat[0].NumberofSeats, Mode=OneWay}"/>
+                <Run Text=")" FontWeight="Normal"/>
+            </TextBlock>
+        </Border>
+
+        <ListView x:Name="BoatInfo" Grid.Row="1" ItemsSource="{Binding SelectedBoat}" Style="{StaticResource ResourceKey=lstContent}" SelectionMode="Single">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -92,10 +114,9 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
-                      HorizontalAlignment="Left" Opacity="0.975" Margin="2,383,0,7" 
-                      FontSize="18" BorderBrush="{x:Null}" Background="White" 
-                      Width="{Binding ActualWidth, ElementName=BoatInfo, Mode=OneWay}">
+        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" Grid.Row="3"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      FontSize="18" BorderBrush="{x:Null}" Background="White">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
