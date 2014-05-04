@@ -48,14 +48,14 @@ namespace ARK.ViewModel.Protokolsystem
                 .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit)).ToListAsync();
             Task<List<Member>> membersAync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
 
-            // Instaliser lister
+            // Initialize lists
             _boats = new List<Boat>();
             _selectedMembers = new ObservableCollection<MemberViewModel>();
             Members = new ObservableCollection<MemberViewModel>();
 
             // Setup filter
             var filterController = new FilterContent(this);
-            filterController.EnableFilter(true, false);
+            filterController.EnableFilter(false, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
             // Configurate the keyboard
@@ -63,7 +63,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 TimeCounter.StopTime();
 
-                // Indlæs data
+                // Read data
                 _boats = boatsAsync.Result;
                 Members = new ObservableCollection<MemberViewModel>(
                     membersAync.Result.Select(member => new MemberViewModel(member)));
