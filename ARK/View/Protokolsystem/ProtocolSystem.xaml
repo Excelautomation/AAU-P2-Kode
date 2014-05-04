@@ -168,9 +168,26 @@
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Width="210" Grid.RowSpan="3" Background="#FFFBFBFB" Margin="0,0,-5,0" Grid.Column="2">
             <ContentControl Content="{Binding Path=CurrentInfo}"/>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1" Height="45" VerticalAlignment="Top">
-            <Label x:Name="HeadlineLabel" Content="{Binding Path=CurrentPageTitle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFFBFBFB" Width="Auto" FontSize="28" FontWeight="Bold" FontFamily="Calibri" Padding="10, 4, 0, 0"/>
-            <Image Source="/View/images/top_shadow.png" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
+        
+        <Grid Grid.Row="0" Grid.Column="1" Height="45" VerticalAlignment="Top" Background="#FFFBFBFB">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/View/images/top_shadow.png" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
+            <Label x:Name="HeadlineLabel" Grid.Column="0" Content="{Binding Path=CurrentPageTitle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" FontSize="28" FontWeight="Bold" FontFamily="Calibri" Padding="10, 4, 0, 0"/>
+            <Grid Grid.Column="2" Margin="0,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <Run Text="BÅDE UDE:" FontWeight="Bold"/>
+                </TextBlock>
+                <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <Run Text="KILOMETER I DAG:" FontWeight="Bold"/>
+                </TextBlock>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
