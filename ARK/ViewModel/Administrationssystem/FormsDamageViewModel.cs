@@ -11,18 +11,19 @@ namespace ARK.ViewModel.Administrationssystem
         private readonly DbArkContext _dbArkContext;
         private DamageForm _damageForm;
         private bool _RecentChange = false;
-        public bool RecentChange 
-        {
-            get { return _RecentChange; }
-            set { _RecentChange = value; Notify(); }
-        }
-        
+
         public FormsDamageViewModel ()
         {
             _dbArkContext = DbArkContext.GetDbContext();
 
 
 
+        }
+
+        public bool RecentChange
+        {
+            get { return _RecentChange; }
+            set { _RecentChange = value; Notify(); }
         }
 
         public DamageForm DamageForm { get { return _damageForm; } 
