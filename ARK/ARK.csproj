@@ -528,6 +528,26 @@
   <ItemGroup>
     <Resource Include="View\images\cancel.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\images\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\images\keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\images\user_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\images\shape_square_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\images\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\images\key_left.png" />
+    <Resource Include="View\images\key_mid.png" />
+    <Resource Include="View\images\key_right.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
