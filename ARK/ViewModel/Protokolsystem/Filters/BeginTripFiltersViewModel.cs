@@ -143,11 +143,6 @@ namespace ARK.ViewModel.Protokolsystem.Filters
                 return boats.Where(boat => Filter(boat)).Cast<T>();
             }
 
-            public override bool CanFilter<T>(IEnumerable<T> items)
-            {
-                return typeof (Boat) == typeof (T);
-            }
-
             public IEnumerable<Boat> GetBoats<T>(IEnumerable<T> items)
             {
                 return items.Cast<Boat>();

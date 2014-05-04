@@ -212,8 +212,5 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         #endregion
-
-
-        
     }
 }

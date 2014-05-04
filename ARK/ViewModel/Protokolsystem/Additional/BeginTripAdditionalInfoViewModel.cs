@@ -1,4 +1,5 @@
-﻿using ARK.Model;
+﻿using System.Windows.Input;
+using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Info;
@@ -46,9 +47,17 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         }
 
         // Methods
-        public void RemoveMember(MemberViewModel member)
+        public ICommand RemoveMember
         {
-            SelectedMembers.Remove(member);
+            get
+            {
+                return GetCommand<MemberViewModel>(member =>
+                {
+                    if (member == null) return;
+
+                    SelectedMembers.Remove(member);
+                });
+            }
         }
     }
 }

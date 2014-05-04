@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
+using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Base.Interfaces.Info;
-using ARK.View.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -17,7 +16,6 @@ namespace ARK.ViewModel.Protokolsystem
     {
         #region PrivateFields
 
-        private ICommand _infoScreen;
         private ICommand _boatsOut;
         private ICommand _createDamage;
         private ICommand _createLongDistance;
@@ -27,10 +25,12 @@ namespace ARK.ViewModel.Protokolsystem
         private ICommand _endTrip;
         private FrameworkElement _filter;
         private string _headlineText;
+        private ICommand _infoScreen;
         private OnScreenKeyboard _keyboard;
         private ICommand _memberInformation;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
+        private EndTrip _endTripPage;
 
         #endregion
 
@@ -52,6 +52,8 @@ namespace ARK.ViewModel.Protokolsystem
 
         #region Pages
 
+        private BeginTripBoats _beginTripBoatsPage;
+
         public string HeadlineText
         {
             get { return _headlineText; }
@@ -64,10 +66,17 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand InfoScreen // overview screen..
         {
-            get
-            {
-                return _infoScreen ?? (_infoScreen = GetNavigateCommand(() => new MainPage(), "InfoScreen"));
-            }
+            get { return _infoScreen ?? (_infoScreen = GetNavigateCommand(() => new MainPage(), "InfoScreen")); }
+        }
+
+        private BeginTripBoats BeginTripBoatsPage
+        {
+            get { return _beginTripBoatsPage ?? (_beginTripBoatsPage = new BeginTripBoats()); }
+        }
+
+        private EndTrip EndTripPage
+        {
+            get { return _endTripPage ?? (_endTripPage = new EndTrip()); }
         }
 
         public ICommand StartTrip
@@ -76,7 +85,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _startTrip ??
                        (_startTrip =
-                           GetNavigateCommand(() => new BeginTripBoats(), "START ROTUR"));
+                           GetNavigateCommand(() => BeginTripBoatsPage, "START ROTUR"));
             }
         }
 
@@ -85,7 +94,7 @@ namespace ARK.ViewModel.Protokolsystem
             get
             {
                 return _endTrip ??
-                       (_endTrip = GetNavigateCommand(() => new EndTrip(), "AFSLUT ROTUR"));
+                       (_endTrip = GetNavigateCommand(() => EndTripPage, "AFSLUT ROTUR"));
             }
         }
 
@@ -105,7 +114,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _statisticsDistance ??
                        (_statisticsDistance =
-                           GetNavigateCommand(() => new DistanceStatistics(), 
+                           GetNavigateCommand(() => new DistanceStatistics(),
                                "KILOMETERSTATISTIK"));
             }
         }
@@ -116,7 +125,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _memberInformation ??
                        (_memberInformation =
-                           GetNavigateCommand(() => new MembersInformation(), 
+                           GetNavigateCommand(() => new MembersInformation(),
                                "MEDLEMSINFORMATION"));
             }
         }
@@ -127,7 +136,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createDamage ??
                        (_createDamage =
-                           GetNavigateCommand(() => new CreateInjury(), 
+                           GetNavigateCommand(() => new CreateInjury(),
                                "SKADE-BLANKET"));
             }
         }
@@ -138,7 +147,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createLongDistance ??
                        (_createLongDistance =
-                           GetNavigateCommand(() => new CreateLongDistance(), 
+                           GetNavigateCommand(() => new CreateLongDistance(),
                                "LANGTUR-BLANKET"));
             }
         }
@@ -222,6 +231,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             KeyboardText = "";
         }
+
         #endregion
 
         #region Filter
@@ -251,12 +261,6 @@ namespace ARK.ViewModel.Protokolsystem
 
                 Notify();
             }
-        }
-
-        private void filter_FilterChanged(object sender, FilterEventArgs e)
-        {
-            if (FilterTextChanged != null)
-                FilterTextChanged(sender, e);
         }
 
         public event EventHandler<SearchEventArgs> SearchTextChanged;
@@ -291,6 +295,12 @@ namespace ARK.ViewModel.Protokolsystem
                     EnableSearch = false;
                 }
             }
+        }
+
+        private void filter_FilterChanged(object sender, FilterEventArgs e)
+        {
+            if (FilterTextChanged != null)
+                FilterTextChanged(sender, e);
         }
 
         #endregion
