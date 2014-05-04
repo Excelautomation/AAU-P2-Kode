@@ -115,7 +115,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                 if (typeof (Boat) != typeof (T))
                     return items;
 
-                IEnumerable<Boat> boats = items.Cast<Boat>();
+                IEnumerable<Boat> boats = items.Cast<Boat>().ToList();
                 var output = new List<Boat>();
 
                 if (ShowBoatsOut)
@@ -123,7 +123,8 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                 if (ShowBoatsHome)
                     output = FilterContent.MergeLists(output, boats.Where(boat => !boat.BoatOut)).ToList();
                 if (ShowBoatsUnderService)
-                    output = FilterContent.MergeLists(output, boats.Where(boat => boat.Damaged && !boat.Usable)).ToList();
+                    output =
+                        FilterContent.MergeLists(output, boats.Where(boat => boat.Damaged && !boat.Usable)).ToList();
                 if (ShowBoatsDamaged)
                     output = FilterContent.MergeLists(output, boats.Where(boat => boat.Damaged)).ToList();
                 if (ShowInactiveBoats)
@@ -132,11 +133,6 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                     output = FilterContent.MergeLists(output, boats.Where(boat => boat.Usable && boat.Active)).ToList();
 
                 return output.Cast<T>();
-            }
-
-            public override bool CanFilter<T>(IEnumerable<T> items)
-            {
-                return typeof (Boat) == typeof (T);
             }
         }
     }

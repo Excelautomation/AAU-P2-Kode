@@ -28,27 +28,16 @@ namespace ARK.ViewModel.Protokolsystem
         private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
 
         private bool _enableMembers; // Used to determine whether the members-listview should be enabled
-        private FrameworkElement _filter;
         private FrameworkElement _infoPage; // Informationpage
         private Boat _selectedBoat; // Holds the selected boat
+
+        private DateTime _latestData;
 
         #region Constructors
 
         public BeginTripViewModel()
         {
-            TimeCounter.StartTimer();
-            TimeCounter.StartTimer();
-
-            // Load data. Check the boats activitylevel on a 8-day-basis
-            DateTime limit = DateTime.Now.AddDays(-8);
-
-            // Async start load
-            Task<List<Boat>> boatsAsync = _db.Boat
-                .Where(b => b.Active)
-                .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit)).ToListAsync();
-            Task<List<Member>> membersAync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
-
-            // Initialize lists
+            // Instaliser lister
             _boats = new List<Boat>();
             _selectedMembers = new ObservableCollection<MemberViewModel>();
             Members = new ObservableCollection<MemberViewModel>();
@@ -58,20 +47,40 @@ namespace ARK.ViewModel.Protokolsystem
             filterController.EnableFilter(false, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
+            // Set up variables to load of data
+            Task<List<Boat>> boatsAsync = null;
+            Task<List<Member>> membersAync = null;
+
             // Configurate the keyboard
             ParentAttached += (sender, args) =>
             {
-                TimeCounter.StopTime();
+                if (boatsAsync == null || membersAync == null || (DateTime.Now - _latestData).TotalHours > 2)
+                {
+                    // Load data. Check the boats activitylevel on a 8-day-basis
+                    DateTime limit = DateTime.Now.AddDays(-8);
+
+                    // Async start load of data
+                    boatsAsync = _db.Boat
+                        .Where(b => b.Active)
+                        .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit)).ToListAsync();
+                    membersAync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
+
+                    // Set date
+                    _latestData = DateTime.Now;
 
                 // Read data
                 _boats = boatsAsync.Result;
                 Members = new ObservableCollection<MemberViewModel>(
                     membersAync.Result.Select(member => new MemberViewModel(member)));
-
-                TimeCounter.StopTime();
+                }
 
                 // Reset filter
                 ResetFilter();
+
+                // Reset lists
+                SelectedMembers.Clear();
+                SelectedBoat = null;
+                EnableMembers = false;
 
                 UpdateInfo();
             };
@@ -212,7 +221,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public FrameworkElement Filter
         {
-            get { return _filter ?? (_filter = new BeginTripFilters()); }
+            get { return new BeginTripFilters(); }
         }
 
         private void ResetFilter()

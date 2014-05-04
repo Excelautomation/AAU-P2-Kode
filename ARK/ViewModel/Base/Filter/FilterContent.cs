@@ -35,17 +35,31 @@ namespace ARK.ViewModel.Base.Filter
 
         public void EnableFilter(bool enableSearch, bool enableFilters)
         {
+            IFilterContainerViewModel parentFilterContainer = null;
+
             ContentViewModel.ParentAttached += (sender, args) =>
             {
                 // Filter
                 FilterContainer.EnableSearch = enableSearch;
                 FilterContainer.EnableFilters = enableFilters;
 
-                // Bind til søgeevent
-                FilterContainer.SearchTextChanged += FilterContainerOnSearchTextChanged;
+                // Unbind events
+                if (parentFilterContainer != null)
+                {
+                    parentFilterContainer.SearchTextChanged -= FilterContainerOnSearchTextChanged;
+                    parentFilterContainer.FilterTextChanged -= FilterContainerOnFilterTextChanged;
+                }
 
-                // Bind til filterEvent
+                // Bind events
+                FilterContainer.SearchTextChanged += FilterContainerOnSearchTextChanged;
                 FilterContainer.FilterTextChanged += FilterContainerOnFilterTextChanged;
+
+                // Delete last eventargs
+                LastSearchEventArgs = null;
+                LastFilterEventArgs = null;
+
+                // Set parentFilterContainer so we can unbind events in the future
+                parentFilterContainer = FilterContainer;
             };
         }
 
@@ -73,7 +87,7 @@ namespace ARK.ViewModel.Base.Filter
 
         public static IEnumerable<T> FilterItems<T>(IEnumerable<T> items, FilterEventArgs filterEventArgs)
         {
-            var filters = filterEventArgs.Filters.Where(filter => filter != null && filter.CanFilter(items)).ToList();
+            var filters = filterEventArgs.Filters.Where(filter => filter != null).ToList();
 
             if (!filters.Any())
                 return items;
