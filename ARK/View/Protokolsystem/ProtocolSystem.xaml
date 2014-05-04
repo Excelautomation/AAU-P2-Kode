@@ -7,7 +7,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="Manual">
-    
+
     <Window.DataContext>
         <Protokolsystem:ProtocolSystemMainViewModel />
     </Window.DataContext>
@@ -21,53 +21,86 @@
             <Setter Property="RadiusY" Value="3"/>
             <Setter Property="Stroke" Value="#FFCDCDCD"/>
         </Style>
-        
-        <Style x:Key="ProtokolButtons" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
+
+        <Style x:Key="txbProtokol" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
             <Setter Property="LineHeight" Value="18"/>
             <Setter Property="Margin" Value="10,10,5,5"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
+
+        <Style x:Key="btnProtokol" TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
+            <Setter Property="OpacityMask">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#99000000" Offset="0"/>
+                        <GradientStop Color="White" Offset="0.866"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    
+
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFB0D141" Offset="0"/>
             <GradientStop Color="#FF1B4E09" Offset="1"/>
         </LinearGradientBrush>
     </Window.BorderBrush>
-    
+
     <Grid Width="1020">
         <Grid.RowDefinitions>
             <RowDefinition Height="49"/>
             <RowDefinition Height="537"/>
             <RowDefinition Height="182"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="194*"/>
             <ColumnDefinition Width="621*"/>
             <ColumnDefinition Width="205*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="621" Background="White" Grid.Column="1" Grid.Row="1">
             <ContentControl Content="{Binding Path=CurrentPage}" VerticalAlignment="Top"/>
         </Grid>
-        
+
         <StackPanel x:Name="Buttons" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="621">
             <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=EnableSearch, Converter={StaticResource BoolToVis}}" Height="182"/>
             <ContentControl Content="{Binding Path=Filter}" Visibility="{Binding Path=EnableFilters, Converter={StaticResource BoolToVis}}" Height="182"/>
         </StackPanel>
-        
-        <Grid HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="194" Grid.Row="0" Grid.RowSpan="3" Background="#FFFBFBFB">
+
+        <Grid HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="194" Grid.Row="0" Grid.RowSpan="3">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Repeat">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="White" Offset="0.026"/>
+                    <GradientStop Color="#FFCDCDCD"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="190"/>
                 <RowDefinition Height="200"/>
                 <RowDefinition Height="135"/>
                 <RowDefinition Height="310"/>
             </Grid.RowDefinitions>
-            
+
             <!--BEGIN & END-->
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
@@ -75,20 +108,20 @@
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="BeginTrip" Grid.Row="0" VerticalAlignment="Top" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding StartTrip}"
             	        Background="{StaticResource BeginBG}"
             	        BorderBrush="{StaticResource BeginBorder}" 
-                        Width="190" Height="90" BorderThickness="2">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="START&#xA;ROTUR" />
+                        Width="Auto" Height="90" BorderThickness="2,2,0,2" Margin="2,0,0,0">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="START&#xA;ROTUR" />
                 </Button>
                 <Button x:Name="EndTrip" Grid.Row="1" VerticalAlignment="Top" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding EndTrip}"
             	        Background="{StaticResource EndBG}"
             	        BorderBrush="{StaticResource EndBorder}" 
-                        Width="190" Height="90">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="AFSLUT&#xA;ROTUR" />
+                        Width="Auto" Height="90" Margin="2,0,0,0" BorderThickness="2,2,0,2">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="AFSLUT&#xA;ROTUR" />
                 </Button>
             </Grid>
 
@@ -100,29 +133,29 @@
                     <RowDefinition Height="33*"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="boatsOverview" Grid.Row="0" VerticalAlignment="Top" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding BoatsOut}"
             	        Background="{StaticResource InfoBG}"
             	        BorderBrush="{StaticResource InfoBorder}" 
-                        Width="190" Height="62" Margin="2,0">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="BÅDE PÅ&#xA;VANDET" />
+                        Width="Auto" Height="62" Margin="2,0,0,0" BorderThickness="2,2,0,2">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="BÅDE PÅ&#xA;VANDET" />
                 </Button>
 
                 <Button x:Name="DistanceStatistics" Grid.Row="1" VerticalAlignment="Top" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding StatisticsDistance}"
             	        Background="{StaticResource InfoBG}"
             	        BorderBrush="{StaticResource InfoBorder}" 
-                        Width="190" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="KILOMETER&#xA;STATISTIK" />
+                        Width="Auto" Height="62" Margin="2,0,0,0" BorderThickness="2,2,0,2">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="KILOMETER&#xA;STATISTIK" />
                 </Button>
                 <Button x:Name="MembersInformation" Grid.Row="2" VerticalAlignment="Top" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding MemberInformation}"
             	        Background="{StaticResource InfoBG}"
             	        BorderBrush="{StaticResource InfoBorder}" 
-                        Width="190" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="MEDLEMS&#xA;INFORMATIONER" />
+                        Width="Auto" Height="62" Margin="2,0,0,0" BorderThickness="2,2,0,2">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="MEDLEMS&#xA;INFORMATIONER" />
                 </Button>
             </Grid>
 
@@ -133,20 +166,20 @@
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="CreateLongDistance" Grid.Row="0" VerticalAlignment="Top" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding CreateLongDistance}"
             	        Background="{StaticResource InputBG}"
             	        BorderBrush="{StaticResource InputBorder}" 
-                        Width="190" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="LANGTURE" />
+                        Width="Auto" Height="62" BorderThickness="2,2,0,2" Margin="2,0,0,0">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="LANGTURE" />
                 </Button>
                 <Button x:Name="CreateDamage" Grid.Row="1" VerticalAlignment="Top" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
-            	        Command="{Binding CreateDamage}"
-            	        Background="{StaticResource InputBG}"
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
+            	        Command="{Binding CreateDamage}" 
+                        Background="{StaticResource InputBG}"
             	        BorderBrush="{StaticResource InputBorder}" 
-                        Width="190" Height="65" Margin="2,0">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="SKADER" />
+                        Width="Auto" Height="65" Margin="2,0,0,0" BorderThickness="2,2,0,2">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="SKADER" />
                 </Button>
             </Grid>
 
@@ -156,37 +189,51 @@
                     <RowDefinition Height="235"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="AdminPanel" Grid.Row="0" VerticalAlignment="Bottom" 
-            	        Style="{StaticResource ResourceKey=btnFilter}"  
+            	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding AdminPanel_Click}"
             	        Background="{DynamicResource NeuBG}"
             	        BorderBrush="{StaticResource NeuBorder}" 
-                        Width="190" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=ProtokolButtons}" Text="ADMINISTRATIONS&#xA;PANEL" />
+                        Width="Auto" Height="62" Margin="2,0,0,0" BorderThickness="2,2,0,2">
+                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="ADMINISTRATIONS&#xA;PANEL" />
                 </Button>
             </Grid>
         </Grid>
-        
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Width="210" Grid.RowSpan="3" Background="#FFFBFBFB" Margin="0,0,-5,0" Grid.Column="2">
+
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Width="210" Grid.RowSpan="3" Margin="0,0,-5,0" Grid.Column="2">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Repeat">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="White" Offset="0.974"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <ContentControl Content="{Binding Path=CurrentInfo}"/>
         </Grid>
-        
-        <Grid Grid.Row="0" Grid.Column="1" Height="45" VerticalAlignment="Top" Background="#FFFBFBFB">
+
+        <Grid Grid.Row="0" Grid.Column="1" Height="45" VerticalAlignment="Top" Background="#FF979595">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="51*"/>
+                <ColumnDefinition Width="49*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="/View/images/top_shadow.png" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
-            <Label x:Name="HeadlineLabel" Grid.Column="0" Content="{Binding Path=CurrentPageTitle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" FontSize="28" FontWeight="Bold" FontFamily="Calibri" Padding="10, 4, 0, 0"/>
+            <Border Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" BorderThickness="0,0,0,2" BorderBrush="#FF0D476C" />
+            <Label x:Name="HeadlineLabel" Foreground="White" Grid.Column="0" Content="{Binding Path=CurrentPageTitle}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" FontSize="28" FontWeight="Bold" FontFamily="Corbel" Padding="10, 4, 0, 0"/>
             <Grid Grid.Column="2" Margin="0,5,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Style="{StaticResource ResourceKey=lstViewContent}">
-                    <Run Text="BÅDE PÅ VANDET:" FontWeight="Bold"/>
+                    <Run Text="BÅDE PÅ VANDET:" FontWeight="Bold" Foreground="White"/>
                 </TextBlock>
                 <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
-                    <Run Text="KILOMETER I DAG:" FontWeight="Bold"/>
+                    <Run Text="KILOMETER I DAG:" FontWeight="Bold" Foreground="White"/>
                 </TextBlock>
             </Grid>
         </Grid>
