@@ -12,14 +12,13 @@ namespace ARK.Model
         public DateTime TripStartTime { get; set; }
         public DateTime? TripEndedTime { get; set; }
         public string Direction { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; }
 
-        public string TimeBoatOut
+        public TimeSpan TimeBoatOut
         {
             get
             {
-                var temp = DateTime.Now.Subtract(TripStartTime);
-                return temp.Hours + ":" + temp.Minutes;
+                return DateTime.Now.Subtract(TripStartTime);
             }
         }
 
