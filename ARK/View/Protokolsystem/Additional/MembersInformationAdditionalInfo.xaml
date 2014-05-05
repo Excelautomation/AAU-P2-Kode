@@ -5,44 +5,91 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-
              xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" >
+    
     <UserControl.DataContext>
         <VM:MembersinformationAdditionalInfoViewModel/>
     </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <Style x:Key="lstContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
+            <Setter Property="Margin" Value="5,3,0,0"/>
+        </Style>
+        
+        <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
+    </UserControl.Resources>
     
     <Grid Height="768" Margin="3,5,3,0">
-        <Rectangle HorizontalAlignment="Left" Height="763" Margin="0" VerticalAlignment="Top"  Width="194" Fill="#FFFBFBFB"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="2,2,0,0" TextWrapping="Wrap" Text="Medlems Info" VerticalAlignment="Top" FontSize="18" Foreground="Black" FontWeight="Bold" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="190"/>
-        <TextBlock  HorizontalAlignment="Left" Margin="2,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="Black" Background="White" Padding="5,0,0,0" FontFamily="Calibri" Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
-                Besætning ( <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> / <Run Text="{Binding Path=SelectedBoat[0].NumberofSeats, Mode=OneWay}"/> )
-        </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
 
-        <ListView x:Name="BoatInfo" ItemsSource="{Binding SelectedBoat}" 
-                  HorizontalAlignment="Left" Height="334" VerticalAlignment="Top" Opacity="0.975" Margin="2,24,0,0" 
-                  SelectionMode="Single" FontSize="18" BorderBrush="{x:Null}" BorderThickness="0" 
-                  Width="{Binding ActualWidth, ElementName=textBlock, Mode=OneWay}">
-            <TextBlock Name="someTxt">
-                <Run Text="Navn"/>
-                <Run Text="{Binding Path=SelectedMember.FirstName}"/>
-            </TextBlock>
-            <TextBlock Name="sknvjd">
-                <Run Text="Medlems Nr."/>
-                <Run Text="{Binding Path=SelectedMember.MemberNumber}"/>
-            </TextBlock>
-            <TextBlock Name="sfv">
-                <Run Text="Må bruge Outriger: "/>
-                <Run Text="{Binding Path=SelectedMember.MayUseOutrigger}"/>
-            </TextBlock>
+        <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="0">
+            <TextBlock Text="YDERLIGERE INFO" Style="{StaticResource ResourceKey=txbHeader}"/>
+        </Border>
 
-        </ListView>
+        <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
+            <TextBlock Text="RETTIGHEDER" Style="{StaticResource ResourceKey=txbHeader}"/>
+        </Border>
 
-        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
-                      HorizontalAlignment="Left" Opacity="0.975" Margin="2,383,0,7" 
-                      FontSize="18" BorderBrush="{x:Null}" Background="White" 
-                      Width="{Binding ActualWidth, ElementName=BoatInfo, Mode=OneWay}">
-            
-        </ItemsControl>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Aktiv: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Active, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Adresse (2): " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Address2}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Email (2): " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Email2}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Tlf. Arbejde: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.PhoneWork}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Fødselsdag: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Birthday}"/>
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="3" Width="194" Background="White">
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Frigivet: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Released, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Svømmeprøve: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.SwimmingTest, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Kortturs-styrmand: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.ShortTripCox, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Langtur-styrmand: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.LongTripCox, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}" >
+                <Run Text="Sculler: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.MayUseSculler, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Outrigger: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.MayUseOutrigger, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Kajak: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.MayUseKayak, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+        </StackPanel>
+
     </Grid>
 </UserControl>

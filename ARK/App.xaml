@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/View/Resources/Search.xaml"/>
                 <ResourceDictionary Source="/View/Resources/RadioButton.xaml"/>
                 <ResourceDictionary Source="/View/Resources/Textbox.xaml" />
+                <ResourceDictionary Source="/View/Resources/AdditionalInfo.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
