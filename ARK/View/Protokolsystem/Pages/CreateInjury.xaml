@@ -10,7 +10,7 @@
              Style="{DynamicResource ResourceKey=ucContent}">
 
     <UserControl.DataContext>
-        <Protokolsystem:CreateInjuryViewModel x:Name="ViewModel" />
+        <Protokolsystem:CreateInjuryViewModel x:Name="ViewModel"/>
     </UserControl.DataContext>
 
     <UserControl.Resources>
@@ -123,7 +123,19 @@
         </ListView>
 
         <TextBox Text="{Binding Path=Comment, Mode=TwoWay}" Height="105" Margin="311,356,8,0" VerticalAlignment="Top" Width="302" Background="White"/>
-        <ComboBox HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
+
+        <ComboBox x:Name="DamageTypeComboBox" HorizontalAlignment="Left" ItemsSource="{Binding Path=DamageTypes, Mode=TwoWay}" Margin="0,356,0,0" VerticalAlignment="Top" Width="302" Height="32">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Title}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=DamageTypeSelected}" CommandParameter="{Binding ElementName=DamageTypeComboBox, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
 
         <Grid Margin="0,461,10,5">
             <Grid.ColumnDefinitions>
@@ -148,6 +160,11 @@
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_white_go.png" />
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;SKADE" />
                 </Grid>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Path=AddDamageType}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </Button>
             <Button x:Name="btnShowKeyboard" Grid.Column="0"
             	Style="{StaticResource ResourceKey=btnFilter}" 
@@ -204,10 +221,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <RadioButton Name="rdoIsFunctional" Grid.Column="0" Content="STADIG&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functionel"/>
-            <RadioButton Name="rdoIsNotFunctional" Grid.Column="1" Content="IKKE&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functionel"/>
-
+            <RadioButton IsChecked="{Binding Path=IsFunctional}" Name="rdoIsFunctional" Grid.Column="0" Content="STADIG&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functional"/>
+            <RadioButton Name="rdoIsNotFunctional" Grid.Column="1" Content="IKKE&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functional"/>
         </Grid>
-
     </Grid>
 </UserControl>

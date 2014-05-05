@@ -8,9 +8,9 @@ namespace ARK.Model
         public DateTime Date { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
-        public string NeededMaterials { get; set; } // bør nok slettes. Vi bruger den ikke.
         public bool Functional { get; set; }
         public bool Closed { get; set; }
+        public string Comments { get; set; }
         
 
         //Foreign Keys
