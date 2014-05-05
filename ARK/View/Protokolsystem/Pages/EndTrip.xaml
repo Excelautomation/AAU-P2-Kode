@@ -7,14 +7,15 @@
              mc:Ignorable="d" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             Style="{DynamicResource ResourceKey=ucContent}">
+             Style="{DynamicResource ResourceKey=ucContent}" 
+             Height="723">
 
     <UserControl.DataContext>
         <Protokolsystem:EndTripViewModel/>
     </UserControl.DataContext>
 
     <!--Content-->
-    <Grid Style="{DynamicResource ResourceKey=gridContent}">
+    <Grid Style="{DynamicResource ResourceKey=gridContent}" Margin="4,0,0,95" Width="Auto" Height="Auto">
         <Border Style="{DynamicResource ResourceKey=brdHeadline}">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
@@ -49,7 +50,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" Margin="0,31,319,77">
+        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" Margin="0,32,315,0" Height="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" >
@@ -72,7 +73,7 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrips}" Margin="311,32,8,77">
+        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrips}" Margin="311,32,8,0" Height="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -93,7 +94,7 @@
                                 <Run Text="Retning: " FontWeight="Bold"/>
                                 <Run Text="{Binding Direction}"/>
                             </TextBlock>
-                            
+
                             <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold">
                                 <Run Text="Distance: "/>
                                 <Run Text="{Binding Distance}"/>
@@ -112,7 +113,7 @@
         </ListView>
 
         <!--Buttons-->
-        <Grid Margin="0,461,10,5">
+        <Grid Margin="2,657,8,-191" Height="65" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
@@ -124,8 +125,8 @@
             <Button x:Name="btnCustomDistance" Grid.Column="3"
         		Style="{StaticResource ResourceKey=btnFilter}" 
         		Command="{Binding ToggleFilter}"
-        		Background="{StaticResource CustomBG}"
-        		BorderBrush="{StaticResource CustomBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+        		Background="{StaticResource ChangeBG}"
+        		BorderBrush="{StaticResource ChangeBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -137,7 +138,7 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ANGIV&#xA;DISTANCE" />
                 </Grid>
             </Button>
-            
+
             <Button x:Name="btnEndTripNow" Grid.Column="4"
         		Command="{Binding EndTripNow}"
         		Background="{StaticResource EndBG}"
