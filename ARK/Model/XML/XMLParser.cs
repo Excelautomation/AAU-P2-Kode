@@ -14,116 +14,127 @@ namespace ARK.Model.XML
 {
     public static class XMLParser
     {
+        public static void UpdateDataFromFtp()
+        {
+            var context = DbArkContext.GetDbContext();
+
+            //Boats
+            var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
+            var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
+
+            foreach (var boatXml in xmlObject.BådeSpecifik)
+            {
+                Boat boat;
+                if ((boat = context.Boat.Find(boatXml.ID)) != null)
+                {
+                    
+                }
+                else
+                {
+                    
+                }
+            }
+
+            //Members
+        }
+
+        private static void BoatXmlToModel(Boat boat, XMLBoats.datarootBådeSpecifik boatXml)
+        {
+            boat.Id = boatXml.ID;
+            boat.Name = boatXml.Navn;
+            boat.NumberofSeats = boatXml.AntalPladser;
+            boat.Active = boatXml.Aktiv == 1;
+            boat.SpecificBoatType = (Boat.BoatType)boatXml.SpecifikBådType;
+            boat.LongTripBoat = boatXml.LangtursBåd == 1;
+        }
+
         public static void LoadBoatsFromXml()
         {
-            DbArkContext context = DbArkContext.GetDbContext();
+            var context = DbArkContext.GetDbContext();
 
-            string ftpPath = @"/upload/monday/BådeSpecifik.xml";
-            FTPInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
-            UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
-            NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
-
-            string xmlString = DlToMem(ub.Uri, ftpCreds);
-            XMLBoats.dataroot xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
-
-            var boats = new List<Boat>();
+            var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
+            var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
 
             foreach (XMLBoats.datarootBådeSpecifik boatXml in xmlObject.BådeSpecifik)
             {
-                Boat boat = new Boat
+                var boat = new Boat
                 {
-                    Id = boatXml.ID,
-                    Name = boatXml.Navn,
-                    NumberofSeats = boatXml.AntalPladser,
-                    Active = boatXml.Aktiv == 1,
-                    SpecificBoatType = (Boat.BoatType)boatXml.SpecifikBådType,
-                    LongTripBoat = boatXml.LangtursBåd == 1,
                     DamageForms = new List<DamageForm>(),
                     LongDistanceForms = new LinkedList<LongDistanceForm>()
                 };
+                BoatXmlToModel(boat, boatXml);
 
-                boats.Add(boat);
+                context.Boat.Add(boat);
             }
 
-            context.Boat.AddRange(boats);
             context.SaveChanges();
+        }
+
+
+        private static void MemberXmlToModel(Member member, XMLMembers.datarootAktiveMedlemmer memberXml)
+        {
+            member.MemberNumber = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr));
+            member.Id = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
+            member.FirstName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fornavn);
+            member.LastName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Efternavn);
+            member.Address1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse1);
+            member.Address2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2);
+            member.ZipCode = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr));
+            member.City = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.By);
+            member.Phone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
+                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon));
+            member.PhoneWork = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
+                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde));
+            member.Cellphone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
+                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil));
+            member.Email1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
+            member.Email2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
+            member.Birthday = Convert.ToDateTime(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato));
+            member.Released = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Frigivet)) == 1;
+            member.SwimmingTest = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Svømmeprøve)) == 1;
+            member.ShortTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Korttursstyrmand)) == 1;
+            member.LongTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Langtursstyrmand)) == 1;
+            member.MayUseSculler = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Scullerret)) == 1;
+            member.MayUseOutrigger = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1;
+            member.MayUseKayak = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1;
         }
 
         public static void LoadMembersFromXml()
         {
-            DbArkContext context = DbArkContext.GetDbContext();
+            var context = DbArkContext.GetDbContext();
 
-            string ftpPath = @"/upload/monday/AktiveMedlemmer.xml";
-            FTPInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
-            UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
-            NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
-
-            string xmlString = DlToMem(ub.Uri, ftpCreds);
-            XMLMembers.dataroot xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
-
-            var members = new List<Member>();
+            var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
+            var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
 
             foreach (XMLMembers.datarootAktiveMedlemmer memberXml in xmlObject.activeMembers)
             {
-                Member member = new Member
+                var member = new Member
                 {
-                    MemberNumber = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr)),
-                    Id = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID)),
-                    FirstName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fornavn),
-                    LastName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Efternavn),
-                    Address1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse1),
-                    Address2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2),
-                    ZipCode = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr)),
-                    City = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.By),
-                    Phone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
-                        .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon)),
-                    PhoneWork = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
-                        .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde)),
-                    Cellphone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
-                        .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil)),
-                    Email1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail),
-                    Email2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2),
-                    Birthday = Convert.ToDateTime(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato)),
-                    Released = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Frigivet)) == 1,
-                    SwimmingTest = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Svømmeprøve)) == 1,
-                    ShortTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Korttursstyrmand)) == 1,
-                    LongTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Langtursstyrmand)) == 1,
-                    MayUseSculler = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Scullerret)) == 1,
-                    MayUseOutrigger = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1,
-                    MayUseKayak = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1,
                     Trips = new List<Trip>(),
                     LongDistanceForms = new List<LongDistanceForm>(),
                     DamageForms = new List<DamageForm>()
                 };
+                MemberXmlToModel(member, memberXml);
 
-                members.Add(member);
+                context.Member.Add(member);
             }
 
-            context.Member.AddRange(members);
             context.SaveChanges();
         }
 
         public static void LoadTripsFromXml()
         {
-            string ftpPath = @"/upload/monday/Tur.xml";
+            var context = DbArkContext.GetDbContext();
 
-            DbArkContext context = DbArkContext.GetDbContext();
-
-            FTPInfo ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
-            UriBuilder ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port, ftpPath);
-            NetworkCredential ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
-
-            string xmlString = DlToMem(ub.Uri, ftpCreds);
-            XMLTrips.dataroot xmlObject = ParseXML<XMLTrips.dataroot>(xmlString);
-
-            var trips = new List<Trip>();
+            var xmlString = DownloadLatestFromFtp(@"Tur.xml");
+            var xmlObject = ParseXML<XMLTrips.dataroot>(xmlString);
 
             IEnumerable<PropertyInfo> props = new List<PropertyInfo>(typeof(XMLTrips.datarootTur).GetProperties());
             var filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
 
             foreach (XMLTrips.datarootTur tripXml in xmlObject.Tur)
             {
-                Trip trip = new Trip();
+                var trip = new Trip();
 
                 trip.Id = tripXml.ID;
                 trip.Distance = tripXml.Kilometer;
@@ -131,9 +142,8 @@ namespace ARK.Model.XML
                 trip.TripEndedTime = tripXml.Dato;
                 trip.LongTrip = tripXml.Langtur == 1;
                 trip.BoatId = tripXml.BådID;
-                trip.Members = new List<Member>();
+                trip.Members = new List<Member> { context.Member.Find((int)tripXml.Nr1) };
 
-                trip.Members.Add(context.Member.Find((int)tripXml.Nr1));
                 foreach (PropertyInfo prop in filteredProps)
                 {
                     if ((bool)prop.GetValue(tripXml))
@@ -143,10 +153,9 @@ namespace ARK.Model.XML
                     }
                 }
 
-                trips.Add(trip);
+                context.Trip.Add(trip);
             }
 
-            context.Trip.AddRange(trips);
             context.SaveChanges();
         }
 
@@ -179,8 +188,56 @@ namespace ARK.Model.XML
 
         private static T ParseXML<T>(string xml) where T : class
         {
-            XmlReader reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Auto });
+            var reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
+        }
+
+        private static string DownloadLatestFromFtp(string filename)
+        {
+            var context = DbArkContext.GetDbContext();
+            var ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
+            var ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
+
+            var weekDays = new string[]
+            {
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday"
+            };
+
+            var latestFolder = string.Empty;
+            var latestDateTime = new DateTime();
+            foreach (var weekDay in weekDays)
+            {
+                var ub = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port,
+                    @"/upload" + "/" + weekDay + "/" + filename);
+
+                var request = WebRequest.Create(ub.Uri) as FtpWebRequest;
+
+                request.Credentials = ftpCreds;
+                request.KeepAlive = true;
+                request.UsePassive = true;
+
+                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+
+                using (var response = request.GetResponse() as FtpWebResponse)
+                {
+                    if (response.LastModified > latestDateTime)
+                    {
+                        latestDateTime = response.LastModified;
+                        latestFolder = weekDay;
+                    }
+                }
+            }
+
+            var uriBuilder = new UriBuilder("ftp", ftpInfo.HostName, ftpInfo.Port,
+                @"/upload" + @"/" + latestFolder + @"/" + filename);
+
+            return DlToMem(uriBuilder.Uri, ftpCreds);
         }
 
         private static string DlToMem(Uri uri, NetworkCredential credentials)
