@@ -101,13 +101,13 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                     if (ShowAccepted)
                         return
                             items.Cast<LongDistanceForm>()
-                                .Where(form => form.Approved.GetValueOrDefault())
+                                .Where(form => form.Status == LongDistanceForm.BoatStatus.Accepteret)
                                 .ToList()
                                 .Cast<T>();
                     else if (ShowDenied)
                         return
                             items.Cast<LongDistanceForm>()
-                                .Where(form => !form.Approved.GetValueOrDefault())
+                                .Where(form => form.Status == LongDistanceForm.BoatStatus.Afvist)
                                 .ToList()
                                 .Cast<T>();
 
