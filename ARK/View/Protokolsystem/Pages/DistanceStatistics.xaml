@@ -13,6 +13,23 @@
         <Protokolsystem:DistanceStatisticsViewModel/>
     </UserControl.DataContext>
     
+    <UserControl.Resources>
+        <Style x:Key="imgMedal" TargetType="Image">
+            <Setter Property="Source" Value="{x:Null}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationCount}" Value="0">
+                    <Setter Property="Source" Value="/View/images/medal_award_gold.png"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationCount}" Value="1">
+                    <Setter Property="Source" Value="/View/images/medal_award_silver.png"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationCount}" Value="2">
+                    <Setter Property="Source" Value="/View/images/medal_award_bronze.png"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
         
         <Border Style="{DynamicResource ResourceKey=brdHeadline}">
@@ -41,7 +58,7 @@
                     </Grid.ColumnDefinitions>
                     <Image Source="/View/images/chart_up_color.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}">
-                        <Run Text="SE SIDSTE 10 TURE ( ANTAL: "/>
+                        <Run Text="SE TURE ( ANTAL: "/>
                         <Run Text="{Binding Items.Count, ElementName=LastTrips, Mode=OneWay}"/>
                         <Run Text=")"/>
                     </TextBlock>
@@ -54,11 +71,11 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="34"/>
+                            <ColumnDefinition Width="22"/>
                             <ColumnDefinition Width="208"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/images/medal_award_gold.png" Grid.Column="0"/>
+                        <Image Style="{StaticResource ResourceKey=imgMedal}" Grid.Column="0" Width="16" Height="16" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Item1.FirstName}"/>
                             <Run Text="{Binding Item1.LastName}"/>
@@ -78,27 +95,33 @@
         <ListView x:Name="LastTrips" Style="{StaticResource lstView}" ItemsSource="{Binding Path=Trips}" Margin="311,31,8,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <Grid>
-                            <TextBlock Text="{Binding Path=Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0">
-                                <Run Text="Start tid:"/>
+                        <TextBlock Text="{Binding Path=Boat.Name}" Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+
+                        <TextBlock Text="{Binding Path=Distance}" Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}" HorizontalAlignment="Left">
+                            <Run Text="{Binding Path=Distance}"/>
+                            <Run Text="Km"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="Start tid:" FontWeight="Bold" />
                                 <Run Text="{Binding Path=TripStartTime}"/>
-                            </TextBlock>
-                            <TextBlock Grid.Column="1">
-                                <Run Text="Tid ude"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Left">
+                                <Run Text="Tid ude:" FontWeight="Bold"/>
                                 <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay}" />
-                            </TextBlock>
-                        </Grid>
-                    </StackPanel>
+                        </TextBlock>
+                    </Grid>
                 </DataTemplate>
 
             </ListView.ItemTemplate>
