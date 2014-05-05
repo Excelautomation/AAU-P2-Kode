@@ -14,6 +14,7 @@
     </UserControl.DataContext>
     
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
+        
         <Border Style="{DynamicResource ResourceKey=brdHeadline}">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
@@ -51,14 +52,21 @@
         <ListView x:Name="Members" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=MemberKmCollection}" Margin="0,31,319,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical">
-                        <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}">
-                            <!--<Run Text="{Binding MemberKmCollection}"/>-->
-                            <!--Distance metode er ikke done - SKAL VÆRE HER-->
+                    <Grid HorizontalAlignment="Stretch">
+                        <TextBlock Text="hejsa" HorizontalAlignment="Right" TextAlignment="Right" Width="40"/>
+                        <!--<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Width="Auto" Style="{StaticResource ResourceKey=lstListViewHeadline}">
+                            --><!--<Run Text="{Binding MemberKmCollection}"/>-->
+                            <!--Distance metode er ikke done - SKAL VÆRE HER--><!--
                             <Run Text="{Binding Item1.FirstName}"/>
                             <Run Text="{Binding Item1.LastName}"/>
                         </TextBlock>
-                    </WrapPanel>
+
+                        <TextBlock Grid.Column="1" Width="40" Text="{Binding Path=Item2}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />-->
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
             
@@ -84,6 +92,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
         <Grid Margin="0,461,10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
