@@ -86,13 +86,20 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Retning: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Distance: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}">
+                                <Run Text="Retning: " FontWeight="Bold"/>
+                                <Run Text="{Binding Direction}"/>
+                            </TextBlock>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold">
+                                <Run Text="Distance: "/>
                                 <Run Text="{Binding Distance}"/>
                                 <Run Text=" km"/>
                             </TextBlock>
+
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
