@@ -1,25 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace ARK.View.ValueConverters
 {
-    public class BoolToValueConverter<T> : IValueConverter
+    public class TimeSpanToHourMinuteStringConverter : IValueConverter
     {
-        public T FalseValue { get; set; }
-        public T TrueValue { get; set; }
-
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
-                return FalseValue;
-            return (bool)value ? TrueValue : FalseValue;
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return ((TimeSpan) value).ToString(@"hh:mm");
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value != null ? value.Equals(TrueValue) : false;
+            throw new NotImplementedException();
         }
     }
-
-    public class BoolToStringConverter : BoolToValueConverter<String> { }
 }

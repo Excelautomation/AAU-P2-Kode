@@ -8,6 +8,7 @@ using ARK.Administrationssystem.Funktioner;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.XML;
+using System.Globalization;
 
 namespace ARK
 {
@@ -18,6 +19,8 @@ namespace ARK
     {
         public App()
         {
+            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
+            //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
             var thr = new Thread(new ThreadStart(() =>
             {
                 var db = DbArkContext.GetDbContext();

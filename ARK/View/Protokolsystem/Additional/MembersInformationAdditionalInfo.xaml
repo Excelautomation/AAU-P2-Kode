@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-             xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 
              xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
              mc:Ignorable="d" >
