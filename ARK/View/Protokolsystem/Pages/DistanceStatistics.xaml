@@ -18,13 +18,13 @@
         <Style x:Key="imgMedal" TargetType="Image">
             <Setter Property="Source" Value="{x:Null}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationCount}" Value="0">
+                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationIndex}" Value="0">
                     <Setter Property="Source" Value="/View/images/medal_award_gold.png"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationCount}" Value="1">
+                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationIndex}" Value="1">
                     <Setter Property="Source" Value="/View/images/medal_award_silver.png"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationCount}" Value="2">
+                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationIndex}" Value="2">
                     <Setter Property="Source" Value="/View/images/medal_award_bronze.png"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -68,7 +68,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="Members" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=MemberKmCollection}" Margin="0,31,319,78">
+        <ListView x:Name="Members" Style="{StaticResource ResourceKey=lstView}" AlternationCount="2" ItemsSource="{Binding Path=MemberKmCollection}" Margin="0,31,319,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
