@@ -5,12 +5,19 @@ namespace ARK.Model
 {
     public class LongDistanceForm : IEquatable<LongDistanceForm>
     {
+        public enum BoatStatus
+        {
+            None = 0,
+            Afventer = 1,
+            Accepteret = 2,
+            Afvist = 3
+        }
+
         public int Id { get; set; }
         public DateTime Departure { get; set; }
         public DateTime Arrival { get; set; }
         public string Text { get; set; }
-        public bool? Approved { get; set; }
-        //public bool Rejected { get; set; }
+        public BoatStatus Status { get; set; }
 
         //Foreign key
         public int BoatId { get; set; }

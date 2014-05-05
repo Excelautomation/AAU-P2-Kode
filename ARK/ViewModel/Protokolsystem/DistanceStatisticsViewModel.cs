@@ -22,7 +22,6 @@ namespace ARK.ViewModel.Protokolsystem
         public DistanceStatisticsViewModel()
         {
             var db = DbArkContext.GetDbContext();
-            var db2 = DbArkContext.GetDbContext();
 
             DateTime limit = new DateTime();
             // Load data
@@ -31,9 +30,9 @@ namespace ARK.ViewModel.Protokolsystem
                 .Include(m => m.Trips)
                 .AsEnumerable();
 
-            //var test = temp
-            //    .Select(m => m.Trips.Where(t => t.TripStartTime > limit).Aggregate(0d, (acc, val) => acc + val.Distance))
-            //    .ToList();
+            var test = temp
+                .Select(m => m.Trips.Where(t => t.TripStartTime > limit).Aggregate(0d, (acc, val) => acc + val.Distance))
+                .ToList();
 
             _memberKmCollection =
                 new ObservableCollection<Tuple<Member, double>>
