@@ -68,10 +68,9 @@ namespace ARK.ViewModel.Protokolsystem
                     // Set date
                     _latestData = DateTime.Now;
 
-                // Read data
-                _boats = boatsAsync.Result;
-                Members = new ObservableCollection<MemberViewModel>(
-                    membersAync.Result.Select(member => new MemberViewModel(member)));
+                    // Read data
+                    _boats = boatsAsync.Result;
+                    Members = new ObservableCollection<MemberViewModel>(membersAync.Result.Select(member => new MemberViewModel(member)));
                 }
 
                 // Reset filter
