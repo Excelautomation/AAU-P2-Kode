@@ -233,7 +233,7 @@
                     <Run Text="BÅDE PÅ VANDET:" FontWeight="Bold" Foreground="White"/>
                 </TextBlock>
                 <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
-                    <Run Text="KILOMETER I DAG:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text="DAGENS KILOMETER:" FontWeight="Bold" Foreground="White"/>
                 </TextBlock>
             </Grid>
         </Grid>
