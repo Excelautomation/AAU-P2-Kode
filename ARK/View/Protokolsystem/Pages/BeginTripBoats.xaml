@@ -82,15 +82,25 @@
         <ListView x:Name="AllBoatsList" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}" />
-                        <WrapPanel>
-                            <TextBlock Text="Pladser: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding NumberofSeats}" Style="{DynamicResource ResourceKey=lstViewContent}" />
-                            <TextBlock Text=" Kategori: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding SpecificBoatType}" Style="{DynamicResource ResourceKey=lstViewContent}" />
-                        </WrapPanel>
-                    </WrapPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource ResourceKey=lstListViewHeadline}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}">
+                            <Run Text="Pladser: " FontWeight="Bold"/>
+                            <Run Text="{Binding NumberofSeats}"/>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
+                            <Run Text="Kategori: " FontWeight="Bold"/>
+                            <Run Text="{Binding SpecificBoatType}"/>
+                        </TextBlock>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
