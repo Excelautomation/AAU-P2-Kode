@@ -16,6 +16,8 @@ namespace ARK.ViewModel.Protokolsystem
         private List<Member> _members;
         private Boat _selectedBoat;
         private List<Boat> _boats;
+        private List<DamageType> _damageTypes;
+        private DamageType _selectedDamageType;
 
         // constructor
         public CreateInjuryViewModel()
@@ -23,6 +25,7 @@ namespace ARK.ViewModel.Protokolsystem
             var db = DbArkContext.GetDbContext();
             _members = db.Member.Where(m => true).ToList();
             _boats = db.Boat.Where(b => true).ToList();
+            _damageTypes = db.DamageType.Where(d => true).ToList();
         }
 
         // Properties
@@ -56,6 +59,18 @@ namespace ARK.ViewModel.Protokolsystem
             set { _boats = value; Notify(); }
         }
 
+        public List<DamageType> DamageTypes
+        {
+            get { return _damageTypes; }
+            set { _damageTypes = value; }
+        }
+
+        public DamageType SelectedDamageType
+        {
+            get { return _selectedDamageType; }
+            set { _selectedDamageType = value; }
+        }
+
         public ICommand MemberSelectionChanged
         {
             get
@@ -74,6 +89,36 @@ namespace ARK.ViewModel.Protokolsystem
                 return GetCommand<Boat>(b =>
                 {
                     SelectedBoat = b;
+                });
+            }
+        }
+
+        public ICommand DamageTypeSelected
+        {
+            get
+            {
+                return GetCommand<DamageType>(d =>
+                {
+                    SelectedDamageType = d;
+                });
+            }
+        }
+
+        public ICommand AddDamageType
+        {
+            get
+            {
+                return GetCommand<object>(d =>
+                {
+                    var damageForm = new DamageForm(); 
+                    damageForm.RegisteringMember = SelectedMember;
+                    damageForm.Boat = SelectedBoat;
+                    damageForm.Functional = IsFunctional;
+                    damageForm.Comments = Comment;
+
+                    var db = DbArkContext.GetDbContext();
+                    throw new NotImplementedException("Der skal tages stilling til hvordan skadesbeskrivelse skal override valgte indstillinger og comments.. Ligeledes hvordan forholdet imellem både of skadesblanketter skal håndteres inden gem"); 
+                    db.DamageForm.Add(damageForm);
                 });
             }
         }

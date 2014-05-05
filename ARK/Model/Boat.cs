@@ -19,17 +19,18 @@ namespace ARK.Model
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public int NumberofSeats { get; set; }
-        public bool Active { get; set; }
-        public BoatType SpecificBoatType { get; set; }
-        public bool LongTripBoat { get; set; }
+        public int NumberofSeats { get; set; }          // The number of rowers in the boat without the Deckofficer
+        public bool HaveDeckOfficer { get; set; }       // states if the boat have seating for cox
+        public bool Active { get; set; }                // states if the boat is not retired/dead
+        public BoatType SpecificBoatType { get; set; }  
+        public bool LongTripBoat { get; set; }          // states if the boad is accepted for long tips
 
-        public bool Usable
+        public bool Usable                              // states if the boat is in a usable condition
         {
             get { return Active && DamageForms != null && !DamageForms.Any(x => !x.Functional && !x.Closed); }
         }
 
-        public bool Damaged
+        public bool Damaged                             // Damaged or not
         {
             get { return DamageForms != null && DamageForms.Count != 0; }
         }
