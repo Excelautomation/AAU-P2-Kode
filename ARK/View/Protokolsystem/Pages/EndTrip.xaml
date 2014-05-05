@@ -15,8 +15,18 @@
     </UserControl.DataContext>
 
     <!--Content-->
-    <Grid Style="{DynamicResource ResourceKey=gridContent}" Margin="4,0,0,95" Width="Auto" Height="Auto">
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}">
+    <Grid Style="{DynamicResource ResourceKey=gridContent}" Margin="4,0,4,0" Width="Auto" Height="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="625"/>
+            <RowDefinition Height="64"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" Style="{DynamicResource ResourceKey=brdHeadline}">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -25,15 +35,15 @@
                     </Grid.ColumnDefinitions>
                     <Image Source="/View/images/yacht_small.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}">
-                        <Run Text="VÆLG BÅD ( ANTAL: "/>
-                        <Run Text="{Binding Items.Count, ElementName=EndTripBoatsOutList, Mode=OneWay}"/>
+                        <Run Text="VÆLG BÅD PÅ VANDET ( ANTAL:"/>
+                        <Run Text="{Binding Items.Count, ElementName=lstBoatsOut, Mode=OneWay}"/>
                         <Run Text=")"/>
                     </TextBlock>
                 </Grid>
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="311,0,0,0">
+        <Border Grid.Column="1" Grid.Row="0" Style="{DynamicResource ResourceKey=brdHeadline}" HorizontalAlignment="Stretch" Margin="1,0,0,0" Width="Auto">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -42,25 +52,23 @@
                     </Grid.ColumnDefinitions>
                     <Image Source="/View/images/cash_terminal.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}">
-                        <Run Text="VÆLG TUR ( ANTAL: "/>
-                        <Run Text="{Binding Items.Count, ElementName=BoatsOutAvailableTrips, Mode=OneWay}"/>
+                        <Run Text="VÆLG STANDARD TUR ( ANTAL:"/>
+                        <Run Text="{Binding Items.Count, ElementName=lstStandardTrip, Mode=OneWay}"/>
                         <Run Text=")"/>
                     </TextBlock>
                 </Grid>
             </WrapPanel>
         </Border>
 
-        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" Margin="0,32,315,0" Height="Auto">
+        <ListView x:Name="lstBoatsOut" Grid.Column="0" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Margin="0,32,5,10" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" >
-                        <TextBlock Text="{Binding Boat.Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Text="{Binding Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
                         <WrapPanel>
-                            <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
-                            <TextBlock  Style="{DynamicResource ResourceKey=lstViewContent}">
-                                <Run Text="{Binding TimeBoatOut, Mode=OneWay}"/>
-                                <!--<Run Text="{Binding Time}"/>
-                                <Run Text="{Binding Distance}"/>-->
+                            <TextBlock Text="Tid: " Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
+                            <TextBlock  Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="{Binding Path=TimeBoatOut.Hours, Mode=OneWay}" /><Run Text=":" /><Run Text="{Binding Path=TimeBoatOut.Minutes, Mode=OneWay}" />
                             </TextBlock>
                         </WrapPanel>
                     </WrapPanel>
@@ -73,36 +81,27 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrips}" Margin="311,32,8,0" Height="Auto">
+        <ListView x:Name="lstStandardTrip" Grid.Column="1" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Margin="0,32,0,10" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
-
-                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}">
-                                <Run Text="Retning: " FontWeight="Bold"/>
-                                <Run Text="{Binding Direction}"/>
-                            </TextBlock>
-
-                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold">
-                                <Run Text="Distance: "/>
-                                <Run Text="{Binding Distance}"/>
-                                <Run Text=" km"/>
-                            </TextBlock>
-
-                        </Grid>
-                    </StackPanel>
+                        <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Grid.Row="1" Style="{DynamicResource ResourceKey=lstViewContent}">
+                            <Run Text="Retning: " FontWeight="Bold"/>
+                            <Run Text="{Binding Direction}"/>
+                        </TextBlock>
+                        <TextBlock Grid.Row="2" Style="{DynamicResource ResourceKey=lstViewContent}" HorizontalAlignment="Left">
+                            <Run Text="Distance: " FontWeight="Bold"/>
+                            <Run Text="{Binding Distance}"/>
+                            <Run Text="km"/>
+                        </TextBlock>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
@@ -113,7 +112,7 @@
         </ListView>
 
         <!--Buttons-->
-        <Grid Margin="2,657,8,-191" Height="65" VerticalAlignment="Top">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Height="64">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
@@ -126,7 +125,7 @@
         		Style="{StaticResource ResourceKey=btnFilter}" 
         		Command="{Binding ToggleFilter}"
         		Background="{StaticResource ChangeBG}"
-        		BorderBrush="{StaticResource ChangeBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+        		BorderBrush="{StaticResource ChangeBorder}" Height="Auto" Margin="1,0,0,0" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -142,7 +141,7 @@
             <Button x:Name="btnEndTripNow" Grid.Column="4"
         		Command="{Binding EndTripNow}"
         		Background="{StaticResource EndBG}"
-        		BorderBrush="{StaticResource EndBorder}" Height="Auto" Margin="5,5,0,0" Width="Auto">
+        		BorderBrush="{StaticResource EndBorder}" Height="Auto" Margin="5,0,0,0" Width="Auto">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=btnFilter}">
