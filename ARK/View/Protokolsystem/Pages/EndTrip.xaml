@@ -87,7 +87,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Retning: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Description}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Distance: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
                                 <Run Text="{Binding Distance}"/>

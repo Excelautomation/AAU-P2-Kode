@@ -22,6 +22,14 @@ namespace ARK.Model.XML
             var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
             var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
 
+            foreach (var boat in context.Boat)
+            {
+                if (xmlObject.BådeSpecifik.All(x => x.ID != boat.Id))
+                {
+                    context.Boat.Remove(boat);
+                }
+            }
+
             foreach (var boatXml in xmlObject.BådeSpecifik)
             {
                 Boat boat;
