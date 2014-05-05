@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
              mc:Ignorable="d"
              Style="{DynamicResource ResourceKey=ucContent}">
+
+    <UserControl.DataContext>
+        <Protokolsystem:CreateInjuryViewModel x:Name="ViewModel" />
+    </UserControl.DataContext>
 
     <UserControl.Resources>
         <!--<Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
@@ -69,19 +76,6 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="0,396,0,0">
-            <WrapPanel Margin="0,2,0,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="/View/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Text="INDFLYDELSE" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
-                </Grid>
-            </WrapPanel>
-        </Border>
-
         <Border Style="{DynamicResource ResourceKey=brdHeadline}" Margin="311,324,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
@@ -95,7 +89,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="ShowMembers" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="0,32,319,221">
+        <ListView x:Name="MembersList" ItemsSource="{Binding Path=Members}" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="0,32,319,221">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -106,24 +100,35 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=MemberSelectionChanged}" CommandParameter="{Binding ElementName=MembersList, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="ShowBoats" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="311,32,8,221">
+        <ListView x:Name="BoatsList" ItemsSource="{Binding Path=Boats}" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="311,32,8,221">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
-                            <Run Text="{Binding FirstName}"/>
-                            <Run Text="{Binding LastName}"/>
-                        </TextBlock>
-                    </WrapPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                        </Grid>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=BoatSelectionChanged}" CommandParameter="{Binding ElementName=BoatsList, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
 
-        <RichTextBox HorizontalAlignment="Left" Height="105" Margin="311,356,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
-        <ComboBox HorizontalAlignment="Left" Margin="0,428,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
+        <TextBox Text="{Binding Path=Comment, Mode=TwoWay}" HorizontalAlignment="Left" Height="105" Margin="311,356,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
         <ComboBox HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
+
+
+
         <Grid Margin="0,461,10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
@@ -196,6 +201,15 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;SKADE" />
                 </Grid>
             </Button>
+
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="63" Margin="10,393,0,0" VerticalAlignment="Top" Width="292">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <RadioButton Name="IsFunctionalRadio" Grid.Column="0" Content="Funktionel" Margin="3,0,0,0" GroupName="{Binding Name, ElementName=Filters}"/>
+            <RadioButton Name="IsNotFunctionalRadio" Grid.Column="1" Content="Ikke Funktionel" Margin="3,0,0,0" GroupName="{Binding Name, ElementName=Filters}"/>
 
         </Grid>
 
