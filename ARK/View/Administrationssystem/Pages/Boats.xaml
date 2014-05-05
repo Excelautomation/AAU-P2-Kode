@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="594.417" d:DesignWidth="1121.053">
     <UserControl.DataContext>
@@ -16,7 +16,7 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
-        <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
+        <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>

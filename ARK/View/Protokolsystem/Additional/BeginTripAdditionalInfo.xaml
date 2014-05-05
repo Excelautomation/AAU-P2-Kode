@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
-             xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
-             x:Class="ARK.View.Protokolsystem.Additional.BeginTripAdditionalInfo"
+    xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
+    xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
+    x:Class="ARK.View.Protokolsystem.Additional.BeginTripAdditionalInfo"
              mc:Ignorable="d" Width="200" Height="768">
 
     <UserControl.DataContext>
@@ -48,7 +48,7 @@
             </Style.Resources>
         </Style>
 
-        <ValConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
+        <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
 
     </UserControl.Resources>
 
