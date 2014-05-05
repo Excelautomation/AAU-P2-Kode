@@ -13,8 +13,8 @@ using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
+using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
-using ARK.ViewModel.Base.Interfaces.Info;
 using ARK.ViewModel.Protokolsystem.Additional;
 
 namespace ARK.ViewModel.Protokolsystem
@@ -108,8 +108,19 @@ namespace ARK.ViewModel.Protokolsystem
             get { return _selectedBoat; }
             set
             {
+                if (_selectedBoat == value) // Nothing changed - silently discart - WARNING STACKOVERFLOW IF NOT
+                    return;
+
                 _selectedBoat = value;
-                Notify();
+
+                if (value == null)
+                    Notify();
+
+                Keyboard.KeyboardClear();
+                SelectedMembers.Clear();
+                UpdateInfo();
+
+                EnableMembers = value != null;
             }
         }
 
@@ -163,7 +174,7 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public IInfoContainerViewModel GetInfoContainerViewModel
+        private IInfoContainerViewModel GetInfoContainerViewModel
         {
             get { return Parent as IInfoContainerViewModel; }
         }
@@ -178,32 +189,14 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public FrameworkElement InfoPage
+        private FrameworkElement InfoPage
         {
             get { return _infoPage ?? (_infoPage = new BeginTripAdditionalInfo()); }
         }
 
-        public BeginTripAdditionalInfoViewModel Info
+        private BeginTripAdditionalInfoViewModel Info
         {
             get { return InfoPage.DataContext as BeginTripAdditionalInfoViewModel; }
-        }
-
-        public ICommand BoatSelected
-        {
-            get
-            {
-                return GetCommand<Boat>(e =>
-                {
-                    if (e == null)
-                        return;
-
-                    EnableMembers = true;
-                    SelectedBoat = e;
-                    Keyboard.KeyboardClear();
-                    SelectedMembers.Clear();
-                    UpdateInfo();
-                });
-            }
         }
 
         #endregion

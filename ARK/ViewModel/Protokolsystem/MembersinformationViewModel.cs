@@ -3,7 +3,7 @@ using ARK.Model.DB;
 using ARK.Protokolsystem.Pages;
 using ARK.View.Protokolsystem.Additional;
 using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces.Info;
+using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Protokolsystem.Additional;
 using System;
 using System.Collections.Generic;

@@ -118,6 +118,7 @@
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\EndTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
+    <Compile Include="ViewModel\Base\KeyboardContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Protokolsystem\MainPageViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
@@ -233,7 +234,7 @@
     <Compile Include="View\Protokolsystem\Filters\BeginTripFilters.xaml.cs">
       <DependentUpon>BeginTripFilters.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Pages\OnScreenKeyboard.xaml.cs">
+    <Compile Include="View\OnScreenKeyboard.xaml.cs">
       <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\ProtocolSystem.xaml.cs">
@@ -247,8 +248,7 @@
     <Compile Include="ViewModel\Base\ContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContainerViewModel.cs" />
-    <Compile Include="ViewModel\Base\Interfaces\Info\IInfoContainerViewModel.cs" />
-    <Compile Include="ViewModel\Base\Interfaces\Info\IInfoContentViewModel.cs" />
+    <Compile Include="ViewModel\Base\Interfaces\IInfoContainerViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IKeyboardContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IPageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IViewModelBase.cs" />
@@ -344,6 +344,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\OnScreenKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Protokolsystem\ProtocolSystem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -395,10 +399,6 @@
     <Page Include="View\Protokolsystem\Pages\MembersInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Protokolsystem\Pages\OnScreenKeyboard.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Resources\RadioButton.xaml">
       <SubType>Designer</SubType>
