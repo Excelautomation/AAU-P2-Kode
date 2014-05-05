@@ -39,7 +39,7 @@ namespace ARK.ViewModel.Base
             }
         }
 
-        public ICommand KeyboardToggle
+        public virtual ICommand KeyboardToggle
         {
             get { return GetCommand<object>(e => KeyboardToggled = !KeyboardToggled); }
         }
@@ -57,7 +57,7 @@ namespace ARK.ViewModel.Base
         public string KeyboardText
         {
             get { return ((KeyboardViewModel) Keyboard.DataContext).Text; }
-            private set { ((KeyboardViewModel) Keyboard.DataContext).Text = value; }
+            protected set { ((KeyboardViewModel) Keyboard.DataContext).Text = value; }
         }
 
         public void KeyboardShow()

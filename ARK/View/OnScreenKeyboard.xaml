@@ -128,7 +128,7 @@
             <Button Content="CLR" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=ClearCommand}" CommandParameter="DEL"/>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-            <TextBox TextWrapping="Wrap" FontSize="18" Foreground="Black" FontFamily="Calibri" Text="{Binding Path=Text, Mode=TwoWay}" 
+            <TextBox TextWrapping="Wrap" FontSize="18" Foreground="Black" FontFamily="Calibri" Text="{Binding Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      Width="473" Height="33" VerticalAlignment="Top" Background="#FFFBFBFB" BorderBrush="#FF232323" VerticalContentAlignment="Center"/>
         </StackPanel>
     </Grid>
