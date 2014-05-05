@@ -99,7 +99,7 @@
                 <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="185"/>
                             <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -175,8 +175,8 @@
             <Button x:Name="btnCustomDistance" Grid.Column="3"
             	Style="{StaticResource ResourceKey=btnFilter}" 
             	Command="{Binding ToggleFilter}"
-            	Background="{StaticResource CustomBG}"
-            	BorderBrush="{StaticResource CustomBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+            	Background="{StaticResource ChangeBG}"
+            	BorderBrush="{StaticResource ChangeBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>

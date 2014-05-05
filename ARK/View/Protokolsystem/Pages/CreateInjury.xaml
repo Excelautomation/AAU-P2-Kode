@@ -70,8 +70,8 @@
                         <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/View/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Text="VÆLG SKADE" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
+                    <Image Source="/View/images/error.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Text="VÆLG EN SKADEBESKRIVELSE" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
                 </Grid>
             </WrapPanel>
         </Border>
@@ -83,8 +83,8 @@
                         <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/View/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Text="KOMMENTARER" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
+                    <Image Source="/View/images/comments_add.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock Text="TILKNYT YDERLIGERE BEMÆRKNINGER" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
                 </Grid>
             </WrapPanel>
         </Border>
@@ -110,11 +110,9 @@
         <ListView x:Name="BoatsList" ItemsSource="{Binding Path=Boats}" Style="{DynamicResource ResourceKey=lstView}" Height="Auto" Margin="311,32,8,221">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <Grid>
-                            <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
-                        </Grid>
-                    </StackPanel>
+                    <Grid>
+                        <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
@@ -124,10 +122,8 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <TextBox Text="{Binding Path=Comment, Mode=TwoWay}" HorizontalAlignment="Left" Height="105" Margin="311,356,0,0" VerticalAlignment="Top" Width="302" Background="{Binding Background, ElementName=ShowMembers}"/>
+        <TextBox Text="{Binding Path=Comment, Mode=TwoWay}" Height="105" Margin="311,356,8,0" VerticalAlignment="Top" Width="302" Background="White"/>
         <ComboBox HorizontalAlignment="Left" Margin="0,356,0,0" VerticalAlignment="Top" Width="302" Height="32"/>
-
-
 
         <Grid Margin="0,461,10,5">
             <Grid.ColumnDefinitions>
@@ -140,8 +136,8 @@
             <Button x:Name="btnCustomDistance" Grid.Column="4"
         		Style="{StaticResource ResourceKey=btnFilter}" 
         		Command="{Binding ToggleFilter}"
-        		Background="{StaticResource InputBG}"
-        		BorderBrush="{StaticResource InputBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+        		Background="{StaticResource SubmitBG}"
+        		BorderBrush="{StaticResource SubmitBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -201,15 +197,15 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;SKADE" />
                 </Grid>
             </Button>
-
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="63" Margin="10,393,0,0" VerticalAlignment="Top" Width="292">
+
+        <Grid HorizontalAlignment="Left" Height="47" Margin="0,393,0,0" VerticalAlignment="Top" Width="292">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <RadioButton Name="IsFunctionalRadio" Grid.Column="0" Content="Funktionel" Margin="3,0,0,0" GroupName="{Binding Name, ElementName=Filters}"/>
-            <RadioButton Name="IsNotFunctionalRadio" Grid.Column="1" Content="Ikke Funktionel" Margin="3,0,0,0" GroupName="{Binding Name, ElementName=Filters}"/>
+            <RadioButton Name="rdoIsFunctional" Grid.Column="0" Content="STADIG&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functionel"/>
+            <RadioButton Name="rdoIsNotFunctional" Grid.Column="1" Content="IKKE&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functionel"/>
 
         </Grid>
 
