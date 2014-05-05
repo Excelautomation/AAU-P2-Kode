@@ -35,7 +35,8 @@ namespace ARK.ViewModel.Protokolsystem
                 new ObservableCollection<Tuple<Member, double>>
                     (temp.Select((val, i) => new Tuple<Member, double>(val, val.Trips
                         .Where(t => t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
-                        .Sum(t => t.Distance))));
+                        .Sum(t => t.Distance)))
+                        .OrderByDescending(x => x.Item2));
         }
 
         public Member SelectedMember
