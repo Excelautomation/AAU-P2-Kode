@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="ARK.View.Administrationssystem.Pages.Trips"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ValConverters="clr-namespace:ARK.View.ValueConverters"
+             xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
+             mc:Ignorable="d" 
+             d:DesignHeight="594.417" d:DesignWidth="1121.053">
+    <UserControl.DataContext>
+        <VM:TripsViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0.118"/>
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FFF9F7F7" Offset="0.056"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500*" MinWidth="150" MaxWidth="500"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="809*"/>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Margin="5,0,0,0" Grid.ColumnSpan="3">
+            <Image Height="32" Source="/View/images/yacht.png"/>
+            <Label FontSize="28" >TURE</Label>
+        </WrapPanel>
+        <DockPanel Grid.Row="2" >
+            <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Ture</Label>
+            <Grid Margin="0,0,5,5">
+                <Border BorderBrush="Gray" BorderThickness="1">
+                    <DockPanel>
+                        <ScrollViewer>
+                            <ListView x:Name="TripList" ItemsSource="{Binding Path=Trips}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="750">
+                                            
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=BoatList, Path=SelectedItem}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListView>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </DockPanel>
+        <DockPanel Grid.Row="2" Grid.Column="2" >
+            <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Detaljer</Label>
+            <Grid Margin="5,0,5,5">
+                <Border BorderBrush="Gray" BorderThickness="1">
+                    <DockPanel>
+                        <ScrollViewer DockPanel.Dock="Bottom">
+                            <Border BorderBrush="Gray" BorderThickness="1">
+                                <DockPanel>
+                                    <ScrollViewer DockPanel.Dock="Bottom" Background="White">
+                                        <Border Margin="25" CornerRadius="15" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                            
+                                        </Border>
+                                    </ScrollViewer>
+                                </DockPanel>
+                            </Border>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </DockPanel>
+
+
+
+        <GridSplitter HorizontalAlignment="Right" Margin="0,35,0,0"
+			VerticalAlignment="Stretch" 
+			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
+			Width="5" Background="Gray"/>
+    </Grid>
+
+</UserControl>
