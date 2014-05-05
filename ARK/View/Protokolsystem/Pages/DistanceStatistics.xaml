@@ -99,7 +99,7 @@
                 <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="210"/>
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
