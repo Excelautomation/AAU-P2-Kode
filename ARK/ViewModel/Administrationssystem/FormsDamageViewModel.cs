@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using ARK.Model;
 using ARK.ViewModel.Base;
-using ARK.Model;
 using ARK.Model.DB;
 
 namespace ARK.ViewModel.Administrationssystem

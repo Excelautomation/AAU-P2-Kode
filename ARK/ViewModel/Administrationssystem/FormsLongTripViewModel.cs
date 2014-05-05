@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Input;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.Model.DB;
@@ -20,9 +16,6 @@ namespace ARK.ViewModel.Administrationssystem
         public FormsLongTripViewModel ()
         {
             _dbArkContext = DbArkContext.GetDbContext();
-
-
-
         }
 
         public bool RecentChange
@@ -36,8 +29,31 @@ namespace ARK.ViewModel.Administrationssystem
                 _LongDistanceForm = value; Notify(); 
             } }
 
+        public ICommand AcceptForm
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    LongDistanceForm.Status = LongDistanceForm.BoatStatus.Accepteret;
+                    RecentChange = true;
+                    _dbArkContext.SaveChanges();
+                 });
+            }
+        }
 
-
+        public ICommand RejectForm
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    LongDistanceForm.Status = LongDistanceForm.BoatStatus.Afvist;
+                    RecentChange = true;
+                    _dbArkContext.SaveChanges();
+                });
+            }
+        }
 
 
 
