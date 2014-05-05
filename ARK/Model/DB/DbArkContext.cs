@@ -5,11 +5,11 @@ using System.Data.Entity.Infrastructure;
 
 namespace ARK.Model.DB
 {
-    public class DbArkContext : DbContext, IDbContextFactory<DbArkContext>
+    public class DbArkContext : DbContext
     {
         private static DbArkContext _dbContext;
 
-        private DbArkContext() : base("MikkelsNoobDB")
+        public DbArkContext() : base("MikkelsNoobDB")
         {
             //Database.SetInitializer<DbArkContext>(new DropCreateDatabaseAlways<DbArkContext>());
             Database.SetInitializer(new MySqlInitializer());
@@ -102,11 +102,6 @@ namespace ARK.Model.DB
                 .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
-        }
-
-        DbArkContext IDbContextFactory<DbArkContext>.Create()
-        {
-            return new DbArkContext();
         }
     }
 }
