@@ -97,11 +97,11 @@
         <ListView x:Name="LastTrips" Style="{StaticResource lstView}" ItemsSource="{Binding Path=Trips}" Margin="311,31,8,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="185"/>
                             <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -115,15 +115,15 @@
                         </TextBlock>
 
                         <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
-                                <Run Text="Start tid:" FontWeight="Bold" />
-                                <Run Text="{Binding Path=TripStartTime, Converter={StaticResource ToLocalStringConverter}}"/>
-                            </TextBlock>
+                            <Run Text="Start tid:" FontWeight="Bold" />
+                            <Run Text="{Binding Path=TripStartTime, Converter={StaticResource ToLocalStringConverter}}"/>
+                        </TextBlock>
 
                         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Left">
-                                <Run Text="Tid ude:" FontWeight="Bold"/>
-                                <Run Text="{Binding Path=TimeBoatOut.Hours, Mode=OneWay}" /><Run Text=":" /><Run Text="{Binding Path=TimeBoatOut.Minutes, Mode=OneWay}" />
-                            </TextBlock>
-                        </Grid>
+                            <Run Text="Tid ude:" FontWeight="Bold"/>
+                            <Run Text="{Binding Path=TimeBoatOut.Hours, Mode=OneWay}" /><Run Text=":" /><Run Text="{Binding Path=TimeBoatOut.Minutes, Mode=OneWay}" />
+                        </TextBlock>
+                    </Grid>
                 </DataTemplate>
 
             </ListView.ItemTemplate>
