@@ -20,6 +20,12 @@
                         <DataTrigger Binding="{Binding SelectedItem, ElementName=DamageTypeList}" Value="{x:Null}">
                             <Setter Property="IsEnabled" Value="False" />
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding SelectedItem, ElementName=StandardTripList}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding SelectedItem, ElementName=AdminList}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Style.Resources>
@@ -253,7 +259,7 @@
                             </Grid.ColumnDefinitions>
 
                             <DockPanel Grid.Column="0" Margin="4">
-                                <Button Padding="5" Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny standardtur"/>
+                                <Button Padding="5" Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="220" Content="Opret ny standardtur"/>
                                 <ListView VerticalAlignment="Stretch" x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
                                           ItemsSource="{Binding Path=StandardTrips}" SelectedItem="{Binding Path=CurrentStandardTrip}">
                                     <ListView.ItemTemplate>

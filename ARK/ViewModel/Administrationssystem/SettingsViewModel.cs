@@ -319,7 +319,7 @@ namespace ARK.ViewModel.Administrationssystem
         public Feedback FeedbackAdmin
         {
             get { return _feedbackAdmin; }
-            set { _feedbackAdmin = value; }
+            set { _feedbackAdmin = value; Notify(); }
         }
 
         private int _CurrentAdminInt;
@@ -403,7 +403,9 @@ namespace ARK.ViewModel.Administrationssystem
                     {
                         Username = ReferenceToCurrentAdmin.Username,
                         Password = ReferenceToCurrentAdmin.Password,
-                        Member = ReferenceToCurrentAdmin.Member
+                        Member = ReferenceToCurrentAdmin.Member,
+                        ContactDark = ReferenceToCurrentAdmin.ContactDark,
+                        ContactTrip = ReferenceToCurrentAdmin.ContactTrip
                     };
                     FeedbackAdmin = Feedback.Cancel;
                 });
