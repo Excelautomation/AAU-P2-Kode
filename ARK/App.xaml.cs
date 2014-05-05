@@ -29,7 +29,7 @@ namespace ARK
                     //SUNSET
                     bool sunset = false;
 
-                    DateTime SunsetTime = XMLParser.GetSunsetFromXml();
+                    DateTime SunsetTime = XmlParser.GetSunsetFromXml();
 
                     if (SunsetTime > DateTime.Now)
                     {
