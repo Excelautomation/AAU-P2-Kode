@@ -68,14 +68,21 @@
                 <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=DamageForm.Type}" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=DamageForm.Functional, Converter={StaticResource Funktionel}}" VerticalAlignment="Center"/>
             </Grid>
-
-            <DockPanel Grid.Column="1" Grid.Row="0">
-                <Label DockPanel.Dock="Top" Content="Kommentarer"/>
-                <TextBox DockPanel.Dock="Bottom" Width="200" IsReadOnly="True" FontSize="16" TextWrapping="Wrap" Text="{Binding Path=DamageForm.Description}"/>
-            </DockPanel>
-
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                
+                <DockPanel DockPanel.Dock="Top">
+                    <Label DockPanel.Dock="Top" Content="Kommentarer"/>
+                    <TextBox DockPanel.Dock="Bottom" Width="200" FontSize="16" TextWrapping="Wrap" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
+                </DockPanel>
+                <Button Grid.Row="1" Content="Gem ændringer" Command="{Binding SaveChanges}"/>
+            </Grid>
+                
             <DockPanel Grid.ColumnSpan="2" Grid.Row="2">
-                <Button Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeaktiverBåd}">
+                <Button Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeactivateBåd}">
                     <StackPanel>
                         <WrapPanel HorizontalAlignment="Center">
                             <Image Source="../../images/yacht.png" Height="24"/>
@@ -84,13 +91,21 @@
                         <Label Content="Sæt båden til skadet" FontSize="14" FontStyle="Normal"/>
                     </StackPanel>
                 </Button>
-                <Button HorizontalAlignment="Right" Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=AktiverBåd}">
+                <Button HorizontalAlignment="Left" Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=AktiverBåd}">
                     <StackPanel Margin="0">
                         <WrapPanel HorizontalAlignment="Center">
                             <Image Source="../../images/yacht.png" Height="24"/>
                             <Image Source="../../images/accept.png" Height="24"/>
                         </WrapPanel>
                         <Label Content="Sæt båden til aktiv" FontSize="14" FontStyle="Normal"/>
+                    </StackPanel>
+                </Button>
+                <Button Padding="5" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" Command="{Binding Path=CloseForm}">
+                    <StackPanel>
+                        <WrapPanel HorizontalAlignment="Center">
+                            <Image Source="../../images/cross.png" Height="24"/>
+                        </WrapPanel>
+                        <Label Content="Luk skadesform" FontSize="14" FontStyle="Normal"/>
                     </StackPanel>
                 </Button>
             </DockPanel>
