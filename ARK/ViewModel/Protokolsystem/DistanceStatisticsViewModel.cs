@@ -23,21 +23,18 @@ namespace ARK.ViewModel.Protokolsystem
         {
             var db = DbArkContext.GetDbContext();
 
-            DateTime limit = new DateTime();
+            DateTime lowerTimeLimit = new DateTime();
+            DateTime upperTimeLimit = DateTime.Now;
             // Load data
             var temp = db.Member
                 .OrderBy(x => x.FirstName)
                 .Include(m => m.Trips)
                 .AsEnumerable();
 
-            var test = temp
-                .Select(m => m.Trips.Where(t => t.TripStartTime > limit).Aggregate(0d, (acc, val) => acc + val.Distance))
-                .ToList();
-
             _memberKmCollection =
                 new ObservableCollection<Tuple<Member, double>>
                     (temp.Select((val, i) => new Tuple<Member, double>(val, val.Trips
-                        .Where(t => t.TripStartTime > limit)
+                        .Where(t => t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
                         .Sum(t => t.Distance))));
         }
 
