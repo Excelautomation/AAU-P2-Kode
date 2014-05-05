@@ -2,28 +2,16 @@
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
-using ARK.ViewModel.Base.Interfaces.Info;
 using System.Collections.ObjectModel;
 
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
-    public class BeginTripAdditionalInfoViewModel : ContentViewModelBase,
-        IInfoContentViewModel<BeginTripAdditionalInfoViewModel>
+    public class BeginTripAdditionalInfoViewModel : ContentViewModelBase
     {
         // Fields
         private ObservableCollection<Boat> _selectedBoat;
         private ObservableCollection<MemberViewModel> _selectedMembers;
-
-        public BeginTripAdditionalInfoViewModel Info
-        {
-            get { return this; }
-            set
-            {
-                SelectedBoat = value.SelectedBoat;
-                SelectedMembers = value.SelectedMembers;
-                Notify();
-            }
-        }
+        private int _boatNumberOfSeats; // Default er 0
 
         // Properties
         public ObservableCollection<Boat> SelectedBoat
@@ -32,6 +20,22 @@ namespace ARK.ViewModel.Protokolsystem.Additional
             set
             {
                 _selectedBoat = value;
+
+                // Update number of seats
+                if (value.Count > 0 && value[0] != null)
+                    BoatNumberOfSeats = value[0].NumberofSeats;
+                else
+                    BoatNumberOfSeats = 0;
+
+                Notify();
+            }
+        }
+
+        public int BoatNumberOfSeats
+        {
+            get { return _boatNumberOfSeats; }
+            private set { 
+                _boatNumberOfSeats = value;
                 Notify();
             }
         }

@@ -1,7 +1,6 @@
 ﻿using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
-using ARK.ViewModel.Base.Interfaces.Info;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
-    class MembersinformationAdditionalInfoViewModel : ContentViewModelBase,
-        IInfoContentViewModel<MembersinformationAdditionalInfoViewModel>
+    class MembersinformationAdditionalInfoViewModel : ContentViewModelBase
     {
         // Fields
         private Member _selectedMember;
@@ -22,20 +20,6 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get { return _selectedMember; }
             set { _selectedMember = value; Notify(); }
-        }
-
-        // Methods
-        public MembersinformationAdditionalInfoViewModel Info
-        {
-            get
-            {
-                return this;
-            }
-            set
-            {
-                SelectedMember = value.SelectedMember;
-                Notify();
-            }
         }
     }
 }

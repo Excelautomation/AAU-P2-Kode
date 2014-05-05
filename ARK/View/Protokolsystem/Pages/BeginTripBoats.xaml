@@ -79,7 +79,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5">
+        <ListView x:Name="AllBoatsList" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -93,11 +93,6 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=BoatSelected}" CommandParameter="{Binding ElementName=AllBoatsList, Path=SelectedItem}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </ListView>
 
         <Grid Grid.Row="1" Grid.Column="1">

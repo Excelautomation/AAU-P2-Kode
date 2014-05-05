@@ -7,11 +7,10 @@ using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
-using ARK.ViewModel.Base.Interfaces.Info;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    public class ProtocolSystemMainViewModel : PageContainerViewModelBase, IKeyboardContainerViewModelBase,
+    public class ProtocolSystemMainViewModel : KeyboardContainerViewModelBase,
         IFilterContainerViewModel, IInfoContainerViewModel
     {
         #region PrivateFields
@@ -21,12 +20,10 @@ namespace ARK.ViewModel.Protokolsystem
         private ICommand _createLongDistance;
         private FrameworkElement _currentInfo;
         private bool _enableFilters;
-        private bool _enableSearch;
         private ICommand _endTrip;
         private FrameworkElement _filter;
         private string _headlineText;
         private ICommand _infoScreen;
-        private OnScreenKeyboard _keyboard;
         private ICommand _memberInformation;
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
@@ -169,67 +166,10 @@ namespace ARK.ViewModel.Protokolsystem
             else
                 Filter = null;
 
-            // Hide and clear keyboard
-            KeyboardText = "";
-
             // Remove information
             CurrentInfo = null;
 
             base.NavigateToPage(() => element, pageTitle);
-        }
-
-        #endregion
-
-        #region Keyboard
-
-        public OnScreenKeyboard Keyboard
-        {
-            get
-            {
-                if (_keyboard != null) return _keyboard;
-
-                Keyboard = new OnScreenKeyboard();
-                KeyboardHide();
-
-                return Keyboard;
-            }
-            set
-            {
-                _keyboard = value;
-                Notify();
-            }
-        }
-
-        public bool KeyboardToggled
-        {
-            get { return EnableSearch; }
-        }
-
-        public void KeyboardShow()
-        {
-            EnableSearch = true;
-        }
-
-        public void KeyboardHide()
-        {
-            EnableSearch = false;
-        }
-
-        public event EventHandler KeyboardTextChanged
-        {
-            add { ((KeyboardViewModel) Keyboard.DataContext).TextChanged += value; }
-            remove { ((KeyboardViewModel) Keyboard.DataContext).TextChanged -= value; }
-        }
-
-        public string KeyboardText
-        {
-            get { return ((KeyboardViewModel) Keyboard.DataContext).Text; }
-            private set { ((KeyboardViewModel) Keyboard.DataContext).Text = value; }
-        }
-
-        public void KeyboardClear()
-        {
-            KeyboardText = "";
         }
 
         #endregion
@@ -268,10 +208,10 @@ namespace ARK.ViewModel.Protokolsystem
 
         public bool EnableSearch
         {
-            get { return _enableSearch; }
+            get { return KeyboardToggled; }
             set
             {
-                _enableSearch = value;
+                KeyboardToggled = value;
                 Notify();
 
                 // If Keyboard is active
@@ -326,13 +266,12 @@ namespace ARK.ViewModel.Protokolsystem
             CurrentInfo = infopage;
 
             // Check ViewModel
-            var viewModel = infopage.DataContext as IInfoContentViewModel<T>;
+            var viewModel = infopage.DataContext as ContentViewModelBase;
 
             // Set parent
             if (viewModel == null) return;
 
             viewModel.Parent = this;
-            viewModel.Info = info;
         }
 
         #endregion

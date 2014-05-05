@@ -11,7 +11,7 @@ using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    public class AdminSystemViewModel : PageContainerViewModelBase, IFilterContainerViewModel
+    public class AdminSystemViewModel : KeyboardContainerViewModelBase, IFilterContainerViewModel
     {
         private bool _enableFilters;
         private bool _enableSearch;
