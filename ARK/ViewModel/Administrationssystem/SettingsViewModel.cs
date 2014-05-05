@@ -14,7 +14,6 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : ContentViewModelBase
     {
-        #region Generelt
         public enum Feedback
         {
             Default, Save, Cancel, Delete, Create
@@ -33,7 +32,6 @@ namespace ARK.ViewModel.Administrationssystem
                 Members = new ObservableCollection<Member>(_dbcontext.Member);
             }
 
-            // Templates til oprettelse af entries
 
 
             if (Admins.Count != 0)
@@ -50,8 +48,18 @@ namespace ARK.ViewModel.Administrationssystem
                 SelectedListItemStandardTrips = 0;
                 CurrentStandardTrip = StandardTrips[0];
             }
+            _currentSeasonStart = _dbcontext.Season.Last().SeasonStart;
+
         }
 
+        #region Generelt
+        private DateTime _currentSeasonStart;
+
+        public DateTime CurrentSeasonStart
+        {
+            get { return _currentSeasonStart; }
+            set { _currentSeasonStart = value; }
+        }
 
         #endregion
 
