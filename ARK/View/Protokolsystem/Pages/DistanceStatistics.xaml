@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              Style="{StaticResource ResourceKey=ucContent}">
@@ -28,6 +29,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <valueConverters:DateTimeToLocalStringConverter x:Key="ToLocalStringConverter"></valueConverters:DateTimeToLocalStringConverter>
     </UserControl.Resources>
     
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
@@ -95,11 +97,11 @@
         <ListView x:Name="LastTrips" Style="{StaticResource lstView}" ItemsSource="{Binding Path=Trips}" Margin="311,31,8,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="210"/>
                             <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                            </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -115,13 +117,13 @@
                         <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
                                 <Run Text="Start tid:" FontWeight="Bold" />
                                 <Run Text="{Binding Path=TripStartTime}"/>
-                        </TextBlock>
+                            </TextBlock>
 
                         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Left">
                                 <Run Text="Tid ude:" FontWeight="Bold"/>
                                 <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay}" />
-                        </TextBlock>
-                    </Grid>
+                            </TextBlock>
+                        </Grid>
                 </DataTemplate>
 
             </ListView.ItemTemplate>
