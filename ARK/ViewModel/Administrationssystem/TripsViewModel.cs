@@ -37,13 +37,15 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 DbArkContext db = DbArkContext.GetDbContext();
 
-                //lock (db)
-                //{
-                //    // Opret forbindelser Async
-                //    Task<List<Boat>> boatsOut = db.Boat.Include(e => e.DamageForms).Include(e => e.Trips).ToListAsync();
+                lock (db)
+                {
+                    // Opret forbindelser Async
+                    Task<List<Trip>> TripsLoad = db.Trip.ToListAsync();
 
-                //    _TripsNonFiltered = boatsOut.Result;
-                //}
+                    _TripsNonFiltered = TripsLoad.Result;
+                }
+
+                Trips = _TripsNonFiltered;
 
                 // Nulstil filter
                 //ResetFilter();
@@ -68,13 +70,24 @@ namespace ARK.ViewModel.Administrationssystem
            }
        }
 
-       public Trip CurrentTrips
+       public Trip CurrentTrip
        {
            get { return _currentTrip; }
            set
            {
                _currentTrip = value;
                Notify();
+           }
+       }
+
+       public ICommand SelectedChange
+       {
+           get
+           {
+               return GetCommand<Trip>(e =>
+               {
+                   CurrentTrip = e;
+               });
            }
        }
 
