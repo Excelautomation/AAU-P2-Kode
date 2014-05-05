@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base.Interfaces;
@@ -9,17 +10,21 @@ namespace ARK.ViewModel.Base
 {
     public class KeyboardContainerViewModelBase : PageContainerViewModelBase, IKeyboardContainerViewModelBase
     {
-        public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
-        {
-            // Hide and clear keyboard
-            KeyboardText = "";
-            KeyboardHide();
-
-            base.NavigateToPage(page, pageTitle);
-        }
-
-        private OnScreenKeyboard _keyboard;
         private bool _enableKeyboard;
+        private OnScreenKeyboard _keyboard;
+
+        public KeyboardContainerViewModelBase()
+        {
+            // Setup keyboard listener
+            KeyboardTextChanged += (sender, e) =>
+            {
+                if (CurrentSelectedTextBox == null) return;
+
+                var textBox = CurrentSelectedTextBox as TextBox;
+                if (textBox != null)
+                    textBox.Text = KeyboardText;
+            };
+        }
 
         public OnScreenKeyboard Keyboard
         {
@@ -39,9 +44,32 @@ namespace ARK.ViewModel.Base
             }
         }
 
-        public virtual ICommand KeyboardToggle
+        public ICommand KeyboardToggle
         {
-            get { return GetCommand<object>(e => KeyboardToggled = !KeyboardToggled); }
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    // Change keyboard state
+                    KeyboardToggled = !KeyboardToggled;
+
+                    // Check if a textbox has been selected
+                    if (CurrentSelectedTextBox == null)
+                        return;
+
+                    // Update keyboard text
+                    var textbox = CurrentSelectedTextBox as TextBox;
+                    if (textbox != null)
+                        KeyboardText = textbox.Text;
+                });
+            }
+        }
+
+        private FrameworkElement CurrentSelectedTextBox { get; set; }
+
+        public ICommand GotFocus
+        {
+            get { return GetCommand<FrameworkElement>(element => { CurrentSelectedTextBox = element; }); }
         }
 
         public bool KeyboardToggled
@@ -79,6 +107,18 @@ namespace ARK.ViewModel.Base
         public void KeyboardClear()
         {
             KeyboardText = "";
+        }
+
+        public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
+        {
+            // Hide and clear keyboard
+            KeyboardText = "";
+            KeyboardHide();
+
+            // Remove currentselected textbox
+            CurrentSelectedTextBox = null;
+
+            base.NavigateToPage(page, pageTitle);
         }
     }
 }

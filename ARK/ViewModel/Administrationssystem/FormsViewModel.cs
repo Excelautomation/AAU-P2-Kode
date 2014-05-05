@@ -248,5 +248,10 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         #endregion
+
+        public ICommand GotFocus
+        {
+            get { return GetCommand<FrameworkElement>(element => ContentViewModelBase.GetKeyboard(this).GotFocus.Execute(element)); }
+        }
     }
 }

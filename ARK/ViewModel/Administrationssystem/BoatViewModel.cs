@@ -79,7 +79,7 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     _RecentSave = value;
                     _RecentCancel = false;
-                    Notify("RecentCancel");
+                    NotifyCustom("RecentCancel");
                 }
                 Notify();
             }
@@ -94,7 +94,7 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     _RecentCancel = value;
                     _RecentSave = false;
-                    Notify("RecentSave");
+                    NotifyCustom("RecentSave");
                 }
                 Notify();
             }

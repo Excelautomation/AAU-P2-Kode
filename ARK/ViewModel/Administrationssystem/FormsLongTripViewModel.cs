@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.Model.DB;
@@ -11,7 +12,6 @@ namespace ARK.ViewModel.Administrationssystem
         private readonly DbArkContext _dbArkContext;
         private LongDistanceForm _LongDistanceForm;
         private bool _RecentChange = false;
-
         
         public FormsLongTripViewModel ()
         {
