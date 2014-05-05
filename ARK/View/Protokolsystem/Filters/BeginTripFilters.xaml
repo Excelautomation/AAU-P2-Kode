@@ -43,14 +43,14 @@
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
-                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Type}" IsChecked="True"/>
-                    <RadioButton Content="2'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}"/>
-                    <RadioButton Content="1'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}"/>
+                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Type}" IsChecked="{Binding Path=CategoryAllSizesChecked, Mode=TwoWay}"/>
+                    <RadioButton Content="2'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}" IsChecked="{Binding Path=CategoryTwoChecked, Mode=TwoWay}"/>
+                    <RadioButton Content="1'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}" IsChecked="{Binding Path=CategoryOneChecked, Mode=TwoWay}"/>
                 </DockPanel>
                 <DockPanel Grid.Column="1">
-                    <RadioButton Content="4'er" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Type}"/>
-                    <RadioButton Content="Langturs" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}"/>
-                    <RadioButton Content="8'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}"/>
+                    <RadioButton Content="4'er" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Type}" IsChecked="{Binding Path=CategoryFourChecked, Mode=TwoWay}"/>
+                    <RadioButton Content="Langturs" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}" />
+                    <RadioButton Content="8'er" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Type}" IsChecked="{Binding Path=CategoryEightChecked, Mode=TwoWay}"/>
                 </DockPanel>
             </Grid>
         </GroupBox>
