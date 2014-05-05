@@ -39,69 +39,77 @@
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
-                            <StackPanel>
-                                <StackPanel Name="FormsDamageFormOverview" Margin="5,5,5,20" Visibility="{Binding Path=ShowDamageForms}">
-                                    <WrapPanel>
-                                        <Image Margin="5,0,0,0" Source="../../images/application_side_list_red.png" Height="24"/>
-                                        <Label Margin="5,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
-                                    </WrapPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                
+                                    <DockPanel Grid.Row="0" Name="FormsDamageFormOverview" Margin="5,5,5,0" Visibility="{Binding Path=ShowDamageForms}">
+                                        <WrapPanel DockPanel.Dock="Top">
+                                            <Image Margin="5,0,0,0" Source="../../images/application_side_list_red.png" Height="24"/>
+                                            <Label Margin="5,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
+                                        </WrapPanel>
 
-                                    <ListView Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
+                                        <ListView DockPanel.Dock="Bottom" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
 
-                                                <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="65"/>
-                                                        <ColumnDefinition Width="125"/>
-                                                        <ColumnDefinition Width="55"/>
-                                                        <ColumnDefinition Width="1*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="auto"/>
-                                                    </Grid.RowDefinitions>
+                                                    <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="65"/>
+                                                            <ColumnDefinition Width="125"/>
+                                                            <ColumnDefinition Width="55"/>
+                                                            <ColumnDefinition Width="1*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="auto"/>
+                                                        </Grid.RowDefinitions>
 
-                                                    <WrapPanel Grid.Column="0" Orientation="Vertical">
-                                                        <TextBlock Text="Båd:" FontSize="14px" />
-                                                        <TextBlock Text="Medlem:" FontSize="14px" />
-                                                    </WrapPanel>
-
-                                                    <WrapPanel Grid.Column="1" Orientation="Vertical">
-                                                        <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
-                                                        <WrapPanel>
-                                                            <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
-                                                            <TextBlock Margin="3,0,0,0" Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
+                                                        <WrapPanel Grid.Column="0" Orientation="Vertical">
+                                                            <TextBlock Text="Båd:" FontSize="14px" />
+                                                            <TextBlock Text="Medlem:" FontSize="14px" />
                                                         </WrapPanel>
-                                                    </WrapPanel>
 
-                                                    <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
-                                                        <TextBlock Text="Type: " FontSize="14px" />
-                                                        <TextBlock Text="Dato: " FontSize="14px" />
-                                                    </WrapPanel>
+                                                        <WrapPanel Grid.Column="1" Orientation="Vertical">
+                                                            <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
+                                                            <WrapPanel>
+                                                                <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
+                                                                <TextBlock Margin="3,0,0,0" Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
+                                                            </WrapPanel>
+                                                        </WrapPanel>
 
-                                                    <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
-                                                        <TextBlock Text="{Binding Type}" FontSize="14px" />
-                                                        <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
-                                                    </WrapPanel>
+                                                        <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
+                                                            <TextBlock Text="Type: " FontSize="14px" />
+                                                            <TextBlock Text="Dato: " FontSize="14px" />
+                                                        </WrapPanel>
 
-                                                </Grid>
+                                                        <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
+                                                            <TextBlock Text="{Binding Type}" FontSize="14px" />
+                                                            <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
+                                                        </WrapPanel>
+
+                                                    </Grid>
                                                 
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </ListView>
-                                </StackPanel>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ListView>
+                                    </DockPanel>
 
-                                <StackPanel Name="FormsLongTripOverview" Margin="5,0,5,0" Visibility="{Binding Path=ShowLongDistanceForms}">
-                                    <WrapPanel>
+                                <DockPanel Grid.Row="1" Name="FormsLongTripOverview" Margin="5,0,5,0" Visibility="{Binding Path=ShowLongDistanceForms}">
+                                    <WrapPanel DockPanel.Dock="Top">
                                         <Image Margin="5,0,0,0" Source="../../images/application_side_list_blue.png" Height="24"/>
                                         <Label Margin="5,0,0,0" FontSize="16" Content="Langtur" FontWeight="Bold"/>
                                     </WrapPanel>
-                                    <ListView Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
+                                    <ListView DockPanel.Dock="Bottom" Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
@@ -123,7 +131,8 @@
                                                     <WrapPanel Grid.Column="1" Orientation="Vertical">
                                                         <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
                                                         <WrapPanel>
-                                                            <TextBlock Margin="0,0,3,0" Text="{Binding Members[0].FirstName}" FontSize="14px" /> <!-- Virker ikke -->
+                                                            <TextBlock Margin="0,0,3,0" Text="{Binding Members[0].FirstName}" FontSize="14px" />
+                                                            <!-- Virker ikke -->
                                                             <TextBlock Text="{Binding Members[0].LastName}" FontSize="14px" />
                                                         </WrapPanel>
                                                     </WrapPanel>
@@ -147,8 +156,8 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListView>
-                                </StackPanel>
-                            </StackPanel>
+                                </DockPanel>
+                            </Grid>
                         </ScrollViewer>
                     </DockPanel>
                 </Border>

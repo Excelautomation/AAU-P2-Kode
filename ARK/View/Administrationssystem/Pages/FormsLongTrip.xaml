@@ -83,40 +83,42 @@
                     </StackPanel>
                 </Button>
             </WrapPanel>
+        
+        <StackPanel Grid.Row="3">
+            <TextBlock Margin="0,10,0,0" FontSize="20" HorizontalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RecentChange, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                <Setter Property="Text" Value="Ændring gemt"/>
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
 
-        <TextBlock Grid.Row="3" Margin="0,10,0,0" FontSize="20" HorizontalAlignment="Center">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding RecentChange, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                            <Setter Property="Text" Value="Ændring gemt"/>
-                            <Setter Property="Foreground" Value="Green"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <TextBlock Grid.Row="3" Margin="0,10,0,0" FontSize="20">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afventer">
-                            <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Accepteret">
-                            <Setter Property="Text" Value="Denne langtursanmodning er blevet godkendt"/>
-                            <Setter Property="Foreground" Value="Green"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afvist">
-                            <Setter Property="Text" Value="Denne langtursanmodning er blevet Afvist"/>
-                            <Setter Property="Foreground" Value="Red"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
+            <TextBlock Margin="0,10,0,0" FontSize="20">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afventer">
+                                <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Accepteret">
+                                <Setter Property="Text" Value="Denne langtursanmodning er blevet godkendt"/>
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afvist">
+                                <Setter Property="Text" Value="Denne langtursanmodning er blevet Afvist"/>
+                                <Setter Property="Foreground" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 
 

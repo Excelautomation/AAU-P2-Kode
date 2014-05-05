@@ -24,7 +24,7 @@ namespace ARK.ViewModel.Administrationssystem
             set { _RecentChange = value; Notify(); }
         }
 
-        public LongDistanceForm LongDistanceForm { get { return _LongDistanceForm; } 
+        public LongDistanceForm LongDistanceForm { get { return _LongDistanceForm; }
             set { 
                 _LongDistanceForm = value; Notify(); 
             } }
