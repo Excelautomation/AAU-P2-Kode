@@ -27,6 +27,8 @@ namespace ARK.Model.DB
         public DbSet<SMS> SMS { get; set; }
         public DbSet<StandardTrip> StandardTrip { get; set; }
         public DbSet<Admin> Admin { get; set; }
+        public DbSet<Season> Season { get; set; }
+        
 
         public static DbArkContext GetDbContext()
         {

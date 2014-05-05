@@ -106,6 +106,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Season.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\BoatFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\FormsFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs" />
