@@ -6,7 +6,8 @@ namespace ARK.Model
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public bool Contact { get; set; }
+        public bool ContactTrip { get; set; }
+        public bool ContactDark { get; set; }
 
         //Navigation property
         public virtual Member Member { get; set; }

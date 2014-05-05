@@ -34,10 +34,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             // Templates til oprettelse af entries
-            NewAdmin.Username = "Ny administrator";
-            NewAdmin.Contact = false;
-            NewAdmin.Password = "kode1234";
-            NewAdmin.Member = null;
+
 
             if (Admins.Count != 0)
             {
@@ -53,10 +50,6 @@ namespace ARK.ViewModel.Administrationssystem
                 SelectedListItemStandardTrips = 0;
                 CurrentStandardTrip = StandardTrips[0];
             }
-            
-
-
-
         }
 
 
@@ -72,7 +65,7 @@ namespace ARK.ViewModel.Administrationssystem
         public int SelectedListItemDamageTypes
         {
             get { return _selectedListItemDamageTypes; }
-            set { _selectedListItemDamageTypes = value; Notify(); }    
+            set { _selectedListItemDamageTypes = value; Notify(); }
         }
 
         public Feedback FeedbackDamageType
@@ -214,7 +207,7 @@ namespace ARK.ViewModel.Administrationssystem
             set { _standardTrips = value; Notify(); }
         }
 
-        
+
         public StandardTrip CurrentStandardTrip
         {
             get { return _currentStandardTrip; }
@@ -316,33 +309,32 @@ namespace ARK.ViewModel.Administrationssystem
         #endregion
 
         #region Administratorer
-
-        private Admin NewAdmin = new Admin();
-        private bool _NewAdminBool = false;
+        private Admin _referenceToCurrentAdmin;
         private ObservableCollection<Admin> _admins;
         private Admin _currentAdmin;
         private ObservableCollection<Member> _members;
         public MembersListWindow MembersListWindow;
+        private Feedback _feedbackAdmin;
+
+        public Feedback FeedbackAdmin
+        {
+            get { return _feedbackAdmin; }
+            set { _feedbackAdmin = value; }
+        }
+
         private int _CurrentAdminInt;
 
-        public bool NewAdminBool
+        public Admin ReferenceToCurrentAdmin
         {
-            get { return _NewAdminBool; }
-            set 
-            { 
-                _NewAdminBool = value;
-                Notify();
-                
-            }
+            get { return _referenceToCurrentAdmin; }
+            set { _referenceToCurrentAdmin = value; Notify(); }
         }
 
-                public int CurrentAdminInt
-        { 
+        public int CurrentAdminInt
+        {
             get { return _CurrentAdminInt; }
             set { _CurrentAdminInt = value; Notify(); }
-        
         }
-
 
         public ObservableCollection<Admin> Admins
         {
@@ -362,16 +354,100 @@ namespace ARK.ViewModel.Administrationssystem
             set { _currentAdmin = value; Notify(); }
         }
 
-        #region ShowMembers related
-        public ICommand ShowMembers
+        public ICommand SelectedChangeAdmin
+        {
+            get
+            {
+                return GetCommand<Admin>(e =>
+                {
+                    if (e == null) return;
+
+                    CurrentAdmin = new Admin()
+                    {
+                        Username = e.Username,
+                        Password = e.Password,
+                        ContactTrip = e.ContactTrip,
+                        ContactDark = e.ContactDark,
+                        Member = e.Member
+                    };
+                    ReferenceToCurrentAdmin = e;
+
+                    FeedbackAdmin = Feedback.Default;
+                });
+            }
+        }
+
+        public ICommand SaveChangesAdmins
+        {
+            get
+            {
+                return GetCommand<Admin>(e =>
+                {
+                    ReferenceToCurrentAdmin.ContactTrip = CurrentAdmin.ContactTrip;
+                    ReferenceToCurrentAdmin.ContactDark = CurrentAdmin.ContactDark;
+                    _dbcontext.SaveChanges();
+
+                    Admins = new ObservableCollection<Admin>(_dbcontext.Admin.ToList());
+                    FeedbackAdmin = Feedback.Save;
+                });
+            }
+        }
+
+        public ICommand CancelChangesAdmins
         {
             get
             {
                 return GetCommand<object>(e =>
                 {
+                    CurrentAdmin = new Admin()
+                    {
+                        Username = ReferenceToCurrentAdmin.Username,
+                        Password = ReferenceToCurrentAdmin.Password,
+                        Member = ReferenceToCurrentAdmin.Member
+                    };
+                    FeedbackAdmin = Feedback.Cancel;
+                });
+            }
+        }
+
+        public ICommand CreateAdmin
+        {
+            get
+            {
+                return GetCommand<Admin>(e =>
+                {
                     MembersListWindow = new View.Administrationssystem.Pages.MembersListWindow();
                     MembersListWindow.DataContext = this;
                     MembersListWindow.ShowDialog();
+
+                    Admin AdminTemplate = new Admin()
+                    {
+                        Username = CurrentAdmin.Username,
+                        Password = CurrentAdmin.Password,
+                        ContactTrip = false,
+                        ContactDark = false,
+                        Member = CurrentAdmin.Member
+                    };
+                    _dbcontext.Admin.Add(AdminTemplate);
+                    _dbcontext.SaveChanges();
+                    Admins.Add(AdminTemplate);
+                    FeedbackAdmin = Feedback.Create;
+                    CurrentAdminInt = Admins.Count - 1;
+                });
+            }
+        }
+
+        public ICommand DeleteAdmin
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    _dbcontext.Admin.Remove(ReferenceToCurrentAdmin);
+                    _dbcontext.SaveChanges();
+                    Admins.Remove(ReferenceToCurrentAdmin);
+                    FeedbackAdmin = Feedback.Delete;
+                    CurrentAdminInt = Admins.Count - 1;
                 });
             }
         }
@@ -384,85 +460,10 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     CurrentAdmin.Member = e;
                     MembersListWindow.Close();
-                    NewAdminBool = false;
-                    NotifyCustom("CurrentAdmin");
                 });
             }
         }
 
-        #endregion
-
-        public ICommand SelectedChangeAdmin
-        {
-
-            get
-            {
-                return GetCommand<Admin>(e => 
-                { 
-                    CurrentAdmin = e;
-                    if (e != null)
-                    {
-                        if (e.Member != null)
-                            NewAdminBool = false;
-                        else
-                            NewAdminBool = true;
-                        Notify("NewAdminBool");
-                    }
-                });
-            }
-        }
-
-        public ICommand SaveChangesAdmins
-        {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                    _dbcontext.SaveChanges();
-                    System.Windows.MessageBox.Show("Gem knap");
-                });
-            }
-        }
-
-        public ICommand CancelChangesAdmins
-        {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                    System.Windows.MessageBox.Show("Annulér knap");
-                });
-            }
-        }
-
-        public ICommand CreateAdmin
-        {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                    CurrentAdmin = null;
-                    Admins.Add(NewAdmin);
-                    NewAdminBool = true;
-                    CurrentAdminInt = Admins.Count - 1;
-                    NotifyCustom("Admins");
-                    CurrentAdmin = Admins[Admins.Count - 1];
-                });
-            }
-        }
-
-        public ICommand DeleteAdmin
-        {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                    Admins.Remove(CurrentAdmin);
-                    CurrentAdmin = Admins[Admins.Count - 1];
-                    CurrentAdminInt = Admins.Count - 1;
-                });
-            }
-        }
         #endregion
     }
 }
