@@ -52,20 +52,18 @@
         <ListView x:Name="Members" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=MemberKmCollection}" Margin="0,31,319,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch">
-                        <TextBlock Text="hejsa" HorizontalAlignment="Right" TextAlignment="Right" Width="40"/>
-                        <!--<Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="34"/>
+                            <ColumnDefinition Width="208"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Width="Auto" Style="{StaticResource ResourceKey=lstListViewHeadline}">
-                            --><!--<Run Text="{Binding MemberKmCollection}"/>-->
-                            <!--Distance metode er ikke done - SKAL VÆRE HER--><!--
+                        <Image Source="/View/images/medal_award_gold.png" Grid.Column="0"/>
+                        <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Item1.FirstName}"/>
                             <Run Text="{Binding Item1.LastName}"/>
                         </TextBlock>
-
-                        <TextBlock Grid.Column="1" Width="40" Text="{Binding Path=Item2}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />-->
+                        <TextBlock Grid.Column="2" Text="{Binding Path=Item2}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
