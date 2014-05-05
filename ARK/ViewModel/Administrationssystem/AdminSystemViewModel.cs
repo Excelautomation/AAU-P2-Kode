@@ -9,6 +9,7 @@ using ARK.Model;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.View.Administrationssystem.Pages;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -73,6 +74,11 @@ namespace ARK.ViewModel.Administrationssystem
             get { return GetNavigateCommand(() => PageBoats, "Boats"); }
         }
 
+        public ICommand MenuTrips
+        {
+            get { return GetNavigateCommand(() => PageTrips, "Trips"); }
+        }
+
         public ICommand MenuConfigurations
         {
             get { return GetNavigateCommand(() => PageConfigurations, "Configurations"); }
@@ -91,6 +97,11 @@ namespace ARK.ViewModel.Administrationssystem
         private Baede PageBoats
         {
             get { return new Baede(); }
+        }
+
+        private Trips PageTrips
+        {
+            get { return new Trips(); }
         }
 
         private Indstillinger PageConfigurations

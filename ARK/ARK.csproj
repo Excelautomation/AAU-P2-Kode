@@ -109,6 +109,7 @@
     <Compile Include="ViewModel\Administrationssystem\Filters\BoatFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\FormsFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\TripsViewModel.cs" />
     <Compile Include="ViewModel\Base\Filter\Filter.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterChangedEventArgs.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContentViewModel.cs" />
@@ -156,6 +157,9 @@
     </Compile>
     <Compile Include="View\Administrationssystem\Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Administrationssystem\Pages\Trips.xaml.cs">
+      <DependentUpon>Trips.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Administrationssystem\SearchTextBox.cs" />
     <Compile Include="ark.Designer.cs">
@@ -314,6 +318,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Administrationssystem\Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrationssystem\Pages\Trips.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -558,6 +566,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\images\page_white_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\images\world_go.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
