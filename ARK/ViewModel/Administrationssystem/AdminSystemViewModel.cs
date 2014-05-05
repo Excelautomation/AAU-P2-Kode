@@ -25,16 +25,6 @@ namespace ARK.ViewModel.Administrationssystem
             // Start oversigten
             MenuOverview.Execute(null);
 
-            // Setup keyboard listener
-            KeyboardTextChanged += (sender, e) =>
-            {
-                if (CurrentSelectedTextBox == null) return;
-
-                var textBox = CurrentSelectedTextBox as TextBox;
-                if (textBox != null)
-                    textBox.Text = KeyboardText;
-            };
-
             TimeCounter.StopTime();
         }
 
@@ -163,40 +153,6 @@ namespace ARK.ViewModel.Administrationssystem
                             if (SearchTextChanged != null) 
                                 SearchTextChanged(this, new SearchEventArgs(s));
                         });
-            }
-        }
-
-        private FrameworkElement CurrentSelectedTextBox { get; set; }
-
-        public ICommand GotFocus
-        {
-            get
-            {
-                return GetCommand<FrameworkElement>(element =>
-                {
-                    CurrentSelectedTextBox = element;
-                });
-            }
-        }
-
-        public override ICommand KeyboardToggle
-        {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                    // Check if a textbox has been selected
-                    if (CurrentSelectedTextBox == null)
-                        return;
-                    
-                    // Change keyboard state
-                    base.KeyboardToggled = !base.KeyboardToggled;
-
-                    // Update keyboard text
-                    var textbox = CurrentSelectedTextBox as TextBox;
-                    if (textbox != null)
-                        KeyboardText = textbox.Text;
-                });
             }
         }
 
