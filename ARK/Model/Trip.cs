@@ -14,12 +14,12 @@ namespace ARK.Model
         public string Direction { get; set; }
         public string Description { get; set; }
 
-        public TimeSpan TimeBoatOut
+        public string TimeBoatOut
         {
             get
             {
                 var temp = DateTime.Now.Subtract(TripStartTime);
-                return new TimeSpan(temp.Hours, temp.Minutes, temp.Seconds);
+                return temp.Hours + ":" + temp.Minutes;
             }
         }
 
