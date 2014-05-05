@@ -80,17 +80,25 @@
         <ListView x:Name="LastTrips" Style="{StaticResource lstView}" ItemsSource="{Binding Path=Trips}" Margin="311,31,8,78">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical">
-                        <!--Vis kun 10 (Fjern kommentarer)-->
-                        <!--Kilometer-->
-                        <TextBlock Text="{Binding}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
-                        <!--Title-->
-                        <TextBlock Text="{Binding}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
-                        <!--Description-->
-                        <TextBlock Text="{Binding}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
-                    </WrapPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <TextBlock Text="{Binding Path=Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Path=Direction}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=TripStartTime}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Path=TimeBoatOut}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                        </Grid>
+                    </StackPanel>
                 </DataTemplate>
+
             </ListView.ItemTemplate>
+            
         </ListView>
         
         <Grid Margin="0,461,10,5">
