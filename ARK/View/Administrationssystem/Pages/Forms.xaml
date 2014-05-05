@@ -101,14 +101,13 @@
                                         <Image Margin="5,0,0,0" Source="../../images/application_side_list_blue.png" Height="24"/>
                                         <Label Margin="5,0,0,0" FontSize="16" Content="Langtur" FontWeight="Bold"/>
                                     </WrapPanel>
-                                    <Separator Margin="0" Padding="0"/>
                                     <ListView Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="65"/>
-                                                        <ColumnDefinition Width="125"/>
+                                                        <ColumnDefinition Width="75"/>
+                                                        <ColumnDefinition Width="115"/>
                                                         <ColumnDefinition Width="90"/>
                                                         <ColumnDefinition Width="1*"/>
                                                     </Grid.ColumnDefinitions>
@@ -118,13 +117,14 @@
 
                                                     <WrapPanel Grid.Column="0" Orientation="Vertical">
                                                         <TextBlock Text="Båd:" FontSize="14px" />
-                                                        <TextBlock Text="Medlem:" FontSize="14px" />
+                                                        <TextBlock Text="Ansvarlig:" FontSize="14px" />
                                                     </WrapPanel>
 
                                                     <WrapPanel Grid.Column="1" Orientation="Vertical">
                                                         <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
                                                         <WrapPanel>
-                                                            <TextBlock Text="ubundet" FontSize="14px" />
+                                                            <TextBlock Margin="0,0,3,0" Text="{Binding Members[0].FirstName}" FontSize="14px" /> <!-- Virker ikke -->
+                                                            <TextBlock Text="{Binding Members[0].LastName}" FontSize="14px" />
                                                         </WrapPanel>
                                                     </WrapPanel>
 
