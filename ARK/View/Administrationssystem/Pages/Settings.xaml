@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <administrationssystem:SettingsViewModel/>
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <Style x:Key="GreyWhNotSelected" TargetType="DockPanel">
             <Style.Resources>
@@ -44,8 +44,8 @@
             </WrapPanel>
             <TabControl Margin="0,0,0,0" Background="Transparent" Grid.Row="1">
 
-                
-                <TabItem Header="SMS-Modul" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+
+                <TabItem Header="Generelt" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -115,18 +115,18 @@
                         </Border>
                     </Grid>
                 </TabItem>
-                
-                
+
+
                 <TabItem Header="Skadetyper" FontSize="20" Margin="0,0,5,0" Padding="10,0,30,0">
                     <DockPanel HorizontalAlignment="Center" Margin="10">
                         <Grid>
-                        
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="320"/>
                                 <ColumnDefinition Width="4"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                        
+
                             <DockPanel Grid.Column="0" Margin="4">
                                 <Button Padding="5" Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
                                 <ListView VerticalAlignment="Stretch" x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
@@ -173,7 +173,7 @@
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
-                            
+
                                 <WrapPanel Margin="4">
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
@@ -234,43 +234,45 @@
                                         </TextBlock.Style>
                                     </TextBlock>
                                 </WrapPanel>
-                            
+
                             </StackPanel>
-                        
+
                         </Grid>
                     </DockPanel>
                 </TabItem>
-                
-                
+
+
                 <TabItem Header="Standardture" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
                     <DockPanel HorizontalAlignment="Center" Margin="10">
-                    <Grid>
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="320"/>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="320"/>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
                             <DockPanel Grid.Column="0" Margin="4">
                                 <Button Padding="5" Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny standardtur"/>
-                                <ListView VerticalAlignment="Stretch" x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ItemsSource="{Binding Path=StandardTrips}" SelectedItem="{Binding Path=CurrentStandardTrip}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
+                                <ListView VerticalAlignment="Stretch" x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
+                                          ItemsSource="{Binding Path=StandardTrips}" SelectedItem="{Binding Path=CurrentStandardTrip}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
                                             <WrapPanel Margin="0,2,0,2">
                                                 <Label Content="{Binding Path=Title}"/>
                                             </WrapPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding Path=SelectedChangeStandardTrip}" CommandParameter="{Binding ElementName=StandardTripList, Path=SelectedItem}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ListView>
-                        </DockPanel>
-                        
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListView>
+                            </DockPanel>
+
                             <StackPanel Grid.Column="2" Margin="4">
+
                                 <Label FontStyle="Italic" HorizontalAlignment="Center" Margin="4" Content="Detaljer om valgte standardtur"/>
                                 <Border Margin="4" CornerRadius="15" Background="#EEEEEE" Padding="15" HorizontalAlignment="Left">
                                     <StackPanel Width="auto">
@@ -286,7 +288,7 @@
                                             <Label Width="150" Margin="4" Content="Distance:"/>
                                             <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
                                         </WrapPanel>
-                                        
+
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}">
                                             <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesStandardTrips}"/>
                                             <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesStandardTrips}"/>
@@ -296,6 +298,7 @@
                                 </Border>
 
                                 <WrapPanel Margin="4">
+
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
                                             <Style TargetType="Image">
@@ -323,6 +326,7 @@
                                             </Style>
                                         </Image.Style>
                                     </Image>
+
                                     <TextBlock VerticalAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
@@ -354,103 +358,166 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
+
                                 </WrapPanel>
 
                             </StackPanel>
-                        
-                    </Grid>
+
+                        </Grid>
                     </DockPanel>
                 </TabItem>
-                
-                
-                <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
-                    <Grid>
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="200*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <DockPanel Grid.Column="0">
-                            <Button Command="{Binding Path=CreateAdmin}" Margin="4" Width="230" DockPanel.Dock="Top" Content="Opret ny administrator"/>
-                            <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" ItemsSource="{Binding Path=Admins, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True" SelectedIndex="{Binding Path=CurrentAdminInt}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Margin="0,2,0,2">
-                                            <WrapPanel>
-                                                <Label Content="{Binding Path=Member.FirstName}"/>
-                                                <Label Content="{Binding Path=Member.LastName}"/>
-                                            </WrapPanel>
-                                            <Label Content="{Binding Path=Username}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding Path=SelectedChangeAdmin}" CommandParameter="{Binding ElementName=AdminList, Path=SelectedItem}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ListView>
-                        </DockPanel>
-                        
-                        <StackPanel Grid.Column="2">
-                            <Label Margin="4">Detaljer</Label>
-                            <Border HorizontalAlignment="Left" CornerRadius="15" Background="#EEEEEE" Padding="10" Margin="10" Width="auto">
-                                <StackPanel>
-                                    <StackPanel>
-                                        
-                                        <Button Command="{Binding ShowMembers}">
-                                            <Button.Style>
-                                                <Style TargetType="Button">
-                                                    <Setter Property="Content" Value="Tildel medlem"/>
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding NewAdminBool}" Value="true">
-                                                            <Setter Property="Visibility"  Value="Visible"/>
 
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Button.Style>
-                                        </Button>
-                                        
-                                        <WrapPanel Margin="4">
-                                            <StackPanel Margin="4">
-                                                <Label>Brugernavn:</Label>
-                                                <Label>Kodeord:</Label>
-                                                <Label>Medlemsnr.:</Label>
-                                                <Label>Fornavn:</Label>
-                                                <Label>Efternavn:</Label>
-                                                <Label>E-mail:</Label>
-                                                <Label>Telefon:</Label>
+
+                <TabItem Header="Administratorer" FontSize="20" Margin="5,0,5,0" Padding="10,0,30,0">
+                    <DockPanel HorizontalAlignment="Center" Margin="10">
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="320"/>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <DockPanel Grid.Column="0" Margin="4">
+                                <Button Padding="5" Command="{Binding Path=CreateAdmin}" Margin="4" DockPanel.Dock="Top" Width="240" Content="Opret ny administrator"/>
+                                <ListView VerticalAlignment="Stretch" x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
+                                          ItemsSource="{Binding Path=Admins}" SelectedItem="{Binding Path=CurrentAdmin}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Margin="0,2,0,2">
+                                                <WrapPanel>
+                                                    <Label Content="{Binding Path=Member.FirstName}"/>
+                                                    <Label Content="{Binding Path=Member.LastName}"/>
+                                                </WrapPanel>
+                                                <Label Content="{Binding Path=Username}"/>
                                             </StackPanel>
-                                            
-                                            <StackPanel Margin="4" VerticalAlignment="Center" Width="250">
-                                                <TextBox Margin="4" Text="{Binding Path=CurrentAdmin.Username, UpdateSourceTrigger=PropertyChanged}"/>
-                                                <Button Content="Skift kodeord"/>
-                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Id}"/>
-                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.FirstName}"/>
-                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.LastName}"/>
-                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Email1}"/>
-                                                <TextBlock Margin="4" Text="{Binding Path=CurrentAdmin.Member.Phone}"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding Path=SelectedChangeAdmin}" CommandParameter="{Binding ElementName=AdminList, Path=SelectedItem}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListView>
+                            </DockPanel>
+
+                            <StackPanel Grid.Column="2" Margin="4">
+
+                                <Label FontStyle="Italic" HorizontalAlignment="Center" Margin="4" Content="Detaljer om valgte administrator"/>
+                                <Border Margin="4" CornerRadius="15" Background="#EEEEEE" Padding="15" HorizontalAlignment="Left">
+                                    
+                                    <StackPanel Width="auto">
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="Brugernavn:"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Username}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="Medlemsnr.:"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Member.Id}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="E-mail:"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Member.Email1}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="Telefon:"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Member.Phone}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Width="150" Margin="4" Content="Kontakt ved:"/>
+                                            <StackPanel Width="320" Margin="4">
+                                                <WrapPanel HorizontalAlignment="Left">
+                                                    <Label Margin="4" Content="Langtursblanketter"/>
+                                                    <CheckBox Margin="4" IsChecked="{Binding Path=CurrentAdmin.ContactTrip}" VerticalAlignment="Center"/>
+                                                </WrapPanel>
+                                                <WrapPanel HorizontalAlignment="Left">
+                                                    <Label Margin="4" Content="Mørkets frembrud"/>
+                                                    <CheckBox Margin="4" IsChecked="{Binding Path=CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
+                                                </WrapPanel>
                                             </StackPanel>
                                         </WrapPanel>
+
+                                        <DockPanel Style="{StaticResource GreyWhNotSelected}">
+                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesAdmins}"/>
+                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesAdmins}"/>
+                                            <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet administrator" Command="{Binding Path=DeleteAdmin}" HorizontalAlignment="Right"/>
+                                        </DockPanel>
+                                        
                                     </StackPanel>
                                     
-                                    <DockPanel Margin="10">
-                                        <Button Margin="4" Content="Gem" Command="{Binding Path=SaveChangesAdmins}"/>
-                                        <Button Margin="4" Content="Annulér" Command="{Binding Path=CancelChangesAdmins}"/>
-                                        <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteAdmin}" HorizontalAlignment="Right"/>
-                                    </DockPanel>
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
-                        
-                    </Grid>
+                                </Border>
+
+                                <WrapPanel Margin="4">
+
+                                    <Image Height="32" Margin="0,0,10,0">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                        <Setter Property="Source" Value="/View/images/accept.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                        <Setter Property="Source" Value="/View/images/cancel.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                        <Setter Property="Source" Value="/View/images/add.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                        <Setter Property="Source" Value="/View/images/delete.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+
+                                    <TextBlock VerticalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                        <Setter Property="Text" Value="Ændringer gemt"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                        <Setter Property="Text" Value="Ændringer annulleret"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                        <Setter Property="Text" Value="administrator oprettet"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                        <Setter Property="Text" Value="administrator slettet"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                </WrapPanel>
+
+                            </StackPanel>
+
+                        </Grid>
+                    </DockPanel>
                 </TabItem>
-                
-                
+
+
             </TabControl>
         </Grid>
     </Grid>

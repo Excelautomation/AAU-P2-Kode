@@ -14,8 +14,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-
 
 
         <Border Style="{DynamicResource ResourceKey=brdHeadline}" Background="AliceBlue" Grid.Row="0">
@@ -27,7 +27,7 @@
                     </Grid.ColumnDefinitions>
                     <Image Source="/View/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}" Foreground="Black">
-                        <Run Text="VÆLG NY ADMINISTRATOR"/>
+                        <Run Text="OPRET NY ADMINISTRATOR"/>
                     </TextBlock>
                 </Grid>
             </WrapPanel>
@@ -55,7 +55,18 @@
             </ListView.ItemTemplate>
         </ListView>
         
-        <DockPanel HorizontalAlignment="Stretch" Grid.Row="2">
+        <StackPanel Grid.Row="2">
+            <WrapPanel>
+                <Label Width="80" Margin="4" Content="Brugernavn:"/>
+                <TextBox Width="180" Margin="4" Text="{Binding Path=CurrentAdmin.Username}"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="80" Margin="4" Content="Kodeord:"/>
+                <TextBox Width="180" Margin="4" Text="{Binding Path=CurrentAdmin.Password}"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <DockPanel HorizontalAlignment="Stretch" Grid.Row="3">
             <Button Content="Fortsæt" Margin="5" Padding="20,5,20,5" Background="#CCFFCC" 
                     Command="{Binding Path=ShowMembersContinue}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItem}"/>
             <Button Content="Annulér" HorizontalAlignment="Right" Margin="5" Padding="20,5,20,5" Background="#FFDEDE" IsCancel="True"/>
