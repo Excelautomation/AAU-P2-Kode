@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    class Season
+    public class Season
     {
         private DateTime _seaonStart;
 
