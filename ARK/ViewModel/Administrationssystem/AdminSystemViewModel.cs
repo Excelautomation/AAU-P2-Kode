@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
@@ -23,6 +24,16 @@ namespace ARK.ViewModel.Administrationssystem
 
             // Start oversigten
             MenuOverview.Execute(null);
+
+            // Setup keyboard listener
+            KeyboardTextChanged += (sender, e) =>
+            {
+                if (CurrentSelectedTextBox == null) return;
+
+                var textBox = CurrentSelectedTextBox as TextBox;
+                if (textBox != null)
+                    textBox.Text = KeyboardText;
+            };
 
             TimeCounter.StopTime();
         }
@@ -147,7 +158,45 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return
                     GetCommand<string>(
-                        s => { if (SearchTextChanged != null) SearchTextChanged(this, new SearchEventArgs(s)); });
+                        s =>
+                        {
+                            if (SearchTextChanged != null) 
+                                SearchTextChanged(this, new SearchEventArgs(s));
+                        });
+            }
+        }
+
+        private FrameworkElement CurrentSelectedTextBox { get; set; }
+
+        public ICommand GotFocus
+        {
+            get
+            {
+                return GetCommand<FrameworkElement>(element =>
+                {
+                    CurrentSelectedTextBox = element;
+                });
+            }
+        }
+
+        public override ICommand KeyboardToggle
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    // Check if a textbox has been selected
+                    if (CurrentSelectedTextBox == null)
+                        return;
+                    
+                    // Change keyboard state
+                    base.KeyboardToggled = !base.KeyboardToggled;
+
+                    // Update keyboard text
+                    var textbox = CurrentSelectedTextBox as TextBox;
+                    if (textbox != null)
+                        KeyboardText = textbox.Text;
+                });
             }
         }
 
