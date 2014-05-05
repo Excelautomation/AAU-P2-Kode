@@ -7,10 +7,9 @@ namespace ARK.Model
     {
         public enum BoatStatus
         {
-            None = 0,
-            Afventer = 1,
-            Accepteret = 2,
-            Afvist = 3
+            Afventer,
+            Accepteret,
+            Afvist
         }
 
         public int Id { get; set; }

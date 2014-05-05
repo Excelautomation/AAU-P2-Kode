@@ -101,10 +101,6 @@
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="None">
-                            <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                        </DataTrigger>
                         <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afventer">
                             <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
                             <Setter Property="Foreground" Value="Black"/>
