@@ -114,40 +114,6 @@
                 <ColumnDefinition Width="152"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="btnShowKeyboardEndTrip" Grid.Column="0"
-        		Style="{StaticResource ResourceKey=btnFilter}" 
-        		Command="{Binding ToggleKeyboard}"
-        		Background="{StaticResource SearchFilterBG}"
-        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/ARK;component/View/images/keyboard.png" Style="{StaticResource ResourceKey=btnImage}" />
-                    <TextBlock Grid.Column="3" Text="VIS&#xA;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
-                </Grid>
-            </Button>
-
-            <Button x:Name="btnShowFilterEndTrip" Grid.Column="1"
-        		Style="{StaticResource ResourceKey=btnFilter}" 
-        		Command="{Binding ToggleFilter}"
-        		Background="{StaticResource SearchFilterBG}"
-        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/filter.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="VIS&#xA;FILTER" />
-                </Grid>
-            </Button>
-
             <Button x:Name="btnCustomDistance" Grid.Column="3"
         		Style="{StaticResource ResourceKey=btnFilter}" 
         		Command="{Binding ToggleFilter}"
@@ -168,7 +134,7 @@
             <Button x:Name="btnEndTripNow" Grid.Column="4"
         		Command="{Binding EndTripNow}"
         		Background="{StaticResource EndBG}"
-        		BorderBrush="{StaticResource EndBorder}" Height="Auto" Margin="0,0,-4,0" Width="Auto">
+        		BorderBrush="{StaticResource EndBorder}" Height="Auto" Margin="5,5,0,0" Width="Auto">
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=btnFilter}">
