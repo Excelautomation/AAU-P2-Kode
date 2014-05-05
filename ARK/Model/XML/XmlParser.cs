@@ -12,13 +12,20 @@ using ARK.Model.DB;
 
 namespace ARK.Model.XML
 {
-    public static class XMLParser
+    public static class XmlParser
     {
         public static void UpdateDataFromFtp()
         {
             var context = DbArkContext.GetDbContext();
+            UpdateBoatsFromFtp(false);
+            UpdateMembersFromFtp(false);
+            context.SaveChanges();
+        }
 
-            //Boats
+        public static void UpdateBoatsFromFtp(bool saveChanges = true)
+        {
+            var context = DbArkContext.GetDbContext();
+
             var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
             var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
 
@@ -35,102 +42,70 @@ namespace ARK.Model.XML
                 Boat boat;
                 if ((boat = context.Boat.Find(boatXml.ID)) != null)
                 {
-                    
+                    BoatXmlToModel(boat, boatXml);
                 }
                 else
                 {
-                    
+                    boat = new Boat()
+                    {
+                        DamageForms = new List<DamageForm>(),
+                        LongDistanceForms = new LinkedList<LongDistanceForm>()
+                    };
+                    BoatXmlToModel(boat, boatXml);
+                    context.Boat.Add(boat);
                 }
             }
 
-            //Members
-        }
-
-        private static void BoatXmlToModel(Boat boat, XMLBoats.datarootBådeSpecifik boatXml)
-        {
-            boat.Id = boatXml.ID;
-            boat.Name = boatXml.Navn;
-            boat.NumberofSeats = boatXml.AntalPladser;
-            boat.Active = boatXml.Aktiv == 1;
-            boat.SpecificBoatType = (Boat.BoatType)boatXml.SpecifikBådType;
-            boat.LongTripBoat = boatXml.LangtursBåd == 1;
-        }
-
-        public static void LoadBoatsFromXml()
-        {
-            var context = DbArkContext.GetDbContext();
-
-            var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
-            var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
-
-            foreach (XMLBoats.datarootBådeSpecifik boatXml in xmlObject.BådeSpecifik)
+            if (saveChanges)
             {
-                var boat = new Boat
-                {
-                    DamageForms = new List<DamageForm>(),
-                    LongDistanceForms = new LinkedList<LongDistanceForm>()
-                };
-                BoatXmlToModel(boat, boatXml);
-
-                context.Boat.Add(boat);
+                context.SaveChanges();
             }
-
-            context.SaveChanges();
         }
 
-
-        private static void MemberXmlToModel(Member member, XMLMembers.datarootAktiveMedlemmer memberXml)
-        {
-            member.MemberNumber = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr));
-            member.Id = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
-            member.FirstName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fornavn);
-            member.LastName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Efternavn);
-            member.Address1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse1);
-            member.Address2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2);
-            member.ZipCode = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr));
-            member.City = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.By);
-            member.Phone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
-                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon));
-            member.PhoneWork = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
-                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde));
-            member.Cellphone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
-                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil));
-            member.Email1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
-            member.Email2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
-            member.Birthday = Convert.ToDateTime(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato));
-            member.Released = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Frigivet)) == 1;
-            member.SwimmingTest = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Svømmeprøve)) == 1;
-            member.ShortTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Korttursstyrmand)) == 1;
-            member.LongTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Langtursstyrmand)) == 1;
-            member.MayUseSculler = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Scullerret)) == 1;
-            member.MayUseOutrigger = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1;
-            member.MayUseKayak = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1;
-        }
-
-        public static void LoadMembersFromXml()
+        public static void UpdateMembersFromFtp(bool saveChanges = true)
         {
             var context = DbArkContext.GetDbContext();
 
             var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
             var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
 
-            foreach (XMLMembers.datarootAktiveMedlemmer memberXml in xmlObject.activeMembers)
+            foreach (var member in context.Member)
             {
-                var member = new Member
+                if (xmlObject.activeMembers.All(x => Convert.ToInt32(x.GetObjFromName(XMLMembers.ItemsChoiceType.ID)) != member.Id))
                 {
-                    Trips = new List<Trip>(),
-                    LongDistanceForms = new List<LongDistanceForm>(),
-                    DamageForms = new List<DamageForm>()
-                };
-                MemberXmlToModel(member, memberXml);
-
-                context.Member.Add(member);
+                    context.Member.Remove(member);
+                }
             }
 
-            context.SaveChanges();
+            foreach (var memberXml in xmlObject.activeMembers)
+            {
+                Member member;
+                if ((member = context.Member.Find(Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID)))) != null)
+                {
+                    MemberXmlToModel(member, memberXml);
+                }
+                else
+                {
+                    member = new Member()
+                    {
+                        Trips = new List<Trip>(),
+                        LongDistanceForms = new List<LongDistanceForm>(),
+                        DamageForms = new List<DamageForm>()
+                    };
+                    MemberXmlToModel(member, memberXml);
+                    context.Member.Add(member);
+                }
+            }
+
+            if (saveChanges)
+            {
+                context.SaveChanges();
+            }
         }
 
-        public static void LoadTripsFromXml()
+        //Be careful when calling this function. If the db table is not clear it may cause foreign key conflicts.
+        //Requires boats and members to have been added beforehand.
+        public static void LoadTripsFromFtp()
         {
             var context = DbArkContext.GetDbContext();
 
@@ -192,6 +167,44 @@ namespace ARK.Model.XML
             sunset = sunset.Add(sunXml.evening.twilight.nautical.TimeOfDay);
 
             return sunset;
+        }
+
+        private static void BoatXmlToModel(Boat boat, XMLBoats.datarootBådeSpecifik boatXml)
+        {
+            boat.Id = boatXml.ID;
+            boat.Name = boatXml.Navn;
+            boat.NumberofSeats = boatXml.AntalPladser;
+            boat.Active = boatXml.Aktiv == 1;
+            boat.SpecificBoatType = (Boat.BoatType)boatXml.SpecifikBådType;
+            boat.LongTripBoat = boatXml.LangtursBåd == 1;
+        }
+
+        private static void MemberXmlToModel(Member member, XMLMembers.datarootAktiveMedlemmer memberXml)
+        {
+            member.MemberNumber = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.MedlemsNr));
+            member.Id = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID));
+            member.FirstName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fornavn);
+            member.LastName = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Efternavn);
+            member.Address1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse1);
+            member.Address2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Adresse2);
+            member.ZipCode = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.PostNr));
+            member.City = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.By);
+            member.Phone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
+                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Telefon));
+            member.PhoneWork = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
+                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonArbejde));
+            member.Cellphone = new Func<string, string>(x => x != null ? Regex.Replace(x, @"[^0-9]", string.Empty) : string.Empty)
+                .Invoke((string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.TelefonMobil));
+            member.Email1 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail);
+            member.Email2 = (string)memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.EMail2);
+            member.Birthday = Convert.ToDateTime(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Fødselsdato));
+            member.Released = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Frigivet)) == 1;
+            member.SwimmingTest = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Svømmeprøve)) == 1;
+            member.ShortTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Korttursstyrmand)) == 1;
+            member.LongTripCox = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Langtursstyrmand)) == 1;
+            member.MayUseSculler = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Scullerret)) == 1;
+            member.MayUseOutrigger = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Outriggerret)) == 1;
+            member.MayUseKayak = Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.Kajakret)) == 1;
         }
 
         private static T ParseXML<T>(string xml) where T : class
