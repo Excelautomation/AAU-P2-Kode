@@ -10,81 +10,81 @@
         <VM:FormsLongTripViewModel></VM:FormsLongTripViewModel>
     </UserControl.DataContext>
 
-   
-        <StackPanel>
-            <Label FontSize="40" HorizontalAlignment="Center" FontFamily="arial" FontWeight="Bold" Margin="0,0,0,20">Langtursblanket</Label>
-            <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,30" Height="350">
-                <StackPanel Margin="0,0,30,0">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+            <Label Grid.Row="0" FontSize="30" HorizontalAlignment="Left" FontStyle="Italic" FontFamily="arial" FontWeight="Bold" Margin="20,0,0,10">Langtursblanket</Label>
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Left" Margin="0,0,0,10" Height="295">
+                <StackPanel Margin="0,0,10,0">
                     <WrapPanel Margin="0,0,0,10">
                         <StackPanel Margin="0,0,20,0">
-                            <Label Content="Afgang" HorizontalAlignment="Center" VerticalAlignment="Top" Width="73.731" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-                            <TextBox x:Name="textBox" HorizontalAlignment="Center" Height="48.373" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="20" Text="{Binding Path=LongDistanceForm.Departure, StringFormat=d}"/>
+                            <Label Content="Afgang" HorizontalAlignment="Center" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
+                            <TextBox x:Name="textBox" IsReadOnly="True" HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="20" Text="{Binding Path=LongDistanceForm.Departure, ConverterCulture='da-DK', StringFormat=d}"/>
                         </StackPanel>
 
                         <StackPanel>
                             <Label Content="Hjemkomst" HorizontalAlignment="Center" VerticalAlignment="Top" Width="109.552" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-                            <TextBox HorizontalAlignment="Center" Height="48.373" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}" Text="{Binding Path=LongDistanceForm.Arrival, StringFormat=d}"/>
+                        <TextBox HorizontalAlignment="Center" Height="40" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}" Text="{Binding Path=LongDistanceForm.Arrival, ConverterCulture='da-DK', StringFormat=d}"/>
                         </StackPanel>
                     </WrapPanel>
                     <StackPanel>
                         <Label Content="Kommentarer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="39.393" Width="135.194" FontSize="18.667" FontWeight="Bold"/>
-                        <TextBox FontSize="16" HorizontalAlignment="Center" Height="205" VerticalAlignment="Top" Width="281" Text="{Binding Path=LongDistanceForm.Text}"/>
+                        <TextBox FontSize="16" HorizontalAlignment="Center" IsReadOnly="True" Height="160" VerticalAlignment="Top" Width="281" Text="{Binding Path=LongDistanceForm.Text}"/>
                     </StackPanel>
                 </StackPanel>
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
                     <WrapPanel>
-                        <Image Source="../../images/user.png" Height="32"/>
+                        <Image Source="../../images/user.png" Height="24"/>
                         <Label FontSize="20" FontWeight="Bold" Margin="0,0,0,0">Deltagere på turen</Label>
                     </WrapPanel>
-                    <!--<ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="270">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding Path=Member.FirstName}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>-->
+                    <Border BorderBrush="Gray" BorderThickness="1" Margin="0">
+                        <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Margin="3">
+                                        <Label Margin="5,0,0,0" Content="{Binding Path=FirstName}" FontSize="18"/>
+                                        <Label Content="{Binding Path=LastName}" FontSize="18"/>
+                                    </WrapPanel>
+                                
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
                     </StackPanel>
                     <WrapPanel Margin="0,0,0,0">
-                        <Image Source="../../images/yacht.png" Height="32"/>
+                        <Image Source="../../images/yacht.png" Height="24"/>
                         <Label FontSize="20" FontWeight="Bold" Margin="0,0,15,0">Båd:</Label>
                         <TextBlock Text="{Binding Path=LongDistanceForm.Boat.Name}" FontSize="20" VerticalAlignment="Center"/>
                     </WrapPanel>
                 </DockPanel>
             </WrapPanel>
-            <WrapPanel HorizontalAlignment="Center">
-                <Button Background="Transparent" BorderBrush="Transparent">
+            <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}">
                     <StackPanel Margin="5">
                         <Image Source="../../images/accept.png" Height="32"/>
                         <Label Content="Godkend Langtursblanket"/>
                     </StackPanel>
                 </Button>
-            <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0">
-                <StackPanel Margin="5">
-                    <Image Source="../../images/cross.png" Height="32"/>
-                    <Label Content="Afvis Langtursblanket"/>
-                </StackPanel>
-            </Button>
-        </WrapPanel>
+            <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0" Command="{Binding RejectForm}">
+                    <StackPanel Margin="5">
+                        <Image Source="../../images/cross.png" Height="32"/>
+                        <Label Content="Afvis Langtursblanket"/>
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
 
-        <TextBlock Margin="0,10,0,0" FontSize="20" HorizontalAlignment="Center">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Approved, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                            <Setter Property="Text" Value="Denne langtursanmodning er blevet godkendt"/>
-                            <Setter Property="Foreground" Value="Green"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Rejected, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                            <Setter Property="Text" Value="Denne langtursanmodning er blevet Afvist"/>
-                            <Setter Property="Foreground" Value="Red"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <TextBlock Margin="0,10,0,0" FontSize="20" HorizontalAlignment="Center">
+        <TextBlock Grid.Row="3" Margin="0,10,0,0" FontSize="20" HorizontalAlignment="Center">
             <TextBlock.Style>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
@@ -97,6 +97,31 @@
             </TextBlock.Style>
         </TextBlock>
 
-    </StackPanel>
-    
+        <TextBlock Grid.Row="3" Margin="0,10,0,0" FontSize="20">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="None">
+                            <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afventer">
+                            <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Accepteret">
+                            <Setter Property="Text" Value="Denne langtursanmodning er blevet godkendt"/>
+                            <Setter Property="Foreground" Value="Green"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afvist">
+                            <Setter Property="Text" Value="Denne langtursanmodning er blevet Afvist"/>
+                            <Setter Property="Foreground" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </Grid>
+
+
 </UserControl>
