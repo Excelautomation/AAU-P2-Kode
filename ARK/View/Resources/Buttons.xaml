@@ -31,9 +31,9 @@
         <GradientStop Color="#FF4D4545" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="SearchFilterBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF6C6A6A" Offset="0"/>
+        <GradientStop Color="#FF9E9D9D" Offset="0"/>
         <GradientStop Color="#FF444040" Offset="0.5"/>
-        <GradientStop Color="#FF515151" Offset="1"/>
+        <GradientStop Color="#FF383333" Offset="1"/>
     </LinearGradientBrush>
 
     <!--
@@ -41,25 +41,29 @@
     Background & Border
     -->
     <LinearGradientBrush x:Key="BeginBG" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF93C700" Offset="0"/>
+        <GradientStop Color="#FFA1DA00" Offset="0"/>
+        <GradientStop Color="#FF178D06" Offset="0.5"/>
         <GradientStop Color="#FF0E6E00" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="BeginBorder" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#FFB0D141" Offset="0"/>
-        <GradientStop Color="#FF1B4E09" Offset="1"/>
+        <GradientStop Color="#FF678013" Offset="0.5"/>
+        <GradientStop Color="#FF85A41B" Offset="1"/>
     </LinearGradientBrush>
 
     <!--
-    Begin (Green)
+    Add (Green)
     Background & Border
     -->
     <LinearGradientBrush x:Key="AddBG" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFA9C752" Offset="0"/>
-        <GradientStop Color="#FF42A634" Offset="1"/>
+        <GradientStop Color="#FFC5E068" Offset="0"/>
+        <GradientStop Color="#FF178D06" Offset="0.5"/>
+        <GradientStop Color="#FF0E6E00" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="AddBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFCFE491" Offset="0"/>
-        <GradientStop Color="#FF3A7E32" Offset="1"/>
+        <GradientStop Color="#FFB0D141" Offset="0"/>
+        <GradientStop Color="#FF678013" Offset="0.5"/>
+        <GradientStop Color="#FF105505" Offset="1"/>
     </LinearGradientBrush>
 
     <!--
@@ -68,37 +72,12 @@
     -->
     <LinearGradientBrush x:Key="InputBG" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#FF019FA2" Offset="0"/>
+        <GradientStop Color="#FF019FA2" Offset="0.5"/>
         <GradientStop Color="#FF006364" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="InputBorder" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#FF004546" Offset="1"/>
         <GradientStop Color="#FF189A9C"/>
-    </LinearGradientBrush>
-
-    <!--
-    Neutral (Gray)
-    Background & Border
-    -->
-    <LinearGradientBrush x:Key="NeuBG" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF2E2E2E" Offset="1"/>
-        <GradientStop Color="#FF727272"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="NeuBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF8B8B8B" Offset="0"/>
-        <GradientStop Color="Black" Offset="1"/>
-    </LinearGradientBrush>
-
-    <!--
-    Information (PURPLE)
-    Background & Border
-    -->
-    <LinearGradientBrush x:Key="InfoBG" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFDD02B8" Offset="0"/>
-        <GradientStop Color="#FF680057" Offset="1"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="InfoBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF680057" Offset="1"/>
-        <GradientStop Color="#FFD416B4"/>
     </LinearGradientBrush>
 
     <!--
@@ -117,20 +96,63 @@
     </LinearGradientBrush>
 
     <!--
-    Custom (Blue)
+    Neutral (Gray)
     Background & Border
     -->
-    <LinearGradientBrush x:Key="CustomBG" EndPoint="0.5,1" StartPoint="0.5,0">
+    <LinearGradientBrush x:Key="NeuBG" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF2E2E2E" Offset="1"/>
+        <GradientStop Color="#FF727272"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="NeuBorder" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF8B8B8B" Offset="0"/>
+        <GradientStop Color="Black" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!--
+    Information (Blue)
+    Background & Border
+    -->
+    <LinearGradientBrush x:Key="InfoBG" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#FF9786FB" Offset="0"/>
         <GradientStop Color="#FF644DF1" Offset="0.5"/>
         <GradientStop Color="#FF2F1CA8" Offset="1"/>
     </LinearGradientBrush>
-    <LinearGradientBrush x:Key="CustomBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF5B4BBD" Offset="0"/>
+    <LinearGradientBrush x:Key="InfoBorder" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFAA9CFF" Offset="0"/>
         <GradientStop Color="#FF7D68FB" Offset="0.5"/>
-        <GradientStop Color="#FF2D1E87" Offset="1"/>
+        <GradientStop Color="#FF21118B" Offset="1"/>
     </LinearGradientBrush>
-    
+
+    <!--
+    Change (PURPLE)
+    Background & Border
+    -->
+    <LinearGradientBrush x:Key="ChangeBG" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFDD02B8" Offset="0"/>
+        <GradientStop Color="#FFAC0690" Offset="0.5"/>
+        <GradientStop Color="#FF8B0074" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ChangeBorder" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF871875" Offset="1"/>
+        <GradientStop Color="#FFA65599" Offset="0.5"/>
+        <GradientStop Color="#FF760A64" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!--
+    Submit (Orange)
+    Background & Border
+    -->
+    <LinearGradientBrush x:Key="SubmitBG" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFF1C325" Offset="0"/>
+        <GradientStop Color="#FFBB9206" Offset="0.5"/>
+        <GradientStop Color="#FFAA8710" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="SubmitBorder" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFFBDC71" Offset="0"/>
+        <GradientStop Color="#FFBB9617" Offset="0.5"/>
+        <GradientStop Color="#FF8B6E0C" Offset="1"/>
+    </LinearGradientBrush>
+
     <!--
     Trigger: IsPressed
     Background & Border
