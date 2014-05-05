@@ -8,12 +8,7 @@ namespace ARK.Model
 {
     public class Season
     {
-        private DateTime _seaonStart;
-
-        public DateTime SeasonStart
-        {
-            get { return _seaonStart; }
-            set { _seaonStart = value; }
-        }
+        public int Id { get; set; }
+        public DateTime SeasonStart { get; set; }
     }
 }
