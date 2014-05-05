@@ -13,12 +13,28 @@ namespace ARK.Model
         public DateTime? TripEndedTime { get; set; }
         public string Direction { get; set; }
         public string Title { get; set; }
+        
+        public bool TripEnded
+        {
+            get
+            {
+                if (TripEndedTime != null && TripEndedTime != TripStartTime)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
 
         public TimeSpan TimeBoatOut
         {
             get
             {
-                return DateTime.Now.Subtract(TripStartTime);
+                //if (TripEndedTime != TripStartTime)
+                //    return TripEndedTime.Value.Subtract(TripStartTime);
+                //else
+                    return DateTime.Now.Subtract(TripStartTime);
             }
         }
 
