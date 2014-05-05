@@ -5,9 +5,6 @@ using ARK.Model;
 
 namespace ARK.View.Protokolsystem
 {
-    /// <summary>
-    /// Interaction logic for Protokolsystem.xaml
-    /// </summary>
     public partial class ProtocolSystem : Window
     {
         public ProtocolSystem()
@@ -21,12 +18,6 @@ namespace ARK.View.Protokolsystem
             admin.Show();
 
             Closing += (sender2, e2) => admin.Close();
-        }
-
-        private void TestFTP_Click(object sender, RoutedEventArgs e)
-        {
-            var sms = new SMS { Reciever = "4522345676", Message = "Trorlrl", Name = "Nigga" };
-            SMSIT.SendSMS(sms);
         }
     }
 }

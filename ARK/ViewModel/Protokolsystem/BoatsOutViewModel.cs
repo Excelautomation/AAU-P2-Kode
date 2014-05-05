@@ -39,6 +39,5 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         // Methods
-
     }
 }

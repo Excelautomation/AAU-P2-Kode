@@ -70,7 +70,7 @@
                 <Run Text="(" FontWeight="Normal"/>
                 <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> 
                 <Run Text=" / " FontWeight="Normal"/>
-                <Run Text="{Binding Path=SelectedBoat[0].NumberofSeats, Mode=OneWay}"/>
+                <Run Text="{Binding Path=BoatNumberOfSeats, Mode=OneWay}"/>
                 <Run Text=")" FontWeight="Normal"/>
             </TextBlock>
         </Border>
