@@ -194,7 +194,7 @@
     <Compile Include="Model\Trip.cs" />
     <Compile Include="Model\XML\XMLBoats.cs" />
     <Compile Include="Model\XML\XMLMembers.cs" />
-    <Compile Include="Model\XML\XMLParser.cs" />
+    <Compile Include="Model\XML\XmlParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
     <Compile Include="View\Protokolsystem\Additional\BeginTripAdditionalInfo.xaml.cs">

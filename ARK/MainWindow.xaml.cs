@@ -44,9 +44,9 @@ namespace ARK
             //var window = new Windows8Fuck();
             //ShowWindow(window);
 
-            //XMLParser.LoadBoatsFromXml();
-            //XMLParser.LoadMembersFromXml();
-            //XMLParser.LoadTripsFromXml();
+            //XmlParser.LoadBoatsFromXml();
+            //XmlParser.LoadMembersFromXml();
+            //XmlParser.LoadTripsFromXml();
         }
     }
 }
