@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:ValConverters="clr-namespace:ARK.ValueConverters"
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
     <UserControl.DataContext>
@@ -20,7 +20,7 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
-        <ValConverters:BoolToStringConverter x:Key="Funktionel" FalseValue="Nej" TrueValue="Ja" />
+        <valueConverters:BoolToStringConverter x:Key="Funktionel" FalseValue="Nej" TrueValue="Ja" />
     </UserControl.Resources>
     <StackPanel>
         <Label FontSize="30" HorizontalAlignment="Left" FontFamily="arial" FontWeight="Bold" Margin="20,0,0,20">Skadesblanket</Label>

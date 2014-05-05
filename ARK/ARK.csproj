@@ -269,6 +269,8 @@
     <Compile Include="ViewModel\Administrationssystem\OverviewViewModel.cs" />
     <Compile Include="ViewModel\Base\TimeCounter.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
+    <Compile Include="View\ValueConverters\DateTimeToDateStringConverter.cs" />
+    <Compile Include="View\ValueConverters\TimeSpanToHourMinuteStringConverter.cs" />
     <Compile Include="View\Windows8Fuck.xaml.cs">
       <DependentUpon>Windows8Fuck.xaml</DependentUpon>
     </Compile>
