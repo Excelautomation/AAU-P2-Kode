@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace ARK.View.ValueConverters
 {
-    public class DateTimeToDateStringConverter : IValueConverter
+    public class DateTimeToLocalStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -17,7 +17,7 @@ namespace ARK.View.ValueConverters
             }
             else
             {
-                return ((DateTime) value).ToString(@"dd-MM-yy");
+                return ((DateTime) value).ToString(@"dd/MM/yy HH:mm");
             }
         }
 
