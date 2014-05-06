@@ -5,16 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
+             d:DesignHeight="300"
              xmlns:VM="clr-namespace:ARK.ViewModel"
-             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             Style="{DynamicResource ResourceKey=ucContent}">
+             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem">
 
     <UserControl.DataContext>
         <Protokolsystem:EndTripViewModel/>
     </UserControl.DataContext>
 
     <!--Content-->
-    <Grid Style="{DynamicResource ResourceKey=gridContent}" Margin="4,0,4,0" Width="Auto" Height="Auto">
+    <Grid Style="{StaticResource ResourceKey=gridContent}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -59,7 +59,8 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="lstBoatsOut" Grid.Column="0" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Margin="0,32,5,10" Grid.RowSpan="2">
+        <ListView x:Name="lstBoatsOut" Grid.Column="0" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Margin="0,32,5,10"
+                  Grid.Row="0" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" >
@@ -115,7 +116,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
             </Grid.ColumnDefinitions>

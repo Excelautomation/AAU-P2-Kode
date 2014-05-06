@@ -52,8 +52,8 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    
-    <Grid Style="{DynamicResource ResourceKey=gridContent}">
+
+    <Grid Style="{StaticResource ResourceKey=gridContent}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -165,7 +165,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
             </Grid.ColumnDefinitions>
