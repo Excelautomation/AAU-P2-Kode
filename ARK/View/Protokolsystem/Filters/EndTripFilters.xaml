@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:VMFilter="clr-namespace:ARK.ViewModel.Protokolsystem.Filters"
-             mc:Ignorable="d" 
-             Style="{StaticResource ResourceKey=ucFilters}">
+             mc:Ignorable="d">
 
     <UserControl.DataContext>
         <VMFilter:EndTripFiltersViewModel></VMFilter:EndTripFiltersViewModel>

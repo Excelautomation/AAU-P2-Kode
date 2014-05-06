@@ -7,8 +7,7 @@
              mc:Ignorable="d" 
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             Style="{DynamicResource ResourceKey=ucContent}" 
-             Height="723">
+             Style="{DynamicResource ResourceKey=ucContent}">
 
     <UserControl.DataContext>
         <Protokolsystem:EndTripViewModel/>
@@ -22,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="625"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
 

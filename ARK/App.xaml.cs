@@ -21,7 +21,7 @@ namespace ARK
         {
             //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
             //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
-            var thr = new Thread(new ThreadStart(() =>
+            var thr = new Thread(() =>
             {
                 var db = DbArkContext.GetDbContext();
                 while (true)
@@ -38,8 +38,8 @@ namespace ARK
 
                     //Afsender SMS´er
                     var FindSMS = from s in db.SMS
-                                    where s.Dispatched == false
-                                    select s;
+                        where s.Dispatched == false
+                        select s;
 
                     foreach (SMS sms in FindSMS)
                     {
@@ -57,14 +57,14 @@ namespace ARK
 
                     //Modtager SMS´er
                     var smsser = (from s in db.GetSMS
-                                    where !s.Handled && s.RecievedDate.Day == DateTime.Now.Day && s.RecievedDate.Month == DateTime.Now.Month && s.RecievedDate.Year == DateTime.Now.Year
-                                    select s).ToList();
+                        where !s.Handled && s.RecievedDate.Day == DateTime.Now.Day && s.RecievedDate.Month == DateTime.Now.Month && s.RecievedDate.Year == DateTime.Now.Year
+                        select s).ToList();
                     var getsms = from s in db.SMS
-                                    select s;
+                        select s;
 
                     var Noresponse = from s in db.SMS
-                                        where !s.approved && !s.Handled
-                                        select s;
+                        where !s.approved && !s.Handled
+                        select s;
 
                     foreach (GetSMS sms in smsser)
                     {
@@ -111,7 +111,7 @@ namespace ARK
                     db.SaveChanges();
                     Thread.Sleep(5000);
                 }
-            }));
+            });
 
             WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
             if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb1")
