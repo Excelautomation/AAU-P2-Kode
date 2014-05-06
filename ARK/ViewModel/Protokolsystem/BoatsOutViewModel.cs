@@ -9,16 +9,16 @@ namespace ARK.ViewModel.Protokolsystem
 {
     internal class BoatsOutViewModel : ProtokolsystemContentViewModelBase
     {
-        private List<Boat> _boatsOut = new List<Boat>();
+        private List<Trip> _boatsOut = new List<Trip>();
         private Boat _selectedBoat;
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
 
         public BoatsOutViewModel()
         {
-            BoatsOut = _db.Trip.Where(t => t.TripEndedTime == null).Select(t => t.Boat).ToList();
+            BoatsOut = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
         }
 
-        public List<Boat> BoatsOut
+        public List<Trip> BoatsOut
         {
             get { return _boatsOut; }
             set
