@@ -13,7 +13,7 @@ namespace ARK.ViewModel.Protokolsystem
 {
     public class CreateLongTripViewModel : ProtokolsystemContentViewModelBase
     {
-        // fields
+        // Fields
         private List<Member> _members = new List<Member>();
         private readonly ObservableCollection<MemberViewModel> _selectedMembers = new ObservableCollection<MemberViewModel>(); // Members in boat
         private List<MemberViewModel> _membersFiltered;

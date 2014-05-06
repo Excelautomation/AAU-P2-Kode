@@ -188,7 +188,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createLongDistance ??
                        (_createLongDistance =
-                           GetNavigateCommand(() => new CreateLongTrip(),
+                           GetNavigateCommand(() => new CreateLongTripForm(),
                                "LANGTUR-BLANKET"));
             }
         }
