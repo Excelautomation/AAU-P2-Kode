@@ -37,13 +37,12 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         // Properties
-        public DateTime FormCreated { get; set; }
-
-        public DateTime StartDate { get; set; }
-
-        public DateTime EndDate { get; set; }
-
-        public string Comment { get; set; }
+        public DateTime PlannedStartDate { get; set; }
+        public DateTime PlannedEndDate { get; set; }
+        public Boat SelectedBoat { get; set; }
+        public string TourDescription { get; set; }
+        public string DistancesPerDay { get; set; }
+        public string CampSites { get; set; }
 
         public List<MemberViewModel> MembersFiltered
         {
@@ -68,13 +67,19 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<object>(d =>
                 {
+                    var db = new DbArkContext();
                     var longTripForm = new LongTripForm();
-
-                    longTripForm.Members = SelectedMembers.ToList();
-                    longTripForm.Status = LongTripForm.BoatStatus.Awaiting;
                     longTripForm.FormCreated = DateTime.Now;
-                    longTripForm.PlannedStartDate = StartDate;
-                    longTripForm.PlannedEndDate = EndDate;
+                    longTripForm.PlannedStartDate = PlannedStartDate;
+                    longTripForm.PlannedEndDate = PlannedEndDate;
+                    longTripForm.Boat = SelectedBoat;
+                    longTripForm.TourDescription = TourDescription;
+                    longTripForm.DistancesPerDay = DistancesPerDay;
+                    longTripForm.CampSites = CampSites;
+                    longTripForm.Members = SelectedMembers.Select(mvm => mvm.Member);
+                    longTripForm.Status = LongTripForm.BoatStatus.Awaiting;
+
+                    db.LongTripForm.Add(longTripForm);
                 });
             }
         }
