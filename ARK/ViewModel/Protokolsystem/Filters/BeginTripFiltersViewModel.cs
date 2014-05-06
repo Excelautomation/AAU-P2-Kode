@@ -44,6 +44,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             CurrentBoatSizeFilter = new BoatCategoryFilter(_categoryAllTypes);
 
             CategoryAllChecked = true;
+            CategoryAllSizesChecked = true;
 
             UpdateFilter();
         }

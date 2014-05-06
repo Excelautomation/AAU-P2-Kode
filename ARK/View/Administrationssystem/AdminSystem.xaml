@@ -213,6 +213,9 @@
                                 <i:EventTrigger EventName="Search">
                                     <i:InvokeCommandAction Command="{Binding Path=SearchChangedCommand}" CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
                                 </i:EventTrigger>
+                                <i:EventTrigger EventName="GotFocus">
+                                    <i:InvokeCommandAction Command="{Binding Path=GotFocus}" CommandParameter="{Binding ElementName=SearchTextBox}" />
+                                </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Administrationssystem:SearchTextBox>
                     </StackPanel>
