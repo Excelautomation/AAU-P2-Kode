@@ -3,11 +3,11 @@
 namespace ARK.Protokolsystem.Pages
 {
     /// <summary>
-    /// Interaction logic for CreateDamageForm.xaml
+    /// Interaction logic for ActiveTrips.xaml
     /// </summary>
-    public partial class CreateDamageForm : UserControl
+    public partial class ViewLongTripForm : UserControl
     {
-        public CreateDamageForm()
+        public ViewLongTripForm()
         {
             InitializeComponent();
         }
