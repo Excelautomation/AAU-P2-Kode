@@ -4,16 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             mc:Ignorable="d" 
-             Style="{DynamicResource ResourceKey=ucContent}">
+             d:DesignHeight="500" 
+             mc:Ignorable="d">
 
     <UserControl.DataContext>
         <Protokolsystem:BoatsOutViewModel/>
     </UserControl.DataContext>
 
     <!--Indhold-->
-    <Grid Style="{DynamicResource ResourceKey=gridContent}">
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Width="613">
+    <Grid Style="{StaticResource ResourceKey=gridContent}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Row="0" HorizontalAlignment="Stretch" Margin="0" Width="Auto">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -30,7 +39,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="BoatsOutList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=BoatsOut}" Margin="0,32,8,77" Width="613">
+        <ListView x:Name="BoatsOutList" ItemsSource="{Binding Path=BoatsOut}" Grid.Row="1" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -58,7 +67,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Grid Margin="0,461,10,5">
+        <Grid Grid.Row="2" Height="76">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
