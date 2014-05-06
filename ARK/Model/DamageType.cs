@@ -5,9 +5,7 @@ namespace ARK.Model
     public class DamageType : IEquatable<DamageType>
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public bool IsFunctional { get; set; }
-        public string Description { get; set; }
+        public string Type { get; set; }            // states the type od the damage
 
         public bool Equals(DamageType other)
         {
