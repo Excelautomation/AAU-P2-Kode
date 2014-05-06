@@ -15,6 +15,14 @@ namespace ARK.Model
         public string Title { get; set; }               // Helping title for the user to decide the distance that the boat have sailed.
  
         
+        //Foreign key
+        public int BoatId { get; set; }
+
+        //Navigation properties
+        public virtual Boat Boat { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
+
+        //Not mapped properties
         public bool TripEnded
         {
             get
@@ -32,19 +40,9 @@ namespace ARK.Model
         {
             get
             {
-                //if (TripEndedTime != TripStartTime)
-                //    return TripEndedTime.Value.Subtract(TripStartTime);
-                //else
                     return DateTime.Now.Subtract(TripStartTime);
             }
         }
-
-        //Foreign key
-        public int BoatId { get; set; }
-
-        //Navigation properties
-        public virtual Boat Boat { get; set; }
-        public virtual ICollection<Member> Members { get; set; }
 
         public bool Equals(Trip other)
         {
