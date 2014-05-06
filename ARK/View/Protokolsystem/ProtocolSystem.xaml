@@ -237,9 +237,11 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Style="{StaticResource ResourceKey=lstViewContent}">
                     <Run Text="BÅDE PÅ VANDET:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text="{Binding NumBoatsOut}"/>
                 </TextBlock>
                 <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
                     <Run Text="DAGENS KILOMETER:" FontWeight="Bold" Foreground="White"/>
+                    <Run Text="{Binding DailyKilometers}"/>
                 </TextBlock>
             </Grid>
         </Grid>
