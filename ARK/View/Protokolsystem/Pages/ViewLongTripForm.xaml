@@ -8,7 +8,7 @@
              mc:Ignorable="d">
 
     <UserControl.DataContext>
-        <Protokolsystem:CreateLongTripViewModel/>
+        <Protokolsystem:ViewLongTripViewModel/>
     </UserControl.DataContext>
 
     <!--Indhold-->
