@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using ARK.Model.DB;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -36,6 +37,14 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         // Properties
+        public DateTime FormCreated { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public string Comment { get; set; }
+
         public List<MemberViewModel> MembersFiltered
         {
             get { return _membersFiltered; }
@@ -51,6 +60,23 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get { return _longTripForms; }
             set { _longTripForms = value; }
+        }
+
+        public ICommand AddLongTrip
+        {
+            get
+            {
+                return GetCommand<object>(d =>
+                {
+                    var longTripForm = new LongTripForm();
+
+                    longTripForm.Members = SelectedMembers.ToList();
+                    longTripForm.Status = LongTripForm.BoatStatus.Awaiting;
+                    longTripForm.FormCreated = DateTime.Now;
+                    longTripForm.PlannedStartDate = StartDate;
+                    longTripForm.PlannedEndDate = EndDate;
+                });
+            }
         }
     }
 }
