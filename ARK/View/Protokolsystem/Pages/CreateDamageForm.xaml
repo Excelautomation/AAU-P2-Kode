@@ -12,7 +12,7 @@
         <Protokolsystem:CreateDamageFormViewModel x:Name="ViewModel"/>
     </UserControl.DataContext>
 
-    <Grid Style="{StaticResource ResourceKey=gridContent}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -42,7 +42,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Margin="5,0,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -59,7 +59,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="2">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="2" Margin="0,5,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -72,7 +72,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="2">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="2" Margin="5,5,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -103,7 +103,8 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="BoatsList" ItemsSource="{Binding Path=Boats}" Style="{DynamicResource ResourceKey=lstView}" Grid.Row="1" Grid.Column="1">
+        <ListView x:Name="BoatsList" ItemsSource="{Binding Path=Boats}" Style="{DynamicResource ResourceKey=lstView}"
+                  Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -118,22 +119,42 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <TextBox Text="{Binding Path=Comment, Mode=TwoWay}" Background="White" Grid.Row="3" Grid.Column="1" Height="100" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox Text="{Binding Path=Comment, Mode=TwoWay}" Background="White" Grid.Row="3" Grid.Column="1" Height="100" Margin="5,0,0,0"
+                 TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
-        <Grid Grid.Row="4" Grid.ColumnSpan="2" Height="76">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="btnShowKeyboard" Grid.Column="0"
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Vertical">
+            <ComboBox x:Name="DamageTypeComboBox" ItemsSource="{Binding Path=DamageTypes, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="32">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Type}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Path=DamageTypeSelected}" CommandParameter="{Binding ElementName=DamageTypeComboBox, Path=SelectedItem}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+
+            <Grid HorizontalAlignment="Left" Height="47" VerticalAlignment="Top" Width="292">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="146*"/>
+                    <ColumnDefinition Width="23*"/>
+                    <ColumnDefinition Width="123*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton IsChecked="{Binding Path=IsFunctional}" Name="rdoIsFunctional" Grid.Column="0" Content="STADIG&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functional"/>
+                <RadioButton Name="rdoIsNotFunctional" Grid.Column="1" Content="IKKE&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functional" Grid.ColumnSpan="2"/>
+            </Grid>
+        </StackPanel>
+
+        <DockPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,5,0,0">
+            <Button x:Name="btnShowKeyboard"
+                    Margin="0,0,3,0"
+                    DockPanel.Dock="Left"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=ToggleKeyboard}"
                     Background="{StaticResource SearchFilterBG}"
-                    BorderBrush="{StaticResource SearchFilterBorder}"
-                    Margin="1,5,0,5">
+                    BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -171,11 +192,14 @@
                     </TextBlock>
                 </Grid>
             </Button>
-            <Button x:Name="btnActiveInjuries" Grid.Column="1"
-            	Style="{StaticResource ResourceKey=btnFilter}" 
-            	Command="{Binding ToggleFilter}"
-            	Background="{StaticResource InfoBG}"
-            	BorderBrush="{StaticResource InfoBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+            
+            <Button x:Name="btnActiveDamgeForms"
+                    Margin="0,0,3,0"
+                    DockPanel.Dock="Left"
+            	    Style="{StaticResource ResourceKey=btnFilter}" 
+            	    Command="{Binding ToggleFilter}"
+            	    Background="{StaticResource InfoBG}"
+            	    BorderBrush="{StaticResource InfoBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -187,11 +211,13 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="SE AKTIVE&#xA;SKADER" />
                 </Grid>
             </Button>
-            <Button x:Name="btnMakeNewInjury" Grid.Column="3"
-            	Style="{StaticResource ResourceKey=btnFilter}" 
-            	Command="{Binding ToggleFilter}"
-            	Background="{StaticResource AddBG}"
-            	BorderBrush="{StaticResource AddBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+            
+            <Button x:Name="btnMakeNewInjury"
+                    DockPanel.Dock="Right"
+            	    Style="{StaticResource ResourceKey=btnFilter}" 
+            	    Command="{Binding ToggleFilter}"
+            	    Background="{StaticResource AddBG}"
+            	    BorderBrush="{StaticResource AddBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -203,11 +229,14 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;SKADE" />
                 </Grid>
             </Button>
-            <Button x:Name="btnSendInjury" Grid.Column="4"
-        		Style="{StaticResource ResourceKey=btnFilter}" 
-        		Command="{Binding AddDamageType}"
-        		Background="{StaticResource SubmitBG}"
-        		BorderBrush="{StaticResource SubmitBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+            
+            <Button x:Name="btnSendInjury"
+                    DockPanel.Dock="Right"
+                    Margin="0,0,3,0"
+        		    Style="{StaticResource ResourceKey=btnFilter}" 
+        		    Command="{Binding AddDamageType}"
+        		    Background="{StaticResource SubmitBG}"
+        		    BorderBrush="{StaticResource SubmitBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -219,31 +248,6 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;SKADE" />
                 </Grid>
             </Button>
-        </Grid>
-
-        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Vertical">
-            <ComboBox x:Name="DamageTypeComboBox" ItemsSource="{Binding Path=DamageTypes, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="32">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Type}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=DamageTypeSelected}" CommandParameter="{Binding ElementName=DamageTypeComboBox, Path=SelectedItem}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            </ComboBox>
-
-            <Grid HorizontalAlignment="Left" Height="47" VerticalAlignment="Top" Width="292">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="146*"/>
-                    <ColumnDefinition Width="23*"/>
-                    <ColumnDefinition Width="123*"/>
-                </Grid.ColumnDefinitions>
-                <RadioButton IsChecked="{Binding Path=IsFunctional}" Name="rdoIsFunctional" Grid.Column="0" Content="STADIG&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functional"/>
-                <RadioButton Name="rdoIsNotFunctional" Grid.Column="1" Content="IKKE&#10;ANVENDELIG" HorizontalAlignment="Stretch" GroupName="Functional" Grid.ColumnSpan="2"/>
-            </Grid>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

@@ -210,9 +210,6 @@
     <Compile Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml.cs">
       <DependentUpon>DistanceStatisticsFilters.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Filters\EndTripFilters.xaml.cs">
-      <DependentUpon>EndTripFilters.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Protokolsystem\Pages\CreateLongTripForm.xaml.cs">
       <DependentUpon>CreateLongTripForm.xaml</DependentUpon>
     </Compile>
@@ -347,10 +344,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Protokolsystem\Filters\EndTripFilters.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
