@@ -28,6 +28,7 @@ namespace ARK.ViewModel.Protokolsystem
 
             DateTime lowerTimeLimit = new DateTime();
             DateTime upperTimeLimit = DateTime.Now;
+
             // Load data
             var members = db.Member
                 .OrderBy(x => x.FirstName)

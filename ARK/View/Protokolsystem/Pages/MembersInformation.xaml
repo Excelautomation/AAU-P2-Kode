@@ -145,11 +145,11 @@
                 </Grid>
             </Button>
 
-            <Button x:Name="btnShowFilter" Grid.Column="1"
-        		Style="{StaticResource ResourceKey=btnFilter}" 
-        		Command="{Binding ToggleFilter}"
-        		Background="{StaticResource SearchFilterBG}"
-        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+            <Button Name="btnShowFilter" Grid.Column="1"
+                    Style="{StaticResource ResourceKey=btnFilter}" 
+                    Command="{Binding Path=ToggleFilter}"
+                    Background="{StaticResource SearchFilterBG}"
+                    BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -157,8 +157,34 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/filter.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="VIS&#xA;FILTER" />
+                    <Image Grid.Column="1">
+                        <Image.Style>
+                            <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="True">
+                                        <Setter Property="Source" Value="/View/images/filter_delete.png"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="False">
+                                        <Setter Property="Source" Value="/View/images/filter.png"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <TextBlock Grid.Column="3">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="True">
+                                        <Setter Property="Text" Value="SKJUL&#10;FILTER"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="False">
+                                        <Setter Property="Text" Value="VIS&#10;FILTER"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </Grid>
             </Button>
 
