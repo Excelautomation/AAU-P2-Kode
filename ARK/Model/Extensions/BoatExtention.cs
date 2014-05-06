@@ -2,7 +2,7 @@
 {
     public static class BoatExtention
     {
-        public static bool FilterBoat(this Boat boat, string searchText)
+        public static bool Filter(this Boat boat, string searchText)
         {
             return boat.Name.ContainsCaseInsensitive(searchText);
         }
