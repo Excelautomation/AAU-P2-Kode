@@ -85,7 +85,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                         return items;
                     else
                         return new List<T>();
-                else if (typeof (LongDistanceForm) == typeof (T))
+                else if (typeof (LongTripForm) == typeof (T))
                 {
                     if (!ShowLongDistanceForm)
                     {
@@ -100,14 +100,14 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
                     if (ShowAccepted)
                         return
-                            items.Cast<LongDistanceForm>()
-                                .Where(form => form.Status == LongDistanceForm.BoatStatus.Accepteret)
+                            items.Cast<LongTripForm>()
+                                .Where(form => form.Status == LongTripForm.BoatStatus.Accepted)
                                 .ToList()
                                 .Cast<T>();
                     else if (ShowDenied)
                         return
-                            items.Cast<LongDistanceForm>()
-                                .Where(form => form.Status == LongDistanceForm.BoatStatus.Afvist)
+                            items.Cast<LongTripForm>()
+                                .Where(form => form.Status == LongTripForm.BoatStatus.Denied)
                                 .ToList()
                                 .Cast<T>();
 

@@ -10,7 +10,7 @@ namespace ARK.ViewModel.Administrationssystem
     {
 
         private readonly DbArkContext _dbArkContext;
-        private LongDistanceForm _LongDistanceForm;
+        private LongTripForm _LongDistanceForm;
         private bool _RecentChange = false;
         
         public FormsLongTripViewModel ()
@@ -24,7 +24,7 @@ namespace ARK.ViewModel.Administrationssystem
             set { _RecentChange = value; Notify(); }
         }
 
-        public LongDistanceForm LongDistanceForm { get { return _LongDistanceForm; }
+        public LongTripForm LongDistanceForm { get { return _LongDistanceForm; }
             set { 
                 _LongDistanceForm = value; Notify(); 
             } }
@@ -35,7 +35,7 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    LongDistanceForm.Status = LongDistanceForm.BoatStatus.Accepteret;
+                    LongDistanceForm.Status = LongTripForm.BoatStatus.Accepted;
                     RecentChange = true;
                     _dbArkContext.SaveChanges();
                  });
@@ -48,7 +48,7 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    LongDistanceForm.Status = LongDistanceForm.BoatStatus.Afvist;
+                    LongDistanceForm.Status = LongTripForm.BoatStatus.Denied;
                     RecentChange = true;
                     _dbArkContext.SaveChanges();
                 });

@@ -15,9 +15,7 @@
     </UserControl.DataContext>
     
     <UserControl.Resources>
-        <valueConverters:DateTimeToLocalStringConverter x:Key="ToLocalStringConverter"/>
-        <valueConverters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
-        <valueConverters:ListViewItemToOrdinalConverter x:Key="OrdinalConverter" />
+        <valueConverters:ListViewItemToOrdinalConverter x:Key="OrdinalConverter"/>
         <DataTemplate x:Key="GoldMedal">
             <Image Source="/View/images/medal_award_gold.png" Width="16" Height="16" HorizontalAlignment="Left"/>
         </DataTemplate>
@@ -147,12 +145,12 @@
 
                         <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Start tid:" FontWeight="Bold" />
-                            <Run Text="{Binding Path=TripStartTime, Converter={StaticResource ToLocalStringConverter}}"/>
+                            <Run Text="{Binding Path=TripStartTime, StringFormat='{}{0:dd/MM/yy HH:mm}'}"/>
                         </TextBlock>
 
                         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Left">
                             <Run Text="Tid ude:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, Converter={StaticResource TimeSpanToStringConverter}}" />
+                            <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, StringFormat='{}{0:HH:mm}'}" />
                         </TextBlock>
                     </Grid>
                 </DataTemplate>

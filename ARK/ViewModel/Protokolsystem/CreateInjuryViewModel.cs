@@ -21,10 +21,6 @@ namespace ARK.ViewModel.Protokolsystem
         private List<DamageForm> _activeDamageForms;
         private DamageForm _selectedDamageForm;
 
-
-        
-        
-
         // constructor
         public CreateInjuryViewModel()
         {
@@ -153,6 +149,5 @@ namespace ARK.ViewModel.Protokolsystem
                 });
             }
         }
-
     }
 }
