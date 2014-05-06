@@ -45,8 +45,6 @@
             <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Både</Label>
             <Grid Margin="0,0,5,5">
                 <Border BorderBrush="Gray" BorderThickness="1">
-                    <DockPanel>
-                        <ScrollViewer>
                             <ListView x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -88,8 +86,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ListView>
-                        </ScrollViewer>
-                    </DockPanel>
+
                 </Border>
             </Grid>
         </DockPanel>
@@ -97,10 +94,10 @@
             <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Detaljer</Label>
             <Grid Margin="5,0,5,5">
                 <Border BorderBrush="Gray" BorderThickness="1">
-                    <DockPanel>
+                    <!--<DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom">
                             <Border BorderBrush="Gray" BorderThickness="1">
-                                <DockPanel>
+                                <DockPanel>-->
                                     <ScrollViewer DockPanel.Dock="Bottom" Background="White">
                                         <Grid Margin="25" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
                                             <Grid.RowDefinitions>
@@ -210,8 +207,8 @@
                                                     </WrapPanel>
                                                 </Border>
 
-                                                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-                                                <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
+                                                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" PanningMode="VerticalOnly">
+                                                <ItemsControl  x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
                                                     <ItemsControl.ItemTemplate>
                                                         <DataTemplate>
                                                             <Grid Margin="5">
@@ -250,10 +247,10 @@
 
                                         </Grid>
                                     </ScrollViewer>
-                                </DockPanel>
+                                <!--</DockPanel>
                             </Border>
                         </ScrollViewer>
-                    </DockPanel>
+                    </DockPanel>-->
                 </Border>
             </Grid>
         </DockPanel>

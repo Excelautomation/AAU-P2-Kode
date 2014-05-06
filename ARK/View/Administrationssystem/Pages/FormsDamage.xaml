@@ -76,9 +76,9 @@
                 
                 <DockPanel DockPanel.Dock="Top">
                     <Label DockPanel.Dock="Top" Content="Kommentarer"/>
-                    <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
-                        <TextBox Name="CommentTextbox" Width="250" FontSize="14" TextWrapping="Wrap" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
-                    </ScrollViewer>
+                    <TextBox AcceptsReturn="True" Height="130" Name="CommentTextbox" Width="250" FontSize="14" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}">
+                        
+                    </TextBox>
                 </DockPanel>
                 <Button Grid.Row="1" Content="Gem ændringer" Command="{Binding SaveChanges}"/>
             </Grid>
