@@ -84,7 +84,8 @@ namespace ARK.ViewModel.Protokolsystem
                         SelectedTrip.Distance = SelectedStdTrip.Distance;
                     }
                     // set Custom distance if different from default
-                    SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : 0 ;
+                    //SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : 0 ;
+                    SelectedTrip.TripEndedTime = DateTime.Now;
                     _db.SaveChanges();
 
                     var mainViewModel = Parent as ProtocolSystemMainViewModel;
