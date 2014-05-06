@@ -126,19 +126,17 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return
-                    GetCommand<LongTripForm>(
-                        e =>
-                        {
-                            if (e == null) return;
+                return GetCommand<LongTripForm>( e =>
+                {
+                    if (e == null) return;
 
-                            NavigateToPage(() => new FormsLongTrip(),
-                                e.Text);
+                    NavigateToPage(() => new FormsLongTrip(),
+                        e.TourDescription);
 
-                            var vm = CurrentPage.DataContext as FormsLongTripViewModel;
-                            if (vm != null)
-                                vm.LongDistanceForm = e;
-                        });
+                    var vm = CurrentPage.DataContext as FormsLongTripViewModel;
+                    if (vm != null)
+                        vm.LongDistanceForm = e;
+                });
             }
         }
 
