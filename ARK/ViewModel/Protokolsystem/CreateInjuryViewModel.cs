@@ -18,6 +18,12 @@ namespace ARK.ViewModel.Protokolsystem
         private List<Boat> _boats;
         private List<DamageType> _damageTypes;
         private DamageType _selectedDamageType;
+        private List<DamageForm> _activeDamageForms;
+        private DamageForm _selectedDamageForm;
+
+
+        
+        
 
         // constructor
         public CreateInjuryViewModel()
@@ -26,6 +32,7 @@ namespace ARK.ViewModel.Protokolsystem
             _members = db.Member.Where(m => true).ToList();
             _boats = db.Boat.Where(b => true).ToList();
             _damageTypes = db.DamageType.Where(d => true).ToList();
+            _activeDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
         }
 
         // Properties
@@ -75,6 +82,18 @@ namespace ARK.ViewModel.Protokolsystem
 
         public bool IsFunctional { get; set; }
 
+        public List<DamageForm> ActiveDamageForms
+        {
+            get { return _activeDamageForms; }
+            set { _activeDamageForms = value; }
+        }
+
+        public DamageForm SelectedDamageForm
+        {
+            get { return _selectedDamageForm; }
+            set { _selectedDamageForm = value; Notify(); }
+        }
+
         public ICommand MemberSelectionChanged
         {
             get
@@ -114,6 +133,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<object>(d =>
                 {
+                    // Fjern evt tjek her i VM og lav button inactive ind til betingelser er ok.
                     if (SelectedBoat != null && SelectedMember != null && SelectedDamageType != null)
                     {
                         var damageForm = new DamageForm();
