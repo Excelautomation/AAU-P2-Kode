@@ -177,7 +177,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return _createDamage ??
                        (_createDamage =
-                           GetNavigateCommand(() => new CreateInjury(),
+                           GetNavigateCommand(() => new CreateDamageForm(),
                                "SKADE-BLANKET"));
             }
         }
