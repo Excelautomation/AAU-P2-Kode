@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using ARK.Model.DB;
 using ARK.Protokolsystem.Pages;
 using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
@@ -15,6 +19,8 @@ namespace ARK.ViewModel.Protokolsystem
     {
         #region PrivateFields
 
+        private int _numBoatsOut;
+        private double _dailyKilometers;
         private ICommand _boatsOut;
         private ICommand _createDamage;
         private ICommand _createLongDistance;
@@ -28,6 +34,7 @@ namespace ARK.ViewModel.Protokolsystem
         private ICommand _startTrip;
         private ICommand _statisticsDistance;
         private EndTrip _endTripPage;
+        private DbArkContext _context = DbArkContext.GetDbContext();
 
         #endregion
 
@@ -44,7 +51,44 @@ namespace ARK.ViewModel.Protokolsystem
                         SearchTextChanged(sender, new SearchEventArgs(KeyboardText));
                 };
 
+            UpdateDailyKilometers();
+            UpdateNumBoatsOut();
+
             TimeCounter.StopTime();
+        }
+
+        public int NumBoatsOut
+        {
+            get { return _numBoatsOut; }
+            set
+            {
+                _numBoatsOut = value;
+                Notify();
+            }
+        }
+
+        public double DailyKilometers
+        {
+            get { return _dailyKilometers; }
+            set
+            {
+                _dailyKilometers = value;
+                Notify();
+            }
+        }
+
+        public void UpdateNumBoatsOut()
+        {
+            NumBoatsOut = _context.Trip.Count(t => t.TripEndedTime == null);
+        }
+
+        public void UpdateDailyKilometers()
+        {
+            var today = DateTime.Today;
+            DailyKilometers =
+                _context.Trip
+                .Where(t =>  t.TripStartTime > today)
+                .Sum(t => t.Distance);
         }
 
         #region Pages

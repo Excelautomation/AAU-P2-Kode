@@ -176,6 +176,9 @@ namespace ARK.ViewModel.Protokolsystem
                     _db.Trip.Add(trip);
                     _db.SaveChanges();
 
+                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
+                    mainViewModel.UpdateNumBoatsOut();
+
                     ResetData();
                 });
             }

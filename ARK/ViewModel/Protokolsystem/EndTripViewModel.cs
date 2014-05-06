@@ -77,10 +77,19 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<object>(e =>
                 {
-                    SelectedTrip.Title = SelectedStdTrip.Title;
-                    SelectedTrip.Direction = SelectedStdTrip.Direction;
+                    if (SelectedStdTrip != null)
+                    {
+                        SelectedTrip.Title = SelectedStdTrip.Title;
+                        SelectedTrip.Direction = SelectedStdTrip.Direction;
+                        SelectedTrip.Distance = SelectedStdTrip.Distance;
+                    }
                     // set Custom distance if different from default
-                    SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : SelectedStdTrip.Distance;
+                    SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : 0 ;
+                    _db.SaveChanges();
+
+                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
+                    mainViewModel.UpdateDailyKilometers();
+                    mainViewModel.UpdateNumBoatsOut();
                 });
             }
         }
