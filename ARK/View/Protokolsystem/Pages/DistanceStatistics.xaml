@@ -65,7 +65,7 @@
         </Grid.RowDefinitions>
 
         
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Row="0" HorizontalAlignment="Stretch" Margin="0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Row="0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>

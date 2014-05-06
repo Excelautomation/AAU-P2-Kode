@@ -44,7 +44,7 @@ namespace ARK.ViewModel.Protokolsystem
 
             // Setup filter
             var filterController = new FilterContent(this);
-            filterController.EnableFilter(false, false);
+            filterController.EnableFilter(false, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
             // Set up variables to load of data
