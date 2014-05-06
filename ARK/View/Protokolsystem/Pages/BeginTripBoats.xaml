@@ -79,7 +79,8 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5">
+        <ListView x:Name="AllBoatsList" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" 
+                  ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
