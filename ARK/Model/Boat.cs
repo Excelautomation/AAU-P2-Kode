@@ -20,7 +20,7 @@ namespace ARK.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public int NumberofSeats { get; set; }          // The number of rowers in the boat without the Deckofficer
-        public bool HaveDeckOfficer { get; set; }       // states if the boat have seating for cox
+        public bool HaveCox { get; set; }       // states if the boat have seating for cox
         public bool Active { get; set; }                // states if the boat is not retired/dead
         public BoatType SpecificBoatType { get; set; }  
         public bool LongTripBoat { get; set; }          // states if the boad is accepted for long tips
