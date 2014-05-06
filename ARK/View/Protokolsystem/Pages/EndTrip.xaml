@@ -14,7 +14,7 @@
     </UserControl.DataContext>
 
     <!--Content-->
-    <Grid Style="{StaticResource ResourceKey=gridContent}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -22,7 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="64"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Column="0" Grid.Row="0" Style="{DynamicResource ResourceKey=brdHeadline}">
@@ -42,7 +42,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource ResourceKey=brdHeadline}">
+        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource ResourceKey=brdHeadline}" Margin="5,0,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -59,8 +59,11 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="lstBoatsOut" Grid.Column="0" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=ActiveTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Margin="0,32,5,10"
-                  Grid.Row="0" Grid.RowSpan="2">
+        <ListView x:Name="lstBoatsOut" 
+                  Grid.Row="1" Grid.Column="0" 
+                  Style="{StaticResource ResourceKey=lstView}" 
+                  ItemsSource="{Binding Path=ActiveTrips}" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical" >
@@ -81,7 +84,12 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="lstStandardTrip" Grid.Column="1" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=StandardTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Margin="0,32,0,10" Grid.RowSpan="2">
+        <ListView x:Name="lstStandardTrip" 
+                  Margin="5,0,0,0"
+                  Grid.Column="1" Grid.Row="1" 
+                  Style="{DynamicResource ResourceKey=lstView}" 
+                  ItemsSource="{Binding Path=StandardTrips}" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -112,37 +120,12 @@
         </ListView>
 
         <!--Buttons-->
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Height="64">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="btnCustomDistance" Grid.Column="3"
-        		Style="{StaticResource ResourceKey=btnFilter}" 
-        		Command="{Binding ToggleFilter}"
-        		Background="{StaticResource ChangeBG}"
-        		BorderBrush="{StaticResource ChangeBorder}" Height="Auto" Margin="1,0,0,0" Width="Auto">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/map_add.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ANGIV&#xA;DISTANCE" />
-                </Grid>
-            </Button>
-
-            <Button x:Name="btnEndTrip" Grid.Column="4"
-        		Command="{Binding EndTrip}"
-        		Background="{StaticResource EndBG}"
-        		BorderBrush="{StaticResource EndBorder}" Height="Auto" Margin="5,0,0,0" Width="Auto">
-
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,5,0,0">
+            <Button x:Name="btnEndTrip"
+                    DockPanel.Dock="Right"
+        		    Command="{Binding EndTrip}"
+        		    Background="{StaticResource EndBG}"
+        		    BorderBrush="{StaticResource EndBorder}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=btnFilter}">
                         <Style.Triggers>
@@ -163,6 +146,25 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}"><Run Text="AFSLUT"/><LineBreak/><Run Text="ROTUR"/></TextBlock>
                 </Grid>
             </Button>
-        </Grid>
+            
+            <Button x:Name="btnCustomDistance"
+                    DockPanel.Dock="Right"
+        		    Style="{StaticResource ResourceKey=btnFilter}" 
+        		    Command="{Binding ToggleFilter}"
+        		    Background="{StaticResource ChangeBG}"
+        		    BorderBrush="{StaticResource ChangeBorder}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/map_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ANGIV&#xA;DISTANCE" />
+                </Grid>
+            </Button>
+            
+        </DockPanel>
     </Grid>
 </UserControl>

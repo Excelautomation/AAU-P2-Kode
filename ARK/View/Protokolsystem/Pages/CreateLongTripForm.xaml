@@ -348,6 +348,38 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;LANGTUR" />
                 </Grid>
             </Button>
+            <Button x:Name="btnActiveLongTrips" Grid.Column="1"
+            	Style="{StaticResource ResourceKey=btnFilter}" 
+            	Command="{Binding ToggleFilter}"
+            	Background="{StaticResource InfoBG}"
+            	BorderBrush="{StaticResource InfoBorder}" Height="Auto" Margin="1,5,0,-7" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/document_inspector.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="SE AKTIVE&#xA;SKADER" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnMakeNewLongTrip" Grid.Column="3"
+            	Style="{StaticResource ResourceKey=btnFilter}" 
+            	Command="{Binding ToggleFilter}"
+            	Background="{StaticResource AddBG}"
+            	BorderBrush="{StaticResource AddBorder}" Height="Auto" Margin="0,5,2,-7" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/error_add.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;SKADE" />
+                </Grid>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>
