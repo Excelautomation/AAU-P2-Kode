@@ -6,8 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding">
+             xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem">
 
     <UserControl.DataContext>
         <Protokolsystem:CreateLongTripViewModel x:Name="ViewModel" />
@@ -95,16 +94,14 @@
             </WrapPanel>
         </Border>
         
-        <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=MembersFiltered}" 
-                ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
-                IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto"
-                ItemContainerStyle="{StaticResource ItemContainerStyle}" Width="Auto" Margin="0,0,0,5">
+        <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}"
+                SelectionMode="Multiple" Height="Auto" Width="Auto" Margin="0,0,0,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
-                        <TextBlock x:Name="txbMember" Style="{StaticResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
-                        <Run Text="{Binding Path=Member.FirstName}"/>
-                        <Run Text="{Binding Path=Member.LastName}"/>
+                    <WrapPanel>
+                        <TextBlock x:Name="txbMember" Style="{StaticResource ResourceKey=lstListViewHeadline}">
+                            <Run Text="{Binding Path=Member.FirstName}"/>
+                            <Run Text="{Binding Path=Member.LastName}"/>
                         </TextBlock>
                     </WrapPanel>
                 </DataTemplate>
@@ -229,7 +226,7 @@
 
         </Grid>
 
-        <!--Dagsdistancern-->
+        <!--Dagsdistancer-->
         <Grid Grid.Row="4" Grid.Column="0" Margin="0,5,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"/>
@@ -282,7 +279,6 @@
             </Border>
 
             <TextBox Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
-            
         </Grid>
 
         <!--Buttons-->
