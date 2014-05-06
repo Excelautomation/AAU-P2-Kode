@@ -206,11 +206,11 @@ namespace ARK.ViewModel.Administrationssystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 DamageForms = from damage in DamageForms
-                    where damage.FilterDamageForms(args.SearchEventArgs.SearchText)
+                    where damage.Filter(args.SearchEventArgs.SearchText)
                     select damage;
 
                 LongDistanceForms = from form in LongDistanceForms
-                    where form.FilterLongDistanceForm(args.SearchEventArgs.SearchText)
+                    where form.Filter(args.SearchEventArgs.SearchText)
                     select form;
             }
 
