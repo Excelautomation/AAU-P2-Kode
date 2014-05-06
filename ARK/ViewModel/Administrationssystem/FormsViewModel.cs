@@ -22,8 +22,8 @@ namespace ARK.ViewModel.Administrationssystem
         private readonly DbArkContext _dbArkContext;
         private IEnumerable<DamageForm> _damageForms;
         private List<DamageForm> _damageFormsNonFiltered;
-        private IEnumerable<LongDistanceForm> _longTripForms;
-        private List<LongDistanceForm> _longTripFormsNonFiltered;
+        private IEnumerable<LongTripForm> _longTripForms;
+        private List<LongTripForm> _longTripFormsNonFiltered;
         private int _selectedIndexDamageForms;
         private Visibility _showDamageForms;
         private Visibility _showLongTripForms;
@@ -32,7 +32,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             // Instaliser lister
             _damageFormsNonFiltered = new List<DamageForm>();
-            _longTripFormsNonFiltered = new List<LongDistanceForm>();
+            _longTripFormsNonFiltered = new List<LongTripForm>();
 
             // Opret dbcontext
             _dbArkContext = DbArkContext.GetDbContext();
@@ -44,7 +44,7 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     // Opret forbindelser Async
                     Task<List<DamageForm>> damageforms = _dbArkContext.DamageForm.ToListAsync();
-                    Task<List<LongDistanceForm>> longDistanceForms = _dbArkContext.LongTripForm.ToListAsync();
+                    Task<List<LongTripForm>> longDistanceForms = _dbArkContext.LongTripForm.ToListAsync();
 
                     _damageFormsNonFiltered = damageforms.Result.ToList();
                     _longTripFormsNonFiltered = longDistanceForms.Result.ToList();
@@ -79,7 +79,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public IEnumerable<LongDistanceForm> LongDistanceForms
+        public IEnumerable<LongTripForm> LongDistanceForms
         {
             get { return _longTripForms; }
             private set
@@ -127,7 +127,7 @@ namespace ARK.ViewModel.Administrationssystem
             get
             {
                 return
-                    GetCommand<LongDistanceForm>(
+                    GetCommand<LongTripForm>(
                         e =>
                         {
                             if (e == null) return;

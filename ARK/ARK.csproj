@@ -117,6 +117,7 @@
     <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\MembersinformationAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\CreateInjuryViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\CreateLongTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\BeginTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\EndTripFiltersViewModel.cs" />
@@ -182,7 +183,7 @@
     <Compile Include="Model\Extensions\StringExtention.cs" />
     <Compile Include="Model\FtpInfo.cs" />
     <Compile Include="Model\GetSMS.cs" />
-    <Compile Include="Model\LongDistanceForm.cs" />
+    <Compile Include="Model\LongTripForm.cs" />
     <Compile Include="View\Administrationssystem\Pages\Overview.xaml.cs">
       <DependentUpon>Overview.xaml</DependentUpon>
     </Compile>
@@ -219,8 +220,8 @@
     <Compile Include="View\Protokolsystem\Pages\CreateInjury.xaml.cs">
       <DependentUpon>CreateInjury.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Pages\CreateLongDistance.xaml.cs">
-      <DependentUpon>CreateLongDistance.xaml</DependentUpon>
+    <Compile Include="View\Protokolsystem\Pages\CreateLongTrip.xaml.cs">
+      <DependentUpon>CreateLongTrip.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Pages\DistanceStatistics.xaml.cs">
       <DependentUpon>DistanceStatistics.xaml</DependentUpon>
@@ -401,7 +402,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Protokolsystem\Pages\CreateLongDistance.xaml">
+    <Page Include="View\Protokolsystem\Pages\CreateLongTrip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

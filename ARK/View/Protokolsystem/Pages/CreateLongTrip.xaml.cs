@@ -5,9 +5,9 @@ namespace ARK.Protokolsystem.Pages
     /// <summary>
     /// Interaction logic for CreateLongDistance.xaml
     /// </summary>
-    public partial class CreateLongDistance : UserControl
+    public partial class CreateLongTrip : UserControl
     {
-        public CreateLongDistance()
+        public CreateLongTrip()
         {
             InitializeComponent();
         }
