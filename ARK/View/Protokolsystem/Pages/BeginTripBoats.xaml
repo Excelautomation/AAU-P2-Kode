@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
+             d:DesignHeight="300"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding">
 
@@ -33,16 +34,17 @@
     </UserControl.Resources>
 
     <!--Content-->
-    <Grid Style="{DynamicResource ResourceKey=gridContent}" Margin="4,0,4,8" Width="Auto">
+    <Grid Style="{StaticResource ResourceKey=gridContent}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
-            <RowDefinition Height="391"/>
-            <RowDefinition Height="44"/>
-            <RowDefinition Height="76"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0" Width="300">
             <WrapPanel Margin="0,2,0,0">
@@ -79,7 +81,7 @@
         </Border>
 
         <ListView x:Name="AllBoatsList" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" 
-                  ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5">
+                  ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -105,12 +107,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="340"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <ListView x:Name="AllMembersList" Grid.Row="0" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
+            <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
                   ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
                   IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto"
                   ItemContainerStyle="{StaticResource ItemContainerStyle}" Width="Auto" Margin="0,0,0,5">
@@ -125,49 +122,48 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="5"/>
-                    <ColumnDefinition Width="50*"/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="btnAddGuest" Grid.Column="0" VerticalAlignment="Top"
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnAddGuest" Grid.Column="0" VerticalAlignment="Top"
                     IsEnabled="{Binding EnableMembers}"
                     Command="{Binding Path=ToggleKeyboard}"
                     Background="{DynamicResource AddBG}"
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8"/>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="8"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" Style="{StaticResource ResourceKey=btnImage}" />
-                        <TextBlock Grid.Column="3" Text="TILFØJ&#10;GÆST" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
-                    </Grid>
-                </Button>
-                <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;GÆST" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
                     IsEnabled="{Binding EnableMembers}"
                     Command="{Binding Path=ToggleKeyboard}"
                     Background="{DynamicResource AddBG}"
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8"/>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="8"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/shape_square_add.png" Style="{StaticResource ResourceKey=btnImage}" />
-                        <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
-                    </Grid>
-                </Button>
-            </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/shape_square_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
+                </Grid>
+            </Button>
         </Grid>
 
         <!--Direction-->
-        <Border Name="Filters" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" BorderBrush="#FFABADB3" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="2" Width="613">
+        <Border Name="Filters" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" BorderBrush="#FFABADB3" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="3" Width="613">
             <Grid Background="#FFFBFBFB">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
@@ -184,11 +180,11 @@
         </Border>
 
         <!--Buttons-->
-        <Grid Grid.ColumnSpan="2" Grid.Row="3">
+        <Grid Grid.ColumnSpan="2" Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="153"/>
                 <ColumnDefinition Width="153"/>
             </Grid.ColumnDefinitions>
