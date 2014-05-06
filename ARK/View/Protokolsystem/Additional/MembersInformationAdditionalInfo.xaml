@@ -14,7 +14,7 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <Style x:Key="lstContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
+        <Style x:Key="styleContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
             <Setter Property="Margin" Value="5,3,0,0"/>
         </Style>
         
@@ -24,9 +24,9 @@
     <Grid Height="768" Margin="3,5,3,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
-            <RowDefinition Height="40*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="25"/>
-            <RowDefinition Height="40*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="0">
@@ -38,54 +38,54 @@
         </Border>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Aktiv: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.Active, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Adresse (2): " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.Address2}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Email (2): " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.Email2}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Tlf. Arbejde: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.PhoneWork}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Fødselsdag: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.Birthday}"/>
             </TextBlock>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="3" Width="194" Background="White">
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Frigivet: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.Released, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Svømmeprøve: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.SwimmingTest, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Kortturs-styrmand: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.ShortTripCox, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Langtur-styrmand: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.LongTripCox, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}" >
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Sculler: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.MayUseSculler, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Outrigger: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.MayUseOutrigger, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Kajak: " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.MayUseKayak, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
