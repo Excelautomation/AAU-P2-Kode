@@ -100,9 +100,10 @@
             <ListView ItemsSource="{Binding SelectedBoat[0].DamageForms}" BorderBrush="{x:Null}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                            <Run Text="{Binding Path=Type}"/>
-                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Date}" Style="{StaticResource ResourceKey=styleContent}"/>
+                            <TextBlock Text="{Binding Path=Type}" Style="{StaticResource ResourceKey=styleContent}"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
