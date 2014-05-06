@@ -61,8 +61,8 @@
     <Grid Width="1020" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="49"/>
-            <RowDefinition Height="537"/>
-            <RowDefinition Height="182"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>

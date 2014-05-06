@@ -73,18 +73,23 @@ namespace ARK.ViewModel.Protokolsystem
                     Members = new ObservableCollection<MemberViewModel>(membersAync.Result.Select(member => new MemberViewModel(member)));
                 }
 
-                // Reset filter
-                ResetFilter();
-
-                // Reset lists
-                SelectedMembers.Clear();
-                EnableMembers = false;
-
-                _selectedBoat = null;
-                NotifyCustom("SelectedBoat");
-
-                UpdateInfo();
+                ResetData();
             };
+        }
+
+        private void ResetData()
+        {
+            // Reset filter
+            ResetFilter();
+
+            // Reset lists
+            SelectedMembers.Clear();
+            EnableMembers = false;
+
+            _selectedBoat = null;
+            NotifyCustom("SelectedBoat");
+
+            UpdateInfo();
         }
 
         #endregion
@@ -110,19 +115,17 @@ namespace ARK.ViewModel.Protokolsystem
             get { return _selectedBoat; }
             set
             {
-                if (_selectedBoat == value) // Nothing changed - silently discart - WARNING STACKOVERFLOW IF NOT
+                if (_selectedBoat == value || // Nothing changed - silently discart - STACKOVERFLOW IF NOT DISCARTED
+                    value == null) 
                     return;
                 
                 _selectedBoat = value;
-
-                if (value == null)
-                    Notify();
 
                 Keyboard.KeyboardClear();
                 SelectedMembers.Clear();
                 UpdateInfo();
 
-                EnableMembers = value != null;
+                EnableMembers = true;
             }
         }
 
@@ -153,14 +156,16 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<object>(x =>
                 {
-                    var trip = new Trip();
-                    trip.Id = _db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1;
-                    trip.TripStartTime = DateTime.Now;
-                    trip.Members = new List<Member>();
-                    trip.BoatId = SelectedBoat.Id;
+                    var trip = new Trip
+                    {
+                        Id = _db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1,
+                        TripStartTime = DateTime.Now,
+                        Members = new List<Member>(),
+                        BoatId = SelectedBoat.Id
+                    };
 
                     // Add selected members to trip
-                    foreach (Member m in SelectedMembers.Select(member => member.Member))
+                    foreach (var m in SelectedMembers.Select(member => member.Member))
                     {
                         trip.Members.Add(m);
                     }
@@ -171,7 +176,7 @@ namespace ARK.ViewModel.Protokolsystem
                     _db.Trip.Add(trip);
                     _db.SaveChanges();
 
-                    SelectedBoat = null;
+                    ResetData();
                 });
             }
         }
@@ -244,12 +249,12 @@ namespace ARK.ViewModel.Protokolsystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.FilterBoat(args.SearchEventArgs.SearchText)
+                    where boat.Filter(args.SearchEventArgs.SearchText)
                     select boat;
 
                 foreach (
                     MemberViewModel member in
-                        Members.Where(member => !member.Member.FilterMembers(args.SearchEventArgs.SearchText)))
+                        Members.Where(member => !member.Member.Filter(args.SearchEventArgs.SearchText)))
                     member.Visible = false;
             }
         }

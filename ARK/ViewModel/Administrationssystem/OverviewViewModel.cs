@@ -164,15 +164,15 @@ namespace ARK.ViewModel.Administrationssystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Skadesblanketter = from skade in Skadesblanketter
-                    where skade.FilterDamageForms(args.SearchEventArgs.SearchText)
+                    where skade.Filter(args.SearchEventArgs.SearchText)
                     select skade;
 
                 LongDistanceForms = from distanceform in LongDistanceForms
-                    where distanceform.FilterLongDistanceForm(args.SearchEventArgs.SearchText)
+                    where distanceform.Filter(args.SearchEventArgs.SearchText)
                     select distanceform;
 
                 BoatsOut = from boat in BoatsOut
-                    where boat.FilterBoat(args.SearchEventArgs.SearchText)
+                    where boat.Filter(args.SearchEventArgs.SearchText)
                     select boat;
             }
 

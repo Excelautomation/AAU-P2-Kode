@@ -2,9 +2,9 @@ namespace ARK.Model.Extensions
 {
     public static class LongDistanceFormExtention
     {
-        public static bool FilterLongDistanceForm(this LongDistanceForm longDistanceForm, string searchText)
+        public static bool Filter(this LongDistanceForm longDistanceForm, string searchText)
         {
-            return longDistanceForm.Boat.FilterBoat(searchText) ||
+            return longDistanceForm.Boat.Filter(searchText) ||
                    longDistanceForm.Text.ContainsCaseInsensitive(searchText);
         }
     }
