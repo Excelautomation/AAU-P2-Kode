@@ -7,12 +7,13 @@ namespace ARK.Model
     public class Trip : IEquatable<Trip>
     {
         public int Id { get; set; }
-        public double Distance { get; set; }
-        public bool LongTrip { get; set; }
-        public DateTime TripStartTime { get; set; }
-        public DateTime? TripEndedTime { get; set; }
-        public string Direction { get; set; }
-        public string Title { get; set; }
+        public double Distance { get; set; }            // Distance rowed.
+        public bool LongTrip { get; set; }              // bool that states if the tour i a long trip, and therefore dont hold Direction.
+        public DateTime TripStartTime { get; set; }     // no further explanation needed
+        public DateTime? TripEndedTime { get; set; }    // no further explanation needed
+        public string Direction { get; set; }           // Starting direction that is ment to be displayed douring the tour for security reasons.   
+        public string Title { get; set; }               // Helping title for the user to decide the distance that the boat have sailed.
+ 
         
         public bool TripEnded
         {
