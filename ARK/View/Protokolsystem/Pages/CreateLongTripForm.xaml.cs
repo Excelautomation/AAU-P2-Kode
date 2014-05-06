@@ -1,13 +1,14 @@
 ﻿using System.Windows.Controls;
+using ARK.ViewModel.Protokolsystem;
 
 namespace ARK.Protokolsystem.Pages
 {
     /// <summary>
-    /// Interaction logic for CreateLongDistance.xaml
+    /// Interaction logic for BeginTripBoats.xaml
     /// </summary>
-    public partial class CreateLongTrip : UserControl
+    public partial class CreateLongTripForm : UserControl
     {
-        public CreateLongTrip()
+        public CreateLongTripForm()
         {
             InitializeComponent();
         }
