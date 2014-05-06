@@ -117,8 +117,7 @@
 
             <!--Tilføj gæst-->
             <Button x:Name="btnAddGuest" Grid.Column="0" VerticalAlignment="Top"
-                    IsEnabled="{Binding EnableMembers}"
-                    Command="{Binding Path=ToggleKeyboard}"
+                    Command="{Binding}"
                     Background="{StaticResource AddBG}"
                     BorderBrush="{StaticResource AddBorder}" Height="46" Width="Auto">
                 <Grid>
@@ -135,8 +134,7 @@
 
             <!--Tilføj blank-->
             <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
-                    IsEnabled="{Binding EnableMembers}"
-                    Command="{Binding Path=ToggleKeyboard}"
+                    Command="{Binding}"
                     Background="{StaticResource AddBG}"
                     BorderBrush="{StaticResource AddBorder}" Height="46" Width="Auto">
                 <Grid>
@@ -172,7 +170,7 @@
                             <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Image Source="/View/images/time_go.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}" Text="AFGANG"/>
                     </Grid>
                 </WrapPanel>
@@ -188,7 +186,7 @@
                             <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Image Source="/View/images/timeline.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}" Text="HJEMKOMST"/>
                     </Grid>
                 </WrapPanel>
@@ -216,7 +214,7 @@
                             <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Image Source="/View/images/emotion_sleep.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}" Text="OVERNATNINGSSTEDER"/>
                     </Grid>
                 </WrapPanel>
@@ -244,7 +242,7 @@
                             <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Image Source="/View/images/timeline_marker.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}" Text="DAGSDISTANCER"/>
                     </Grid>
                 </WrapPanel>
@@ -272,7 +270,7 @@
                             <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Image Source="/View/images/document_comments.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}" Text="BESKRIVELSE AF LANGTUR"/>
                     </Grid>
                 </WrapPanel>
@@ -336,9 +334,9 @@
 
             <Button x:Name="btnBeginTripNow" Grid.Column="4" VerticalAlignment="Top" 
             	Style="{StaticResource ResourceKey=btnFilter}"  
-            	Command="{Binding StartTripNow}"
-            	Background="{StaticResource BeginBG}"
-            	BorderBrush="{StaticResource BeginBorder}" Margin="0,0,0,0" Width="Auto">
+            	Command="{Binding}"
+            	Background="{StaticResource SubmitBG}"
+            	BorderBrush="{StaticResource SubmitBorder}" Margin="0,0,0,0" Width="Auto">
                 <Grid Margin="0,0,-2,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
