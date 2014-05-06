@@ -218,7 +218,13 @@
             <ContentControl Content="{Binding Path=CurrentInfo}"/>
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="1" Height="45" VerticalAlignment="Top" Background="#FF979595">
+        <Grid Grid.Row="0" Grid.Column="1" Height="45" VerticalAlignment="Top">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF818181" Offset="0"/>
+                    <GradientStop Color="#FF9C9C9C" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="51*"/>
                 <ColumnDefinition Width="49*"/>
