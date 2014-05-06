@@ -49,5 +49,11 @@ namespace ARK
             //XmlParser.LoadMembersFromXml();
             //XmlParser.LoadTripsFromXml();
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var window = new AdminLogin();
+            ShowWindow(window);
+        }
     }
 }
