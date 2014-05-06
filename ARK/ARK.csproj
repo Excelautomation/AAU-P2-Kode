@@ -127,6 +127,8 @@
     <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtokolsystemContentViewModelBase.cs" />
+    <Compile Include="ViewModel\Protokolsystem\ViewDamageFormViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\ViewLongTripFormViewModel.cs" />
     <Compile Include="View\Administrationssystem\AdminSystem.xaml.cs">
       <DependentUpon>AdminSystem.xaml</DependentUpon>
     </Compile>

@@ -13,10 +13,14 @@ namespace ARK.Model
         }
 
         public int Id { get; set; }
+
         public DateTime FormCreated { get; set; }   // Date of the freation of the form
-        public DateTime StartDate { get; set; }     // Start date of the trip
-        public DateTime EndDate{ get; set; }        // End date of the trip
-        public string Text { get; set; }
+        public DateTime PlannedStartDate { get; set; }     // Start date of the trip
+        public DateTime PlannedEndDate{ get; set; }        // End date of the trip
+        public Boat DesiredBoat { get; set; }
+        public string TourDescription { get; set; }
+        public string DistancesPerDay { get; set; } // eventually an integer!!!!!!! 
+        public string CampSites { get; set; }       // 
         public BoatStatus Status { get; set; }      // statud of the Form
 
         //Foreign key
@@ -24,7 +28,8 @@ namespace ARK.Model
 
         //Navigation properties
         public virtual Boat Boat { get; set; }
-        public virtual ICollection<Member> Members { get; set; }
+        public virtual List<Member> Members { get; set; }
+        public Member ResponsibleMember { get; set; }
 
         public bool Equals(LongTripForm other)
         {
