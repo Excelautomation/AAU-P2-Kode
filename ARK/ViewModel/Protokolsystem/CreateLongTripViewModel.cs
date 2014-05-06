@@ -76,7 +76,7 @@ namespace ARK.ViewModel.Protokolsystem
                     longTripForm.TourDescription = TourDescription;
                     longTripForm.DistancesPerDay = DistancesPerDay;
                     longTripForm.CampSites = CampSites;
-                    longTripForm.Members = SelectedMembers.Select(mvm => mvm.Member);
+                    longTripForm.Members = SelectedMembers.Select(mvm => mvm.Member).ToList();
                     longTripForm.Status = LongTripForm.BoatStatus.Awaiting;
 
                     db.LongTripForm.Add(longTripForm);
