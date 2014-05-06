@@ -46,7 +46,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0" Width="300">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -63,7 +63,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0" Width="309">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>

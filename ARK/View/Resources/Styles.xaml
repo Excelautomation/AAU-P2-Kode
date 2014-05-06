@@ -19,8 +19,7 @@
     <!--Headline Border-->
     <Style x:Key="brdHeadline" TargetType="Border">
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Width" Value="302"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="Height" Value="32"/>
         <Setter Property="Background" Value="#FF979595"/>
         <Setter Property="BorderBrush" Value="#FF0D476C"/>

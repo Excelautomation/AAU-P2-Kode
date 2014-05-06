@@ -42,7 +42,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource ResourceKey=brdHeadline}" HorizontalAlignment="Stretch" Margin="1,0,0,0" Width="Auto">
+        <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource ResourceKey=brdHeadline}">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>

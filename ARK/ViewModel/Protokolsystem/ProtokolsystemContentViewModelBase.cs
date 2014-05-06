@@ -27,12 +27,12 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand ToggleKeyboard
         {
-            get { return GetCommand<object>(e => { ProtocolSystem.EnableSearch = true; }); }
+            get { return GetCommand<object>(e => { ProtocolSystem.EnableSearch = !ProtocolSystem.EnableSearch; }); }
         }
 
         public ICommand ToggleFilter
         {
-            get { return GetCommand<object>(e => { ProtocolSystem.EnableFilters = true; }); }
+            get { return GetCommand<object>(e => { ProtocolSystem.EnableFilters = !ProtocolSystem.EnableFilters; }); }
         }
     }
 }
