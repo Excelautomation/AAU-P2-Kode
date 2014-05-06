@@ -8,7 +8,7 @@ namespace ARK.Model
     {
         public int Id { get; set; }
         public double Distance { get; set; }            // Distance rowed.
-        public bool LongTrip { get; set; }              // bool that states if the tour i a long trip, and therefore dont hold Direction.
+        public bool LongTrip { get; set; }              // bool that states if the tour is a long trip, and therefore holds no Direction.
         public DateTime TripStartTime { get; set; }     // no further explanation needed
         public DateTime? TripEndedTime { get; set; }    // no further explanation needed
         public string Direction { get; set; }           // Starting direction that is ment to be displayed douring the tour for security reasons.   

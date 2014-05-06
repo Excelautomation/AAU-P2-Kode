@@ -24,6 +24,8 @@ namespace ARK.ViewModel.Administrationssystem
         private readonly DbArkContext _dbArkContext;
         private IEnumerable<Trip> _Trips;
         private Trip _currentTrip;
+        private bool _RecentSave = false;
+        
         //private FrameworkElement _filter;
 
        public TripsViewModel()
@@ -79,6 +81,12 @@ namespace ARK.ViewModel.Administrationssystem
                Notify();
            }
        }
+       
+       public bool RecentSave
+       {
+           get { return _RecentSave; }
+           set { _RecentSave = value; Notify(); }
+       }
 
        public ICommand SelectedChange
        {
@@ -90,6 +98,19 @@ namespace ARK.ViewModel.Administrationssystem
                });
            }
        }
+
+       public ICommand SaveChanges
+       {
+           get
+           {
+               return GetCommand<object>(e =>
+               {
+                   _dbArkContext.SaveChanges();
+                   RecentSave = true;
+               });
+           }
+       }
+
 
        //public FrameworkElement Filter
        //{
