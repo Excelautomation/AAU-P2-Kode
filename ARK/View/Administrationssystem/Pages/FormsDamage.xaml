@@ -74,11 +74,9 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
                 
-                <DockPanel DockPanel.Dock="Top">
+                <DockPanel>
                     <Label DockPanel.Dock="Top" Content="Kommentarer"/>
-                    <TextBox AcceptsReturn="True" Height="130" Name="CommentTextbox" Width="250" FontSize="14" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}">
-                        
-                    </TextBox>
+                    <TextBox AcceptsReturn="True" Height="130" Name="CommentTextbox" Width="250" FontSize="14" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
                 </DockPanel>
                 <Button Grid.Row="1" Content="Gem ændringer" Command="{Binding SaveChanges}"/>
             </Grid>
