@@ -66,9 +66,9 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="194*"/>
-            <ColumnDefinition Width="621*"/>
-            <ColumnDefinition Width="205*"/>
+            <ColumnDefinition Width="194"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <ContentControl VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Content="{Binding Path=CurrentPage}"/>
@@ -197,7 +197,7 @@
             </Grid>
         </Grid>
 
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Width="210" Grid.RowSpan="3" Margin="0,0,-5,0" Grid.Column="2">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Grid.RowSpan="3" Margin="0,0,-5,0" Grid.Column="2">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Repeat">
                     <LinearGradientBrush.RelativeTransform>
