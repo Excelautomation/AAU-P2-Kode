@@ -78,8 +78,10 @@ namespace ARK.ViewModel.Protokolsystem
 
                 // Reset lists
                 SelectedMembers.Clear();
-                SelectedBoat = null;
                 EnableMembers = false;
+
+                _selectedBoat = null;
+                NotifyCustom("SelectedBoat");
 
                 UpdateInfo();
             };
@@ -110,7 +112,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 if (_selectedBoat == value) // Nothing changed - silently discart - WARNING STACKOVERFLOW IF NOT
                     return;
-
+                
                 _selectedBoat = value;
 
                 if (value == null)
