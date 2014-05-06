@@ -9,7 +9,7 @@ using ARK.Model.DB;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    class CreateInjuryViewModel : ProtokolsystemContentViewModelBase
+    class CreateDamageFormViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
         private Member _selectedMember;
@@ -22,7 +22,7 @@ namespace ARK.ViewModel.Protokolsystem
         private DamageForm _selectedDamageForm;
 
         // constructor
-        public CreateInjuryViewModel()
+        public CreateDamageFormViewModel()
         {
             var db = DbArkContext.GetDbContext();
             _members = db.Member.Where(m => true).ToList();

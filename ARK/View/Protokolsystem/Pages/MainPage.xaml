@@ -68,7 +68,7 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="BoatsOutList" ItemsSource="{Binding Path=BoatsOut}" Margin="309,32,6,124" Height="Auto">
+        <ListView x:Name="lstBoatsOut" ItemsSource="{Binding Path=BoatsOut}" Margin="309,32,6,124" Height="Auto">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
