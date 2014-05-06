@@ -13,8 +13,8 @@
         <Protokolsystem:CreateInjuryViewModel x:Name="ViewModel"/>
     </UserControl.DataContext>
 
-    <UserControl.Resources>
-        <!--<Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+    <!--<UserControl.Resources>
+        --><!--<Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Height" Value="300"/>
             <Setter Property="Background" Value="Black"/>
@@ -25,8 +25,8 @@
                     </Grid>
                 </Setter.Value>
             </Setter>
-        </Style>-->
-    </UserControl.Resources>
+        </Style>--><!--
+    </UserControl.Resources>-->
 
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
         <Border x:Name="border" Style="{DynamicResource ResourceKey=brdHeadline}">
@@ -127,7 +127,7 @@
         <ComboBox x:Name="DamageTypeComboBox" HorizontalAlignment="Left" ItemsSource="{Binding Path=DamageTypes, Mode=TwoWay}" Margin="0,356,0,0" VerticalAlignment="Top" Width="302" Height="32">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Title}"/>
+                    <TextBlock Text="{Binding Path=Type}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
             <i:Interaction.Triggers>
@@ -145,27 +145,6 @@
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnCustomDistance" Grid.Column="4"
-        		Style="{StaticResource ResourceKey=btnFilter}" 
-        		Command="{Binding ToggleFilter}"
-        		Background="{StaticResource SubmitBG}"
-        		BorderBrush="{StaticResource SubmitBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_white_go.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;SKADE" />
-                </Grid>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding Path=AddDamageType}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
             <Button x:Name="btnShowKeyboard" Grid.Column="0"
             	Style="{StaticResource ResourceKey=btnFilter}" 
             	Command="{Binding ToggleKeyboard}"
@@ -182,7 +161,7 @@
                     <TextBlock Grid.Column="3" Text="VIS&#xA;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
                 </Grid>
             </Button>
-            <Button x:Name="btnCustomDistance_Copy" Grid.Column="1"
+            <Button x:Name="btnActiveInjuries" Grid.Column="1"
             	Style="{StaticResource ResourceKey=btnFilter}" 
             	Command="{Binding ToggleFilter}"
             	Background="{StaticResource InfoBG}"
@@ -198,7 +177,7 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="SE AKTIVE&#xA;SKADER" />
                 </Grid>
             </Button>
-            <Button x:Name="btnCustomDistance_Copy1" Grid.Column="3"
+            <Button x:Name="btnMakeNewInjury" Grid.Column="3"
             	Style="{StaticResource ResourceKey=btnFilter}" 
             	Command="{Binding ToggleFilter}"
             	Background="{StaticResource AddBG}"
@@ -212,6 +191,22 @@
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/error_add.png" />
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;SKADE" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnSendInjury" Grid.Column="4"
+        		Style="{StaticResource ResourceKey=btnFilter}" 
+        		Command="{Binding AddDamageType}"
+        		Background="{StaticResource SubmitBG}"
+        		BorderBrush="{StaticResource SubmitBorder}" Height="Auto" Margin="1,5,0,5" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_white_go.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;SKADE" />
                 </Grid>
             </Button>
         </Grid>
