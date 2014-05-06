@@ -107,7 +107,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-            <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" 
+            <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=MembersFiltered}" 
                   ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
                   IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto"
                   ItemContainerStyle="{StaticResource ItemContainerStyle}" Width="Auto" Margin="0,0,0,5">
