@@ -64,6 +64,7 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
 </ResourceDictionary>

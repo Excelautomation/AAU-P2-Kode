@@ -17,7 +17,6 @@ namespace ARK.ViewModel.Administrationssystem
         private string _errorLabel;
 
         public string Username { get; set; }
-        public string Password { get; set; }
         public AdminLogin AdminLogin { get; set; }
         public string ErrorLabel { get { return _errorLabel; } set { _errorLabel = value; Notify(); } }
 
@@ -31,9 +30,9 @@ namespace ARK.ViewModel.Administrationssystem
                     
                     Admin admin = db.Admin.Find(Username);
 
-                    if (admin != null && admin.Username == Username && admin.Password == Password)
+                    if (admin != null && admin.Username == Username && admin.Password == ((AdminLogin)e).PasswordBox.Password)
                     {
-                        AdminSystem window = new AdminSystem();
+                        var window = new AdminSystem();
                         window.Show();
                         ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
 
