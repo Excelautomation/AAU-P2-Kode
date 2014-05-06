@@ -33,15 +33,28 @@
         <ListView x:Name="BoatsOutList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=BoatsOut}" Margin="0,32,8,77" Width="613">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
-                        <WrapPanel>
-                            <TextBlock Text="Tid: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Time}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
-                            <TextBlock Text="Pladser: " Style="{DynamicResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding NumberofSeats}" Style="{DynamicResource ResourceKey=lstViewContent}"/>
-                        </WrapPanel>
-                    </WrapPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="2" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+
+                        <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Grid.Row="1" Grid.Column="0">
+                            <Run Text="Tid ude:" FontWeight="Bold"/>
+                            <Run Text="{Binding Path=TimeBoatOut.Hours, Mode=OneWay}" /><Run Text=":" /><Run Text="{Binding Path=TimeBoatOut.Minutes, Mode=OneWay}" />
+                        </TextBlock>
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1" Grid.Column="1">
+                                <Run Text="Pladser:" FontWeight="Bold"/>
+                                <Run Text="{Binding NumberofSeats}"/>
+                        </TextBlock>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
