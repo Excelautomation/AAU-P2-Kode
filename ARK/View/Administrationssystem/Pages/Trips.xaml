@@ -54,7 +54,7 @@
                                         <StackPanel Margin="10">
                                             <TextBlock Text="{Binding Boat.Name}" FontSize="18"/>
                                             <WrapPanel>
-                                                <TextBlock Text=" Starttid: " FontSize="14px" />
+                                                <TextBlock Text="Starttid: " FontSize="14px" />
                                                 <TextBlock Text="{Binding TripStartTime, ConverterCulture='da-DK'}" FontSize="14px" />
                                             </WrapPanel>
                                         </StackPanel>
@@ -65,7 +65,7 @@
                                             </WrapPanel>
                                             <WrapPanel>
                                                 <TextBlock Text="Tid ude: " FontSize="14px" />
-                                                <TextBlock Text="{Binding TimeBoatOut}" FontSize="14px" />
+                                                <TextBlock FontSize="14px" Text="{Binding TimeBoatOut, StringFormat=hh\\:mm}"/>
                                             </WrapPanel>
                                         </StackPanel>
                                     </Grid>
@@ -127,7 +127,7 @@
                                             <TextBlock Text="{Binding CurrentTrip.Boat.Name}" Grid.Row="0" Grid.Column="1"/>
 
                                             <TextBlock Text="Retning:" Grid.Row="1" Grid.Column="0"/>
-                                            <TextBlock Text="{Binding CurrentTrip.Direction}" Grid.Row="1" Grid.Column="1"/>
+                                            <TextBox Text="{Binding CurrentTrip.Direction, Mode=TwoWay}" VerticalContentAlignment="Center" FontSize="18" Grid.Row="1" Grid.Column="1"/>
 
                                             <TextBlock Text="Starttid:" Grid.Row="2" Grid.Column="0"/>
                                             <TextBlock Text="{Binding CurrentTrip.TripStartTime, ConverterCulture='da-DK', StringFormat=F}" Grid.Row="2" Grid.Column="1"/>
@@ -152,7 +152,11 @@
                                             </WrapPanel>
 
                                             <TextBlock Text="Langtur:" Grid.Row="6" Grid.Column="0"/>
-                                            <TextBlock Text="{Binding CurrentTrip.LongTrip, Converter={StaticResource YesNo}}" Grid.Row="6" Grid.Column="1"/>
+                                            <TextBlock  Grid.Row="6" Grid.Column="1"/>
+                                            <ComboBox  Width="100" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" x:Name="LongDistance" SelectedIndex="{Binding CurrentTrip.LongTrip}" FontSize="16" Background="#EEEEEE">
+                                                <ComboBoxItem Content="Nej"/>
+                                                <ComboBoxItem Content="Ja"/>
+                                            </ComboBox>
 
                                         </Grid>
 
