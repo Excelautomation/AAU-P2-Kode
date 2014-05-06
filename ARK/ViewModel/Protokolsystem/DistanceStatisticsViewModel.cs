@@ -37,6 +37,7 @@ namespace ARK.ViewModel.Protokolsystem
                         .Where(t => t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
                         .Sum(t => t.Distance)))
                         .OrderByDescending(x => x.Item2));
+            SelectedMember = _memberKmCollection.Select(x => x.Item1).First(x => true);
         }
 
         public Member SelectedMember
