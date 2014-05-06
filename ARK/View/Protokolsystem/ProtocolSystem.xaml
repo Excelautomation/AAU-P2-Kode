@@ -71,11 +71,9 @@
             <ColumnDefinition Width="205*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="621" Background="White" Grid.Column="1" Grid.Row="1">
-            <ContentControl Content="{Binding Path=CurrentPage}" VerticalAlignment="Top"/>
-        </Grid>
+        <ContentControl VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Content="{Binding Path=CurrentPage}"/>
 
-        <StackPanel x:Name="Buttons" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="621">
+        <StackPanel x:Name="Buttons" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=EnableSearch, Converter={StaticResource BoolToVis}}" Height="182"/>
             <ContentControl Content="{Binding Path=Filter}" Visibility="{Binding Path=EnableFilters, Converter={StaticResource BoolToVis}}" Height="182"/>
         </StackPanel>

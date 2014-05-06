@@ -5,16 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d" 
-             Style="{DynamicResource ResourceKey=ucContent}">
+             d:DesignHeight="400"
+             mc:Ignorable="d">
 
     <UserControl.DataContext>
         <Protokolsystem:MembersinformationViewModel/>
     </UserControl.DataContext>
 
     <!--Indhold-->
-    <Grid Style="{DynamicResource ResourceKey=gridContent}" Margin="4,0,4,10">
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Width="611">
+    <Grid Style="{StaticResource ResourceKey=gridContent}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Row="0" HorizontalAlignment="Stretch" Margin="0" Width="Auto">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -31,7 +40,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" Margin="0,32,10,77" Width="Auto">
+        <ListView x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" Grid.Row="1" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -83,7 +92,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <Grid Margin="0,461,10,5">
+        <Grid Grid.Row="2" Height="76">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
                 <ColumnDefinition Width="152"/>

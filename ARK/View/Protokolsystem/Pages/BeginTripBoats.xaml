@@ -6,8 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding"
-             Style="{DynamicResource ResourceKey=ucContent}">
+             xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding">
 
     <UserControl.DataContext>
         <Protokolsystem:BeginTripViewModel x:Name="ViewModel" />

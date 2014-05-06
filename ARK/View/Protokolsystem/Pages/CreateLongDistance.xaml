@@ -4,31 +4,79 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="600" Height="600">
+             d:DesignHeight="600" d:DesignWidth="600">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="475" Margin="301,41,0,0" VerticalAlignment="Top" Width="299" SelectionMode="Multiple" />
-        <Label Content="Deltagere på turen" HorizontalAlignment="Left" Margin="301,10,0,0" VerticalAlignment="Top" Height="32" Width="279" FontSize="16" FontWeight="Bold"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="49" Margin="0,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" FontSize="29.333"/>
-        <TextBox HorizontalAlignment="Left" Height="49" Margin="152,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="{Binding FontSize, ElementName=textBox}"/>
-        <Label Content="Hjemkomst" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top" Width="117" Height="32" FontSize="16" FontWeight="Bold"/>
-        <Label Content="Afgang" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="102" Height="32" FontSize="16" FontWeight="Bold"/>
-        <RichTextBox HorizontalAlignment="Left" Height="388" Margin="0,128,0,0" VerticalAlignment="Top" Width="296">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Label Content="Deltagere på turen" Grid.Column="1" Grid.Row="0" FontSize="16" FontWeight="Bold"/>
+        <ListView SelectionMode="Multiple" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" />
+
+        <Grid Grid.Column="0" Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Hjemkomst" FontSize="16" FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
+            <Label Content="Afgang" FontSize="16" FontWeight="Bold" Grid.Column="1" Grid.Row="0"/>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="49"/>
+            </Grid.RowDefinitions>
+            
+            <TextBox FontSize="29.333" Grid.Column="0" />
+            <TextBox FontSize="29.333" Grid.Column="1" />
+        </Grid>
+
+        <Label Content="Kommentarer" Grid.Column="0" Grid.Row="2" FontSize="16" FontWeight="Bold"/>
+        
+
+        <RichTextBox Grid.Column="0" Grid.Row="3">
             <FlowDocument/>
         </RichTextBox>
-        <Label Content="Kommentarer" HorizontalAlignment="Left" Margin="0,95,0,0" VerticalAlignment="Top" Height="33" Width="208" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="AddLongDistance" Content="INDSEND &#xA;LANGTUR" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="64" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" BorderThickness="2" Margin="426,526,0,0" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddLongDistance}">
-            <Button.BorderBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF004546" Offset="0"/>
-                    <GradientStop Color="#FF00B0B4" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.BorderBrush>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF019FA2" Offset="0"/>
-                    <GradientStop Color="#FF006364" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+
+        <Grid Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Height="76">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="3"/>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition Width="152"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="AddLongDistance" Grid.Column="4" Content="INDSEND &#xA;LANGTUR" Effect="{Binding Effect, ElementName=EndTrip}" FontSize="16" BorderThickness="2" Foreground="White" FontFamily="/Protokolsystem;component/Fonts/#Arial" Padding="10,10,1,1" FontWeight="Bold" Command="{Binding Path=AddLongDistance}">
+                <Button.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF004546" Offset="0"/>
+                        <GradientStop Color="#FF00B0B4" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.BorderBrush>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF019FA2" Offset="0"/>
+                        <GradientStop Color="#FF006364" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>
