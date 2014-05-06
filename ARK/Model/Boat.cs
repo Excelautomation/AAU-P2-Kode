@@ -25,6 +25,12 @@ namespace ARK.Model
         public BoatType SpecificBoatType { get; set; }  
         public bool LongTripBoat { get; set; }          // states if the boad is accepted for long tips
 
+        //Navigation properties
+        public virtual ICollection<Trip> Trips { get; set; }
+        public virtual ICollection<DamageForm> DamageForms { get; set; }
+        public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
+
+        //Not mapped properties
         public bool Usable                              // states if the boat is in a usable condition
         {
             get { return Active && DamageForms != null && !DamageForms.Any(x => !x.Functional && !x.Closed); }
@@ -45,11 +51,7 @@ namespace ARK.Model
             get { return GetActiveTrip != default(Trip); }
         }
 
-        //Navigation properties
-        public virtual ICollection<Trip> Trips { get; set; }
-        public virtual ICollection<DamageForm> DamageForms { get; set; }
-        public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
-
+        //Interfaces
         public bool Equals(Boat other)
         {
             if (ReferenceEquals(null, other)) return false;

@@ -7,11 +7,18 @@ using System.Windows.Data;
 
 namespace ARK.View.ValueConverters
 {
-    public class TimeSpanTo24HourMinuteConverter : IValueConverter
+    public class TimeSpanToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return ((TimeSpan) value).ToString(@"HH:mm");
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

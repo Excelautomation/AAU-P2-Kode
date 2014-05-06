@@ -55,10 +55,6 @@ namespace ARK.Model.DB
                 .Property(b => b.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            modelBuilder.Entity<Trip>()
-                .Property(b => b.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             modelBuilder.Entity<Member>()
                 .Property(b => b.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
@@ -72,6 +68,10 @@ namespace ARK.Model.DB
             modelBuilder.Entity<LongDistanceForm>()
                 .HasMany(ldf => ldf.Members)
                 .WithMany(m => m.LongDistanceForms);
+
+            modelBuilder.Entity<Trip>()
+                .Property(b => b.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<Trip>()
                 .HasRequired(t => t.Boat)

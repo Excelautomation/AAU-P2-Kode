@@ -13,27 +13,48 @@
     <UserControl.DataContext>
         <Protokolsystem:DistanceStatisticsViewModel/>
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
-        <Style x:Key="imgMedal" TargetType="Image">
-            <Setter Property="Source" Value="{x:Null}"/>
+        <valueConverters:DateTimeToLocalStringConverter x:Key="ToLocalStringConverter"/>
+        <valueConverters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+        <valueConverters:ListViewItemToOrdinalConverter x:Key="OrdinalConverter" />
+        <DataTemplate x:Key="GoldMedal">
+            <Image Source="/View/images/medal_award_gold.png" Width="16" Height="16" HorizontalAlignment="Left"/>
+        </DataTemplate>
+        <DataTemplate x:Key="SilverMedal">
+            <Image Source="/View/images/medal_award_Silver.png" Width="16" Height="16" HorizontalAlignment="Left"/>
+        </DataTemplate>
+        <DataTemplate x:Key="BronzeMedal">
+            <Image Source="/View/images/medal_award_Bronze.png" Width="16" Height="16" HorizontalAlignment="Left"/>
+        </DataTemplate>
+        <DataTemplate x:Key="NoMedal">
+            <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TypeName=ListViewItem}},
+                Converter={StaticResource ResourceKey=OrdinalConverter}}" HorizontalAlignment="Left"/>
+        </DataTemplate>
+        <Style x:Key="imgMedal" TargetType="Label">
+            <Setter Property="ContentTemplate" Value="{StaticResource NoMedal}"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationIndex}" Value="0">
-                    <Setter Property="Source" Value="/View/images/medal_award_gold.png"/>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsLoaded}" Value="True"/>
+                        <!--<Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="0"/>-->
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="ContentTemplate" Value="{StaticResource GoldMedal}"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="1">
+                    <Setter Property="ContentTemplate" Value="{StaticResource SilverMedal}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationIndex}" Value="1">
-                    <Setter Property="Source" Value="/View/images/medal_award_silver.png"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Members, Path=AlternationIndex}" Value="2">
-                    <Setter Property="Source" Value="/View/images/medal_award_bronze.png"/>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="2">
+                    <Setter Property="ContentTemplate" Value="{StaticResource BronzeMedal}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <valueConverters:DateTimeToLocalStringConverter x:Key="ToLocalStringConverter"></valueConverters:DateTimeToLocalStringConverter>
     </UserControl.Resources>
-    
+
     <Grid Style="{DynamicResource ResourceKey=gridContent}">
-        
+
         <Border Style="{DynamicResource ResourceKey=brdHeadline}">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
@@ -73,20 +94,20 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="22"/>
+                            <ColumnDefinition Width="25"/>
                             <ColumnDefinition Width="208"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Style="{StaticResource ResourceKey=imgMedal}" Grid.Column="0" Width="16" Height="16" HorizontalAlignment="Left"/>
+                        <Label Grid.Column="0" Style="{StaticResource imgMedal}"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}">
-                            <Run Text="{Binding Item1.FirstName}"/>
-                            <Run Text="{Binding Item1.LastName}"/>
+                            <Run Text="{Binding Item1.FirstName}" FontWeight="Normal"/>
+                            <Run Text="{Binding Item1.LastName}" FontWeight="Normal"/>
                         </TextBlock>
                         <TextBlock Grid.Column="2" Text="{Binding Path=Item2}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
+
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding Path=MemberSelectionChanged}" CommandParameter="{Binding ElementName=Members, Path=SelectedItem.Item1}" />
@@ -121,15 +142,15 @@
 
                         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Left">
                             <Run Text="Tid ude:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=TimeBoatOut.Hours, Mode=OneWay}" /><Run Text=":" /><Run Text="{Binding Path=TimeBoatOut.Minutes, Mode=OneWay}" />
+                            <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, Converter={StaticResource TimeSpanToStringConverter}}" />
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
 
             </ListView.ItemTemplate>
-            
+
         </ListView>
-        
+
         <Grid Margin="0,461,10,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="152"/>
