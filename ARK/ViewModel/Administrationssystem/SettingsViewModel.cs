@@ -104,9 +104,7 @@ namespace ARK.ViewModel.Administrationssystem
 
                     CurrentDamageType = new DamageType()
                     {
-                        Description = e.Description,
-                        IsFunctional = e.IsFunctional,
-                        Title = e.Title
+                        Type = e.Type
                     };
                     ReferenceToCurrentDamageType = e;
 
@@ -121,9 +119,7 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<DamageType>(e =>
                 {
-                    ReferenceToCurrentDamageType.Description = CurrentDamageType.Description;
-                    ReferenceToCurrentDamageType.Title = CurrentDamageType.Title;
-                    ReferenceToCurrentDamageType.IsFunctional = CurrentDamageType.IsFunctional;
+                    ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
                     _dbcontext.SaveChanges();
 
                     // Loader igen fra HELE databasen, og sætter ind i listview.
@@ -142,9 +138,7 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     CurrentDamageType = new DamageType()
                     {
-                        Description = ReferenceToCurrentDamageType.Description,
-                        IsFunctional = ReferenceToCurrentDamageType.IsFunctional,
-                        Title = ReferenceToCurrentDamageType.Title
+                        Type = ReferenceToCurrentDamageType.Type
                     };
                     FeedbackDamageType = Feedback.Cancel;
                 });
@@ -159,9 +153,7 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     DamageType DamageTypeTemplate = new DamageType()
                     {
-                        Title = "Ny skadetype",
-                        IsFunctional = true,
-                        Description = "En beskrivelse."
+                        Type = "Ny skadetype"
                     };
                     _dbcontext.DamageType.Add(DamageTypeTemplate);
                     _dbcontext.SaveChanges();

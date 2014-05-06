@@ -71,6 +71,10 @@ namespace ARK.ViewModel.Protokolsystem
             set { _selectedDamageType = value; }
         }
 
+        public string Description { get; set; }
+
+        public bool IsFunctional { get; set; }
+
         public ICommand MemberSelectionChanged
         {
             get
@@ -110,21 +114,25 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return GetCommand<object>(d =>
                 {
-                    var damageForm = new DamageForm(); 
-                    damageForm.RegisteringMember = SelectedMember;
-                    damageForm.Boat = SelectedBoat;
-                    damageForm.Functional = IsFunctional;
-                    damageForm.Comments = Comment;
+                    if (SelectedBoat != null && SelectedMember != null && SelectedDamageType != null)
+                    {
+                        var damageForm = new DamageForm();
+                        damageForm.RegisteringMember = SelectedMember;  // Member
+                        damageForm.Boat = SelectedBoat;                 // Boat
+                        // set damagetype
+                        damageForm.Type = SelectedDamageType.Type;
 
-                    var db = DbArkContext.GetDbContext();
-                    throw new NotImplementedException("Der skal tages stilling til hvordan skadesbeskrivelse skal override valgte indstillinger og comments.. Ligeledes hvordan forholdet imellem både of skadesblanketter skal håndteres inden gem"); 
-                    db.DamageForm.Add(damageForm);
+                        // set additional description
+                        damageForm.Description = Description;
+                        damageForm.Functional = IsFunctional;
+
+                        var db = DbArkContext.GetDbContext();
+
+                        db.DamageForm.Add(damageForm);
+                    }
                 });
             }
         }
 
-        public string Comment { get; set; }
-
-        public bool IsFunctional { get; set; }
     }
 }
