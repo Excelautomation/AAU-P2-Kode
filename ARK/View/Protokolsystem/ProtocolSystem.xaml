@@ -71,9 +71,9 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Content="{Binding Path=CurrentPage}"/>
+        <ContentControl VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Content="{Binding Path=CurrentPage}" Margin="3,0,3,0"/>
 
-        <StackPanel x:Name="Buttons" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+        <StackPanel x:Name="Buttons" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="3,0,3,6">
             <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=EnableSearch, Converter={StaticResource BoolToVis}}" Height="182"/>
             <ContentControl Content="{Binding Path=Filter}" Visibility="{Binding Path=EnableFilters, Converter={StaticResource BoolToVis}}" Height="182"/>
         </StackPanel>
@@ -233,12 +233,12 @@
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Style="{StaticResource ResourceKey=lstViewContent}">
-                    <Run Text="BÅDE PÅ VANDET:" FontWeight="Bold" Foreground="White"/>
+                <TextBlock Grid.Row="0" Style="{StaticResource ResourceKey=lstViewContent}"  FontWeight="Bold" Foreground="White">
+                    <Run Text="BÅDE PÅ VANDET:"/>
                     <Run Text="{Binding NumBoatsOut}"/>
                 </TextBlock>
-                <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
-                    <Run Text="DAGENS KILOMETER:" FontWeight="Bold" Foreground="White"/>
+                <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Foreground="White">
+                    <Run Text="DAGENS KILOMETER:"/>
                     <Run Text="{Binding DailyKilometers}"/>
                 </TextBlock>
             </Grid>

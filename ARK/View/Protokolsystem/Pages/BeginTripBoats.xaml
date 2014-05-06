@@ -34,7 +34,7 @@
     </UserControl.Resources>
 
     <!--Content-->
-    <Grid Style="{StaticResource ResourceKey=gridContent}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
@@ -46,7 +46,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0">
+        
+        <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -63,7 +64,7 @@
             </WrapPanel>
         </Border>
 
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0">
+        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0" Margin="5,0,0,0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -80,8 +81,8 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" 
-                  ItemsSource="{Binding Path=Boats}" Height="Auto" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="0,0,8,5" Grid.RowSpan="2">
+        <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.Row="1" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" 
+                  ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -107,22 +108,24 @@
             </ListView.ItemTemplate>
         </ListView>
 
-            <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=MembersFiltered}" 
-                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
-                  IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" Height="Auto"
-                  ItemContainerStyle="{StaticResource ItemContainerStyle}" Width="Auto" Margin="0,0,0,5">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
-                            <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
-                            <Run Text="{Binding Path=Member.FirstName}"/>
-                            <Run Text="{Binding Path=Member.LastName}"/>
-                            </TextBlock>
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        <Grid Grid.Row="2" Grid.Column="1">
+        <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" ItemsSource="{Binding Path=MembersFiltered}" 
+                ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
+                IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" 
+                ItemContainerStyle="{StaticResource ItemContainerStyle}" Margin="5,0,0,0"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
+                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
+                        <Run Text="{Binding Path=Member.FirstName}"/>
+                        <Run Text="{Binding Path=Member.LastName}"/>
+                        </TextBlock>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <Grid Grid.Row="2" Grid.Column="1" Margin="5,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="5"/>
@@ -163,7 +166,9 @@
         </Grid>
 
         <!--Direction-->
-        <Border Name="Filters" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" BorderBrush="#FFABADB3" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="3" Width="613">
+        <Border Name="Filters" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" 
+                BorderBrush="#FFABADB3" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="3" Width="613"
+                Margin="0,5,0,0">
             <Grid Background="#FFFBFBFB">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
@@ -180,16 +185,10 @@
         </Border>
 
         <!--Buttons-->
-        <Grid Grid.ColumnSpan="2" Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="153"/>
-                <ColumnDefinition Width="153"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="btnShowKeyboard" Grid.Column="0"
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="4" Margin="0,5,5,0" LastChildFill="False" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+            <Button x:Name="btnShowKeyboard"
+                    Margin="0,0,3,0"
+                    DockPanel.Dock="Left"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=ToggleKeyboard}"
                     Background="{StaticResource SearchFilterBG}"
@@ -232,7 +231,8 @@
                 </Grid>
             </Button>
 
-            <Button Name="btnShowFilter" Grid.Column="1"
+            <Button Name="btnShowFilter"
+                    DockPanel.Dock="Left"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=ToggleFilter}"
                     Background="{StaticResource SearchFilterBG}"
@@ -275,11 +275,13 @@
                 </Grid>
             </Button>
 
-            <Button x:Name="btnBeginTripNow" Grid.Column="4" VerticalAlignment="Top" 
-            	Style="{StaticResource ResourceKey=btnFilter}"  
-            	Command="{Binding StartTripNow}"
-            	Background="{StaticResource BeginBG}"
-            	BorderBrush="{StaticResource BeginBorder}" Margin="0,0,0,0" Width="Auto">
+            <Button x:Name="btnBeginTripNow" 
+                    DockPanel.Dock="Right"
+                    VerticalAlignment="Top" 
+            	    Style="{StaticResource ResourceKey=btnFilter}"  
+            	    Command="{Binding StartTripNow}"
+            	    Background="{StaticResource BeginBG}"
+            	    BorderBrush="{StaticResource BeginBorder}" Margin="0,0,0,0" Width="Auto">
                 <Grid Margin="0,0,-2,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -291,6 +293,6 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="BEGYND&#xA;ROTUR" />
                 </Grid>
             </Button>
-        </Grid>
+        </DockPanel>
     </Grid>
 </UserControl>
