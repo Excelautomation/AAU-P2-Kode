@@ -65,45 +65,40 @@
             </TextBlock>
         </Border>
 
-        <ListView x:Name="BoatInfo" Grid.Row="1" ItemsSource="{Binding SelectedBoat}" SelectionMode="Single" BorderBrush="{x:Null}" BorderThickness="0">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Style="{StaticResource ResourceKey=lstContent}">
-                            <Run Text="Navn:" FontWeight="Bold"/>
-                            <Run Text="{Binding Name}"/>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Navn:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedBoat.Name}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Pladser:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedBoat.NumberofSeats}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Bådtype:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedBoat.SpecificBoatType}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Aktiv:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedBoat.Active, Converter={StaticResource YesNo}}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+                <Run Text="Funktionsdygtig:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedBoat.Usable, Converter={StaticResource YesNo}, Mode=OneWay}"/>
+            </TextBlock>
+            <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=lstContent}" 
+                        FontWeight="Bold"/>
+            <ListView ItemsSource="{Binding Path=SelectedBoat.DamageForms}" BorderBrush="{x:Null}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="13px">
+                            <Run Text="{Binding Path=Type}"/>
                         </TextBlock>
-                        <TextBlock Style="{StaticResource ResourceKey=lstContent}">
-                            <Run Text="Pladser:" FontWeight="Bold"/>
-                            <Run Text="{Binding NumberofSeats}"/>
-                        </TextBlock>
-                        <TextBlock Style="{StaticResource ResourceKey=lstContent}">
-                            <Run Text="Bådtype:" FontWeight="Bold"/>
-                            <Run Text="{Binding SpecificBoatType}"/>
-                        </TextBlock>
-                        <TextBlock Style="{StaticResource ResourceKey=lstContent}">
-                            <Run Text="Aktiv:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=Active, Converter={StaticResource YesNo}}"/>
-                        </TextBlock>
-                        <TextBlock Style="{StaticResource ResourceKey=lstContent}">
-                            <Run Text="Funktionsdygtig:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=Usable, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-                        </TextBlock>
-                        <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=lstContent}" 
-                                   FontWeight="Bold"/>
-                        <ListView ItemsSource="{Binding Path=DamageForms}" BorderBrush="{x:Null}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock FontSize="13px">
-                                        <Run Text="{Binding Path=Type}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
 
         <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" Grid.Row="3"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
