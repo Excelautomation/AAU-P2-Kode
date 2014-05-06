@@ -20,7 +20,7 @@ namespace ARK.Model.DB
         public DbSet<FTPInfo> FtpInfo { get; set; }
         public DbSet<DamageType> DamageType { get; set; }
         public DbSet<Boat> Boat { get; set; }
-        public DbSet<LongDistanceForm> LongTripForm { get; set; }
+        public DbSet<LongTripForm> LongTripForm { get; set; }
         public DbSet<Member> Member { get; set; }
         public DbSet<DamageForm> DamageForm { get; set; }
         public DbSet<Trip> Trip { get; set; }
@@ -56,23 +56,23 @@ namespace ARK.Model.DB
                 .Property(b => b.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
+            modelBuilder.Entity<Trip>()
+                .Property(b => b.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             modelBuilder.Entity<Member>()
                 .Property(b => b.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            modelBuilder.Entity<LongDistanceForm>()
+            modelBuilder.Entity<LongTripForm>()
                 .HasRequired(ldf => ldf.Boat)
                 .WithMany(b => b.LongDistanceForms)
                 .HasForeignKey(ldf => ldf.BoatId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<LongDistanceForm>()
+            modelBuilder.Entity<LongTripForm>()
                 .HasMany(ldf => ldf.Members)
                 .WithMany(m => m.LongDistanceForms);
-
-            modelBuilder.Entity<Trip>()
-                .Property(b => b.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<Trip>()
                 .HasRequired(t => t.Boat)

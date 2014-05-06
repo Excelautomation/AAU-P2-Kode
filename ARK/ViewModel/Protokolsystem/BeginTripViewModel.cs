@@ -33,14 +33,12 @@ namespace ARK.ViewModel.Protokolsystem
 
         private DateTime _latestData;
 
-        #region Constructors
-
         public BeginTripViewModel()
         {
             // Instaliser lister
             _boats = new List<Boat>();
             _selectedMembers = new ObservableCollection<MemberViewModel>();
-            Members = new ObservableCollection<MemberViewModel>();
+            _membersFiltered = new ObservableCollection<MemberViewModel>();
 
             // Setup filter
             var filterController = new FilterContent(this);
@@ -49,12 +47,11 @@ namespace ARK.ViewModel.Protokolsystem
 
             // Set up variables to load of data
             Task<List<Boat>> boatsAsync = null;
-            Task<List<Member>> membersAync = null;
+            Task<List<Member>> membersAsync = null;
 
-            // Configurate the keyboard
             ParentAttached += (sender, args) =>
             {
-                if (boatsAsync == null || membersAync == null || (DateTime.Now - _latestData).TotalHours > 2)
+                if (boatsAsync == null || membersAsync == null || (DateTime.Now - _latestData).TotalHours > 2)
                 {
                     // Load data. Check the boats activitylevel on a 8-day-basis
                     DateTime limit = DateTime.Now.AddDays(-8);
@@ -63,14 +60,14 @@ namespace ARK.ViewModel.Protokolsystem
                     boatsAsync = _db.Boat
                         .Where(b => b.Active)
                         .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit)).ToListAsync();
-                    membersAync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
+                    membersAsync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
 
                     // Set date
                     _latestData = DateTime.Now;
 
                     // Read data
                     _boats = boatsAsync.Result;
-                    Members = new ObservableCollection<MemberViewModel>(membersAync.Result.Select(member => new MemberViewModel(member)));
+                    MembersFiltered = new ObservableCollection<MemberViewModel>(membersAsync.Result.Select(member => new MemberViewModel(member)));
                 }
 
                 ResetData();
@@ -91,8 +88,6 @@ namespace ARK.ViewModel.Protokolsystem
 
             UpdateInfo();
         }
-
-        #endregion
 
         #region Properties
 
@@ -129,7 +124,7 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public IEnumerable<MemberViewModel> Members
+        public IEnumerable<MemberViewModel> MembersFiltered
         {
             get { return _membersFiltered; }
             set
@@ -142,7 +137,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public int MembersCount
         {
-            get { return Members.Count(member => member.Visible); }
+            get { return MembersFiltered.Count(member => member.Visible); }
         }
 
         public ObservableCollection<MemberViewModel> SelectedMembers
@@ -229,7 +224,7 @@ namespace ARK.ViewModel.Protokolsystem
         private void ResetFilter()
         {
             Boats = new ObservableCollection<Boat>(_boats);
-            foreach (MemberViewModel member in Members)
+            foreach (MemberViewModel member in MembersFiltered)
                 member.Visible = true;
         }
 
@@ -257,7 +252,7 @@ namespace ARK.ViewModel.Protokolsystem
 
                 foreach (
                     MemberViewModel member in
-                        Members.Where(member => !member.Member.Filter(args.SearchEventArgs.SearchText)))
+                        MembersFiltered.Where(member => !member.Member.Filter(args.SearchEventArgs.SearchText)))
                     member.Visible = false;
             }
         }
@@ -273,7 +268,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         private void SortMembers(Func<MemberViewModel, string> predicate)
         {
-            Members = Members.OrderBy(predicate);
+            MembersFiltered = MembersFiltered.OrderBy(predicate);
         }
 
         #endregion

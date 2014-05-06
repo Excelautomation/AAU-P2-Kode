@@ -28,7 +28,7 @@ namespace ARK.Model
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<DamageForm> DamageForms { get; set; }
-        public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
+        public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }
 
         //Not mapped properties
         public bool Usable                              // states if the boat is in a usable condition

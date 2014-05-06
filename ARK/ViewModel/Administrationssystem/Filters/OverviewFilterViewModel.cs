@@ -73,7 +73,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                     if (ShowDamages)
                         return items;
                 }
-                else if (typeof (LongDistanceForm) == typeof (T))
+                else if (typeof (LongTripForm) == typeof (T))
                 {
                     if (ShowLongTrip)
                         return items;

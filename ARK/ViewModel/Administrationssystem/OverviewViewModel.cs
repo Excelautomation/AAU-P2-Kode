@@ -18,8 +18,8 @@ namespace ARK.ViewModel.Administrationssystem
         private IEnumerable<Boat> _boatsOut;
         private List<Boat> _boatsOutNonFiltered;
         private OverviewFilter _filter;
-        private IEnumerable<LongDistanceForm> _longDistanceForms;
-        private List<LongDistanceForm> _longDistanceFormsNonFiltered;
+        private IEnumerable<LongTripForm> _longDistanceForms;
+        private List<LongTripForm> _longDistanceFormsNonFiltered;
         private Visibility _showBoatsOut;
         private Visibility _showLangtur;
         private Visibility _showSkader;
@@ -30,7 +30,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             // Instaliser lister så lazy ikke fejler
             _skadesblanketterNonFiltered = new List<DamageForm>();
-            _longDistanceFormsNonFiltered = new List<LongDistanceForm>();
+            _longDistanceFormsNonFiltered = new List<LongTripForm>();
             _boatsOutNonFiltered = new List<Boat>();
 
             // Load data
@@ -42,7 +42,7 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     // Opret forbindelser Async
                     Task<List<DamageForm>> damageforms = db.DamageForm.ToListAsync();
-                    Task<List<LongDistanceForm>> longDistanceForms = db.LongTripForm.ToListAsync();
+                    Task<List<LongTripForm>> longDistanceForms = db.LongTripForm.ToListAsync();
                     Task<List<Boat>> boatsOut = db.Boat.ToListAsync();
 
                     _skadesblanketterNonFiltered = damageforms.Result;
@@ -73,7 +73,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public IEnumerable<LongDistanceForm> LongDistanceForms
+        public IEnumerable<LongTripForm> LongDistanceForms
         {
             get { return _longDistanceForms; }
             private set

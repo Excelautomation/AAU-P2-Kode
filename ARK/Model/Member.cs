@@ -32,7 +32,7 @@ namespace ARK.Model
 
         //Navigation properties
         public virtual ICollection<DamageForm> DamageForms { get; set; }
-        public virtual ICollection<LongDistanceForm> LongDistanceForms { get; set; }
+        public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
 
         public static IEqualityComparer<Member> IdComparer

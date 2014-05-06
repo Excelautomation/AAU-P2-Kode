@@ -21,6 +21,7 @@ namespace ARK
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //var window = new AdminLogin();
             var window = new AdminSystem();
             ShowWindow(window);
         }
