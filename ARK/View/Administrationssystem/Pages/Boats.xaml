@@ -12,7 +12,7 @@
         <VM:BoatViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <Style x:Key="StackpanelLabels" TargetType="Label">
+        <Style x:Key="DetailLabels" TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
@@ -45,214 +45,201 @@
             <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Både</Label>
             <Grid Margin="0,0,5,5">
                 <Border BorderBrush="Gray" BorderThickness="1">
-                            <ListView x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Width="750">
-                                            <StackPanel Margin="5,0,15,0">
-                                                <TextBlock Text="{Binding Name}" FontSize="18"/>
-                                                <WrapPanel>
-                                                    <TextBlock Margin="0,0,2,0" Text="Mest anvendende:" FontSize="12"/>
-                                                    <TextBlock Text="Ubundet" FontSize="12"/>
-                                                </WrapPanel>
-                                            </StackPanel>
-                                            <WrapPanel Margin="220,5,0,5" Orientation="Vertical">
-                                                <WrapPanel>
-                                                    <TextBlock Margin="0,0,5,0" Text="Pladser: " FontSize="14px" />
-                                                    <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
-                                                </WrapPanel>
-                                                <WrapPanel>
-                                                    <TextBlock Margin="-4,0,5,0" Text=" Kategori: " FontSize="14px" />
-                                                    <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
-                                                </WrapPanel>
-                                            </WrapPanel>
-                                            <Grid.Style>
-                                                <!-- Gør listview item rød hvis båden er inaktiv-->
-                                                <Style TargetType="Grid">
-                                                    <Setter Property="Background" Value="#CCFFCC"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=Active}" Value="False">
-                                                            <Setter Property="Background" Value="#FFDEDE"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Grid.Style>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=BoatList, Path=SelectedItem}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ListView>
-
+                    <ListView x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="750">
+                                    <StackPanel Margin="5,0,15,0">
+                                        <TextBlock Text="{Binding Name}" FontSize="18"/>
+                                        <WrapPanel>
+                                            <TextBlock Margin="0,0,2,0" Text="Mest anvendende:" FontSize="12"/>
+                                            <TextBlock Text="Ubundet" FontSize="12"/>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                    <WrapPanel Margin="220,5,0,5" Orientation="Vertical">
+                                        <WrapPanel>
+                                            <TextBlock Margin="0,0,5,0" Text="Pladser: " FontSize="14px" />
+                                            <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <TextBlock Margin="-4,0,5,0" Text=" Kategori: " FontSize="14px" />
+                                            <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
+                                        </WrapPanel>
+                                    </WrapPanel>
+                                    <Grid.Style>
+                                        <!-- Gør listview item rød hvis båden er inaktiv-->
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Background" Value="#CCFFCC"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=Active}" Value="False">
+                                                    <Setter Property="Background" Value="#FFDEDE"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=BoatList, Path=SelectedItem}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
                 </Border>
             </Grid>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="2" >
             <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Detaljer</Label>
-            <Grid Margin="5,0,5,5">
-                <Border BorderBrush="Gray" BorderThickness="1">
-                    <!--<DockPanel>
-                        <ScrollViewer DockPanel.Dock="Bottom">
-                            <Border BorderBrush="Gray" BorderThickness="1">
-                                <DockPanel>-->
-                                    <ScrollViewer DockPanel.Dock="Bottom" Background="White">
-                                        <Grid Margin="25" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="308"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
+            <Border BorderBrush="Gray" BorderThickness="1">
+                <Grid Margin="25" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="308"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.Resources>
+                            <Style BasedOn="{StaticResource DetailLabels}" TargetType="{x:Type Label}"/>
+                        </Grid.Resources>
+
+                        <Label Grid.Row="0" Content="Navn:" />
+                        <Label Grid.Row="1" Content="Pladser:"/>
+                        <Label Grid.Row="2" Content="Kategori:"/>
+                        <Label Grid.Row="3" Content="Status:"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" FontSize="16" Text="{Binding Path=CurrentBoat.Name}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{Binding Path=CurrentBoat.NumberofSeats}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" FontSize="16" Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalContentAlignment="Center" x:Name="AktivBox" SelectedIndex="{Binding Path=LocalActiveBoat, Mode=TwoWay}" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
+                            <ComboBoxItem Content="Inaktiv"/>
+                            <ComboBoxItem Content="Aktiv"/>
+                        </ComboBox>
+
+
+                        <DockPanel Grid.Row="5" Margin="10" Width="275" Grid.ColumnSpan="2">
+                            <Button FontSize="20" Padding="5" Content="Gem" Command="{Binding Path=SaveChanges}" Background="#CCFFCC"/>
+                            <Button FontSize="20" Padding="5" HorizontalAlignment="Right" Content="Annuller" Command="{Binding Path=CancelChanges}" Background="#FFDEDE"/>
+                        </DockPanel>
+                        
+                        <WrapPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
+                            <Image Height="24">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                <Setter Property="Source" Value="../../images/accept.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RecentCancel, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                <Setter Property="Source" Value="../../images/cross.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock FontSize="16" Margin="8,0,0,0" VerticalAlignment="Center" >
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                <Setter Property="Foreground" Value="Green"/>
+                                                <Setter Property="Text" Value="Ændringer gemt"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=RecentCancel, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                <Setter Property="Foreground" Value="Red"/>
+                                                <Setter Property="Text" Value="Ændringer annulleret"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </WrapPanel>
+                        <WrapPanel Grid.Row="6" Margin="10" HorizontalAlignment="Center" Visibility="Collapsed">
+                            <Image Height="24" Margin="0,0,5,0" Source="../../images/cross.png"/>
+                            <TextBlock FontSize="16" Margin="0,0,0,0" Text="Ændringer annulleret" VerticalAlignment="Center" Foreground="Red" />
+                        </WrapPanel>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Width="270" Background="AliceBlue" Grid.Row="0">
+                            <WrapPanel Margin="0,2,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="/View/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <WrapPanel Grid.Column="1">
+                                        <TextBlock Text="Ture (" Foreground="Black" FontSize="18"/>
+                                        <TextBlock Text="{Binding Path=CurrentBoat.Trips.Count}" Foreground="Black" FontSize="18"/>
+                                        <TextBlock Text=")" Foreground="Black" FontSize="18"/>
+                                    </WrapPanel>
+                                </Grid>
+                            </WrapPanel>
+                        </Border>
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" PanningMode="VerticalOnly">
+                            <ItemsControl  x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="5">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="10"/>
+                                                <ColumnDefinition Width="95"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
-                                            
-                                            <StackPanel>
-                                                <WrapPanel HorizontalAlignment="Left" Margin="10">
-                                                    <WrapPanel Margin="0,0,2,0">
-                                                        <StackPanel Margin="0,0,30,0" >
-                                                            <StackPanel.Resources>
-                                                                <Style BasedOn="{StaticResource StackpanelLabels}" TargetType="{x:Type Label}"/>
-                                                            </StackPanel.Resources>
-                                                            <Label Content="Navn:" />
-                                                            <Label Content="Båd-Id:"/>
-                                                            <Label Content="Pladser:"/>
-                                                            <Label Content="Kategori:"/>
-                                                            <Label Content="Status:"/>
-                                                        </StackPanel>
-                                                        <StackPanel Width="150">
-                                                            
-                                                            <TextBlock Margin="0,9,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Name}"/>
-                                                            <TextBlock Margin="0,14,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.Id}"/>
-                                                            <TextBlock Margin="0,16,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.NumberofSeats}"/>
-                                                            <TextBlock Margin="0,15,0,0" FontSize="16" Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
-                                                            <Grid>
-                                                                <ComboBox x:Name="AktivBox" SelectedIndex="{Binding Path=LocalActiveBoat, Mode=TwoWay}" Margin="0,13,0,0" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
-                                                                    <ComboBoxItem Content="Inaktiv"/>
-                                                                    <ComboBoxItem Content="Aktiv"/>
-                                                                </ComboBox>
-                                                            </Grid>
-                                                        </StackPanel>
-                                                    </WrapPanel>
+
+                                            <StackPanel Margin="5,0,0,0" Grid.Column="0">
+                                                <WrapPanel>
+                                                    <!--<TextBlock Text="Retning "/>-->
+                                                    <TextBlock Text="{Binding Path=Direction}"/>
                                                 </WrapPanel>
-                                                <DockPanel Margin="10" Width="250">
-                                                    <Button Margin="0,0,0,0" Padding="5" FontSize="20" Content="Gem" Command="{Binding Path=SaveChanges}" Background="#CCFFCC"/>
-                                                    <Button FontSize="20" Padding="5" HorizontalAlignment="Right" Content="Annuller" Command="{Binding Path=CancelChanges}" Background="#FFDEDE"/>
-                                                </DockPanel>
-                                                <Grid>
-                                                <WrapPanel Margin="10" HorizontalAlignment="Center">
-                                                        <Image Height="24">
-                                                        <Image.Style>
-                                                            <Style TargetType="Image">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                                        <Setter Property="Source" Value="../../images/accept.png"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding RecentCancel, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                                        <Setter Property="Source" Value="../../images/cross.png"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Image.Style>
-                                                    </Image>
-                                                    <TextBlock FontSize="16" Margin="8,0,0,0" VerticalAlignment="Center" > 
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="TextBlock">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Path=RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                                        <Setter Property="Foreground" Value="Green"/>
-                                                                        <Setter Property="Text" Value="Ændringer gemt"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Path=RecentCancel, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                                        <Setter Property="Foreground" Value="Red"/>
-                                                                        <Setter Property="Text" Value="Ændringer annulleret"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
+                                                <WrapPanel>
+                                                    <TextBlock Text="{Binding Path=Distance}"/>
+                                                    <TextBlock Text=" Km"/>
                                                 </WrapPanel>
-                                                    <WrapPanel Margin="10" HorizontalAlignment="Center" Visibility="Collapsed">
-                                                        <Image Height="24" Margin="0,0,5,0" Source="../../images/cross.png"/>
-                                                        <TextBlock FontSize="16" Margin="0,0,0,0" Text="Ændringer annulleret" VerticalAlignment="Center" Foreground="Red" />
-                                                    </WrapPanel>
-                                                </Grid>
                                             </StackPanel>
-
-                                            <Grid Grid.Column="2">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="auto"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-
-
-                                                <Border Style="{DynamicResource ResourceKey=brdHeadline}" Width="270" Background="AliceBlue" Grid.Row="0">
-                                                    <WrapPanel Margin="0,2,0,0">
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="20"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <Image Source="/View/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                                            <WrapPanel Grid.Column="1">
-                                                                <TextBlock Text="Ture (" Foreground="Black" FontSize="18"/>
-                                                                <TextBlock Text="{Binding Path=CurrentBoat.Trips.Count}" Foreground="Black" FontSize="18"/>
-                                                                <TextBlock Text=")" Foreground="Black" FontSize="18"/>
-                                                            </WrapPanel>
-                                                        </Grid>
-                                                    </WrapPanel>
-                                                </Border>
-
-                                                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" PanningMode="VerticalOnly">
-                                                <ItemsControl  x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Grid Margin="5">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="95"/>
-                                                                    <ColumnDefinition Width="auto"/>
-                                                                </Grid.ColumnDefinitions>
-
-                                                                <StackPanel Margin="5,0,0,0" Grid.Column="0">
-                                                                    <WrapPanel>
-                                                                        <!--<TextBlock Text="Retning "/>-->
-                                                                        <TextBlock Text="{Binding Path=Direction}"/>
-                                                                    </WrapPanel>
-                                                                    <WrapPanel>
-                                                                        <TextBlock Text="{Binding Path=Distance}"/>
-                                                                        <TextBlock Text=" Km"/>
-                                                                    </WrapPanel>
-                                                                </StackPanel>
-                                                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
-                                                                    <WrapPanel>
-                                                                        <TextBlock Text="Start:  "/>
-                                                                        <TextBlock Text="{Binding Path=TripStartTime, ConverterCulture='da-DK'}"/>
-                                                                    </WrapPanel>
-                                                                    <WrapPanel>
-                                                                        <TextBlock Text="Slut:   "/>
-                                                                        <TextBlock Text="{Binding Path=TripEndedTime, ConverterCulture='da-DK'}"/>
-                                                                    </WrapPanel>
-                                                                </StackPanel>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                                </ScrollViewer>
-                                            </Grid>
-
-
+                                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
+                                                <WrapPanel>
+                                                    <TextBlock Text="Start:  "/>
+                                                    <TextBlock Text="{Binding Path=TripStartTime, ConverterCulture='da-DK'}"/>
+                                                </WrapPanel>
+                                                <WrapPanel>
+                                                    <TextBlock Text="Slut:   "/>
+                                                    <TextBlock Text="{Binding Path=TripEndedTime, ConverterCulture='da-DK'}"/>
+                                                </WrapPanel>
+                                            </StackPanel>
                                         </Grid>
-                                    </ScrollViewer>
-                                <!--</DockPanel>
-                            </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </ScrollViewer>
-                    </DockPanel>-->
-                </Border>
-            </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
         </DockPanel>
 
 
