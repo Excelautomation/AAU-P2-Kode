@@ -4,14 +4,17 @@ using System.Data.Entity;
 using System.Windows.Forms.VisualStyles;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.View.Protokolsystem.Filters;
 using ARK.ViewModel.Base;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using ARK.ViewModel.Base.Filter;
+using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase
+    internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         // Fields
         private readonly ObservableCollection<Tuple<Member, double>> _memberKmCollection;
@@ -26,18 +29,23 @@ namespace ARK.ViewModel.Protokolsystem
             DateTime lowerTimeLimit = new DateTime();
             DateTime upperTimeLimit = DateTime.Now;
             // Load data
-            var temp = db.Member
+            var members = db.Member
                 .OrderBy(x => x.FirstName)
                 .Include(m => m.Trips)
                 .AsEnumerable();
 
             _memberKmCollection =
                 new ObservableCollection<Tuple<Member, double>>
-                    (temp.Select((val, i) => new Tuple<Member, double>(val, val.Trips
+                    (members.Select((val, i) => new Tuple<Member, double>(val, val.Trips
                         .Where(t => t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
                         .Sum(t => t.Distance)))
                         .OrderByDescending(x => x.Item2));
             SelectedMember = _memberKmCollection.Select(x => x.Item1).First(x => true);
+
+            // Setup filter
+            var filterController = new FilterContent(this);
+            filterController.EnableFilter(false, false);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
         public Member SelectedMember
@@ -72,5 +80,39 @@ namespace ARK.ViewModel.Protokolsystem
                 });
             }
         }
+
+        #region Filter
+        public System.Windows.FrameworkElement Filter
+        {
+            get { return new DistanceStatisticsFilters(); }
+        }
+
+        private void ResetFilter()
+        {
+            
+        }
+
+        private void UpdateFilter(FilterChangedEventArgs args)
+        {
+            // Reset filters
+            ResetFilter();
+
+            if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
+                (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
+                return;
+
+            // Filter
+            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
+            {
+                
+            }
+
+            // Search
+            if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
+            {
+                
+            }
+        }
+        #endregion
     }
 }
