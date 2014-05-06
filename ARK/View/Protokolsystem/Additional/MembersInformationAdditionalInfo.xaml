@@ -18,6 +18,10 @@
             <Setter Property="Margin" Value="5,3,0,0"/>
         </Style>
         
+        <Style x:Key="styleCheckBox" TargetType="CheckBox">
+            <Setter Property="Margin" Value="5,4,0,0"/>
+        </Style>
+        
         <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
     </UserControl.Resources>
     
@@ -61,34 +65,40 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="3" Width="194" Background="White">
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Frigivet: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.Released, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Svømmeprøve: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.SwimmingTest, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Kortturs-styrmand: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.ShortTripCox, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Langtur-styrmand: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.LongTripCox, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Sculler: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.MayUseSculler, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Outrigger: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.MayUseOutrigger, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Kajak: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.MayUseKayak, Converter={StaticResource YesNo}, Mode=OneWay}"/>
-            </TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedMember.Released, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Frigivet" FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedMember.SwimmingTest, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Svømmeprøve" FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedMember.ShortTripCox, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Kortturs-styrmand" FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedMember.LongTripCox, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Langtur-styrmand" FontWeight="Bold"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedMember.MayUseSculler, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Sculler" FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedMember.Outrigger, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Outrigger" FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedMember.MayUseKayak, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Kajak" FontWeight="Bold"/>
+            </StackPanel>
         </StackPanel>
 
     </Grid>

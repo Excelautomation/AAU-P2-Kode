@@ -34,10 +34,14 @@
             </Style.Resources>
         </Style>
 
-        <Style x:Key="lstContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
+        <Style x:Key="styleContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
             <Setter Property="Margin" Value="5,3,0,0"/>
         </Style>
 
+        <Style x:Key="styleCheckBox" TargetType="CheckBox">
+            <Setter Property="Margin" Value="5,4,0,0"/>
+        </Style>
+        
         <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
 
     </UserControl.Resources>
@@ -66,27 +70,31 @@
         </Border>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedBoat.Active, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Aktiv" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding SelectedBoat.HaveCox, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Styrmand (Med)" FontWeight="Bold"/>
+            </StackPanel>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Navn:" FontWeight="Bold"/>
                 <Run Text="{Binding SelectedBoat.Name}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Pladser:" FontWeight="Bold"/>
                 <Run Text="{Binding SelectedBoat.NumberofSeats}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Bådtype:" FontWeight="Bold"/>
                 <Run Text="{Binding SelectedBoat.SpecificBoatType}"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
-                <Run Text="Aktiv:" FontWeight="Bold"/>
-                <Run Text="{Binding Path=SelectedBoat.Active, Converter={StaticResource YesNo}}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=lstContent}">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Funktionsdygtig:" FontWeight="Bold"/>
                 <Run Text="{Binding Path=SelectedBoat.Usable, Converter={StaticResource YesNo}, Mode=OneWay}"/>
             </TextBlock>
-            <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=lstContent}" 
+            <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=styleContent}" 
                         FontWeight="Bold"/>
             <ListView ItemsSource="{Binding Path=SelectedBoat.DamageForms}" BorderBrush="{x:Null}">
                 <ListView.ItemTemplate>

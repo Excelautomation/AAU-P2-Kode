@@ -141,7 +141,6 @@
                         Width="Auto" Height="62">
                     <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="BÅDE PÅ&#xA;VANDET" />
                 </Button>
-
                 <Button x:Name="DistanceStatistics" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding StatisticsDistance}"
@@ -192,7 +191,7 @@
                 <Button x:Name="AdminPanel" Grid.Row="0" VerticalAlignment="Bottom" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding AdminPanel_Click}"
-            	        Background="{DynamicResource NeuBG}"
+            	        Background="{StaticResource NeuBG}"
             	        BorderBrush="{StaticResource NeuBorder}" 
                         Width="Auto" Height="62">
                     <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="ADMINISTRATIONS&#xA;PANEL" />
