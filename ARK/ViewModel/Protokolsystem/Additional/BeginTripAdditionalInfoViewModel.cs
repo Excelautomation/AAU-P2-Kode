@@ -11,7 +11,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         // Fields
         private ObservableCollection<Boat> _selectedBoat;
         private ObservableCollection<MemberViewModel> _selectedMembers;
-        private int _boatNumberOfSeats; // Default er 0
+        private int _boatNumberOfSeats; // Default is 0
 
         // Properties
         public ObservableCollection<Boat> SelectedBoat
@@ -22,11 +22,14 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                 _selectedBoat = value;
 
                 // Update number of seats
-                if (value.Count > 0 && value[0] != null)
+                if (value.Count > 0 && value[0] != null) 
+                {
                     BoatNumberOfSeats = value[0].NumberofSeats;
+                }
                 else
+                {
                     BoatNumberOfSeats = 0;
-
+                }
                 Notify();
             }
         }
@@ -34,7 +37,8 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         public int BoatNumberOfSeats
         {
             get { return _boatNumberOfSeats; }
-            private set { 
+            private set 
+            { 
                 _boatNumberOfSeats = value;
                 Notify();
             }
