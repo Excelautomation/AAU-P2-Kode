@@ -9,7 +9,8 @@ namespace ARK.Model.DB
     {
         private static DbArkContext _dbContext;
 
-        public DbArkContext() : base("MikkelsNoobDB")
+        public DbArkContext()
+            : base("DefaultDB")
         {
             //Database.SetInitializer<DbArkContext>(new DropCreateDatabaseAlways<DbArkContext>());
             Database.SetInitializer(new MySqlInitializer());
