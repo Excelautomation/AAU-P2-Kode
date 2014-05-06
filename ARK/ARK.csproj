@@ -276,7 +276,8 @@
     <Compile Include="ViewModel\Base\TimeCounter.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="View\ValueConverters\DateTimeToLocalStringConverter.cs" />
-    <Compile Include="View\ValueConverters\TimeSpanTo24HourMinuteConverter.cs" />
+    <Compile Include="View\ValueConverters\ListViewItemToOrdinalConverter.cs" />
+    <Compile Include="View\ValueConverters\TimeSpanToStringConverter.cs" />
     <Compile Include="View\Windows8Fuck.xaml.cs">
       <DependentUpon>Windows8Fuck.xaml</DependentUpon>
     </Compile>
