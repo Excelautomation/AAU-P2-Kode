@@ -83,10 +83,10 @@
                 <ColumnDefinition Width="152"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btnShowKeyboard" Grid.Column="0"
-        		Style="{StaticResource ResourceKey=btnFilter}" 
-        		Command="{Binding ToggleKeyboard}"
-        		Background="{StaticResource SearchFilterBG}"
-        		BorderBrush="{StaticResource SearchFilterBorder}" Height="Auto" Margin="0,5,1,5" Width="Auto">
+                    Style="{StaticResource ResourceKey=btnFilter}" 
+                    Command="{Binding Path=ToggleKeyboard}"
+                    Background="{StaticResource SearchFilterBG}"
+                    BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -94,8 +94,34 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/ARK;component/View/images/keyboard.png" Style="{StaticResource ResourceKey=btnImage}" />
-                    <TextBlock Grid.Column="3" Text="VIS&#xA;TASTATUR" Style="{StaticResource ResourceKey=ButtonStyle}" />
+                    <Image Grid.Column="1" HorizontalAlignment="Left">
+                        <Image.Style>
+                            <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
+                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
+                                        <Setter Property="Source" Value="/View/images/keyboard.png"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <TextBlock Grid.Column="3">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
+                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
+                                        <Setter Property="Text" Value="VIS&#10;TASTATUR"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </Grid>
             </Button>
 
