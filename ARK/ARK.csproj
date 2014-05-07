@@ -120,7 +120,6 @@
     <Compile Include="ViewModel\Protokolsystem\CreateLongTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\BeginTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\Filters\EndTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
     <Compile Include="ViewModel\Base\KeyboardContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Protokolsystem\MainPageViewModel.cs" />
