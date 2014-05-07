@@ -10,6 +10,7 @@ using ARK.ViewModel.Base;
 using System.Windows;
 using ARK.View.Administrationssystem.Pages;
 
+
 namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : ContentViewModelBase
@@ -18,21 +19,22 @@ namespace ARK.ViewModel.Administrationssystem
         {
             Default, Save, Cancel, Delete, Create
         }
-        private DbArkContext _dbcontext;
+        private DbArkContext _db;
+
+        // General page
+        private Season _currentSeason;
 
         public SettingsViewModel()
         {
-            _dbcontext = DbArkContext.GetDbContext();
+            _db = DbArkContext.GetDbContext();
 
-            lock (_dbcontext)
+            lock (_db)
             {
-                DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType);
-                StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip);
-                Admins = new ObservableCollection<Admin>(_dbcontext.Admin);
-                Members = new ObservableCollection<Member>(_dbcontext.Member);
+                DamageTypes = new ObservableCollection<DamageType>(_db.DamageType);
+                StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip);
+                Admins = new ObservableCollection<Admin>(_db.Admin);
+                Members = new ObservableCollection<Member>(_db.Member);
             }
-
-
 
             if (Admins.Count != 0)
             {
@@ -53,16 +55,39 @@ namespace ARK.ViewModel.Administrationssystem
                 ReferenceToCurrentStandardTrip = CurrentStandardTrip;
             }
 
+            if (!_db.Season.Any(x => true))
+                _db.Season.Add(new Season());
         }
 
         #region Generelt
-        private DateTime _currentSeasonStart;
 
-        public DateTime CurrentSeasonStart
+        public Season CurrentSeason
         {
-            get { return _currentSeasonStart; }
-            set { _currentSeasonStart = value; }
+            get { return _currentSeason; }
+            set { _currentSeason = value; Notify(); }
         }
+
+        public ICommand NewSeason
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    // if current season started less then 183 days ago promt the user!
+                    if (CurrentSeason != null && DateTime.Compare(CurrentSeason.SeasonStart.AddDays(183), DateTime.Now) > 0 )
+                    {
+                        // promp the uder that the current season is less than a half year old!
+                        throw new NotImplementedException();
+                    }
+                    else
+                    {
+                        CurrentSeason.SeasonEnd = DateTime.Now;
+                        _db.Season.Add(new Season());
+                    }
+                });
+            }
+        }
+
 
         #endregion
 
@@ -123,9 +148,9 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<DamageType>(e =>
                 {
                     ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
-                    _dbcontext.SaveChanges();
+                    _db.SaveChanges();
 
-                    DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType.ToList());
+                    DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.ToList());
                     FeedbackDamageType = Feedback.Save;
                 });
             }
@@ -156,8 +181,8 @@ namespace ARK.ViewModel.Administrationssystem
                     {
                         Type = "Ny skadetype"
                     };
-                    _dbcontext.DamageType.Add(DamageTypeTemplate);
-                    _dbcontext.SaveChanges();
+                    _db.DamageType.Add(DamageTypeTemplate);
+                    _db.SaveChanges();
                     DamageTypes.Add(DamageTypeTemplate);
                     SelectedListItemDamageTypes = DamageTypes.Count - 1;
                     FeedbackDamageType = Feedback.Create;
@@ -171,8 +196,8 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.DamageType.Remove(ReferenceToCurrentDamageType);
-                    _dbcontext.SaveChanges();
+                    _db.DamageType.Remove(ReferenceToCurrentDamageType);
+                    _db.SaveChanges();
                     DamageTypes.Remove(ReferenceToCurrentDamageType);
                     SelectedListItemDamageTypes = DamageTypes.Count - 1;
                     FeedbackDamageType = Feedback.Delete;
@@ -245,11 +270,11 @@ namespace ARK.ViewModel.Administrationssystem
                     ReferenceToCurrentStandardTrip.Distance = CurrentStandardTrip.Distance;
                     ReferenceToCurrentStandardTrip.Title = CurrentStandardTrip.Title;
                     ReferenceToCurrentStandardTrip.Direction = CurrentStandardTrip.Direction;
-                    _dbcontext.SaveChanges();
+                    _db.SaveChanges();
 
                     // Loader igen fra HELE databasen, og sætter ind i listview.
                     // Bør optimseres til kun at loade den ændrede query.
-                    StandardTrips = new ObservableCollection<StandardTrip>(_dbcontext.StandardTrip.ToList());
+                    StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.ToList());
                     FeedbackStandardTrip = Feedback.Save;
                 });
             }
@@ -284,8 +309,8 @@ namespace ARK.ViewModel.Administrationssystem
                         Direction = "Vest",
                         Distance = 5
                     };
-                    _dbcontext.StandardTrip.Add(StandardTripTemplate);
-                    _dbcontext.SaveChanges();
+                    _db.StandardTrip.Add(StandardTripTemplate);
+                    _db.SaveChanges();
                     StandardTrips.Add(StandardTripTemplate);
                     SelectedListItemStandardTrips = StandardTrips.Count - 1;
                     FeedbackStandardTrip = Feedback.Create;
@@ -299,8 +324,8 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
-                    _dbcontext.SaveChanges();
+                    _db.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
+                    _db.SaveChanges();
                     StandardTrips.Remove(ReferenceToCurrentStandardTrip);
                     SelectedListItemStandardTrips = StandardTrips.Count - 1;
                     FeedbackDamageType = Feedback.Delete;
@@ -397,9 +422,9 @@ namespace ARK.ViewModel.Administrationssystem
                     
                     ReferenceToCurrentAdmin.ContactTrip = CurrentAdmin.ContactTrip;
                     ReferenceToCurrentAdmin.ContactDark = CurrentAdmin.ContactDark;
-                    _dbcontext.SaveChanges();
+                    _db.SaveChanges();
 
-                    Admins = new ObservableCollection<Admin>(_dbcontext.Admin.ToList());
+                    Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
                     SelectedListItemAdmins = tempindex;
                     FeedbackAdmin = Feedback.Save;
                 });
@@ -448,9 +473,9 @@ namespace ARK.ViewModel.Administrationssystem
                         ContactDark = false,
                         Member = NewAdmin.Member
                     };
-                    _dbcontext.Admin.Add(AdminTemplate);
+                    _db.Admin.Add(AdminTemplate);
                     Admins.Add(AdminTemplate);
-                    _dbcontext.SaveChanges();
+                    _db.SaveChanges();
                     FeedbackAdmin = Feedback.Create;
                     SelectedListItemAdmins = Admins.Count - 1;
                 });
@@ -463,8 +488,8 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    _dbcontext.Admin.Remove(ReferenceToCurrentAdmin);
-                    _dbcontext.SaveChanges();
+                    _db.Admin.Remove(ReferenceToCurrentAdmin);
+                    _db.SaveChanges();
                     Admins.Remove(ReferenceToCurrentAdmin);
                     FeedbackAdmin = Feedback.Delete;
                     SelectedListItemAdmins = Admins.Count - 1;
