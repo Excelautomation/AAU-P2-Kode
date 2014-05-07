@@ -371,7 +371,7 @@
                     DockPanel.Dock="Right"
                     Margin="3,0,0,0"
             	    Style="{StaticResource ResourceKey=btnFilter}"
-        		    Command="{Binding Path=AddLongTrip}"
+        		    Command="{Binding AddLongTrip}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
                 <Grid>
