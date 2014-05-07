@@ -63,9 +63,49 @@
                                         <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:"/>
                                         <DatePicker DisplayDateStart="{Binding Path=Today, Mode=OneWay}" DisplayDateEnd="{Binding Path=CurrentSeason.LatestSeasonEnd, Mode=OneWay}" Name="EndSeasonDatePicker" SelectedDate="{Binding Path=CurrentSeason.SeasonEnd, Mode=TwoWay}" HorizontalAlignment="Right" Margin="4" Width="200"/>
                                     </DockPanel>
-                                    <DockPanel>
-                                        <Button Command="{Binding Path=NewSeason}" Content="Start ny sæson" HorizontalAlignment="Center" Padding="5" Width="150"/>
-                                    </DockPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Grid.Column="1" Command="{Binding Path=NewSeason}" Content="Start ny sæson" Padding="5" Width="150"/>
+                                        <WrapPanel Grid.Column="2" Margin="4">
+                                            <Image Height="32" Margin="0,0,10,0">
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=NewSeasonStarted, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                                <Setter Property="Visibility" Value="Hidden"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Path=NewSeasonStarted, UpdateSourceTrigger=PropertyChanged}" Value="false">
+                                                                <Setter Property="Source" Value="/View/images/cross.png"/>
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+
+                                            <TextBlock VerticalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=NewSeasonStarted, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                                <Setter Property="Visibility" Value="Hidden"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Path=NewSeasonStarted, UpdateSourceTrigger=PropertyChanged}" Value="false">
+                                                                <Setter Property="Foreground" Value="Red"/>
+                                                                <Setter Property="Text" Value="Sæson ikke startet"/>
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </WrapPanel>
+                                    </Grid>
 
                                 </StackPanel>
                             </Border>
