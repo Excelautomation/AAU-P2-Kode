@@ -67,7 +67,7 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         #region Generelt
-        private bool _displaySeasonErrorLabel;
+        private bool _displaySeasonErrorLabel = false;
 
         public bool DisplaySeasonErrorLabel
         {
