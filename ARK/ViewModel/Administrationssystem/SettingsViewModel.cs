@@ -49,7 +49,6 @@ namespace ARK.ViewModel.Administrationssystem
                 SelectedListItemStandardTrips = 0;
                 CurrentStandardTrip = StandardTrips[0];
             }
-            //_currentSeasonStart = _dbcontext.Season.Last().SeasonStart;
 
         }
 
@@ -123,8 +122,6 @@ namespace ARK.ViewModel.Administrationssystem
                     ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
                     _dbcontext.SaveChanges();
 
-                    // Loader igen fra HELE databasen, og sætter ind i listview.
-                    // Bør optimseres til kun at loade den ændrede query.
                     DamageTypes = new ObservableCollection<DamageType>(_dbcontext.DamageType.ToList());
                     FeedbackDamageType = Feedback.Save;
                 });
@@ -159,8 +156,8 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.DamageType.Add(DamageTypeTemplate);
                     _dbcontext.SaveChanges();
                     DamageTypes.Add(DamageTypeTemplate);
-                    FeedbackDamageType = Feedback.Create;
                     SelectedListItemDamageTypes = DamageTypes.Count - 1;
+                    FeedbackDamageType = Feedback.Create;
                 });
             }
         }
@@ -174,8 +171,8 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.DamageType.Remove(ReferenceToCurrentDamageType);
                     _dbcontext.SaveChanges();
                     DamageTypes.Remove(ReferenceToCurrentDamageType);
-                    FeedbackDamageType = Feedback.Delete;
                     SelectedListItemDamageTypes = DamageTypes.Count - 1;
+                    FeedbackDamageType = Feedback.Delete;
                 });
             }
         }
@@ -287,8 +284,8 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.StandardTrip.Add(StandardTripTemplate);
                     _dbcontext.SaveChanges();
                     StandardTrips.Add(StandardTripTemplate);
-                    FeedbackStandardTrip = Feedback.Create;
                     SelectedListItemStandardTrips = StandardTrips.Count - 1;
+                    FeedbackStandardTrip = Feedback.Create;
                 });
             }
         }
@@ -302,8 +299,8 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
                     _dbcontext.SaveChanges();
                     StandardTrips.Remove(ReferenceToCurrentStandardTrip);
-                    FeedbackDamageType = Feedback.Delete;
                     SelectedListItemStandardTrips = StandardTrips.Count - 1;
+                    FeedbackDamageType = Feedback.Delete;
                 });
             }
         }
