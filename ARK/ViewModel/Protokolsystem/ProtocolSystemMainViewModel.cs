@@ -84,11 +84,11 @@ namespace ARK.ViewModel.Protokolsystem
 
         public void UpdateDailyKilometers()
         {
-            var today = DateTime.Today;
-            DailyKilometers =
-                _context.Trip
-                .Where(t =>  t.TripStartTime > today)
-                .Sum(t => t.Distance);
+            //var today = DateTime.Today;
+            //DailyKilometers =
+            //    _context.Trip
+            //    .Where(t =>  t.TripStartTime > today)
+            //    .Sum(t => t.Distance);
         }
 
         #region Pages
