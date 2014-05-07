@@ -51,7 +51,7 @@ namespace ARK.ViewModel.Protokolsystem
                         SearchTextChanged(sender, new SearchEventArgs(KeyboardText));
                 };
 
-            //UpdateDailyKilometers();
+            UpdateDailyKilometers();
             UpdateNumBoatsOut();
 
             TimeCounter.StopTime();
