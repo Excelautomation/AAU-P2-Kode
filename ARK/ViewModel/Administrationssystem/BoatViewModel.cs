@@ -26,6 +26,7 @@ namespace ARK.ViewModel.Administrationssystem
         private IEnumerable<Boat> _boats;
         private bool _RecentSave = false;
         private bool _RecentCancel = false;
+        private bool _RecentInfoSave = false; // De tre sidste kan laves til enum
         private Boat _currentBoat;
         private FrameworkElement _filter;
 
@@ -84,6 +85,15 @@ namespace ARK.ViewModel.Administrationssystem
                 Notify();
             }
         }
+
+        public bool RecentInfoSave
+        {
+            get { return _RecentInfoSave; }
+            set
+            {
+                _RecentInfoSave = value; Notify();
+            }
+        }
             
         public bool RecentCancel
         {
@@ -120,6 +130,7 @@ namespace ARK.ViewModel.Administrationssystem
                     LocalActiveBoat = value.Active;
                 RecentSave = false;
                 RecentCancel = false;
+                RecentInfoSave = false;
                 Notify();
             }
         }
@@ -151,8 +162,23 @@ namespace ARK.ViewModel.Administrationssystem
                     }
                 });
             }
+        }
+
+        public ICommand SaveInfoChanges
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                        Boat tempboat = CurrentBoat;
+                        _dbArkContext.SaveChanges();
+                        Boats = _dbArkContext.Boat.ToList();
+                        CurrentBoat = tempboat;
+                        RecentInfoSave = true;
+                });
             }
-            
+        }
+
         public ICommand CancelChanges
         {
             get
