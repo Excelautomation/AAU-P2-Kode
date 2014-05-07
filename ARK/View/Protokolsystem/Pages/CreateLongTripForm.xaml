@@ -222,7 +222,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=CampSites}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Dagsdistancer-->
@@ -249,7 +249,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=DistancesPerDay}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Beskrivelse af ruten-->
@@ -276,7 +276,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=TourDescription}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Buttons-->
@@ -366,8 +366,8 @@
             <Button x:Name="btnSendLongTrip"
                     DockPanel.Dock="Right"
                     Margin="0,0,3,0"
-            	Style="{StaticResource ResourceKey=btnFilter}" 
-        		    Command="{Binding AddDamageType}"
+            	Style="{StaticResource ResourceKey=btnFilter}"
+        		    Command="{Binding Path=AddLongTrip}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
                 <Grid>
