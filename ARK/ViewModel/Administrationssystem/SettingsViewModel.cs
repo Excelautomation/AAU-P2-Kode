@@ -38,16 +38,19 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 SelectedListItemAdmins = 0;
                 CurrentAdmin = Admins[0];
+                ReferenceToCurrentAdmin = CurrentAdmin;
             }
             if (DamageTypes.Count != 0)
             {
                 SelectedListItemDamageTypes = 0;
                 CurrentDamageType = DamageTypes[0];
+                ReferenceToCurrentDamageType = CurrentDamageType;
             }
             if (StandardTrips.Count != 0)
             {
                 SelectedListItemStandardTrips = 0;
                 CurrentStandardTrip = StandardTrips[0];
+                ReferenceToCurrentStandardTrip = CurrentStandardTrip;
             }
 
         }
@@ -398,11 +401,14 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<Admin>(e =>
                 {
+                    int tempindex = SelectedListItemAdmins;
+                    
                     ReferenceToCurrentAdmin.ContactTrip = CurrentAdmin.ContactTrip;
                     ReferenceToCurrentAdmin.ContactDark = CurrentAdmin.ContactDark;
                     _dbcontext.SaveChanges();
 
                     Admins = new ObservableCollection<Admin>(_dbcontext.Admin.ToList());
+                    SelectedListItemAdmins = tempindex;
                     FeedbackAdmin = Feedback.Save;
                 });
             }
@@ -433,9 +439,14 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<Admin>(e =>
                 {
+                    NewAdmin = new Admin();
+                    
                     MembersListWindow = new View.Administrationssystem.Pages.MembersListWindow();
                     MembersListWindow.DataContext = this;
                     MembersListWindow.ShowDialog();
+
+                    if (NewAdmin.Member == null)
+                        return;
 
                     Admin AdminTemplate = new Admin()
                     {
@@ -450,7 +461,6 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.SaveChanges();
                     FeedbackAdmin = Feedback.Create;
                     SelectedListItemAdmins = Admins.Count - 1;
-
                 });
             }
         }
