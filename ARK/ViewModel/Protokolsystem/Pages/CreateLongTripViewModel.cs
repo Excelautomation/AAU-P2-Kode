@@ -7,7 +7,6 @@ using ARK.Model;
 using System.Collections.ObjectModel;
 using ARK.Model.DB;
 using System.Data.Entity;
-using System.Linq;
 using System.Windows.Input;
 
 namespace ARK.ViewModel.Protokolsystem

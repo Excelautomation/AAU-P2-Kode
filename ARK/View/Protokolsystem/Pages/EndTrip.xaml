@@ -150,7 +150,7 @@
             <Button x:Name="btnCustomDistance"
                     DockPanel.Dock="Right"
         		    Style="{StaticResource ResourceKey=btnFilter}" 
-        		    Command="{Binding ToggleFilter}"
+        		    Command="{Binding ToggleKeyboard}"
         		    Background="{StaticResource ChangeBG}"
         		    BorderBrush="{StaticResource ChangeBorder}">
                 <Grid>
