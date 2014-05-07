@@ -279,9 +279,7 @@
     <Compile Include="ViewModel\Administrationssystem\OverviewViewModel.cs" />
     <Compile Include="ViewModel\Base\TimeCounter.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
-    <Compile Include="View\ValueConverters\DateTimeToLocalStringConverter.cs" />
     <Compile Include="View\ValueConverters\ListViewItemToOrdinalConverter.cs" />
-    <Compile Include="View\ValueConverters\TimeSpanToStringConverter.cs" />
     <Page Include="View\Administrationssystem\AdminSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
