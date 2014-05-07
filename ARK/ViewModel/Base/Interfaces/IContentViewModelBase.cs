@@ -7,7 +7,8 @@ namespace ARK.ViewModel.Base.Interfaces
     {
         ICommand GotFocus { get; }
         IViewModelBase Parent { get; set; }
+
         event EventHandler ParentAttached;
-        void ParentDetached();
+        event EventHandler ParentDetached;
     }
 }

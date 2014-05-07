@@ -35,31 +35,26 @@ namespace ARK.ViewModel.Base.Filter
 
         public void EnableFilter(bool enableSearch, bool enableFilters)
         {
-            IFilterContainerViewModel parentFilterContainer = null;
-
             ContentViewModel.ParentAttached += (sender, args) =>
             {
                 // Filter
                 FilterContainer.EnableSearch = enableSearch;
                 FilterContainer.EnableFilters = enableFilters;
 
-                // Unbind events
-                if (parentFilterContainer != null)
-                {
-                    parentFilterContainer.SearchTextChanged -= FilterContainerOnSearchTextChanged;
-                    parentFilterContainer.FilterTextChanged -= FilterContainerOnFilterTextChanged;
-                }
-
                 // Bind events
                 FilterContainer.SearchTextChanged += FilterContainerOnSearchTextChanged;
                 FilterContainer.FilterTextChanged += FilterContainerOnFilterTextChanged;
+            };
+
+            ContentViewModel.ParentDetached += (sender, args) =>
+            {
+                // Unbind events
+                FilterContainer.SearchTextChanged -= FilterContainerOnSearchTextChanged;
+                FilterContainer.FilterTextChanged -= FilterContainerOnFilterTextChanged;
 
                 // Delete last eventargs
                 LastSearchEventArgs = null;
                 LastFilterEventArgs = null;
-
-                // Set parentFilterContainer so we can unbind events in the future
-                parentFilterContainer = FilterContainer;
             };
         }
 
