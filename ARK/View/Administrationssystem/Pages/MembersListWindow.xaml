@@ -33,7 +33,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" Grid.Row="1" SelectionMode="Single">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" Grid.Row="1" SelectionMode="Single" IsSynchronizedWithCurrentItem="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5">
@@ -58,11 +58,11 @@
         <StackPanel Grid.Row="2">
             <WrapPanel>
                 <Label Width="80" Margin="4" Content="Brugernavn:"/>
-                <TextBox Width="180" Margin="4" Text="{Binding Path=CurrentAdmin.Username}"/>
+                <TextBox Width="180" Margin="4" Text="{Binding Path=NewAdmin.Username, Mode=OneWayToSource}"/>
             </WrapPanel>
             <WrapPanel>
                 <Label Width="80" Margin="4" Content="Kodeord:"/>
-                <TextBox Width="180" Margin="4" Text="{Binding Path=CurrentAdmin.Password}"/>
+                <TextBox Width="180" Margin="4" Text="{Binding Path=NewAdmin.Password, Mode=OneWayToSource}"/>
             </WrapPanel>
         </StackPanel>
 

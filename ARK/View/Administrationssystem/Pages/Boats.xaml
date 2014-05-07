@@ -249,4 +249,5 @@
 			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
 			Width="5" Background="Gray"/>
     </Grid>
+    
 </UserControl>
