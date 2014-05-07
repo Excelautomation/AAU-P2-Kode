@@ -134,7 +134,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="btnAddGuest" Grid.Column="0" VerticalAlignment="Top"
                     IsEnabled="{Binding EnableMembers}"
-                    Command="{Binding Path=ToggleKeyboard}"
+                    Command="{Binding Path=AddGuest}"
                     Background="{DynamicResource AddBG}"
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
                 <Grid>
@@ -149,8 +149,8 @@
                 </Grid>
             </Button>
             <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
+                    Command="{Binding Path=AddBlanc}" 
                     IsEnabled="{Binding EnableMembers}"
-                    Command="{Binding Path=ToggleKeyboard}"
                     Background="{DynamicResource AddBG}"
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
                 <Grid>
