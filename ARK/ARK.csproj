@@ -116,18 +116,19 @@
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContentViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\MembersinformationAdditionalInfoViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\CreateDamageFormViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\CreateLongTripViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\CreateDamageFormViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\CreateLongTripViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Data\MemberDistanceViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\BeginTripFiltersViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
     <Compile Include="ViewModel\Base\KeyboardContainerViewModelBase.cs" />
-    <Compile Include="ViewModel\Protokolsystem\MainPageViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\MembersinformationViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\MemberViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\MembersinformationViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Data\MemberViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtokolsystemContentViewModelBase.cs" />
-    <Compile Include="ViewModel\Protokolsystem\ViewDamageFormViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\ViewLongTripFormViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\ViewDamageFormViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\ViewLongTripFormViewModel.cs" />
     <Compile Include="View\Administrationssystem\AdminSystem.xaml.cs">
       <DependentUpon>AdminSystem.xaml</DependentUpon>
     </Compile>
@@ -267,12 +268,12 @@
     <Compile Include="ViewModel\Base\Filter\FilterEventArgs.cs" />
     <Compile Include="ViewModel\Base\Filter\SearchEventArgs.cs" />
     <Compile Include="ViewModel\Base\PageContainerViewModelBase.cs" />
-    <Compile Include="ViewModel\Protokolsystem\BoatsOutViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\DistanceStatisticsViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\EndTripViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\BoatsOutViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\DistanceStatisticsViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\EndTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\KeyboardViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtocolSystemMainViewModel.cs" />
-    <Compile Include="ViewModel\Protokolsystem\BeginTripViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Pages\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\BoatViewModel.cs" />
     <Compile Include="ViewModel\Base\DelegateCommand.cs" />
