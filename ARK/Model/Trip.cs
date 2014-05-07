@@ -39,7 +39,14 @@ namespace ARK.Model
         {
             get
             {
-                return DateTime.Now.Subtract(TripStartTime);
+                if (this.TripEndedTime == null)
+                {
+                    return DateTime.Now - this.TripStartTime;
+                }
+                else
+                {
+                    return this.TripEndedTime.Value - this.TripStartTime;
+                }
             }
         }
 
