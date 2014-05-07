@@ -340,18 +340,10 @@ namespace ARK.ViewModel.Administrationssystem
             set { _feedbackAdmin = value; Notify(); }
         }
 
-        private int _CurrentAdminInt;
-
         public Admin ReferenceToCurrentAdmin
         {
             get { return _referenceToCurrentAdmin; }
             set { _referenceToCurrentAdmin = value; Notify(); }
-        }
-
-        public int CurrentAdminInt
-        {
-            get { return _CurrentAdminInt; }
-            set { _CurrentAdminInt = value; Notify(); }
         }
 
         public ObservableCollection<Admin> Admins
