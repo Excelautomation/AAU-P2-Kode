@@ -22,8 +22,8 @@ namespace ARK.ViewModel.Protokolsystem
         private int _numBoatsOut;
         private double _dailyKilometers;
         private ICommand _boatsOut;
-        private ICommand _createDamage;
-        private ICommand _createLongDistance;
+        private ICommand _viewDamageForm;
+        private ICommand _viewLongTripForm;
         private FrameworkElement _currentInfo;
         private bool _enableFilters;
         private ICommand _endTrip;
@@ -168,25 +168,25 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public ICommand CreateDamage
+        public ICommand ViewDamageForm
         {
             get
             {
-                return _createDamage ??
-                       (_createDamage =
-                           GetNavigateCommand(() => new CreateDamageForm(),
-                               "SKADE-BLANKET"));
+                return _viewDamageForm ??
+                       (_viewDamageForm =
+                           GetNavigateCommand(() => new ViewDamageForm(),
+                               "AKTIVE SKADES BLANKETTER"));
             }
         }
 
-        public ICommand CreateLongDistance
+        public ICommand ViewLongTripForm
         {
             get
             {
-                return _createLongDistance ??
-                       (_createLongDistance =
-                           GetNavigateCommand(() => new CreateLongTripForm(),
-                               "LANGTUR-BLANKET"));
+                return _viewLongTripForm ??
+                       (_viewLongTripForm =
+                           GetNavigateCommand(() => new ViewLongTripForm(),
+                               "AKTIVE LANGTURS BLANKETTER"));
             }
         }
 

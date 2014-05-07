@@ -222,7 +222,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Text="{Binding Path=CampSites}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=CampSites}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Dagsdistancer-->
@@ -249,7 +249,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Text="{Binding Path=DistancesPerDay}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=DistancesPerDay}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Beskrivelse af ruten-->
@@ -276,7 +276,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Text="{Binding Path=TourDescription}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=TourDescription}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Buttons-->
@@ -329,8 +329,8 @@
             <Button x:Name="btnActiveLongTripForms"
                     Margin="0,0,3,0"
                     DockPanel.Dock="Left" 
-            	Style="{StaticResource ResourceKey=btnFilter}"  
-            	    Command="{Binding ToggleFilter}"
+            	    Style="{StaticResource ResourceKey=btnFilter}"  
+                    Command="{Binding ViewLongTripForm}"
             	    Background="{StaticResource InfoBG}"
             	    BorderBrush="{StaticResource InfoBorder}">
                 <Grid>
@@ -347,8 +347,8 @@
             
             <Button x:Name="btnMakeNewLongTripForm"
                     DockPanel.Dock="Left"
-            	Style="{StaticResource ResourceKey=btnFilter}" 
-            	Command="{Binding ToggleFilter}"
+            	    Style="{StaticResource ResourceKey=btnFilter}" 
+            	    Command="{Binding CreateLongTripForm}"
             	    Background="{StaticResource AddBG}"
             	    BorderBrush="{StaticResource AddBorder}">
                 <Grid>
@@ -358,15 +358,15 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/error_add.png" />
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/building_add.png" />
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;LANGTUR" />
                 </Grid>
             </Button>
             
             <Button x:Name="btnSendLongTrip"
                     DockPanel.Dock="Right"
-                    Margin="0,0,3,0"
-            	Style="{StaticResource ResourceKey=btnFilter}"
+                    Margin="3,0,0,0"
+            	    Style="{StaticResource ResourceKey=btnFilter}"
         		    Command="{Binding Path=AddLongTrip}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">

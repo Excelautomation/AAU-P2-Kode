@@ -180,7 +180,7 @@
                 </Grid.ColumnDefinitions>
                 <RadioButton Grid.Column="0" Content="ØST" Margin="3,0,0,0" GroupName="{Binding Name, ElementName=Filters}"/>
                 <RadioButton Grid.Column="1" Content="VEST - NORD&#10;OM EGHOLM" GroupName="{Binding Name, ElementName=Filters}"/>
-                <RadioButton Grid.Column="3" Content="VEST - SYD&#10;OM EGHOLM" GroupName="{Binding Name, ElementName=Filters}"/>
+                <RadioButton Grid.Column="3" Content="VEST - SYD&#10;OM EGHOLM" GroupName="{Binding Name, ElementName=Filters}" Margin="5,0,0,0"/>
                 <RadioButton Grid.Column="4" Content="LANGTUR" GroupName="{Binding Name, ElementName=Filters}"/>
             </Grid>
         </Border>

@@ -13,7 +13,7 @@
     </UserControl.DataContext>
 
     <!--Indhold-->
-    <Grid Style="{StaticResource ResourceKey=gridContent}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -40,7 +40,10 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}" ItemsSource="{Binding Path=Members}" Grid.Row="1" VerticalAlignment="Stretch">
+        <ListView x:Name="AllMembersList" 
+                  Style="{StaticResource ResourceKey=lstView}" 
+                  ItemsSource="{Binding Path=Members}" Grid.Row="1" 
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -92,21 +95,15 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-        <Grid Grid.Row="2" Height="76">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="152"/>
-                <ColumnDefinition Width="152"/>
-            </Grid.ColumnDefinitions>
 
-            <Button x:Name="btnShowKeyboard"  Grid.Column="0"
+        <DockPanel Grid.Row="2" Margin="0,5,0,0" LastChildFill="False">
+            <Button x:Name="btnShowKeyboard"
+                    DockPanel.Dock="Left"
                     Style="{StaticResource ResourceKey=btnFilter}" 
                     Command="{Binding Path=ToggleKeyboard}"
                     Background="{StaticResource SearchFilterBG}"
                     BorderBrush="{StaticResource SearchFilterBorder}"
-                    Margin="1,5,0,5">
+                    Margin="0,0,3,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -144,50 +141,7 @@
                     </TextBlock>
                 </Grid>
             </Button>
+        </DockPanel>
 
-            <Button Name="btnShowFilter" Grid.Column="1"
-                    Style="{StaticResource ResourceKey=btnFilter}" 
-                    Command="{Binding Path=ToggleFilter}"
-                    Background="{StaticResource SearchFilterBG}"
-                    BorderBrush="{StaticResource SearchFilterBorder}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1">
-                        <Image.Style>
-                            <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/filter_delete.png"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/filter.png"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <TextBlock Grid.Column="3">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;FILTER"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;FILTER"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </Grid>
-            </Button>
-
-        </Grid>
     </Grid>
 </UserControl>
