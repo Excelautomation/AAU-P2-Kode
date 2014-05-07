@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
-             d:DesignHeight="300"
+             d:DesignHeight="393"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem">
 
     <UserControl.DataContext>
         <Protokolsystem:CreateLongTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
 
-    <UserControl.Resources>        
+    <UserControl.Resources>
 
     </UserControl.Resources>
 
@@ -30,7 +30,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-                    
+
         <!--Vælg båd-->
         <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0">
             <WrapPanel Margin="0,2,0,0">
@@ -75,7 +75,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
         <!--Vælg besætning-->
         <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0" Margin="5,0,0,0">
             <WrapPanel Margin="0,2,0,0">
@@ -93,9 +93,9 @@
                 </Grid>
             </WrapPanel>
         </Border>
-        
-        <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}"
-                SelectionMode="Multiple" Height="Auto" Width="Auto" Margin="0,0,0,5">
+
+        <ListView ItemsSource="{Binding Path=MembersFiltered}" Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}"
+                SelectionMode="Multiple" Height="27" Width="Auto" Margin="0,0,0,5" VerticalAlignment="Bottom">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -107,7 +107,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
         <Grid Grid.Row="2" Grid.Column="1" Margin="5,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
@@ -148,7 +148,7 @@
                     <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
                 </Grid>
             </Button>
-            
+
         </Grid>
 
         <!--Departure and return time-->
@@ -161,7 +161,7 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!--Afgang-->
             <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0" Margin="0,0,2.5,0">
                 <WrapPanel Margin="0,2,0,0">
@@ -177,7 +177,7 @@
             </Border>
 
             <DatePicker Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="30" Background="White" Margin="0,0,2.5,0"/>
-            
+
             <!--Hjemkomst-->
             <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0" Margin="2.5,0,0,0">
                 <WrapPanel Margin="0,2,0,0">
@@ -193,9 +193,9 @@
             </Border>
 
             <DatePicker Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="30" Background="White" Margin="2.5,0,0,0"/>
-            
+
         </Grid>
-        
+
         <!--Overnatningssteder-->
         <Grid Grid.Row="3" Grid.Column="1" Margin="5,5,0,0">
             <Grid.RowDefinitions>
@@ -249,7 +249,7 @@
             </Border>
 
             <TextBox Grid.Row="1" Grid.ColumnSpan="2" Height="60" Background="White" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
-            
+
         </Grid>
 
         <!--Beskrivelse af ruten-->
