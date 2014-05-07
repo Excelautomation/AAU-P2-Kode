@@ -232,18 +232,27 @@ namespace ARK.ViewModel.Administrationssystem
             get { return _parent; }
             set
             {
-                _parent = value;
+                if (value != null)
+                {
+                    // Attach
+                    _parent = value;
 
-                if (ParentAttached != null && _parent != null) ParentAttached(this, new EventArgs());
+                    if (ParentAttached != null)
+                        ParentAttached(this, new EventArgs());
+                }
+                else
+                {
+                    // Detach
+                    if (ParentDetached != null)
+                        ParentDetached(this, new EventArgs());
+
+                    _parent = null;
+                }
             }
         }
 
         public event EventHandler ParentAttached;
-
-        public void ParentDetached()
-        {
-            _parent = null;
-        }
+        public event EventHandler ParentDetached;
 
         #endregion
 
