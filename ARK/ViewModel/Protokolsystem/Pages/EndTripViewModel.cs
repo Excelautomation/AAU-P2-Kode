@@ -26,21 +26,6 @@ namespace ARK.ViewModel.Protokolsystem
 
             GetData();
 
-            ParentAttached += (sender, args) =>
-            {
-                // Bind på keyboard toggle changed
-                Keyboard.PropertyChanged += (senderKeyboard, keyboardArgs) =>
-                {
-                    // Tjek om toggled er ændret
-                    if (keyboardArgs.PropertyName == "KeyboardToggled")
-                        NotifyCustom("KeyboardToggleText");
-                };
-
-                // Notify at parent er ændret
-                NotifyCustom("Keyboard");
-                NotifyCustom("KeyboardToggleText");
-            };
-
             TimeCounter.StopTime();
         }
 
