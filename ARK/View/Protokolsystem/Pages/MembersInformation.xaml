@@ -41,7 +41,7 @@
         </Border>
 
         <ListView x:Name="AllMembersList" 
-                  Style="{StaticResource ResourceKey=lstView}" 
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=Members}" Grid.Row="1" 
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>

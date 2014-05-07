@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="/View/Resources/RadioButton.xaml"/>
                 <ResourceDictionary Source="/View/Resources/Textbox.xaml" />
                 <ResourceDictionary Source="/View/Resources/AdditionalInfo.xaml" />
+                <ResourceDictionary Source="/View/Resources/ListView.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

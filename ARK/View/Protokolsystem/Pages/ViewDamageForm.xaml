@@ -40,7 +40,10 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="lstDamgeForm" ItemsSource="{Binding Path=ActiveDamageForms}" Grid.Row="1" VerticalAlignment="Stretch">
+        <ListView x:Name="lstDamgeForm" 
+                  ItemsSource="{Binding Path=ActiveDamageForms}" Grid.Row="1" 
+                  VerticalAlignment="Stretch"
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

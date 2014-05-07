@@ -38,34 +38,34 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="lstBoatsOut" ItemsSource="{Binding Path=BoatsOut}" Grid.Row="1" VerticalAlignment="Stretch">
+        <ListView x:Name="lstBoatsOut" ItemsSource="{Binding Path=BoatsOut}" Grid.Row="1" VerticalAlignment="Stretch"
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="{Binding Boat.Name}" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
 
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-                            <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Text="Tid ude: " FontWeight="Bold"/>
-                            <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}">
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0:D2}:{1:D2}">
-                                        <Binding Path="TimeBoatOut.Hours" />
-                                        <Binding Path="TimeBoatOut.Minutes" />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
+                        <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Grid.Row="1" Grid.Column="0">
+                            <Run Text="Start tid:" FontWeight="Bold"/>
+                            <Run Text="{Binding TripStartTime, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                        </TextBlock>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1" Grid.Column="1">
+                        <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}" Grid.Row="1" Grid.Column="1">
+                            <Run Text="   Tid ude:" FontWeight="Bold"/>
+                            <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
+                        </TextBlock>
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2" Grid.Column="0">
                                 <Run Text="Pladser:" FontWeight="Bold"/>
                                 <Run Text="{Binding Boat.NumberofSeats}"/>
                         </TextBlock>

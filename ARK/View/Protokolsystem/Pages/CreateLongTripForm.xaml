@@ -49,7 +49,9 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{StaticResource ResourceKey=lstView}" 
+        <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" 
+                  SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" 
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2" 
                   ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -95,8 +97,10 @@
         </Border>
 
 
-        <ListView ItemsSource="{Binding Path=MembersFiltered}" Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{StaticResource ResourceKey=lstView}"
-                SelectionMode="Multiple" Width="Auto" Margin="5,0,0,0">
+        <ListView ItemsSource="{Binding Path=MembersFiltered}" 
+                  Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" 
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  SelectionMode="Multiple" Width="Auto" Margin="5,0,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
