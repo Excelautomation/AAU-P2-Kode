@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using ARK.ViewModel.Protokolsystem;
+using System.Linq;
 
 namespace ARK.Protokolsystem.Pages
 {
@@ -18,9 +20,9 @@ namespace ARK.Protokolsystem.Pages
             var vm = (BeginTripViewModel)this.DataContext;
             var selectedMembers = this.AllMembersList.SelectedItems;
 
-            if (selectedMembers.Count > vm.SelectedBoat.NumberofSeats)
+            if (vm.SelectedMembers.Count > vm.SelectedBoat.NumberofSeats)
             {
-                selectedMembers.Remove(e.AddedItems[0]);
+                vm.SelectedMembers.Remove((MemberViewModel) e.AddedItems[0]);
             }
         }
     }
