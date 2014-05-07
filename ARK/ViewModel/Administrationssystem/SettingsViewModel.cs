@@ -36,7 +36,8 @@ namespace ARK.ViewModel.Administrationssystem
 
             if (Admins.Count != 0)
             {
-                CurrentAdminInt = 0;
+                SelectedListItemAdmins = 0;
+                CurrentAdmin = Admins[0];
             }
             if (DamageTypes.Count != 0)
             {
@@ -48,7 +49,7 @@ namespace ARK.ViewModel.Administrationssystem
                 SelectedListItemStandardTrips = 0;
                 CurrentStandardTrip = StandardTrips[0];
             }
-            _currentSeasonStart = _dbcontext.Season.Last().SeasonStart;
+            //_currentSeasonStart = _dbcontext.Season.Last().SeasonStart;
 
         }
 
@@ -315,6 +316,23 @@ namespace ARK.ViewModel.Administrationssystem
         private ObservableCollection<Member> _members;
         public MembersListWindow MembersListWindow;
         private Feedback _feedbackAdmin;
+        private int _selectedListItemAdmins;
+        private Admin _NewAdmin = new Admin();
+
+        public Admin NewAdmin
+        {
+            get { return _NewAdmin; }
+            set
+            {
+                _NewAdmin = value; Notify();
+            }
+        }
+
+        public int SelectedListItemAdmins
+        {
+            get { return _selectedListItemAdmins; }
+            set { _selectedListItemAdmins = value; Notify(); }
+        }
 
         public Feedback FeedbackAdmin
         {
@@ -424,17 +442,18 @@ namespace ARK.ViewModel.Administrationssystem
 
                     Admin AdminTemplate = new Admin()
                     {
-                        Username = CurrentAdmin.Username,
-                        Password = CurrentAdmin.Password,
+                        Username = NewAdmin.Username,
+                        Password = NewAdmin.Password,
                         ContactTrip = false,
                         ContactDark = false,
-                        Member = CurrentAdmin.Member
+                        Member = NewAdmin.Member
                     };
                     _dbcontext.Admin.Add(AdminTemplate);
-                    _dbcontext.SaveChanges();
                     Admins.Add(AdminTemplate);
+                    _dbcontext.SaveChanges();
                     FeedbackAdmin = Feedback.Create;
-                    CurrentAdminInt = Admins.Count - 1;
+                    SelectedListItemAdmins = Admins.Count - 1;
+
                 });
             }
         }
@@ -449,7 +468,7 @@ namespace ARK.ViewModel.Administrationssystem
                     _dbcontext.SaveChanges();
                     Admins.Remove(ReferenceToCurrentAdmin);
                     FeedbackAdmin = Feedback.Delete;
-                    CurrentAdminInt = Admins.Count - 1;
+                    SelectedListItemAdmins = Admins.Count - 1;
                 });
             }
         }
@@ -460,7 +479,7 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<Member>(e =>
                 {
-                    CurrentAdmin.Member = e;
+                    NewAdmin.Member = e;
                     MembersListWindow.Close();
                 });
             }
