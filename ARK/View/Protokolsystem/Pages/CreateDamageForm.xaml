@@ -197,6 +197,7 @@
                     Margin="0,0,3,0"
                     DockPanel.Dock="Left"
             	    Style="{StaticResource ResourceKey=btnFilter}" 
+                    Command="{Binding ViewDamageForm}"
             	    Background="{StaticResource InfoBG}"
             	    BorderBrush="{StaticResource InfoBorder}">
                 <Grid>
@@ -214,7 +215,7 @@
             <Button x:Name="btnMakeNewInjury"
                     DockPanel.Dock="Left"
             	    Style="{StaticResource ResourceKey=btnFilter}" 
-            	    Command="{Binding ToggleFilter}"
+            	    Command="{Binding CreateDamageForm}"
             	    Background="{StaticResource AddBG}"
             	    BorderBrush="{StaticResource AddBorder}">
                 <Grid>
@@ -233,7 +234,7 @@
                     DockPanel.Dock="Right"
                     Margin="3,0,0,0"
         		    Style="{StaticResource ResourceKey=btnFilter}" 
-        		    Command="{Binding AddDamageType}"
+        		    Command="{Binding AddDamageForm}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
                 <Grid>
