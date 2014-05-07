@@ -39,7 +39,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="lstLongTrip" ItemsSource="{Binding}" Grid.Row="1" VerticalAlignment="Stretch">
+        <ListView x:Name="lstLongTrip" ItemsSource="{Binding Path=LongTripForms}" Grid.Row="1" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -51,7 +51,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
+                        <TextBlock Grid.Column="0" Text="{Binding Path=TourDescription}"/>
 
                     </Grid>
                 </DataTemplate>
