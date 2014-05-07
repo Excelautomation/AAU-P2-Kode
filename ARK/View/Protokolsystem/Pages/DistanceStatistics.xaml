@@ -52,6 +52,15 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="styleContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
+            <Setter Property="Margin" Value="5,3,0,0"/>
+        </Style>
+
+        <Style x:Key="styleCheckBox" TargetType="CheckBox">
+            <Setter Property="Margin" Value="0,4,0,0"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -153,13 +162,13 @@
                             <Run Text="Start tid:" FontWeight="Bold" />
                             <Run Text="{Binding Path=TripStartTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
-                        
-                        <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" >
-                            <!--Vi mangler denne property. 30 min efter afsluttet tur, skal brugeren have mulighed for at ændre distancen-->
-                            <CheckBox/>
-                            <Run Text="Redigerbar"/>
-                        </TextBlock>
 
+                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
+                            <!--Vi mangler denne property. 30 min efter afsluttet tur, skal brugeren have mulighed for at ændre distancen-->
+                            <CheckBox Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                            <TextBlock Text="Redigerbar" Style="{StaticResource ResourceKey=styleContent}" FontWeight="Bold"/>
+                        </StackPanel>
+                            
                         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Right">
                             <Run Text="Tid ude:" FontWeight="Bold"/>
                             <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
@@ -169,7 +178,8 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <DockPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" LastChildFill="False">
+        <DockPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" 
+                   LastChildFill="False">
             <Button x:Name="btnShowKeyboard" 
                     Margin="0,0,3,0"
                     DockPanel.Dock="Left"
@@ -262,7 +272,7 @@
             <Button x:Name="btnCustomDistance" 
                     DockPanel.Dock="Right"
             	    Style="{StaticResource ResourceKey=btnFilter}" 
-            	    Command="{Binding ToggleFilter}"
+            	    Command="{Binding ToggleKeyboard}"
             	    Background="{StaticResource ChangeBG}"
             	    BorderBrush="{StaticResource ChangeBorder}">
                 <Grid>
