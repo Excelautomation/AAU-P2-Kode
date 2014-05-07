@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
@@ -10,12 +9,6 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 {
     internal class BeginTripFiltersViewModel : ViewModelBase, IFilterViewModel
     {
-        private readonly Func<Boat, bool> _categoryAllTypes = boat => true;
-        private readonly Func<Boat, bool> _categoryErgometer = boat => boat.SpecificBoatType == Boat.BoatType.Ergometer;
-        private readonly Func<Boat, bool> _categoryGig = boat => boat.SpecificBoatType == Boat.BoatType.Gig;
-        private readonly Func<Boat, bool> _categoryInrigger = boat => boat.SpecificBoatType == Boat.BoatType.Inrigger;
-        private readonly Func<Boat, bool> _categoryKajak = boat => boat.SpecificBoatType == Boat.BoatType.Kajak;
-        private readonly Func<Boat, bool> _categoryOutrigger = boat => boat.SpecificBoatType == Boat.BoatType.Outrigger;
         private bool _categoryAllTypesChecked;
         private bool _categoryErgometerChecked;
         private bool _categoryGigChecked;
@@ -24,13 +17,6 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         private bool _categoryOutriggerChecked;
 
         // Boat size filtering
-        private readonly Func<Boat, bool> _categoryOne = boat => boat.NumberofSeats == 1;
-        private readonly Func<Boat, bool> _categoryTwo = boat => boat.NumberofSeats == 2 || boat.NumberofSeats == 3;
-        private readonly Func<Boat, bool> _categoryFour = boat => boat.NumberofSeats == 4 || boat.NumberofSeats == 5;
-        private readonly Func<Boat, bool> _categorySix = boat => boat.NumberofSeats == 6;
-        private readonly Func<Boat, bool> _categoryEight = boat => boat.NumberofSeats > 8;
-        private readonly Func<Boat, bool> _categoryAllSizes = boat => true;
-        private readonly Func<Boat, bool> _categoryLongTour = boat => boat.LongTripBoat;
         private bool _categoryOneChecked;
         private bool _categoryTwoChecked;
         private bool _categoryFourChecked;
@@ -41,7 +27,8 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         public BeginTripFiltersViewModel()
         {
-            CurrentBoatSizeFilter = new BoatCategoryFilter(_categoryAllTypes);
+            CurrentBoatType = new CategoryFilter<Boat>(boat => true);
+            CurrentBoatSizeFilter = new CategoryFilter<Boat>(boat => true);
 
             CategoryAllChecked = true;
             CategoryAllSizesChecked = true;
@@ -49,9 +36,10 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             UpdateFilter();
         }
 
-        public BoatCategoryFilter CurrentBoatSizeFilter { get; set; }
-        public BoatCategoryFilter CurrentBoatType { get; set; }
+        public CategoryFilter<Boat> CurrentBoatSizeFilter { get; set; }
+        public CategoryFilter<Boat> CurrentBoatType { get; set; }
 
+        #region Category
         public bool CategoryAllChecked
         {
             get { return _categoryAllTypesChecked; }
@@ -59,7 +47,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _categoryAllTypesChecked = value;
                 if (value)
-                    UpdateCategory(_categoryAllTypes);
+                    UpdateCategory(boat => true);
 
                 Notify();
             }
@@ -72,7 +60,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _categoryKajakChecked = value;
                 if (value)
-                    UpdateCategory(_categoryKajak);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Kajak);
 
                 Notify();
             }
@@ -85,7 +73,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _categoryOutriggerChecked = value;
                 if (value)
-                    UpdateCategory(_categoryOutrigger);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Outrigger);
 
                 Notify();
             }
@@ -98,7 +86,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _categoryErgometerChecked = value;
                 if (value)
-                    UpdateCategory(_categoryErgometer);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Ergometer);
 
                 Notify();
             }
@@ -111,7 +99,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _categoryInriggerChecked = value;
                 if (value)
-                    UpdateCategory(_categoryInrigger);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Inrigger);
 
                 Notify();
             }
@@ -124,12 +112,14 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _categoryGigChecked = value;
                 if (value)
-                    UpdateCategory(_categoryGig);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Gig);
 
                 Notify();
             }
         }
+        #endregion
 
+        #region Size
         public bool CategoryOneChecked
         {
             get { return _categoryOneChecked ; }
@@ -138,7 +128,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
                 _categoryOneChecked = value; 
                 
                 if (value)
-                    UpdateCategory(_categoryOne);
+                    UpdateSide(boat => boat.NumberofSeats == 1);
 
                 Notify();
             }
@@ -150,7 +140,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             { 
                 _categoryTwoChecked = value;
                 if (value)
-                    UpdateCategory(_categoryTwo);
+                    UpdateSide(boat => boat.NumberofSeats == 2 || boat.NumberofSeats == 3);
 
                 Notify();
             }
@@ -162,7 +152,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             { 
                 _categoryFourChecked = value;
                 if (value)
-                    UpdateCategory(_categoryFour);
+                    UpdateSide(boat => boat.NumberofSeats == 4 || boat.NumberofSeats == 5);
 
                 Notify();
             }
@@ -174,7 +164,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             { 
                 _categorySixChecked = value;
                 if (value)
-                    UpdateCategory(_categorySix);
+                    UpdateSide(boat => boat.NumberofSeats == 6);
 
                 Notify();
             }
@@ -186,7 +176,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             { 
                 _categoryEightChecked = value;
                 if (value)
-                    UpdateCategory(_categoryEight);
+                    UpdateSide(boat => boat.NumberofSeats > 8);
 
                 Notify();
             }
@@ -198,7 +188,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _categoryAllSizesChecked = value;
                 if (value)
-                    UpdateCategory(_categoryAllSizes);
+                    UpdateSide(boat => true);
 
                 Notify();
             }
@@ -210,47 +200,32 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             { 
                 _categoryLongTourChecked = value;
                 if (value)
-                    UpdateCategory(_categoryLongTour);
+                    UpdateSide(boat => boat.LongTripBoat);
 
                 Notify();
             }
         }
-
+#endregion
 
         public event EventHandler<FilterEventArgs> FilterChanged;
 
         private void UpdateCategory(Func<Boat, bool> filter)
         {
-            CurrentBoatSizeFilter.Filter = filter;
+            CurrentBoatType.Filter = filter;
 
+            UpdateFilter();
+        }
+
+        private void UpdateSide(Func<Boat, bool> filter)
+        {
+            CurrentBoatSizeFilter.Filter = filter;
             UpdateFilter();
         }
 
         private void UpdateFilter()
         {
             if (FilterChanged != null)
-                FilterChanged(this, new FilterEventArgs(new List<Filter> {CurrentBoatSizeFilter, CurrentBoatType}));
-        }
-
-        public class BoatCategoryFilter : Filter
-        {
-            public BoatCategoryFilter(Func<Boat, bool> filter)
-            {
-                Filter = filter;
-            }
-
-            public Func<Boat, bool> Filter { get; set; }
-
-            public override IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
-            {
-                IEnumerable<Boat> boats = items.Cast<Boat>().ToList();
-                return boats.Where(boat => Filter(boat)).Cast<T>();
-            }
-
-            public IEnumerable<Boat> GetBoats<T>(IEnumerable<T> items)
-            {
-                return items.Cast<Boat>();
-            }
+                FilterChanged(this, new FilterEventArgs(new List<Filter> { CurrentBoatType, CurrentBoatSizeFilter }));
         }
     }
 }
