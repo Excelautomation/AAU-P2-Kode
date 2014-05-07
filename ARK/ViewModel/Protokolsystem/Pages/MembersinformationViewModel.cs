@@ -29,9 +29,9 @@ namespace ARK.ViewModel.Protokolsystem
 
             // Load data
             _members = new List<Member>(db.Member)
-            .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
-            .OrderBy(x => x.FirstName)
-            .ToList();
+                .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
+                .OrderBy(x => x.FirstName)
+                .ToList();
 
             ParentAttached += (sender, args) => UpdateInfo();
         }
