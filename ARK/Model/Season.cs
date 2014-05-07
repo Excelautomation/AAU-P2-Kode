@@ -18,5 +18,13 @@ namespace ARK.Model
         public int Id { get; set; }
         public DateTime SeasonStart { get; set; }
         public DateTime SeasonEnd { get; set; }
+
+        public DateTime LatestSeasonEnd
+        {
+            get
+            {
+                return SeasonStart.AddDays(365 + 183);
+            }
+        }
     }
 }
