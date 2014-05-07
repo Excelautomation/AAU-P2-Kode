@@ -123,7 +123,6 @@
     <Compile Include="ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs" />
     <Compile Include="ViewModel\Base\KeyboardContainerViewModelBase.cs" />
-    <Compile Include="ViewModel\Protokolsystem\Pages\MainPageViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Pages\MembersinformationViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Data\MemberViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ProtokolsystemContentViewModelBase.cs" />
@@ -233,9 +232,6 @@
     </Compile>
     <Compile Include="View\Protokolsystem\Pages\EndTrip.xaml.cs">
       <DependentUpon>EndTrip.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Protokolsystem\Pages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Pages\MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
@@ -358,10 +354,6 @@
     <Page Include="View\Protokolsystem\Pages\ViewDamageForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Protokolsystem\Pages\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Protokolsystem\Pages\MessageWindow.xaml">
       <SubType>Designer</SubType>

@@ -105,11 +105,6 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public ICommand InfoScreen // overview screen..
-        {
-            get { return _infoScreen ?? (_infoScreen = GetNavigateCommand(() => new MainPage(), "InfoScreen")); }
-        }
-
         private BeginTripBoats BeginTripBoatsPage
         {
             get { return _beginTripBoatsPage ?? (_beginTripBoatsPage = new BeginTripBoats()); }
