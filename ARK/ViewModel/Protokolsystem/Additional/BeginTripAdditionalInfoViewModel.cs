@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
@@ -63,7 +64,17 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                 {
                     if (member == null) return;
 
-                    SelectedMembers.Remove(member);
+                    if (member.Member.Id == -1)
+                    {
+                        var temp = SelectedMembers.ToList();
+                        temp.Remove(member);
+
+                        SelectedMembers.Clear();
+                        foreach (var m in temp)
+                            SelectedMembers.Add(m);
+                    }
+                    else
+                        SelectedMembers.Remove(member);
                 });
             }
         }
