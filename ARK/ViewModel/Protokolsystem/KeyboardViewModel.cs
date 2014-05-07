@@ -17,7 +17,7 @@ namespace ARK.ViewModel.Protokolsystem
                 Notify();
 
                 if (TextChanged != null)
-                    TextChanged(this, new EventArgs());
+                    TextChanged(this, new KeyboardEventArgs(Text));
             }
         }
 
@@ -43,6 +43,6 @@ namespace ARK.ViewModel.Protokolsystem
             get { return GetCommand<string>(s => { Text = ""; }); }
         }
 
-        public event EventHandler TextChanged;
+        public event EventHandler<KeyboardEventArgs> TextChanged;
     }
 }

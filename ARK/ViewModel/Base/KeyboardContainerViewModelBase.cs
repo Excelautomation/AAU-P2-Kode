@@ -5,6 +5,7 @@ using System.Windows.Input;
 using ARK.Protokolsystem.Pages;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Protokolsystem;
+using KeyboardEventArgs = ARK.ViewModel.Protokolsystem.KeyboardEventArgs;
 
 namespace ARK.ViewModel.Base
 {
@@ -98,7 +99,7 @@ namespace ARK.ViewModel.Base
             KeyboardToggled = false;
         }
 
-        public event EventHandler KeyboardTextChanged
+        public event EventHandler<KeyboardEventArgs> KeyboardTextChanged
         {
             add { ((KeyboardViewModel) Keyboard.DataContext).TextChanged += value; }
             remove { ((KeyboardViewModel) Keyboard.DataContext).TextChanged -= value; }
