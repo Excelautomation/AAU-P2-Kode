@@ -39,8 +39,8 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         // Properties
-        public DateTime PlannedStartDate { get; set; }
-        public DateTime PlannedEndDate { get; set; }
+        public DateTime? PlannedStartDate { get; set; }
+        public DateTime? PlannedEndDate { get; set; }
         public List<Boat> Boats { get; set; }
         public Boat SelectedBoat
         {
@@ -77,8 +77,8 @@ namespace ARK.ViewModel.Protokolsystem
                     var db = new DbArkContext();
                     var longTripForm = new LongTripForm();
                     longTripForm.FormCreated = DateTime.Now;
-                    longTripForm.PlannedStartDate = PlannedStartDate;
-                    longTripForm.PlannedEndDate = PlannedEndDate;
+                    longTripForm.PlannedStartDate = PlannedStartDate ?? DateTime.MinValue;
+                    longTripForm.PlannedEndDate = PlannedEndDate ?? DateTime.MinValue;
                     longTripForm.Boat = SelectedBoat;
                     longTripForm.TourDescription = TourDescription;
                     longTripForm.DistancesPerDay = DistancesPerDay;
@@ -90,6 +90,7 @@ namespace ARK.ViewModel.Protokolsystem
                 });
             }
         }
+
         public ICommand AddBlanc
         {
             get
@@ -100,6 +101,7 @@ namespace ARK.ViewModel.Protokolsystem
                 });
             }
         }
+        
         public ICommand AddGuest
         {
             get
