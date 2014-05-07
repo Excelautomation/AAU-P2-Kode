@@ -116,6 +116,7 @@
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContentViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\MembersinformationAdditionalInfoViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\KeyboardEventArgs.cs" />
     <Compile Include="ViewModel\Protokolsystem\Pages\CreateDamageFormViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Pages\CreateLongTripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Data\MemberDistanceViewModel.cs" />

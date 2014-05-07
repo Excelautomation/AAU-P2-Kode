@@ -63,6 +63,11 @@ namespace ARK.ViewModel.Base.Filter
             };
         }
 
+        public void UpdateFilter()
+        {
+            OnFilterChanged();
+        }
+
         private void FilterContainerOnSearchTextChanged(object sender, SearchEventArgs e)
         {
             LastSearchEventArgs = e;

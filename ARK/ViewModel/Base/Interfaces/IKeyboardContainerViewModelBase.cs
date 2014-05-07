@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using KeyboardEventArgs = ARK.ViewModel.Protokolsystem.KeyboardEventArgs;
 
 namespace ARK.ViewModel.Base.Interfaces
 {
@@ -9,7 +10,7 @@ namespace ARK.ViewModel.Base.Interfaces
 
         ICommand GotFocus { get; }
         bool KeyboardToggled { get; }
-        event EventHandler KeyboardTextChanged;
+        event EventHandler<KeyboardEventArgs> KeyboardTextChanged;
         void KeyboardClear();
 
         void KeyboardShow();

@@ -11,23 +11,24 @@ using System.Linq;
 using System.Windows.Input;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.ViewModel.Protokolsystem.Data;
 
 namespace ARK.ViewModel.Protokolsystem
 {
     internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         // Fields
-        private readonly ObservableCollection<Tuple<Member, double>> _memberKmCollection;
-        private Member _selectedMember;
-        private List<Trip> _trips = new List<Trip>();
+        private readonly ObservableCollection<MemberDistanceViewModel> _memberKmCollectionFiltered;
+        private MemberDistanceViewModel _selectedMember;
+        private List<Trip> _tripsFiltered = new List<Trip>();
 
         // Constructor
         public DistanceStatisticsViewModel()
         {
             var db = DbArkContext.GetDbContext();
 
-            DateTime lowerTimeLimit = new DateTime();
-            DateTime upperTimeLimit = DateTime.Now;
+            var lowerTimeLimit = new DateTime();
+            var upperTimeLimit = DateTime.Now;
 
             // Load data
             var members = db.Member
@@ -35,13 +36,13 @@ namespace ARK.ViewModel.Protokolsystem
                 .Include(m => m.Trips)
                 .AsEnumerable();
 
-            _memberKmCollection =
-                new ObservableCollection<Tuple<Member, double>>
-                    (members.Select((val, i) => new Tuple<Member, double>(val, val.Trips
+            _memberKmCollectionFiltered =
+                new ObservableCollection<MemberDistanceViewModel>
+                    (members.Select((member, i) => new MemberDistanceViewModel(member, member.Trips
                         .Where(t => t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
                         .Sum(t => t.Distance)))
-                        .OrderByDescending(x => x.Item2));
-            SelectedMember = _memberKmCollection.Select(x => x.Item1).First(x => true);
+                        .OrderByDescending(trips => trips.Distance));
+            SelectedMember = _memberKmCollectionFiltered.First();
 
             // Setup filter
             var filterController = new FilterContent(this);
@@ -49,33 +50,28 @@ namespace ARK.ViewModel.Protokolsystem
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
-        public Member SelectedMember
+        public MemberDistanceViewModel SelectedMember
         {
             get { return _selectedMember; }
-            set { _selectedMember = value; Notify(); GetLatestTrips(); }
+            set { _selectedMember = value; Notify(); }
         }
 
-        public ObservableCollection<Tuple<Member, double>> MemberKmCollection
+        public ObservableCollection<MemberDistanceViewModel> MemberKmCollectionFiltered
         {
-            get { return _memberKmCollection; }
+            get { return _memberKmCollectionFiltered; }
         }
 
-        private void GetLatestTrips()
+        public List<Trip> TripsFiltered
         {
-            Trips = SelectedMember.Trips.ToList();
-        }
-
-        public List<Trip> Trips
-        {
-            get { return _trips; }
-            set { _trips = value; Notify(); }
+            get { return _tripsFiltered; }
+            set { _tripsFiltered = value; Notify(); }
         }
 
         public ICommand MemberSelectionChanged
         {
             get
             {
-                return GetCommand<Member>(e =>
+                return GetCommand<MemberDistanceViewModel>(e =>
                 {
                     SelectedMember = e;
                 });
@@ -89,6 +85,11 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         private void ResetFilter()
+        {
+            
+        }
+
+        private void UpdateFilter()
         {
             
         }
