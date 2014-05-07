@@ -57,7 +57,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
 
         private void ResetFilter()
         {
-            FilteredTrips = _trips.ToList();
+            FilteredTrips = _trips.Where(t => t.TripEndedTime != null).ToList();
         }
 
         public void UpdateFilter(FilterChangedEventArgs args)
@@ -84,7 +84,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
             var upperTimeLimit = DateTime.Now;
 
             Distance = FilteredTrips
-                .Where(t => t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
+                .Where(t => t.TripEndedTime != null && t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
                 .Sum(t => t.Distance);
         }
     }
