@@ -67,12 +67,12 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         #region Generelt
-        private bool _newSeasonStarted = true;
+        private bool _displaySeasonErrorLabel;
 
-        public bool NewSeasonStarted
+        public bool DisplaySeasonErrorLabel
         {
-            get { return _newSeasonStarted; }
-            set { _newSeasonStarted = value; Notify(); }
+            get { return _displaySeasonErrorLabel; }
+            set { _displaySeasonErrorLabel = value; Notify(); }
         }
 
         public Season CurrentSeason
@@ -94,7 +94,7 @@ namespace ARK.ViewModel.Administrationssystem
                     {
                         // promp the user that the current season is less than a half year old!
                         //throw new NotImplementedException();
-                        NewSeasonStarted = false;
+                        DisplaySeasonErrorLabel = true;
                     }
                     else
                     {
@@ -103,12 +103,11 @@ namespace ARK.ViewModel.Administrationssystem
                         _db.Season.Add(tmpSeason);
                         CurrentSeason = tmpSeason;
                         _db.SaveChanges();
-                        NewSeasonStarted = true;
+                        DisplaySeasonErrorLabel = false;
                     }
                 });
             }
         }
-
 
         #endregion
 
