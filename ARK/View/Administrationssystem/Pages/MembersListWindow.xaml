@@ -33,7 +33,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" Grid.Row="1" SelectionMode="Single" IsSynchronizedWithCurrentItem="True">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" Grid.Row="1" SelectionMode="Single"  IsSynchronizedWithCurrentItem="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5">

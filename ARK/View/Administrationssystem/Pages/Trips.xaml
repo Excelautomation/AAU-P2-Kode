@@ -50,7 +50,7 @@
                         <ListView x:Name="TripList" ItemsSource="{Binding Path=Trips}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="750">
+                                    <Grid Width="350">
                                         <StackPanel Margin="10">
                                             <TextBlock Text="{Binding Boat.Name}" FontSize="18"/>
                                             <WrapPanel>
@@ -100,6 +100,7 @@
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
 
@@ -160,7 +161,7 @@
 
                                         </Grid>
 
-                                        <Grid Grid.Column="1" Grid.RowSpan="10">
+                                        <Grid Grid.Column="2" Grid.RowSpan="10">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="auto"/>
                                                 <RowDefinition Height="*"/>
