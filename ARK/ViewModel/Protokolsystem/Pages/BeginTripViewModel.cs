@@ -22,7 +22,7 @@ namespace ARK.ViewModel.Protokolsystem
     public class BeginTripViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         private readonly DbArkContext _db = DbArkContext.GetDbContext(); // Database
-        private readonly ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
+        private ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
         private IEnumerable<Boat> _boats; // All boats
         private IEnumerable<Boat> _boatsFiltered; // Boats to display
         private IEnumerable<MemberViewModel> _membersFiltered; // Members to display
@@ -110,7 +110,7 @@ namespace ARK.ViewModel.Protokolsystem
             get { return _selectedBoat; }
             set
             {
-                if (_selectedBoat == value || // Nothing changed - silently discart - STACKOVERFLOW IF NOT DISCARTED
+                if (_selectedBoat == value || // Nothing changed - silently discart - STACKOVERFLOW IF NOT DISCARTED (Keyboard chaning LV)
                     value == null) 
                     return;
                 
@@ -143,6 +143,9 @@ namespace ARK.ViewModel.Protokolsystem
         public ObservableCollection<MemberViewModel> SelectedMembers
         {
             get { return _selectedMembers; }
+            set { _selectedMembers = value;
+                Notify();
+            }
         }
 
         public ICommand StartTripNow
@@ -175,6 +178,34 @@ namespace ARK.ViewModel.Protokolsystem
                     mainViewModel.UpdateNumBoatsOut();
 
                     ResetData();
+                });
+            }
+        }
+
+        public ICommand AddBlanc
+        {
+            get
+            {
+                return GetCommand<object>(d =>
+                {
+                    if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
+                    {
+                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -1, FirstName = "Blank" }));
+                    }
+                });
+            }
+        }
+
+        public ICommand AddGuest
+        {
+            get
+            {
+                return GetCommand<object>(d =>
+                {
+                    if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
+                    {
+                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -1, FirstName = "Gæst" }));
+                    }
                 });
             }
         }
