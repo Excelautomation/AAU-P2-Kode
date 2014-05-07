@@ -90,5 +90,25 @@ namespace ARK.ViewModel.Protokolsystem
                 });
             }
         }
+        public ICommand AddBlanc
+        {
+            get
+            {
+                return GetCommand<object>(d =>
+                {
+                    // Add a empty seat to boat
+                });
+            }
+        }
+        public ICommand AddGuest
+        {
+            get
+            {
+                return GetCommand<object>(d =>
+                {
+                    // Add a guest to boat
+                });
+            }
+        }
     }
 }
