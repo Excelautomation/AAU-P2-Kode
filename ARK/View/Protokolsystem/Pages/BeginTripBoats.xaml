@@ -15,7 +15,7 @@
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}">
+        <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource styleListViewItem}">
             <Setter Property="Visibility" 
                 Value="{Binding Visible, Converter={StaticResource BoolToVis}}"/>
         </Style>
@@ -81,7 +81,7 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.Row="1" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" Style="{DynamicResource ResourceKey=lstView}" 
+        <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.Row="1" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2" 
                   ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -108,12 +108,12 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" Style="{DynamicResource ResourceKey=lstView}" 
+        <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" AlternationCount="2" 
                   ItemsSource="{Binding Path=MembersFiltered}"
                   ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
-                IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" 
-                ItemContainerStyle="{StaticResource ItemContainerStyle}" Margin="5,0,0,0"
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" 
+                  ItemContainerStyle="{StaticResource ItemContainerStyle}" Margin="5,0,0,0"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">

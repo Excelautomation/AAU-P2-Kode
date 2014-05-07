@@ -61,7 +61,7 @@
 
         <ListView x:Name="lstBoatsOut" 
                   Grid.Row="1" Grid.Column="0" 
-                  Style="{StaticResource ResourceKey=lstView}" 
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=ActiveTrips}" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
@@ -87,7 +87,7 @@
         <ListView x:Name="lstStandardTrip" 
                   Margin="5,0,0,0"
                   Grid.Column="1" Grid.Row="1" 
-                  Style="{DynamicResource ResourceKey=lstView}" 
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=StandardTrips}" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
