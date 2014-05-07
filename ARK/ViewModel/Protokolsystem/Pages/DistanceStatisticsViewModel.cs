@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Windows.Forms.VisualStyles;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Filters;
 using ARK.ViewModel.Base;
 using System.Collections.Generic;
@@ -18,17 +19,15 @@ namespace ARK.ViewModel.Protokolsystem
     internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         // Fields
-        private readonly ObservableCollection<MemberDistanceViewModel> _memberKmCollectionFiltered;
+        private readonly IEnumerable<MemberDistanceViewModel> _memberKmCollection;
+        private IEnumerable<MemberDistanceViewModel> _memberKmCollectionFiltered;
+
         private MemberDistanceViewModel _selectedMember;
-        private List<Trip> _tripsFiltered = new List<Trip>();
 
         // Constructor
         public DistanceStatisticsViewModel()
         {
             var db = DbArkContext.GetDbContext();
-
-            var lowerTimeLimit = new DateTime();
-            var upperTimeLimit = DateTime.Now;
 
             // Load data
             var members = db.Member
@@ -36,13 +35,13 @@ namespace ARK.ViewModel.Protokolsystem
                 .Include(m => m.Trips)
                 .AsEnumerable();
 
-            _memberKmCollectionFiltered =
-                new ObservableCollection<MemberDistanceViewModel>
-                    (members.Select((member, i) => new MemberDistanceViewModel(member, member.Trips
-                        .Where(t => t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
-                        .Sum(t => t.Distance)))
-                        .OrderByDescending(trips => trips.Distance));
-            SelectedMember = _memberKmCollectionFiltered.First();
+            _memberKmCollection = members.Select((member, i) => new MemberDistanceViewModel(member));
+
+            MemberKmCollectionFiltered = _memberKmCollection;
+            SelectedMember = MemberKmCollectionFiltered.First();
+
+            // Order list
+            OrderFilter();
 
             // Setup filter
             var filterController = new FilterContent(this);
@@ -56,17 +55,14 @@ namespace ARK.ViewModel.Protokolsystem
             set { _selectedMember = value; Notify(); }
         }
 
-        public ObservableCollection<MemberDistanceViewModel> MemberKmCollectionFiltered
+        public IEnumerable<MemberDistanceViewModel> MemberKmCollectionFiltered
         {
             get { return _memberKmCollectionFiltered; }
+            private set { 
+                _memberKmCollectionFiltered = value;
+                Notify();
+            }
         }
-
-        public List<Trip> TripsFiltered
-        {
-            get { return _tripsFiltered; }
-            set { _tripsFiltered = value; Notify(); }
-        }
-
         public ICommand MemberSelectionChanged
         {
             get
@@ -86,34 +82,43 @@ namespace ARK.ViewModel.Protokolsystem
 
         private void ResetFilter()
         {
-            
+            MemberKmCollectionFiltered = _memberKmCollection.ToList();
         }
 
-        private void UpdateFilter()
+        private void OrderFilter()
         {
-            
+            MemberKmCollectionFiltered = MemberKmCollectionFiltered.OrderByDescending(member => member.Distance).ToList();
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
         {
-            // Reset filters
             ResetFilter();
 
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
                 (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
-                return;
-
-            // Filter
-            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                
+                // Order filter
+                OrderFilter();
+
+                return;
             }
 
             // Search
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
-                
+                MemberKmCollectionFiltered =
+                    MemberKmCollectionFiltered.Where(member => member.Member.Filter(args.SearchEventArgs.SearchText));
             }
+
+            // Filter
+            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
+            {
+                foreach (var elm in MemberKmCollectionFiltered)
+                    elm.UpdateFilter(args);
+            }
+
+            // Order filter
+            OrderFilter();
         }
         #endregion
     }

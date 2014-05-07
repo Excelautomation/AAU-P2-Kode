@@ -126,7 +126,7 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="LastTrips" Style="{StaticResource lstView}" ItemsSource="{Binding Path=TripsFiltered}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
+        <ListView x:Name="LastTrips" Style="{StaticResource lstView}" ItemsSource="{Binding Path=SelectedMember.FilteredTrips}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
