@@ -53,7 +53,7 @@ namespace ARK.ViewModel.Base
             if (viewModel != null) viewModel.Parent = this;
         }
 
-        protected ICommand GetNavigateCommand(Func<FrameworkElement> page, string pageTitle)
+        public ICommand GetNavigateCommand(Func<FrameworkElement> page, string pageTitle)
         {
             return GetCommand<object>(obj => NavigateToPage(page, pageTitle));
         }
