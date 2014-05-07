@@ -33,7 +33,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500*" MinWidth="150" MaxWidth="500"/>
+            <ColumnDefinition Width="250" MinWidth="70" MaxWidth="250"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
                     <ListView x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="750">
+                                <Grid Width="210">
                                     <StackPanel Margin="5,0,15,0">
                                         <TextBlock Text="{Binding Name}" FontSize="18"/>
                                         <WrapPanel>
@@ -56,16 +56,7 @@
                                             <TextBlock Text="Ubundet" FontSize="12"/>
                                         </WrapPanel>
                                     </StackPanel>
-                                    <WrapPanel Margin="220,5,0,5" Orientation="Vertical">
-                                        <WrapPanel>
-                                            <TextBlock Margin="0,0,5,0" Text="Pladser: " FontSize="14px" />
-                                            <TextBlock Text="{Binding NumberofSeats}" FontSize="14px" />
-                                        </WrapPanel>
-                                        <WrapPanel>
-                                            <TextBlock Margin="-4,0,5,0" Text=" Kategori: " FontSize="14px" />
-                                            <TextBlock Text="{Binding SpecificBoatType}" FontSize="14px" />
-                                        </WrapPanel>
-                                    </WrapPanel>
+
                                     <Grid.Style>
                                         <!-- Gør listview item rød hvis båden er inaktiv-->
                                         <Style TargetType="Grid">
