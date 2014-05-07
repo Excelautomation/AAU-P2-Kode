@@ -30,6 +30,13 @@ namespace ARK.Model
         public virtual ICollection<DamageForm> DamageForms { get; set; }
         public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }
 
+        //Statistics/information properties
+        public int NewPrice { get; set; }
+        public int Year { get; set; }
+        public int KilometersSailed { get; set; }
+        public int TripsSailed { get; set; }
+        public int LongDistanceTripsSailed { get; set; }
+
         //Not mapped properties
         public bool Usable                              // states if the boat is in a usable condition
         {
