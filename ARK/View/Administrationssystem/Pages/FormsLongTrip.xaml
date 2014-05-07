@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="800">
     <UserControl.DataContext>
-        <VM:FormsLongTripViewModel></VM:FormsLongTripViewModel>
+        <VM:FormsLongTripViewModel/>
     </UserControl.DataContext>
 
 
