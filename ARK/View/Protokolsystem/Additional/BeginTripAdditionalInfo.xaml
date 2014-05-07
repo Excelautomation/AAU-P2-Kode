@@ -101,7 +101,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Date}" Style="{StaticResource ResourceKey=styleContent}"/>
+                            <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}" Style="{StaticResource ResourceKey=styleContent}"/>
                             <TextBlock Text="{Binding Path=Type}" Style="{StaticResource ResourceKey=styleContent}"/>
                         </StackPanel>
                     </DataTemplate>
