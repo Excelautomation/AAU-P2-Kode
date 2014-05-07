@@ -19,6 +19,7 @@ namespace ARK.ViewModel.Protokolsystem
         private readonly ObservableCollection<MemberViewModel> _selectedMembers = new ObservableCollection<MemberViewModel>(); // Members in boat
         private List<MemberViewModel> _membersFiltered;
         private List<LongTripForm> _longTripForms;
+        private Boat _selectedBoat;
 
         // Constructor
         public CreateLongTripViewModel()
@@ -34,12 +35,18 @@ namespace ARK.ViewModel.Protokolsystem
             
             // get long trip forms
             _longTripForms = db.LongTripForm.OrderBy(x => x.FormCreated).Where(x => true).ToList();
+            Boats = db.Boat.Where(x => true).ToList();
         }
 
         // Properties
         public DateTime PlannedStartDate { get; set; }
         public DateTime PlannedEndDate { get; set; }
-        public Boat SelectedBoat { get; set; }
+        public List<Boat> Boats { get; set; }
+        public Boat SelectedBoat
+        {
+            get { return _selectedBoat; }
+            set { _selectedBoat = value; Notify(); }
+        }
         public string TourDescription { get; set; }
         public string DistancesPerDay { get; set; }
         public string CampSites { get; set; }
