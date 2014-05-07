@@ -99,7 +99,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -117,21 +117,14 @@
                         <Label Grid.Row="0" Content="Navn:" />
                         <Label Grid.Row="1" Content="Pladser:"/>
                         <Label Grid.Row="2" Content="Kategori:"/>
-                        <Label Grid.Row="3" Content="Status:"/>
+                        <Label Grid.Row="3" Content="Aktiv:"/>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" FontSize="16" Text="{Binding Path=CurrentBoat.Name}"/>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{Binding Path=CurrentBoat.NumberofSeats}"/>
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" FontSize="16" Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
-                        <ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalContentAlignment="Center" x:Name="AktivBox" SelectedIndex="{Binding Path=LocalActiveBoat, Mode=TwoWay}" DockPanel.Dock="Top" FontSize="16" Background="#EEEEEE">
-                            <ComboBoxItem Content="Inaktiv"/>
-                            <ComboBoxItem Content="Aktiv"/>
-                        </ComboBox>
+                        <CheckBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalContentAlignment="Center" x:Name="AktivBox" IsChecked="{Binding Path=LocalActiveBoat, Mode=TwoWay}"/>
+                        <Button Grid.Row="5" Grid.Column="0" FontSize="20" Padding="8,3,8,3" Margin="5" HorizontalAlignment="Left" Content="Ok" Command="{Binding Path=SaveChanges}" Background="#CCFFCC"/>
+                        <Button Grid.Row="5" Grid.Column="1" FontSize="20" Padding="8,3,8,3" Margin="5" HorizontalAlignment="Right" Content="Annuller" Command="{Binding Path=CancelChanges}" Background="#FFDEDE"/>
 
-
-                        <DockPanel Grid.Row="5" Margin="10" Width="275" Grid.ColumnSpan="2">
-                            <Button FontSize="20" Padding="5" Content="Gem" Command="{Binding Path=SaveChanges}" Background="#CCFFCC"/>
-                            <Button FontSize="20" Padding="5" HorizontalAlignment="Right" Content="Annuller" Command="{Binding Path=CancelChanges}" Background="#FFDEDE"/>
-                        </DockPanel>
-                        
                         <WrapPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
                             <Image Height="24">
                                 <Image.Style>
