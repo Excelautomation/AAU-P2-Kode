@@ -52,14 +52,21 @@
                     <DockPanel HorizontalAlignment="Center" Margin="10">
                         <StackPanel>
 
-                            <Label Content="Statistik"/>
+                            <Label Content="Sæson indstillinger"/>
                             <Border Width="800" Margin="4" CornerRadius="15" Background="#EEEEEE" Padding="15">
                                 <StackPanel>
                                     <DockPanel>
-                                        <TextBlock Width="400" Margin="4" Text="Nuværende sæsonstart er registreret til:"/>
-                                        <TextBox IsEnabled="False" Margin="4" Text="{Binding Path=CurrentSeasonStart}"/>
-                                        <Button Content="Ny sæson" HorizontalAlignment="Right" Padding="5" Width="130"/>
+                                        <TextBlock Width="250" Margin="4" Text="Nuværende sæsonstart:"/>
+                                        <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" Text="{Binding Path=CurrentSeasonStart.Value.Date}" Width="200"/>
                                     </DockPanel>
+                                    <DockPanel>
+                                        <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:"/>
+                                        <DatePicker Name="EndSeasonDatePicker" DataContext="{Binding Whatever}" HorizontalAlignment="Right" Margin="4" Width="200"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Button Content="Start ny sæson" HorizontalAlignment="Center" Padding="5" Width="150"/>
+                                    </DockPanel>
+
                                 </StackPanel>
                             </Border>
 
