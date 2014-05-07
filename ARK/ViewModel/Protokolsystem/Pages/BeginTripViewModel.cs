@@ -51,7 +51,7 @@ namespace ARK.ViewModel.Protokolsystem
 
             ParentAttached += (sender, args) =>
             {
-                if (boatsAsync == null || membersAsync == null || (DateTime.Now - _latestData).TotalHours > 2)
+                if (boatsAsync == null || membersAsync == null || (DateTime.Now - _latestData).TotalHours > 1)
                 {
                     // Load data. Check the boats activitylevel on a 8-day-basis
                     DateTime limit = DateTime.Now.AddDays(-8);
