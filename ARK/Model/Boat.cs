@@ -33,9 +33,10 @@ namespace ARK.Model
         //Statistics/information properties
         public int NewPrice { get; set; }
         public int Year { get; set; }
-        public int KilometersSailed { get; set; }
-        public int TripsSailed { get; set; }
-        public int LongDistanceTripsSailed { get; set; }
+        public int KilometersSailed { get; set; }           // skal være readonly
+        public int TripsSailed { get; set; }                // skal være readonly
+        public int LongDistanceTripsSailed { get; set; }    // skal være readonly
+        public string InformationString { get; set; }
 
         //Not mapped properties
         public bool Usable                              // states if the boat is in a usable condition
