@@ -57,14 +57,14 @@
                                 <StackPanel>
                                     <DockPanel>
                                         <TextBlock Width="250" Margin="4" Text="Nuværende sæsonstart:"/>
-                                        <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" Text="{Binding Path=CurrentSeasonStart.Value.Date}" Width="200"/>
+                                        <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" Text="{Binding Path=CurrentSeason.SeasonStart}" Width="200"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:"/>
-                                        <DatePicker Name="EndSeasonDatePicker" DataContext="{Binding Whatever}" HorizontalAlignment="Right" Margin="4" Width="200"/>
+                                        <DatePicker DisplayDateStart="{Binding Path=Today, Mode=OneWay}" DisplayDateEnd="{Binding Path=CurrentSeason.LatestSeasonEnd, Mode=OneWay}" Name="EndSeasonDatePicker" SelectedDate="{Binding Path=CurrentSeason.SeasonEnd, Mode=TwoWay}" HorizontalAlignment="Right" Margin="4" Width="200"/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <Button Content="Start ny sæson" HorizontalAlignment="Center" Padding="5" Width="150"/>
+                                        <Button Command="{Binding Path=NewSeason}" Content="Start ny sæson" HorizontalAlignment="Center" Padding="5" Width="150"/>
                                     </DockPanel>
 
                                 </StackPanel>

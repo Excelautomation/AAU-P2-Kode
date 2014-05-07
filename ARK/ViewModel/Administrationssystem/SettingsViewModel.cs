@@ -56,7 +56,14 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             if (!_db.Season.Any(x => true))
-                _db.Season.Add(new Season());
+            {
+                CurrentSeason = new Season();
+                _db.Season.Add(CurrentSeason);
+            }
+            else
+            {
+                CurrentSeason = _db.Season.AsEnumerable().Last(x => true);
+            }
         }
 
         #region Generelt
@@ -67,6 +74,8 @@ namespace ARK.ViewModel.Administrationssystem
             set { _currentSeason = value; Notify(); }
         }
 
+        public DateTime Today { get { return DateTime.Now; } }
+
         public ICommand NewSeason
         {
             get
@@ -76,13 +85,17 @@ namespace ARK.ViewModel.Administrationssystem
                     // if current season started less then 183 days ago promt the user!
                     if (CurrentSeason != null && DateTime.Compare(CurrentSeason.SeasonStart.AddDays(183), DateTime.Now) > 0 )
                     {
-                        // promp the uder that the current season is less than a half year old!
-                        throw new NotImplementedException();
+                        // promp the user that the current season is less than a half year old!
+                        //throw new NotImplementedException();
+
                     }
                     else
                     {
                         CurrentSeason.SeasonEnd = DateTime.Now;
-                        _db.Season.Add(new Season());
+                        Season tmpSeason = new Season();
+                        _db.Season.Add(tmpSeason);
+                        CurrentSeason = tmpSeason;
+                        _db.SaveChanges();
                     }
                 });
             }
