@@ -90,18 +90,19 @@ namespace ARK.ViewModel.Base.Filter
 
         public event EventHandler<FilterChangedEventArgs> FilterChanged;
 
-        public static IEnumerable<T> FilterItems<T>(IEnumerable<T> items, FilterEventArgs filterEventArgs)
+        public static IEnumerable<T> FilterItems<T>(IEnumerable<T> items, FilterEventArgs filterEventArgs, bool merge = false)
         {
             var filters = filterEventArgs.Filters.Where(filter => filter != null).ToList();
 
             if (!filters.Any())
                 return items;
 
-            IEnumerable<T> output = new List<T>();
             IEnumerable<T> allItems = items.ToList();
+            IEnumerable<T> output = new List<T>(allItems);
+            
 
             foreach (var filter in filters)
-                output = MergeLists<T>(filter.FilterItems<T>(allItems), output);
+                output = (merge ? MergeLists<T>(filter.FilterItems<T>(allItems), output) : filter.FilterItems<T>(output)).ToList();
 
             return output;
         } 
