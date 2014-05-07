@@ -5,7 +5,14 @@
     <Style x:Key="gridContent" TargetType="Grid">
         <Setter Property="Margin" Value="4,0,4,10"/>
     </Style>
-    
+
+    <!--TextBox (User input)-->
+    <Style x:Key="txbUserinput" TargetType="TextBox">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
     <!--Headline TextBlock-->
     <Style x:Key="txbHeadline" TargetType="TextBlock">
         <Setter Property="FontSize" Value="16"/>
