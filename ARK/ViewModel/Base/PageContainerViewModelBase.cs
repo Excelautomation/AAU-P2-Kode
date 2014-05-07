@@ -39,7 +39,7 @@ namespace ARK.ViewModel.Base
             if (CurrentPage != null)
             {
                 var vm = CurrentPage.DataContext as IContentViewModelBase;
-                if (vm != null) vm.ParentDetached();
+                if (vm != null) vm.Parent = null;
             }
 
             // Sæt nuværende side og tekst

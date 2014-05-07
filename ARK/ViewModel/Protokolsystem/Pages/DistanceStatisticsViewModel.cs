@@ -36,12 +36,13 @@ namespace ARK.ViewModel.Protokolsystem
                 .AsEnumerable();
 
             _memberKmCollection = members.Select((member, i) => new MemberDistanceViewModel(member));
-
             MemberKmCollectionFiltered = _memberKmCollection;
-            SelectedMember = MemberKmCollectionFiltered.First();
 
             // Order list
             OrderFilter();
+
+            // Set selected member
+            SelectedMember = MemberKmCollectionFiltered.First();
 
             // Setup filter
             var filterController = new FilterContent(this);
