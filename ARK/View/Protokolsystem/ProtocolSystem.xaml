@@ -165,7 +165,7 @@
                 </Grid.RowDefinitions>
                 <Button x:Name="CreateLongDistance" Grid.Row="0" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
-            	        Command="{Binding CreateLongDistance}"
+            	        Command="{Binding ViewLongTripForm}"
             	        Background="{StaticResource SubmitBG}"
             	        BorderBrush="{StaticResource SubmitBorder}" 
                         Width="Auto" Height="62">
@@ -173,7 +173,7 @@
                 </Button>
                 <Button x:Name="CreateDamage" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
-            	        Command="{Binding CreateDamage}" 
+            	        Command="{Binding ViewDamageForm}" 
                         Background="{StaticResource SubmitBG}"
             	        BorderBrush="{StaticResource SubmitBorder}" 
                         Width="Auto" Height="62">

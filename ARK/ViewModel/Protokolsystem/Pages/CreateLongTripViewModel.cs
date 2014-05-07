@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using ARK.Model.DB;
 using System.Data.Entity;
 using System.Windows.Input;
+using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -87,6 +88,22 @@ namespace ARK.ViewModel.Protokolsystem
 
                     db.LongTripForm.Add(longTripForm);
                 });
+            }
+        }
+
+        public ICommand CreateLongTripForm
+        {
+            get
+            {
+                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new CreateLongTripForm(), "OPRET NY LANGTUR"));
+            }
+        }
+
+        public ICommand ViewLongTripForm
+        {
+            get
+            {
+                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "AKTIVE LANGTURS BLANKETTER"));
             }
         }
 

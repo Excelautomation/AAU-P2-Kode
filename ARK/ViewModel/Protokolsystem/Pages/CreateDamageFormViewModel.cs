@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ARK.Model;
 using System.Windows.Input;
 using ARK.Model.DB;
+using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -88,6 +89,22 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get { return _selectedDamageForm; }
             set { _selectedDamageForm = value; Notify(); }
+        }
+
+        public ICommand CreateDamageForm
+        {
+            get
+            {
+                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+            }
+        }
+
+        public ICommand ViewDamageForm
+        {
+            get
+            {
+                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "AKTIVE SKADES BLANKETTER"));
+            }
         }
 
         public ICommand MemberSelectionChanged

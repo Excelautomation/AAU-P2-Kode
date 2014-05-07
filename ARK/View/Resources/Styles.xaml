@@ -11,6 +11,12 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     </Style>
 
     <!--Headline TextBlock-->

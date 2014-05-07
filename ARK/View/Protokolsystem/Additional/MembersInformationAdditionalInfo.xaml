@@ -49,20 +49,46 @@
                 <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Aktiv" FontWeight="Bold"/>
             </StackPanel>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Navn: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.FirstName}"/>
+                <Run Text="{Binding SelectedMember.LastName}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Medlemsnr.: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.MemberNumber}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Adresse: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Address1}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Adresse (2): " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.Address2}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Postnr. &amp; By:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.ZipCode}"/>
+                <Run Text="{Binding SelectedMember.City}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Fødselsdag: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Birthday, StringFormat={}{0:dd/MM/yy}}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Email: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Email1}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Email (2): " FontWeight="Bold"/>
                 <Run Text="{Binding SelectedMember.Email2}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Tlf. Arbejde: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.PhoneWork}"/>
+                <Run Text="Telefon: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Cellphone}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Fødselsdag: " FontWeight="Bold"/>
-                <Run Text="{Binding SelectedMember.Birthday}"/>
+                <Run Text="Telefon (Arbejde): " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.PhoneWork}"/>
             </TextBlock>
         </StackPanel>
 
