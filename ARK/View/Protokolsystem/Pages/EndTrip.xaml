@@ -63,6 +63,7 @@
                   Grid.Row="1" Grid.Column="0" 
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=ActiveTrips}" 
+                  SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -77,11 +78,6 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=TripSelected}" CommandParameter="{Binding Path=SelectedItem}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </ListView>
 
         <ListView x:Name="lstStandardTrip" 
@@ -114,7 +110,7 @@
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=StdTripSelected}" CommandParameter="{Binding Path=SelectedItem}" />
+                    <i:InvokeCommandAction Command="{Binding Path=StdTripSelected}" CommandParameter="{Binding Path=SelectedItems}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
@@ -129,9 +125,14 @@
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=btnFilter}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=lstBoatsOut, Path=SelectedItem}" Value="{x:Null}">
-                                <Setter Property="IsEnabled" Value="False" />
-                            </DataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding CanEndTrip}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="IsEnabled" Value="False" />    
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
