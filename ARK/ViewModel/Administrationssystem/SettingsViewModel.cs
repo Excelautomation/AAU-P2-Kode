@@ -36,19 +36,19 @@ namespace ARK.ViewModel.Administrationssystem
                 Members = new ObservableCollection<Member>(_db.Member);
             }
 
-            if (Admins.Count != 0)
+            if (Admins.Any())
             {
                 SelectedListItemAdmins = 0;
                 CurrentAdmin = Admins[0];
                 ReferenceToCurrentAdmin = CurrentAdmin;
             }
-            if (DamageTypes.Count != 0)
+            if (Admins.Any())
             {
                 SelectedListItemDamageTypes = 0;
                 CurrentDamageType = DamageTypes[0];
                 ReferenceToCurrentDamageType = CurrentDamageType;
             }
-            if (StandardTrips.Count != 0)
+            if (Admins.Any())
             {
                 SelectedListItemStandardTrips = 0;
                 CurrentStandardTrip = StandardTrips[0];
