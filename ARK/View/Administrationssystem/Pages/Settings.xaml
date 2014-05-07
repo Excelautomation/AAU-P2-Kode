@@ -70,41 +70,27 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Grid.Column="1" Command="{Binding Path=NewSeason}" Content="Start ny sæson" Padding="5" Width="150"/>
-                                        <WrapPanel Grid.Column="2" Margin="4">
-                                            <Image Height="32" Margin="0,0,10,0">
-                                                <Image.Style>
-                                                    <Style TargetType="Image">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="false">
-                                                                <Setter Property="Visibility" Value="Hidden"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                                <Setter Property="Source" Value="/View/images/cross.png"/>
-                                                                <Setter Property="Visibility" Value="Visible"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Image.Style>
-                                            </Image>
+                                        <Button Grid.Column="1" VerticalAlignment="Center" Command="{Binding Path=NewSeason}" Content="Start ny sæson" Padding="5" Width="150"/>
 
-                                            <TextBlock VerticalAlignment="Center">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="TextBlock">
+                                        <DockPanel Grid.Column="2" Margin="4" HorizontalAlignment="Right" Width="250">
+                                            <DockPanel.Style>
+                                                <Style TargetType="DockPanel">
                                                         <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                            <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="false">
                                                                 <Setter Property="Visibility" Value="Hidden"/>
                                                             </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="false">
-                                                                <Setter Property="Foreground" Value="Red"/>
-                                                                <Setter Property="Text" Value="Sæson er mindre end 6 mdr gammel."/>
+                                                        <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="true">
                                                                 <Setter Property="Visibility" Value="Visible"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock>
-                                        </WrapPanel>
+                                            </DockPanel.Style>
+
+                                            <Image Height="32" Source="/View/images/cross.png" Margin="4"/>
+
+                                            <TextBlock Text="Sæson er ikke mere end 6 mdr gammel!" TextWrapping="Wrap" Foreground="Red" Margin="4"/>
+
+                                        </DockPanel>
                                     </Grid>
 
                                 </StackPanel>
