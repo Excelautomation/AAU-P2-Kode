@@ -5,16 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="600">
     <UserControl.DataContext>
         <VM:FormsLongTripViewModel/>
     </UserControl.DataContext>
 
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -23,71 +20,80 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         
-            <Label Grid.Row="0" FontSize="30" HorizontalAlignment="Left" FontStyle="Italic" FontFamily="arial" FontWeight="Bold" Margin="20,0,0,10">Langtursblanket</Label>
-            <WrapPanel Grid.Row="1" HorizontalAlignment="Left" Margin="0,0,0,10" Height="295">
-                <StackPanel Margin="0,0,10,0">
-                    <WrapPanel Margin="0,0,0,10">
-                        <StackPanel Margin="0,0,20,0">
-                            <Label Content="Afgang" HorizontalAlignment="Center" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-                            <TextBox x:Name="textBox" IsReadOnly="True" HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="20" Text="{Binding Path=LongDistanceForm.Departure, ConverterCulture='da-DK', StringFormat=d}"/>
-                        </StackPanel>
+        <Label Grid.Row="0" FontSize="20" HorizontalAlignment="Center" FontStyle="Italic" Margin="4" Content="Langtursblanket"/>
 
-                        <StackPanel>
-                            <Label Content="Hjemkomst" HorizontalAlignment="Center" VerticalAlignment="Top" Width="109.552"
-                                   Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-                        <TextBox HorizontalAlignment="Center" Height="40" IsReadOnly="True" TextWrapping="Wrap"
-                                 VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}" 
-                                 Text="{Binding Path=LongDistanceForm.Arrival, ConverterCulture='da-DK', StringFormat=d}"/>
-                        </StackPanel>
-                    </WrapPanel>
-                    <StackPanel>
-                        <Label Content="Kommentarer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="39.393"
-                               Width="135.194" FontSize="18.667" FontWeight="Bold"/>
-                        <TextBox FontSize="16" HorizontalAlignment="Center" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
-                                 Height="160" VerticalAlignment="Top" Width="281" Text="{Binding Path=LongDistanceForm.Text}"/>
-                    </StackPanel>
-                </StackPanel>
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Center" MaxWidth="600" Margin="4">
+
+            <StackPanel Width="250" Margin="4">
+                <WrapPanel>
+                    <TextBlock Text="Afrejse" Width="100"/>
+                    <TextBox Text="{Binding Path=LongDistanceForm.Departure, ConverterCulture='da-DK', StringFormat=d}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Hjemkomst" Width="100"/>
+                    <TextBox Text="{Binding Path=LongDistanceForm.Arrival, ConverterCulture='da-DK', StringFormat=d}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Ansvarlig" Width="100"/>
+                    <TextBlock Text="Et navn"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Båd" Width="100"/>
+                    <TextBlock Text="{Binding Path=LongDistanceForm.Boat.Name}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Oprettet" Width="100"/>
+                    <TextBlock Text="En dato"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Status" Width="100"/>
+                    <TextBlock Text="{Binding Path=LongDistanceForm.Status}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Distance per dag" Width="100"/>
+                    <TextBox/>
+                </WrapPanel>
                 <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
-                    <WrapPanel>
-                        <Image Source="../../images/user.png" Height="24"/>
-                        <Label FontSize="20" FontWeight="Bold" Margin="0,0,0,0">Deltagere på turen</Label>
-                    </WrapPanel>
-                    <Border BorderBrush="Gray" BorderThickness="1" Margin="0">
-                        <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <WrapPanel Margin="3">
-                                        <Label Margin="5,0,0,0" Content="{Binding Path=FirstName}" FontSize="18"/>
-                                        <Label Content="{Binding Path=LastName}" FontSize="18"/>
-                                    </WrapPanel>
-                                
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Border>
-                    </StackPanel>
-                    <WrapPanel Margin="0,0,0,0">
-                        <Image Source="../../images/yacht.png" Height="24"/>
-                        <Label FontSize="20" FontWeight="Bold" Margin="0,0,15,0">Båd:</Label>
-                        <TextBlock Text="{Binding Path=LongDistanceForm.Boat.Name}" FontSize="20" VerticalAlignment="Center"/>
-                    </WrapPanel>
+                    <Label DockPanel.Dock="Top" Content="Turbeskrivelse"/>
+                    <TextBox Height="160" DockPanel.Dock="Bottom" Text="{Binding Path=LongDistanceForm.Text}"/>
                 </DockPanel>
-            </WrapPanel>
-            <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
-                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}">
-                    <StackPanel Margin="5">
-                        <Image Source="../../images/accept.png" Height="32"/>
-                        <Label Content="Godkend Langtursblanket"/>
-                    </StackPanel>
-                </Button>
-            <Button Background="Transparent" BorderBrush="Transparent" Margin="100,0,0,0" Command="{Binding RejectForm}">
-                    <StackPanel Margin="5">
-                        <Image Source="../../images/cross.png" Height="32"/>
-                        <Label Content="Afvis Langtursblanket"/>
-                    </StackPanel>
-                </Button>
-            </WrapPanel>
+            </StackPanel>
+
+            <StackPanel Width="250" Margin="4">
+                <WrapPanel>
+                    <Image Source="../../images/user.png" Height="24"/>
+                    <Label Content="Deltagere på turen"/>
+                </WrapPanel>
+                <WrapPanel Background="#EEEEEE">
+                    <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel Margin="3">
+                                    <Label Margin="5,0,0,0" Content="{Binding Path=FirstName}" FontSize="18"/>
+                                    <Label Content="{Binding Path=LastName}" FontSize="18"/>
+                                </WrapPanel>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
+        </WrapPanel>
+
+        <WrapPanel Margin="4" Grid.Row="2" HorizontalAlignment="Center">
+            <Button Margin="4" Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}">
+                <StackPanel Margin="5">
+                    <Image Source="../../images/accept.png" Height="32"/>
+                    <Label Content="Godkend Langtursblanket"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="4" Background="Transparent" BorderBrush="Transparent" Command="{Binding RejectForm}">
+                <StackPanel Margin="5">
+                    <Image Source="../../images/cross.png" Height="32"/>
+                    <Label Content="Afvis Langtursblanket"/>
+                </StackPanel>
+            </Button>
+        </WrapPanel>
         
         <StackPanel Grid.Row="3">
             <TextBlock Margin="0,10,0,0" FontSize="20" HorizontalAlignment="Center">
