@@ -34,7 +34,7 @@
             <Label FontSize="28" >BLANKETTER</Label>
         </WrapPanel>
         <DockPanel Grid.Row="2" >
-            <TabControl Margin="0,0,5,5" Width="280">
+            <TabControl Margin="0,0,5,5" Width="320">
                 <TabItem Name="FormsDamageFormOverview">
                     <TabItem.Header>
                         <WrapPanel DockPanel.Dock="Top">
@@ -134,15 +134,13 @@
         <DockPanel Grid.Row="2" Grid.Column="2" >
             <Grid Margin="5,0,5,5">
                 <Border BorderBrush="Gray" BorderThickness="1">
-                    <DockPanel>
-                        <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
-                            <Border Margin="10" Padding="15" CornerRadius="15" Background="White">
-                                <DockPanel Name="FormsDetailContent">
-                                    <ContentControl Content="{Binding Path=CurrentPage}"/>
-                                </DockPanel>
-                            </Border>
-                        </ScrollViewer>
-                    </DockPanel>
+                    <ScrollViewer Background="#DDDDDD">
+                        <Border Margin="10" Padding="25,15,25,15" CornerRadius="15" Background="White">
+                            <DockPanel Name="FormsDetailContent">
+                                <ContentControl Content="{Binding Path=CurrentPage}"/>
+                            </DockPanel>
+                        </Border>
+                    </ScrollViewer>
                 </Border>
             </Grid>
         </DockPanel>
