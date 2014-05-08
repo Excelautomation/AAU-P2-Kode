@@ -10,7 +10,7 @@
              mc:Ignorable="d" Width="200" Height="768">
 
     <UserControl.DataContext>
-        <VM:BeginTripAdditionalInfoViewModel></VM:BeginTripAdditionalInfoViewModel>
+        <VM:BoatsOutAdditionalInfoViewModel></VM:BoatsOutAdditionalInfoViewModel>
     </UserControl.DataContext>
 
     <UserControl.Resources>
