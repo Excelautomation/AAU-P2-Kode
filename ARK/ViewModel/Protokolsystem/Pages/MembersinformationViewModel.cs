@@ -18,7 +18,7 @@ namespace ARK.ViewModel.Protokolsystem
     internal class MembersinformationViewModel : ProtokolsystemContentViewModelBase
     {
         private IEnumerable<Member> _membersFiltered;
-        private readonly List<Member> _members;
+        private IEnumerable<Member> _members;
 
         private Member _selectedMember;
 
@@ -29,18 +29,23 @@ namespace ARK.ViewModel.Protokolsystem
         {
             var db = DbArkContext.GetDbContext();
 
-            // Load data
-            _members = new List<Member>(db.Member)
-                .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
-                .OrderBy(x => x.FirstName)
-                .ToList();
-            _membersFiltered = _members;
-
             ParentAttached += (sender, args) =>
             {
-                UpdateInfo();
+                // Load data
+                _members = new List<Member>(db.Member)
+                    .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
+                    .OrderBy(x => x.FirstName)
+                    .ToList();
+                MembersFiltered = _members;
 
+                // Set selected member
+                SelectedMember = MembersFiltered.First();
+
+                // Setup keyboard listener
                 ProtocolSystem.KeyboardTextChanged += ProtocolSystem_KeyboardTextChanged;
+
+                // Update info
+                UpdateInfo();
             };
 
             ParentDetached += (sender, args) =>

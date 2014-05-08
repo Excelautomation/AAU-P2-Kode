@@ -19,7 +19,9 @@ namespace ARK.ViewModel.Protokolsystem
         public ViewLongTripFormViewModel()
         {
             var db = DbArkContext.GetDbContext();
-            _lingTripForms = db.LongTripForm.ToList();
+
+            ParentAttached += (sender, e) =>
+                _lingTripForms = db.LongTripForm.ToList();
         }
 
         // Props
