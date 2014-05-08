@@ -114,6 +114,7 @@
     <Compile Include="ViewModel\Base\Filter\Filter.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterChangedEventArgs.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContentViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Additional\BoatsOutAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\DistanceStatisticsAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\MembersinformationAdditionalInfoViewModel.cs" />
@@ -204,6 +205,9 @@
     <Compile Include="Model\XML\XmlParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
+    <Compile Include="View\Protokolsystem\Additional\BoatsOutAdditionalInfo.xaml.cs">
+      <DependentUpon>BoatsOutAdditionalInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Protokolsystem\Additional\DistanceStatisticsAdditionalInfo.xaml.cs">
       <DependentUpon>DistanceStatisticsAdditionalInfo.xaml</DependentUpon>
     </Compile>
@@ -332,6 +336,10 @@
     <Page Include="View\Administrationssystem\Pages\Trips.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Protokolsystem\Additional\BoatsOutAdditionalInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Protokolsystem\Additional\DistanceStatisticsAdditionalInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
