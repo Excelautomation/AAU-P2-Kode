@@ -44,11 +44,18 @@
                     </TabItem.Header>
                     <DockPanel>
                         <ListView Margin="10" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Closed}" Value="True">
+                                            <Setter Property="Background" Value="#FFDEDE"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-
                                     <DockPanel Margin="0,5,0,5">
-
                                         <StackPanel>
                                             <WrapPanel>
                                                 <TextBlock Width="80" Text="Båd:" FontSize="14px"/>
@@ -69,9 +76,7 @@
                                                 <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
                                             </WrapPanel>
                                         </StackPanel>
-
                                     </DockPanel>
-
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <i:Interaction.Triggers>
