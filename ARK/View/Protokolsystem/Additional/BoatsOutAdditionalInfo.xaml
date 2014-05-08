@@ -56,99 +56,101 @@
         </Grid.RowDefinitions>
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="0">
-            <TextBlock Text="BÅDENS OPLYSNINGER" Style="{StaticResource ResourceKey=txbHeader}"/>
+            <TextBlock Text="TURENS OPLYSNINGER" Style="{StaticResource ResourceKey=txbHeader}"/>
         </Border>
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
             <TextBlock Style="{StaticResource ResourceKey=txbHeader}">
-                <Run Text="BESÆTNING"/>
-                <Run Text="(" FontWeight="Normal"/>
-                <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> 
-                <Run Text=" / " FontWeight="Normal"/>
-                <Run Text="{Binding Path=BoatNumberOfSeats, Mode=OneWay}"/>
-                <Run Text=")" FontWeight="Normal"/>
+                <Run Text="TURENS OPLYSNINGER"/>
             </TextBlock>
         </Border>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
-            <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding SelectedBoat[0].Active, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
-                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Aktiv" FontWeight="Bold"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding SelectedBoat[0].HaveCox, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
-                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Styrmandsbåd" FontWeight="Bold"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding SelectedBoat[0].Usable, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
-                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Funktionsdygtig" FontWeight="Bold"/>
-            </StackPanel>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Navn:" FontWeight="Bold"/>
-                <Run Text="{Binding SelectedBoat[0].Name}"/>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Bådens navn:" FontWeight="Bold"/>
             </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Pladser:" FontWeight="Bold"/>
-                <Run Text="{Binding SelectedBoat[0].NumberofSeats}"/>
-            </TextBlock>
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Kategori:" FontWeight="Bold"/>
-                <Run Text="{Binding SelectedBoat[0].SpecificBoatType}"/>
             </TextBlock>
-            <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=styleContent}" 
-                        FontWeight="Bold"/>
-            <ListView ItemsSource="{Binding SelectedBoat[0].DamageForms}" BorderBrush="{x:Null}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}" Style="{StaticResource ResourceKey=styleContent}"/>
-                            <TextBlock Text="{Binding Path=Type}" Style="{StaticResource ResourceKey=styleContent}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Pladser:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Start tid:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Tid ude:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Retning:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <!--Personnavn og telefonnr. Tidspunkt for forsendelsen-->
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Tur-ansvarlig:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <!--SMS tidspunkt for forsendelsen og modtagelsen-->
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="SMS sendt til tur-ansvarlig:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="SMS modtaget fra tur-ansvarlig:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="SMS sendt til administrationen:" FontWeight="Bold"/>
+            </TextBlock>
         </StackPanel>
 
-
-        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" Grid.Row="3"
+        <StackPanel Orientation="Vertical" Grid.Row="3" Background="White">
+            <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                       FontSize="18" BorderBrush="{x:Null}" Background="White">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.RemoveMember}" 
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.RemoveMember}" 
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <ContentPresenter />
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <StackPanel Style="{StaticResource styleStack}">
-                                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
-                                        <TextBlock Text=" " />
-                                        <TextBlock Text="{Binding Path=Member.FirstName}"/>
-                                        <TextBlock Text=" " />
-                                        <TextBlock Text="{Binding Path=Member.LastName}"/>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Style="{StaticResource styleStack}">
+                                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
+                                            <TextBlock Text=" " />
+                                            <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                            <TextBlock Text=" " />
+                                            <TextBlock Text="{Binding Path=Member.LastName}"/>
+                                        </StackPanel>
+                                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
+                                            <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
+                                            <TextBlock Text="{Binding Path=Member.ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                                        <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
-                                        <TextBlock Text="{Binding Path=Member.ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
     </Grid>
 </UserControl>
