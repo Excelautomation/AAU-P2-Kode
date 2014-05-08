@@ -294,6 +294,7 @@
     <Compile Include="ViewModel\Base\TimeCounter.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="View\ValueConverters\ListViewItemToOrdinalConverter.cs" />
+    <Compile Include="View\ValueConverters\ValueLessThanConverter.cs" />
     <Page Include="View\Administrationssystem\AdminSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
