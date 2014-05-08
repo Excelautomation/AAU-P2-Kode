@@ -27,6 +27,8 @@ namespace ARK.ViewModel.Administrationssystem
         private int _selectedIndexDamageForms;
         private Visibility _showDamageForms;
         private Visibility _showLongTripForms;
+        private int _selectedTabIndex;
+
 
         public FormsViewModel()
         {
@@ -87,6 +89,12 @@ namespace ARK.ViewModel.Administrationssystem
                 _longTripForms = value;
                 Notify();
             }
+        }
+
+        public int SelectedTabIndex
+        {
+            get { return _selectedTabIndex; }
+            set { _selectedTabIndex = value; Notify(); }
         }
 
         #region Commands

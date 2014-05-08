@@ -150,13 +150,7 @@ namespace ARK.ViewModel.Administrationssystem
             adminSystem.MenuForms.Execute(null);
             var FormsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
 
-            //FormsViewModel.NavigateToPage(() => new FormsDamage(),
-            //SelectedDamageForm.Description);
-
-            //var vm = FormsViewModel.CurrentPage.DataContext as FormsDamageViewModel;
-            //if (vm != null)
-            //    vm.DamageForm = SelectedDamageForm;
-            
+            FormsViewModel.SelectedTabIndex = 0;
             FormsViewModel.GoToDamageForm(SelectedDamageForm);
         }
 
@@ -180,6 +174,8 @@ namespace ARK.ViewModel.Administrationssystem
             var adminSystem = (AdminSystemViewModel)Parent;
             adminSystem.MenuForms.Execute(null);
             var FormsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
+
+            FormsViewModel.SelectedTabIndex = 1;
             FormsViewModel.GoToLongDistanceForm(LongDistanceForm);
         }
 
