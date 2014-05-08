@@ -17,7 +17,7 @@ namespace ARK.View.Protokolsystem.Confirmations
     /// <summary>
     /// Interaction logic for Confirmation.xaml
     /// </summary>
-    public partial class Confirmation : Window
+    public partial class Confirmation : UserControl
     {
         public Confirmation()
         {
