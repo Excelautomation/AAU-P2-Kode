@@ -22,7 +22,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         private double _customDistance;
         private bool _canEndTrip;
-        private Regex _validDistance = new Regex(@"(?'number'\d+(?:(?:,|.)\d+)?)", RegexOptions.Compiled);
+        private Regex _validDistance = new Regex(@"(?'number'\d+(?:(?:,|.)\d+)?)");
         private DateTime _latestData;
 
         // Constructor
@@ -33,7 +33,7 @@ namespace ARK.ViewModel.Protokolsystem
 
             ParentAttached += (sender, args) =>
             {
-                if (this.ActiveTrips == null || (DateTime.Now - _latestData).TotalHours > 1)
+                if (this.StandardTrips == null || (DateTime.Now - _latestData).TotalHours > 1)
                 {
                     // Indlæs data
                     this.GetStandardTrips();
@@ -43,6 +43,11 @@ namespace ARK.ViewModel.Protokolsystem
                 this.GetActiveTrips();
 
                 base.ProtocolSystem.KeyboardTextChanged += this.CheckCanEndTrip;
+            };
+
+            ParentDetached += (sender, args) =>
+            {
+                base.ProtocolSystem.KeyboardTextChanged -= this.CheckCanEndTrip;
             };
 
             TimeCounter.StopTime();

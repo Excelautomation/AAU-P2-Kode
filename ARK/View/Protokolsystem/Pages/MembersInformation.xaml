@@ -48,10 +48,9 @@
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}">
-                            <Run Text="{Binding MemberNumber}"/>
-                            <Run Text=" "/>
                             <Run Text="{Binding FirstName}"/>
                             <Run Text="{Binding LastName}"/>
+                            <Run Text="{Binding MemberNumber}"/>
                         </TextBlock>
                         <Grid>
                             <Grid.RowDefinitions>
