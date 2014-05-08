@@ -49,7 +49,7 @@ namespace ARK.Model.XML
                     boat = new Boat()
                     {
                         DamageForms = new List<DamageForm>(),
-                        LongDistanceForms = new LinkedList<LongTripForm>()
+                        LongTripForms = new LinkedList<LongTripForm>()
                     };
                     BoatXmlToModel(boat, boatXml);
                     context.Boat.Add(boat);
