@@ -69,7 +69,7 @@ namespace ARK.ViewModel.Protokolsystem
         public Member SelectedMember
         {
             get { return _selectedMember; }
-            set { _selectedMember = value; Notify(); }
+            set { _selectedMember = value; Notify(); UpdateInfo(); }
         }
 
         public FrameworkElement InfoPage
@@ -85,18 +85,6 @@ namespace ARK.ViewModel.Protokolsystem
         public IInfoContainerViewModel GetInfoContainerViewModel
         {
             get { return Parent as IInfoContainerViewModel; }
-        }
-
-        public ICommand MemberSelectionChanged
-        {
-            get
-            {
-                return GetCommand<Member>(e =>
-                {
-                    SelectedMember = e;
-                    UpdateInfo();
-                });
-            }
         }
 
         // Methods
