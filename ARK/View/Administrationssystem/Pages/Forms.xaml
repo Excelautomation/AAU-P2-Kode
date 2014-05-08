@@ -20,13 +20,13 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="4"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500*" MinWidth="200" MaxWidth="500"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="4"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
         <WrapPanel Margin="5,0,0,0" Grid.ColumnSpan="3">
@@ -34,155 +34,117 @@
             <Label FontSize="28" >BLANKETTER</Label>
         </WrapPanel>
         <DockPanel Grid.Row="2" >
-            <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Blanketter</Label>
-            <Grid Margin="0,0,5,5">
-                <Border BorderBrush="Gray" BorderThickness="1">
+            <TabControl Margin="0,0,5,5" Width="280">
+                <TabItem Name="FormsDamageFormOverview">
+                    <TabItem.Header>
+                        <WrapPanel DockPanel.Dock="Top">
+                            <Image Margin="4" Source="../../images/application_side_list_red.png" Height="24"/>
+                            <Label Margin="4" FontSize="16" Content="Skader" FontWeight="Bold"/>
+                        </WrapPanel>
+                    </TabItem.Header>
                     <DockPanel>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                        <ListView Margin="10" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
 
-                            <DockPanel Grid.Row="0" Name="FormsDamageFormOverview" Margin="5,5,5,0" Visibility="{Binding Path=ShowDamageForms}">
-                                <WrapPanel DockPanel.Dock="Top">
-                                    <Image Margin="5,0,0,0" Source="../../images/application_side_list_red.png" Height="24"/>
-                                    <Label Margin="5,0,0,0" FontSize="16" Content="Skade" FontWeight="Bold"/>
-                                </WrapPanel>
+                                    <DockPanel Margin="0,5,0,5">
 
-                                <ListView DockPanel.Dock="Bottom" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
+                                        <StackPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Båd:" FontSize="14px"/>
+                                                <TextBlock Text="{Binding Boat.Name}" FontSize="14px"/>
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Medlem:" FontSize="14px" />
+                                                <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
+                                                <TextBlock Text=" " FontSize="14px" />
+                                                <TextBlock Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Type: " FontSize="14px" />
+                                                <TextBlock Text="{Binding Type}" FontSize="14px" />
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Dato: " FontSize="14px" />
+                                                <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
+                                            </WrapPanel>
+                                        </StackPanel>
 
-                                            <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="65"/>
-                                                    <ColumnDefinition Width="125"/>
-                                                    <ColumnDefinition Width="55"/>
-                                                    <ColumnDefinition Width="1*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="auto"/>
-                                                </Grid.RowDefinitions>
+                                    </DockPanel>
 
-                                                <WrapPanel Grid.Column="0" Orientation="Vertical">
-                                                    <TextBlock Text="Båd:" FontSize="14px" />
-                                                    <TextBlock Text="Medlem:" FontSize="14px" />
-                                                </WrapPanel>
-
-                                                <WrapPanel Grid.Column="1" Orientation="Vertical">
-                                                    <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
-                                                    <WrapPanel>
-                                                        <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
-                                                        <TextBlock Margin="3,0,0,0" Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
-                                                    </WrapPanel>
-                                                </WrapPanel>
-
-                                                <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
-                                                    <TextBlock Text="Type: " FontSize="14px" />
-                                                    <TextBlock Text="Dato: " FontSize="14px" />
-                                                </WrapPanel>
-
-                                                <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
-                                                    <TextBlock Text="{Binding Type}" FontSize="14px" />
-                                                    <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
-                                                </WrapPanel>
-
-                                            </Grid>
-
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </ListView>
-                            </DockPanel>
-
-                            <DockPanel Grid.Row="1" Name="FormsLongTripOverview" Margin="5,0,5,0" Visibility="{Binding Path=ShowLongDistanceForms}">
-                                <WrapPanel DockPanel.Dock="Top">
-                                    <Image Margin="5,0,0,0" Source="../../images/application_side_list_blue.png" Height="24"/>
-                                    <Label Margin="5,0,0,0" FontSize="16" Content="Langtur" FontWeight="Bold"/>
-                                </WrapPanel>
-                                <ListView DockPanel.Dock="Bottom" Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,5,0,5">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="75"/>
-                                                    <ColumnDefinition Width="115"/>
-                                                    <ColumnDefinition Width="90"/>
-                                                    <ColumnDefinition Width="1*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="auto"/>
-                                                </Grid.RowDefinitions>
-
-                                                <WrapPanel Grid.Column="0" Orientation="Vertical">
-                                                    <TextBlock Text="Båd:" FontSize="14px" />
-                                                    <TextBlock Text="Ansvarlig:" FontSize="14px" />
-                                                </WrapPanel>
-
-                                                <WrapPanel Grid.Column="1" Orientation="Vertical">
-                                                    <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
-                                                    <WrapPanel>
-                                                        <TextBlock Margin="0,0,3,0" Text="{Binding Members[0].FirstName}" FontSize="14px" />
-                                                        <!-- Virker ikke -->
-                                                        <TextBlock Text="{Binding Members[0].LastName}" FontSize="14px" />
-                                                    </WrapPanel>
-                                                </WrapPanel>
-
-                                                <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
-                                                    <TextBlock Text="Afgang: " FontSize="14px" />
-                                                    <TextBlock Text="Hjemkomst: " FontSize="14px" />
-                                                </WrapPanel>
-
-                                                <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
-                                                    <TextBlock Text="{Binding Departure, StringFormat=d}" FontSize="14px" />
-                                                    <TextBlock Text="{Binding Arrival, StringFormat=d}" FontSize="14px" />
-                                                </WrapPanel>
-
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding Path=SelectLongDistanceFormCommand}" CommandParameter="{Binding ElementName=LongDistanceListView, Path=SelectedItem}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </ListView>
-                            </DockPanel>
-                        </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding Path=SelectDamageFormCommand}" CommandParameter="{Binding ElementName=DamageList, Path=SelectedItem}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListView>
                     </DockPanel>
-                </Border>
-            </Grid>
+                </TabItem>
+
+                <TabItem Name="FormsLongTripOverview">
+                    <TabItem.Header>
+                        <WrapPanel>
+                            <Image Margin="4" Source="../../images/application_side_list_blue.png" Height="24"/>
+                            <Label Margin="4" FontSize="16" Content="Langture" FontWeight="Bold"/>
+                        </WrapPanel>
+                    </TabItem.Header>
+                    <DockPanel>
+                        
+                        <ListView Margin="10" Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel Margin="0,5,0,5">
+
+                                        <StackPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Båd:" FontSize="14px" />
+                                                <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Ansvarlig:" FontSize="14px" />
+                                                <TextBlock Text="{Binding Members[0].FirstName}" FontSize="14px"/>
+                                                <TextBlock Text=" " FontSize="14px"/>
+                                                <TextBlock Text="{Binding Members[0].LastName}" FontSize="14px"/>
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Afgang:" FontSize="14px" />
+                                                <TextBlock Text="{Binding Departure, StringFormat=d}" FontSize="14px" />
+                                            </WrapPanel>
+                                            <WrapPanel>
+                                                <TextBlock Width="80" Text="Hjemkomst:" FontSize="14px" />
+                                                <TextBlock Text="{Binding Arrival, StringFormat=d}" FontSize="14px" />
+                                            </WrapPanel>
+                                        </StackPanel>
+
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding Path=SelectLongDistanceFormCommand}" CommandParameter="{Binding ElementName=LongDistanceListView, Path=SelectedItem}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="2" >
-            <Label DockPanel.Dock="Top" Margin="20,0,0,0" FontSize="18">Detaljer</Label>
             <Grid Margin="5,0,5,5">
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
                         <ScrollViewer DockPanel.Dock="Bottom" Background="#DDDDDD">
-                            <Border Margin="10" CornerRadius="5" Background="White">
-                                <Grid Margin="25" Name="FormsDetailContent">
+                            <Border Margin="10" Padding="15" CornerRadius="15" Background="White">
+                                <DockPanel Name="FormsDetailContent">
                                     <ContentControl Content="{Binding Path=CurrentPage}"/>
-                                </Grid>
+                                </DockPanel>
                             </Border>
                         </ScrollViewer>
                     </DockPanel>
                 </Border>
             </Grid>
         </DockPanel>
-
-
-
-        <GridSplitter HorizontalAlignment="Right" Margin="0,35,0,0"
-			VerticalAlignment="Stretch" 
-			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
-			Width="5" Background="Gray"/>
     </Grid>
 </UserControl>
