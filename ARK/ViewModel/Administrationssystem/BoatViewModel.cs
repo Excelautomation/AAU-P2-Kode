@@ -135,17 +135,6 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public ICommand SelectedChange
-        {
-            get 
-            { 
-                return GetCommand<Boat>(e => 
-                { 
-                    CurrentBoat = e;
-                }); 
-            }
-        }
-
         public ICommand SaveChanges
         {
             get
