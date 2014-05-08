@@ -41,7 +41,7 @@
                         <ListView Margin="5,5,5,20" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedDamageForm}">
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Left" IsItemsHost="True" Orientation="Horizontal"/>
+                                    <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Left" IsItemsHost="True" />
                                 </ItemsPanelTemplate>
                             </ListView.ItemsPanel>
                             <ListView.Template>
@@ -51,42 +51,41 @@
                             </ListView.Template>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="-5,-2,-5,-2" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
-                                        <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="65"/>
-                                                <ColumnDefinition Width="125"/>
-                                                <ColumnDefinition Width="55"/>
-                                                <ColumnDefinition Width="1*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
+                                    <Border Margin="-5,-2,-5,-2" Height="75" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
+                                            <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="65"/>
+                                                    <ColumnDefinition Width="125"/>
+                                                    <ColumnDefinition Width="55"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
 
-                                            <WrapPanel Grid.Column="0" Orientation="Vertical">
-                                                <TextBlock Text="Båd:" FontSize="14px" />
-                                                <TextBlock Text="Medlem:" FontSize="14px" />
-                                            </WrapPanel>
-
-                                            <WrapPanel Grid.Column="1" Orientation="Vertical">
-                                                <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
-                                                <WrapPanel>
-                                                    <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
-                                                    <TextBlock Margin="3,0,0,0" Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
+                                                <WrapPanel Grid.Column="0" Orientation="Vertical">
+                                                    <TextBlock Text="Båd:" FontSize="14px" />
+                                                    <TextBlock Text="Medlem:" FontSize="14px" />
                                                 </WrapPanel>
-                                            </WrapPanel>
 
-                                            <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
-                                                <TextBlock Text="Type: " FontSize="14px" />
-                                                <TextBlock Text="Dato: " FontSize="14px" />
-                                            </WrapPanel>
+                                                <WrapPanel Grid.Column="1" Orientation="Vertical">
+                                                    <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
+                                                    <WrapPanel>
+                                                        <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
+                                                        <TextBlock Margin="3,0,0,0" Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
+                                                    </WrapPanel>
+                                                </WrapPanel>
 
-                                            <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
-                                                <TextBlock Text="{Binding Type}" FontSize="14px" />
-                                                <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
-                                            </WrapPanel>
-                                        
-                                        </Grid>
+                                                <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
+                                                    <TextBlock Text="Type: " FontSize="14px" />
+                                                    <TextBlock Text="Dato: " FontSize="14px" />
+                                                </WrapPanel>
+
+                                                <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
+                                                    <TextBlock Text="{Binding Type}" FontSize="14px" />
+                                                    <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
+                                                </WrapPanel>
+                                            </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -111,8 +110,8 @@
                             </ListView.Template>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="-5,-2,-5,-2"  Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
-                                        <Grid HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
+                                    <Border Margin="-5,-2,-5,-2" Height="75" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
+                                        <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="65"/>
                                                 <ColumnDefinition Width="125"/>
