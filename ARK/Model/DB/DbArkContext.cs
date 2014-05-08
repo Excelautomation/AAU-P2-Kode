@@ -69,8 +69,14 @@ namespace ARK.Model.DB
 
             modelBuilder.Entity<LongTripForm>()
                 .HasRequired(ldf => ldf.Boat)
-                .WithMany(b => b.LongDistanceForms)
+                .WithMany(b => b.LongTripForms)
                 .HasForeignKey(ldf => ldf.BoatId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LongTripForm>()
+                .HasRequired(ltf => ltf.ResponsibleMember)
+                .WithMany()
+                .HasForeignKey(ltf => ltf.ResponsibleMemberId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<LongTripForm>()
