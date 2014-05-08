@@ -2,10 +2,11 @@
 {
     public static class MembersExtention
     {
-        public static bool Filter(this Member damageForm, string searchText)
+        public static bool Filter(this Member member, string searchText)
         {
-            return damageForm.FirstName.ContainsCaseInsensitive(searchText) ||
-                   damageForm.LastName.ContainsCaseInsensitive(searchText);
+            return member.FirstName.ContainsCaseInsensitive(searchText) ||
+                   member.LastName.ContainsCaseInsensitive(searchText) ||
+                   member.MemberNumber.ToString().ContainsCaseInsensitive(searchText);
         }
     }
 }

@@ -106,10 +106,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Extensions\TripExtention.cs" />
     <Compile Include="Model\Season.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\BoatFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\FormsFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs" />
+    <Compile Include="ViewModel\Administrationssystem\Filters\TripFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\TripsViewModel.cs" />
     <Compile Include="ViewModel\Base\Filter\Filter.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterChangedEventArgs.cs" />
@@ -147,6 +149,9 @@
     </Compile>
     <Compile Include="View\Administrationssystem\Filters\OverviewFilter.xaml.cs">
       <DependentUpon>OverviewFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Administrationssystem\Filters\TripFilter.xaml.cs">
+      <DependentUpon>TripFilter.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Administrationssystem\Functions\SMSIT.cs" />
     <Compile Include="View\Administrationssystem\Pages\Boats.xaml.cs">
@@ -306,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Administrationssystem\Filters\OverviewFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrationssystem\Filters\TripFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
