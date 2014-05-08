@@ -43,7 +43,8 @@
         <ListView x:Name="AllMembersList" 
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=MembersFiltered}" Grid.Row="1" 
-                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  SelectedItem="{Binding Path=SelectedMember, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel Orientation="Vertical">
@@ -87,12 +88,6 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=MemberSelectionChanged}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItem}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </ListView>
 
         <DockPanel Grid.Row="2" Margin="0,5,0,0" LastChildFill="False">
