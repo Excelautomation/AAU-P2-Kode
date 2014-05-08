@@ -10,14 +10,14 @@ namespace ARK.ViewModel.Protokolsystem.Data
     public class MemberDistanceViewModel : ViewModelBase
     {
         private double _distance;
-        private IEnumerable<Trip> _filteredTrips;
+        private IEnumerable<TripViewModel> _filteredTrips;
         private Member _member;
-        private readonly IEnumerable<Trip> _trips;
+        private readonly IEnumerable<TripViewModel> _trips;
 
         public MemberDistanceViewModel(Member member)
         {
             Member = member;
-            _trips = member.Trips;
+            _trips = member.Trips.Select(t => new TripViewModel(t));
 
             ResetFilter();
         }
@@ -33,7 +33,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
             }
         }
 
-        public IEnumerable<Trip> FilteredTrips
+        public IEnumerable<TripViewModel> FilteredTrips
         {
             get { return _filteredTrips; }
             private set
@@ -57,7 +57,15 @@ namespace ARK.ViewModel.Protokolsystem.Data
 
         private void ResetFilter()
         {
-            FilteredTrips = _trips.Where(t => t.TripEndedTime != null).ToList();
+            try
+            {
+                FilteredTrips = _trips.Where(t => t.Trip.TripEndedTime != null).ToList();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
         }
 
         public void UpdateFilter(FilterChangedEventArgs args)
@@ -84,8 +92,8 @@ namespace ARK.ViewModel.Protokolsystem.Data
             var upperTimeLimit = DateTime.Now;
 
             Distance = FilteredTrips
-                .Where(t => t.TripEndedTime != null && t.TripStartTime > lowerTimeLimit && t.TripStartTime < upperTimeLimit)
-                .Sum(t => t.Distance);
+                .Where(t => t.Trip.TripEndedTime != null && t.Trip.TripStartTime > lowerTimeLimit && t.Trip.TripStartTime < upperTimeLimit)
+                .Sum(t => t.Trip.Distance);
         }
     }
 }

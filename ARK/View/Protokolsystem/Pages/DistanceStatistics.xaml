@@ -151,27 +151,27 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding Path=Boat.Name}" Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Text="{Binding Path=Trip.Boat.Name}" Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
 
                         <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}" HorizontalAlignment="Right">
-                            <Run Text="{Binding Path=Distance}"/>
+                            <Run Text="{Binding Path=Trip.Distance}"/>
                             <Run Text="Km"/>
                         </TextBlock>
 
                         <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Start tid:" FontWeight="Bold" />
-                            <Run Text="{Binding Path=TripStartTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                            <Run Text="{Binding Path=Trip.TripStartTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
 
                         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
                             <!--Vi mangler denne property. 30 min efter afsluttet tur, skal brugeren have mulighed for at ændre distancen-->
-                            <CheckBox Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                            <CheckBox Style="{StaticResource ResourceKey=styleCheckBox}" IsChecked="{Binding Path=Editable, Mode=OneWay}"/>
                             <TextBlock Text="Redigerbar" Style="{StaticResource ResourceKey=styleContent}" FontWeight="Bold"/>
                         </StackPanel>
                             
                         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Right">
                             <Run Text="Tid ude:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
+                            <Run Text="{Binding Path=Trip.TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
