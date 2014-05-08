@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Filters;
@@ -16,6 +16,8 @@ namespace ARK.ViewModel.Protokolsystem
     internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         // Fields
+        private readonly DbArkContext _db;
+        private DateTime _latestData;
         private IEnumerable<MemberDistanceViewModel> _memberKmCollection;
         private IEnumerable<MemberDistanceViewModel> _memberKmCollectionFiltered;
         private MemberDistanceViewModel _selectedMember;
@@ -23,21 +25,13 @@ namespace ARK.ViewModel.Protokolsystem
         // Constructor
         public DistanceStatisticsViewModel()
         {
-            DbArkContext db = DbArkContext.GetDbContext();
+            _db = DbArkContext.GetDbContext();
 
             ParentAttached += (sender, e) =>
             {
-                // Load data
-                IEnumerable<Member> members = db.Member
-                    .OrderBy(x => x.FirstName)
-                    .Include(m => m.Trips)
-                    .AsEnumerable();
-
-                _memberKmCollection = members.Select((member, i) => new MemberDistanceViewModel(member));
-                MemberKmCollectionFiltered = _memberKmCollection;
-
-                // Order list
-                OrderFilter();
+                // Load data and order list
+                LoadMembers();
+                MemberKmCollectionFiltered = _memberKmCollection.ToList();
 
                 // Set selected member
                 SelectedMember = MemberKmCollectionFiltered.First();
@@ -109,7 +103,7 @@ namespace ARK.ViewModel.Protokolsystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 MemberKmCollectionFiltered =
-                    MemberKmCollectionFiltered.Where(member => member.Member.Filter(args.SearchEventArgs.SearchText));
+                    MemberKmCollectionFiltered.Where(member => member.Member.Filter(args.SearchEventArgs.SearchText)).ToList();
             }
 
             // Filter
@@ -124,5 +118,29 @@ namespace ARK.ViewModel.Protokolsystem
         }
 
         #endregion
+
+        private void LoadMembers()
+        {
+            if (_memberKmCollection == null || (DateTime.Now - _latestData).TotalHours > 1)
+            {
+                _latestData = DateTime.Now;
+
+                _memberKmCollection = _db.Member
+                    .OrderBy(x => x.FirstName)
+                    .Include(m => m.Trips)
+                    .ToList()
+                    .Select((member, i) => new MemberDistanceViewModel(member))
+                    .OrderByDescending(member => member.Distance)
+                    .ToList();
+            }
+            else
+            {
+                foreach (var member in _memberKmCollection)
+                {
+                    member.ResetFilter();
+                    member.UpdateDistance();
+                }
+            }
+        }
     }
 }
