@@ -210,6 +210,9 @@
     <Compile Include="Model\XML\XmlParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
+    <Compile Include="View\Protokolsystem\Additional\ViewDamageForm.xaml.cs">
+      <DependentUpon>ViewDamageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Protokolsystem\Additional\BoatsOutAdditionalInfo.xaml.cs">
       <DependentUpon>BoatsOutAdditionalInfo.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,9 @@
     </Compile>
     <Compile Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml.cs">
       <DependentUpon>DistanceStatisticsFilters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Protokolsystem\Messages\BeginTripBoatsConfirm.xaml.cs">
+      <DependentUpon>BeginTripBoatsConfirm.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Pages\CreateLongTripForm.xaml.cs">
       <DependentUpon>CreateLongTripForm.xaml</DependentUpon>
@@ -347,6 +353,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Protokolsystem\Additional\ViewDamageForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Protokolsystem\Additional\BoatsOutAdditionalInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -364,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Protokolsystem\Messages\BeginTripBoatsConfirm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -556,6 +570,7 @@
     <Resource Include="View\images\medal_award_bronze.png" />
     <Resource Include="View\images\medal_award_gold.png" />
     <Resource Include="View\images\medal_award_silver.png" />
+    <Resource Include="View\images\page_edit.png" />
     <Resource Include="View\images\search.png" />
     <Resource Include="View\images\setting_tools.png" />
     <Resource Include="View\images\user.png" />
