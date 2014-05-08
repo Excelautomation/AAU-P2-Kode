@@ -1,6 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
+    <!--Major headlines-->
+    <Style x:Key="lblSuperHeadline" TargetType="Label">
+        <Setter Property="FontFamily" Value="Corbel"/>
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    
     <!--Grid-->
     <Style x:Key="gridContent" TargetType="Grid">
         <Setter Property="Margin" Value="4,0,4,10"/>
