@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace ARK.Administrationssystem
+namespace ARK.View.Administrationssystem
 {
     public enum SearchMode
     {

@@ -13,8 +13,6 @@ using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
-using ARK.Administrationssystem;
-using ARK.Administrationssystem.Pages;
 
 namespace ARK.ViewModel.Administrationssystem
 {

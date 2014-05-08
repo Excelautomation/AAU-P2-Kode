@@ -1,13 +1,7 @@
-﻿using ARK.Protokolsystem.Pages;
-using ARK.View.Protokolsystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using ARK.View.Protokolsystem.Pages;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     class ViewDamageFormViewModel : ProtokolsystemContentViewModelBase
     {

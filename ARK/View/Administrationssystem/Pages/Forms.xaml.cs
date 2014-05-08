@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ARK.Administrationssystem.Pages
+namespace ARK.View.Administrationssystem.Pages
 {
     /// <summary>
     /// Interaction logic for Blanketter.xaml

@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ARK.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.Model;
 using ARK.ViewModel.Base.Filter;

@@ -2,7 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ARK.Protokolsystem.Pages;
+using ARK.View;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Protokolsystem;
 using KeyboardEventArgs = ARK.ViewModel.Protokolsystem.KeyboardEventArgs;

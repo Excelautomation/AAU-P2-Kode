@@ -1,4 +1,4 @@
-﻿<Window x:Class="ARK.Administrationssystem.AdminLogin"
+﻿<Window x:Class="ARK.View.Administrationssystem.AdminLogin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
