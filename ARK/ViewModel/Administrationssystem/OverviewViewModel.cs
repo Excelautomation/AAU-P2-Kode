@@ -123,6 +123,14 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        private void ShowBoat(Boat boat)
+        {
+            var adminSystem = (AdminSystemViewModel)Parent;
+            adminSystem.MenuBoats.Execute(null);
+            var boatsViewModel = (BoatViewModel)adminSystem.CurrentPage.DataContext;
+            boatsViewModel.CurrentBoat = boat;
+        }
+
         #region Seach and filters
         public FrameworkElement Filter
         {
