@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ARK.Protokolsystem.Pages
+namespace ARK.View
 {
     /// <summary>
     /// Interaction logic for Keyboard.xaml

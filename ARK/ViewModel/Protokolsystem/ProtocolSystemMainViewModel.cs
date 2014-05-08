@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Protokolsystem.Pages;
+using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;

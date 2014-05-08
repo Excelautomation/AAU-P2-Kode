@@ -1,9 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using ARK.ViewModel.Protokolsystem;
-using System.Linq;
+﻿using System.Windows.Controls;
+using ARK.ViewModel.Protokolsystem.Data;
+using ARK.ViewModel.Protokolsystem.Pages;
 
-namespace ARK.Protokolsystem.Pages
+namespace ARK.View.Protokolsystem.Pages
 {
     /// <summary>
     /// Interaction logic for BeginTripBoats.xaml

@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows;
-using ARK.Administrationssystem.Funktioner;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.XML;
 using System.Globalization;
+using ARK.View.Administrationssystem.Functions;
 
 namespace ARK
 {

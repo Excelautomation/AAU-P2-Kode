@@ -5,9 +5,10 @@ using System.Linq;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Protokolsystem.Pages;
+using ARK.View.Protokolsystem.Pages;
+using ARK.ViewModel.Protokolsystem.Data;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     public class CreateLongTripViewModel : ProtokolsystemContentViewModelBase
     {

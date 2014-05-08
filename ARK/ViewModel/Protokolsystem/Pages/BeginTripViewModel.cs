@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ARK.Model;
@@ -11,13 +10,13 @@ using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Filters;
-using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Protokolsystem.Additional;
+using ARK.ViewModel.Protokolsystem.Data;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     public class BeginTripViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {

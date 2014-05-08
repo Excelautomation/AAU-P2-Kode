@@ -1,19 +1,15 @@
-﻿using ARK.Model;
-using ARK.Model.DB;
-using ARK.Model.Extensions;
-using ARK.Protokolsystem.Pages;
-using ARK.View.Protokolsystem.Additional;
-using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
-using ARK.ViewModel.Protokolsystem.Additional;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
+using ARK.Model;
+using ARK.Model.DB;
+using ARK.Model.Extensions;
+using ARK.View.Protokolsystem.Additional;
+using ARK.ViewModel.Base.Interfaces;
+using ARK.ViewModel.Protokolsystem.Additional;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class MembersinformationViewModel : ProtokolsystemContentViewModelBase
     {

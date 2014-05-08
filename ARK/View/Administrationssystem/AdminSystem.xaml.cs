@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ARK.Administrationssystem
+namespace ARK.View.Administrationssystem
 {
     /// <summary>
     /// Interaction logic for Administrationssystem.xaml
