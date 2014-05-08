@@ -109,7 +109,8 @@
         </Border>
 
         <ListView x:Name="Members" ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
-                  ItemsSource="{Binding Path=MemberKmCollectionFiltered}" Grid.Row="1" Grid.Column="0">
+                  ItemsSource="{Binding Path=MemberKmCollectionFiltered}" Grid.Row="1" Grid.Column="0"
+                  SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

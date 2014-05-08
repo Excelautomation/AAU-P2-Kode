@@ -56,7 +56,7 @@
         </Grid.RowDefinitions>
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="0">
-            <TextBlock Text="BÅD" Style="{StaticResource ResourceKey=txbHeader}"/>
+            <TextBlock Text="BÅDENS OPLYSNINGER" Style="{StaticResource ResourceKey=txbHeader}"/>
         </Border>
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
@@ -92,7 +92,7 @@
                 <Run Text="{Binding SelectedBoat[0].NumberofSeats}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Bådtype:" FontWeight="Bold"/>
+                <Run Text="Kategori:" FontWeight="Bold"/>
                 <Run Text="{Binding SelectedBoat[0].SpecificBoatType}"/>
             </TextBlock>
             <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=styleContent}" 

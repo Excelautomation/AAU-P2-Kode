@@ -21,7 +21,6 @@ namespace ARK.ViewModel.Protokolsystem
         // Fields
         private readonly IEnumerable<MemberDistanceViewModel> _memberKmCollection;
         private IEnumerable<MemberDistanceViewModel> _memberKmCollectionFiltered;
-
         private MemberDistanceViewModel _selectedMember;
 
         // Constructor
