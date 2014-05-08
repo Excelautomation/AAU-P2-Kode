@@ -78,7 +78,8 @@ namespace ARK.ViewModel.Protokolsystem
 
             _boats = _db.Boat
                 .Where(boat => boat.Active)
-                .OrderByDescending(boat => boat.Trips.Count(trip => trip.TripStartTime > limit))
+                .OrderBy(boat => boat.Trips.Any(trip => trip.TripEndedTime == null))
+                .ThenByDescending(boat => boat.Trips.Count(trip => trip.TripStartTime > limit))
                 .Include(boat => boat.Trips)
                 .ToList();
         }
@@ -282,7 +283,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         private void ResetFilter()
         {
-            Boats = new ObservableCollection<Boat>(_boats);
+            Boats = new ObservableCollection<Boat>(_boats.ToList());
             foreach (MemberViewModel member in MembersFiltered)
                 member.Visible = true;
         }
