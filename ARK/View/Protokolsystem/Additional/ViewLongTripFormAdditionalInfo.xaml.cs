@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ARK.View.Protokolsystem.Additional
 {
     /// <summary>
-    /// Interaction logic for ViewDamageForm.xaml
+    /// Interaction logic for ViewLongTripFormAdditionalInfo.xaml
     /// </summary>
-    public partial class ViewDamageForm : UserControl
+    public partial class ViewLongTripFormAdditionalInfo : UserControl
     {
-        public ViewDamageForm()
+        public ViewLongTripFormAdditionalInfo()
         {
             InitializeComponent();
         }
