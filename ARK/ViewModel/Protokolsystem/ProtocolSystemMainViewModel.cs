@@ -89,7 +89,7 @@ namespace ARK.ViewModel.Protokolsystem
                 .Where(t => t.TripEndedTime > today);
             if (temp.Any())
             {
-                DailyKilometers = temp.Sum(t => t.Distance*t.Members.Count());
+                DailyKilometers = temp.Sum(t => t.Distance*t.CrewCount);
             }
         }
 
