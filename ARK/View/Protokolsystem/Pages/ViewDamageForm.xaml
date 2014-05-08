@@ -63,13 +63,14 @@
         </ListView>
 
         <DockPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,5,0,0" LastChildFill="False">
-            <Button x:Name="btnShowKeyboard"
+
+            <Button x:Name="btnRectifyDamageForm"
                     Margin="0,0,3,0"
                     DockPanel.Dock="Left"
-                    Style="{StaticResource ResourceKey=btnFilter}" 
-                    Command="{Binding Path=ToggleKeyboard}"
-                    Background="{StaticResource SearchFilterBG}"
-                    BorderBrush="{StaticResource SearchFilterBorder}">
+                    Command="{Binding ViewDamageForm}"
+            	    Style="{StaticResource ResourceKey=btnFilter}" 
+            	    Background="{DynamicResource ChangeBorder}"
+            	    BorderBrush="{StaticResource InfoBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -77,34 +78,8 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left">
-                        <Image.Style>
-                            <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/keyboard.png"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <TextBlock Grid.Column="3">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;TASTATUR"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/document_inspector.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="SKADE&#xA;UDBEDRET" />
                 </Grid>
             </Button>
 
