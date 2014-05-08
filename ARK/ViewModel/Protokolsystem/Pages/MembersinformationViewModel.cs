@@ -23,19 +23,19 @@ namespace ARK.ViewModel.Protokolsystem
         private Member _selectedMember;
 
         private FrameworkElement _additionalInfoPage;
+        private DateTime _latestData;
+
+        private DbArkContext db;
 
         // Constructor
         public MembersinformationViewModel()
         {
-            var db = DbArkContext.GetDbContext();
+            db = DbArkContext.GetDbContext();
 
             ParentAttached += (sender, args) =>
             {
                 // Load data
-                _members = new List<Member>(db.Member)
-                    .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
-                    .OrderBy(x => x.FirstName)
-                    .ToList();
+                LoadMembers();
                 MembersFiltered = _members;
 
                 // Set selected member
@@ -52,6 +52,19 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 ProtocolSystem.KeyboardTextChanged -= ProtocolSystem_KeyboardTextChanged;
             };
+        }
+
+        private void LoadMembers()
+        {
+            if (MembersFiltered == null || (DateTime.Now - _latestData).TotalHours > 1)
+            {
+                _latestData = DateTime.Now;
+
+                _members = new List<Member>(db.Member)
+                    .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
+                    .OrderBy(x => x.FirstName)
+                    .ToList();
+            }
         }
 
         private void ProtocolSystem_KeyboardTextChanged(object sender, KeyboardEventArgs e)

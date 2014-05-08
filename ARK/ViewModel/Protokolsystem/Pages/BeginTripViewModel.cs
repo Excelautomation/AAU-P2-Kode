@@ -43,22 +43,16 @@ namespace ARK.ViewModel.Protokolsystem
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(false, true);
-            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
+            filterController.FilterChanged += (sender, e) => UpdateFilter(e);
 
-            // Load members and set date
+            // Load members
             LoadMembers();
-            _latestData = DateTime.Now;
 
             // Set up variables to load of data
-            ParentAttached += (sender, args) =>
+            ParentAttached += (sender, e) =>
             {
-                if ((DateTime.Now - _latestData).TotalHours > 1)
-                {
-                    // Load members and set date
-                    LoadMembers();
-                    _latestData = DateTime.Now;
-                }
-
+                // Load members and boats
+                LoadMembers();
                 LoadBoats();
 
                 ResetData();
@@ -67,8 +61,14 @@ namespace ARK.ViewModel.Protokolsystem
 
         private void LoadMembers()
         {
-            var members = _db.Member.Where(member => member.Active).OrderBy(x => x.FirstName).ToList();
-            MembersFiltered = new ObservableCollection<MemberViewModel>(members.Select(member => new MemberViewModel(member)));
+            if (MembersFiltered == null || (DateTime.Now - _latestData).TotalHours > 1)
+            {
+                _latestData = DateTime.Now;
+
+                var members = _db.Member.Where(member => member.Active).OrderBy(x => x.FirstName).ToList();
+                MembersFiltered =
+                    new ObservableCollection<MemberViewModel>(members.Select(member => new MemberViewModel(member)));
+            }
         }
 
         private void LoadBoats()
