@@ -7,7 +7,7 @@
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="600">
     <UserControl.DataContext>
         <VM:FormsDamageViewModel></VM:FormsDamageViewModel>
     </UserControl.DataContext>
@@ -23,92 +23,90 @@
         <valueConverters:BoolToStringConverter x:Key="Funktionel" FalseValue="Nej" TrueValue="Ja" />
     </UserControl.Resources>
     <StackPanel>
-        <Label FontSize="30" HorizontalAlignment="Left" FontFamily="arial" FontWeight="Bold" Margin="20,0,0,20">Skadesblanket</Label>
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="20"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="15"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            
-            
-            <Grid Margin="0,0,0,0" Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="150"/>
-                </Grid.ColumnDefinitions>
-                
-                <Label Grid.Row="0">Andmelder:</Label>
-                <Label Grid.Row="1">Båd:</Label>
-                <Label Grid.Row="2">Indsendt:</Label>
-                <Label Grid.Row="3">Skade:</Label>
-                <Label Grid.Row="4">Funktionel:</Label>
 
-                <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                    <TextBlock Margin="0,0,3,0" Text="{Binding Path=DamageForm.RegisteringMember.FirstName}" />
-                    <TextBlock Text="{Binding Path=DamageForm.RegisteringMember.LastName}" />
-                </WrapPanel>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=DamageForm.Boat.Name}" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=DamageForm.Date, StringFormat=d}" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=DamageForm.Type}" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=DamageForm.Functional, Converter={StaticResource Funktionel}}" VerticalAlignment="Center"/>
-            </Grid>
-            <Grid Grid.Column="1" Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="20"/>
-                </Grid.RowDefinitions>
-                
-                <DockPanel>
-                    <Label DockPanel.Dock="Top" Content="Kommentarer"/>
-                    <TextBox AcceptsReturn="True" Height="130" Name="CommentTextbox" Width="250" FontSize="14" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
-                </DockPanel>
-                <Button Grid.Row="1" Content="Gem ændringer" Command="{Binding SaveChanges}"/>
-            </Grid>
-                
-            <DockPanel Grid.ColumnSpan="2" Grid.Row="2">
-                <Button Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeactivateBåd}">
-                    <StackPanel>
+            <Label Grid.Row="0" FontSize="20" HorizontalAlignment="Center" Margin="4" Content="Skadesblanket"/>
+
+
+            <WrapPanel Grid.Row="1" Margin="4" HorizontalAlignment="Center">
+
+                <StackPanel Width="400" Margin="4">
+                    <WrapPanel>
+                        <TextBlock Text="Anmelder" Width="100"/>
+                        <TextBlock Text="{Binding Path=DamageForm.RegisteringMember.FirstName}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Path=DamageForm.RegisteringMember.LastName}"/>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Båd" Width="100"/>
+                        <TextBlock Text="{Binding Path=DamageForm.Boat.Name}"/>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Indsendt" Width="100"/>
+                        <TextBlock Text="{Binding Path=DamageForm.Date, StringFormat=d}"/>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Skadetype" Width="100"/>
+                        <TextBlock Text="{Binding Path=DamageForm.Type}"/>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Funktionalitet" Width="100"/>
+                        <TextBlock/>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Text="Status" Width="100"/>
+                        <TextBlock>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=DamageForm.Closed, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                            <Setter Property="Text" Value="Lukket"/>
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </WrapPanel>
+                </StackPanel>
+
+                <StackPanel Width="400" Margin="4">
+                    <Label Content="Kommentarer"/>
+                    <WrapPanel Width="250" HorizontalAlignment="Left">
+                        <TextBox AcceptsReturn="True" Height="130" Name="CommentTextbox" Width="250" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
+                        <Button Content="Gem ændringer" Width="100" Command="{Binding SaveChanges}"/>
+                    </WrapPanel>
+                </StackPanel>
+
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="2" Margin="4" HorizontalAlignment="Center">
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeactivateBåd}">
+                    <StackPanel Margin="4">
                         <WrapPanel HorizontalAlignment="Center">
-                            <Image Source="../../images/yacht.png" Height="24"/>
-                            <Image Source="../../images/cross.png" Height="24"/>
+                            <Image Source="../../images/application_side_list_red.png" Height="32"/>
+                            <Image Source="../../images/add.png" Height="32"/>
                         </WrapPanel>
-                        <Label Content="Sæt båden til skadet" FontSize="14" FontStyle="Normal"/>
+                        <Label Content="Genopret skadesblanket"/>
                     </StackPanel>
                 </Button>
-                <Button HorizontalAlignment="Left" Padding="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=AktiverBåd}">
-                    <StackPanel Margin="0">
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=AktiverBåd}">
+                    <StackPanel Margin="4">
                         <WrapPanel HorizontalAlignment="Center">
-                            <Image Source="../../images/yacht.png" Height="24"/>
-                            <Image Source="../../images/accept.png" Height="24"/>
+                            <Image Source="../../images/application_side_list_red.png" Height="32"/>
+                            <Image Source="../../images/delete.png" Height="32"/>
                         </WrapPanel>
-                        <Label Content="Sæt båden til aktiv" FontSize="14" FontStyle="Normal"/>
+                        <Label Content="Deaktiver skadesblanket"/>
                     </StackPanel>
                 </Button>
-                <Button Padding="5" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" Command="{Binding Path=CloseForm}">
-                    <StackPanel>
-                        <WrapPanel HorizontalAlignment="Center">
-                            <Image Source="../../images/cross.png" Height="24"/>
-                        </WrapPanel>
-                        <Label Content="Luk skadesform" FontSize="14" FontStyle="Normal"/>
-                    </StackPanel>
-                </Button>
-            </DockPanel>
+            </WrapPanel>
             
             
             <TextBlock Grid.Row="3" FontSize="20">
@@ -124,18 +122,7 @@
                 </TextBlock.Style>
             </TextBlock>
 
-            <TextBlock Grid.Row="4" FontSize="20">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=DamageForm.Closed, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                <Setter Property="Text" Value="Denne skadesform er lukket"/>
-                                <Setter Property="Foreground" Value="Red"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
+            
             
         </Grid>
     </StackPanel>

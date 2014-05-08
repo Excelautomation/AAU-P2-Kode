@@ -82,13 +82,13 @@
 
         <WrapPanel Margin="4" Grid.Row="2" HorizontalAlignment="Center">
             <Button Margin="4" Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}">
-                <StackPanel Margin="5">
+                <StackPanel Margin="4">
                     <Image Source="../../images/accept.png" Height="32"/>
                     <Label Content="Godkend Langtursblanket"/>
                 </StackPanel>
             </Button>
             <Button Margin="4" Background="Transparent" BorderBrush="Transparent" Command="{Binding RejectForm}">
-                <StackPanel Margin="5">
+                <StackPanel Margin="4">
                     <Image Source="../../images/cross.png" Height="32"/>
                     <Label Content="Afvis Langtursblanket"/>
                 </StackPanel>
