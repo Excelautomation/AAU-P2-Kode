@@ -64,7 +64,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                 {
                     if (member == null) return;
 
-                    if (member.Member.Id == -1)
+                    if (member.Member.Id < 0)
                     {
                         var temp = SelectedMembers.ToList();
                         temp.Remove(member);
