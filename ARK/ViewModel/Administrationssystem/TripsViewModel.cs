@@ -1,15 +1,11 @@
-﻿    using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
-using System.ComponentModel;
 using ARK.Model.Extensions;
 using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
@@ -18,103 +14,124 @@ using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-   public class TripsViewModel : ContentViewModelBase //, IFilterContentViewModel
+    public class TripsViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        private List<Trip> _TripsNonFiltered;
-        private readonly DbArkContext _dbArkContext;
-        private IEnumerable<Trip> _Trips;
         private Trip _currentTrip;
-        private bool _RecentSave = false;
-        
+        private bool _recentSave;
+        private List<Trip> _trips;
+        private IEnumerable<Trip> _tripsFiltered;
+
         //private FrameworkElement _filter;
 
-       public TripsViewModel()
+        public TripsViewModel()
         {
-            // Instaliser lister så lazy ikke fejler
-            _TripsNonFiltered = new List<Trip>();
-            
+            // Initialize lists
+            TripsFiltered = new List<Trip>();
+            _trips = new List<Trip>();
+
             // Load data
-            _dbArkContext = DbArkContext.GetDbContext();
             Task.Factory.StartNew(() =>
             {
                 DbArkContext db = DbArkContext.GetDbContext();
 
                 lock (db)
                 {
-                    // Opret forbindelser Async
-                    Task<List<Trip>> TripsLoad = db.Trip.ToListAsync();
-
-                    _TripsNonFiltered = TripsLoad.Result;
+                    // Indlæs data
+                    _trips = db.Trip.Include(trip => trip.Members).ToList();
                 }
 
-                Trips = _TripsNonFiltered;
+                TripsFiltered = _trips;
 
                 // Nulstil filter
-                //ResetFilter();
+                ResetFilter();
             });
 
             // Nulstil filter
-            //ResetFilter();
+            ResetFilter();
 
-            // Setup filter
-            //var filterController = new FilterContent(this);
-            //filterController.EnableFilter(true, true);
-            //filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs); 
+            //Setup filter
+            var filterController = new FilterContent(this);
+            filterController.EnableFilter(true, true);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
-       public IEnumerable<Trip> Trips
-       {
-           get { return _Trips; }
-           set
-           {
-               _Trips = value;
-               Notify();
-           }
-       }
+        public IEnumerable<Trip> TripsFiltered
+        {
+            get { return _tripsFiltered; }
+            set
+            {
+                _tripsFiltered = value;
+                Notify();
+            }
+        }
 
-       public Trip CurrentTrip
-       {
-           get { return _currentTrip; }
-           set
-           {
-               _currentTrip = value;
-               Notify();
-           }
-       }
-       
-       public bool RecentSave
-       {
-           get { return _RecentSave; }
-           set { _RecentSave = value; Notify(); }
-       }
+        public Trip CurrentTrip
+        {
+            get { return _currentTrip; }
+            set
+            {
+                _currentTrip = value;
+                Notify();
+            }
+        }
 
-       public ICommand SelectedChange
-       {
-           get
-           {
-               return GetCommand<Trip>(e =>
-               {
-                   CurrentTrip = e;
-               });
-           }
-       }
+        public bool RecentSave
+        {
+            get { return _recentSave; }
+            set
+            {
+                _recentSave = value;
+                Notify();
+            }
+        }
 
-       public ICommand SaveChanges
-       {
-           get
-           {
-               return GetCommand<object>(e =>
-               {
-                   _dbArkContext.SaveChanges();
-                   RecentSave = true;
-               });
-           }
-       }
+        public ICommand SelectedChange
+        {
+            get { return GetCommand<Trip>(e => { CurrentTrip = e; }); }
+        }
 
+        public ICommand SaveChanges
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    DbArkContext.GetDbContext().SaveChanges();
+                    RecentSave = true;
+                });
+            }
+        }
 
-       //public FrameworkElement Filter
-       //{
-       //    get { throw new NotImplementedException(); }
-       //}
+        public FrameworkElement Filter
+        {
+            get { return new TripFilter(); }
+        }
+
+        private void ResetFilter()
+        {
+            TripsFiltered = _trips;
+        }
+
+        private void UpdateFilter(FilterChangedEventArgs args)
+        {
+            // Reset filters
+            ResetFilter();
+
+            if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
+                (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
+                return;
+
+            // Filter
+            if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
+            {
+                TripsFiltered = FilterContent.FilterItems(TripsFiltered, args.FilterEventArgs);
+            }
+
+            // Tjek søgning
+            if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
+            {
+                TripsFiltered = TripsFiltered.Where(trip => trip.Filter(args.SearchEventArgs.SearchText)).ToList();
+            }
+        }
     }
 }

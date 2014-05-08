@@ -1,5 +1,6 @@
 ﻿using ARK.Model;
 using ARK.Model.DB;
+using ARK.Model.Extensions;
 using ARK.Protokolsystem.Pages;
 using ARK.View.Protokolsystem.Additional;
 using ARK.ViewModel.Base;
@@ -16,7 +17,8 @@ namespace ARK.ViewModel.Protokolsystem
 {
     internal class MembersinformationViewModel : ProtokolsystemContentViewModelBase
     {
-        private List<Member> _members;
+        private IEnumerable<Member> _membersFiltered;
+        private readonly List<Member> _members;
 
         private Member _selectedMember;
 
@@ -32,15 +34,31 @@ namespace ARK.ViewModel.Protokolsystem
                 .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
                 .OrderBy(x => x.FirstName)
                 .ToList();
+            _membersFiltered = _members;
 
-            ParentAttached += (sender, args) => UpdateInfo();
+            ParentAttached += (sender, args) =>
+            {
+                UpdateInfo();
+
+                ProtocolSystem.KeyboardTextChanged += ProtocolSystem_KeyboardTextChanged;
+            };
+
+            ParentDetached += (sender, args) =>
+            {
+                ProtocolSystem.KeyboardTextChanged -= ProtocolSystem_KeyboardTextChanged;
+            };
+        }
+
+        private void ProtocolSystem_KeyboardTextChanged(object sender, KeyboardEventArgs e)
+        {
+            MembersFiltered = string.IsNullOrEmpty(e.Text) ? _members : _members.Where(member => member.Filter(e.Text)).ToList();
         }
 
         // Properties
-        public List<Member> Members
+        public IEnumerable<Member> MembersFiltered
         {
-            get { return _members; }
-            set { _members = value; Notify(); }
+            get { return _membersFiltered; }
+            set { _membersFiltered = value; Notify(); }
         }
 
         public Member SelectedMember
@@ -79,7 +97,7 @@ namespace ARK.ViewModel.Protokolsystem
         // Methods
         public void Sort(Func<Member, string> predicate)
         {
-            Members = Members.OrderBy(predicate).ToList();
+            MembersFiltered = MembersFiltered.OrderBy(predicate).ToList();
         }
 
         private void UpdateInfo()
