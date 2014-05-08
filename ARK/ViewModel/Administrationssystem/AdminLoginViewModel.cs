@@ -33,8 +33,9 @@ namespace ARK.ViewModel.Administrationssystem
                     if (admin != null && admin.Username == Username && admin.Password == ((AdminLogin)e).PasswordBox.Password)
                     {
                         var window = new AdminSystem();
-                        window.Show();
                         ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
+                        window.Show();
+
 
                         e.Close();
                     }
