@@ -45,33 +45,42 @@ namespace ARK.ViewModel.Protokolsystem
             filterController.EnableFilter(false, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
-            // Set up variables to load of data
-            Task<List<Boat>> boatsAsync = null;
-            Task<List<Member>> membersAsync = null;
+            // Load members and set date
+            LoadMembers();
+            _latestData = DateTime.Now;
 
+            // Set up variables to load of data
             ParentAttached += (sender, args) =>
             {
-                if (boatsAsync == null || membersAsync == null || (DateTime.Now - _latestData).TotalHours > 1)
+                if ((DateTime.Now - _latestData).TotalHours > 1)
                 {
-                    // Load data. Check the boats activitylevel on a 8-day-basis
-                    DateTime limit = DateTime.Now.AddDays(-8);
-
-                    // Async start load of data
-                    boatsAsync = _db.Boat
-                        .Where(b => b.Active)
-                        .OrderByDescending(b => b.Trips.Count(t => t.TripStartTime > limit)).ToListAsync();
-                    membersAsync = _db.Member.OrderBy(x => x.FirstName).ToListAsync();
-
-                    // Set date
+                    // Load members and set date
+                    LoadMembers();
                     _latestData = DateTime.Now;
-
-                    // Read data
-                    _boats = boatsAsync.Result;
-                    MembersFiltered = new ObservableCollection<MemberViewModel>(membersAsync.Result.Select(member => new MemberViewModel(member)));
                 }
+
+                LoadBoats();
 
                 ResetData();
             };
+        }
+
+        private void LoadMembers()
+        {
+            var members = _db.Member.Where(member => member.Active).OrderBy(x => x.FirstName).ToList();
+            MembersFiltered = new ObservableCollection<MemberViewModel>(members.Select(member => new MemberViewModel(member)));
+        }
+
+        private void LoadBoats()
+        {
+            // Load data. Check the boats activitylevel on a 8-day-basis
+            DateTime limit = DateTime.Now.AddDays(-8);
+
+            _boats = _db.Boat
+                .Where(boat => boat.Active)
+                .OrderByDescending(boat => boat.Trips.Count(trip => trip.TripStartTime > limit))
+                .Include(boat => boat.Trips)
+                .ToList();
         }
 
         private void ResetData()
@@ -116,7 +125,7 @@ namespace ARK.ViewModel.Protokolsystem
                 
                 _selectedBoat = value;
 
-                Keyboard.KeyboardClear();
+                ProtocolSystem.KeyboardClear();
                 SelectedMembers.Clear();
                 UpdateInfo();
 
@@ -156,7 +165,7 @@ namespace ARK.ViewModel.Protokolsystem
                 {
                     var trip = new Trip
                     {
-                        Id = _db.Trip.OrderByDescending(t => t.Id).First(y => true).Id + 1,
+                        Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
                         TripStartTime = DateTime.Now,
                         Members = new List<Member>(),
                         BoatId = SelectedBoat.Id
@@ -205,10 +214,15 @@ namespace ARK.ViewModel.Protokolsystem
                 {
                     if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
                     {
-                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -1, FirstName = "Gæst" }));
+                        SelectedMembers.Add(new MemberViewModel(FindGuest()));
                     }
                 });
             }
+        }
+
+        private Member FindGuest()
+        {
+            return DbArkContext.GetDbContext().Member.FirstOrDefault(member => member.FirstName == "Gæst");
         }
 
         private IInfoContainerViewModel GetInfoContainerViewModel

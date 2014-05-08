@@ -81,8 +81,17 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.Row="1" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2" 
+        <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.Row="1" SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" AlternationCount="2" 
                   ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource styleListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=BoatOut}" Value="True">
+                            <Setter Property="Background" Value="Yellow"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

@@ -51,7 +51,7 @@ namespace ARK.Model
 
         public Trip GetActiveTrip
         {
-            get { return Trips.FirstOrDefault(x => x.TripEndedTime == default(DateTime)); }
+            get { return Trips.FirstOrDefault(trip => trip.TripEndedTime == null); }
         }
 
         public bool BoatOut

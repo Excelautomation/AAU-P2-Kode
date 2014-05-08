@@ -35,9 +35,13 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 if (this.ActiveTrips == null || (DateTime.Now - _latestData).TotalHours > 1)
                 {
-                    this.GetData();
+                    // Indlæs data
+                    this.GetStandardTrips();
+
                     _latestData = DateTime.Now;
                 }
+                this.GetActiveTrips();
+
                 base.ProtocolSystem.KeyboardTextChanged += this.CheckCanEndTrip;
             };
 
@@ -133,13 +137,6 @@ namespace ARK.ViewModel.Protokolsystem
         public Trip SelectedTrip { get; set; }
 
         private StandardTrip SelectedStdTrip { get; set; }
-
-        private void GetData()
-        {
-            // Indlæs data
-            this.GetStandardTrips();
-            this.GetActiveTrips();
-        }
 
         private void GetActiveTrips()
         {

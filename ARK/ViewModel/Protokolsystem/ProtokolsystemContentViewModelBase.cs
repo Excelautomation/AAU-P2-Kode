@@ -8,21 +8,12 @@ namespace ARK.ViewModel.Protokolsystem
     {
         public ProtokolsystemContentViewModelBase()
         {
-            ParentAttached += (sender, args) =>
-            {
-                NotifyCustom("ProtocolSystem");
-                NotifyCustom("Keyboard");
-            };
+            ParentAttached += (sender, args) => NotifyCustom("ProtocolSystem");
         }
 
         public ProtocolSystemMainViewModel ProtocolSystem
         {
             get { return Parent as ProtocolSystemMainViewModel; }
-        }
-
-        public IKeyboardContainerViewModelBase Keyboard
-        {
-            get { return Parent as IKeyboardContainerViewModelBase; }
         }
 
         public ICommand ToggleKeyboard
