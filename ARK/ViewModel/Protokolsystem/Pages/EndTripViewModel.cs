@@ -118,10 +118,11 @@ namespace ARK.ViewModel.Protokolsystem
                 return GetCommand<IList>(st =>
                 {
                     var temp = st.Cast<StandardTrip>();
+                    SelectedStdTrips = temp;
                     if (this.SelectedStdTrips.Count() == 1)
                     {
                         this.CanEndTrip = true;
-                        this.SelectedStdTrip = temp.First();
+                        this.SelectedStdTrip = this.SelectedStdTrips.Single();
         }
                     else
                 {

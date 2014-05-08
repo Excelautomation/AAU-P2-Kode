@@ -13,6 +13,7 @@ namespace ARK.Model
         public DateTime? TripEndedTime { get; set; }    // no further explanation needed
         public string Direction { get; set; }           // Starting direction that is ment to be displayed douring the tour for security reasons.   
         public string Title { get; set; }               // Helping title for the user to decide the distance that the boat have sailed.
+        public int CrewCount { get; set; }
  
         //Foreign key
         public int BoatId { get; set; }
