@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ARK.View.Protokolsystem.Pages
+namespace ARK.View.Protokolsystem.Confirmations
 {
     /// <summary>
-    /// Interaction logic for MessageWindow.xaml
+    /// Interaction logic for Confirmation.xaml
     /// </summary>
-    public partial class MessageWindow : Window
+    public partial class Confirmation : Window
     {
-        public MessageWindow()
+        public Confirmation()
         {
             InitializeComponent();
         }

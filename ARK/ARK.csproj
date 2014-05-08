@@ -237,7 +237,7 @@
     <Compile Include="View\Protokolsystem\Filters\DistanceStatisticsFilters.xaml.cs">
       <DependentUpon>DistanceStatisticsFilters.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Messages\BeginTripBoatsConfirm.xaml.cs">
+    <Compile Include="View\Protokolsystem\Confirmations\BeginTripBoatsConfirm.xaml.cs">
       <DependentUpon>BeginTripBoatsConfirm.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Pages\CreateLongTripForm.xaml.cs">
@@ -267,8 +267,8 @@
     <Compile Include="View\Protokolsystem\Pages\MembersInformation.xaml.cs">
       <DependentUpon>MembersInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Pages\MessageWindow.xaml.cs">
-      <DependentUpon>MessageWindow.xaml</DependentUpon>
+    <Compile Include="View\Protokolsystem\Confirmations\Confirmation.xaml.cs">
+      <DependentUpon>Confirmation.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Filters\BeginTripFilters.xaml.cs">
       <DependentUpon>BeginTripFilters.xaml</DependentUpon>
@@ -394,7 +394,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Protokolsystem\Messages\BeginTripBoatsConfirm.xaml">
+    <Page Include="View\Protokolsystem\Confirmations\BeginTripBoatsConfirm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -410,7 +410,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Protokolsystem\Pages\MessageWindow.xaml">
+    <Page Include="View\Protokolsystem\Confirmations\Confirmation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -668,6 +668,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\images\building_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\Protokolsystem\Confirmations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
