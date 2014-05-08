@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="ARK.View.Protokolsystem.Additional.ViewDamageFormAdditionalInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
+             mc:Ignorable="d" Width="200" Height="768">
+
+    <UserControl.DataContext>
+        <VM:ViewDamageFormAdditionalInfoViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <Style x:Key="styleStack" TargetType="StackPanel">
+            <Style.Setters>
+                <Setter Property="Margin" Value="5,5,0,0"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Orientation" Value="Vertical"/>
+            </Style.Setters>
+                
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Member.ShortTripCox}">
+                    <DataTrigger.Value>
+                        <sys:Boolean>True</sys:Boolean>
+                    </DataTrigger.Value>
+                    <Setter Property="Background" Value="LightGreen"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource lstViewContent}"/>
+            </Style.Resources>
+        </Style>
+
+        <Style x:Key="styleContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
+            <Setter Property="Margin" Value="5,3,0,0"/>
+        </Style>
+
+        <Style x:Key="styleCheckBox" TargetType="CheckBox">
+            <Setter Property="Margin" Value="5,4,0,0"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+        </Style>
+        
+        <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
+    </UserControl.Resources>
+
+    <Grid Height="768" Margin="3,5,3,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="0">
+            <TextBlock Text="SKADEBLANKET" Style="{StaticResource ResourceKey=txbHeader}"/>
+        </Border>
+
+        <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
+            <TextBlock Style="{StaticResource ResourceKey=txbHeader}">
+                <Run Text="SKADE BESKRIVELSE"/>
+            </TextBlock>
+        </Border>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Status:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Oprettelsesdato:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Anmelderens navn:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Beskadiget båd:" FontWeight="Bold"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Funktionel:" FontWeight="Bold"/>
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="3" Background="White">
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Skadetype:" FontWeight="Bold"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Skadebeskrivelse:" FontWeight="Bold"/>
+            </TextBlock>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
