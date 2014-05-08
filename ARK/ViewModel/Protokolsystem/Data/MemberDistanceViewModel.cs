@@ -58,15 +58,16 @@ namespace ARK.ViewModel.Protokolsystem.Data
             }
         }
 
-        private void ResetFilter()
+        public void ResetFilter()
         {
             FilteredTrips = _trips.ToList();
         }
 
         public void UpdateFilter(FilterChangedEventArgs args)
         {
+            // Reset filter
             ResetFilter();
-
+            
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
                 (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
             {
@@ -81,7 +82,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
             }
         }
 
-        private void UpdateDistance()
+        public void UpdateDistance()
         {
             var lowerTimeLimit = new DateTime();
             var upperTimeLimit = DateTime.Now;
