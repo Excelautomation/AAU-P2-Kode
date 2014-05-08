@@ -15,7 +15,8 @@ namespace ARK.ViewModel.Protokolsystem
 
         public BoatsOutViewModel()
         {
-            BoatsOut = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
+            ParentAttached += (sender, e) =>
+                BoatsOut = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
         }
 
         public List<Trip> BoatsOut

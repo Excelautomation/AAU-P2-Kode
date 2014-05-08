@@ -1,35 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ARK.Model;
 using System.Windows.Input;
+using ARK.Model;
 using ARK.Model.DB;
 using ARK.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem
 {
-    class CreateDamageFormViewModel : ProtokolsystemContentViewModelBase
+    internal class CreateDamageFormViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        private Member _selectedMember;
-        private List<Member> _members;
-        private Boat _selectedBoat;
+        private List<DamageForm> _activeDamageForms;
         private List<Boat> _boats;
         private List<DamageType> _damageTypes;
-        private DamageType _selectedDamageType;
-        private List<DamageForm> _activeDamageForms;
+        private List<Member> _members;
+        private Boat _selectedBoat;
         private DamageForm _selectedDamageForm;
+        private DamageType _selectedDamageType;
+        private Member _selectedMember;
 
         // constructor
         public CreateDamageFormViewModel()
         {
-            var db = DbArkContext.GetDbContext();
-            _members = db.Member.Where(m => true).ToList();
-            _boats = db.Boat.Where(b => true).ToList();
-            _damageTypes = db.DamageType.Where(d => true).ToList();
-            _activeDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
+            DbArkContext db = DbArkContext.GetDbContext();
+
+            ParentAttached += (sender, e) =>
+            {
+                Members = db.Member.ToList();
+                Boats = db.Boat.ToList();
+                DamageTypes = db.DamageType.ToList();
+                ActiveDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
+            };
         }
 
         // Properties
@@ -37,42 +38,62 @@ namespace ARK.ViewModel.Protokolsystem
         public Member SelectedMember
         {
             get { return _selectedMember; }
-            set 
+            set
             {
-                _selectedMember = value; 
-                Notify(); 
+                _selectedMember = value;
+                Notify();
             }
         }
 
         public List<Member> Members
         {
             get { return _members; }
-            set { _members = value; Notify(); }
+            set
+            {
+                _members = value;
+                Notify();
+            }
         }
 
         // injured boat
         public Boat SelectedBoat
         {
             get { return _selectedBoat; }
-            set { _selectedBoat = value; Notify(); }
+            set
+            {
+                _selectedBoat = value;
+                Notify();
+            }
         }
 
         public List<Boat> Boats
         {
             get { return _boats; }
-            set { _boats = value; Notify(); }
+            set
+            {
+                _boats = value;
+                Notify();
+            }
         }
 
         public List<DamageType> DamageTypes
         {
             get { return _damageTypes; }
-            set { _damageTypes = value; }
+            set
+            {
+                _damageTypes = value;
+                Notify();
+            }
         }
 
         public DamageType SelectedDamageType
         {
             get { return _selectedDamageType; }
-            set { _selectedDamageType = value; }
+            set
+            {
+                _selectedDamageType = value;
+                Notify();
+            }
         }
 
         public string Description { get; set; }
@@ -82,20 +103,30 @@ namespace ARK.ViewModel.Protokolsystem
         public List<DamageForm> ActiveDamageForms
         {
             get { return _activeDamageForms; }
-            set { _activeDamageForms = value; }
+            set
+            {
+                _activeDamageForms = value;
+                Notify();
+            }
         }
 
         public DamageForm SelectedDamageForm
         {
             get { return _selectedDamageForm; }
-            set { _selectedDamageForm = value; Notify(); }
+            set
+            {
+                _selectedDamageForm = value;
+                Notify();
+            }
         }
 
         public ICommand CreateDamageForm
         {
             get
             {
-                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+                return
+                    GetCommand<object>(
+                        a => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
             }
         }
 
@@ -103,41 +134,25 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "AKTIVE SKADES BLANKETTER"));
+                return
+                    GetCommand<object>(
+                        a => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "AKTIVE SKADES BLANKETTER"));
             }
         }
 
         public ICommand MemberSelectionChanged
         {
-            get
-            {
-                return GetCommand<Member>(e =>
-                {
-                    SelectedMember = e;
-                });
-            }
+            get { return GetCommand<Member>(e => { SelectedMember = e; }); }
         }
 
         public ICommand BoatSelectionChanged
         {
-            get
-            {
-                return GetCommand<Boat>(b =>
-                {
-                    SelectedBoat = b;
-                });
-            }
+            get { return GetCommand<Boat>(b => { SelectedBoat = b; }); }
         }
 
         public ICommand DamageTypeSelected
         {
-            get
-            {
-                return GetCommand<DamageType>(d =>
-                {
-                    SelectedDamageType = d;
-                });
-            }
+            get { return GetCommand<DamageType>(d => { SelectedDamageType = d; }); }
         }
 
         public ICommand AddDamageType
@@ -150,8 +165,8 @@ namespace ARK.ViewModel.Protokolsystem
                     if (SelectedBoat != null && SelectedMember != null && SelectedDamageType != null)
                     {
                         var damageForm = new DamageForm();
-                        damageForm.RegisteringMember = SelectedMember;  // Member
-                        damageForm.Boat = SelectedBoat;                 // Boat
+                        damageForm.RegisteringMember = SelectedMember; // Member
+                        damageForm.Boat = SelectedBoat; // Boat
                         // set damagetype
                         damageForm.Type = SelectedDamageType.Type;
 
@@ -159,7 +174,7 @@ namespace ARK.ViewModel.Protokolsystem
                         damageForm.Description = Description;
                         damageForm.Functional = IsFunctional;
 
-                        var db = DbArkContext.GetDbContext();
+                        DbArkContext db = DbArkContext.GetDbContext();
 
                         db.DamageForm.Add(damageForm);
                     }

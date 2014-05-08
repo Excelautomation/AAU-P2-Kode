@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using ARK.Model;
 using ARK.Model.DB;
 using ARK.Protokolsystem.Pages;
-using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
@@ -19,22 +17,13 @@ namespace ARK.ViewModel.Protokolsystem
     {
         #region PrivateFields
 
-        private int _numBoatsOut;
-        private double _dailyKilometers;
-        private ICommand _boatsOut;
-        private ICommand _viewDamageForm;
-        private ICommand _viewLongTripForm;
+        private readonly DbArkContext _context = DbArkContext.GetDbContext();
         private FrameworkElement _currentInfo;
+        private double _dailyKilometers;
         private bool _enableFilters;
-        private ICommand _endTrip;
         private FrameworkElement _filter;
         private string _headlineText;
-        private ICommand _infoScreen;
-        private ICommand _memberInformation;
-        private ICommand _startTrip;
-        private ICommand _statisticsDistance;
-        private EndTrip _endTripPage;
-        private DbArkContext _context = DbArkContext.GetDbContext();
+        private int _numBoatsOut;
 
         #endregion
 
@@ -57,16 +46,6 @@ namespace ARK.ViewModel.Protokolsystem
             TimeCounter.StopTime();
         }
 
-        public int NumBoatsOut
-        {
-            get { return _numBoatsOut; }
-            set
-            {
-                _numBoatsOut = value;
-                Notify();
-            }
-        }
-
         public double DailyKilometers
         {
             get { return _dailyKilometers; }
@@ -77,15 +56,20 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public void UpdateNumBoatsOut()
+        public int NumBoatsOut
         {
-            NumBoatsOut = _context.Trip.Count(t => t.TripEndedTime == null);
+            get { return _numBoatsOut; }
+            set
+            {
+                _numBoatsOut = value;
+                Notify();
+            }
         }
 
         public void UpdateDailyKilometers()
         {
-            var today = DateTime.Today;
-            var temp = _context.Trip
+            DateTime today = DateTime.Today;
+            IQueryable<Trip> temp = _context.Trip
                 .Where(t => t.TripEndedTime > today);
             if (temp.Any())
             {
@@ -93,9 +77,12 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        #region Pages
+        public void UpdateNumBoatsOut()
+        {
+            NumBoatsOut = _context.Trip.Count(t => t.TripEndedTime == null);
+        }
 
-        private BeginTripBoats _beginTripBoatsPage;
+        #region Pages
 
         public string HeadlineText
         {
@@ -107,64 +94,38 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        private BeginTripBoats BeginTripBoatsPage
-        {
-            get { return _beginTripBoatsPage ?? (_beginTripBoatsPage = new BeginTripBoats()); }
-        }
+        #region Commands
 
-        private EndTrip EndTripPage
+        public ICommand BoatsOut
         {
-            get { return _endTripPage ?? (_endTripPage = new EndTrip()); }
-        }
-
-        public ICommand StartTrip
-        {
-            get
-            {
-                return _startTrip ??
-                       (_startTrip =
-                           GetNavigateCommand(() => BeginTripBoatsPage, "START ROTUR"));
-            }
+            get { return GetNavigateCommand(() => BoatsOutPage, "BÅDE PÅ VANDET"); }
         }
 
         public ICommand EndTrip
         {
-            get
-            {
-                return _endTrip ??
-                       (_endTrip = GetNavigateCommand(() => EndTripPage, "AFSLUT ROTUR"));
-            }
-        }
-
-        public ICommand BoatsOut
-        {
-            get
-            {
-                return _boatsOut ??
-                       (_boatsOut =
-                           GetNavigateCommand(() => new BoatsOut(), "BÅDE PÅ VANDET"));
-            }
-        }
-
-        public ICommand StatisticsDistance
-        {
-            get
-            {
-                return _statisticsDistance ??
-                       (_statisticsDistance =
-                           GetNavigateCommand(() => new DistanceStatistics(),
-                               "KILOMETERSTATISTIK"));
-            }
+            get { return GetNavigateCommand(() => EndTripPage, "AFSLUT ROTUR"); }
         }
 
         public ICommand MemberInformation
         {
             get
             {
-                return _memberInformation ??
-                       (_memberInformation =
-                           GetNavigateCommand(() => new MembersInformation(),
-                               "MEDLEMSINFORMATION"));
+                return GetNavigateCommand(() => MembersInformationPage,
+                    "MEDLEMSINFORMATION");
+            }
+        }
+
+        public ICommand StartTrip
+        {
+            get { return GetNavigateCommand(() => BeginTripBoatsPage, "START ROTUR"); }
+        }
+
+        public ICommand StatisticsDistance
+        {
+            get
+            {
+                return GetNavigateCommand(() => DistanceStatisticsPage,
+                    "KILOMETERSTATISTIK");
             }
         }
 
@@ -172,10 +133,8 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return _viewDamageForm ??
-                       (_viewDamageForm =
-                           GetNavigateCommand(() => new ViewDamageForm(),
-                               "AKTIVE SKADES BLANKETTER"));
+                return GetNavigateCommand(() => ViewDamageFormPage,
+                    "AKTIVE SKADES BLANKETTER");
             }
         }
 
@@ -183,12 +142,60 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return _viewLongTripForm ??
-                       (_viewLongTripForm =
-                           GetNavigateCommand(() => new ViewLongTripForm(),
-                               "AKTIVE LANGTURS BLANKETTER"));
+                return
+                    GetNavigateCommand(() => ViewLongTripFormPage,
+                        "AKTIVE LANGTURS BLANKETTER");
             }
         }
+
+        #endregion
+
+        #region View
+
+        private BeginTripBoats _beginTripBoatsPage;
+        private BoatsOut _boatsOutPage;
+        private DistanceStatistics _distanceStatisticsPage;
+        private EndTrip _endTripPage;
+        private MembersInformation _membersInformationPage;
+        private ViewDamageForm _viewDamageFormPage;
+        private ViewLongTripForm _viewLongTripFormPage;
+
+        private BeginTripBoats BeginTripBoatsPage
+        {
+            get { return _beginTripBoatsPage ?? (_beginTripBoatsPage = new BeginTripBoats()); }
+        }
+
+        private BoatsOut BoatsOutPage
+        {
+            get { return _boatsOutPage ?? (_boatsOutPage = new BoatsOut()); }
+        }
+
+        private DistanceStatistics DistanceStatisticsPage
+        {
+            get { return _distanceStatisticsPage ?? (_distanceStatisticsPage = new DistanceStatistics()); }
+        }
+
+        private EndTrip EndTripPage
+        {
+            get { return _endTripPage ?? (_endTripPage = new EndTrip()); }
+        }
+
+        private MembersInformation MembersInformationPage
+        {
+            get { return _membersInformationPage ?? (_membersInformationPage = new MembersInformation()); }
+        }
+
+        private ViewDamageForm ViewDamageFormPage
+        {
+            get { return _viewDamageFormPage ?? (_viewDamageFormPage = new ViewDamageForm()); }
+        }
+
+        private ViewLongTripForm ViewLongTripFormPage
+        {
+            get { return _viewLongTripFormPage ?? (_viewLongTripFormPage = new ViewLongTripForm()); }
+        }
+
+        #endregion
 
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
@@ -244,8 +251,24 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
-        public event EventHandler<SearchEventArgs> SearchTextChanged;
         public event EventHandler<FilterEventArgs> FilterTextChanged;
+
+        public event EventHandler<SearchEventArgs> SearchTextChanged;
+
+        public bool EnableFilters
+        {
+            get { return _enableFilters; }
+            set
+            {
+                _enableFilters = value;
+                Notify();
+
+                if (value)
+                {
+                    EnableSearch = false;
+                }
+            }
+        }
 
         public bool EnableSearch
         {
@@ -259,21 +282,6 @@ namespace ARK.ViewModel.Protokolsystem
                 if (value)
                 {
                     EnableFilters = false;
-                }
-            }
-        }
-
-        public bool EnableFilters
-        {
-            get { return _enableFilters; }
-            set
-            {
-                _enableFilters = value;
-                Notify();
-
-                if (value)
-                {
-                    EnableSearch = false;
                 }
             }
         }
