@@ -20,26 +20,25 @@ namespace ARK.ViewModel.Administrationssystem
         public bool RecentChange
         {
             get { return _RecentChange; }
-            set
-            {
-                _RecentChange = value;
-                Notify();
-            }
+            set { _RecentChange = value; Notify(); }
         }
 
         public DamageForm DamageForm
         {
             get { return _damageForm; }
             set
-            {
-                _damageForm = value;
-                Notify();
-            }
+            { _damageForm = value; Notify(); }
         }
 
         public ICommand SaveChanges
         {
-            get { return GetCommand<object>(e => { _dbArkContext.SaveChanges(); }); }
+            get {
+                return GetCommand<object>(e =>
+                {
+                    _dbArkContext.SaveChanges();
+                    RecentChange = true;
+                });
+            }
         }
 
         public ICommand DeactivateBåd
