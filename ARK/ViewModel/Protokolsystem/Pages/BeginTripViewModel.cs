@@ -174,8 +174,21 @@ namespace ARK.ViewModel.Protokolsystem
                     // Add selected members to trip
                     foreach (var m in SelectedMembers.Select(member => member.Member))
                     {
-                        if (m.Id != -1)
+                        if (m.Id == -1)
+                        {
+                            //-1 is a blank spot => Do nothing
+                        }
+                        else if (m.Id == -2)
+                        {
+                            //-2 is a guest => Increment the crew count, but don't add the member to the member list
+                            trip.CrewCount++;
+                        }
+                        else
+                        {
+                            //Add the member reference and increment the crew count
                             trip.Members.Add(m);
+                            trip.CrewCount++;
+                        }
                     }
 
                     trip.LongTrip = LongTrip;

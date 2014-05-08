@@ -17,7 +17,10 @@ namespace ARK.ViewModel.Protokolsystem.Data
         public MemberDistanceViewModel(Member member)
         {
             Member = member;
-            _trips = member.Trips.Select(t => new TripViewModel(t));
+            _trips =
+                member.Trips.Where(t => t.TripEndedTime != null)
+                    .OrderByDescending(t => t.TripEndedTime)
+                    .Select(t => new TripViewModel(t));
 
             ResetFilter();
         }
@@ -57,15 +60,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
 
         private void ResetFilter()
         {
-            try
-            {
-                FilteredTrips = _trips.Where(t => t.Trip.TripEndedTime != null).ToList();
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
+            FilteredTrips = _trips.ToList();
         }
 
         public void UpdateFilter(FilterChangedEventArgs args)

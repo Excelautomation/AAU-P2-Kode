@@ -150,6 +150,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="{Binding Path=Trip.Boat.Name}" Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
@@ -163,9 +164,13 @@
                             <Run Text="Start tid:" FontWeight="Bold" />
                             <Run Text="{Binding Path=Trip.TripStartTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
+                        
+                        <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource lstViewContent}">
+                            <Run Text="Slut tid:" FontWeight="Bold"/>
+                            <Run Text="{Binding Trip.TripEndedTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                        </TextBlock>
 
-                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
-                            <!--Vi mangler denne property. 30 min efter afsluttet tur, skal brugeren have mulighed for at ændre distancen-->
+                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
                             <CheckBox Style="{StaticResource ResourceKey=styleCheckBox}" IsChecked="{Binding Path=Editable, Mode=OneWay}"/>
                             <TextBlock Text="Redigerbar" Style="{StaticResource ResourceKey=styleContent}" FontWeight="Bold"/>
                         </StackPanel>
