@@ -22,7 +22,7 @@ namespace ARK.Model
         public int NumberofSeats { get; set; }          // The number of rowers in the boat without the Deckofficer
         public bool HaveCox { get; set; }       // states if the boat have seating for cox
         public bool Active { get; set; }                // states if the boat is not retired/dead
-        public BoatType SpecificBoatType { get; set; }  
+        public BoatType SpecificBoatType { get; set; }
         public bool LongTripBoat { get; set; }          // states if the boad is accepted for long tips
         public int NewPrice { get; set; }
         public int Year { get; set; }
@@ -31,12 +31,12 @@ namespace ARK.Model
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<DamageForm> DamageForms { get; set; }
-        public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }     
+        public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }
 
         //Not mapped properties
         public bool Usable                              // states if the boat is in a usable condition
         {
-            get { return Active && DamageForms != null && !DamageForms.Any(x => !x.Functional && !x.Closed); }
+            get { return DamageForms != null && !DamageForms.Any(x => !x.Functional && !x.Closed); }
         }
 
         public bool Damaged                             // Damaged or not
@@ -54,11 +54,20 @@ namespace ARK.Model
             get { return GetActiveTrip != default(Trip); }
         }
 
-        public int KilometersSailed { get; set; }           // skal være readonly
+        public double KilometersSailed
+        {
+            get { return this.Trips.Sum(t => t.Distance); }
+        }
 
-        public int TripsSailed { get; set; }                // skal være readonly
+        public int TripsSailed
+        {
+            get { return this.Trips.Count; }
+        }
 
-        public int LongDistanceTripsSailed { get; set; }    // skal være readonly
+        public int LongDistanceTripsSailed
+        {
+            get { return this.Trips.Count(t => t.LongTrip); }
+        }
 
         //Interfaces
         public bool Equals(Boat other)
@@ -73,7 +82,7 @@ namespace ARK.Model
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Boat) obj);
+            return Equals((Boat)obj);
         }
 
         public override int GetHashCode()

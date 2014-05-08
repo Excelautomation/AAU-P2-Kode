@@ -110,7 +110,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding SelectedMember.LongTripCox, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
-                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Langtur-styrmand" FontWeight="Bold"/>
+                <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Langturs-styrmand" FontWeight="Bold"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">

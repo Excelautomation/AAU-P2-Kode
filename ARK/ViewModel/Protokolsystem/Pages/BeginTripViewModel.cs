@@ -120,7 +120,7 @@ namespace ARK.ViewModel.Protokolsystem
             get { return _selectedBoat; }
             set
             {
-                if (_selectedBoat == value || // Nothing changed - silently discart - STACKOVERFLOW IF NOT DISCARTED (Keyboard chaning LV)
+                if (_selectedBoat == value || // Nothing changed - silently discard - STACKOVERFLOW IF NOT DISCARDED (Keyboard chaning LV)
                     value == null) 
                     return;
                 
@@ -228,15 +228,10 @@ namespace ARK.ViewModel.Protokolsystem
                 {
                     if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
                     {
-                        SelectedMembers.Add(new MemberViewModel(FindGuest()));
+                        SelectedMembers.Add(new MemberViewModel(new Member() {Id = -2, FirstName = "Gæst"}));
                     }
                 });
             }
-        }
-
-        private Member FindGuest()
-        {
-            return DbArkContext.GetDbContext().Member.FirstOrDefault(member => member.FirstName == "Gæst");
         }
 
         private IInfoContainerViewModel GetInfoContainerViewModel
