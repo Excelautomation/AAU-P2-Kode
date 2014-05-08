@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Text;
+using System.Windows.Input;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +14,8 @@ using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.Administrationssystem;
+using ARK.Administrationssystem.Pages;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -119,6 +125,75 @@ namespace ARK.ViewModel.Administrationssystem
             set
             {
                 _showSkader = value;
+                Notify();
+            }
+        }
+
+        private DamageForm _selectedDamageForm;
+        public DamageForm SelectedDamageForm
+        {
+            get { return _selectedDamageForm; }
+            set
+            {
+                _selectedDamageForm = value;
+
+                if (_selectedDamageForm != null)
+                    ShowDamageForm(_selectedDamageForm);
+
+                Notify();
+            }
+        }
+
+        private void ShowDamageForm(DamageForm SelectedDamageForm)
+        {
+            var adminSystem = (AdminSystemViewModel)Parent;
+            adminSystem.MenuForms.Execute(null);
+            var FormsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
+
+            //FormsViewModel.NavigateToPage(() => new FormsDamage(),
+            //SelectedDamageForm.Description);
+
+            //var vm = FormsViewModel.CurrentPage.DataContext as FormsDamageViewModel;
+            //if (vm != null)
+            //    vm.DamageForm = SelectedDamageForm;
+            
+            FormsViewModel.GoToDamageForm(SelectedDamageForm);
+        }
+
+        private LongTripForm _selectedLongDistanceForm;
+        public LongTripForm SelectedLongDistanceForm
+        {
+            get { return _selectedLongDistanceForm; }
+            set
+            {
+                _selectedLongDistanceForm = value;
+
+                if (_selectedLongDistanceForm != null)
+                    ShowLongDistanceForm(_selectedLongDistanceForm);
+
+                Notify();
+            }
+        }
+
+        private void ShowLongDistanceForm(LongTripForm LongDistanceForm)
+        {
+            var adminSystem = (AdminSystemViewModel)Parent;
+            adminSystem.MenuForms.Execute(null);
+            var FormsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
+            FormsViewModel.GoToLongDistanceForm(LongDistanceForm);
+        }
+
+        private Boat _selectedBoat;
+        public Boat SelectedBoat
+        {
+            get { return _selectedBoat; }
+            set
+            {
+                _selectedBoat = value;
+
+                if (_selectedBoat != null)
+                    ShowBoat(_selectedBoat);
+
                 Notify();
             }
         }

@@ -18,13 +18,16 @@ namespace ARK.ViewModel.Administrationssystem
         private bool _enableFilters;
         private bool _enableSearch;
         private string _searchText;
+        private Admin currentLoggedInUser;
 
         public AdminSystemViewModel()
         {
             TimeCounter.StartTimer();
-
+            NotifyCustom("CurrentLoggedInUser");
             // Start oversigten
             MenuOverview.Execute(null);
+
+            NotifyCustom("CurrentLoggedInUser");
 
             TimeCounter.StopTime();
         }
@@ -49,12 +52,10 @@ namespace ARK.ViewModel.Administrationssystem
             base.NavigateToPage(() => element, pageTitle);
         }
 
-        private Admin currentLoggetInUser;
-
         public Admin CurrentLoggedInUser
         {
-            get { return currentLoggetInUser; }
-            set { currentLoggetInUser = value; Notify(); }
+            get { return currentLoggedInUser; }
+            set { currentLoggedInUser = value; Notify(); }
         }
         
         #region Pages

@@ -62,10 +62,10 @@ namespace ARK.ViewModel.Administrationssystem
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
-            if (DamageForms.Count() != 0)
-            {
-                SelectedIndexDamageForms = 0;
-            }
+            //if (DamageForms.Count() != 0)
+            //{
+            //    SelectedIndexDamageForms = 0;
+            //}
         }
 
 
@@ -111,15 +111,21 @@ namespace ARK.ViewModel.Administrationssystem
                         {
                             if (e == null) return;
 
-                            NavigateToPage(() => new FormsDamage(),
-                                e.Description);
-
-                            // Sæt damageform
-                            var vm = CurrentPage.DataContext as FormsDamageViewModel;
-                            if (vm != null)
-                                vm.DamageForm = e;
+                            GoToDamageForm(e);
                         });
             }
+        }
+
+        public void GoToDamageForm(DamageForm df) 
+        {
+
+            NavigateToPage(() => new FormsDamage(),
+                df.Description);
+
+            // Sæt damageform
+            var vm = CurrentPage.DataContext as FormsDamageViewModel;
+            if (vm != null)
+                vm.DamageForm = df;
         }
 
         public ICommand SelectLongDistanceFormCommand
@@ -130,14 +136,20 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     if (e == null) return;
 
-                    NavigateToPage(() => new FormsLongTrip(),
-                        e.TourDescription);
-
-                    var vm = CurrentPage.DataContext as FormsLongTripViewModel;
-                    if (vm != null)
-                        vm.LongDistanceForm = e;
+                    GoToLongDistanceForm(e);
                 });
             }
+        }
+
+        public void GoToLongDistanceForm(LongTripForm ltf)
+        {
+
+            NavigateToPage(() => new FormsLongTrip(),
+                ltf.TourDescription);
+
+            var vm = CurrentPage.DataContext as FormsLongTripViewModel;
+            if (vm != null)
+                vm.LongDistanceForm = ltf;
         }
 
         #endregion
