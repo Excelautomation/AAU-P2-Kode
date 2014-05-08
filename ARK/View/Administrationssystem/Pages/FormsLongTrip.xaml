@@ -33,13 +33,18 @@
                         </StackPanel>
 
                         <StackPanel>
-                            <Label Content="Hjemkomst" HorizontalAlignment="Center" VerticalAlignment="Top" Width="109.552" Height="45.363" FontSize="18.667" FontWeight="Bold"/>
-                        <TextBox HorizontalAlignment="Center" Height="40" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}" Text="{Binding Path=LongDistanceForm.Arrival, ConverterCulture='da-DK', StringFormat=d}"/>
+                            <Label Content="Hjemkomst" HorizontalAlignment="Center" VerticalAlignment="Top" Width="109.552"
+                                   Height="45.363" FontSize="18.667" FontWeight="Bold"/>
+                        <TextBox HorizontalAlignment="Center" Height="40" IsReadOnly="True" TextWrapping="Wrap"
+                                 VerticalAlignment="Top" Width="128.955" FontSize="{Binding FontSize, ElementName=textBox}" 
+                                 Text="{Binding Path=LongDistanceForm.Arrival, ConverterCulture='da-DK', StringFormat=d}"/>
                         </StackPanel>
                     </WrapPanel>
                     <StackPanel>
-                        <Label Content="Kommentarer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="39.393" Width="135.194" FontSize="18.667" FontWeight="Bold"/>
-                        <TextBox FontSize="16" HorizontalAlignment="Center" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Height="160" VerticalAlignment="Top" Width="281" Text="{Binding Path=LongDistanceForm.Text}"/>
+                        <Label Content="Kommentarer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="39.393"
+                               Width="135.194" FontSize="18.667" FontWeight="Bold"/>
+                        <TextBox FontSize="16" HorizontalAlignment="Center" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
+                                 Height="160" VerticalAlignment="Top" Width="281" Text="{Binding Path=LongDistanceForm.Text}"/>
                     </StackPanel>
                 </StackPanel>
                 <DockPanel>

@@ -32,24 +32,24 @@ namespace ARK.ViewModel.Base
 
         public virtual void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
-            // Tjek page
+            // Check page
             if (page == null) throw new ArgumentNullException("page");
 
-            // Tjek om currentpage ikke er null og cleanup denne hvis den er
+            // Check if currentpage is null, if cond. is true then cleanup
             if (CurrentPage != null)
             {
                 var vm = CurrentPage.DataContext as IContentViewModelBase;
                 if (vm != null) vm.Parent = null;
             }
 
-            // Sæt nuværende side og tekst
+            // Set current page and text
             CurrentPage = page();
             CurrentPageTitle = pageTitle;
 
-            // Tjek viewModel
+            // Check viewModel
             var viewModel = CurrentPage.DataContext as IContentViewModelBase;
 
-            // Sæt parent
+            // Set parent
             if (viewModel != null) viewModel.Parent = this;
         }
 
