@@ -50,8 +50,8 @@
 					DockPanel.Dock="Right"
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
-					Background="{DynamicResource ChangeBorder}"
-					BorderBrush="{StaticResource SearchFilterBorder}" Margin="0,0,3,0" Width="Auto">
+					Background="{DynamicResource ChangeBG}"
+					BorderBrush="{StaticResource ChangeBorder}" Margin="0,0,3,0" Width="Auto">
 				<Grid Margin="0,0,-2,0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="8"/>
