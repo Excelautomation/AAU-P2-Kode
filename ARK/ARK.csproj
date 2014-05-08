@@ -117,6 +117,7 @@
     <Compile Include="ViewModel\Base\Filter\FilterChangedEventArgs.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContentViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\BoatsOutAdditionalInfoViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Additional\CreateLongTripFormAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\ViewLongTripFormAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\ViewDamageFormAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\DistanceStatisticsAdditionalInfoViewModel.cs" />
@@ -212,6 +213,9 @@
     <Compile Include="Model\XML\XmlParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
+    <Compile Include="View\Protokolsystem\Additional\CreateLongTripFormAdditionalInfo.xaml.cs">
+      <DependentUpon>CreateLongTripFormAdditionalInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Protokolsystem\Additional\ViewLongTripFormAdditionalInfo.xaml.cs">
       <DependentUpon>ViewLongTripFormAdditionalInfo.xaml</DependentUpon>
     </Compile>
@@ -357,6 +361,10 @@
     <Page Include="View\Administrationssystem\Pages\Trips.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Protokolsystem\Additional\CreateLongTripFormAdditionalInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Protokolsystem\Additional\ViewLongTripFormAdditionalInfo.xaml">
       <Generator>MSBuild:Compile</Generator>

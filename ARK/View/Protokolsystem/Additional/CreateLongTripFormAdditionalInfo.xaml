@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ARK.View.Protokolsystem.Additional.BeginTripAdditionalInfo"
+﻿<UserControl x:Class="ARK.View.Protokolsystem.Additional.CreateLongTripFormAdditionalInfo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
              mc:Ignorable="d" Width="200" Height="768">
 
     <UserControl.DataContext>
-        <VM:BeginTripAdditionalInfoViewModel></VM:BeginTripAdditionalInfoViewModel>
+        <VM:CreateLongTripFormAdditionalInfoViewModel/>
     </UserControl.DataContext>
 
     <UserControl.Resources>
@@ -20,7 +20,7 @@
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="Orientation" Value="Vertical"/>
             </Style.Setters>
-                
+
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Member.ShortTripCox}">
                     <DataTrigger.Value>
@@ -42,7 +42,7 @@
             <Setter Property="Margin" Value="5,4,0,0"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
         </Style>
-        
+
         <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
 
     </UserControl.Resources>
@@ -109,46 +109,71 @@
             </ListView>
         </StackPanel>
 
-
-        <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" Grid.Row="3"
+        <Grid Background="White" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" Grid.Row="0" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                      FontSize="18" BorderBrush="{x:Null}" Background="White">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.RemoveMember}" 
+                      FontSize="18" BorderBrush="{x:Null}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.RemoveMember}" 
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <ContentPresenter />
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <StackPanel Style="{StaticResource styleStack}">
-                                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
-                                        <TextBlock Text=" " />
-                                        <TextBlock Text="{Binding Path=Member.FirstName}"/>
-                                        <TextBlock Text=" " />
-                                        <TextBlock Text="{Binding Path=Member.LastName}"/>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Style="{StaticResource styleStack}">
+                                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
+                                            <TextBlock Text=" " />
+                                            <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                            <TextBlock Text=" " />
+                                            <TextBlock Text="{Binding Path=Member.LastName}"/>
+                                        </StackPanel>
+                                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
+                                            <TextBlock Text="Langtursstyrmand: " FontSize="13px" FontWeight="Normal"/>
+                                            <TextBlock Text="{Binding Path=Member.LongTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                                        <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
-                                        <TextBlock Text="{Binding Path=Member.ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Button x:Name="btnAddGuest" Grid.Row="1" VerticalAlignment="Top"
+                    IsEnabled="{Binding EnableMembers}"
+                    Command="{Binding Path=AddGuest}"
+                    Background="{DynamicResource AddBG}"
+                    BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="VÆLG&#10;ANSVARLIG" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
+                </Grid>
+            </Button>
+        </Grid>
+
+        
+        
+        
     </Grid>
 </UserControl>
