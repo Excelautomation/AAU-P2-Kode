@@ -83,6 +83,7 @@
         <ListView x:Name="lstStandardTrip" 
                   Margin="5,0,0,0"
                   Grid.Column="1" Grid.Row="1" 
+                  SelectionMode="Multiple"
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=StandardTrips}" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -110,7 +111,7 @@
             </ListView.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding Path=StdTripSelected}" CommandParameter="{Binding Path=SelectedItems}" />
+                    <i:InvokeCommandAction Command="{Binding Path=StdTripSelected}" CommandParameter="{Binding Path=SelectedItems, ElementName=lstStandardTrip}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
