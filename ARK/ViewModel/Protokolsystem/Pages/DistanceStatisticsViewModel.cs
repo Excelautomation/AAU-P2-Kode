@@ -11,7 +11,7 @@ using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Protokolsystem.Data;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {

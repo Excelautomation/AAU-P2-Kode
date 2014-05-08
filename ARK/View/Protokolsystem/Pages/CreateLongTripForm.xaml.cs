@@ -1,7 +1,6 @@
 ﻿using System.Windows.Controls;
-using ARK.ViewModel.Protokolsystem;
 
-namespace ARK.Protokolsystem.Pages
+namespace ARK.View.Protokolsystem.Pages
 {
     /// <summary>
     /// Interaction logic for BeginTripBoats.xaml

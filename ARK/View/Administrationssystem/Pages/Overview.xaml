@@ -1,5 +1,5 @@
-﻿<UserControl xmlns:Administrationssystem="clr-namespace:ARK.Administrationssystem"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -7,7 +7,7 @@
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
-             x:Class="ARK.Administrationssystem.Pages.Oversigt"
+             x:Class="ARK.View.Administrationssystem.Pages.Oversigt"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using ARK.Model;
 
-namespace ARK.Administrationssystem.Funktioner
+namespace ARK.View.Administrationssystem.Functions
 {
     public class SMSIT
     {

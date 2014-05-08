@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Media.TextFormatting;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Text.RegularExpressions;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     class EndTripViewModel : ProtokolsystemContentViewModelBase
     {

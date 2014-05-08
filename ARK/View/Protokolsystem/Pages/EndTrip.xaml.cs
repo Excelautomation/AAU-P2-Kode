@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ARK.Protokolsystem.Pages
+namespace ARK.View.Protokolsystem.Pages
 {
     /// <summary>
     /// Interaction logic for EndTrip.xaml

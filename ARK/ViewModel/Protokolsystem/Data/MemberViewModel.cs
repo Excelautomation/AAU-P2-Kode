@@ -1,7 +1,7 @@
 ﻿using ARK.Model;
 using ARK.ViewModel.Base;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Data
 {
     public class MemberViewModel : ViewModelBase
     {

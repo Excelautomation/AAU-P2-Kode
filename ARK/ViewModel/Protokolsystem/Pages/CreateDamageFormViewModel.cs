@@ -3,9 +3,9 @@ using System.Linq;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Protokolsystem.Pages;
+using ARK.View.Protokolsystem.Pages;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class CreateDamageFormViewModel : ProtokolsystemContentViewModelBase
     {

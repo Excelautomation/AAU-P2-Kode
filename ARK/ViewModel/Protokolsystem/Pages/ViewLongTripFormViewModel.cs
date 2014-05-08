@@ -1,14 +1,11 @@
-﻿using ARK.Protokolsystem.Pages;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.View.Protokolsystem.Pages;
 
-namespace ARK.ViewModel.Protokolsystem
+namespace ARK.ViewModel.Protokolsystem.Pages
 {
     class ViewLongTripFormViewModel : ProtokolsystemContentViewModelBase
     {

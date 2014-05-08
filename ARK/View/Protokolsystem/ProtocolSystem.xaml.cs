@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using ARK.Administrationssystem;
-using ARK.Administrationssystem.Funktioner;
 using ARK.Model;
+using ARK.View.Administrationssystem;
 
 namespace ARK.View.Protokolsystem
 {
