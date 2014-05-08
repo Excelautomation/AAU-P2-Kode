@@ -24,19 +24,14 @@ namespace ARK.Model
         public bool Active { get; set; }                // states if the boat is not retired/dead
         public BoatType SpecificBoatType { get; set; }  
         public bool LongTripBoat { get; set; }          // states if the boad is accepted for long tips
+        public int NewPrice { get; set; }
+        public int Year { get; set; }
+        public string InformationString { get; set; }
 
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<DamageForm> DamageForms { get; set; }
-        public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }
-
-        //Statistics/information properties
-        public int NewPrice { get; set; }
-        public int Year { get; set; }
-        public int KilometersSailed { get; set; }           // skal være readonly
-        public int TripsSailed { get; set; }                // skal være readonly
-        public int LongDistanceTripsSailed { get; set; }    // skal være readonly
-        public string InformationString { get; set; }
+        public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }     
 
         //Not mapped properties
         public bool Usable                              // states if the boat is in a usable condition
@@ -58,6 +53,12 @@ namespace ARK.Model
         {
             get { return GetActiveTrip != default(Trip); }
         }
+
+        public int KilometersSailed { get; set; }           // skal være readonly
+
+        public int TripsSailed { get; set; }                // skal være readonly
+
+        public int LongDistanceTripsSailed { get; set; }    // skal være readonly
 
         //Interfaces
         public bool Equals(Boat other)
