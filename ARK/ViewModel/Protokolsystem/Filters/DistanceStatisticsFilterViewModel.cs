@@ -4,6 +4,7 @@ using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.ViewModel.Protokolsystem.Data;
 
 namespace ARK.ViewModel.Protokolsystem.Filters
 {
@@ -18,14 +19,14 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         public DistanceStatisticsFilterViewModel()
         {
-            CurrentBoatType = new CategoryFilter<Trip>(trip => true);
+            CurrentBoatType = new CategoryFilter<TripViewModel>(trip => true);
 
             StatisticsAll = true;
 
             UpdateFilter();
         }
 
-        public CategoryFilter<Trip> CurrentBoatType { get; set; }
+        public CategoryFilter<TripViewModel> CurrentBoatType { get; set; }
 
         public bool StatisticsAll
         {
@@ -47,7 +48,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _statisticsErgometer = value;
                 if (value)
-                    UpdateCategory(trip => trip.Boat.SpecificBoatType == Boat.BoatType.Ergometer);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Ergometer);
 
                 Notify();
             }
@@ -60,7 +61,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _statisticsKajak = value;
                 if (value)
-                    UpdateCategory(trip => trip.Boat.SpecificBoatType == Boat.BoatType.Kajak);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Kajak);
 
                 Notify();
             }
@@ -73,7 +74,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _statisticsInrigger = value;
                 if (value)
-                    UpdateCategory(trip => trip.Boat.SpecificBoatType == Boat.BoatType.Inrigger);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Inrigger);
 
                 Notify();
             }
@@ -86,7 +87,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _statisticsGig = value;
                 if (value)
-                    UpdateCategory(trip => trip.Boat.SpecificBoatType == Boat.BoatType.Gig);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Gig);
 
                 Notify();
             }
@@ -99,13 +100,13 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             {
                 _statisticsOutrigger = value;
                 if (value)
-                    UpdateCategory(trip => trip.Boat.SpecificBoatType == Boat.BoatType.Outrigger);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Outrigger);
 
                 Notify();
             }
         }
 
-        private void UpdateCategory(Func<Trip, bool> filter)
+        private void UpdateCategory(Func<TripViewModel, bool> filter)
         {
             CurrentBoatType.Filter = filter;
 

@@ -94,7 +94,6 @@ namespace ARK.ViewModel.Base.Filter
 
             IEnumerable<T> allItems = items.ToList();
             IEnumerable<T> output = new List<T>(allItems);
-            
 
             foreach (var filter in filters)
                 output = (merge ? MergeLists<T>(filter.FilterItems<T>(allItems), output) : filter.FilterItems<T>(output)).ToList();
