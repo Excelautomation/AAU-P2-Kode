@@ -4,7 +4,6 @@ using System.Text;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using ARK.Model;

@@ -283,15 +283,5 @@
         </Grid>
 
         <ContentControl Grid.Row="2" Grid.Column="{Binding Path=ContentRow}" Grid.ColumnSpan="{Binding Path=ContentRowSpan}" Content="{Binding Path=Keyboard}" Visibility="{Binding Path=KeyboardToggled, Converter={StaticResource BoolToVis}}" Height="182"/>
-
-        <Grid Grid.Row="3" Grid.ColumnSpan="3" Background="#0a2f6c">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" HorizontalAlignment="Center" FontFamily="Arial" Foreground="White" FontSize="16" Margin="0,8,0,0"><Run Text="Aalborg Roklub | +45 98 12 67 19 | Søsportsvej 9, 9000 Aalborg"/></TextBlock>
-        </Grid>
     </Grid>
 </Window>
