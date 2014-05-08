@@ -23,7 +23,7 @@ namespace ARK.Model
         public bool HaveCox { get; set; }       // states if the boat have seating for cox
         public bool Active { get; set; }                // states if the boat is not retired/dead
         public BoatType SpecificBoatType { get; set; }
-        public bool LongTripBoat { get; set; }          // states if the boad is accepted for long tips
+        public bool LongTripBoat { get; set; }          // states if the boat is accepted for long tips
         public int NewPrice { get; set; }
         public int Year { get; set; }
         public string InformationString { get; set; }
@@ -31,7 +31,7 @@ namespace ARK.Model
         //Navigation properties
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<DamageForm> DamageForms { get; set; }
-        public virtual ICollection<LongTripForm> LongDistanceForms { get; set; }
+        public virtual ICollection<LongTripForm> LongTripForms { get; set; }
 
         //Not mapped properties
         public bool Usable                              // states if the boat is in a usable condition
