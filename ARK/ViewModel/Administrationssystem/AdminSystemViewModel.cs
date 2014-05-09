@@ -109,6 +109,18 @@ namespace ARK.ViewModel.Administrationssystem
             get { return new Indstillinger(); }
         }
 
+        public ICommand Logout
+        {
+            get
+            {
+                return GetCommand<Window>(e =>
+                {
+                    e.Close();
+                }
+            );}
+        }
+
+
         #endregion private
 
         #region Filter

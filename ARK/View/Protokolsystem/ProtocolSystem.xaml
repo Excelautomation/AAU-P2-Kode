@@ -191,7 +191,7 @@
             	        Command="{Binding AdminPanel_Click}"
             	        Background="{StaticResource NeuBG}"
             	        BorderBrush="{StaticResource NeuBorder}" 
-                        Width="Auto" Height="62">
+                        Width="Auto" Height="62" Click="AdminPanel_Click">
                     <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="ADMINISTRATIONS&#xA;PANEL" />
                 </Button>
             </Grid>
