@@ -200,7 +200,7 @@ namespace ARK.ViewModel.Administrationssystem
             get
             {
                 return DamageForm
-                    ? _filterDamage ?? (_filterDamage = new FormsFilter())
+                    ? _filterDamage ?? (_filterDamage = new FormsFilterDamage())
                     : _filterLongDistance ?? (_filterLongDistance = new FormsFilter());
             }
         }
