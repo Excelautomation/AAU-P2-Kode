@@ -14,10 +14,15 @@ namespace ARK.ViewModel.Protokolsystem
             set
             {
                 _text = value;
-                Notify();
 
-                if (TextChanged != null)
-                    TextChanged(this, new KeyboardEventArgs(Text));
+                // Tjek at værdien er ændret
+                if (_text != value)
+                {
+                    Notify();
+
+                    if (TextChanged != null)
+                        TextChanged(this, new KeyboardEventArgs(Text));
+                }
             }
         }
 

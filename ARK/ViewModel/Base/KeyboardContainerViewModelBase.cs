@@ -112,14 +112,14 @@ namespace ARK.ViewModel.Base
 
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
-            // Hide and clear keyboard
-            KeyboardText = "";
-            KeyboardHide();
+            base.NavigateToPage(page, pageTitle);
 
             // Remove currentselected textbox
             CurrentSelectedTextBox = null;
 
-            base.NavigateToPage(page, pageTitle);
+            // Hide and clear keyboard
+            KeyboardText = "";
+            KeyboardHide();
         }
     }
 }

@@ -25,29 +25,16 @@ namespace ARK.ViewModel.Administrationssystem
 
         public TripsViewModel()
         {
-            // Initialize lists
-            TripsFiltered = new List<Trip>();
-            _trips = new List<Trip>();
-
-            // Load data
-            Task.Factory.StartNew(() =>
+            ParentAttached += (sender, e) =>
             {
                 DbArkContext db = DbArkContext.GetDbContext();
 
-                lock (db)
-                {
-                    // Indlæs data
-                    _trips = db.Trip.Include(trip => trip.Members).ToList();
-                }
+                // Load data
+                _trips = db.Trip.Include(trip => trip.Members).ToList();
 
-                TripsFiltered = _trips;
-
-                // Nulstil filter
+                // Reset filter
                 ResetFilter();
-            });
-
-            // Nulstil filter
-            ResetFilter();
+            };
 
             //Setup filter
             var filterController = new FilterContent(this);

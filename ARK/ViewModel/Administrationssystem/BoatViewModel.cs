@@ -22,11 +22,11 @@ namespace ARK.ViewModel.Administrationssystem
     {
         private List<Boat> _boatsNonFiltered;
         private readonly DbArkContext _dbArkContext;
-        private bool _LocalActiveBoat;
+        private bool _localActiveBoat;
         private IEnumerable<Boat> _boats;
-        private bool _RecentSave = false;
-        private bool _RecentCancel = false;
-        private bool _RecentInfoSave = false; // De tre sidste kan laves til enum
+        private bool _recentSave = false;
+        private bool _recentCancel = false;
+        private bool _recentInfoSave = false; // De tre sidste kan laves til enum
         private Boat _currentBoat;
         //private Member _MostUsingMember;
 
@@ -34,34 +34,18 @@ namespace ARK.ViewModel.Administrationssystem
 
         public BoatViewModel()
         {
-            // Instaliser lister så lazy ikke fejler
-            _boatsNonFiltered = new List<Boat>();
-            
             // Load data
             _dbArkContext = DbArkContext.GetDbContext();
-            Task.Factory.StartNew(() =>
+
+            ParentAttached += (sender, e) =>
             {
                 DbArkContext db = DbArkContext.GetDbContext();
 
-                lock (db)
-                {
-                    // Opret forbindelser Async
-                    Task<List<Boat>> boatsOut = db.Boat.Include(e => e.DamageForms).Include(e => e.Trips).ToListAsync();
-
-                    _boatsNonFiltered = boatsOut.Result;
-                }
-
-                // Nulstil filter
-                ResetFilter();
-            });
+                // Load data
+                _boatsNonFiltered = db.Boat.Include(boat => boat.DamageForms).Include(boat => boat.Trips).ToList();
 
             // Nulstil filter
             ResetFilter();
-
-            // Setup filter
-            var filterController = new FilterContent(this);
-            filterController.EnableFilter(true, true);
-            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
 
                 // Sæt valgt båd
             if (Boats.Count() != 0)
@@ -69,17 +53,23 @@ namespace ARK.ViewModel.Administrationssystem
                 CurrentBoat = Boats.First();
                 LocalActiveBoat = CurrentBoat.Active;
             }
+            };
+
+            // Setup filter
+            var filterController = new FilterContent(this);
+            filterController.EnableFilter(true, true);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
         public bool RecentSave 
         { 
-            get { return _RecentSave; }
+            get { return _recentSave; }
             set 
             {
-                if (value != _RecentSave)
+                if (value != _recentSave)
                 {
-                    _RecentSave = value;
-                    _RecentCancel = false;
+                    _recentSave = value;
+                    _recentCancel = false;
                     NotifyCustom("RecentCancel");
                 }
                 Notify();
@@ -88,22 +78,22 @@ namespace ARK.ViewModel.Administrationssystem
 
         public bool RecentInfoSave
         {
-            get { return _RecentInfoSave; }
+            get { return _recentInfoSave; }
             set
             {
-                _RecentInfoSave = value; Notify();
+                _recentInfoSave = value; Notify();
             }
         }
             
         public bool RecentCancel
         {
-            get { return _RecentCancel; }
+            get { return _recentCancel; }
             set
             {
-                if (value != _RecentCancel)
+                if (value != _recentCancel)
                 {
-                    _RecentCancel = value;
-                    _RecentSave = false;
+                    _recentCancel = value;
+                    _recentSave = false;
                     NotifyCustom("RecentSave");
                 }
                 Notify();
@@ -185,10 +175,10 @@ namespace ARK.ViewModel.Administrationssystem
 
         public bool LocalActiveBoat
         {
-            get { return _LocalActiveBoat; }
+            get { return _localActiveBoat; }
             set
             {
-                _LocalActiveBoat = value;
+                _localActiveBoat = value;
                 Notify();
             }
         }

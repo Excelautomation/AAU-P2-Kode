@@ -31,34 +31,18 @@ namespace ARK.ViewModel.Administrationssystem
 
         public OverviewViewModel()
         {
-            // Instaliser lister så lazy ikke fejler
-            _skadesblanketterNonFiltered = new List<DamageForm>();
-            _longDistanceFormsNonFiltered = new List<LongTripForm>();
-            _boatsOutNonFiltered = new List<Boat>();
-
-            // Load data
-            Task.Factory.StartNew(() =>
+            ParentAttached += (sender, e) =>
             {
                 DbArkContext db = DbArkContext.GetDbContext();
 
-                lock (db)
-                {
-                    // Opret forbindelser Async
-                    Task<List<DamageForm>> damageforms = db.DamageForm.ToListAsync();
-                    Task<List<LongTripForm>> longDistanceForms = db.LongTripForm.ToListAsync();
-                    Task<List<Boat>> boatsOut = db.Boat.ToListAsync();
-
-                    _skadesblanketterNonFiltered = damageforms.Result;
-                    _longDistanceFormsNonFiltered = longDistanceForms.Result;
-                    _boatsOutNonFiltered = boatsOut.Result;
-                }
+                // Load data
+                _skadesblanketterNonFiltered = db.DamageForm.ToList();
+                _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
+                _boatsOutNonFiltered = db.Boat.ToList();
 
                 // Nulstil filter
                 ResetFilter();
-            });
-
-            // Nulstil filter
-            ResetFilter();
+            };
 
             // Setup filter
             var filterController = new FilterContent(this);
