@@ -35,7 +35,7 @@
                     <StackPanel Visibility="{Binding Path=ShowSkader}">
                         <WrapPanel>
                             <Image Source="/View/images/application_side_list_red.png" Height="24" />
-                            <Label FontSize="18">Skadesblanketter</Label>
+                            <Label FontSize="18">Åbne Skadesblanketter</Label>
                         </WrapPanel>
 
                         <ListView Margin="5,5,5,20" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedDamageForm}">
@@ -71,8 +71,8 @@
                                             </Grid.RowDefinitions>
 
                                             <WrapPanel Grid.Column="0" Orientation="Vertical">
-                                                <TextBlock Text="Båd:" FontSize="14px" />
-                                                <TextBlock Text="Medlem:" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Båd:" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Medlem:" FontSize="14px" />
                                             </WrapPanel>
 
                                             <WrapPanel Grid.Column="1" Orientation="Vertical">
@@ -84,8 +84,8 @@
                                             </WrapPanel>
 
                                             <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
-                                                <TextBlock Text="Type: " FontSize="14px" />
-                                                <TextBlock Text="Dato: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Type: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Dato: " FontSize="14px" />
                                             </WrapPanel>
 
                                             <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
@@ -102,7 +102,7 @@
                     <StackPanel Visibility="{Binding Path=ShowLangtur}">
                         <WrapPanel>
                             <Image Source="/View/images/application_side_list_blue.png" Height="24" />
-                            <Label FontSize="18">Langtursblanketter</Label>
+                            <Label FontSize="18">Afventende Langtursblanketter</Label>
                         </WrapPanel>
                         <ListView Margin="5,5,5,20" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedLongDistanceForm}">
                             <ListView.ItemContainerStyle>
@@ -137,8 +137,8 @@
                                             </Grid.RowDefinitions>
 
                                             <WrapPanel Grid.Column="0" Orientation="Vertical">
-                                                <TextBlock Text="Båd:" FontSize="14px" />
-                                                <TextBlock Text="Medlem:" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Båd:" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Medlem:" FontSize="14px" />
                                             </WrapPanel>
 
                                             <WrapPanel Grid.Column="1" Orientation="Vertical">
@@ -149,13 +149,13 @@
                                             </WrapPanel>
 
                                             <WrapPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
-                                                <TextBlock Text="Afgang: " FontSize="14px" />
-                                                <TextBlock Text="Hjemkomst: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Afgang: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Hjemkomst: " FontSize="14px" />
                                             </WrapPanel>
 
                                             <WrapPanel Grid.Column="3" Orientation="Vertical"  HorizontalAlignment="Left">
-                                                <TextBlock Text="{Binding Departure, StringFormat=d}" FontSize="14px" />
-                                                <TextBlock Text="{Binding Arrival, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock Text="{Binding PlannedStartDate, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock Text="{Binding PlannedEndDate, StringFormat=d}" FontSize="14px" />
                                             </WrapPanel>
 
                                         </Grid>
@@ -206,8 +206,8 @@
                                             <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" FontSize="18px" />
 
                                             <WrapPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                                                <TextBlock Text="Kategori: " FontSize="14px" />
-                                                <TextBlock Text="Pladser: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Kategori: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Pladser: " FontSize="14px" />
                                             </WrapPanel>
 
                                             <WrapPanel Grid.Column="2" Orientation="Vertical" Margin="10,0,0,0"  HorizontalAlignment="Left">
