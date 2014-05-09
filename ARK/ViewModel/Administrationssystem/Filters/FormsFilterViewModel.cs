@@ -15,25 +15,16 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         public FormsFilterViewModel()
         {
             CurrentFormsFilter = new FormsFilter();
+
+            ShowOpen = true;
         }
 
-        public bool ShowLongDistanceForm
+        public bool ShowOpen
         {
-            get { return CurrentFormsFilter.ShowLongDistanceForm; }
+            get { return CurrentFormsFilter.ShowOpen; }
             set
             {
-                CurrentFormsFilter.ShowLongDistanceForm = value;
-                Notify();
-                CallEvent();
-            }
-        }
-
-        public bool ShowDamageTypes
-        {
-            get { return CurrentFormsFilter.ShowDamageTypes; }
-            set
-            {
-                CurrentFormsFilter.ShowDamageTypes = value;
+                CurrentFormsFilter.ShowOpen = value;
                 Notify();
                 CallEvent();
             }
@@ -70,48 +61,50 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
         public class FormsFilter : Filter
         {
-            public bool ShowLongDistanceForm { get; set; }
-            public bool ShowDamageTypes { get; set; }
+            public bool ShowOpen { get; set; }
             public bool ShowDenied { get; set; }
             public bool ShowAccepted { get; set; }
 
             public override IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
-                if (!ShowLongDistanceForm && !ShowDamageTypes)
-                    return items;
-
-                if (typeof (DamageForm) == typeof (T))
-                    if (ShowDamageTypes)
-                        return items;
-                    else
-                        return new List<T>();
-                else if (typeof (LongTripForm) == typeof (T))
+                if (typeof(DamageForm) == typeof(T))
                 {
-                    if (!ShowLongDistanceForm)
-                    {
-                        if (ShowAccepted || ShowDenied)
-                            throw new NotImplementedException();
-
-                        return new List<T>();
-                    }
-
-                    if (ShowAccepted && ShowDenied)
-                        throw new NotImplementedException();
+                    List<DamageForm> output = new List<DamageForm>();
 
                     if (ShowAccepted)
-                        return
+                        output = FilterContent.MergeLists(
+                            items.Cast<DamageForm>()
+                                .Where(form => !form.Closed)
+                                , output).ToList();
+                    if (ShowDenied)
+                        output = FilterContent.MergeLists(
+                            items.Cast<DamageForm>()
+                                .Where(form => form.Closed)
+                                , output).ToList();
+
+                    return output.Cast<T>();
+                }
+                else if (typeof(LongTripForm) == typeof(T))
+                {
+                    List<LongTripForm> output = new List<LongTripForm>();
+
+                    if (ShowAccepted)
+                        output = FilterContent.MergeLists(
                             items.Cast<LongTripForm>()
                                 .Where(form => form.Status == LongTripForm.BoatStatus.Accepted)
-                                .ToList()
-                                .Cast<T>();
-                    else if (ShowDenied)
-                        return
+                                , output).ToList();
+                    if (ShowDenied)
+                        output = FilterContent.MergeLists(
                             items.Cast<LongTripForm>()
                                 .Where(form => form.Status == LongTripForm.BoatStatus.Denied)
-                                .ToList()
-                                .Cast<T>();
+                                , output).ToList();
+                    if (ShowOpen)
+                        output = FilterContent.MergeLists(
+                            items.Cast<LongTripForm>()
+                                .Where(form => form.Status == LongTripForm.BoatStatus.Awaiting)
+                                , output).ToList();
 
-                    return items;
+                    return output.Cast<T>();
                 }
 
                 return items;

@@ -14,6 +14,10 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         public OverviewFilterViewModel()
         {
             CurrentFilter = new OverViewFilter();
+
+            Damages = true;
+            LongTrip = true;
+            BoatsOut = true;
         }
 
         public bool Damages
