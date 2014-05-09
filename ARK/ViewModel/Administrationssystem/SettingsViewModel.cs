@@ -526,9 +526,6 @@ namespace ARK.ViewModel.Administrationssystem
                     MembersListWindow.DataContext = this;
                     MembersListWindow.ShowDialog();
 
-                    if (NewAdmin.Member == null)
-                        return;
-
                     Admin AdminTemplate = new Admin()
                     {
                         Username = NewAdmin.Username,
@@ -537,12 +534,35 @@ namespace ARK.ViewModel.Administrationssystem
                         ContactDark = false,
                         Member = NewAdmin.Member
                     };
+
+                    if (Admins.Any(m => m.Member == NewAdmin.Member))
+                    {
+                        System.Windows.MessageBox.Show("Det valgte medlem er allerede administrator!");
+                        return;
+                    }
+
+                    if (Admins.Any(m => m.Username == NewAdmin.Username))
+                    {
+                        System.Windows.MessageBox.Show("Det ønskede brugernavn eksisterer allerede!");
+                        return;
+                    }
+
                     _db.Admin.Add(AdminTemplate);
-                    
-                    _db.SaveChanges();
                     Admins.Add(AdminTemplate);
-                    FeedbackAdmin = Feedback.Create;
+
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        System.Windows.MessageBox.Show("Der skete en fejl! Genstart af programmet anbefales.");
+                        Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+                        return;
+                    }
+                    
                     SelectedListItemAdmins = Admins.Count - 1;
+                    FeedbackAdmin = Feedback.Create;
                 });
             }
         }
@@ -570,8 +590,8 @@ namespace ARK.ViewModel.Administrationssystem
                         return;
                     }
                     Admins.Remove(ReferenceToCurrentAdmin);
-                    FeedbackAdmin = Feedback.Delete;
                     SelectedListItemAdmins = Admins.Count - 1;
+                    FeedbackAdmin = Feedback.Delete;
                 });
             }
         }
