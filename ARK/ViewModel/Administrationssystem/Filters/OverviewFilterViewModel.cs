@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
-using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem.Filters
 {
-    public class OverviewFilterViewModel : ViewModelBase, IFilterViewModel
+    public class OverviewFilterViewModel : FilterViewModelBase
     {
-        public OverViewFilter CurrentFilter { get; set; }
-
         public OverviewFilterViewModel()
         {
             CurrentFilter = new OverViewFilter();
@@ -19,6 +15,8 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             LongTrip = true;
             BoatsOut = true;
         }
+
+        public OverViewFilter CurrentFilter { get; set; }
 
         public bool Damages
         {
@@ -55,11 +53,14 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
         private void CallEvent()
         {
-            if (FilterChanged != null)
-                FilterChanged(this, new FilterEventArgs(new List<Filter> {CurrentFilter}));
+            OnFilterChanged();
         }
 
-        public event EventHandler<FilterEventArgs> FilterChanged;
+
+        public override IEnumerable<Filter> GetFilter()
+        {
+            return new List<Filter> {CurrentFilter};
+        }
 
         public class OverViewFilter : Filter
         {

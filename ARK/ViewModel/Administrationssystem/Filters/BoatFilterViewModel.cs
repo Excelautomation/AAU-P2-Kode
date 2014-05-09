@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
-using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem.Filters
 {
-    internal class BoatFilterViewModel : ViewModelBase, IFilterViewModel
+    internal class BoatFilterViewModel : FilterViewModelBase
     {
         public BoatFilterViewModel()
         {
@@ -19,7 +17,6 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             ShowBoatsDamaged = true;
             ShowInactiveBoats = true;
             ShowFunctionalBoats = true;
-            
         }
 
         public BoatFilter CurrentFilter { get; set; }
@@ -96,12 +93,14 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             }
         }
 
-        public event EventHandler<FilterEventArgs> FilterChanged;
-
         private void CallEvent()
         {
-            if (FilterChanged != null)
-                FilterChanged(this, new FilterEventArgs(new List<Filter> {CurrentFilter}));
+            OnFilterChanged();
+        }
+
+        public override IEnumerable<Filter> GetFilter()
+        {
+            return new List<Filter> {CurrentFilter};
         }
 
         public class BoatFilter : Filter
