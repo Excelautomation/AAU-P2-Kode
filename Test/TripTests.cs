@@ -7,7 +7,23 @@ namespace Test
 {
     [TestClass]
     public class TripTests
-    {
+    {   
+        [TestMethod]
+        public void TripEnded_WithStartAndEndTime_ReturnTrue()
+        {
+            // Arrange
+            Trip trip = new Trip();
+            trip.TripStartTime = DateTime.Now;
+            trip.TripEndedTime = DateTime.Now.AddHours(1);
+            bool expected = true;
+
+            // Act
+            bool actual = trip.TripEnded;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestMethod]
         public void TimeBoatOut_Wait5Secs_Return5()
         {
