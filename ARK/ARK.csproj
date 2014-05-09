@@ -154,6 +154,9 @@
     <Compile Include="View\Administrationssystem\Filters\FormsFilter.xaml.cs">
       <DependentUpon>FormsFilter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Administrationssystem\Filters\FormsFilterDamage.xaml.cs">
+      <DependentUpon>FormsFilterDamage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Administrationssystem\Filters\OverviewFilter.xaml.cs">
       <DependentUpon>OverviewFilter.xaml</DependentUpon>
     </Compile>
@@ -327,6 +330,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Administrationssystem\Filters\FormsFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrationssystem\Filters\FormsFilterDamage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
