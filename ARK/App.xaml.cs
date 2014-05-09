@@ -19,6 +19,21 @@ namespace ARK
     {
         public App()
         {
+            // Thread that checks if a new season needs to be started
+            var checkForNewSeasonThread = new Thread(() =>
+            {
+                DateTime tomorrowAtTree = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 3, 00, 00);
+
+                tomorrowAtTree = tomorrowAtTree.AddDays(1);
+
+                TimeSpan TimeToTreeOCloc = tomorrowAtTree - DateTime.Now;
+
+                Thread.Sleep((int)TimeToTreeOCloc.TotalMilliseconds);// sleep until 3.00 hours
+
+                CheckCurrentSeasonEnd(); 
+
+            });
+            checkForNewSeasonThread.Start();
             //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
             //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
             var thr = new Thread(() =>
@@ -137,6 +152,32 @@ namespace ARK
             this.StartupUri = new Uri("/View/Protokolsystem/ProtocolSystem.xaml", UriKind.Relative);
 #endif
 #endif
+        }
+
+        void CheckCurrentSeasonEnd()
+        {
+            using (var db = new DbArkContext())
+            {
+                Season currentSeason;
+
+                // Get current season
+                if (!db.Season.Any(x => true))
+                {
+                    currentSeason = new Season();
+                    db.Season.Add(currentSeason);
+                }
+                else
+                    currentSeason = db.Season.AsEnumerable().Last(x => true);
+
+
+                // if current seasonEnd is before today add new season.
+                if (DateTime.Compare(currentSeason.SeasonEnd, DateTime.Now) <= 0)
+                {
+                    currentSeason = new Season();
+                    db.Season.Add(currentSeason);
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

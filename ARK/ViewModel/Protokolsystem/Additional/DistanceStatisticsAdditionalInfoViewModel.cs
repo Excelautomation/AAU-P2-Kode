@@ -10,6 +10,8 @@ namespace ARK.ViewModel.Protokolsystem.Additional
     public class DistanceStatisticsAdditionalInfoViewModel : ContentViewModelBase
     {
         // Fields
+        public Member SelectedMember { get; set; }
+        public Trip SelectedTrip { get; set; }
 
     }
 }
