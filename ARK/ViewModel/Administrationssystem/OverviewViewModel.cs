@@ -36,9 +36,24 @@ namespace ARK.ViewModel.Administrationssystem
                 DbArkContext db = DbArkContext.GetDbContext();
 
                 // Load data
-                _skadesblanketterNonFiltered = db.DamageForm.ToList();
-                _longDistanceFormsNonFiltered = db.LongTripForm.ToList();
-                _boatsOutNonFiltered = db.Boat.ToList();
+                _skadesblanketterNonFiltered = db.DamageForm
+                    .Where(damageForm => !damageForm.Closed)
+                    .OrderBy(damageForm => damageForm.Date)
+                    .Take(6)
+                    .ToList();
+
+                _longDistanceFormsNonFiltered = db.LongTripForm
+                    .Where(longDistanceForm => longDistanceForm.Status == LongTripForm.BoatStatus.Awaiting)
+                    .OrderBy(longDistanceForm => longDistanceForm.PlannedStartDate)
+                    .Take(6)
+                    .ToList();
+
+                _boatsOutNonFiltered = db.Boat
+                    .Include(boat => boat.Trips)
+                    .Where(boat => boat.Trips.Any(trip => trip.TripEndedTime == null))
+                    .ToList()
+                    .OrderBy(boat => boat.Trips.First(trip => trip.TripEndedTime == null).TripStartTime)
+                    .ToList();
 
                 // Nulstil filter
                 ResetFilter();
@@ -200,27 +215,9 @@ namespace ARK.ViewModel.Administrationssystem
             ShowLangtur = Visibility.Visible;
             ShowSkader = Visibility.Visible;
 
-            // Loads the first six open damageforms
-            Skadesblanketter =
-                (from dmf in _skadesblanketterNonFiltered.AsReadOnly()
-                where dmf.Closed == false
-                orderby dmf.Date
-                select dmf).Take(6);
-            
-            // Loads the first six awaiting longdistanceforms
-            LongDistanceForms = 
-                (from ldf in _longDistanceFormsNonFiltered.AsReadOnly()
-                where ldf.Status == LongTripForm.BoatStatus.Awaiting
-                orderby ldf.PlannedStartDate ascending
-                select ldf).Take(6);
-
-            // Loads all boats out
-            BoatsOut =
-                from boatsout in _boatsOutNonFiltered
-                where boatsout.Trips.Any(x => x.TripEndedTime == null)
-                orderby boatsout.Trips.Single(x => x.TripEndedTime == null).TripStartTime ascending
-                select boatsout;
-
+            Skadesblanketter = _skadesblanketterNonFiltered;
+            LongDistanceForms = _longDistanceFormsNonFiltered;
+            BoatsOut = _boatsOutNonFiltered;
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)

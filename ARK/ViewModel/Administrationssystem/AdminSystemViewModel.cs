@@ -109,6 +109,17 @@ namespace ARK.ViewModel.Administrationssystem
         private Oversigt _pageOverview;
         private Trips _pageTrips;
 
+        public void UpdateFilter()
+        {
+            var viewModelbase = CurrentPage.DataContext as IFilterContentViewModel;
+            if (viewModelbase != null)
+            {
+                Filter = viewModelbase.Filter;
+            }
+            else
+                Filter = null;
+        }
+
         public FrameworkElement Filter
         {
             get { return _filter; }
@@ -230,22 +241,15 @@ namespace ARK.ViewModel.Administrationssystem
 
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
-            FrameworkElement element = page();
-
             EnableSearch = false;
             EnableFilters = false;
+
+            base.NavigateToPage(page, pageTitle);
+
             SearchText = "";
 
-            // Sæt filter
-            var viewModelbase = element.DataContext as IFilterContentViewModel;
-            if (viewModelbase != null)
-            {
-                Filter = viewModelbase.Filter;
-            }
-            else
-                Filter = null;
-
-            base.NavigateToPage(() => element, pageTitle);
+            // Set filter
+            UpdateFilter();
         }
     }
 }
