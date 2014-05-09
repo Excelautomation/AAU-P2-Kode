@@ -22,15 +22,26 @@ namespace ARK
             // Thread that checks if a new season needs to be started
             var checkForNewSeasonThread = new Thread(() =>
             {
-                DateTime tomorrowAtTree = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 3, 00, 00);
+                while (true)
+                {
+                    DateTime tomorrowAtTree = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 3,
+                        00, 00);
 
-                tomorrowAtTree = tomorrowAtTree.AddDays(1);
+                    tomorrowAtTree = tomorrowAtTree.AddDays(1);
 
-                TimeSpan TimeToTreeOCloc = tomorrowAtTree - DateTime.Now;
+                    TimeSpan TimeToTreeOCloc = tomorrowAtTree - DateTime.Now;
 
-                Thread.Sleep((int)TimeToTreeOCloc.TotalMilliseconds);// sleep until 3.00 hours
+                    try
+                    {
+                        Thread.Sleep((int) TimeToTreeOCloc.TotalMilliseconds); // sleep until 3.00 hours
+                    }
+                    catch (ThreadInterruptedException)
+                    {
+                        break;
+                    }
 
-                CheckCurrentSeasonEnd(); 
+                    CheckCurrentSeasonEnd();
+                }
 
             });
             checkForNewSeasonThread.Start();
@@ -134,10 +145,15 @@ namespace ARK
                 thr.Start();
             }
 
+            Current.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
+
             Current.Exit += (sender, e) =>
             {
                 if (thr.ThreadState == ThreadState.Running)
-                    thr.Abort();
+                    thr.Interrupt();
+                if (checkForNewSeasonThread.ThreadState == ThreadState.Running ||
+                    checkForNewSeasonThread.ThreadState == ThreadState.WaitSleepJoin)
+                    checkForNewSeasonThread.Interrupt();
             };
         }
 
