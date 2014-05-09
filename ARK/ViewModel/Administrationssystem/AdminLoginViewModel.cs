@@ -18,7 +18,22 @@ namespace ARK.ViewModel.Administrationssystem
 
         public string Username { get; set; }
         public AdminLogin AdminLogin { get; set; }
-        public string ErrorLabel { get { return _errorLabel; } set { _errorLabel = value; Notify(); } }
+        public string ErrorLabel
+        {
+            get { return _errorLabel; }
+            set { _errorLabel = value; Notify(); }
+        }
+
+        public ICommand CloseWindow
+        {
+            get
+            {
+                return GetCommand<Window>(e =>
+                {
+                    e.Close();
+                });
+            }
+        }
 
         public ICommand Login
         {

@@ -6,7 +6,8 @@
         xmlns:administrationssystem1="clr-namespace:ARK.View.Administrationssystem"
         x:Class="ARK.View.Administrationssystem.AdminSystem"
         Title="Administrationssystem" Height="768" Width="1024"
-        MinWidth="1024" MinHeight="768" WindowState="Maximized">
+        MinWidth="1024" MinHeight="768" WindowState="Maximized"
+        x:Name="AdminPanel">
     <Window.DataContext>
         <administrationssystem:AdminSystemViewModel />
     </Window.DataContext>
@@ -196,7 +197,7 @@
                 <Run Text="{Binding Path=CurrentLoggedInUser.Member.LastName}" />
             </TextBlock>
             <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial"/>
-            <Button x:Name="btnMenuLogout" Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="50,70,20,0" FontFamily="Arial">
+            <Button x:Name="btnMenuLogout" Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="50,70,20,0" FontFamily="Arial" Command="{Binding Path=Logout}" CommandParameter="{Binding ElementName=AdminPanel}">
                 <Button.Background>
                     <ImageBrush ImageSource="/View/images/logud.png"/>
                 </Button.Background>

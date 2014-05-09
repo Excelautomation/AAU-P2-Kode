@@ -12,14 +12,6 @@
         <VM:FormsDamageViewModel></VM:FormsDamageViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontStyle" Value="Italic"/>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontStyle" Value="Normal"/>
-        </Style>
         <valueConverters:BoolToStringConverter x:Key="Funktionel" FalseValue="Nej" TrueValue="Ja" />
     </UserControl.Resources>
     <StackPanel>
