@@ -21,6 +21,8 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
+
+
     <!--
     Search and Filter
     Background & Border
@@ -158,20 +160,28 @@
     Background & Border
     -->
     <LinearGradientBrush x:Key="PressedBG" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="{DynamicResource {x:Static SystemColors.ControlLightLightColorKey}}" Offset="0.0"/>
-        <GradientStop Color="#FFC9C9C9" Offset="0.5" />
-        <GradientStop Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}" Offset="1.0"/>
+        <GradientStop Offset="0.0" Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
+        <GradientStop Offset="1.0" Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="PressedBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Offset="0.0" Color="#FFE6E6E6"/>
-        <GradientStop Color="#FFAEA9A9" Offset="0.5" />
-        <GradientStop Offset="1.0" Color="#FF8B8B8B"/>
+        <GradientStop Offset="0.0" Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
     </LinearGradientBrush>
+
+
+
+    <Style x:Key="txbProtokol" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="LineHeight" Value="18"/>
+        <Setter Property="Margin" Value="10,10,5,5"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
 
     <!--Button-->
     <Style x:Key="btnFilter" TargetType="Button">
         <Setter Property="Height" Value="64"/>
-        <Setter Property="Width" Value="150"/>
+        <Setter Property="Width" Value="Auto"/>
         <Setter Property="FontFamily" Value="Corbel"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
@@ -189,14 +199,62 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="{StaticResource PressedBG}" TargetName="btnBorder"/>
                             <Setter Property="BorderBrush" Value="{StaticResource PressedBorder}" TargetName="btnBorder"/>
+                            <Setter Property="OpacityMask">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                        <LinearGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </LinearGradientBrush.RelativeTransform>
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="White" Offset="0.866"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource txbProtokol}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button, Mode=FindAncestor}, Path=IsPressed}" Value="True">
+                        <Setter Property="Foreground" Value="#FFF3F3F3"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
     </Style>
 
+    <Style x:Key="btnProtokol" TargetType="Button" BasedOn="{StaticResource btnFilter}">
+        <Setter Property="BorderThickness" Value="0,2,0,2"/>
+        <Setter Property="OpacityMask">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#99000000" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.866"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-
+    <Style x:Key="styleButtons" TargetType="Button" BasedOn="{StaticResource btnProtokol}">
+        <Setter Property="OpacityMask" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="2,2,2,2"/>
+    </Style>
+    
 </ResourceDictionary>
     
