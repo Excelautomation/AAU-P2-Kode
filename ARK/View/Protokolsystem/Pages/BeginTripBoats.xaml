@@ -20,7 +20,7 @@
             <Setter Property="Visibility" 
                 Value="{Binding Visible, Converter={StaticResource BoolToVis}}"/>
         </Style>
-        
+
         <Style x:Key="DeactivateAddButtons" TargetType="Button">
             <Setter Property="IsEnabled" Value="False"/>
             <Style.Triggers>
@@ -47,7 +47,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
@@ -135,31 +135,35 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
         <Grid Grid.Row="2" Grid.Column="1" Margin="5,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnAddGuest" Grid.Column="0" VerticalAlignment="Top"
+            <Button x:Name="btnAddGuest" Grid.Column="0"
+                    Style="{StaticResource styleButtons}" 
                     IsEnabled="{Binding EnableMembers}"
-                    Command="{Binding Path=AddGuest}"
+                    Command="{Binding AddGuest}"
                     Background="{DynamicResource AddBG}"
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
-                <Grid>
+                <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="32"/>
                         <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" Style="{StaticResource ResourceKey=btnImage}" />
-                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;GÆST" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" 
+                           Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;GÆST" FontSize="16"
+                               VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1"/>
                 </Grid>
             </Button>
             <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
-                    Command="{Binding Path=AddBlanc}" 
+                    Style="{StaticResource styleButtons}" 
+                    Command="{Binding AddBlanc}" 
                     IsEnabled="{Binding EnableMembers}"
                     Background="{DynamicResource AddBG}"
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
@@ -171,7 +175,7 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/shape_square_add.png" Style="{StaticResource ResourceKey=btnImage}" />
-                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18" />
+                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" FontSize="16" VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1"/>
                 </Grid>
             </Button>
         </Grid>
@@ -189,12 +193,13 @@
         </Border>
 
         <!--Buttons-->
-        <DockPanel Grid.ColumnSpan="2" Grid.Row="4" Margin="0,5,0,0" LastChildFill="False" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="4" Margin="0,5,0,0" LastChildFill="False"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <Button x:Name="btnShowKeyboard"
                     Margin="0,0,3,0"
                     DockPanel.Dock="Left"
-                    Style="{StaticResource ResourceKey=btnFilter}" 
-                    Command="{Binding Path=ToggleKeyboard}"
+                    Style="{StaticResource styleButtons}" 
+                    Command="{Binding ToggleKeyboard}"
                     Background="{StaticResource SearchFilterBG}"
                     BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
@@ -218,9 +223,9 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <TextBlock Grid.Column="3">
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1">
                         <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
+                            <Style TargetType="TextBlock">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
                                         <Setter Property="Text" Value="SKJUL&#10;TASTATUR"></Setter>
@@ -237,8 +242,8 @@
 
             <Button Name="btnShowFilter"
                     DockPanel.Dock="Left"
-                    Style="{StaticResource ResourceKey=btnFilter}" 
-                    Command="{Binding Path=ToggleFilter}"
+                    Style="{StaticResource styleButtons}" 
+                    Command="{Binding ToggleFilter}"
                     Background="{StaticResource SearchFilterBG}"
                     BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
@@ -262,9 +267,9 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <TextBlock Grid.Column="3">
+                    <TextBlock Grid.Column="3" VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1">
                         <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
+                            <Style TargetType="TextBlock" >
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="True">
                                         <Setter Property="Text" Value="SKJUL&#10;FILTER"></Setter>
@@ -282,10 +287,10 @@
             <Button x:Name="btnBeginTripNow" 
                     DockPanel.Dock="Right"
                     VerticalAlignment="Top" 
-            	    Style="{StaticResource ResourceKey=btnFilter}"  
+            	    Style="{StaticResource styleButtons}"  
             	    Command="{Binding StartTripNow}"
             	    Background="{StaticResource BeginBG}"
-            	    BorderBrush="{StaticResource BeginBorder}" Margin="0,0,0,0" Width="Auto">
+            	    BorderBrush="{StaticResource BeginBorder}" Width="Auto">
                 <Grid Margin="0,0,-2,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -294,7 +299,7 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/document_page_next.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="BEGYND&#xA;ROTUR" />
+                    <TextBlock Grid.Column="3" Text="BEGYND&#xA;ROTUR" VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1" />
                 </Grid>
             </Button>
         </DockPanel>

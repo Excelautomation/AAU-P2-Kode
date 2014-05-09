@@ -22,33 +22,6 @@
             <Setter Property="Stroke" Value="#FFCDCDCD"/>
         </Style>
 
-        <Style x:Key="txbProtokol" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
-            <Setter Property="LineHeight" Value="18"/>
-            <Setter Property="Margin" Value="10,10,5,5"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-
-        <Style x:Key="btnProtokol" TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
-            <Setter Property="BorderThickness" Value="0,2,0,2"/>
-            <Setter Property="OpacityMask">
-                <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                        <LinearGradientBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="#99000000" Offset="0"/>
-                        <GradientStop Color="White" Offset="0.866"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Window.Resources>
 
     <Window.BorderBrush>
@@ -112,7 +85,7 @@
             	        Background="{StaticResource BeginBG}"
             	        BorderBrush="{StaticResource BeginBorder}" 
                         Width="Auto" Height="90">
-                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="START&#xA;ROTUR" />
+                    <TextBlock Text="START&#xA;ROTUR" />
                 </Button>
                 <Button x:Name="EndTrip" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
@@ -120,7 +93,7 @@
             	        Background="{StaticResource EndBG}"
             	        BorderBrush="{StaticResource EndBorder}" 
                         Width="Auto" Height="90">
-                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="AFSLUT&#xA;ROTUR" />
+                    <TextBlock Text="AFSLUT&#xA;ROTUR" />
                 </Button>
             </Grid>
 
@@ -137,7 +110,7 @@
             	        Background="{StaticResource InfoBG}"
             	        BorderBrush="{StaticResource InfoBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="BÅDE PÅ&#xA;VANDET" />
+                    <TextBlock Text="BÅDE PÅ&#xA;VANDET" />
                 </Button>
                 <Button x:Name="DistanceStatistics" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
@@ -145,7 +118,7 @@
             	        Background="{StaticResource InfoBG}"
             	        BorderBrush="{StaticResource InfoBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="KILOMETER&#xA;STATISTIK" />
+                    <TextBlock Text="KILOMETER&#xA;STATISTIK" />
                 </Button>
                 <Button x:Name="MembersInformation" Grid.Row="2" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
@@ -153,7 +126,7 @@
             	        Background="{StaticResource InfoBG}"
             	        BorderBrush="{StaticResource InfoBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="MEDLEMS&#xA;INFORMATIONER" />
+                    <TextBlock Text="MEDLEMS&#xA;INFORMATIONER" />
                 </Button>
             </Grid>
 
@@ -169,7 +142,7 @@
             	        Background="{StaticResource SubmitBG}"
             	        BorderBrush="{StaticResource SubmitBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="LANGTURE" />
+                    <TextBlock Text="LANGTURE" />
                 </Button>
                 <Button x:Name="CreateDamage" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
@@ -177,7 +150,7 @@
                         Background="{StaticResource SubmitBG}"
             	        BorderBrush="{StaticResource SubmitBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="SKADER" />
+                    <TextBlock Text="SKADER" />
                 </Button>
             </Grid>
 
