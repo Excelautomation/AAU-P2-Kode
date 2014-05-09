@@ -98,6 +98,21 @@
                     <DockPanel>
                         
                         <ListView Margin="10" Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Status}" Value="Accepted">
+                                            <Setter Property="Background" Value="#CCFFCC"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Status}" Value="Denied">
+                                            <Setter Property="Background" Value="#FFDEDE"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <DockPanel Margin="0,5,0,5">
@@ -122,7 +137,6 @@
                                                 <TextBlock Text="{Binding PlannedEndDate, StringFormat=d}" FontSize="14px" />
                                             </WrapPanel>
                                         </StackPanel>
-
                                     </DockPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
