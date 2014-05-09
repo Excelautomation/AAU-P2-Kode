@@ -25,8 +25,6 @@ namespace ARK.ViewModel.Administrationssystem
         private IEnumerable<LongTripForm> _longTripForms;
         private List<LongTripForm> _longTripFormsNonFiltered;
         private int _selectedIndexDamageForms;
-        private Visibility _showDamageForms;
-        private Visibility _showLongTripForms;
         private int _selectedTabIndex;
 
         public FormsViewModel()
@@ -46,6 +44,9 @@ namespace ARK.ViewModel.Administrationssystem
 
                 // Nulstil filter
                 ResetFilter();
+
+                // Set selected tab index to 0 - damage
+                SelectedTabIndex = 0;
             };
 
             // Setup filter
@@ -53,7 +54,6 @@ namespace ARK.ViewModel.Administrationssystem
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
-
 
         public IEnumerable<DamageForm> DamageForms
         {
@@ -78,7 +78,48 @@ namespace ARK.ViewModel.Administrationssystem
         public int SelectedTabIndex
         {
             get { return _selectedTabIndex; }
-            set { _selectedTabIndex = value; Notify(); }
+            set
+            {
+                _selectedTabIndex = value;
+                Notify();
+
+                switch (_selectedTabIndex)
+                {
+                    case 0:
+                        DamageForm = true;
+                        break;
+                    case 1:
+                        DamageForm = false;
+                        break;
+                }
+            }
+        }
+
+        private bool DamageForm
+        {
+            get { return _damageForm; }
+            set
+            {
+                _damageForm = value;
+                UpdateFilter();
+            }
+        }
+
+        public ICommand GotFocus
+        {
+            get
+            {
+                return
+                    GetCommand<FrameworkElement>(
+                        element => ContentViewModelBase.GetKeyboard(this).GotFocus.Execute(element));
+            }
+        }
+
+        private void UpdateFilter()
+        {
+            var vm = Parent as AdminSystemViewModel;
+            if (vm != null)
+                vm.UpdateFilter();
         }
 
         #region Commands
@@ -108,9 +149,21 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public void GoToDamageForm(DamageForm df) 
+        public ICommand SelectLongDistanceFormCommand
         {
+            get
+            {
+                return GetCommand<LongTripForm>(e =>
+                {
+                    if (e == null) return;
 
+                    GoToLongDistanceForm(e);
+                });
+            }
+        }
+
+        public void GoToDamageForm(DamageForm df)
+        {
             NavigateToPage(() => new FormsDamage(),
                 df.Description);
 
@@ -120,22 +173,8 @@ namespace ARK.ViewModel.Administrationssystem
                 vm.DamageForm = df;
         }
 
-        public ICommand SelectLongDistanceFormCommand
-        {
-            get
-            {
-                return GetCommand<LongTripForm>( e =>
-                {
-                    if (e == null) return;
-
-                    GoToLongDistanceForm(e);
-                });
-            }
-        }
-
         public void GoToLongDistanceForm(LongTripForm ltf)
         {
-
             NavigateToPage(() => new FormsLongTrip(),
                 ltf.TourDescription);
 
@@ -148,41 +187,26 @@ namespace ARK.ViewModel.Administrationssystem
 
         #region Filters
 
+        private FrameworkElement _filterDamage;
+        private FrameworkElement _filterLongDistance;
+
         public IFilterContainerViewModel FilterContainer
         {
             get { return Parent as IFilterContainerViewModel; }
         }
 
-        public Visibility ShowDamageForms
-        {
-            get { return _showDamageForms; }
-            set
-            {
-                _showDamageForms = value;
-                Notify();
-            }
-        }
-
-        public Visibility ShowLongDistanceForms
-        {
-            get { return _showLongTripForms; }
-            set
-            {
-                _showLongTripForms = value;
-                Notify();
-            }
-        }
-
         public FrameworkElement Filter
         {
-            get { return new FormsFilter(); }
+            get
+            {
+                return DamageForm
+                    ? _filterDamage ?? (_filterDamage = new FormsFilter())
+                    : _filterLongDistance ?? (_filterLongDistance = new FormsFilter());
+            }
         }
 
         private void ResetFilter()
         {
-            ShowDamageForms = Visibility.Visible;
-            ShowLongDistanceForms = Visibility.Visible;
-
             DamageForms = _damageFormsNonFiltered.AsReadOnly()
                 .OrderBy(d => d.Closed).ThenBy(d => d.Date);
 
@@ -219,21 +243,16 @@ namespace ARK.ViewModel.Administrationssystem
                     where form.Filter(args.SearchEventArgs.SearchText)
                     select form;
             }
-
-            ShowDamageForms = DamageForms.Any()
-                ? Visibility.Visible
-                : Visibility.Collapsed;
-
-            ShowLongDistanceForms = LongDistanceForms.Any()
-                ? Visibility.Visible
-                : Visibility.Collapsed;
         }
 
         #endregion
 
         #region IContentViewModelBase
 
+        private bool _damageForm;
+        private bool _longTripForm;
         private IViewModelBase _parent;
+        private int _tabSelectedIndex;
 
         public IViewModelBase Parent
         {
@@ -263,10 +282,5 @@ namespace ARK.ViewModel.Administrationssystem
         public event EventHandler ParentDetached;
 
         #endregion
-
-        public ICommand GotFocus
-        {
-            get { return GetCommand<FrameworkElement>(element => ContentViewModelBase.GetKeyboard(this).GotFocus.Execute(element)); }
-        }
     }
 }
