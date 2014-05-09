@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using ARK.Model;
+using ARK.Model.DB;
 using ARK.Model.XML;
 using ARK.View;
 using ARK.View.Administrationssystem;
@@ -42,12 +46,17 @@ namespace ARK
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //var window = new Windows8Fuck();
-            //ShowWindow(window);
+            var context = DbArkContext.GetDbContext();
 
-            //XmlParser.LoadBoatsFromXml();
-            //XmlParser.LoadMembersFromXml();
-            //XmlParser.LoadTripsFromXml();
+            //var info = context.Boat.First();
+            //var info2 = ARK.HelperFunctions.HelperFunctions.CloneObject<Boat>(info);
+            //info2.Trips.First().Distance = 33;
+
+            var temp = context.Boat.ToList();
+            var temp2 = ARK.HelperFunctions.HelperFunctions.CloneCollection<Boat>(temp);
+            temp.First().Name = "changed";
+
+            Console.WriteLine();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

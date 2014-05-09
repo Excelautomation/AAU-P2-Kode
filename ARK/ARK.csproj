@@ -108,6 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HelperFunctions\HelperFunctions.cs" />
     <Compile Include="Model\Extensions\TripExtention.cs" />
     <Compile Include="Model\Season.cs" />
     <Compile Include="Model\SmsSetting.cs" />
