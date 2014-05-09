@@ -526,6 +526,24 @@ namespace ARK.ViewModel.Administrationssystem
                     MembersListWindow.DataContext = this;
                     MembersListWindow.ShowDialog();
 
+                    Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+
+                    if (NewAdmin.Username.Length == 0 || NewAdmin.Password.Length == 0)
+                    {
+                        System.Windows.MessageBox.Show("Brugernavn og kodeord er påkrævet!");
+                        return;
+                    }
+                    else if (Admins.Any(m => m.Member == NewAdmin.Member))
+                    {
+                        System.Windows.MessageBox.Show("Det valgte medlem er allerede administrator!");
+                        return;
+                    }
+                    else if (Admins.Any(m => m.Username == NewAdmin.Username))
+                    {
+                        System.Windows.MessageBox.Show("Det ønskede brugernavn eksisterer allerede!");
+                        return;
+                    }
+
                     Admin AdminTemplate = new Admin()
                     {
                         Username = NewAdmin.Username,
@@ -535,17 +553,6 @@ namespace ARK.ViewModel.Administrationssystem
                         Member = NewAdmin.Member
                     };
 
-                    if (Admins.Any(m => m.Member == NewAdmin.Member))
-                    {
-                        System.Windows.MessageBox.Show("Det valgte medlem er allerede administrator!");
-                        return;
-                    }
-
-                    if (Admins.Any(m => m.Username == NewAdmin.Username))
-                    {
-                        System.Windows.MessageBox.Show("Det ønskede brugernavn eksisterer allerede!");
-                        return;
-                    }
 
                     _db.Admin.Add(AdminTemplate);
                     Admins.Add(AdminTemplate);
@@ -573,12 +580,16 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+
                     if (Admins.Count == 1)
                     {
                         System.Windows.MessageBox.Show("Sidste administrator kan ikke slettes!");
                         return;
                     }
+
                     _db.Admin.Remove(ReferenceToCurrentAdmin);
+
                     try
                     {
                         _db.SaveChanges();
