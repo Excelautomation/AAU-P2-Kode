@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
-using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem.Filters
 {
-    public class FormsFilterViewModel : ViewModelBase, IFilterViewModel
+    public class FormsFilterViewModel : FilterViewModelBase
     {
-        public FormsFilter CurrentFormsFilter { get; set; }
-
         public FormsFilterViewModel()
         {
             CurrentFormsFilter = new FormsFilter();
 
             ShowOpen = true;
         }
+
+        public FormsFilter CurrentFormsFilter { get; set; }
 
         public bool ShowOpen
         {
@@ -40,6 +38,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                 CallEvent();
             }
         }
+
         public bool ShowAccepted
         {
             get { return CurrentFormsFilter.ShowAccepted; }
@@ -53,11 +52,13 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
         private void CallEvent()
         {
-            if (FilterChanged != null)
-                FilterChanged(this, new FilterEventArgs(new List<Filter> { CurrentFormsFilter }));
+            OnFilterChanged();
         }
 
-        public event EventHandler<FilterEventArgs> FilterChanged;
+        public override IEnumerable<Filter> GetFilter()
+        {
+            return new List<Filter> {CurrentFormsFilter};
+        }
 
         public class FormsFilter : Filter
         {
@@ -67,42 +68,42 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
             public override IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
-                if (typeof(DamageForm) == typeof(T))
+                if (typeof (DamageForm) == typeof (T))
                 {
-                    List<DamageForm> output = new List<DamageForm>();
+                    var output = new List<DamageForm>();
 
                     if (ShowAccepted)
                         output = FilterContent.MergeLists(
                             items.Cast<DamageForm>()
                                 .Where(form => !form.Closed)
-                                , output).ToList();
+                            , output).ToList();
                     if (ShowDenied)
                         output = FilterContent.MergeLists(
                             items.Cast<DamageForm>()
                                 .Where(form => form.Closed)
-                                , output).ToList();
+                            , output).ToList();
 
                     return output.Cast<T>();
                 }
-                else if (typeof(LongTripForm) == typeof(T))
+                if (typeof (LongTripForm) == typeof (T))
                 {
-                    List<LongTripForm> output = new List<LongTripForm>();
+                    var output = new List<LongTripForm>();
 
                     if (ShowAccepted)
                         output = FilterContent.MergeLists(
                             items.Cast<LongTripForm>()
                                 .Where(form => form.Status == LongTripForm.BoatStatus.Accepted)
-                                , output).ToList();
+                            , output).ToList();
                     if (ShowDenied)
                         output = FilterContent.MergeLists(
                             items.Cast<LongTripForm>()
                                 .Where(form => form.Status == LongTripForm.BoatStatus.Denied)
-                                , output).ToList();
+                            , output).ToList();
                     if (ShowOpen)
                         output = FilterContent.MergeLists(
                             items.Cast<LongTripForm>()
                                 .Where(form => form.Status == LongTripForm.BoatStatus.Awaiting)
-                                , output).ToList();
+                            , output).ToList();
 
                     return output.Cast<T>();
                 }

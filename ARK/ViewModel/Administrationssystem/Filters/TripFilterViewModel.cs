@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
-using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem.Filters
 {
-    public class TripFilterViewModel : ViewModelBase, IFilterViewModel
+    public class TripFilterViewModel : FilterViewModelBase
     {
-        public event EventHandler<FilterEventArgs> FilterChanged;
+        public override IEnumerable<Filter> GetFilter()
+        {
+            return new List<Filter>();
+        }
     }
 }

@@ -7,7 +7,7 @@ using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Protokolsystem.Filters
 {
-    internal class BeginTripFiltersViewModel : ViewModelBase, IFilterViewModel
+    internal class BeginTripFiltersViewModel : FilterViewModelBase
     {
         private bool _categoryAllTypesChecked;
         private bool _categoryErgometerChecked;
@@ -207,8 +207,6 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         }
 #endregion
 
-        public event EventHandler<FilterEventArgs> FilterChanged;
-
         private void UpdateCategory(Func<Boat, bool> filter)
         {
             CurrentBoatType.Filter = filter;
@@ -224,8 +222,12 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         private void UpdateFilter()
         {
-            if (FilterChanged != null)
-                FilterChanged(this, new FilterEventArgs(new List<Filter> { CurrentBoatType, CurrentBoatSizeFilter }));
+            base.OnFilterChanged();
+        }
+
+        public override IEnumerable<Filter> GetFilter()
+        {
+            return new List<Filter> {CurrentBoatType, CurrentBoatSizeFilter};
         }
     }
 }
