@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
-             mc:Ignorable="d" d:DesignWidth="1121.053" d:DesignHeight="650.134">
+             mc:Ignorable="d" d:DesignWidth="1121.053" d:DesignHeight="1200.134">
     <UserControl.DataContext>
         <VM:BoatViewModel/>
     </UserControl.DataContext>
@@ -159,7 +159,7 @@
                         <Grid Grid.Row="1" Grid.ColumnSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
-                                <RowDefinition Height="250"/>
+                            <RowDefinition Height="250"/>
                         </Grid.RowDefinitions>
 
 
@@ -181,7 +181,7 @@
                         </Border>
 
                         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" PanningMode="VerticalOnly">
-                            <ItemsControl  x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
+                            <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="5">

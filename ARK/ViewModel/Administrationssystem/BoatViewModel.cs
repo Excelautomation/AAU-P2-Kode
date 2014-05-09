@@ -28,6 +28,8 @@ namespace ARK.ViewModel.Administrationssystem
         private bool _RecentCancel = false;
         private bool _RecentInfoSave = false; // De tre sidste kan laves til enum
         private Boat _currentBoat;
+        //private Member _MostUsingMember;
+
         private FrameworkElement _filter;
 
         public BoatViewModel()
@@ -67,8 +69,6 @@ namespace ARK.ViewModel.Administrationssystem
                 CurrentBoat = Boats.First();
                 LocalActiveBoat = CurrentBoat.Active;
             }
-
-            
         }
 
         public bool RecentSave 
