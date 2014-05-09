@@ -33,7 +33,7 @@ namespace ARK.ViewModel.Administrationssystem
                 DamageTypes = new ObservableCollection<DamageType>(_db.DamageType);
                 StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip);
                 Admins = new ObservableCollection<Admin>(_db.Admin);
-                Members = new ObservableCollection<Member>(_db.Member);
+                Members = new ObservableCollection<Member>(_db.Member.OrderBy(e => e.FirstName));
             }
 
             if (Admins.Any())
