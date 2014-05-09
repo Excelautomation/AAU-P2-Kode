@@ -57,7 +57,7 @@
                                 <StackPanel>
                                     <DockPanel>
                                         <TextBlock Width="250" Margin="4" Text="Nuværende sæsonstart:"/>
-                                        <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" Text="{Binding Path=CurrentSeason.SeasonStart}" Width="200"/>
+                                        <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" Text="{Binding Path=CurrentSeason.SeasonStart, ConverterCulture=da-DK}" Width="200"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:"/>

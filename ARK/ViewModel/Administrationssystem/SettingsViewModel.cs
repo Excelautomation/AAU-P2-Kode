@@ -508,6 +508,11 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
+                    if (Admins.Count == 1)
+                    {
+                        System.Windows.MessageBox.Show("Sidste administrator kan ikke slettes!");
+                        return;
+                    }
                     _db.Admin.Remove(ReferenceToCurrentAdmin);
                     _db.SaveChanges();
                     Admins.Remove(ReferenceToCurrentAdmin);
