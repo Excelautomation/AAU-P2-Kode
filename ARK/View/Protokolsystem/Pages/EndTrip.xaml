@@ -87,7 +87,16 @@
                   SelectionMode="Multiple"
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=StandardTrips}" 
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lstStandardTrip_SelectionChanged">
+            <ListView.Style>
+                <Style TargetType="{x:Type ListView}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=lstBoatsOut, Path=SelectedItem}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Style>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -123,21 +132,9 @@
                     DockPanel.Dock="Right"
         		    Command="{Binding EndTrip}"
         		    Background="{StaticResource EndBG}"
-        		    BorderBrush="{StaticResource EndBorder}">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ResourceKey=btnFilter}">
-                        <Style.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding CanEndTrip}" Value="False"/>
-                                </MultiDataTrigger.Conditions>
-                                <MultiDataTrigger.Setters>
-                                    <Setter Property="IsEnabled" Value="False" />    
-                                </MultiDataTrigger.Setters>
-                            </MultiDataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+        		    BorderBrush="{StaticResource EndBorder}"
+                    IsEnabled="{Binding Path=CanEndTrip, Mode=OneWay}"
+                    Style="{StaticResource btnFilter}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -160,7 +157,7 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding SelectedTrip}" Value="{x:Null}"/>
+                                    <Condition Binding="{Binding Path=SelectedTrip}" Value="{x:Null}"/>
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.Setters>
                                     <Setter Property="IsEnabled" Value="False"/>
@@ -180,7 +177,6 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ANGIV&#xA;DISTANCE" />
                 </Grid>
             </Button>
-            
         </DockPanel>
     </Grid>
 </UserControl>

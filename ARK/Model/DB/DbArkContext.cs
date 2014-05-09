@@ -29,6 +29,7 @@ namespace ARK.Model.DB
         public DbSet<StandardTrip> StandardTrip { get; set; }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<Season> Season { get; set; }
+        public DbSet<SmsSetting> SmsSetting { get; set; }
         
 
         public static DbArkContext GetDbContext()
@@ -68,9 +69,9 @@ namespace ARK.Model.DB
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<LongTripForm>()
-                .HasRequired(ldf => ldf.Boat)
+                .HasOptional(ltf => ltf.Boat)
                 .WithMany(b => b.LongTripForms)
-                .HasForeignKey(ldf => ldf.BoatId)
+                .HasForeignKey(ltf => ltf.BoatId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<LongTripForm>()
