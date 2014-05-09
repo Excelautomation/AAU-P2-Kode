@@ -110,6 +110,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        #region Navigering via listitems
         private DamageForm _selectedDamageForm;
         public DamageForm SelectedDamageForm
         {
@@ -182,6 +183,7 @@ namespace ARK.ViewModel.Administrationssystem
             var boatsViewModel = (BoatViewModel)adminSystem.CurrentPage.DataContext;
             boatsViewModel.CurrentBoat = boat;
         }
+        #endregion
 
         #region Seach and filters
         public FrameworkElement Filter
@@ -198,9 +200,27 @@ namespace ARK.ViewModel.Administrationssystem
             ShowLangtur = Visibility.Visible;
             ShowSkader = Visibility.Visible;
 
-            Skadesblanketter = _skadesblanketterNonFiltered.AsReadOnly();
-            LongDistanceForms = _longDistanceFormsNonFiltered.AsReadOnly();
-            BoatsOut = _boatsOutNonFiltered.AsReadOnly();
+            // Loads the first six open damageforms
+            Skadesblanketter =
+                (from dmf in _skadesblanketterNonFiltered.AsReadOnly()
+                where dmf.Closed == false
+                orderby dmf.Date
+                select dmf).Take(6);
+            
+            // Loads the first six awaiting longdistanceforms
+            LongDistanceForms = 
+                (from ldf in _longDistanceFormsNonFiltered.AsReadOnly()
+                where ldf.Status == LongTripForm.BoatStatus.Awaiting
+                orderby ldf.PlannedStartDate ascending
+                select ldf).Take(6);
+
+            // Loads all boats out
+            BoatsOut =
+                from boatsout in _boatsOutNonFiltered
+                where boatsout.Trips.Any(x => x.TripEndedTime == null)
+                orderby boatsout.Trips.Single(x => x.TripEndedTime == null).TripStartTime ascending
+                select boatsout;
+
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
