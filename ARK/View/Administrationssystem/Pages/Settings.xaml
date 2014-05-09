@@ -61,7 +61,7 @@
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:"/>
-                                        <DatePicker DisplayDateStart="{Binding Path=Today, Mode=OneWay}" DisplayDateEnd="{Binding Path=CurrentSeason.LatestSeasonEnd, Mode=OneWay}" Name="EndSeasonDatePicker" SelectedDate="{Binding Path=CurrentSeason.SeasonEnd, Mode=TwoWay}" HorizontalAlignment="Right" Margin="4" Width="200"/>
+                                        <DatePicker DisplayDateStart="{Binding Path=CurrentSeason.EarliestSeasonEnd, Mode=OneWay}" DisplayDateEnd="{Binding Path=CurrentSeason.LatestSeasonEnd, Mode=OneWay}" Name="EndSeasonDatePicker" SelectedDate="{Binding Path=CurrentSeason.SeasonEnd, Mode=TwoWay}" HorizontalAlignment="Right" Margin="4" Width="200"/>
                                     </DockPanel>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
