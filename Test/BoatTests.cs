@@ -75,6 +75,31 @@ namespace Test
             // Act
             int actual = boat.TripsSailed;
 
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void KilometersSailed_With3Trips_Return69()
+        {
+            // Arange
+            Boat boat = new Boat();
+            Trip trip1 = new Trip();
+            Trip trip2 = new Trip();
+            Trip trip3 = new Trip();
+            trip1.Distance = 35;
+            trip2.Distance = 14;
+            trip3.Distance = 20;
+            boat.Trips = new List<Trip>();
+            boat.Trips.Add(trip1);
+            boat.Trips.Add(trip2);
+            boat.Trips.Add(trip3);
+            double expected = 69;
+
+            // Act
+            double actual = boat.KilometersSailed;
+
+            // Assert
             Assert.AreEqual(expected, actual);
         }
     }
