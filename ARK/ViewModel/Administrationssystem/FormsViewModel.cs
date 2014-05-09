@@ -212,7 +212,7 @@ namespace ARK.ViewModel.Administrationssystem
 
 
             LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly()
-                .OrderBy(x => x.Status).ThenBy(x => x.PlannedStartDate);
+                .OrderBy(x => x.Status).ThenBy(x => x.FormCreated);
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
