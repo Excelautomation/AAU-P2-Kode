@@ -8,7 +8,7 @@ using ARK.ViewModel.Protokolsystem.Data;
 
 namespace ARK.ViewModel.Protokolsystem.Filters
 {
-    internal class DistanceStatisticsFilterViewModel : ViewModelBase, IFilterViewModel
+    internal class DistanceStatisticsFilterViewModel : FilterViewModelBase
     {
         private bool _statisticsAll;
         private bool _statisticsErgometer;
@@ -115,10 +115,12 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         private void UpdateFilter()
         {
-            if (FilterChanged != null)
-                FilterChanged(this, new FilterEventArgs(new List<Filter> { CurrentBoatType }));
+            base.OnFilterChanged();
         }
 
-        public event EventHandler<FilterEventArgs> FilterChanged;
+        public override IEnumerable<Filter> GetFilter()
+        {
+            return new List<Filter> {CurrentBoatType};
+        }
     }
 }
