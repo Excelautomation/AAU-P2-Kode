@@ -91,6 +91,18 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        public ICommand ShowBoatDialog
+        {
+            get
+            {
+                return GetCommand<object>(e =>
+                {
+                    DbArkContext.GetDbContext().SaveChanges();
+                    RecentSave = true;
+                });
+            }
+        }
+
         public FrameworkElement Filter
         {
             get { return new TripFilter(); }

@@ -192,8 +192,7 @@
 
                                             <StackPanel Margin="5,0,0,0" Grid.Column="0">
                                                 <WrapPanel>
-                                                    <!--<TextBlock Text="Retning "/>-->
-                                                    <TextBlock Text="{Binding Path=Direction}"/>
+                                                    <TextBlock Width="80" TextWrapping="Wrap" Text="{Binding Path=Direction}"/>
                                                 </WrapPanel>
                                                 <WrapPanel>
                                                     <TextBlock Text="{Binding Path=Distance}"/>
