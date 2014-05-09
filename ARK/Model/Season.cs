@@ -26,5 +26,13 @@ namespace ARK.Model
                 return SeasonStart.AddDays(365 + 183);
             }
         }
+
+        public DateTime EarliestSeasonEnd
+        {
+            get
+            {
+                return SeasonStart.AddDays(183);
+            }
+        }
     }
 }
