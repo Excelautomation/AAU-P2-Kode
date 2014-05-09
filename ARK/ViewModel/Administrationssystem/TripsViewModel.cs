@@ -30,7 +30,9 @@ namespace ARK.ViewModel.Administrationssystem
                 DbArkContext db = DbArkContext.GetDbContext();
 
                 // Load data
-                _trips = db.Trip.Include(trip => trip.Members).ToList();
+                _trips = db.Trip
+                    .Include(trip => trip.Members)
+                    .ToList();
 
                 // Reset filter
                 ResetFilter();
