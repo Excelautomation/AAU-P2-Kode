@@ -13,6 +13,13 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         public BoatFilterViewModel()
         {
             CurrentFilter = new BoatFilter();
+            ShowBoatsOut = true;
+            ShowBoatsHome = true;
+            ShowBoatsUnderService = true;
+            ShowBoatsDamaged = true;
+            ShowInactiveBoats = true;
+            ShowFunctionalBoats = true;
+            
         }
 
         public BoatFilter CurrentFilter { get; set; }
