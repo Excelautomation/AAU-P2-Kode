@@ -115,11 +115,11 @@
                                             </WrapPanel>
                                             <WrapPanel>
                                                 <TextBlock Width="80" Text="Afgang:" FontSize="14px" />
-                                                <TextBlock Text="{Binding Departure, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock Text="{Binding PlannedStartDate, StringFormat=d}" FontSize="14px" />
                                             </WrapPanel>
                                             <WrapPanel>
                                                 <TextBlock Width="80" Text="Hjemkomst:" FontSize="14px" />
-                                                <TextBlock Text="{Binding Arrival, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock Text="{Binding PlannedEndDate, StringFormat=d}" FontSize="14px" />
                                             </WrapPanel>
                                         </StackPanel>
 
