@@ -190,14 +190,14 @@
             </Button>
         </WrapPanel>
 
-        <Grid Height="100" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="165">
+        <Grid Height="100" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,0,10,0">
 
-            <TextBlock Margin="0,-40,5,0" Height="40" FontSize="20" FontFamily="Arial">
+            <TextBlock HorizontalAlignment="Right" Height="40" FontSize="20" FontFamily="Arial">
                 <Run Text="{Binding Path=CurrentLoggedInUser.Member.FirstName}" />
                 <Run Text="{Binding Path=CurrentLoggedInUser.Member.LastName}" />
             </TextBlock>
             <TextBlock Margin="0,5,5,0" Height="40" FontSize="16" FontFamily="Arial"/>
-            <Button x:Name="btnMenuLogout" Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="50,70,20,0" FontFamily="Arial" Command="{Binding Path=Logout}" CommandParameter="{Binding ElementName=AdminPanel}">
+            <Button x:Name="btnMenuLogout" Content="    Logud    " FontSize="14" Foreground="White" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="105,70,0,0" FontFamily="Arial" Command="{Binding Path=Logout}" CommandParameter="{Binding ElementName=AdminPanel}">
                 <Button.Background>
                     <ImageBrush ImageSource="/View/images/logud.png"/>
                 </Button.Background>
