@@ -16,7 +16,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private List<StandardTrip> _standardTrips;
         private List<Trip> _activeTrips;
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
-
+        private Trip _selectedTrip;
         private double _customDistance;
         private bool _canEndTrip;
         private Regex _validDistance = new Regex(@"(?'number'\d+(?:(?:,|.)\d+)?)");
@@ -79,7 +79,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         public bool CanEndTrip
         {
-            get { return _canEndTrip; }
+            get
+            {
+                return _canEndTrip;
+            }
             set
             {
                 _canEndTrip = value;
@@ -125,9 +128,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     {
                         this.CanEndTrip = true;
                         this.SelectedStdTrip = this.SelectedStdTrips.Single();
-        }
+                    }
                     else
-                {
+                    {
                         this.CanEndTrip = false;
                         this.SelectedStdTrip = null;
                     }
@@ -137,7 +140,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         public IEnumerable<StandardTrip> SelectedStdTrips { get; set; }
 
-        public Trip SelectedTrip { get; set; }
+        public Trip SelectedTrip
+        {
+            get { return _selectedTrip; }
+            set
+            {
+                _selectedTrip = value;
+                Notify();
+            }
+        }
 
         private StandardTrip SelectedStdTrip { get; set; }
 
