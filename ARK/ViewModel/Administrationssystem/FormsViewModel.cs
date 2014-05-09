@@ -183,8 +183,12 @@ namespace ARK.ViewModel.Administrationssystem
             ShowDamageForms = Visibility.Visible;
             ShowLongDistanceForms = Visibility.Visible;
 
-            DamageForms = _damageFormsNonFiltered.AsReadOnly();
-            LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly();
+            DamageForms = _damageFormsNonFiltered.AsReadOnly()
+                .OrderBy(d => d.Closed).ThenBy(d => d.Date);
+
+
+            LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly()
+                .OrderBy(x => x.Status).ThenBy(x => x.PlannedStartDate);
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
