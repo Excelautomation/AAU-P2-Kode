@@ -200,6 +200,9 @@ namespace ARK.ViewModel.Protokolsystem
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
             FrameworkElement element = page();
+            
+            // Call base method
+            base.NavigateToPage(() => element, pageTitle);
 
             // Deactivate filter
             EnableSearch = false;
@@ -216,8 +219,6 @@ namespace ARK.ViewModel.Protokolsystem
 
             // Remove information
             CurrentInfo = null;
-
-            base.NavigateToPage(() => element, pageTitle);
         }
 
         #endregion

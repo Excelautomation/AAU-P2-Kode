@@ -4,7 +4,7 @@ namespace ARK.Model.Extensions
     {
         public static bool ContainsCaseInsensitive(this string searchText, string value)
         {
-            return searchText.ToLower().Contains(value.ToLower());
+            return searchText != null && searchText.ToLower().Contains(value.ToLower());
         }
     }
 }

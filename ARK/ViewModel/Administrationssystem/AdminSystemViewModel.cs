@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using ARK.ViewModel.Base;
 using ARK.Model;
-using ARK.ViewModel.Base.Filter;
-using ARK.ViewModel.Base.Interfaces;
-using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.View.Administrationssystem.Pages;
+using ARK.ViewModel.Base;
+using ARK.ViewModel.Base.Filter;
+using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -17,44 +14,26 @@ namespace ARK.ViewModel.Administrationssystem
         private bool _enableFilters;
         private bool _enableSearch;
         private string _searchText;
-        private Admin currentLoggedInUser;
+        private Admin _currentLoggedInUser;
 
         public AdminSystemViewModel()
         {
             TimeCounter.StartTimer();
-            NotifyCustom("CurrentLoggedInUser");
+
             // Start oversigten
             MenuOverview.Execute(null);
-
-            NotifyCustom("CurrentLoggedInUser");
 
             TimeCounter.StopTime();
         }
 
-        public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
-        {
-            FrameworkElement element = page();
-
-            EnableSearch = false;
-            EnableFilters = false;
-            SearchText = "";
-
-            // Sæt filter
-            var viewModelbase = element.DataContext as IFilterContentViewModel;
-            if (viewModelbase != null)
-            {
-                Filter = viewModelbase.Filter;
-            }
-            else
-                Filter = null;
-
-            base.NavigateToPage(() => element, pageTitle);
-        }
-
         public Admin CurrentLoggedInUser
         {
-            get { return currentLoggedInUser; }
-            set { currentLoggedInUser = value; Notify(); }
+            get { return _currentLoggedInUser; }
+            set
+            {
+                _currentLoggedInUser = value;
+                Notify();
+        }
         }
         
         #region Pages
@@ -86,22 +65,22 @@ namespace ARK.ViewModel.Administrationssystem
 
         private Oversigt PageOverview
         {
-            get { return new Oversigt(); }
+            get { return _pageOverview ?? (_pageOverview = new Oversigt()); }
         }
 
         private Blanketter PageForms
         {
-            get { return new Blanketter(); }
+            get { return _pageForms ?? (_pageForms = new Blanketter()); }
         }
 
         private Baede PageBoats
         {
-            get { return new Baede(); }
+            get { return _pageBoats ?? (_pageBoats = new Baede()); }
         }
 
         private Trips PageTrips
         {
-            get { return new Trips(); }
+            get { return _pageTrips ?? (_pageTrips = new Trips()); }
         }
 
         private Indstillinger PageConfigurations
@@ -120,10 +99,15 @@ namespace ARK.ViewModel.Administrationssystem
             );}
         }
 
-
-        #endregion private
+        #endregion
 
         #region Filter
+
+        private FrameworkElement _filter;
+        private Baede _pageBoats;
+        private Blanketter _pageForms;
+        private Oversigt _pageOverview;
+        private Trips _pageTrips;
 
         public FrameworkElement Filter
         {
@@ -153,16 +137,14 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        private void filter_FilterChanged(object sender, FilterEventArgs e)
-        {
-            if (FilterTextChanged != null)
-                FilterTextChanged(sender, e);
-        }
-
         public string SearchText
         {
             get { return _searchText; }
-            set { _searchText = value; Notify(); }
+            set
+            {
+                _searchText = value;
+                Notify();
+            }
         }
 
         public ICommand SearchChangedCommand
@@ -204,18 +186,8 @@ namespace ARK.ViewModel.Administrationssystem
             get { return EnableSearch && EnableFilters ? 1 : 3; }
         }
 
-        private void NotifyFilter()
-        {
-            NotifyCustom("SearchVisibility");
-            NotifyCustom("FiltersVisibility");
-            NotifyCustom("FilterBarVisibility");
-            NotifyCustom("ContentRow");
-            NotifyCustom("ContentRowSpan");
-        }
-
         public event EventHandler<SearchEventArgs> SearchTextChanged;
         public event EventHandler<FilterEventArgs> FilterTextChanged;
-        private FrameworkElement _filter;
 
         public bool EnableSearch
         {
@@ -239,6 +211,41 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        private void filter_FilterChanged(object sender, FilterEventArgs e)
+        {
+            if (FilterTextChanged != null)
+                FilterTextChanged(sender, e);
+        }
+
+        private void NotifyFilter()
+        {
+            NotifyCustom("SearchVisibility");
+            NotifyCustom("FiltersVisibility");
+            NotifyCustom("FilterBarVisibility");
+            NotifyCustom("ContentRow");
+            NotifyCustom("ContentRowSpan");
+        }
+
         #endregion
+
+        public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
+        {
+            FrameworkElement element = page();
+
+            EnableSearch = false;
+            EnableFilters = false;
+            SearchText = "";
+
+            // Sæt filter
+            var viewModelbase = element.DataContext as IFilterContentViewModel;
+            if (viewModelbase != null)
+            {
+                Filter = viewModelbase.Filter;
+            }
+            else
+                Filter = null;
+
+            base.NavigateToPage(() => element, pageTitle);
+        }
     }
 }
