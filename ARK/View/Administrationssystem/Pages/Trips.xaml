@@ -124,8 +124,13 @@
                                                     <Style BasedOn="{StaticResource DetailsTextbox}" TargetType="{x:Type TextBlock}"/>
                                                 </Grid.Resources>
                                                 <TextBlock Text="Båd ude:" Grid.Row="0" Grid.Column="0"/>
-                                                <TextBlock Text="{Binding CurrentTrip.Boat.Name}" Grid.Row="0" Grid.Column="1"/>
-
+                                                <DockPanel Grid.Column="1">
+                                                    <!--<Button Command="ShowBoatDialog" DockPanel.Dock="Right">
+                                                        <Image Height="32" Source="../../images/yacht.png"/>
+                                                    </Button>-->
+                                                    <TextBlock DockPanel.Dock="Left" Text="{Binding CurrentTrip.Boat.Name}" Grid.Row="0" Grid.Column="1"/>
+                                                </DockPanel>
+                                                
                                                 <TextBlock Text="Retning:" Grid.Row="1" Grid.Column="0"/>
                                                 <TextBox Text="{Binding CurrentTrip.Direction, Mode=TwoWay}" VerticalContentAlignment="Center" FontSize="18" Grid.Row="1" Grid.Column="1"/>
 
