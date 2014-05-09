@@ -168,7 +168,17 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<DamageType>(e =>
                 {
                     ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
-                    _db.SaveChanges();
+                    
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                    {
+                        System.Windows.MessageBox.Show("Den valgte skadetype eksisterer ikke i databasen!");
+                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.ToList());
+                        return;
+                    }
 
                     DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.ToList());
                     FeedbackDamageType = Feedback.Save;
@@ -217,7 +227,16 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     _db.DamageType.Remove(ReferenceToCurrentDamageType);
-                    _db.SaveChanges();
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                    {
+                        System.Windows.MessageBox.Show("Den valgte skadetype eksisterer ikke i databasen!");
+                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.ToList());
+                        return;
+                    }
                     DamageTypes.Remove(ReferenceToCurrentDamageType);
                     SelectedListItemDamageTypes = DamageTypes.Count - 1;
                     FeedbackDamageType = Feedback.Delete;
@@ -290,10 +309,17 @@ namespace ARK.ViewModel.Administrationssystem
                     ReferenceToCurrentStandardTrip.Distance = CurrentStandardTrip.Distance;
                     ReferenceToCurrentStandardTrip.Title = CurrentStandardTrip.Title;
                     ReferenceToCurrentStandardTrip.Direction = CurrentStandardTrip.Direction;
-                    _db.SaveChanges();
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                    {
+                        System.Windows.MessageBox.Show("Den valgte standardtur eksisterer ikke i databasen!");
+                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.ToList());
+                        return;
+                    }
 
-                    // Loader igen fra HELE databasen, og sætter ind i listview.
-                    // Bør optimseres til kun at loade den ændrede query.
                     StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.ToList());
                     FeedbackStandardTrip = Feedback.Save;
                 });
@@ -345,7 +371,16 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     _db.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
-                    _db.SaveChanges();
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                    {
+                        System.Windows.MessageBox.Show("Den valgte standardtur eksisterer ikke i databasen!");
+                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.ToList());
+                        return;
+                    }
                     StandardTrips.Remove(ReferenceToCurrentStandardTrip);
                     SelectedListItemStandardTrips = StandardTrips.Count - 1;
                     FeedbackDamageType = Feedback.Delete;
@@ -442,7 +477,16 @@ namespace ARK.ViewModel.Administrationssystem
                     
                     ReferenceToCurrentAdmin.ContactTrip = CurrentAdmin.ContactTrip;
                     ReferenceToCurrentAdmin.ContactDark = CurrentAdmin.ContactDark;
-                    _db.SaveChanges();
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                    {
+                        System.Windows.MessageBox.Show("Den valgte administrator eksisterer ikke i databasen!");
+                        Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+                        return;
+                    }
 
                     Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
                     SelectedListItemAdmins = tempindex;
@@ -494,8 +538,9 @@ namespace ARK.ViewModel.Administrationssystem
                         Member = NewAdmin.Member
                     };
                     _db.Admin.Add(AdminTemplate);
-                    Admins.Add(AdminTemplate);
+                    
                     _db.SaveChanges();
+                    Admins.Add(AdminTemplate);
                     FeedbackAdmin = Feedback.Create;
                     SelectedListItemAdmins = Admins.Count - 1;
                 });
@@ -514,7 +559,16 @@ namespace ARK.ViewModel.Administrationssystem
                         return;
                     }
                     _db.Admin.Remove(ReferenceToCurrentAdmin);
-                    _db.SaveChanges();
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                    {
+                        System.Windows.MessageBox.Show("Den valgte administrator eksisterer ikke i databasen!");
+                        Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+                        return;
+                    }
                     Admins.Remove(ReferenceToCurrentAdmin);
                     FeedbackAdmin = Feedback.Delete;
                     SelectedListItemAdmins = Admins.Count - 1;
