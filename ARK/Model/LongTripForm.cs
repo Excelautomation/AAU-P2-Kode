@@ -22,7 +22,7 @@ namespace ARK.Model
         public BoatStatus Status { get; set; }      // status of the Form
 
         //Foreign key
-        public int BoatId { get; set; }
+        public int? BoatId { get; set; }
         public int ResponsibleMemberId { get; set; }
 
         //Navigation properties

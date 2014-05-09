@@ -108,6 +108,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Extensions\TripExtention.cs" />
     <Compile Include="Model\Season.cs" />
+    <Compile Include="Model\SmsSetting.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\BoatFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\FormsFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs" />
