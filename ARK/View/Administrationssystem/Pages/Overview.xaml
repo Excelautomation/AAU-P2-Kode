@@ -39,6 +39,13 @@
                         </WrapPanel>
 
                         <ListView Margin="5,5,5,20" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedDamageForm}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Margin" Value="2"/>
+                                    <Setter Property="BorderThickness" Value="0.5"/>
+                                    <Setter Property="BorderBrush" Value="Gray"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Left" IsItemsHost="True" />
@@ -51,7 +58,7 @@
                             </ListView.Template>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="-5,-2,-5,-2" Height="75" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
+                                    <Border Height="75" Padding="10">
                                             <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="65"/>
@@ -98,6 +105,13 @@
                             <Label FontSize="18">Langtursblanketter</Label>
                         </WrapPanel>
                         <ListView Margin="5,5,5,20" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedLongDistanceForm}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Margin" Value="2"/>
+                                    <Setter Property="BorderThickness" Value="0.5"/>
+                                    <Setter Property="BorderBrush" Value="Gray"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Left" IsItemsHost="True" Orientation="Horizontal"/>
@@ -110,7 +124,7 @@
                             </ListView.Template>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="-5,-2,-5,-2" Height="75" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
+                                    <Border Margin="2" Height="75" Padding="10">
                                         <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="400" Margin="0,0,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="65"/>
@@ -158,6 +172,13 @@
                         </WrapPanel>
 
                         <ListView Name="OverviewBoatsOutList" HorizontalAlignment="Left" Margin="5,5,5,20" BorderThickness="0" ItemsSource="{Binding Path=BoatsOut}" SelectedItem="{Binding Path=SelectedBoat}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Margin" Value="2"/>
+                                    <Setter Property="BorderThickness" Value="0.5"/>
+                                    <Setter Property="BorderBrush" Value="Gray"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Left" IsItemsHost="True" Orientation="Horizontal"/>
@@ -171,7 +192,7 @@
                             </ListView.Template>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="-5,-2,-5,-2" Padding="10" Background="Transparent" BorderBrush="#bbbbbb" BorderThickness="0.5">
+                                    <Border Padding="10" Background="Transparent">
                                         <Grid HorizontalAlignment="Stretch" Width="400">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*"></ColumnDefinition>
