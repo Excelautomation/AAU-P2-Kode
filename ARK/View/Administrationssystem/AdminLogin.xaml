@@ -17,7 +17,8 @@
                 <KeyBinding Key="Enter" Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminWindow}"/>
             </PasswordBox.InputBindings>
         </PasswordBox>
-        <Button x:Name="button" Content="Login" HorizontalAlignment="Left" Margin="261.5,78.04,0,0" VerticalAlignment="Top" Width="73.5" Height="43.96" UseLayoutRounding="False" Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminWindow}"/>
-        <Label Content="{Binding Path=ErrorLabel}" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="44" Width="246" Foreground="#FFFF5F5F"/>
+        <Button x:Name="buttonLogin" Content="Login" HorizontalAlignment="Left" Margin="261.5,78.04,0,0" VerticalAlignment="Top" Width="73.5" Height="43.96" UseLayoutRounding="False" Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminWindow}"/>
+        <TextBlock Text="{Binding Path=ErrorLabel}" HorizontalAlignment="Left" Margin="88,78,0,0" VerticalAlignment="Top" Height="44" Width="168" Foreground="#FFFF5F5F" TextWrapping="Wrap"/>
+        <Button x:Name="buttonClose" Content="Luk" HorizontalAlignment="Left" Margin="10,78.04,0,0" VerticalAlignment="Top" Width="73.5" Height="43.96" UseLayoutRounding="False" Command="{Binding Path=CloseWindow}" CommandParameter="{Binding ElementName=AdminWindow}"/>
     </Grid>
 </Window>

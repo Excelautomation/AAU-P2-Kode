@@ -64,7 +64,7 @@
                     <Image Source="../../images/user.png" Height="24"/>
                     <Label Content="Deltagere på turen"/>
                 </WrapPanel>
-                <WrapPanel Background="#EEEEEE">
+                <WrapPanel>
                     <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
