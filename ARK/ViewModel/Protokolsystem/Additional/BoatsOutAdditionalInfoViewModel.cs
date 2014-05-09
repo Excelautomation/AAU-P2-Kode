@@ -12,12 +12,15 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         // Fields
         private Trip _selectedTrip;
 
-        // Propertiesp
+        // Properties
         public Trip SelectedTrip
         {
             get { return _selectedTrip; }
             set { _selectedTrip = value; Notify(); }
         }
+
+
+
         private bool _smsSentToBoat;
 
         public bool SmsSentToBoat
