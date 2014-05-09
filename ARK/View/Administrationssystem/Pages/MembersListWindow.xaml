@@ -47,7 +47,7 @@
                             <TextBlock Text="{Binding Path=LastName}"/>
                         </WrapPanel>
                         <WrapPanel HorizontalAlignment="Right" Grid.Column="1">
-                            <TextBlock Margin="0,0,3,0" Text="Id:"/>
+                            <TextBlock Margin="0,0,3,0" Text="Nr.:"/>
                             <TextBlock Text="{Binding Path=Id}"/>
                         </WrapPanel>
                     </Grid>
