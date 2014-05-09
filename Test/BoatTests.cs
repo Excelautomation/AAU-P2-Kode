@@ -9,6 +9,24 @@ namespace Test
     public class BoatTests
     {
         [TestMethod]
+        public void Usable_WithDamageReportNonFunctional_ReturnFalse()
+        {
+            // Arrange
+            Boat boat = new Boat();
+            DamageForm damageform = new DamageForm();
+            damageform.Functional = false;
+            boat.DamageForms = new List<DamageForm>();
+            boat.DamageForms.Add(damageform);
+            bool expected = false;
+
+            // Act
+            bool actual = boat.Usable;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+        
+        [TestMethod]
         public void Damaged_WithDamageForm_ReturnTrue()
         {            
             // Arrange
@@ -98,6 +116,26 @@ namespace Test
 
             // Act
             double actual = boat.KilometersSailed;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void LongDistanceTripsSailed_With1NormalAnd1LongDistance_Return1()
+        {
+            // Arange
+            Boat boat = new Boat();
+            Trip trip1 = new Trip();
+            Trip trip2 = new Trip();
+            trip2.LongTrip = true;
+            boat.Trips = new List<Trip>();
+            boat.Trips.Add(trip1);
+            boat.Trips.Add(trip2);
+            int expected = 1;
+
+            // Act
+            int actual = boat.LongDistanceTripsSailed;
 
             // Assert
             Assert.AreEqual(expected, actual);

@@ -9,9 +9,16 @@ namespace Test
     public class XMLParserTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetSunsetFromXml_MISSING_MISSING()
         {
-            Assert.Inconclusive();
+            // Arrange
+            DateTime expected = DateTime.Today;
+
+            // Act
+            DateTime actual = XmlParser.GetSunsetFromXml();
+
+            // Assert - Tests that today's sunset time was found
+            Assert.AreEqual(expected.Date, actual.Date);
         }
     }
 }
