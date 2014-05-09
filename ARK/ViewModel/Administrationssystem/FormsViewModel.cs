@@ -29,45 +29,29 @@ namespace ARK.ViewModel.Administrationssystem
         private Visibility _showLongTripForms;
         private int _selectedTabIndex;
 
-
         public FormsViewModel()
         {
-            // Instaliser lister
-            _damageFormsNonFiltered = new List<DamageForm>();
-            _longTripFormsNonFiltered = new List<LongTripForm>();
-
             // Opret dbcontext
             _dbArkContext = DbArkContext.GetDbContext();
 
             // Load data
-            Task.Factory.StartNew(() =>
+            ParentAttached += (sender, e) =>
             {
-                lock (_dbArkContext)
-                {
-                    // Opret forbindelser Async
-                    Task<List<DamageForm>> damageforms = _dbArkContext.DamageForm.ToListAsync();
-                    Task<List<LongTripForm>> longDistanceForms = _dbArkContext.LongTripForm.ToListAsync();
+                // Opret forbindelser Async
+                Task<List<DamageForm>> damageforms = _dbArkContext.DamageForm.ToListAsync();
+                Task<List<LongTripForm>> longDistanceForms = _dbArkContext.LongTripForm.ToListAsync();
 
-                    _damageFormsNonFiltered = damageforms.Result.ToList();
-                    _longTripFormsNonFiltered = longDistanceForms.Result.ToList();
-                }
+                _damageFormsNonFiltered = damageforms.Result.ToList();
+                _longTripFormsNonFiltered = longDistanceForms.Result.ToList();
 
                 // Nulstil filter
                 ResetFilter();
-            });
-
-            // Nulstil filter
-            ResetFilter();
+            };
 
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
-
-            //if (DamageForms.Count() != 0)
-            //{
-            //    SelectedIndexDamageForms = 0;
-            //}
         }
 
 
