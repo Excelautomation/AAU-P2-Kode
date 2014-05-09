@@ -54,7 +54,7 @@
                                         <StackPanel Margin="10">
                                             <TextBlock Text="{Binding Boat.Name}" FontSize="18"/>
                                             <WrapPanel>
-                                                <TextBlock Text="Starttid: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Starttid: " FontSize="14px" />
                                                 <TextBlock Text="{Binding TripStartTime, ConverterCulture='da-DK'}" FontSize="14px" />
                                             </WrapPanel>
                                         </StackPanel>
@@ -64,7 +64,7 @@
                                                 <TextBlock Text=" Km" FontSize="18px" />
                                             </WrapPanel>
                                             <WrapPanel>
-                                                <TextBlock Text="Tid ude: " FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Text="Tid ude: " FontSize="14px" />
                                                 <TextBlock FontSize="14px" Text="{Binding TimeBoatOut, StringFormat=hh\\:mm}"/>
                                             </WrapPanel>
                                         </StackPanel>
