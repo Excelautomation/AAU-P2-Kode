@@ -151,9 +151,9 @@
                             </Grid.ColumnDefinitions>
 
                             <DockPanel Grid.Column="0" Margin="4">
-                                <Button Padding="5" Command="{Binding Path=CreateSkadeType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
+                                <Button Padding="5" Command="{Binding Path=CreateDamageType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
                                 <ListView VerticalAlignment="Stretch" x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
-                                          ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedListItemDamageTypes}">
+                                          ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedDamageType}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Margin="0,2,0,2">
@@ -178,9 +178,9 @@
                                         </WrapPanel>
 
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}">
-                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesSkadeTyper}"/>
-                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesSkadeTyper}"/>
-                                            <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet skadetype" Command="{Binding Path=DeleteSkadeType}" HorizontalAlignment="Right"/>
+                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesDamageTypes}"/>
+                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangeDamageTypes}"/>
+                                            <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet skadetype" Command="{Binding Path=DeleteDamageType}" HorizontalAlignment="Right"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -207,6 +207,10 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Source" Value="/View/images/delete.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                        <Setter Property="Source" Value="/View/images/error.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -240,6 +244,11 @@
                                                         <Setter Property="Text" Value="Skadetype slettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                        <Setter Property="Text" Value="{Binding Path=ErrorDamageType}"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </TextBlock.Style>
@@ -266,7 +275,7 @@
                             <DockPanel Grid.Column="0" Margin="4">
                                 <Button Padding="5" Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="220" Content="Opret ny standardtur"/>
                                 <ListView VerticalAlignment="Stretch" x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
-                                          ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedListItemStandardTrips}" SelectedItem="{Binding Path=CurrentStandardTrip}">
+                                          ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedStandardTrip}" SelectedItem="{Binding Path=CurrentStandardTrip}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <WrapPanel Margin="0,2,0,2">
@@ -281,9 +290,7 @@
                                     </i:Interaction.Triggers>
                                 </ListView>
                             </DockPanel>
-
                             <StackPanel Grid.Column="2" Margin="4">
-
                                 <Label FontStyle="Italic" HorizontalAlignment="Center" Margin="4" Content="Detaljer om valgte standardtur"/>
                                 <Border Margin="4" CornerRadius="15" Background="#EEEEEE" Padding="15">
                                     <StackPanel Width="auto">
@@ -299,7 +306,6 @@
                                             <Label Width="150" Margin="4" Content="Distance:"/>
                                             <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
                                         </WrapPanel>
-
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}">
                                             <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesStandardTrips}"/>
                                             <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesStandardTrips}"/>
@@ -307,7 +313,6 @@
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
-
                                 <WrapPanel Margin="4">
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
@@ -332,11 +337,14 @@
                                                         <Setter Property="Source" Value="/View/images/delete.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                        <Setter Property="Source" Value="/View/images/error.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </Image.Style>
                                     </Image>
-
                                     <TextBlock VerticalAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
@@ -364,14 +372,17 @@
                                                         <Setter Property="Text" Value="Standardtur slettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                        <Setter Property="Text" Value="{Binding Path=ErrorStandardTrip}"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
                                 </WrapPanel>
-
                             </StackPanel>
-
                         </Grid>
                     </DockPanel>
                 </TabItem>
