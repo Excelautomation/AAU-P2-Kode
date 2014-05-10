@@ -17,7 +17,7 @@ namespace ARK.ViewModel.Administrationssystem
     {
         public enum Feedback
         {
-            Default, Save, Cancel, Delete, Create
+            Default, Save, Cancel, Delete, Create, Error
         }
         private DbArkContext _db;
 
@@ -30,9 +30,9 @@ namespace ARK.ViewModel.Administrationssystem
 
             lock (_db)
             {
-                DamageTypes = new ObservableCollection<DamageType>(_db.DamageType);
-                StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip);
-                Admins = new ObservableCollection<Admin>(_db.Admin);
+                DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(e => e.Type));
+                StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(e => e.Title));
+                Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(e => e.Member.FirstName));
                 Members = new ObservableCollection<Member>(_db.Member.OrderBy(e => e.FirstName));
             }
 
@@ -42,15 +42,15 @@ namespace ARK.ViewModel.Administrationssystem
                 CurrentAdmin = Admins[0];
                 ReferenceToCurrentAdmin = CurrentAdmin;
             }
-            if (Admins.Any())
+            if (DamageTypes.Any())
             {
-                SelectedListItemDamageTypes = 0;
+                SelectedDamageType = 0;
                 CurrentDamageType = DamageTypes[0];
                 ReferenceToCurrentDamageType = CurrentDamageType;
             }
-            if (Admins.Any())
+            if (StandardTrips.Any())
             {
-                SelectedListItemStandardTrips = 0;
+                SelectedStandardTrip = 0;
                 CurrentStandardTrip = StandardTrips[0];
                 ReferenceToCurrentStandardTrip = CurrentStandardTrip;
             }
@@ -66,7 +66,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        #region Generelt
+        #region General
         private bool _displaySeasonErrorLabel = false;
 
         public bool DisplaySeasonErrorLabel
@@ -111,17 +111,24 @@ namespace ARK.ViewModel.Administrationssystem
 
         #endregion
 
-        #region Skadetyper
+        #region DamageTypes
         private DamageType ReferenceToCurrentDamageType;
         private ObservableCollection<DamageType> _damageTypes;
         private DamageType _currentDamageType;
         private Feedback _feedbackDamageType;
-        private int _selectedListItemDamageTypes;
+        private int _selectedDamageType;
+        private string _errorDamageType;
 
-        public int SelectedListItemDamageTypes
+        public string ErrorDamageType
         {
-            get { return _selectedListItemDamageTypes; }
-            set { _selectedListItemDamageTypes = value; Notify(); }
+            get { return _errorDamageType; }
+            set { _errorDamageType = value; Notify(); }
+        }
+
+        public int SelectedDamageType
+        {
+            get { return _selectedDamageType; }
+            set { _selectedDamageType = value; Notify(); }
         }
 
         public Feedback FeedbackDamageType
@@ -161,36 +168,37 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public ICommand SaveChangesSkadeTyper
+        public ICommand SaveChangesDamageTypes
         {
             get
             {
                 return GetCommand<DamageType>(e =>
                 {
                     ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
-                    
+
                     try
                     {
                         _db.SaveChanges();
                     }
                     catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                     {
-                        System.Windows.MessageBox.Show("Den valgte skadetype eksisterer ikke i databasen!");
-                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.ToList());
+                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
+                        ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
+                        FeedbackDamageType = Feedback.Error;
                         return;
                     }
 
-                    DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.ToList());
+                    DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
                     FeedbackDamageType = Feedback.Save;
                 });
             }
         }
 
-        public ICommand CancelChangesSkadeTyper
+        public ICommand CancelChangesDamageTypes
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand<DamageType>(e =>
                 {
                     CurrentDamageType = new DamageType()
                     {
@@ -201,44 +209,47 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public ICommand CreateSkadeType
+        public ICommand CreateDamageType
         {
             get
             {
                 return GetCommand<DamageType>(e =>
                 {
-                    DamageType DamageTypeTemplate = new DamageType()
+                    DamageType NewDamageType = new DamageType()
                     {
                         Type = "Ny skadetype"
                     };
-                    _db.DamageType.Add(DamageTypeTemplate);
+                    _db.DamageType.Add(NewDamageType);
                     _db.SaveChanges();
-                    DamageTypes.Add(DamageTypeTemplate);
-                    SelectedListItemDamageTypes = DamageTypes.Count - 1;
+                    DamageTypes.Add(NewDamageType);
+                    SelectedDamageType = DamageTypes.Count - 1;
+                    DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
                     FeedbackDamageType = Feedback.Create;
                 });
             }
         }
 
-        public ICommand DeleteSkadeType
+        public ICommand DeleteDamageType
         {
             get
             {
                 return GetCommand<object>(e =>
                 {
                     _db.DamageType.Remove(ReferenceToCurrentDamageType);
+
                     try
                     {
                         _db.SaveChanges();
                     }
                     catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                     {
-                        System.Windows.MessageBox.Show("Den valgte skadetype eksisterer ikke i databasen!");
-                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.ToList());
+                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
+                        ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
+                        FeedbackDamageType = Feedback.Error;
                         return;
                     }
                     DamageTypes.Remove(ReferenceToCurrentDamageType);
-                    SelectedListItemDamageTypes = DamageTypes.Count - 1;
+                    SelectedDamageType = DamageTypes.Count - 1;
                     FeedbackDamageType = Feedback.Delete;
                 });
             }
@@ -250,14 +261,20 @@ namespace ARK.ViewModel.Administrationssystem
         private ObservableCollection<StandardTrip> _standardTrips;
         private StandardTrip _currentStandardTrip;
         private Feedback _feedbackStandardTrip;
-        private int _selectedListItemStandardTrips;
+        private int _selectedStandardTrip;
+        private string _errorStandardTrip;
 
-        public int SelectedListItemStandardTrips
+        public string ErrorStandardTrip
         {
-            get { return _selectedListItemStandardTrips; }
-            set { _selectedListItemStandardTrips = value; Notify(); }
+            get { return _errorStandardTrip; }
+            set { _errorStandardTrip = value; Notify(); }
         }
 
+        public int SelectedStandardTrip
+        {
+            get { return _selectedStandardTrip; }
+            set { _selectedStandardTrip = value; Notify(); }
+        }
 
         public Feedback FeedbackStandardTrip
         {
@@ -265,13 +282,11 @@ namespace ARK.ViewModel.Administrationssystem
             set { _feedbackStandardTrip = value; Notify(); }
         }
 
-
         public ObservableCollection<StandardTrip> StandardTrips
         {
             get { return _standardTrips; }
             set { _standardTrips = value; Notify(); }
         }
-
 
         public StandardTrip CurrentStandardTrip
         {
@@ -315,12 +330,13 @@ namespace ARK.ViewModel.Administrationssystem
                     }
                     catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                     {
-                        System.Windows.MessageBox.Show("Den valgte standardtur eksisterer ikke i databasen!");
-                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.ToList());
+                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
+                        ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
+                        FeedbackStandardTrip = Feedback.Error;
                         return;
                     }
 
-                    StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.ToList());
+                    StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
                     FeedbackStandardTrip = Feedback.Save;
                 });
             }
@@ -358,7 +374,8 @@ namespace ARK.ViewModel.Administrationssystem
                     _db.StandardTrip.Add(StandardTripTemplate);
                     _db.SaveChanges();
                     StandardTrips.Add(StandardTripTemplate);
-                    SelectedListItemStandardTrips = StandardTrips.Count - 1;
+                    SelectedStandardTrip = StandardTrips.Count - 1;
+                    StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
                     FeedbackStandardTrip = Feedback.Create;
                 });
             }
@@ -377,12 +394,13 @@ namespace ARK.ViewModel.Administrationssystem
                     }
                     catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                     {
-                        System.Windows.MessageBox.Show("Den valgte standardtur eksisterer ikke i databasen!");
-                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.ToList());
+                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
+                        ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
+                        FeedbackStandardTrip = Feedback.Error;
                         return;
                     }
                     StandardTrips.Remove(ReferenceToCurrentStandardTrip);
-                    SelectedListItemStandardTrips = StandardTrips.Count - 1;
+                    SelectedStandardTrip = StandardTrips.Count - 1;
                     FeedbackDamageType = Feedback.Delete;
                 });
             }
