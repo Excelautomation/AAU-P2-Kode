@@ -13,6 +13,7 @@ namespace ARK.ViewModel.Base
     {
         private bool _enableKeyboard;
         private OnScreenKeyboard _keyboard;
+        private FrameworkElement _currentSelectedTextBox;
 
         public KeyboardContainerViewModelBase()
         {
@@ -51,22 +52,59 @@ namespace ARK.ViewModel.Base
             {
                 return GetCommand<object>(e =>
                 {
-                    // Change keyboard state
-                    KeyboardToggled = !KeyboardToggled;
+                    // If keyboardstate is on ignore check for currentSelectedTextBox
+                    if (KeyboardToggled)
+                    {
+                        KeyboardToggled = false;
+                        return;
+                    }
 
                     // Check if a textbox has been selected
-                    if (CurrentSelectedTextBox == null)
-                        return;
-
-                    // Update keyboard text
-                    var textbox = CurrentSelectedTextBox as TextBox;
-                    if (textbox != null)
-                        KeyboardText = textbox.Text;
+                    // If true change keyboard state
+                    if (CurrentSelectedTextBox != null)
+                        KeyboardToggled = !KeyboardToggled;
                 });
             }
         }
 
-        private FrameworkElement CurrentSelectedTextBox { get; set; }
+        private FrameworkElement CurrentSelectedTextBox
+        {
+            get { return _currentSelectedTextBox; }
+            set
+            {
+                // Unbind event if current is not null
+                if (_currentSelectedTextBox != null)
+                {
+                    var ctextbox = CurrentSelectedTextBox as TextBox;
+                    if (ctextbox != null)
+                        ctextbox.TextChanged -= textbox_TextChanged;
+                }
+
+                _currentSelectedTextBox = value;
+
+                // Update keyboard text and bind event
+                var textbox = CurrentSelectedTextBox as TextBox;
+                if (textbox != null)
+                {
+                    // Set text
+                    KeyboardText = textbox.Text;
+
+                    // Bind eventhandler to support twoway
+                    textbox.TextChanged += textbox_TextChanged;
+                }
+            }
+        }
+
+        void textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update keyboard text
+            var textbox = CurrentSelectedTextBox as TextBox;
+            if (textbox != null)
+            {
+                // Set text
+                KeyboardText = textbox.Text;
+            }
+        }
 
         public ICommand GotFocus
         {
