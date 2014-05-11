@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ARK.Model
 {
-    public class SmsSetting
+    public class Setting
     {
         public int Id { get; set; }
-        //Tilføj props
+        
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

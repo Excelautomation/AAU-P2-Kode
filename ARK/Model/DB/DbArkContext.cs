@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Data.Entity.Infrastructure;
+using ARK.HelperFunctions.SMSGateway;
 
 namespace ARK.Model.DB
 {
@@ -29,7 +30,8 @@ namespace ARK.Model.DB
         public DbSet<StandardTrip> StandardTrip { get; set; }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<Season> Season { get; set; }
-        public DbSet<SmsSetting> SmsSetting { get; set; }
+        public DbSet<TripWarningSms> TripWarningSms { get; set; }
+        public DbSet<Setting> Settings { get; set; }
         
 
         public static DbArkContext GetDbContext()

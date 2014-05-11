@@ -4,11 +4,12 @@ using System.Runtime.CompilerServices;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows;
+using ARK.HelperFunctions;
+using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.XML;
 using System.Globalization;
-using ARK.View.Administrationssystem.Functions;
 
 namespace ARK
 {
@@ -50,7 +51,7 @@ namespace ARK
             var thr = new Thread(() =>
             {
                 var db = DbArkContext.GetDbContext();
-                while (true)
+                /*while (true)
                 {
                     //SUNSET
                     bool sunset = false;
@@ -76,7 +77,8 @@ namespace ARK
                                 Reciever = sms.Reciever,
                                 Message = "Hej" + sms.Name + "bekræft venligst med OK, at du har det godt hilsen Aalborg Roklub"
                             };
-                            SMSIT.SendSMS(SMS);
+
+                            SmsIt.SendSMS(SMS);
                             sms.Dispatched = true;
                         }
                     }
@@ -103,7 +105,7 @@ namespace ARK
                                 Reciever = sms.From.Replace("+", string.Empty),
                                 Message = "Bekræftelsen er modtaget, venlig hilsen Aalborg Roklub"
                             };
-                            SMSIT.SendSMS(SMS);
+                            SmsIt.SendSMS(SMS);
                             sms.Handled = true;
                         }
                         else
@@ -113,7 +115,7 @@ namespace ARK
                                 Reciever = sms.From.Replace("+", string.Empty),
                                 Message = "Beskeden blev ikke forstået, bekræft venligst igen, venlig hilsen Aalborg Roklub"
                             };
-                            SMSIT.SendSMS(SMS);
+                            SmsIt.SendSMS(SMS);
                             sms.Handled = true;
                         }
                     }
@@ -128,7 +130,7 @@ namespace ARK
                                 Reciever = "4522907111",
                                 Message = "Følgende person er ikke kommet hjem " + noresponse.Name + " hans telefon nummer er " + noresponse.Reciever + string.Empty
                             };
-                            SMSIT.SendSMS(SMS);
+                            SmsIt.SendSMS(SMS);
                             noresponse.Handled = true;
                         }
                     }
@@ -136,7 +138,7 @@ namespace ARK
                     //Save til databasen
                     db.SaveChanges();
                     Thread.Sleep(5000);
-                }
+                }*/
             });
 
             WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
