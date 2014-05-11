@@ -113,15 +113,15 @@
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afventer">
+                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status}" Value="Awaiting">
                                 <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
                                 <Setter Property="Foreground" Value="Black"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Accepteret">
+                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status}" Value="Accepted">
                                 <Setter Property="Text" Value="Denne langtursanmodning er blevet godkendt"/>
                                 <Setter Property="Foreground" Value="Green"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status, UpdateSourceTrigger=PropertyChanged}" Value="Afvist">
+                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status}" Value="Denied">
                                 <Setter Property="Text" Value="Denne langtursanmodning er blevet Afvist"/>
                                 <Setter Property="Foreground" Value="Red"/>
                             </DataTrigger>
