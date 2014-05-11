@@ -9,7 +9,7 @@ namespace Test
     public class XMLParserTests
     {
         [TestMethod]
-        public void GetSunsetFromXml_MISSING_MISSING()
+        public void GetSunsetFromXml_WithData_ReturnDateTime()
         {
             // Arrange
             DateTime expected = DateTime.Today;
