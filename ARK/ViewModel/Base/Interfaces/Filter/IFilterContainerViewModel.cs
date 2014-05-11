@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows;
 using ARK.ViewModel.Base.Filter;
 
 namespace ARK.ViewModel.Base.Interfaces.Filter

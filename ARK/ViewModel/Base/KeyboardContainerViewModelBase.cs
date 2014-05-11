@@ -11,9 +11,9 @@ namespace ARK.ViewModel.Base
 {
     public class KeyboardContainerViewModelBase : PageContainerViewModelBase, IKeyboardContainerViewModelBase
     {
+        private FrameworkElement _currentSelectedTextBox;
         private bool _enableKeyboard;
         private OnScreenKeyboard _keyboard;
-        private FrameworkElement _currentSelectedTextBox;
 
         public KeyboardContainerViewModelBase()
         {
@@ -95,17 +95,6 @@ namespace ARK.ViewModel.Base
             }
         }
 
-        void textbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Update keyboard text
-            var textbox = CurrentSelectedTextBox as TextBox;
-            if (textbox != null)
-            {
-                // Set text
-                KeyboardText = textbox.Text;
-            }
-        }
-
         public ICommand GotFocus
         {
             get { return GetCommand<FrameworkElement>(element => { CurrentSelectedTextBox = element; }); }
@@ -146,6 +135,17 @@ namespace ARK.ViewModel.Base
         public void KeyboardClear()
         {
             KeyboardText = "";
+        }
+
+        private void textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update keyboard text
+            var textbox = CurrentSelectedTextBox as TextBox;
+            if (textbox != null)
+            {
+                // Set text
+                KeyboardText = textbox.Text;
+            }
         }
 
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)

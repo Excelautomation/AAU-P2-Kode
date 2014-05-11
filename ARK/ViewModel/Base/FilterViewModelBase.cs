@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
 
@@ -10,8 +7,6 @@ namespace ARK.ViewModel.Base
 {
     public abstract class FilterViewModelBase : ViewModelBase, IFilterViewModel
     {
-        public abstract IEnumerable<Filter.Filter> GetFilter();
-
         public event EventHandler<FilterEventArgs> FilterChanged
         {
             add
@@ -21,6 +16,8 @@ namespace ARK.ViewModel.Base
             }
             remove { FilterChangedInternal -= value; }
         }
+
+        public abstract IEnumerable<Filter.Filter> GetFilter();
 
         private event EventHandler<FilterEventArgs> FilterChangedInternal;
 
