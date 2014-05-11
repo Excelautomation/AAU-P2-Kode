@@ -72,7 +72,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
                 {
                     var output = new List<DamageForm>();
 
-                    if (ShowAccepted)
+                    if (ShowOpen)
                         output = FilterContent.MergeLists(
                             items.Cast<DamageForm>()
                                 .Where(form => !form.Closed)
