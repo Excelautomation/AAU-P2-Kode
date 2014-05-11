@@ -155,7 +155,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get { return GetCommand<DamageType>(d => { SelectedDamageType = d; }); }
         }
 
-        public ICommand AddDamageType
+        public ICommand AddDamageForm
         {
             get
             {

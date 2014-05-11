@@ -121,7 +121,7 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <TextBox Text="{Binding Path=Comment, Mode=TwoWay}" Style="{StaticResource ResourceKey=txbUserinput}" Grid.Row="3" Grid.Column="1" Height="100" Margin="5,0,0,0"/>
+        <TextBox Text="{Binding Path=Description, Mode=TwoWay}" Style="{StaticResource ResourceKey=txbUserinput}" Grid.Row="3" Grid.Column="1" Height="100" Margin="5,0,0,0"/>
 
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Vertical">
             <ComboBox x:Name="DamageTypeComboBox" ItemsSource="{Binding Path=DamageTypes, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="32">

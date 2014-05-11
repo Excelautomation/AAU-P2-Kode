@@ -20,6 +20,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private List<LongTripForm> _longTripForms;
         private List<Member> _members = new List<Member>();
         private List<MemberViewModel> _membersFiltered;
+        private List<Boat> _boats;
         private Boat _selectedBoat;
 
         // Constructor
@@ -35,15 +36,19 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
                 // get long trip forms
                 LongTripForms = db.LongTripForm.OrderBy(x => x.FormCreated).Where(x => true).ToList();
-                Boats = db.Boat.Where(x => true).ToList();
+                Boats = db.Boat.Where(x => x.Active).ToList();
             };
         }
 
         // Properties
         public DateTime? PlannedStartDate { get; set; }
         public DateTime? PlannedEndDate { get; set; }
-        public List<Boat> Boats { get; set; }
-
+        public List<Boat> Boats
+        {
+            get { return _boats; }
+            set { _boats = value; Notify(); }
+        }
+        
         public Boat SelectedBoat
         {
             get { return _selectedBoat; }
@@ -104,6 +109,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     };
 
                     db.LongTripForm.Add(longTripForm);
+                    db.SaveChanges();
                 });
             }
         }
