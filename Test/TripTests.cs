@@ -34,7 +34,7 @@ namespace Test
 
             // Act
             System.Threading.Thread.Sleep(5000);
-            int actual = (int)(DateTime.Now - trip.TripStartTime).TotalSeconds;
+            int actual = (int)trip.TimeBoatOut.TotalSeconds;
 
             // Assert
             Assert.AreEqual(expected, actual);
