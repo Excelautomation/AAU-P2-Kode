@@ -134,16 +134,10 @@
                                             <TextBox Text="{Binding CurrentTrip.Direction, Mode=TwoWay}" VerticalContentAlignment="Center" FontSize="18" Grid.Row="1" Grid.Column="1"/>
 
                                             <TextBlock Text="Starttid:" Grid.Row="2" Grid.Column="0"/>
-                                            <DockPanel Grid.Row="2" Grid.Column="1">
-                                                <DatePicker Width="32" DockPanel.Dock="Right" SelectedDate="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" Margin="2,0,0,1" FontSize="14"/>
-                                                <TextBlock Text="{Binding CurrentTrip.TripStartTime, ConverterCulture='da-DK', StringFormat=d}" Grid.Row="2" Grid.Column="1"/>
-                                            </DockPanel>
+                                            <DatePicker Grid.Row="2" Grid.Column="1" DockPanel.Dock="Right" SelectedDate="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay}" SelectedDateFormat="Long" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" Margin="2,0,0,1" FontSize="14"/>
 
                                             <TextBlock Text="Sluttid:" Grid.Row="3" Grid.Column="0"/>
-                                            <DockPanel Grid.Row="3" Grid.Column="1">
-                                                <DatePicker Width="32" DockPanel.Dock="Right" SelectedDate="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" Margin="2,0,0,1" FontSize="14"/>
-                                                <TextBlock  Text="{Binding CurrentTrip.TripEndedTime, ConverterCulture='da-DK', StringFormat=d}"/>
-                                            </DockPanel>
+                                            <DatePicker Grid.Row="3" Grid.Column="1" DockPanel.Dock="Right" SelectedDate="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" Margin="2,0,0,1" FontSize="14"/>
 
                                             <TextBlock Text="Tid ude:" Grid.Row="4" Grid.Column="0"/>
                                             <TextBlock Grid.Row="4" Grid.Column="1">
