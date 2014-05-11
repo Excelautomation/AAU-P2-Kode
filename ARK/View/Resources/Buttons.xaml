@@ -216,6 +216,10 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#FFC1C1C1" TargetName="btnBorder"/>
+                            <Setter Property="BorderBrush" Value="#FF808080" TargetName="btnBorder"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -227,7 +231,9 @@
                         <Setter Property="Foreground" Value="#FFF3F3F3"/>
                     </DataTrigger>
                 </Style.Triggers>
+
             </Style>
+
         </Style.Resources>
     </Style>
 
