@@ -204,7 +204,7 @@ namespace ARK.ViewModel.Administrationssystem
             var adminSystem = (AdminSystemViewModel) Parent;
             adminSystem.MenuBoats.Execute(null);
             var boatsViewModel = (BoatViewModel) adminSystem.CurrentPage.DataContext;
-            boatsViewModel.CurrentBoat = boat;
+            boatsViewModel.OpenBoat(boat);
         }
 
         #endregion

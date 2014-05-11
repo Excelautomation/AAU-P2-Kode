@@ -62,6 +62,11 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        public void OpenBoat(Boat boat)
+        {
+            CurrentBoat = Boats.First(b => b.Id == boat.Id);
+        }
+
         public Boat CurrentBoat
         {
             get { return _currentBoat; }

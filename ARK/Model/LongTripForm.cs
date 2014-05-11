@@ -17,7 +17,7 @@ namespace ARK.Model
         public DateTime PlannedStartDate { get; set; }     // Start date of the trip
         public DateTime PlannedEndDate{ get; set; }        // End date of the trip
         public string TourDescription { get; set; }
-        public string DistancesPerDay { get; set; } // eventually an integer!!!!!!! 
+        public string DistancesPerDay { get; set; } // eventually an integer 
         public string CampSites { get; set; }       // 
         public BoatStatus Status { get; set; }      // status of the Form
 
