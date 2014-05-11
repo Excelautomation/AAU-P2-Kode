@@ -162,8 +162,21 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public void GoToDamageForm(DamageForm df)
+        public void OpenDamageForm(DamageForm damageForm)
         {
+            GoToDamageForm(DamageForms.First(form => form.Id == damageForm.Id));
+        }
+
+        public void OpenLongDistanceForm(LongTripForm longTrip)
+        {
+            GoToLongDistanceForm(LongDistanceForms.First(form => form.Id == longTrip.Id));
+        }
+
+        private void GoToDamageForm(DamageForm df)
+        {
+            // Set tab index
+            SelectedTabIndex = 0;
+
             NavigateToPage(() => new FormsDamage(),
                 df.Description);
 
@@ -173,8 +186,11 @@ namespace ARK.ViewModel.Administrationssystem
                 vm.DamageForm = df;
         }
 
-        public void GoToLongDistanceForm(LongTripForm ltf)
+        private void GoToLongDistanceForm(LongTripForm ltf)
         {
+            // Set tab index
+            SelectedTabIndex = 1;
+            
             NavigateToPage(() => new FormsLongTrip(),
                 ltf.TourDescription);
 
