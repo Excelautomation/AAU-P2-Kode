@@ -17,6 +17,18 @@ namespace ARK.Model
             Ukendt = 6
         }
 
+        public static BoatType[] GetBoatTypes()
+        {
+            return new BoatType[]
+            {
+                BoatType.Inrigger,
+                BoatType.Outrigger,
+                BoatType.Kajak,
+                BoatType.Gig,
+                BoatType.Ergometer
+            };
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int NumberofSeats { get; set; }          // The number of rowers in the boat without the Deckofficer
