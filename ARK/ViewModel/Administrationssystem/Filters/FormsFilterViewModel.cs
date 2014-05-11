@@ -55,18 +55,18 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             OnFilterChanged();
         }
 
-        public override IEnumerable<Filter> GetFilter()
+        public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<Filter> {CurrentFormsFilter};
+            return new List<IFilter> {CurrentFormsFilter};
         }
 
-        public class FormsFilter : Filter
+        public class FormsFilter : IFilter
         {
             public bool ShowOpen { get; set; }
             public bool ShowDenied { get; set; }
             public bool ShowAccepted { get; set; }
 
-            public override IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
+            public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
                 if (typeof (DamageForm) == typeof (T))
                 {

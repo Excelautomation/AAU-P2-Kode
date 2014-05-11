@@ -118,9 +118,9 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             base.OnFilterChanged();
         }
 
-        public override IEnumerable<Filter> GetFilter()
+        public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<Filter> {CurrentBoatType};
+            return new List<IFilter> {CurrentBoatType};
         }
     }
 }

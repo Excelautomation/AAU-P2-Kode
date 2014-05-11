@@ -224,9 +224,6 @@
                 </Border>
                 <Border Visibility="{Binding Path=FiltersVisibility}" BorderThickness="1" CornerRadius="5" BorderBrush="Black" Margin="5,5,5,5">
                     <StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,0" DockPanel.Dock="Left" VerticalAlignment="Top">
-                        <Label FontSize="18">Filter</Label>
-
-                        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
                         <ContentControl Content="{Binding Path=Filter}" Margin="5,0,5,5" />
                     </StackPanel>
                 </Border>

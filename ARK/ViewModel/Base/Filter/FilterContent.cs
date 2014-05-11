@@ -88,7 +88,7 @@ namespace ARK.ViewModel.Base.Filter
         public static IEnumerable<T> FilterItems<T>(IEnumerable<T> items, FilterEventArgs filterEventArgs,
             bool merge = false)
         {
-            List<Filter> filters = filterEventArgs.Filters.Where(filter => filter != null).ToList();
+            List<IFilter> filters = filterEventArgs.Filters.Where(filter => filter != null).ToList();
 
             if (!filters.Any())
                 return items;
@@ -96,7 +96,7 @@ namespace ARK.ViewModel.Base.Filter
             IEnumerable<T> allItems = items.ToList();
             IEnumerable<T> output = new List<T>(allItems);
 
-            foreach (Filter filter in filters)
+            foreach (IFilter filter in filters)
                 output =
                     (merge ? MergeLists(filter.FilterItems(allItems), output) : filter.FilterItems(output)).ToList();
 
