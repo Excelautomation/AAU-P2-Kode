@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.XML;
@@ -46,17 +47,20 @@ namespace ARK
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            var context = DbArkContext.GetDbContext();
+            SmsWarnings warn = new SmsWarnings();
+            warn.Test();
+
+            //var context = DbArkContext.GetDbContext();
 
             //var info = context.Boat.First();
             //var info2 = ARK.HelperFunctions.HelperFunctions.CloneObject<Boat>(info);
             //info2.Trips.First().Distance = 33;
 
-            var temp = context.Boat.ToList();
-            var temp2 = ARK.HelperFunctions.HelperFunctions.CloneCollection<Boat>(temp);
-            temp.First().Name = "changed";
+            //var temp = context.Boat.ToList();
+            //var temp2 = ARK.HelperFunctions.HelperFunctions.CloneCollection<Boat>(temp);
+            //temp.First().Name = "changed";
 
-            Console.WriteLine();
+            //Console.WriteLine();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

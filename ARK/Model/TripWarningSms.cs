@@ -1,3 +1,5 @@
+using System;
+
 namespace ARK.Model
 {
     public class TripWarningSms
@@ -5,7 +7,7 @@ namespace ARK.Model
         public int Id { get; set; }
 
         public Trip Trip { get; set; }
-        public bool SentSms { get; set; }
-        public bool RecievedSms { get; set; }
+        public DateTime? SentSms { get; set; }
+        public DateTime? RecievedSms { get; set; }
     }
 }

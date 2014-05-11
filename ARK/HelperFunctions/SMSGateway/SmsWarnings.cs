@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,23 +12,47 @@ using ARK.Model.XML;
 
 namespace ARK.HelperFunctions.SMSGateway
 {
-    class SmsWarnings
+    public class SmsWarnings
     {
         public ISmsGateway Gateway { get; set; }
 
-
-        private TripWarningSms[] GetTripWarningSms()
+        public void Test()
         {
-            IEnumerable<TripWarningSms> warningSMS;
-            IEnumerable<Trip> trips = GetCurrentTrips();
-
             using (var db = new DbArkContext())
             {
-                warningSMS = db.TripWarningSms
-                    .Where(warning => trips.Any(trip => trip.Id == warning.Trip.Id)).AsEnumerable();
+                var warnings = GetTripWarningSms(db).ToList();
             }
+        }
+        private IEnumerable<TripWarningSms> GetTripWarningSms(DbArkContext db)
+        {
+            // Find all trips which dosn't have a tripwarningsms yet - select tripWarningSms and add to db
+            IEnumerable<TripWarningSms> missingTrips = (from trip in db.Trip
+                where trip.TripEndedTime == null &&
+                        !trip.LongTrip
+                select trip).ToList()
+            .Where(trip => !db.TripWarningSms.Any(warning => warning.Trip.Id == trip.Id))
+            .Select(trip => new TripWarningSms {Trip = trip})
+            .ToList();
 
-            throw new NotImplementedException();
+            // Remove trips home
+            IEnumerable<TripWarningSms> endedTrips = db.TripWarningSms
+                .Where(warning => warning.Trip.TripEndedTime != null)
+                .ToList();
+
+            // Update database
+            if (missingTrips.Any())
+                db.TripWarningSms.AddRange(missingTrips);
+
+            if (endedTrips.Any())
+                db.TripWarningSms.RemoveRange(endedTrips);
+
+            // Save
+            if (missingTrips.Any() || endedTrips.Any())
+                db.SaveChanges();
+
+            return db.TripWarningSms
+                .Where(warning => warning.RecievedSms == null)
+                .Include(warning => warning.Trip);
         }
 
         private IEnumerable<Trip> GetCurrentTrips()
