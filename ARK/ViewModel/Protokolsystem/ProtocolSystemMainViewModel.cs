@@ -200,7 +200,10 @@ namespace ARK.ViewModel.Protokolsystem
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
             FrameworkElement element = page();
-            
+
+            // Remove information
+            CurrentInfo = null;
+
             // Call base method
             base.NavigateToPage(() => element, pageTitle);
 
@@ -216,9 +219,6 @@ namespace ARK.ViewModel.Protokolsystem
             }
             else
                 Filter = null;
-
-            // Remove information
-            CurrentInfo = null;
         }
 
         #endregion

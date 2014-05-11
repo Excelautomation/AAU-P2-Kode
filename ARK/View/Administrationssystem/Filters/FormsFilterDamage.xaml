@@ -14,7 +14,7 @@
         <!--<CheckBox Content="Langtur" IsChecked="{Binding Path=ShowLongDistanceForm, Mode=TwoWay}"></CheckBox>
         <CheckBox Content="Skader" IsChecked="{Binding Path=ShowDamageTypes, Mode=TwoWay}"></CheckBox>
         <Separator Height="20"></Separator>-->
-        <CheckBox Content="Åbne" IsChecked="{Binding Path=ShowDenied, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Lukkede" IsChecked="{Binding Path=ShowAccepted, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Åbne" IsChecked="{Binding Path=ShowOpen, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Lukkede" IsChecked="{Binding Path=ShowDenied, Mode=TwoWay}"></CheckBox>
     </StackPanel>
 </UserControl>
