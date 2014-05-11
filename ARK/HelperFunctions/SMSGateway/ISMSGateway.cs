@@ -1,6 +1,6 @@
 ﻿namespace ARK.HelperFunctions.SMSGateway
 {
-    interface ISmsGateway
+    public interface ISmsGateway
     {
         bool SendSms(string sender, string reciever, string message);
     }
