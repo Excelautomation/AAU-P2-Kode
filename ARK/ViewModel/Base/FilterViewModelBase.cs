@@ -17,7 +17,7 @@ namespace ARK.ViewModel.Base
             remove { FilterChangedInternal -= value; }
         }
 
-        public abstract IEnumerable<Filter.Filter> GetFilter();
+        public abstract IEnumerable<IFilter> GetFilter();
 
         private event EventHandler<FilterEventArgs> FilterChangedInternal;
 

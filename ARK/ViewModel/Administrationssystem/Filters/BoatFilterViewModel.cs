@@ -98,12 +98,12 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             OnFilterChanged();
         }
 
-        public override IEnumerable<Filter> GetFilter()
+        public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<Filter> {CurrentFilter};
+            return new List<IFilter> {CurrentFilter};
         }
 
-        public class BoatFilter : Filter
+        public class BoatFilter : IFilter
         {
             public bool ShowBoatsOut { get; set; }
             public bool ShowBoatsHome { get; set; }
@@ -112,7 +112,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             public bool ShowInactiveBoats { get; set; }
             public bool ShowFunctionalBoats { get; set; }
 
-            public override IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
+            public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
                 if (!ShowBoatsOut && !ShowBoatsHome && !ShowBoatsUnderService && !ShowBoatsDamaged && !ShowInactiveBoats &&
                     !ShowFunctionalBoats)

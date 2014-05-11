@@ -6,7 +6,7 @@ using ARK.ViewModel.Base.Filter;
 
 namespace ARK.ViewModel.Protokolsystem.Filters
 {
-    public class CategoryFilter<T> : Filter
+    public class CategoryFilter<T> : IFilter
     {
         public CategoryFilter(Func<T, bool> filter)
         {
@@ -15,7 +15,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         public Func<T, bool> Filter { get; set; }
 
-        public override IEnumerable<TInput> FilterItems<TInput>(IEnumerable<TInput> items)
+        public IEnumerable<TInput> FilterItems<TInput>(IEnumerable<TInput> items)
         {
             IEnumerable<T> boats = items.Cast<T>().ToList();
             return boats.Where(o => Filter(o)).Cast<TInput>();

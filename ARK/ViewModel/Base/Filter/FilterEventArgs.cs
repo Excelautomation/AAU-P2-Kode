@@ -5,11 +5,11 @@ namespace ARK.ViewModel.Base.Filter
 {
     public class FilterEventArgs : EventArgs
     {
-        public FilterEventArgs(IEnumerable<Filter> filtersActive)
+        public FilterEventArgs(IEnumerable<IFilter> filtersActive)
         {
             Filters = filtersActive;
         }
 
-        public IEnumerable<Filter> Filters { get; private set; }
+        public IEnumerable<IFilter> Filters { get; private set; }
     }
 }

@@ -204,12 +204,12 @@ namespace ARK.ViewModel.Protokolsystem
             // Remove information
             CurrentInfo = null;
 
-            // Call base method
-            base.NavigateToPage(() => element, pageTitle);
-
             // Deactivate filter
             EnableSearch = false;
             EnableFilters = false;
+
+            // Call base method
+            base.NavigateToPage(() => element, pageTitle);
 
             // Set filter
             var viewModelbase = element.DataContext as IFilterContentViewModel;

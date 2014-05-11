@@ -57,18 +57,18 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         }
 
 
-        public override IEnumerable<Filter> GetFilter()
+        public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<Filter> {CurrentFilter};
+            return new List<IFilter> {CurrentFilter};
         }
 
-        public class OverViewFilter : Filter
+        public class OverViewFilter : IFilter
         {
             public bool ShowDamages { get; set; }
             public bool ShowLongTrip { get; set; }
             public bool ShowBoatsOut { get; set; }
 
-            public override IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
+            public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
                 if (!ShowDamages && !ShowLongTrip && !ShowBoatsOut)
                     return new List<T>();

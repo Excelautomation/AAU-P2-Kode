@@ -9,9 +9,18 @@
     <UserControl.DataContext>
         <filters:TripFilterViewModel />
     </UserControl.DataContext>
-    
-    <Grid>
-        <Label Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-    </Grid>
+    <StackPanel>
+        <Label FontSize="18">Bådtype</Label>
+        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
+        <ItemsControl ItemsSource="{Binding Path=ControlsBoatType}"></ItemsControl>
+
+        <Label FontSize="18">Distance</Label>
+        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
+        <ItemsControl ItemsSource="{Binding Path=ControlsDistance}"></ItemsControl>
+
+        <Label FontSize="18">År</Label>
+        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
+        <ItemsControl ItemsSource="{Binding Path=ControlsYear}"></ItemsControl>
+    </StackPanel>
 </UserControl>
