@@ -13,15 +13,19 @@ namespace ARK.ViewModel.Protokolsystem
             get { return _text; }
             set
             {
-                _text = value;
-
                 // Tjek at værdien er ændret
                 if (_text != value)
                 {
+                    _text = value;
+
                     Notify();
 
                     if (TextChanged != null)
                         TextChanged(this, new KeyboardEventArgs(Text));
+                }
+                else
+                {
+                    _text = value;
                 }
             }
         }

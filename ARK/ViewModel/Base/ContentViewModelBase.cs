@@ -41,14 +41,14 @@ namespace ARK.ViewModel.Base
             get { return GetCommand<FrameworkElement>(element => GetKeyboard().GotFocus.Execute(element)); }
         }
 
-        private KeyboardContainerViewModelBase GetKeyboard()
+        private IKeyboardContainerViewModelBase GetKeyboard()
         {
             return GetKeyboard(this);
         }
 
-        public static KeyboardContainerViewModelBase GetKeyboard(IContentViewModelBase content)
+        public static IKeyboardContainerViewModelBase GetKeyboard(IContentViewModelBase content)
         {
-            var keyboard = content.Parent as KeyboardContainerViewModelBase;
+            var keyboard = content.Parent as IKeyboardContainerViewModelBase;
             if (keyboard != null)
                 return keyboard;
 
