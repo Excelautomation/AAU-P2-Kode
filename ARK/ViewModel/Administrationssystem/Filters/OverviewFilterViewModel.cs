@@ -71,7 +71,7 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             public override IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
                 if (!ShowDamages && !ShowLongTrip && !ShowBoatsOut)
-                    return items;
+                    return new List<T>();
 
                 if (typeof (DamageForm) == typeof (T))
                 {

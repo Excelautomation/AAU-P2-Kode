@@ -116,29 +116,31 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             {
                 if (!ShowBoatsOut && !ShowBoatsHome && !ShowBoatsUnderService && !ShowBoatsDamaged && !ShowInactiveBoats &&
                     !ShowFunctionalBoats)
-                    return items;
+                    return new List<T>();
 
                 if (typeof (Boat) != typeof (T))
                     return items;
 
                 IEnumerable<Boat> boats = items.Cast<Boat>().ToList();
-                var output = new List<Boat>();
+                var outputBoatsOutIn = new List<Boat>();
+                var outputDamage = new List<Boat>();
 
                 if (ShowBoatsOut)
-                    output = FilterContent.MergeLists(output, boats.Where(boat => boat.BoatOut)).ToList();
+                    outputBoatsOutIn = FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => boat.BoatOut)).ToList();
                 if (ShowBoatsHome)
-                    output = FilterContent.MergeLists(output, boats.Where(boat => !boat.BoatOut)).ToList();
-                if (ShowBoatsUnderService)
-                    output =
-                        FilterContent.MergeLists(output, boats.Where(boat => boat.Damaged && !boat.Usable)).ToList();
-                if (ShowBoatsDamaged)
-                    output = FilterContent.MergeLists(output, boats.Where(boat => boat.Damaged)).ToList();
-                if (ShowInactiveBoats)
-                    output = FilterContent.MergeLists(output, boats.Where(boat => !boat.Active)).ToList();
-                if (ShowFunctionalBoats)
-                    output = FilterContent.MergeLists(output, boats.Where(boat => boat.Usable && boat.Active)).ToList();
+                    outputBoatsOutIn = FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => !boat.BoatOut)).ToList();
 
-                return output.Cast<T>();
+                if (ShowBoatsUnderService)
+                    outputDamage =
+                        FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged && !boat.Usable)).ToList();
+                if (ShowBoatsDamaged)
+                    outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged)).ToList();
+                if (ShowInactiveBoats)
+                    outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => !boat.Active)).ToList();
+                if (ShowFunctionalBoats)
+                    outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Usable && boat.Active)).ToList();
+
+                return outputBoatsOutIn.Where(boat => outputDamage.Any(boat2 => boat == boat2)).Cast<T>();
             }
         }
     }
