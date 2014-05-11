@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
-using System.ComponentModel;
 using ARK.Model.Extensions;
 using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
@@ -20,84 +15,41 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class BoatViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        private List<Boat> _boatsNonFiltered;
-        private readonly DbArkContext _dbArkContext;
-        private bool _localActiveBoat;
         private IEnumerable<Boat> _boats;
-        private bool _recentSave = false;
-        private bool _recentCancel = false;
-        private bool _recentInfoSave = false; // De tre sidste kan laves til enum
+        private List<Boat> _boatsNonFiltered;
         private Boat _currentBoat;
-        //private Member _MostUsingMember;
 
         private FrameworkElement _filter;
+        private bool _recentCancel;
+        private bool _recentSave;
 
         public BoatViewModel()
         {
-            // Load data
-            _dbArkContext = DbArkContext.GetDbContext();
-
             ParentAttached += (sender, e) =>
             {
-                DbArkContext db = DbArkContext.GetDbContext();
-
                 // Load data
-                _boatsNonFiltered = db.Boat.Include(boat => boat.DamageForms).Include(boat => boat.Trips).ToList();
+                using (var db = new DbArkContext())
+                {
+                    _boatsNonFiltered = db.Boat
+                        .Include(boat => boat.DamageForms)
+                        .Include(boat => boat.Trips)
+                        .ToList();
+                }
 
-            // Nulstil filter
-            ResetFilter();
+                // Nulstil filter
+                ResetFilter();
 
                 // Sæt valgt båd
-            if (Boats.Count() != 0)
-            {
-                CurrentBoat = Boats.First();
-                LocalActiveBoat = CurrentBoat.Active;
-            }
+                if (Boats.Count() != 0)
+                {
+                    CurrentBoat = Boats.First();
+                }
             };
 
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
-        }
-
-        public bool RecentSave 
-        { 
-            get { return _recentSave; }
-            set 
-            {
-                if (value != _recentSave)
-                {
-                    _recentSave = value;
-                    _recentCancel = false;
-                    NotifyCustom("RecentCancel");
-                }
-                Notify();
-            }
-        }
-
-        public bool RecentInfoSave
-        {
-            get { return _recentInfoSave; }
-            set
-            {
-                _recentInfoSave = value; Notify();
-            }
-        }
-            
-        public bool RecentCancel
-        {
-            get { return _recentCancel; }
-            set
-            {
-                if (value != _recentCancel)
-                {
-                    _recentCancel = value;
-                    _recentSave = false;
-                    NotifyCustom("RecentSave");
-                }
-                Notify();
-            }
         }
 
         public IEnumerable<Boat> Boats
@@ -115,46 +67,53 @@ namespace ARK.ViewModel.Administrationssystem
             get { return _currentBoat; }
             set
             {
+                if (_currentBoat != null)
+                    Reload();
+
                 _currentBoat = value;
-                if (value != null)
-                    LocalActiveBoat = value.Active;
                 RecentSave = false;
                 RecentCancel = false;
-                RecentInfoSave = false;
                 Notify();
             }
         }
+
+        #region State
+        public bool RecentSave
+        {
+            get { return _recentSave; }
+            set
+            {
+                if (value != _recentSave)
+                {
+                    _recentSave = value;
+                    _recentCancel = false;
+                    NotifyCustom("RecentCancel");
+                }
+                Notify();
+            }
+        }
+
+        public bool RecentCancel
+        {
+            get { return _recentCancel; }
+            set
+            {
+                if (value != _recentCancel)
+                {
+                    _recentCancel = value;
+                    _recentSave = false;
+                    NotifyCustom("RecentSave");
+                }
+                Notify();
+            }
+        }
+        #endregion
 
         public ICommand SaveChanges
         {
             get
             {
-                return GetCommand<object>(e =>
-                {
-                    if (CurrentBoat.Active != LocalActiveBoat) { 
-                    CurrentBoat.Active = LocalActiveBoat;
-                    Boat tempboat = CurrentBoat;
-                    _dbArkContext.SaveChanges();
-                    Boats = _dbArkContext.Boat.ToList();
-                    CurrentBoat = tempboat;
-                        RecentSave = true;
-                    }
-                });
-            }
-        }
-
-        public ICommand SaveInfoChanges
-        {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                        Boat tempboat = CurrentBoat;
-                        _dbArkContext.SaveChanges();
-                        Boats = _dbArkContext.Boat.ToList();
-                        CurrentBoat = tempboat;
-                        RecentInfoSave = true;
-                });
+                return GetCommand<object>(e => Save());
             }
         }
 
@@ -162,25 +121,37 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
-                {
-                    if (CurrentBoat.Active != LocalActiveBoat)
-                    {
-                    LocalActiveBoat = CurrentBoat.Active;
-                        RecentCancel = true;
-                    }
-                });
+                return GetCommand<object>(e => Reload());
             }
         }
 
-        public bool LocalActiveBoat
+        private void Save()
         {
-            get { return _localActiveBoat; }
-            set
+            using (var db = new DbArkContext())
             {
-                _localActiveBoat = value;
-                Notify();
+                db.Entry(CurrentBoat).State = EntityState.Modified;
+                db.SaveChanges();
             }
+
+            RecentSave = true;
+        }
+
+        private void Reload()
+        {
+            using (var db = new DbArkContext())
+            {
+                db.Entry(CurrentBoat).State = EntityState.Modified;
+                db.Entry(CurrentBoat).Reload();
+            }
+
+            RecentCancel = true;
+
+            // Trigger notify - reset lists
+            var tmp = Boats;
+            Boats = null;
+            Boats = tmp;
+
+            NotifyCustom("CurrentBoat");
         }
 
         #region Search
@@ -197,7 +168,7 @@ namespace ARK.ViewModel.Administrationssystem
 
             // Tjek om en af filtertyperne er aktive
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
-               (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
+                (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
                 return;
 
             // Tjek filter
@@ -214,6 +185,7 @@ namespace ARK.ViewModel.Administrationssystem
                     select boat;
             }
         }
+
         #endregion
 
         public FrameworkElement Filter
