@@ -151,6 +151,12 @@ namespace ARK
 
             Current.Exit += (sender, e) =>
             {
+                if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
+                {
+                    // KILL IT!
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
+                }
+
                 if (thr.ThreadState == ThreadState.Running)
                     thr.Abort();
                 if (checkForNewSeasonThread.ThreadState == ThreadState.Running ||
