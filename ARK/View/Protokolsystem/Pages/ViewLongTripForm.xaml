@@ -48,6 +48,8 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -55,7 +57,9 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=TourDescription}"/>
-
+                        <TextBlock Grid.Column="1" Text="{Binding Path=FormCreated}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=PlannedStartDate}"/>
+                        <TextBlock Grid.Column="3" Text="{Binding Path=Status}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
