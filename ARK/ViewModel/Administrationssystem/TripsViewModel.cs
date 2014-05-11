@@ -11,28 +11,35 @@ using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.View.Administrationssystem.Pages;
 
 namespace ARK.ViewModel.Administrationssystem
 {
     public class TripsViewModel : ContentViewModelBase, IFilterContentViewModel
     {
         private Trip _currentTrip;
-        private bool _recentSave;
+        private bool _recentSave = false;
         private List<Trip> _trips;
         private IEnumerable<Trip> _tripsFiltered;
+        private List<Boat> _allBoats;
+        public BoatListWindow NewBoatDialog;
+        public DbArkContext db;
 
+        
         //private FrameworkElement _filter;
 
         public TripsViewModel()
         {
             ParentAttached += (sender, e) =>
             {
-                DbArkContext db = DbArkContext.GetDbContext();
+                db = DbArkContext.GetDbContext();
 
                 // Load data
                 _trips = db.Trip
                     .Include(trip => trip.Members)
                     .ToList();
+
+                _allBoats = db.Boat.ToList();
 
                 // Reset filter
                 ResetFilter();
@@ -50,6 +57,16 @@ namespace ARK.ViewModel.Administrationssystem
             set
             {
                 _tripsFiltered = value;
+                Notify();
+            }
+        }
+
+        public List<Boat> AllBoats
+        {
+            get { return _allBoats; }
+            set
+            {
+                _allBoats = value;
                 Notify();
             }
         }
@@ -76,7 +93,11 @@ namespace ARK.ViewModel.Administrationssystem
 
         public ICommand SelectedChange
         {
-            get { return GetCommand<Trip>(e => { CurrentTrip = e; }); }
+            get { return GetCommand<Trip>(e => 
+            { 
+                CurrentTrip = e;
+                RecentSave = false;
+            }); }
         }
 
         public ICommand SaveChanges
@@ -97,8 +118,30 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    DbArkContext.GetDbContext().SaveChanges();
-                    RecentSave = true;
+                    NewBoatDialog = new View.Administrationssystem.Pages.BoatListWindow();
+                    NewBoatDialog.DataContext = this;
+                    NewBoatDialog.ShowDialog();
+                });
+            }
+        }
+
+        public ICommand ShowBoatsContinue
+        {
+            get
+            {
+                return GetCommand<Boat>(e =>
+                {
+                    NewBoatDialog.Close();
+                    CurrentTrip.Boat = e;
+                    db.SaveChanges();
+                    NotifyCustom("CurrentTrip");
+                    NotifyCustom("TripsFiltered");
+
+                    // Båd opdateres ikke i listview, men andre ændringer, som km sejlet gør. Meget mærkeligt.
+
+                    //Trip TempTrip = CurrentTrip;
+                    //TripsFiltered = db.Trip.ToList();
+                    //CurrentTrip = TempTrip;
                 });
             }
         }
