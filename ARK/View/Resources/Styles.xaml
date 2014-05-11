@@ -14,7 +14,7 @@
     </Style>
 
     <!--TextBox (User input)-->
-    <Style x:Key="txbUserinput" TargetType="TextBox">
+    <Style x:Key="txbUserinput" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="Foreground" Value="Black"/>

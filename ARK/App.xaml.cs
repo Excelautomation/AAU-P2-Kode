@@ -150,7 +150,7 @@ namespace ARK
             Current.Exit += (sender, e) =>
             {
                 if (thr.ThreadState == ThreadState.Running)
-                    thr.Interrupt();
+                    thr.Abort();
                 if (checkForNewSeasonThread.ThreadState == ThreadState.Running ||
                     checkForNewSeasonThread.ThreadState == ThreadState.WaitSleepJoin)
                     checkForNewSeasonThread.Interrupt();
@@ -162,11 +162,11 @@ namespace ARK
 #if AdministrationsSystem
             this.StartupUri = new Uri("/View/Administrationssystem/AdminSystem.xaml", UriKind.Relative);
 #else
-#if DEBUG
+    #if DEBUG
             this.StartupUri = new Uri("/MainWindow.xaml", UriKind.Relative);
-#else
+    #else
             this.StartupUri = new Uri("/View/Protokolsystem/ProtocolSystem.xaml", UriKind.Relative);
-#endif
+    #endif
 #endif
         }
 
