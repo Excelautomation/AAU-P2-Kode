@@ -35,14 +35,20 @@ namespace ARK.ViewModel.Administrationssystem
             // Load data
             ParentAttached += (sender, e) =>
             {
-                // Opret forbindelser Async
-                Task<List<DamageForm>> damageforms = _dbArkContext.DamageForm.ToListAsync();
-                Task<List<LongTripForm>> longDistanceForms = _dbArkContext.LongTripForm.ToListAsync();
+                using (var db = new DbArkContext())
+                {
+                    _damageFormsNonFiltered = db.DamageForm
+                        .Include(form => form.RegisteringMember)
+                        .Include(form => form.Boat)
+                        .ToList();
 
-                _damageFormsNonFiltered = damageforms.Result.ToList();
-                _longTripFormsNonFiltered = longDistanceForms.Result.ToList();
+                    _longTripFormsNonFiltered = db.LongTripForm
+                        .Include(form => form.Boat)
+                        .Include(form => form.Members)
+                        .ToList();
+                }
 
-                // Nulstil filter
+                // Reset filter
                 ResetFilter();
 
                 // Set selected tab index to 0 - damage

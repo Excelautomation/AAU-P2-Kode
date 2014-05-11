@@ -1,33 +1,34 @@
-﻿using System.Windows;
+﻿using System.Data.Entity;
 using System.Windows.Input;
 using ARK.Model;
-using ARK.ViewModel.Base;
 using ARK.Model.DB;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsLongTripViewModel : ContentViewModelBase
     {
-
-        private readonly DbArkContext _dbArkContext;
-        private LongTripForm _LongDistanceForm;
-        private bool _RecentChange = false;
-        
-        public FormsLongTripViewModel ()
-        {
-            _dbArkContext = DbArkContext.GetDbContext();
-        }
+        private LongTripForm _longDistanceForm;
+        private bool _recentChange;
 
         public bool RecentChange
         {
-            get { return _RecentChange; }
-            set { _RecentChange = value; Notify(); }
+            get { return _recentChange; }
+            set
+            {
+                _recentChange = value;
+                Notify();
+            }
         }
 
         public LongTripForm LongDistanceForm
         {
-            get { return _LongDistanceForm; }
-            set { _LongDistanceForm = value; Notify(); }
+            get { return _longDistanceForm; }
+            set
+            {
+                _longDistanceForm = value;
+                Notify();
+            }
         }
 
         public ICommand AcceptForm
@@ -37,9 +38,9 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     LongDistanceForm.Status = LongTripForm.BoatStatus.Accepted;
-                    RecentChange = true;
-                    _dbArkContext.SaveChanges();
-                 });
+
+                    Save();
+                });
             }
         }
 
@@ -50,16 +51,20 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     LongDistanceForm.Status = LongTripForm.BoatStatus.Denied;
-                    RecentChange = true;
-                    _dbArkContext.SaveChanges();
+                    Save();
                 });
             }
         }
 
+        private void Save()
+        {
+            using (var db = new DbArkContext())
+            {
+                db.Entry(LongDistanceForm).State = EntityState.Modified;
+                db.SaveChanges();
+            }
 
-
-
-
-
+            RecentChange = true;
+        }
     }
 }

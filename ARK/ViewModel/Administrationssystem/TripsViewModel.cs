@@ -1,45 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.View.Administrationssystem.Filters;
+using ARK.View.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
-using ARK.View.Administrationssystem.Pages;
 
 namespace ARK.ViewModel.Administrationssystem
 {
     public class TripsViewModel : ContentViewModelBase, IFilterContentViewModel
     {
+        public BoatListWindow NewBoatDialog;
+        private List<Boat> _allBoats;
         private Trip _currentTrip;
-        private bool _recentSave = false;
+        private bool _recentSave;
         private List<Trip> _trips;
         private IEnumerable<Trip> _tripsFiltered;
-        private List<Boat> _allBoats;
-        public BoatListWindow NewBoatDialog;
-        public DbArkContext db;
-
-        
-        //private FrameworkElement _filter;
 
         public TripsViewModel()
         {
             ParentAttached += (sender, e) =>
             {
-                db = DbArkContext.GetDbContext();
-
                 // Load data
-                _trips = db.Trip
-                    .Include(trip => trip.Members)
-                    .ToList();
+                using (var db = new DbArkContext())
+                {
+                    _trips = db.Trip
+                        .Include(trip => trip.Members)
+                        .ToList();
 
-                _allBoats = db.Boat.ToList();
+                    _allBoats = db.Boat.ToList();
+                }
 
                 // Reset filter
                 ResetFilter();
@@ -93,23 +89,19 @@ namespace ARK.ViewModel.Administrationssystem
 
         public ICommand SelectedChange
         {
-            get { return GetCommand<Trip>(e => 
-            { 
-                CurrentTrip = e;
-                RecentSave = false;
-            }); }
+            get
+            {
+                return GetCommand<Trip>(e =>
+                {
+                    CurrentTrip = e;
+                    RecentSave = false;
+                });
+            }
         }
 
         public ICommand SaveChanges
         {
-            get
-            {
-                return GetCommand<object>(e =>
-                {
-                    DbArkContext.GetDbContext().SaveChanges();
-                    RecentSave = true;
-                });
-            }
+            get { return GetCommand<object>(e => Save()); }
         }
 
         public ICommand ShowBoatDialog
@@ -118,7 +110,7 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand<object>(e =>
                 {
-                    NewBoatDialog = new View.Administrationssystem.Pages.BoatListWindow();
+                    NewBoatDialog = new BoatListWindow();
                     NewBoatDialog.DataContext = this;
                     NewBoatDialog.ShowDialog();
                 });
@@ -132,11 +124,13 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<Boat>(e =>
                 {
                     NewBoatDialog.Close();
-                    CurrentTrip.Boat = e;
-                    db.SaveChanges();
-                    NotifyCustom("CurrentTrip");
-                    NotifyCustom("TripsFiltered");
-
+                    using (var db = new DbArkContext())
+                    {
+                        db.Trip.Attach(CurrentTrip);
+                        CurrentTrip.Boat = e;
+                        db.SaveChanges();
+                    }
+                    RecentSave = true;
                     // Båd opdateres ikke i listview, men andre ændringer, som km sejlet gør. Meget mærkeligt.
 
                     //Trip TempTrip = CurrentTrip;
@@ -145,6 +139,37 @@ namespace ARK.ViewModel.Administrationssystem
                 });
             }
         }
+
+        private void Save()
+        {
+            using (var db = new DbArkContext())
+            {
+                db.Entry(CurrentTrip).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            RecentSave = true;
+        }
+
+        private void Reload()
+        {
+            using (var db = new DbArkContext())
+            {
+                db.Entry(CurrentTrip).State = EntityState.Modified;
+                db.Entry(CurrentTrip).Reload();
+            }
+
+            RecentSave = false;
+
+            // Trigger notify - reset lists
+            IEnumerable<Trip> tmp = TripsFiltered;
+            TripsFiltered = null;
+            TripsFiltered = tmp;
+
+            NotifyCustom("CurrentTrip");
+        }
+
+        #region Filter
 
         public FrameworkElement Filter
         {
@@ -177,5 +202,7 @@ namespace ARK.ViewModel.Administrationssystem
                 TripsFiltered = TripsFiltered.Where(trip => trip.Filter(args.SearchEventArgs.SearchText)).ToList();
             }
         }
+
+        #endregion
     }
 }

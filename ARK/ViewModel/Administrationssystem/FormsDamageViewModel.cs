@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using System.Data.Entity;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
@@ -8,37 +8,32 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsDamageViewModel : ContentViewModelBase
     {
-        private readonly DbArkContext _dbArkContext;
-        private bool _RecentChange;
+        private bool _recentChange;
         private DamageForm _damageForm;
-
-        public FormsDamageViewModel()
-        {
-            _dbArkContext = DbArkContext.GetDbContext();
-        }
 
         public bool RecentChange
         {
-            get { return _RecentChange; }
-            set { _RecentChange = value; Notify(); }
+            get { return _recentChange; }
+            set
+            {
+                _recentChange = value;
+                Notify();
+            }
         }
 
         public DamageForm DamageForm
         {
             get { return _damageForm; }
             set
-            { _damageForm = value; Notify(); }
+            {
+                _damageForm = value;
+                Notify();
+            }
         }
 
         public ICommand SaveChanges
         {
-            get {
-                return GetCommand<object>(e =>
-                {
-                    _dbArkContext.SaveChanges();
-                    RecentChange = true;
-                });
-            }
+            get { return GetCommand<object>(e => Save()); }
         }
 
         public ICommand DeactivateBåd
@@ -48,8 +43,8 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     DamageForm.Boat.Active = false;
-                    RecentChange = true;
-                    _dbArkContext.SaveChanges();
+
+                    Save();
                     // DamageformIndex = 0 // så den næste damageform vælges, men dette kan kun gøres når/hvis den nuværende damageform forsvinder fra listen.
                     // Det skal helst være sådan at closed damageforms ikke vises i listen, medmindre det er valgt. Så denne knap skal også få den pågænldende damageform til at forsvinde i listen.
                 });
@@ -63,8 +58,8 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     DamageForm.Boat.Active = true;
-                    RecentChange = true;
-                    _dbArkContext.SaveChanges();
+
+                    Save();
                     // DamageformIndex = 0 // så den næste damageform vælges, men dette kan kun gøres når/hvis den nuværende damageform forsvinder fra listen.
                     // Det skal helst være sådan at closed damageforms ikke vises i listen, medmindre det er valgt. Så denne knap skal også få den pågænldende damageform til at forsvinde i listen.
                 });
@@ -78,12 +73,23 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     DamageForm.Closed = true;
-                    RecentChange = true;
-                    _dbArkContext.SaveChanges();
+
+                    Save();
                     // DamageformIndex = 0 // så den næste damageform vælges, men dette kan kun gøres når/hvis den nuværende damageform forsvinder fra listen.
                     // Det skal helst være sådan at closed damageforms ikke vises i listen, medmindre det er valgt. Så denne knap skal også få den pågænldende damageform til at forsvinde i listen.
                 });
             }
+        }
+
+        private void Save()
+        {
+            using (var db = new DbArkContext())
+            {
+                db.Entry(DamageForm).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            RecentChange = true;
         }
     }
 }
