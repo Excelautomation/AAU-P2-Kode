@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using ARK.Model;
@@ -31,33 +28,42 @@ namespace ARK.ViewModel.Administrationssystem
 
         public OverviewViewModel()
         {
-            ParentAttached += (sender, e) =>
+            // Initilize lists
+            _skadesblanketterNonFiltered = new List<DamageForm>();
+            _longDistanceFormsNonFiltered = new List<LongTripForm>();
+            _boatsOutNonFiltered = new List<Boat>();
+
+            ParentAttached += (sender, e) => Task.Factory.StartNew(() =>
             {
-                DbArkContext db = DbArkContext.GetDbContext();
-
                 // Load data
-                _skadesblanketterNonFiltered = db.DamageForm
-                    .Where(damageForm => !damageForm.Closed)
-                    .OrderBy(damageForm => damageForm.Date)
-                    .Take(6)
-                    .ToList();
+                using (var db = new DbArkContext())
+                {
+                    _skadesblanketterNonFiltered = db.DamageForm
+                        .Where(damageForm => !damageForm.Closed)
+                        .OrderBy(damageForm => damageForm.Date)
+                        .Include(damageForm => damageForm.Boat)
+                        .Include(damageForm => damageForm.RegisteringMember)
+                        .Take(6)
+                        .ToList();
 
-                _longDistanceFormsNonFiltered = db.LongTripForm
-                    .Where(longDistanceForm => longDistanceForm.Status == LongTripForm.BoatStatus.Awaiting)
-                    .OrderBy(longDistanceForm => longDistanceForm.PlannedStartDate)
-                    .Take(6)
-                    .ToList();
+                    _longDistanceFormsNonFiltered = db.LongTripForm
+                        .Where(longDistanceForm => longDistanceForm.Status == LongTripForm.BoatStatus.Awaiting)
+                        .OrderBy(longDistanceForm => longDistanceForm.PlannedStartDate)
+                        .Include(longDistanceForm => longDistanceForm.Boat)
+                        .Take(6)
+                        .ToList();
 
-                _boatsOutNonFiltered = db.Boat
-                    .Include(boat => boat.Trips)
-                    .Where(boat => boat.Trips.Any(trip => trip.TripEndedTime == null))
-                    .ToList()
-                    .OrderBy(boat => boat.Trips.First(trip => trip.TripEndedTime == null).TripStartTime)
-                    .ToList();
+                    _boatsOutNonFiltered = db.Boat
+                        .Include(boat => boat.Trips)
+                        .Where(boat => boat.Trips.Any(trip => trip.TripEndedTime == null))
+                        .ToList()
+                        .OrderBy(boat => boat.Trips.First(trip => trip.TripEndedTime == null).TripStartTime)
+                        .ToList();
 
-                // Nulstil filter
-                ResetFilter();
-            };
+                    // Nulstil filter
+                    ResetFilter();
+                }
+            }).Wait(500);
 
             // Setup filter
             var filterController = new FilterContent(this);
@@ -125,8 +131,13 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        #region Navigering via listitems
+        #region NavigationListView
+
+        private Boat _selectedBoat;
         private DamageForm _selectedDamageForm;
+
+        private LongTripForm _selectedLongDistanceForm;
+
         public DamageForm SelectedDamageForm
         {
             get { return _selectedDamageForm; }
@@ -141,17 +152,6 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        private void ShowDamageForm(DamageForm SelectedDamageForm)
-        {
-            var adminSystem = (AdminSystemViewModel)Parent;
-            adminSystem.MenuForms.Execute(null);
-            var FormsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
-
-            FormsViewModel.SelectedTabIndex = 0;
-            FormsViewModel.GoToDamageForm(SelectedDamageForm);
-        }
-
-        private LongTripForm _selectedLongDistanceForm;
         public LongTripForm SelectedLongDistanceForm
         {
             get { return _selectedLongDistanceForm; }
@@ -166,17 +166,6 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        private void ShowLongDistanceForm(LongTripForm LongDistanceForm)
-        {
-            var adminSystem = (AdminSystemViewModel)Parent;
-            adminSystem.MenuForms.Execute(null);
-            var FormsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
-
-            FormsViewModel.SelectedTabIndex = 1;
-            FormsViewModel.GoToLongDistanceForm(LongDistanceForm);
-        }
-
-        private Boat _selectedBoat;
         public Boat SelectedBoat
         {
             get { return _selectedBoat; }
@@ -191,22 +180,40 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        private void ShowDamageForm(DamageForm damageForm)
+        {
+            var adminSystem = (AdminSystemViewModel) Parent;
+            adminSystem.MenuForms.Execute(null);
+            var formsViewModel = (FormsViewModel) adminSystem.CurrentPage.DataContext;
+
+            formsViewModel.SelectedTabIndex = 0;
+            formsViewModel.OpenDamageForm(damageForm);
+        }
+
+        private void ShowLongDistanceForm(LongTripForm longDistanceForm)
+        {
+            var adminSystem = (AdminSystemViewModel) Parent;
+            adminSystem.MenuForms.Execute(null);
+
+            var formsViewModel = (FormsViewModel) adminSystem.CurrentPage.DataContext;
+            formsViewModel.OpenLongDistanceForm(longDistanceForm);
+        }
+
         private void ShowBoat(Boat boat)
         {
-            var adminSystem = (AdminSystemViewModel)Parent;
+            var adminSystem = (AdminSystemViewModel) Parent;
             adminSystem.MenuBoats.Execute(null);
-            var boatsViewModel = (BoatViewModel)adminSystem.CurrentPage.DataContext;
+            var boatsViewModel = (BoatViewModel) adminSystem.CurrentPage.DataContext;
             boatsViewModel.CurrentBoat = boat;
         }
+
         #endregion
 
         #region Seach and filters
+
         public FrameworkElement Filter
         {
-            get
-            {
-                return _filter ?? (_filter = new OverviewFilter());
-            }
+            get { return _filter ?? (_filter = new OverviewFilter()); }
         }
 
         private void ResetFilter()
@@ -266,6 +273,7 @@ namespace ARK.ViewModel.Administrationssystem
                 ? Visibility.Visible
                 : Visibility.Collapsed;
         }
+
         #endregion
     }
 }

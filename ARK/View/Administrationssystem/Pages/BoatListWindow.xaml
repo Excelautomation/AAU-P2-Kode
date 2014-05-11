@@ -7,7 +7,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              mc:Ignorable="d"
              xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-        Title="MembersListWindow" Height="500" Width="300" MaxWidth="300" MinWidth="300">
+        Title="Tildel ny båd" Height="500" Width="300" MaxWidth="300" MinWidth="300">
 
     <Grid>
         <Grid.RowDefinitions>
