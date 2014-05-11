@@ -10,22 +10,21 @@ namespace ARK.ViewModel.Protokolsystem.Pages
     class ViewLongTripFormViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        private List<LongTripForm> _lingTripForms;
+        private List<LongTripForm> _longTripForms;
 
         // Constructor
         public ViewLongTripFormViewModel()
         {
             var db = DbArkContext.GetDbContext();
 
-            ParentAttached += (sender, e) =>
-                _lingTripForms = db.LongTripForm.ToList();
+            LongTripForms = db.LongTripForm.ToList();
         }
 
         // Props
         public List<LongTripForm> LongTripForms
         {
-            get { return _lingTripForms; }
-            set { _lingTripForms = value; Notify(); }
+            get { return _longTripForms; }
+            set { _longTripForms = value; Notify(); }
         }
 
         public ICommand CreateLongTripForm
