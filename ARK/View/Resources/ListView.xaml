@@ -10,6 +10,10 @@
                 <Setter Property="Background" Value="White"></Setter>
             </Trigger>
         </Style.Triggers>
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Blue" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Blue" />
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

@@ -127,7 +127,7 @@
         </ListView>
 
         <!--Buttons-->
-        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,5,0,0">
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,5,0,0" LastChildFill="False">
             <Button x:Name="btnEndTrip"
                     DockPanel.Dock="Right"
         		    Command="{Binding EndTrip}"
@@ -149,9 +149,10 @@
             
             <Button x:Name="btnCustomDistance"
                     DockPanel.Dock="Right"
+                    Margin="0,0,3,0"
         		    Command="{Binding ToggleKeyboard}"
         		    Background="{StaticResource ChangeBG}"
-        		    BorderBrush="{StaticResource ChangeBorder}">
+        		    BorderBrush="{StaticResource ChangeBorder}" Width="148">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
                         <Style.Triggers>
