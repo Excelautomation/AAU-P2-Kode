@@ -17,6 +17,7 @@
     </UserControl.DataContext>
     
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <valueConverters:ListViewItemToOrdinalConverter x:Key="OrdinalConverter"/>
         <DataTemplate x:Key="GoldMedal">
             <Image Source="/View/images/medal_award_gold.png" Width="16" Height="16" HorizontalAlignment="Left"/>
@@ -171,9 +172,9 @@
                             <Run Text="{Binding Trip.TripEndedTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
 
-                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3">
+                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" Visibility="{Binding Path=Editable, Converter={StaticResource BoolToVis}}">
                             <CheckBox Style="{StaticResource ResourceKey=styleCheckBox}" IsChecked="{Binding Path=Editable, Mode=OneWay}"/>
-                            <TextBlock Text="Redigerbar" Style="{StaticResource ResourceKey=styleContent}" FontWeight="Bold"/>
+                            <TextBlock Text="Redigerbar" Style="{StaticResource ResourceKey=styleContent}" FontWeight="Bold" Foreground="#FF2A9900"/>
                         </StackPanel>
                             
                         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Right">

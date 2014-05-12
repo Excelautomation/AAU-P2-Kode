@@ -173,7 +173,7 @@
 
         <!--Direction-->
         <Border Name="Filters" Height="40" VerticalAlignment="Top" 
-                BorderBrush="#FF0D476C" BorderThickness="0,2,0,2" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Stretch"
+                BorderBrush="#FF999999" BorderThickness="0,2,0,2" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Stretch"
                 Margin="0,5,0,0">
             <DockPanel Background="#FFFBFBFB" LastChildFill="False">
                 <RadioButton DockPanel.Dock="Left" Width="Auto" Content="ØST" Margin="3,0,30,0" GroupName="{Binding Name, ElementName=Filters}"/>

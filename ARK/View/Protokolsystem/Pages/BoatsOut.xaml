@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:pages="clr-namespace:ARK.ViewModel.Protokolsystem.Pages"
-             d:DesignHeight="500" 
+             d:DesignHeight="500" d:DesignWidth="760"
              mc:Ignorable="d">
 
     <UserControl.DataContext>
