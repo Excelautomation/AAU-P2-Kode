@@ -15,6 +15,7 @@
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
+            
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -22,6 +23,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="10*"/>
+                
                 <RowDefinition Height="80*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -42,80 +44,200 @@
                 <Run Text="Bekræft venligst at nedenstående oplysninger er korrekte" FontSize="14"/>
             </Label>
 
+            <!--Kolonne 1-->
             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Run Text="BÅDENS OPLYSNINGER" FontSize="16"/>
-                </TextBlock>
+                <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Run Text="BÅDENS OPLYSNINGER" FontSize="16"/>
+                    </TextBlock>
 
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Navn:" FontWeight="Bold"/>
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Pladser:" FontWeight="Bold"/>
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Kategori:" FontWeight="Bold"/>
-                    </TextBlock>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text="Navn:" FontWeight="Bold"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text="Pladser:" FontWeight="Bold"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text="Kategori:" FontWeight="Bold"/>
+                        </TextBlock>
+                    </StackPanel>
 
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text=""/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text=""/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text=""/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <!--Afgang-->
+                <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Run Text="AFGANG" FontSize="16"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text="Tidspunkt:" FontWeight="Bold"/>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text=""/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <!--Hjemkomst-->
+                <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Run Text="HJEMKOMST" FontSize="16"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
-                    </TextBlock>
-                </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text="Tidspunkt:" FontWeight="Bold"/>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text=""/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
             </Grid>
 
+            <!--Kolonne 2-->
             <Grid Grid.Row="2" Grid.Column="1" Margin="10,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Run Text="TUR OPLYSNINGER" FontSize="16"/>
-                </TextBlock>
+                <!--Overnatningssteder-->
+                <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Retning:" FontWeight="Bold"/>
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Run Text="OVERNATNINGSSTEDER" FontSize="16"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Mørkets frembrud:" FontWeight="Bold"/>
-                    </TextBlock>
-                </StackPanel>
 
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" >
+                            <Run Text=""/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <!--Dagsdistancer-->
+                <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Run Text="DAGSDISTANCER" FontSize="16"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" >
+                            <Run Text=""/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <!--Dagsdistancer-->
+                <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2"
+                               HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Run Text="BESKRIVELSE AF LANGTUR" FontSize="16"/>
                     </TextBlock>
-                </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" >
+                            <Run Text=""/>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
             </Grid>
 
+            <!--Kolonne 3-->
             <Grid Grid.Row="2" Grid.Column="2" Margin="10,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
