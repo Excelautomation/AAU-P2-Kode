@@ -4,12 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="600">
     <UserControl.DataContext>
         <VM:FormsLongTripViewModel/>
     </UserControl.DataContext>
-
+    <UserControl.Resources>
+        <valueConverters:EnumToStringConverter x:Key="Status" Enum1="Afventer" Enum2="Godkendt" Enum3="Afvist"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -27,15 +30,18 @@
             <StackPanel Width="250" Margin="4">
                 <WrapPanel>
                     <TextBlock Text="Afrejse" Width="100"/>
-                    <TextBox Text="{Binding Path=LongDistanceForm.Departure, ConverterCulture='da-DK', StringFormat=d}"/>
+                    <TextBox Text="{Binding Path=LongDistanceForm.PlannedStartDate, ConverterCulture='da-DK', StringFormat=d}"/>
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Hjemkomst" Width="100"/>
-                    <TextBox Text="{Binding Path=LongDistanceForm.Arrival, ConverterCulture='da-DK', StringFormat=d}"/>
+                    <TextBox Text="{Binding Path=LongDistanceForm.PlannedEndDate, ConverterCulture='da-DK', StringFormat=d}"/>
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Ansvarlig" Width="100"/>
-                    <TextBlock Text="Et navn"/>
+                    <WrapPanel>
+                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=LongDistanceForm.ResponsibleMember.FirstName}"/>
+                        <TextBlock Text="{Binding Path=LongDistanceForm.ResponsibleMember.LastName}"/>
+                    </WrapPanel>
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Båd" Width="100"/>
@@ -43,15 +49,15 @@
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Oprettet" Width="100"/>
-                    <TextBlock Text="En dato"/>
+                    <TextBlock Text="{Binding Path=LongDistanceForm.FormCreated, ConverterCulture='da-DK', StringFormat=d}"/>
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Status" Width="100"/>
-                    <TextBlock Text="{Binding Path=LongDistanceForm.Status}"/>
+                    <TextBlock Text="{Binding Path=LongDistanceForm.Status, Converter={StaticResource Status}}"/>
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Distance per dag" Width="100"/>
-                    <TextBox/>
+                    <TextBox Text="{Binding Path=LongDistanceForm.DistancesPerDay}"/>
                 </WrapPanel>
                 <DockPanel>
                     <Label DockPanel.Dock="Top" Content="Turbeskrivelse"/>

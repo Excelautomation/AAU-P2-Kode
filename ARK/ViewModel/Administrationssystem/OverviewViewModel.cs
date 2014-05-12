@@ -135,7 +135,6 @@ namespace ARK.ViewModel.Administrationssystem
 
         private Boat _selectedBoat;
         private DamageForm _selectedDamageForm;
-
         private LongTripForm _selectedLongDistanceForm;
 
         public DamageForm SelectedDamageForm

@@ -10,6 +10,7 @@ namespace ARK.ViewModel.Administrationssystem
     {
         private LongTripForm _longDistanceForm;
         private bool _recentChange;
+        
 
         public bool RecentChange
         {
