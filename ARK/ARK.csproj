@@ -149,6 +149,7 @@
     <Compile Include="ViewModel\Protokolsystem\Additional\DistanceStatisticsAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\BeginTripAdditionalInfoViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\MembersinformationAdditionalInfoViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Confirmations\DamageFormConfirmViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Confirmations\CreateLongTripConfirmViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Confirmations\BeginTripBoatsConfirmViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Data\TripViewModel.cs" />
@@ -270,6 +271,9 @@
     </Compile>
     <Compile Include="View\Protokolsystem\Confirmations\AdminLogin.xaml.cs">
       <DependentUpon>AdminLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Protokolsystem\Confirmations\DamageFormConfirm.xaml.cs">
+      <DependentUpon>DamageFormConfirm.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Confirmations\CreateLongTripConfirm.xaml.cs">
       <DependentUpon>CreateLongTripConfirm.xaml</DependentUpon>
@@ -439,6 +443,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Protokolsystem\Confirmations\AdminLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Protokolsystem\Confirmations\DamageFormConfirm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
