@@ -128,14 +128,8 @@ namespace ARK.ViewModel.Administrationssystem
                     {
                         db.Trip.Attach(CurrentTrip);
                         CurrentTrip.Boat = e;
-                        db.SaveChanges();
                     }
-                    RecentSave = true;
-                    // Båd opdateres ikke i listview, men andre ændringer, som km sejlet gør. Meget mærkeligt.
-
-                    //Trip TempTrip = CurrentTrip;
-                    //TripsFiltered = db.Trip.ToList();
-                    //CurrentTrip = TempTrip;
+                    NotifyCustom("CurrentTrip");
                 });
             }
         }
@@ -144,9 +138,15 @@ namespace ARK.ViewModel.Administrationssystem
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(CurrentTrip).State = EntityState.Modified;
+                //db.Entry(CurrentTrip).State = EntityState.Modified; // Får bådudskiftning i ture til at fucke op.
                 db.SaveChanges();
             }
+            //Reload();
+
+            // Trigger notify - reset lists
+            var tmp = TripsFiltered;
+            TripsFiltered = null;
+            TripsFiltered = tmp;
 
             RecentSave = true;
         }
@@ -162,7 +162,7 @@ namespace ARK.ViewModel.Administrationssystem
             RecentSave = false;
 
             // Trigger notify - reset lists
-            IEnumerable<Trip> tmp = TripsFiltered;
+            var tmp = TripsFiltered;
             TripsFiltered = null;
             TripsFiltered = tmp;
 

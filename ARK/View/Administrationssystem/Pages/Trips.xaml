@@ -48,7 +48,7 @@
             <Grid Margin="0,0,5,5">
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <DockPanel>
-                        <ListView x:Name="TripList" ItemsSource="{Binding Path=TripsFiltered, Mode=TwoWay}" SelectedItem="{Binding Path=CurrentTrip}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
+                        <ListView x:Name="TripList" ItemsSource="{Binding Path=TripsFiltered}" SelectedItem="{Binding Path=CurrentTrip, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="350">
