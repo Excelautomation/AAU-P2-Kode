@@ -164,8 +164,10 @@
                                             </ComboBox>
 
                                         </Grid>
-
-                                        <Button Grid.Row="2" Padding="3" HorizontalAlignment="Center" Content="Gem ændringer" FontSize="18" Command="{Binding Path=SaveChanges}"/>
+                                        <DockPanel Grid.Row="2" >
+                                            <Button Padding="3" HorizontalAlignment="Left" Content="Gem ændringer" FontSize="18" Command="{Binding Path=SaveChanges}"/>
+                                            <Button Padding="3" HorizontalAlignment="Right" Content="Annullér ændringer" FontSize="18" Command="{Binding Path=CancelChanges}"/>
+                                        </DockPanel>
 
                                         <TextBlock FontSize="16" Margin="8,10,0,0" VerticalAlignment="Center" Grid.Row="3" Grid.ColumnSpan="3" >
                                             <TextBlock.Style>

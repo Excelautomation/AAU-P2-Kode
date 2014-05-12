@@ -19,9 +19,14 @@ namespace ARK.ViewModel.Administrationssystem
         public BoatListWindow NewBoatDialog;
         private List<Boat> _allBoats;
         private Trip _currentTrip;
+        //private Trip _localTrip;
+        
+
         private bool _recentSave;
         private List<Trip> _trips;
         private IEnumerable<Trip> _tripsFiltered;
+
+        
 
         public TripsViewModel()
         {
@@ -35,8 +40,16 @@ namespace ARK.ViewModel.Administrationssystem
                         .ToList();
 
                     _allBoats = db.Boat.ToList();
+
+                    if (_trips.Count != 0)
+                    {
+                        CurrentTrip = _trips[0];
+                        //LocalTrip = CurrentTrip;
+                    }
                 }
 
+
+                
                 // Reset filter
                 ResetFilter();
             };
@@ -45,6 +58,8 @@ namespace ARK.ViewModel.Administrationssystem
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
+
+
         }
 
         public IEnumerable<Trip> TripsFiltered
@@ -77,6 +92,12 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        //public Trip LocalTrip
+        //{
+        //    get { return _localTrip; }
+        //    set { _localTrip = value; Notify(); }
+        //}
+
         public bool RecentSave
         {
             get { return _recentSave; }
@@ -94,6 +115,7 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<Trip>(e =>
                 {
                     CurrentTrip = e;
+                    //LocalTrip = CurrentTrip;
                     RecentSave = false;
                 });
             }
@@ -101,8 +123,22 @@ namespace ARK.ViewModel.Administrationssystem
 
         public ICommand SaveChanges
         {
-            get { return GetCommand<object>(e => Save()); }
+            get 
+            {
+                //CurrentTrip = LocalTrip;
+                return GetCommand<object>(e => Save()); 
+            }
         }
+
+        public ICommand CancelChanges
+        {
+            get
+            {
+                
+                return GetCommand<object>(e => Reload());
+            }
+        }
+
 
         public ICommand ShowBoatDialog
         {
@@ -129,6 +165,7 @@ namespace ARK.ViewModel.Administrationssystem
                         db.Trip.Attach(CurrentTrip);
                         CurrentTrip.Boat = e;
                     }
+                    CurrentTrip.Boat = e;
                     NotifyCustom("CurrentTrip");
                 });
             }
@@ -138,17 +175,22 @@ namespace ARK.ViewModel.Administrationssystem
         {
             using (var db = new DbArkContext())
             {
-                //db.Entry(CurrentTrip).State = EntityState.Modified; // Får bådudskiftning i ture til at fucke op.
+                db.Entry(CurrentTrip).State = EntityState.Modified; // Får bådudskiftning i ture til at fucke op.
                 db.SaveChanges();
             }
             //Reload();
 
             // Trigger notify - reset lists
+            UpdateList<Trip>(TripsFiltered);
+
+            RecentSave = true;
+        }
+
+        public void UpdateList<T>(IEnumerable<T> list)
+        {
             var tmp = TripsFiltered;
             TripsFiltered = null;
             TripsFiltered = tmp;
-
-            RecentSave = true;
         }
 
         private void Reload()
@@ -162,9 +204,7 @@ namespace ARK.ViewModel.Administrationssystem
             RecentSave = false;
 
             // Trigger notify - reset lists
-            var tmp = TripsFiltered;
-            TripsFiltered = null;
-            TripsFiltered = tmp;
+            UpdateList<Trip>(TripsFiltered);
 
             NotifyCustom("CurrentTrip");
         }
