@@ -25,6 +25,7 @@ namespace ARK.ViewModel.Administrationssystem
         private IEnumerable<LongTripForm> _longTripForms;
         private List<LongTripForm> _longTripFormsNonFiltered;
         private int _selectedIndexDamageForms;
+        private int _selectedIndexLongDistanceForms;
         private int _selectedTabIndex;
 
         public FormsViewModel()
@@ -40,6 +41,7 @@ namespace ARK.ViewModel.Administrationssystem
                     _damageFormsNonFiltered = db.DamageForm
                         .Include(form => form.RegisteringMember)
                         .Include(form => form.Boat)
+                        .OrderBy(form => form.Closed)
                         .ToList();
 
                     _longTripFormsNonFiltered = db.LongTripForm
@@ -52,7 +54,12 @@ namespace ARK.ViewModel.Administrationssystem
                 ResetFilter();
 
                 // Set selected tab index to 0 - damage
-                SelectedTabIndex = 0;
+                if (DamageForms.Any())
+                {
+                    SelectedTabIndex = 0;
+                    SelectedIndexDamageForms = 0;
+                    GoToDamageForm(DamageForms.First());
+                }
             };
 
             // Setup filter
@@ -64,7 +71,7 @@ namespace ARK.ViewModel.Administrationssystem
         public IEnumerable<DamageForm> DamageForms
         {
             get { return _damageForms; }
-            private set
+            set
             {
                 _damageForms = value;
                 Notify();
@@ -74,7 +81,7 @@ namespace ARK.ViewModel.Administrationssystem
         public IEnumerable<LongTripForm> LongDistanceForms
         {
             get { return _longTripForms; }
-            private set
+            set
             {
                 _longTripForms = value;
                 Notify();
@@ -93,17 +100,64 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     case 0:
                         DamageForm = true;
+                        if (DamageForms.Any())
+                        {
+                            DamageForm df = DamageForms.First();
+                            NavigateToPage(() => new FormsDamage(), df.Description); // Hvorfor er det nødvendigt at Description bliver sendt med? -Martin
+
+                            // Sæt damageform
+                            var vm = CurrentPage.DataContext as FormsDamageViewModel;
+                            if (vm != null)
+                                vm.DamageForm = df;
+
+                            //SelectedIndexDamageForms = 0;
+                        }
                         var templdf = LongDistanceForms;
                         LongDistanceForms = null;
                         LongDistanceForms = templdf;
                         break;
                     case 1:
                         DamageForm = false;
+
+                        if (LongDistanceForms.Any())
+                        {
+                            LongTripForm ldf = LongDistanceForms.First();
+                            NavigateToPage(() => new FormsLongTrip(), ldf.TourDescription); // Hvorfor er det nødvendigt at Description bliver sendt med? -Martin
+
+                            // Sæt damageform
+                            var vm = CurrentPage.DataContext as FormsLongTripViewModel;
+                            if (vm != null)
+                                vm.LongDistanceForm = ldf;
+
+                            //SelectedIndexLongDistanceForms = 0;
+                        }
+
+                        //GoToLongDistanceForm(LongDistanceForms.First());
                         var tempdmf = DamageForms;
                         DamageForms = null;
                         DamageForms = tempdmf;
                         break;
                 }
+            }
+        }
+
+        public int SelectedIndexLongDistanceForms
+        {
+            get { return _selectedIndexLongDistanceForms; }
+            set
+            {
+                _selectedIndexLongDistanceForms = value;
+                Notify();
+            }
+        }
+
+        public int SelectedIndexDamageForms
+        {
+            get { return _selectedIndexDamageForms; }
+            set
+            {
+                _selectedIndexDamageForms = value;
+                Notify();
             }
         }
 
@@ -136,15 +190,7 @@ namespace ARK.ViewModel.Administrationssystem
 
         #region Commands
 
-        public int SelectedIndexDamageForms
-        {
-            get { return _selectedIndexDamageForms; }
-            set
-            {
-                _selectedIndexDamageForms = value;
-                Notify();
-            }
-        }
+
 
         public ICommand SelectDamageFormCommand
         {

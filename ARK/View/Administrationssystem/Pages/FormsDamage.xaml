@@ -13,6 +13,7 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <valueConverters:BoolToStringConverter x:Key="Funktionel" FalseValue="Nej" TrueValue="Ja" />
+        <valueConverters:BoolToStringConverter x:Key="Status" FalseValue="Åben" TrueValue="Lukket" />
     </UserControl.Resources>
     <StackPanel>
         
@@ -49,14 +50,16 @@
                         <TextBlock Text="{Binding Path=DamageForm.Type}"/>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Funktionalitet" Width="100"/>
-                        <TextBlock/>
+                        <TextBlock Text="Funktionel" Width="100"/>
+                        <TextBlock Text="{Binding Path=DamageForm.Functional, Converter={StaticResource Funktionel}}"/>
                     </WrapPanel>
                     <WrapPanel>
                         <TextBlock Text="Status" Width="100"/>
-                        <TextBlock>
-                            <TextBlock.Style>
+                        <TextBlock Text="{Binding Path=DamageForm.Closed, Converter={StaticResource Status}}">
+                             <!--<TextBlock.Style>
                                 <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Åben"/>
+                                    <Setter Property="Foreground" Value="Green"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Path=DamageForm.Closed, UpdateSourceTrigger=PropertyChanged}" Value="true">
                                             <Setter Property="Text" Value="Lukket"/>
@@ -64,7 +67,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </TextBlock.Style>
+                            </TextBlock.Style>-->
                         </TextBlock>
                     </WrapPanel>
                 </StackPanel>
@@ -80,22 +83,22 @@
             </WrapPanel>
 
             <WrapPanel Grid.Row="2" Margin="4" HorizontalAlignment="Center">
-                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=DeactivateBåd}">
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=OpenDamageForm}">
                     <StackPanel Margin="4">
                         <WrapPanel HorizontalAlignment="Center">
                             <Image Source="../../images/application_side_list_red.png" Height="32"/>
                             <Image Source="../../images/add.png" Height="32"/>
                         </WrapPanel>
-                        <Label Content="Genopret skadesblanket"/>
+                        <Label Content="Åben skadesblanket"/>
                     </StackPanel>
                 </Button>
-                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=AktiverBåd}">
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=CloseDamageForm}">
                     <StackPanel Margin="4">
                         <WrapPanel HorizontalAlignment="Center">
                             <Image Source="../../images/application_side_list_red.png" Height="32"/>
                             <Image Source="../../images/delete.png" Height="32"/>
                         </WrapPanel>
-                        <Label Content="Deaktiver skadesblanket"/>
+                        <Label Content="Luk skadesblanket"/>
                     </StackPanel>
                 </Button>
             </WrapPanel>

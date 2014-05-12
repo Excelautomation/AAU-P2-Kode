@@ -43,12 +43,15 @@
                         </WrapPanel>
                     </TabItem.Header>
                     <DockPanel>
-                        <ListView Margin="10" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single">
+                        <ListView Margin="10" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Path=Closed}" Value="True">
                                             <Setter Property="Background" Value="#FFDEDE"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Closed}" Value="false">
+                                            <Setter Property="Background" Value="White"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -97,7 +100,7 @@
                     </TabItem.Header>
                     <DockPanel>
                         
-                        <ListView Margin="10" Name="LongDistanceListView" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
+                        <ListView Margin="10" Name="LongDistanceListView" SelectedIndex="{Binding Path=SelectedIndexLongDistanceForms}" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
 
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">

@@ -36,32 +36,32 @@ namespace ARK.ViewModel.Administrationssystem
             get { return GetCommand<object>(e => Save()); }
         }
 
-        public ICommand DeactivateBåd
+        public ICommand CloseDamageForm
         {
             get
             {
                 return GetCommand<object>(e =>
                 {
-                    DamageForm.Boat.Active = false;
+                    DamageForm.Closed = true;
 
                     Save();
-                    // DamageformIndex = 0 // så den næste damageform vælges, men dette kan kun gøres når/hvis den nuværende damageform forsvinder fra listen.
-                    // Det skal helst være sådan at closed damageforms ikke vises i listen, medmindre det er valgt. Så denne knap skal også få den pågænldende damageform til at forsvinde i listen.
                 });
             }
         }
 
-        public ICommand ActivateBåd
+        public ICommand OpenDamageForm
         {
             get
             {
                 return GetCommand<object>(e =>
                 {
-                    DamageForm.Boat.Active = true;
-
+                    DamageForm.Closed = false;
                     Save();
-                    // DamageformIndex = 0 // så den næste damageform vælges, men dette kan kun gøres når/hvis den nuværende damageform forsvinder fra listen.
-                    // Det skal helst være sådan at closed damageforms ikke vises i listen, medmindre det er valgt. Så denne knap skal også få den pågænldende damageform til at forsvinde i listen.
+
+                    var vm = (FormsViewModel)Parent;
+                    var tempdmf2 = vm.DamageForms;
+                    vm.DamageForms = null;
+                    vm.DamageForms = tempdmf2;
                 });
             }
         }
@@ -73,10 +73,12 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand<object>(e =>
                 {
                     DamageForm.Closed = true;
-
                     Save();
-                    // DamageformIndex = 0 // så den næste damageform vælges, men dette kan kun gøres når/hvis den nuværende damageform forsvinder fra listen.
-                    // Det skal helst være sådan at closed damageforms ikke vises i listen, medmindre det er valgt. Så denne knap skal også få den pågænldende damageform til at forsvinde i listen.
+
+                    var vm = (FormsViewModel)Parent;
+                    var tempdmf2 = vm.DamageForms;
+                    vm.DamageForms = null;
+                    vm.DamageForms = tempdmf2;
                 });
             }
         }
