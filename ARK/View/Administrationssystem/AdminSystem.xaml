@@ -254,7 +254,7 @@
                             <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=KeyboardToggled}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png"></Setter>
+                                        <!--<Setter Property="Source" Value="/View/images/keyboard_delete.png"></Setter>-->
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=KeyboardToggled}" Value="False">
                                         <Setter Property="Source" Value="/View/images/keyboard.png"></Setter>
