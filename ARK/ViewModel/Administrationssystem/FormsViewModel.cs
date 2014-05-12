@@ -93,9 +93,15 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     case 0:
                         DamageForm = true;
+                        var templdf = LongDistanceForms;
+                        LongDistanceForms = null;
+                        LongDistanceForms = templdf;
                         break;
                     case 1:
                         DamageForm = false;
+                        var tempdmf = DamageForms;
+                        DamageForms = null;
+                        DamageForms = tempdmf;
                         break;
                 }
             }
