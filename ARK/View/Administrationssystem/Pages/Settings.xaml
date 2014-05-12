@@ -152,7 +152,7 @@
 
                             <DockPanel Grid.Column="0" Margin="4">
                                 <Button Padding="5" Command="{Binding Path=CreateDamageType}" Margin="4" DockPanel.Dock="Top" Width="200" Content="Opret ny skadetype"/>
-                                <ListView VerticalAlignment="Stretch" x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
+                                <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
                                           ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedDamageType}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -274,7 +274,7 @@
 
                             <DockPanel Grid.Column="0" Margin="4">
                                 <Button Padding="5" Command="{Binding Path=CreateStandardTrip}" Margin="4" DockPanel.Dock="Top" Width="220" Content="Opret ny standardtur"/>
-                                <ListView VerticalAlignment="Stretch" x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
+                                <ListView x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
                                           ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedStandardTrip}" SelectedItem="{Binding Path=CurrentStandardTrip}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -400,8 +400,8 @@
 
                             <DockPanel Grid.Column="0" Margin="4">
                                 <Button Padding="5" Command="{Binding Path=CreateAdmin}" Margin="4" DockPanel.Dock="Top" Width="240" Content="Opret ny administrator"/>
-                                <ListView VerticalAlignment="Stretch" x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" IsSynchronizedWithCurrentItem="True"
-                                          ItemsSource="{Binding Path=Admins}" SelectedIndex="{Binding Path=SelectedListItemAdmins}">
+                                <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" IsSynchronizedWithCurrentItem="True"
+                                          ItemsSource="{Binding Path=Admins}" SelectedIndex="{Binding Path=SelectedAdmin}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Margin="0,2,0,2">
@@ -424,47 +424,47 @@
                             <StackPanel Grid.Column="2" Margin="4">
 
                                 <Label FontStyle="Italic" HorizontalAlignment="Center" Margin="4" Content="Detaljer om valgte administrator"/>
-                                <Border Margin="4" CornerRadius="15" Background="#EEEEEE" Padding="15" HorizontalAlignment="Left">
-                                    
+                                <Border Margin="4,4,0,4" CornerRadius="15" Background="#EEEEEE" Padding="15" HorizontalAlignment="Left">
+
                                     <StackPanel Width="auto">
                                         <WrapPanel>
                                             <Label Width="150" Margin="4" Content="Brugernavn:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Username}"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Username}"/>
                                         </WrapPanel>
                                         <WrapPanel>
                                             <Label Width="150" Margin="4" Content="Medlemsnr.:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Member.Id}"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Member.Id}"/>
                                         </WrapPanel>
                                         <WrapPanel>
                                             <Label Width="150" Margin="4" Content="E-mail:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Member.Email1}"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Member.Email1}"/>
                                         </WrapPanel>
                                         <WrapPanel>
                                             <Label Width="150" Margin="4" Content="Telefon:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding Path=CurrentAdmin.Member.Phone}"/>
+                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Member.Phone}"/>
                                         </WrapPanel>
                                         <WrapPanel>
                                             <Label Width="150" Margin="4" Content="Kontakt ved:"/>
-                                            <StackPanel Width="320" Margin="4">
+                                            <StackPanel Width="320">
                                                 <WrapPanel HorizontalAlignment="Left">
                                                     <Label Margin="4" Content="Langtursblanketter"/>
-                                                    <CheckBox Margin="4" IsChecked="{Binding Path=CurrentAdmin.ContactTrip}" VerticalAlignment="Center"/>
+                                                    <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactTrip}" VerticalAlignment="Center"/>
                                                 </WrapPanel>
                                                 <WrapPanel HorizontalAlignment="Left">
                                                     <Label Margin="4" Content="Mørkets frembrud"/>
-                                                    <CheckBox Margin="4" IsChecked="{Binding Path=CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
+                                                    <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
                                                 </WrapPanel>
                                             </StackPanel>
                                         </WrapPanel>
 
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}">
-                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesAdmins}"/>
-                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesAdmins}"/>
+                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding SaveChangesAdmins}"/>
+                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding CancelChangesAdmins}"/>
                                             <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet administrator" Command="{Binding Path=DeleteAdmin}" HorizontalAlignment="Right"/>
                                         </DockPanel>
-                                        
+
                                     </StackPanel>
-                                    
+
                                 </Border>
 
                                 <WrapPanel Margin="4">
@@ -490,6 +490,10 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Source" Value="/View/images/delete.png"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                        <Setter Property="Source" Value="/View/images/error.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -522,6 +526,11 @@
                                                     <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                         <Setter Property="Text" Value="administrator slettet"/>
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                        <Setter Property="Text" Value="{Binding Path=ErrorAdmin}"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
