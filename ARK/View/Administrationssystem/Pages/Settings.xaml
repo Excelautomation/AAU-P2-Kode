@@ -261,7 +261,6 @@
                     </DockPanel>
                 </TabItem>
 
-
                 <TabItem Header="  Standardture  " FontSize="20">
                     <DockPanel HorizontalAlignment="Center" Margin="10">
                         <Grid>

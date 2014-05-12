@@ -36,7 +36,7 @@ namespace ARK.ViewModel.Administrationssystem
                 Members = new ObservableCollection<Member>(_db.Member.OrderBy(e => e.FirstName));
             }
 
-            // Initialise the selected items in the respective lists.
+            // Initialize the selected items in the respective lists.
             if (Admins.Any())
             {
                 SelectedAdmin = 0;
@@ -568,7 +568,7 @@ namespace ARK.ViewModel.Administrationssystem
                     }
 
                     // Refresh from database, reselect the previously selected admin and give feedback
-                    Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+                    Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(m => m.Member.FirstName));
                     SelectedAdmin = tempindex;
                     FeedbackAdmin = Feedback.Save;
                 });
