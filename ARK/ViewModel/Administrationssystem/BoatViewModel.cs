@@ -10,6 +10,7 @@ using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using System;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -18,6 +19,7 @@ namespace ARK.ViewModel.Administrationssystem
         private IEnumerable<Boat> _boats;
         private List<Boat> _boatsNonFiltered;
         private Boat _currentBoat;
+        private Member _mostUsingMember;
 
         private FrameworkElement _filter;
         private bool _recentCancel;
@@ -32,8 +34,7 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     _boatsNonFiltered = db.Boat
                         .Include(boat => boat.DamageForms)
-                        .Include(boat => boat.Trips)
-                        .ToList();
+                        .Include("Trips.Members").ToList();
                 }
 
                 // Nulstil filter
@@ -62,6 +63,12 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        public Member MostUsingMember
+        {
+            get { return _mostUsingMember; }
+            set { _mostUsingMember = value; Notify(); }
+        }
+
         public void OpenBoat(Boat boat)
         {
             CurrentBoat = Boats.First(b => b.Id == boat.Id);
@@ -76,6 +83,12 @@ namespace ARK.ViewModel.Administrationssystem
                     Reload();
 
                 _currentBoat = value;
+
+                if (_currentBoat != null)
+                    MostUsingMember = MostUsingMemberFunc();
+                else
+                    MostUsingMember = null;
+
                 RecentSave = false;
                 RecentCancel = false;
                 Notify();
@@ -186,8 +199,8 @@ namespace ARK.ViewModel.Administrationssystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.Filter(args.SearchEventArgs.SearchText)
-                    select boat;
+                        where boat.Filter(args.SearchEventArgs.SearchText)
+                        select boat;
             }
         }
 
@@ -196,6 +209,30 @@ namespace ARK.ViewModel.Administrationssystem
         public FrameworkElement Filter
         {
             get { return _filter ?? (_filter = new BoatsFilter()); }
+        }
+
+        public Member MostUsingMemberFunc()
+        {
+            if (CurrentBoat.Trips.Count == 0)
+                return null;
+            else
+            {
+                var m3 = from member in CurrentBoat.Trips
+                                       .SelectMany(trip => trip.Members)
+                                       .Distinct()
+                             select member;
+                var o = CurrentBoat.Trips
+                                .SelectMany(trip => trip.Members)
+                                .Count(m2 => m2 == m3);
+
+                return (from member in CurrentBoat.Trips
+                                       .SelectMany(trip => trip.Members)
+                                       .Distinct()
+                        orderby CurrentBoat.Trips
+                                .SelectMany(trip => trip.Members)
+                                .Count(m => m == member) descending
+                        select member).First();
+            }
         }
     }
 }
