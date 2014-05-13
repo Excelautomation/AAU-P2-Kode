@@ -10,7 +10,7 @@
     
     <Style x:Key="styleCheckBox" TargetType="CheckBox">
         <Setter Property="FontFamily" Value="Calibri"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="15"/>
     </Style>
     
     <!-- Search - http://davidowens.wordpress.com/2009/02/18/wpf-search-text-box/ -->
