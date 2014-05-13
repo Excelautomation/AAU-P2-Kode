@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              d:DesignHeight="500"
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
-             xmlns:pages="clr-namespace:ARK.ViewModel.Protokolsystem.Pages">
+             xmlns:pages="clr-namespace:ARK.ViewModel.Protokolsystem.Pages"
+             xmlns:behaviours="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding">
 
     <UserControl.DataContext>
         <pages:CreateLongTripViewModel x:Name="ViewModel" />
@@ -101,6 +102,7 @@
         <ListView ItemsSource="{Binding Path=MembersFiltered}" 
                   Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" 
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  behaviours:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"
                   SelectionMode="Multiple" Width="Auto" Margin="5,0,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>

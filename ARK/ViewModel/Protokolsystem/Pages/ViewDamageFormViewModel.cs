@@ -92,7 +92,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             Info.SelectedDamageForm = SelectedDamageForm;
 
-            
+
             ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
     }

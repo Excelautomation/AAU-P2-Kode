@@ -121,9 +121,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             set
             {
                 if (_selectedBoat == value || // Nothing changed - silently discard - STACKOVERFLOW IF NOT DISCARDED (Keyboard chaning LV)
-                    value == null)
+                    value == null) 
                     return;
-
+                
                 _selectedBoat = value;
 
                 ProtocolSystem.KeyboardClear();
@@ -166,45 +166,45 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return new RelayCommand(
                     x =>
+                {
+                    var trip = new Trip
                     {
-                        var trip = new Trip
-                        {
-                            Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
-                            TripStartTime = DateTime.Now,
-                            Members = new List<Member>(),
-                            BoatId = SelectedBoat.Id
-                        };
+                        Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
+                        TripStartTime = DateTime.Now,
+                        Members = new List<Member>(),
+                        BoatId = SelectedBoat.Id
+                    };
 
-                        // Add selected members to trip
-                        foreach (var m in SelectedMembers.Select(member => member.Member))
+                    // Add selected members to trip
+                    foreach (var m in SelectedMembers.Select(member => member.Member))
+                    {
+                        if (m.Id == -1)
                         {
-                            if (m.Id == -1)
-                            {
-                                //-1 is a blank spot => Do nothing
-                            }
-                            else if (m.Id == -2)
-                            {
-                                //-2 is a guest => Increment the crew count, but don't add the member to the member list
-                                trip.CrewCount++;
-                            }
-                            else
-                            {
-                                //Add the member reference and increment the crew count
-                                trip.Members.Add(m);
-                                trip.CrewCount++;
-                            }
+                            //-1 is a blank spot => Do nothing
                         }
+                        else if (m.Id == -2)
+                        {
+                            //-2 is a guest => Increment the crew count, but don't add the member to the member list
+                            trip.CrewCount++;
+                        }
+                        else
+                        {
+                            //Add the member reference and increment the crew count
+                            trip.Members.Add(m);
+                            trip.CrewCount++;
+                        }
+                    }
 
-                        trip.LongTrip = LongTrip;
-                        trip.Direction = Direction;
+                    trip.LongTrip = LongTrip;
+                    trip.Direction = Direction;
 
-                        _db.Trip.Add(trip);
-                        _db.SaveChanges();
+                    _db.Trip.Add(trip);
+                    _db.SaveChanges();
 
-                        var mainViewModel = Parent as ProtocolSystemMainViewModel;
-                        mainViewModel.UpdateNumBoatsOut();
+                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
+                    mainViewModel.UpdateNumBoatsOut();
 
-                        ResetData();
+                    ResetData();
                     },
                     x =>
                         this.SelectedBoat != null && this.SelectedMembers.Count == this.SelectedBoat.NumberofSeats &&
@@ -238,7 +238,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     }
                 });
             }
-        }
+                    }
 
         public ICommand DirectionSelected
         {
@@ -276,7 +276,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void UpdateInfo()
         {
-            Info.SelectedBoat = new ObservableCollection<Boat> { SelectedBoat };
+            Info.SelectedBoat = SelectedBoat;
             Info.SelectedMembers = SelectedMembers;
 
             ProtocolSystem.ChangeInfo(InfoPage, Info);
@@ -315,8 +315,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                        where boat.Filter(args.SearchEventArgs.SearchText)
-                        select boat;
+                    where boat.Filter(args.SearchEventArgs.SearchText)
+                    select boat;
 
                 foreach (
                     MemberViewModel member in
