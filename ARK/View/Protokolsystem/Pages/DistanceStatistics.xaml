@@ -116,7 +116,7 @@
                 <DataTemplate>
                     <DockPanel>
                         
-                        <Label Width="45" Style="{StaticResource imgMedal}"/>
+                        <!--Label Width="45" Style="{StaticResource imgMedal}"/-->
                         
                         <TextBlock Width="250" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Path=Member.FirstName}" FontWeight="Normal"/>
