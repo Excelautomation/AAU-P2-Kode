@@ -225,7 +225,8 @@ namespace ARK.ViewModel.Administrationssystem
             else
             {
                 var members = _trips
-                    .Where(trip => trip.Boat == CurrentBoat);
+                    .Where(trip => trip.Boat.Id == CurrentBoat.Id)
+                    .SelectMany(trip => trip.Members);
 
                 var m3 = CurrentBoat.Trips.SelectMany(trip => trip.Members);
 
