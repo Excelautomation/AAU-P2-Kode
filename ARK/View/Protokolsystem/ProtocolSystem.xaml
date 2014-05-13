@@ -95,6 +95,7 @@
                         Width="Auto" Height="90">
                     <TextBlock Text="AFSLUT&#xA;ROTUR" />
                 </Button>
+
             </Grid>
 
             <!--BOATS OUT, STATISTICS & MEMBERINFORMATION-->
