@@ -78,7 +78,7 @@
                                     <Style TargetType="Run">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Functional}" Value="True">
-                                                <Setter Property="Foreground" Value="OrangeRed"/>
+                                                <Setter Property="Foreground" Value="Orange"/>
                                                 <Setter Property="Text" Value="Anvendelig"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Functional}" Value="False">
