@@ -126,7 +126,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="HelperFunctions\HelperFunctions.cs" />
+    <Compile Include="HelperFunctions\CloneFunctions.cs" />
+    <Compile Include="HelperFunctions\InputValidation.cs" />
     <Compile Include="HelperFunctions\RelayCommand.cs" />
     <Compile Include="HelperFunctions\SMSGateway\ISMSGateway.cs" />
     <Compile Include="HelperFunctions\SMSGateway\SmsWarnings.cs" />

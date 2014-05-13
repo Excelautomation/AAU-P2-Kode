@@ -20,7 +20,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <valueConverters:ListViewItemToOrdinalConverter x:Key="OrdinalConverter"/>
         <DataTemplate x:Key="GoldMedal">
-            <Image Source="/View/images/medal_award_gold.png" Width="16" Height="16" HorizontalAlignment="Left"/>
+            
         </DataTemplate>
         <DataTemplate x:Key="SilverMedal">
             <Image Source="/View/images/medal_award_Silver.png" Width="16" Height="16" HorizontalAlignment="Left"/>
@@ -31,16 +31,15 @@
         <DataTemplate x:Key="NoMedal">
             <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}" 
                        Margin="0,-5,0,0"
-                       Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TypeName=ListViewItem}},
-                       Converter={StaticResource ResourceKey=OrdinalConverter}}" HorizontalAlignment="Left"/>
+                       Text="{Binding Position}" HorizontalAlignment="Left"/>
         </DataTemplate>
         <Style x:Key="imgMedal" TargetType="Label">
             <Setter Property="ContentTemplate" Value="{StaticResource NoMedal}"/>
-            <Style.Triggers>
+            <!--<Style.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsLoaded}" Value="True"/>
-                        <!--<Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="0"/>-->
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="0"/>
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
                         <Setter Property="ContentTemplate" Value="{StaticResource GoldMedal}"/>
@@ -52,7 +51,7 @@
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="2">
                     <Setter Property="ContentTemplate" Value="{StaticResource BronzeMedal}"/>
                 </DataTrigger>
-            </Style.Triggers>
+            </Style.Triggers>-->
         </Style>
 
         <Style x:Key="styleContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
@@ -274,21 +273,9 @@
         
             <Button x:Name="btnCustomDistance" 
                     DockPanel.Dock="Right" 
-            	    Command="{Binding ToggleKeyboard}"
+            	    Command="{Binding ChangeDistance}"
             	    Background="{StaticResource ChangeBG}"
             	    BorderBrush="{StaticResource ChangeBorder}">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
-                        <Setter Property="IsEnabled" Value="False"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=SelectedTrip.Editable}" Value="true">
-                                <DataTrigger.Setters>
-                                    <Setter Property="IsEnabled" Value="True"/>
-                                </DataTrigger.Setters>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
