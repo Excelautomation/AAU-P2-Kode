@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ARK.HelperFunctions;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
@@ -120,9 +121,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             set
             {
                 if (_selectedBoat == value || // Nothing changed - silently discard - STACKOVERFLOW IF NOT DISCARDED (Keyboard chaning LV)
-                    value == null) 
+                    value == null)
                     return;
-                
+
                 _selectedBoat = value;
 
                 ProtocolSystem.KeyboardClear();
@@ -152,7 +153,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         public ObservableCollection<MemberViewModel> SelectedMembers
         {
             get { return _selectedMembers; }
-            set { _selectedMembers = value;
+            set
+            {
+                _selectedMembers = value;
                 Notify();
             }
         }
@@ -161,51 +164,55 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(x =>
-                {
-                    var trip = new Trip
+                return new RelayCommand(
+                    x =>
                     {
-                        Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
-                        TripStartTime = DateTime.Now,
-                        Members = new List<Member>(),
-                        BoatId = SelectedBoat.Id
-                    };
-
-                    // Add selected members to trip
-                    foreach (var m in SelectedMembers.Select(member => member.Member))
-                    {
-                        if (m.Id == -1)
+                        var trip = new Trip
                         {
-                            //-1 is a blank spot => Do nothing
-                        }
-                        else if (m.Id == -2)
+                            Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
+                            TripStartTime = DateTime.Now,
+                            Members = new List<Member>(),
+                            BoatId = SelectedBoat.Id
+                        };
+
+                        // Add selected members to trip
+                        foreach (var m in SelectedMembers.Select(member => member.Member))
                         {
-                            //-2 is a guest => Increment the crew count, but don't add the member to the member list
-                            trip.CrewCount++;
+                            if (m.Id == -1)
+                            {
+                                //-1 is a blank spot => Do nothing
+                            }
+                            else if (m.Id == -2)
+                            {
+                                //-2 is a guest => Increment the crew count, but don't add the member to the member list
+                                trip.CrewCount++;
+                            }
+                            else
+                            {
+                                //Add the member reference and increment the crew count
+                                trip.Members.Add(m);
+                                trip.CrewCount++;
+                            }
                         }
-                        else
-                        {
-                            //Add the member reference and increment the crew count
-                            trip.Members.Add(m);
-                            trip.CrewCount++;
-                        }
-                    }
 
-                    trip.LongTrip = LongTrip;
-                    trip.Direction = Direction;
+                        trip.LongTrip = LongTrip;
+                        trip.Direction = Direction;
 
-                    _db.Trip.Add(trip);
-                    _db.SaveChanges();
+                        _db.Trip.Add(trip);
+                        _db.SaveChanges();
 
-                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
-                    mainViewModel.UpdateNumBoatsOut();
+                        var mainViewModel = Parent as ProtocolSystemMainViewModel;
+                        mainViewModel.UpdateNumBoatsOut();
 
-                    ResetData();
-                });
+                        ResetData();
+                    },
+                    x =>
+                        this.SelectedBoat != null && this.SelectedMembers.Count == this.SelectedBoat.NumberofSeats &&
+                        this.Direction != null);
             }
         }
 
-        public ICommand AddBlanc
+        public ICommand AddBlank
         {
             get
             {
@@ -227,8 +234,20 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 {
                     if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
                     {
-                        SelectedMembers.Add(new MemberViewModel(new Member() {Id = -2, FirstName = "Gæst"}));
+                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -2, FirstName = "Gæst" }));
                     }
+                });
+            }
+        }
+
+        public ICommand DirectionSelected
+        {
+            get
+            {
+                return new RelayCommand(x =>
+                {
+                    var temp = x as string;
+                    this.Direction = temp;
                 });
             }
         }
@@ -257,7 +276,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void UpdateInfo()
         {
-            Info.SelectedBoat = new ObservableCollection<Boat> {SelectedBoat};
+            Info.SelectedBoat = new ObservableCollection<Boat> { SelectedBoat };
             Info.SelectedMembers = SelectedMembers;
 
             ProtocolSystem.ChangeInfo(InfoPage, Info);
@@ -296,8 +315,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.Filter(args.SearchEventArgs.SearchText)
-                    select boat;
+                        where boat.Filter(args.SearchEventArgs.SearchText)
+                        select boat;
 
                 foreach (
                     MemberViewModel member in

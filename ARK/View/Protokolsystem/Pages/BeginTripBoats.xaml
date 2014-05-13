@@ -154,7 +154,7 @@
             </Button>
             <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
                     Style="{StaticResource styleButtons}" 
-                    Command="{Binding AddBlanc}" 
+                    Command="{Binding AddBlank}" 
                     IsEnabled="{Binding EnableMembers}"
                     Background="{DynamicResource AddBG}"
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
@@ -176,10 +176,14 @@
                 BorderBrush="#FF999999" BorderThickness="0,2,0,2" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Stretch"
                 Margin="0,5,0,0">
             <DockPanel Background="#FFFBFBFB" LastChildFill="False">
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="ØST" Margin="3,0,30,0" GroupName="{Binding Name, ElementName=Filters}"/>
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - NORD&#10;OM EGHOLM" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"/>
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - SYD&#10;OM EGHOLM" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"/>
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="LANGTUR" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"/>
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="ØST" Margin="3,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - NORD&#10;OM EGHOLM" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - SYD&#10;OM EGHOLM" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="LANGTUR" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             </DockPanel>
         </Border>
 
