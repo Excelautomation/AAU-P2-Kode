@@ -5,9 +5,9 @@ namespace ARK.View.Protokolsystem.Confirmations
 	/// <summary>
 	/// Interaction logic for BeginTripBoatsConfirm.xaml
 	/// </summary>
-	public partial class AdminLogin : UserControl
+	public partial class AdminLoginConfirm : UserControl
 	{
-        public AdminLogin()
+        public AdminLoginConfirm()
 		{
 			this.InitializeComponent();
 		}

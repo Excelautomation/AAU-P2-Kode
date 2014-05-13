@@ -84,6 +84,19 @@
 
             <WrapPanel Grid.Row="2" Margin="4" HorizontalAlignment="Center">
                 <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=OpenDamageForm}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="true">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="false">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    
                     <StackPanel Margin="4">
                         <WrapPanel HorizontalAlignment="Center">
                             <Image Source="../../images/application_side_list_red.png" Height="32"/>
@@ -93,6 +106,18 @@
                     </StackPanel>
                 </Button>
                 <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=CloseDamageForm}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="false">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="true">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                     <StackPanel Margin="4">
                         <WrapPanel HorizontalAlignment="Center">
                             <Image Source="../../images/application_side_list_red.png" Height="32"/>
