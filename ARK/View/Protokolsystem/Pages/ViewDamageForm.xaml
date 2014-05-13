@@ -114,25 +114,6 @@
                 </Grid>
             </Button>
 
-            <Button x:Name="btnSendInjury"
-                    DockPanel.Dock="Right"
-                    Margin="3,0,0,0"
-        		    Style="{StaticResource ResourceKey=btnFilter}" 
-        		    Command="{Binding AddDamageForm}"
-        		    Background="{StaticResource SubmitBG}"
-        		    BorderBrush="{StaticResource SubmitBorder}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_white_go.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;SKADE" />
-                </Grid>
-            </Button>
-            
             <Button x:Name="btnRectifyDamageForm"
                     DockPanel.Dock="Right"
                     Command="{Binding FixDamageForm}"
