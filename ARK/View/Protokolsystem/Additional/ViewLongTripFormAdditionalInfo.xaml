@@ -67,52 +67,75 @@
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Status:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.Status}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Oprettelsesdato:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.FormCreated}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Ansøgerens navn:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.ResponsibleMember.FirstName}"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.ResponsibleMember.LastName}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Ønsket båd:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.Boat.Name}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Pladser i båden:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.Boat.NumberofSeats}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Afgangstidspunkt:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.PlannedStartDate}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Hjemkomsttidspunkt:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.PlannedEndDate}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Overnatningssteder:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.CampSites}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Dagsdistancer:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.DistancesPerDay}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Beskrivelse af langtur:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.TourDescription}"/>
             </TextBlock>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="3" Background="White">
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Ansvarlig:" FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.ResponsibleMember.FirstName}"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.ResponsibleMember.LastName}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Besætning:" FontWeight="Bold"/>
             </TextBlock>
+            <ListView ItemsSource="{Binding Path=SelectedLongTripForm.Members}" BorderBrush="{x:Null}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Path=FirstName}"/>
+                            <Run Text="{Binding Path=LastName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
 
     </Grid>
