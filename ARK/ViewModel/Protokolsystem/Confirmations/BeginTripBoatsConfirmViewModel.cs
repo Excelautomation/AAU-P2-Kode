@@ -12,23 +12,11 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
     {
         // Fields
         private Trip _trip;
-        
-        
-        //BeginTripBoatsConfirmViewModel()
-        //{
 
-        //}
-
-
-
-
-
-
-
-        //_db.Trip.Add(trip);
-        //_db.SaveChanges();
-
-        //ResetData();
+        public BeginTripBoatsConfirmViewModel()
+        {
+           
+        }
 
         public ICommand CloseWindow
         {
@@ -36,7 +24,9 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             {
                 return GetCommand<object>(e =>
                 {
-                    
+                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
+                    // En lorteløsning?
+                    mainViewModel.HideDialog();
                 });
             }
         }
@@ -44,7 +34,10 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         public Trip Trip
         {
             get { return _trip; }
-            set { _trip = value; Notify(); }
+            set { 
+                _trip = value; 
+                Notify(); 
+            }
         }
     }
 }
