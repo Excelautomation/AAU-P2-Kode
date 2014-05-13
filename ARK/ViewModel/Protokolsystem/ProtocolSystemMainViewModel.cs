@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.View.Protokolsystem.Confirmations;
 using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
@@ -154,6 +155,8 @@ namespace ARK.ViewModel.Protokolsystem
 
         private BeginTripBoats _beginTripBoatsPage;
         private BoatsOut _boatsOutPage;
+        private FrameworkElement _dialogElement;
+        private bool _dialogShow;
         private DistanceStatistics _distanceStatisticsPage;
         private EndTrip _endTripPage;
         private MembersInformation _membersInformationPage;
@@ -219,6 +222,54 @@ namespace ARK.ViewModel.Protokolsystem
             }
             else
                 Filter = null;
+        }
+
+        #endregion
+
+        #region Dialog
+
+        public ICommand AdminLogin
+        {
+            get { return GetCommand<object>(e => ShowDialog(new AdminLogin())); }
+        }
+
+        public bool DialogShow
+        {
+            get { return _dialogShow; }
+            set
+            {
+                _dialogShow = value;
+                Notify();
+            }
+        }
+
+        public FrameworkElement DialogElement
+        {
+            get { return _dialogElement; }
+            set
+            {
+                _dialogElement = value;
+                Notify();
+            }
+        }
+
+        public void ShowDialog(FrameworkElement dialog)
+        {
+            DialogElement = dialog;
+
+            // Check viewModel
+            var viewModel = DialogElement.DataContext as IContentViewModelBase;
+
+            // Set parent
+            if (viewModel != null) viewModel.Parent = this;
+
+            DialogShow = true;
+        }
+
+        public void HideDialog()
+        {
+            DialogShow = false;
+            DialogElement = null;
         }
 
         #endregion

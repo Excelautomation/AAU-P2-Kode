@@ -10,13 +10,5 @@ namespace ARK.View.Protokolsystem
         {
             InitializeComponent();
         }
-
-        private void AdminPanel_Click(object sender, RoutedEventArgs e)
-        {
-            AdminLogin admin = new AdminLogin();
-            admin.Show();
-
-            Closing += (sender2, e2) => admin.Close();
-        }
     }
 }
