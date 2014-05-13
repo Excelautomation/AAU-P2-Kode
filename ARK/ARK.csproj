@@ -271,8 +271,8 @@
     <Compile Include="View\Protokolsystem\Additional\MembersInformationAdditionalInfo.xaml.cs">
       <DependentUpon>MembersInformationAdditionalInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Protokolsystem\Confirmations\AdminLogin.xaml.cs">
-      <DependentUpon>AdminLogin.xaml</DependentUpon>
+    <Compile Include="View\Protokolsystem\Confirmations\AdminLoginConfirm.xaml.cs">
+      <DependentUpon>AdminLoginConfirm.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Confirmations\DamageFormConfirm.xaml.cs">
       <DependentUpon>DamageFormConfirm.xaml</DependentUpon>
@@ -445,7 +445,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Protokolsystem\Confirmations\AdminLogin.xaml">
+    <Page Include="View\Protokolsystem\Confirmations\AdminLoginConfirm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

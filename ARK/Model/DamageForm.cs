@@ -10,6 +10,11 @@ namespace ARK.Model
         public string Description { get; set; }     // Further description of the damage. what en where etc.
         public bool Functional { get; set; }        // bool that states if the boat is functional
         public bool Closed { get; set; }            // bool that states if the damageform is invalid or if the damage have ben repaired
+        
+        public DamageForm()
+        {
+            Date = DateTime.Now;
+        }
 
         //Foreign Keys
         public int RegisteringMemberId { get; set; }    
