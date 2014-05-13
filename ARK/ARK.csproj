@@ -127,6 +127,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="HelperFunctions\HelperFunctions.cs" />
+    <Compile Include="HelperFunctions\RelayCommand.cs" />
     <Compile Include="HelperFunctions\SMSGateway\ISMSGateway.cs" />
     <Compile Include="HelperFunctions\SMSGateway\SmsWarnings.cs" />
     <Compile Include="Model\TripWarningSms.cs" />

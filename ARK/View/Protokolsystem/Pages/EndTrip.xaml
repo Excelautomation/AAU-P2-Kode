@@ -133,7 +133,6 @@
         		    Command="{Binding EndTrip}"
         		    Background="{StaticResource EndBG}"
         		    BorderBrush="{StaticResource EndBorder}"
-                    IsEnabled="{Binding Path=CanEndTrip, Mode=OneWay}"
                     Style="{StaticResource btnFilter}">
                 <Grid>
                     <Grid.ColumnDefinitions>
