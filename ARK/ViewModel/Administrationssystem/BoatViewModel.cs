@@ -10,21 +10,20 @@ using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
-using System;
 
 namespace ARK.ViewModel.Administrationssystem
 {
     public class BoatViewModel : ContentViewModelBase, IFilterContentViewModel
     {
         private IEnumerable<Boat> _boats;
-        private IEnumerable<Trip> _trips;
         private List<Boat> _boatsNonFiltered;
         private Boat _currentBoat;
-        private Member _mostUsingMember;
 
         private FrameworkElement _filter;
+        private Member _mostUsingMember;
         private bool _recentCancel;
         private bool _recentSave;
+        private IEnumerable<Trip> _trips;
 
         public BoatViewModel()
         {
@@ -73,12 +72,11 @@ namespace ARK.ViewModel.Administrationssystem
         public Member MostUsingMember
         {
             get { return _mostUsingMember; }
-            set { _mostUsingMember = value; Notify(); }
-        }
-
-        public void OpenBoat(Boat boat)
-        {
-            CurrentBoat = Boats.First(b => b.Id == boat.Id);
+            set
+            {
+                _mostUsingMember = value;
+                Notify();
+            }
         }
 
         public Boat CurrentBoat
@@ -102,7 +100,18 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        public ICommand SaveChanges
+        {
+            get { return GetCommand<object>(e => Save()); }
+        }
+
+        public ICommand CancelChanges
+        {
+            get { return GetCommand<object>(e => Reload()); }
+        }
+
         #region State
+
         public bool RecentSave
         {
             get { return _recentSave; }
@@ -132,22 +141,17 @@ namespace ARK.ViewModel.Administrationssystem
                 Notify();
             }
         }
+
         #endregion
 
-        public ICommand SaveChanges
+        public FrameworkElement Filter
         {
-            get
-            {
-                return GetCommand<object>(e => Save());
-            }
+            get { return _filter ?? (_filter = new BoatsFilter()); }
         }
 
-        public ICommand CancelChanges
+        public void OpenBoat(Boat boat)
         {
-            get
-            {
-                return GetCommand<object>(e => Reload());
-            }
+            CurrentBoat = Boats.First(b => b.Id == boat.Id);
         }
 
         private void Save()
@@ -172,11 +176,26 @@ namespace ARK.ViewModel.Administrationssystem
             RecentCancel = true;
 
             // Trigger notify - reset lists
-            var tmp = Boats;
+            IEnumerable<Boat> tmp = Boats;
             Boats = null;
             Boats = tmp;
 
             NotifyCustom("CurrentBoat");
+        }
+
+        public Member MostUsingMemberFunc()
+        {
+            if (CurrentBoat.Trips.Count == 0)
+                return null;
+            IEnumerable<Member> members = _trips
+                .Where(trip => trip.Boat.Id == CurrentBoat.Id)
+                .SelectMany(trip => trip.Members);
+
+            return (from member in members
+                .Distinct()
+                orderby members
+                    .Count(m => m.Id == member.Id) descending
+                select member).First();
         }
 
         #region Search
@@ -206,35 +225,11 @@ namespace ARK.ViewModel.Administrationssystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                        where boat.Filter(args.SearchEventArgs.SearchText)
-                        select boat;
+                    where boat.Filter(args.SearchEventArgs.SearchText)
+                    select boat;
             }
         }
 
         #endregion
-
-        public FrameworkElement Filter
-        {
-            get { return _filter ?? (_filter = new BoatsFilter()); }
-        }
-
-        public Member MostUsingMemberFunc()
-        {
-            if (CurrentBoat.Trips.Count == 0)
-                return null;
-            else
-            {
-                var members = _trips
-                    .Where(trip => trip.Boat.Id == CurrentBoat.Id)
-                    .SelectMany(trip => trip.Members)
-                    .ToList();
-
-                return (from member in members
-                                    .Distinct()
-                        orderby members
-                                .Count(m => m.Id == member.Id) descending
-                        select member).First();
-            }
-        }
     }
 }

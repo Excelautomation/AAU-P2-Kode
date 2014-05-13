@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
-    public class BeginTripBoatsConfirmViewModel : ContentViewModelBase
+    public class BeginTripBoatsConfirmViewModel : ConfirmationViewModelBase
     {
         // Fields
 
