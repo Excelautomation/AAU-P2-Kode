@@ -49,7 +49,6 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -58,11 +57,30 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
+                        <StackPanel Grid.Row="0">
+                            <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="Awaiting">
+                                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="Accepted">
+                                                <Setter Property="BorderBrush" Value="MediumSeaGreen"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="Denied">
+                                                <Setter Property="BorderBrush" Value="IndianRed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}" Grid.Row="0" >
-                            <Run Text="{Binding Path=ResponsibleMember.FirstName}"/>
-                            <Run Text="{Binding Path=ResponsibleMember.LastName}"/>
-                        </TextBlock>
+                            <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}">
+                                <Run Text="{Binding Path=ResponsibleMember.FirstName}"/>
+                                <Run Text="{Binding Path=ResponsibleMember.LastName}"/>
+                            </TextBlock>
+                        </StackPanel>
 
                         <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1">
                             <Run Text="Registreret:" FontWeight="Bold"/>
@@ -74,30 +92,6 @@
                             <Run Text="{Binding Path=PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="3">
-                            <Run Text="Status:" FontWeight="Bold"/>
-                            <Run>
-                                <Run.Style>
-                                    <Style TargetType="Run">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=Status}" Value="Awaiting">
-                                                <Setter Property="Foreground" Value="DarkOrange"/>
-                                                <Setter Property="Text" Value="Afventer godkendelse"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=Status}" Value="Accepted">
-                                                <Setter Property="Foreground" Value="MediumSeaGreen"/>
-                                                <Setter Property="Text" Value="Godkendt"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=Status}" Value="Denied">
-                                                <Setter Property="Foreground" Value="IndianRed"/>
-                                                <Setter Property="Text" Value="Aflyst"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Run.Style>
-                            </Run>
-                        </TextBlock>
-                        
                         
                     </Grid>
                 </DataTemplate>
