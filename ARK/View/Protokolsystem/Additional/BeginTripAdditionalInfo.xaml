@@ -72,32 +72,32 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
             <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding SelectedBoat[0].Active, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <CheckBox IsChecked="{Binding SelectedBoat.Active, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
                 <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Aktiv" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding SelectedBoat[0].HaveCox, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <CheckBox IsChecked="{Binding SelectedBoat.HaveCox, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
                 <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Styrmandsbåd" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding SelectedBoat[0].Usable, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
+                <CheckBox IsChecked="{Binding SelectedBoat.Usable, Mode=OneWay}" Style="{StaticResource ResourceKey=styleCheckBox}"/>
                 <TextBlock Style="{StaticResource ResourceKey=styleContent}" Text="Funktionsdygtig" FontWeight="Bold"/>
             </StackPanel>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Navn:" FontWeight="Bold"/>
-                <Run Text="{Binding SelectedBoat[0].Name}"/>
+                <Run Text="{Binding SelectedBoat.Name}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Pladser:" FontWeight="Bold"/>
-                <Run Text="{Binding SelectedBoat[0].NumberofSeats}"/>
+                <Run Text="{Binding SelectedBoat.NumberofSeats}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Kategori:" FontWeight="Bold"/>
-                <Run Text="{Binding SelectedBoat[0].SpecificBoatType}"/>
+                <Run Text="{Binding SelectedBoat.SpecificBoatType}"/>
             </TextBlock>
             <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=styleContent}" 
                         FontWeight="Bold"/>
-            <ListView ItemsSource="{Binding SelectedBoat[0].DamageForms}" BorderBrush="{x:Null}">
+            <ListView ItemsSource="{Binding SelectedBoat.DamageForms}" BorderBrush="{x:Null}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

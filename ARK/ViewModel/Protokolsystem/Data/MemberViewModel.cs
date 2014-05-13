@@ -7,6 +7,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
     {
         private Member _member;
         private bool _visible;
+        private bool _isResponsible;
 
         public MemberViewModel(Member member) : this(member, true)
         {
@@ -34,6 +35,17 @@ namespace ARK.ViewModel.Protokolsystem.Data
             set
             {
                 _visible = value;
+                Notify();
+            }
+        }
+
+        // Is responsible for longtrip (not used in begintrip)
+        public bool IsResponsible
+        {
+            get { return _isResponsible; }
+            set
+            {
+                _isResponsible = value;
                 Notify();
             }
         }
