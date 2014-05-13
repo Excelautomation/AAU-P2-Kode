@@ -10,6 +10,9 @@ using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.ViewModel.Protokolsystem.Pages;
+using ARK.ViewModel.Protokolsystem.Confirmations;
+using System.Collections.Generic;
 
 namespace ARK.ViewModel.Protokolsystem
 {
@@ -18,7 +21,7 @@ namespace ARK.ViewModel.Protokolsystem
     {
         #region PrivateFields
 
-        private readonly DbArkContext _context = DbArkContext.GetDbContext();
+        private readonly DbArkContext db = DbArkContext.GetDbContext();
         private FrameworkElement _currentInfo;
         private double _dailyKilometers;
         private bool _enableFilters;
@@ -70,7 +73,7 @@ namespace ARK.ViewModel.Protokolsystem
         public void UpdateDailyKilometers()
         {
             DateTime today = DateTime.Today;
-            IQueryable<Trip> temp = _context.Trip
+            IQueryable<Trip> temp = db.Trip
                 .Where(t => t.TripEndedTime > today);
             if (temp.Any())
             {
@@ -80,7 +83,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public void UpdateNumBoatsOut()
         {
-            NumBoatsOut = _context.Trip.Count(t => t.TripEndedTime == null);
+            NumBoatsOut = db.Trip.Count(t => t.TripEndedTime == null);
         }
 
         #region Pages

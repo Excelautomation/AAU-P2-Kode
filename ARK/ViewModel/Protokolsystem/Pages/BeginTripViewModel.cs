@@ -16,12 +16,14 @@ using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Protokolsystem.Additional;
 using ARK.ViewModel.Protokolsystem.Data;
+using ARK.ViewModel.Protokolsystem.Confirmations;
+using ARK.View.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
     public class BeginTripViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
-        private readonly DbArkContext _db = DbArkContext.GetDbContext(); // Database
+        private readonly DbArkContext db = DbArkContext.GetDbContext(); // Database
         private ObservableCollection<MemberViewModel> _selectedMembers; // Members in boat
         private IEnumerable<Boat> _boats; // All boats
         private IEnumerable<Boat> _boatsFiltered; // Boats to display
@@ -30,6 +32,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private bool _enableMembers; // Used to determine whether the members-listview should be enabled
         private FrameworkElement _infoPage; // Informationpage
         private Boat _selectedBoat; // Holds the selected boat
+
 
         private DateTime _latestData;
 
@@ -57,6 +60,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
                 ResetData();
             };
+
+            // Initializes the radiobuttons
+            Direction = "Øst";
         }
 
         private void LoadMembers()
@@ -65,7 +71,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 _latestData = DateTime.Now;
 
-                var members = _db.Member.Where(member => member.Active).OrderBy(x => x.FirstName).ToList();
+                var members = db.Member.Where(member => member.Active).OrderBy(x => x.FirstName).ToList();
                 MembersFiltered =
                     new ObservableCollection<MemberViewModel>(members.Select(member => new MemberViewModel(member)));
             }
@@ -76,7 +82,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             // Load data. Check the boats activitylevel on a 8-day-basis
             DateTime limit = DateTime.Now.AddDays(-8);
 
-            _boats = _db.Boat
+            _boats = db.Boat
                 .Where(boat => boat.Active)
                 .OrderBy(boat => boat.Trips.Any(trip => trip.TripEndedTime == null))
                 .ThenByDescending(boat => boat.Trips.Count(trip => trip.TripStartTime > limit))
@@ -160,59 +166,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public ICommand StartTripNow
-        {
-            get
-            {
-                return new RelayCommand(
-                    x =>
-                {
-                    var trip = new Trip
-                    {
-                        Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
-                        TripStartTime = DateTime.Now,
-                        Members = new List<Member>(),
-                        BoatId = SelectedBoat.Id
-                    };
-
-                    // Add selected members to trip
-                    foreach (var m in SelectedMembers.Select(member => member.Member))
-                    {
-                        if (m.Id == -1)
-                        {
-                            //-1 is a blank spot => Do nothing
-                        }
-                        else if (m.Id == -2)
-                        {
-                            //-2 is a guest => Increment the crew count, but don't add the member to the member list
-                            trip.CrewCount++;
-                        }
-                        else
-                        {
-                            //Add the member reference and increment the crew count
-                            trip.Members.Add(m);
-                            trip.CrewCount++;
-                        }
-                    }
-
-                    trip.LongTrip = LongTrip;
-                    trip.Direction = Direction;
-
-                    _db.Trip.Add(trip);
-                    _db.SaveChanges();
-
-                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
-                    mainViewModel.UpdateNumBoatsOut();
-
-                    ResetData();
-                    },
-                    x =>
-                        this.SelectedBoat != null && this.SelectedMembers.Count == this.SelectedBoat.NumberofSeats &&
-                        this.Direction != null);
-            }
-        }
-
-        public ICommand AddBlank
+        public ICommand AddBlanc
         {
             get
             {
@@ -273,6 +227,113 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         }
 
         #endregion
+
+        public ICommand ShowConfirmDialog
+        {
+            get 
+            { 
+                return GetCommand<object>(e =>{
+
+                    //var btb = new BeginTripBoats();
+                    //var btvm = (BeginTripViewModel)btb.DataContext;
+
+                    ConfirmTripData();
+
+                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
+                    mainViewModel.ShowDialog(new BeginTripBoatsConfirm());
+
+                    //ShowDialog(new BeginTripBoatsConfirm());
+                }); 
+            }
+        }
+
+        public void ConfirmTripData ()
+        {
+            {
+                Trip trip = new Trip
+                {
+                    Id = db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
+                    TripStartTime = DateTime.Now,
+                    Members = new List<Member>(),
+                    Boat = SelectedBoat
+                };
+
+                // Add selected members to trip
+                foreach (var m in SelectedMembers.Select(member => member.Member))
+                {
+                    if (m.Id == -1)
+                    {
+                        //-1 is a blank spot => Do nothing
+                    }
+                    else if (m.Id == -2)
+                    {
+                        //-2 is a guest => Increment the crew count, but don't add the member to the member list
+                        trip.CrewCount++;
+                    }
+                    else
+                    {
+                        //Add the member reference and increment the crew count
+                        trip.Members.Add(m);
+                        trip.CrewCount++;
+                    }
+                }
+
+                trip.LongTrip = LongTrip;
+                trip.Direction = Direction;
+
+                // viser confirm trip skærmen
+                //var mainViewModel = Parent as ProtocolSystemMainViewModel;
+                var dlg = new BeginTripBoatsConfirm();
+                var ConfirmTripViewModel = (BeginTripBoatsConfirmViewModel)dlg.DataContext;
+                ConfirmTripViewModel.Trip = trip;
+                //mainViewModel.NavigateToPage(() => dlg, "Confirm");
+
+                // hold øje med om denne bliver kørt
+                //mainViewModel.UpdateNumBoatsOut();
+            }
+        }
+
+        //public ICommand ShowConfirmDialog
+        //{
+        //    get 
+        //    { 
+        //        return GetCommand<object>(e =>
+        //        {    
+        //            var trip = new Trip
+        //            {
+        //                Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
+        //                TripStartTime = DateTime.Now,
+        //                Members = new List<Member>(),
+        //                Boat = SelectedBoat
+        //            };
+                
+        //            foreach (var m in SelectedMembers.Select(member => member.Member))
+        //            {
+        //                if (m.Id == -1)
+        //                {
+        //                    //-1 is a blank spot => Do nothing
+        //                }
+        //                else if (m.Id == -2)
+        //                {
+        //                    //-2 is a guest => Increment the crew count, but don't add the member to the member list
+        //                    trip.CrewCount++;
+        //                }
+        //                else
+        //                {
+        //                    //Add the member reference and increment the crew count
+        //                    trip.Members.Add(m);
+        //                    trip.CrewCount++;
+        //                }
+        //            }
+
+        //            trip.LongTrip = LongTrip;
+        //            trip.Direction = Direction;
+                
+        //            // åbner dialog vinduet
+        //            ShowDialog(new BeginTripBoatsConfirm()); 
+        //        });
+        //    }
+        //}
 
         private void UpdateInfo()
         {
