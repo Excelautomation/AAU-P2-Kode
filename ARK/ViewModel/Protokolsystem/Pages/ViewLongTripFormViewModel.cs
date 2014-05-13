@@ -25,7 +25,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             ParentAttached += (sender, e) =>
             {
                 LongTripForms = db.LongTripForm.ToList();
-                SelectedLongTripForm = LongTripForms[0];
+
+                if (LongTripForms.Any())
+                    SelectedLongTripForm = LongTripForms.First();
 
                 UpdateInfo();
             };

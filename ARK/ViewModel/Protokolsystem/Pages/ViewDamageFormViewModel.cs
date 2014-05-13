@@ -34,7 +34,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
 
                 // Select first instance
-                SelectedDamageForm = DamageForms.First();
+                if (DamageForms.Any())
+                    SelectedDamageForm = DamageForms.First();
 
                 // Vis info
                 UpdateInfo();
@@ -73,7 +74,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     SelectedDamageForm.Closed = true;
                     db.SaveChanges();
                     DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
-                    SelectedDamageForm = DamageForms.First();
+
+                    if (DamageForms.Any())
+                        SelectedDamageForm = DamageForms.First();
                 });
             }
         }
