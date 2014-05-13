@@ -77,16 +77,9 @@
                   VerticalAlignment="Stretch" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
+                    <StackPanel>
+                        
+                        <StackPanel>
                             <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
                                 <Border.Style>
                                     <Style TargetType="Border">
@@ -104,15 +97,19 @@
                             </Border>
                             <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
                         </StackPanel>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{DynamicResource ResourceKey=lstViewContent}">
-                            <Run Text="Pladser: " FontWeight="Bold"/>
-                            <Run Text="{Binding NumberofSeats}"/>
-                        </TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource ResourceKey=lstViewContent}">
-                            <Run Text="Kategori: " FontWeight="Bold"/>
-                            <Run Text="{Binding SpecificBoatType}"/>
-                        </TextBlock>
-                    </Grid>
+                        
+                        <DockPanel>
+                            <TextBlock Width="80" Style="{DynamicResource ResourceKey=lstViewContent}">
+                                <Run Text="Pladser: " FontWeight="Bold"/>
+                                <Run Text="{Binding NumberofSeats}"/>
+                            </TextBlock>
+                            <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}">
+                                <Run Text="Kategori: " FontWeight="Bold"/>
+                                <Run Text="{Binding SpecificBoatType}"/>
+                            </TextBlock>
+                        </DockPanel>
+
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -125,12 +122,12 @@
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
+                    <DockPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
                         <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
-                        <Run Text="{Binding Path=Member.FirstName}"/>
-                        <Run Text="{Binding Path=Member.LastName}"/>
+                            <Run Text="{Binding Path=Member.FirstName}"/>
+                            <Run Text="{Binding Path=Member.LastName}"/>
                         </TextBlock>
-                    </WrapPanel>
+                    </DockPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

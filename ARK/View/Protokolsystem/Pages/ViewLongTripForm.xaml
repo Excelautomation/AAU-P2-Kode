@@ -46,18 +46,9 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <StackPanel>
 
-                        <StackPanel Grid.Row="0">
+                        <StackPanel>
                             <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
                                 <Border.Style>
                                     <Style TargetType="Border">
@@ -82,18 +73,18 @@
                             </TextBlock>
                         </StackPanel>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Registreret:" FontWeight="Bold"/>
                             <Run Text="{Binding Path=FormCreated, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Startdato:" FontWeight="Bold"/>
                             <Run Text="{Binding Path=PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
 
                         
-                    </Grid>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

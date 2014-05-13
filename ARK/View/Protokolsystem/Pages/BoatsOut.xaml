@@ -43,40 +43,32 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <StackPanel>
 
-                        <TextBlock Text="{Binding Boat.Name}" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                        <TextBlock Text="{Binding Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1" Grid.ColumnSpan="2">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Retning:" FontWeight="Bold"/>
                             <Run Text="{Binding Direction}"/>
                         </TextBlock>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2" Grid.Column="0">
-                            <Run Text="Start tid:" FontWeight="Bold"/>
-                            <Run Text="{Binding TripStartTime, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
-                        </TextBlock>
+                        <DockPanel>
+                            <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="Start tid:" FontWeight="Bold"/>
+                                <Run Text="{Binding TripStartTime, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="   Tid ude:" FontWeight="Bold"/>
+                                <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
+                            </TextBlock>
+                        </DockPanel>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2" Grid.Column="1">
-                            <Run Text="   Tid ude:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
-                        </TextBlock>
-
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="3" Grid.Column="0">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                                 <Run Text="Pladser:" FontWeight="Bold"/>
                                 <Run Text="{Binding Boat.NumberofSeats}"/>
                         </TextBlock>
-                    </Grid>
+                        
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

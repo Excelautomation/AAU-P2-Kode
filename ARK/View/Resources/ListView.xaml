@@ -24,7 +24,7 @@
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="Border" Property="Background"
                                     Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
