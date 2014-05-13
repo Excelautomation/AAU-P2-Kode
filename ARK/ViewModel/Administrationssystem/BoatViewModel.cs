@@ -17,6 +17,7 @@ namespace ARK.ViewModel.Administrationssystem
     public class BoatViewModel : ContentViewModelBase, IFilterContentViewModel
     {
         private IEnumerable<Boat> _boats;
+        private IEnumerable<Trip> _trips;
         private List<Boat> _boatsNonFiltered;
         private Boat _currentBoat;
         private Member _mostUsingMember;
@@ -34,7 +35,13 @@ namespace ARK.ViewModel.Administrationssystem
                 {
                     _boatsNonFiltered = db.Boat
                         .Include(boat => boat.DamageForms)
-                        .Include("Trips.Members").ToList();
+                        .Include(boat => boat.Trips)
+                        .ToList();
+
+                    _trips = db.Trip
+                        .Include(trip => trip.Members)
+                        .Include(trip => trip.Boat)
+                        .ToList();
                 }
 
                 // Nulstil filter
@@ -217,13 +224,14 @@ namespace ARK.ViewModel.Administrationssystem
                 return null;
             else
             {
-                var m3 = from member in CurrentBoat.Trips
-                                       .SelectMany(trip => trip.Members)
-                                       .Distinct()
-                             select member;
-                var o = CurrentBoat.Trips
-                                .SelectMany(trip => trip.Members)
-                                .Count(m2 => m2 == m3);
+                var members = _trips
+                    .Where(trip => trip.Boat == CurrentBoat);
+
+                var m3 = CurrentBoat.Trips.SelectMany(trip => trip.Members);
+
+                var o2 = m3.Select(member => CurrentBoat.Trips
+                    .SelectMany(trip => trip.Members)
+                    .Count(m => m == member));
 
                 return (from member in CurrentBoat.Trips
                                        .SelectMany(trip => trip.Members)
