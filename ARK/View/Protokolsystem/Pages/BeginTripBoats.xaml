@@ -7,14 +7,14 @@
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:ff="clr-namespace:FunctionalFun.UI.Behaviours;assembly=SelectedItemsBinding"
              xmlns:pages="clr-namespace:ARK.ViewModel.Protokolsystem.Pages"
+             xmlns:valueconverter="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d"
              d:DesignHeight="300">
-
     <UserControl.DataContext>
         <pages:BeginTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
-
     <UserControl.Resources>
+        <valueconverter:RadioButtonToStringConverter x:Key="RadioButtonToString"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource styleListViewItem}">
             <Setter Property="Visibility" 
@@ -291,7 +291,7 @@
                     DockPanel.Dock="Right"
                     VerticalAlignment="Top" 
             	    Style="{StaticResource styleButtons}"  
-            	    Command="{Binding StartTripNow}"
+            	    Command="{Binding ShowConfirmDialog}"
             	    Background="{StaticResource BeginBG}"
             	    BorderBrush="{StaticResource BeginBorder}" Width="Auto">
                 <Grid Margin="0,0,-2,0">

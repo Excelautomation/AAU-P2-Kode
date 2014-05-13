@@ -9,7 +9,7 @@
              mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
 
     <UserControl.DataContext>
-        <con:BeginTripBoatsConfirmViewModel x:Name="ViewModel" />
+        <con:BeginTripBoatsConfirmViewModel/>
     </UserControl.DataContext>
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -34,7 +34,7 @@
 
             <Label Style="{StaticResource ResourceKey=lblSuperHeadline}" Grid.ColumnSpan="3" HorizontalAlignment="Center" 
                    VerticalAlignment="Bottom">
-                <Run Text="PÅBYND ROTUR"/>
+                <Run Text="PÅBEGYND ROTUR"/>
             </Label>
 
             <Label Style="{StaticResource ResourceKey=lblSuperHeadline}" Grid.ColumnSpan="3" Grid.Row="1" 
@@ -68,16 +68,15 @@
                         <Run Text="Kategori:" FontWeight="Bold"/>
                     </TextBlock>
                 </StackPanel>
-
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+                        <Run Text="{Binding Path=Trip.Boat.Name}" FontWeight="Bold"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+                        <Run Text="{Binding Path=Trip.Boat.NumberofSeats}" FontWeight="Bold"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+                        <Run Text="{Binding Path=Trip.Boat.SpecificBoatType}" FontWeight="Bold"/>
                     </TextBlock>
                 </StackPanel>
             </Grid>
@@ -105,22 +104,17 @@
                         <Run Text="Mørkets frembrud:" FontWeight="Bold"/>
                     </TextBlock>
                 </StackPanel>
-
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+                        <Run Text="{Binding Path=Trip.Direction}" />
                     </TextBlock>
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="" />
+                        <Run Text="Ubundet" />
                     </TextBlock>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="2" Margin="10,10,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -131,12 +125,31 @@
                     <Run Text="BESÆTNING" FontSize="16"/>
                 </TextBlock>
 
+                <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1" PanningMode="VerticalOnly">
+                    <ItemsControl x:Name="AllMembersList" ItemsSource="{Binding Path=Trip.Members}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <WrapPanel Margin="5,0,0,0" Grid.Column="0">
+                                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=FirstName}" FontSize="16"/>
+                                        <TextBlock Text="{Binding Path=LastName}" FontSize="16"/>
+                                    </WrapPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
 
             </Grid>
         </Grid>
 
         <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="1">
-			<Button x:Name="btnCancel" 
+			<Button x:Name="btnCancel"
+                    Command="{Binding Path=CloseWindow}"
 					DockPanel.Dock="Left"
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
