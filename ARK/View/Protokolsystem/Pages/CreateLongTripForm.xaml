@@ -229,7 +229,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Text="{Binding Path=CampSites}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=CampSites, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Dagsdistancer-->
@@ -256,7 +256,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Text="{Binding Path=DistancesPerDay}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=DistancesPerDay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Beskrivelse af ruten-->
@@ -283,7 +283,7 @@
                 </WrapPanel>
             </Border>
 
-            <TextBox Text="{Binding Path=TourDescription}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
+            <TextBox Text="{Binding Path=TourDescription, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Style="{StaticResource ResourceKey=txbUserinput}"/>
         </Grid>
 
         <!--Buttons-->
@@ -355,10 +355,21 @@
             <Button x:Name="btnSendLongTrip"
                     DockPanel.Dock="Right"
                     Margin="3,0,0,0"
-            	    Style="{StaticResource ResourceKey=btnFilter}"
         		    Command="{Binding AddLongTrip}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
+                <Button.Style>
+                    <Style TargetType="Button"> 
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=AllDataFilled}" Value="true">
+                                <DataTrigger.Setters>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>

@@ -306,7 +306,6 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ÆNDRE&#xA;DISTANCE" />
                 </Grid>
             </Button>
-
         </DockPanel>
     </Grid>
 </UserControl>
