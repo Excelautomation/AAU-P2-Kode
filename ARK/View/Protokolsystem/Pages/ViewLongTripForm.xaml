@@ -48,31 +48,57 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0">
-                            <Run Text="Description:"/>
-                            <Run Text="{Binding Path=TourDescription}"/>
+
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}" Grid.Row="0" >
+                            <Run Text="{Binding Path=ResponsibleMember.FirstName}"/>
+                            <Run Text="{Binding Path=ResponsibleMember.LastName}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="1">
-                            <Run Text="Created:"/>
-                            <Run Text="{Binding Path=FormCreated}"/>
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1">
+                            <Run Text="Registreret:" FontWeight="Bold"/>
+                            <Run Text="{Binding Path=FormCreated, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="2">
-                            <Run Text="StartDate:"/>
-                            <Run Text="{Binding Path=PlannedStartDate}"/>
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2">
+                            <Run Text="Startdato:" FontWeight="Bold"/>
+                            <Run Text="{Binding Path=PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="3">
-                            <Run Text="Status:"/>
-                            <Run Text="{Binding Path=Status}"/>
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="3">
+                            <Run Text="Status:" FontWeight="Bold"/>
+                            <Run>
+                                <Run.Style>
+                                    <Style TargetType="Run">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="Awaiting">
+                                                <Setter Property="Foreground" Value="Orange"/>
+                                                <Setter Property="Text" Value="Afventer godkendelse"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="Accepted">
+                                                <Setter Property="Foreground" Value="Green"/>
+                                                <Setter Property="Text" Value="Godkendt"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="Denied">
+                                                <Setter Property="Foreground" Value="Red"/>
+                                                <Setter Property="Text" Value="Aflyst"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Run.Style>
+                            </Run>
                         </TextBlock>
+                        
+                        
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
