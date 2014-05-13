@@ -4,6 +4,7 @@ using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Protokolsystem.Pages;
+using System;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
@@ -177,6 +178,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         DbArkContext db = DbArkContext.GetDbContext();
 
                         db.DamageForm.Add(damageForm);
+                        db.SaveChanges();
+
+                        throw new NotImplementedException("Retur til DistanceStatistics");
                     }
                 });
             }

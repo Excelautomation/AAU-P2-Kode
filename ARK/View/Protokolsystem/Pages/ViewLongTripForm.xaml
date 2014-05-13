@@ -40,7 +40,8 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="lstLongTrip" ItemsSource="{Binding Path=LongTripForms}" Grid.Row="1" 
+        <ListView x:Name="lstLongTrip" ItemsSource="{Binding Path=LongTripForms}" Grid.Row="1"
+                  SelectedItem="{Binding Path=SelectedLongTripForm}"
                   VerticalAlignment="Stretch"
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
