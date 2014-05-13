@@ -27,7 +27,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             TimeCounter.StartTimer();
 
-
             ParentAttached += (sender, args) =>
             {
                 if (this.StandardTrips == null || (DateTime.Now - _latestData).TotalHours > 1)
@@ -39,6 +38,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 }
                 this.GetActiveTrips();
 
+                // Reset selected trip
+                SelectedTrip = null;
+
+                // Bind keyboard
                 base.ProtocolSystem.KeyboardTextChanged += this.MonitorCustomDistance;
 
                 this.ResetPage();

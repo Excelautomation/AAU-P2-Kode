@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:VM="clr-namespace:ARK.ViewModel.Protokolsystem.Additional"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" Width="200" Height="768">
 
     <UserControl.DataContext>
@@ -37,6 +38,8 @@
             <Setter Property="Margin" Value="5,3,0,0"/>
         </Style>
 
+        <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
+        
     </UserControl.Resources>
 
     <Grid Height="768" Margin="3,5,3,0">
@@ -59,50 +62,72 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
-                <Run Text="Mest anvendte båd (navn):" FontWeight="Bold"/>
+                <Run Text="Navn: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Member.FirstName}"/>
+                <Run Text="{Binding SelectedMember.Member.LastName}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Medlemsnr.: " FontWeight="Bold"/>
+                <Run Text="{Binding SelectedMember.Member.MemberNumber}"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}">
+                <Run Text="Mest anvendte båd: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=MostUsedBoat.Name}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Outrigger:" FontWeight="Bold"/>
+                <Run Text="Outrigger: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=KmOutrigger, Mode=OneWay}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Inrigger:" FontWeight="Bold"/>
+                <Run Text="Inrigger: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=KmInrigger, Mode=OneWay}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Kajak:" FontWeight="Bold"/>
+                <Run Text="Kajak: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=KmKajak, Mode=OneWay}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Ergometer:" FontWeight="Bold"/>
+                <Run Text="Ergometer: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=KmErgometer, Mode=OneWay}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Gig:" FontWeight="Bold"/>
+                <Run Text="Gig: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=KmGig, Mode=OneWay}"/>
             </TextBlock>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="3" Background="White">
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Bådens navn:" FontWeight="Bold"/>
+                <Run Text="Bådens navn: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedTrip.Trip.Boat.Name}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Kategori:" FontWeight="Bold"/>
+                <Run Text="Kategori: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedTrip.Trip.Boat.SpecificBoatType}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Pladser:" FontWeight="Bold"/>
+                <Run Text="Pladser: " FontWeight="Bold"/>
+                <Run Text="{Binding Path=SelectedTrip.Trip.Boat.NumberofSeats}"/>
             </TextBlock>
 
-            <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
+            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
+                <Run Text="Besætning: " FontWeight="Bold"/>
+            </TextBlock>
+
+            <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedTrip.Trip.Members}" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                       FontSize="18" BorderBrush="{x:Null}" Background="White">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.RemoveMember}" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
+                        <Button>
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <ContentPresenter />
@@ -119,15 +144,11 @@
                                     </Grid.RowDefinitions>
                                     <StackPanel Style="{StaticResource styleStack}">
                                         <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
+                                            <TextBlock Text="{Binding Path=MemberNumber}"/>
                                             <TextBlock Text=" " />
-                                            <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                            <TextBlock Text="{Binding Path=FirstName}"/>
                                             <TextBlock Text=" " />
-                                            <TextBlock Text="{Binding Path=Member.LastName}"/>
-                                        </StackPanel>
-                                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                                            <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
-                                            <TextBlock Text="{Binding Path=Member.ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding Path=LastName}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
