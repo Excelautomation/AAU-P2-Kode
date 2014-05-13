@@ -172,7 +172,8 @@
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
 					Background="{StaticResource BeginBG}"
-					BorderBrush="{StaticResource BeginBorder}" Margin="0,0,0,0" Width="Auto">
+					BorderBrush="{StaticResource BeginBorder}" Margin="0,0,0,0"
+                    Command="{Binding Path=Save}">
 				<Grid Margin="0,0,-2,0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="8"/>

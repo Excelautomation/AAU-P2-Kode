@@ -27,6 +27,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private MemberDistanceViewModel _selectedMember;
         private FrameworkElement _additionalInfoPage;
         private TripViewModel _selectedTrip;
+        private bool _distanceSelector;
 
 
         // Constructor
@@ -88,6 +89,16 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get { return GetCommand<MemberDistanceViewModel>(e => { SelectedMember = e; }); }
         }
 
+        private bool DistanceSelector
+        {
+            get { return _distanceSelector; }
+            set
+            {
+                _distanceSelector = value;
+                base.ToggleKeyboard.Execute(null);
+            }
+        }
+
         public ICommand ChangeDistance
         {
             get
@@ -95,7 +106,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(
                     x =>
                     {
-                        base.ToggleKeyboard.Execute(null);
+                        DistanceSelector = !DistanceSelector;
                     },
                     x => this.SelectedTrip != null && this.SelectedTrip.Editable);
             }
@@ -121,6 +132,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void UpdateFilter(FilterChangedEventArgs args)
         {
+            // Ignore filter if distance is changing
+            if (DistanceSelector)
+                return;
+
             ResetFilter();
 
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any()) &&
