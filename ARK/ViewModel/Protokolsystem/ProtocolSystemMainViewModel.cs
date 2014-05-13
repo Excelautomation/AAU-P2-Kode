@@ -135,7 +135,7 @@ namespace ARK.ViewModel.Protokolsystem
             get
             {
                 return GetNavigateCommand(() => ViewDamageFormPage,
-                    "AKTIVE SKADES BLANKETTER");
+                    "SKADEBLANKETTER");
             }
         }
 
@@ -145,7 +145,7 @@ namespace ARK.ViewModel.Protokolsystem
             {
                 return
                     GetNavigateCommand(() => ViewLongTripFormPage,
-                        "AKTIVE LANGTURS BLANKETTER");
+                        "LANGTURSBLANKETTER");
             }
         }
 

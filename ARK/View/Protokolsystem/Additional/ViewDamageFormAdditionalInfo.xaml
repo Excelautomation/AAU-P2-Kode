@@ -65,24 +65,41 @@
         </Border>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Width="194" Background="White">
+
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Status:" FontWeight="Bold"/>
+                <Run Text="Registreret:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedDamageForm.Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Oprettelsesdato:" FontWeight="Bold"/>
-            </TextBlock>
-
-            <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Anmelderens navn:" FontWeight="Bold"/>
+                <Run Text="Anmelder:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedDamageForm.RegisteringMember.FirstName}"/>
+                <Run Text="{Binding SelectedDamageForm.RegisteringMember.LastName}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Beskadiget båd:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedDamageForm.Boat.Name}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Funktionel:" FontWeight="Bold"/>
+                <Run Text="Anvendelighed:" FontWeight="Bold"/>
+                <Run>
+                    <Run.Style>
+                        <Style TargetType="Run">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedDamageForm.Functional}" Value="True">
+                                    <Setter Property="Foreground" Value="MediumSeaGreen"/>
+                                    <Setter Property="Text" Value="Anvendelig"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SelectedDamageForm.Functional}" Value="False">
+                                    <Setter Property="Foreground" Value="IndianRed"/>
+                                    <Setter Property="Text" Value="Ikke anvendelig"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Run.Style>
+                </Run>
             </TextBlock>
         </StackPanel>
 
