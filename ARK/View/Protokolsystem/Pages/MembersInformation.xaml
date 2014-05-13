@@ -44,49 +44,42 @@
         <ListView x:Name="AllMembersList" 
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=MembersFiltered}" Grid.Row="1" 
-                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
                   SelectedItem="{Binding Path=SelectedMember, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical">
+                    <StackPanel>
+
                         <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}">
+                            <Run Text="{Binding MemberNumber}"/>
                             <Run Text="{Binding FirstName}"/>
                             <Run Text="{Binding LastName}"/>
-                            <Run Text="{Binding MemberNumber}"/>
                         </TextBlock>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=lstViewContent}" >
+                        <DockPanel>
+                            <TextBlock Width="300" Style="{StaticResource ResourceKey=lstViewContent}" >
                                 <Run Text="Adresse:" FontWeight="Bold"/>
                                 <Run Text="{Binding Address1}"/>
                             </TextBlock>
-
-                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource ResourceKey=lstViewContent}">
-                                <Run Text="Postnr./By:" FontWeight="Bold"/>
-                            <Run Text="{Binding ZipCode}"/>
-                            <Run Text="{Binding City}"/>
-                            </TextBlock>
-
-                            <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=lstViewContent}">
+                            <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                                 <Run Text="Tlf:" FontWeight="Bold"/>
-                            <Run Text="{Binding Cellphone}"/>
+                                <Run Text="{Binding Cellphone}"/>
                             </TextBlock>
+                        </DockPanel>
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource ResourceKey=lstViewContent}">
+                        <DockPanel>
+                            <TextBlock Width="300" Style="{StaticResource ResourceKey=lstViewContent}">
+                                <Run Text="Postnr./By:" FontWeight="Bold"/>
+                                <Run Text="{Binding ZipCode}"/>
+                                <Run Text="{Binding City}"/>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                                 <Run Text="Email:" FontWeight="Bold"/>
                                 <Run Text="{Binding Email1}"/>
                             </TextBlock>
-                        </Grid>
+                        </DockPanel>
 
-                    </WrapPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
