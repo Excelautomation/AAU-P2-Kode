@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Pages;
+using ARK.ViewModel.Protokolsystem.Additional;
 using ARK.ViewModel.Protokolsystem.Data;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
@@ -22,6 +25,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private List<MemberViewModel> _membersFiltered;
         private List<Boat> _boats;
         private Boat _selectedBoat;
+        private FrameworkElement _infoPage;
 
         // Constructor
         public CreateLongTripViewModel()
@@ -37,6 +41,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 // get long trip forms
                 LongTripForms = db.LongTripForm.OrderBy(x => x.FormCreated).Where(x => true).ToList();
                 Boats = db.Boat.Where(x => x.Active).ToList();
+
+                // Set info
+                UpdateInfo();
             };
         }
 
@@ -56,6 +63,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 _selectedBoat = value;
                 Notify();
+                UpdateInfo();
             }
         }
 
@@ -106,7 +114,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         CampSites = CampSites,
                         Members = SelectedMembers.Select(mvm => mvm.Member).ToList(),
                         Status = LongTripForm.BoatStatus.Awaiting,
-                        ResponsibleMember = SelectedMembers[0].Member
+                        ResponsibleMember = Info.ResponsibleMember.Member
                     };
 
                     db.LongTripForm.Add(longTripForm);
@@ -134,7 +142,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand<object>(d =>
                 {
-                    // Add a empty seat to boat
+                    if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
+                    {
+                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -1, FirstName = "Blank" }));
+                    }
                 });
             }
         }
@@ -145,9 +156,30 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand<object>(d =>
                 {
-                    // Add a guest to boat
+                    if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
+                    {
+                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -2, FirstName = "Gæst" }));
+                    }
                 });
             }
+        }
+
+        private FrameworkElement InfoPage
+        {
+            get { return _infoPage ?? (_infoPage = new CreateLongTripFormAdditionalInfo()); }
+        }
+
+        private CreateLongTripFormAdditionalInfoViewModel Info
+        {
+            get { return InfoPage.DataContext as CreateLongTripFormAdditionalInfoViewModel; }
+        }
+
+        private void UpdateInfo()
+        {
+            Info.SelectedBoat = SelectedBoat;
+            Info.SelectedMembers = SelectedMembers;
+
+            ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
     }
 }
