@@ -66,12 +66,12 @@
 
                         <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1">
                             <Run Text="Registreret:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=FormCreated, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                            <Run Text="{Binding Path=FormCreated, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
 
                         <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2">
                             <Run Text="Startdato:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                            <Run Text="{Binding Path=PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
 
                         <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="3">
