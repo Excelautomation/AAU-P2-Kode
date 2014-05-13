@@ -128,7 +128,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 _memberKmCollection = _db.Member
                     .OrderBy(x => x.FirstName)
                     .Include(m => m.Trips)
-                    .ToList()
+                    .AsEnumerable()
                     .Select((member, i) => new MemberDistanceViewModel(member))
                     .OrderByDescending(member => member.Distance)
                     .ToList();
