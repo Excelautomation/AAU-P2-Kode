@@ -47,6 +47,7 @@ namespace ARK.ViewModel.Administrationssystem
                     _longTripFormsNonFiltered = db.LongTripForm
                         .Include(form => form.Boat)
                         .Include(form => form.Members)
+                        .Include(form => form.ResponsibleMember)
                         .ToList();
                 }
 
