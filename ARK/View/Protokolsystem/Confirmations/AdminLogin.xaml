@@ -8,6 +8,10 @@
              xmlns:con="clr-namespace:ARK.ViewModel.Protokolsystem.Confirmations"
              mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
 
+    <UserControl.DataContext>
+        <con:AdminLoginConfirmViewModel/>
+    </UserControl.DataContext>
+    
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -60,11 +64,11 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
 
-                <TextBox Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="0"
+                <TextBox FontWeight="Bold" Grid.Row="0"
                    HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26">
                 </TextBox>
 
-                <TextBox Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.Row="1"
+                <TextBox FontWeight="Bold" Grid.Row="1"
                    HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26">
                 </TextBox>
             </Grid>
@@ -76,7 +80,8 @@
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
 					Background="{StaticResource SearchFilterBG}"
-					BorderBrush="{StaticResource SearchFilterBorder}" Margin="0,0,0,0" Width="Auto">
+					BorderBrush="{StaticResource SearchFilterBorder}" Margin="0,0,0,0"
+                    Command="{Binding Path=CommandHide}">
 				<Grid Margin="0,0,-2,0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="8"/>

@@ -160,15 +160,15 @@
                     <RowDefinition Height="235"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="AdminPanel" Grid.Row="0" VerticalAlignment="Bottom" 
-            	        Style="{StaticResource ResourceKey=btnProtokol}"  
-            	        Command="{Binding AdminPanel_Click}"
+            	        Style="{StaticResource ResourceKey=btnProtokol}"
             	        Background="{StaticResource NeuBG}"
             	        BorderBrush="{StaticResource NeuBorder}" 
-                        Width="Auto" Height="62">
+                        Width="Auto" Height="62"
+                        Command="{Binding Path=AdminLogin}">
                     <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="ADMINISTRATIONS&#xA;PANEL" />
                 </Button>
                 
-                <Popup IsOpen="{Binding IsPressed, ElementName=AdminPanel, Mode=OneWay}" 
+                <Popup IsOpen="{Binding Path=DialogShow}" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                        PlacementTarget="{Binding ElementName=gridtest}" Placement="Center"
                        PopupAnimation="Slide" AllowsTransparency="True">
@@ -183,7 +183,7 @@
                                 <GradientStop Color="White" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
-                        <ContentControl Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,10"/>
+                        <ContentControl Content="{Binding Path=DialogElement}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,10"/>
                     </Border>
                 </Popup>
             </Grid>

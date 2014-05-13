@@ -138,6 +138,8 @@
     <Compile Include="ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\Filters\TripFilterViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\TripsViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Confirmations\AdminLoginConfirmViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\ConfirmationViewModel.cs" />
     <Compile Include="ViewModel\Base\FilterViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Filter\IFilter.cs" />
     <Compile Include="ViewModel\Base\Filter\FilterChangedEventArgs.cs" />
