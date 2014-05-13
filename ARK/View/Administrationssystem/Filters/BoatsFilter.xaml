@@ -6,13 +6,16 @@
              xmlns:VMFilter="clr-namespace:ARK.ViewModel.Administrationssystem.Filters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource styleCheckBox}"/>
+    </UserControl.Resources>
+    
     <UserControl.DataContext>
         <VMFilter:BoatFilterViewModel></VMFilter:BoatFilterViewModel>
     </UserControl.DataContext>
+    
     <StackPanel>
-        <Label FontSize="18">Filter</Label>
-        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
-        
         <CheckBox Content="Både ude" IsChecked="{Binding Path=ShowBoatsOut, Mode=TwoWay}"></CheckBox>
         <CheckBox Content="Både hjemme" IsChecked="{Binding Path=ShowBoatsHome, Mode=TwoWay}"></CheckBox>
         <Separator Height="20"></Separator>
