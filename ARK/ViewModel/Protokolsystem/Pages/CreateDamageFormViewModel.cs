@@ -180,7 +180,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         db.DamageForm.Add(damageForm);
                         db.SaveChanges();
 
-                        throw new NotImplementedException("Retur til DistanceStatistics");
                     }
                 });
             }
