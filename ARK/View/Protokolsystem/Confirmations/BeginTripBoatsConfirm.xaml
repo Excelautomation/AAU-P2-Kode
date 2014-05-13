@@ -70,13 +70,13 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="{Binding Path=Trip.Boat.Name}" FontWeight="Bold"/>
+                        <Run Text="{Binding Path=Trip.Boat.Name, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="{Binding Path=Trip.Boat.NumberofSeats}" FontWeight="Bold"/>
+                        <Run Text="{Binding Path=Trip.Boat.NumberofSeats}"/>
                     </TextBlock>
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="{Binding Path=Trip.Boat.SpecificBoatType}" FontWeight="Bold"/>
+                        <Run Text="{Binding Path=Trip.Boat.SpecificBoatType}"/>
                     </TextBlock>
                 </StackPanel>
             </Grid>
