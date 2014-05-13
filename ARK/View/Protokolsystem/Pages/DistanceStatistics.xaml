@@ -140,6 +140,7 @@
 
         <ListView x:Name="LastTrips" 
                   ItemsSource="{Binding Path=SelectedMember.FilteredTrips}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0"
+                  SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}"
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -278,11 +279,22 @@
             </Button>
         
             <Button x:Name="btnCustomDistance" 
-                    DockPanel.Dock="Right"
-            	    Style="{StaticResource ResourceKey=btnFilter}" 
+                    DockPanel.Dock="Right" 
             	    Command="{Binding ToggleKeyboard}"
             	    Background="{StaticResource ChangeBG}"
             	    BorderBrush="{StaticResource ChangeBorder}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedTrip.Editable}" Value="true">
+                                <DataTrigger.Setters>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
