@@ -15,6 +15,7 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <valueConverters:ValueLessThanConverter x:Key="WindowDownsize"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
     <Grid>
         <Grid.Background>
@@ -31,6 +32,8 @@
                     <Image Source="/View/images/house.png" Height="32" />
                     <Label FontSize="28" Margin="0">OVERSIGT</Label>
                 </WrapPanel>
+                
+                
                 <StackPanel>
                     <StackPanel Visibility="{Binding Path=ShowSkader}">
                         <WrapPanel>
@@ -223,5 +226,6 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <ProgressBar Height="30" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" IsIndeterminate="True" Visibility="{Binding Path=LoadingData, Converter={StaticResource BoolToVis}}"/>
     </Grid>
 </UserControl>

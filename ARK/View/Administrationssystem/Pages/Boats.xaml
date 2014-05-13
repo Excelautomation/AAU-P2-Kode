@@ -100,7 +100,11 @@
                             </WrapPanel>
                             <WrapPanel>
                                 <TextBlock Text="Mest anvendende:" Width="100"/>
-                                <TextBlock Text="{Binding Path=MostUsingMember.FirstName}"/>
+                                <TextBlock>
+                                    <Run Text="{Binding Path=MostUsingMember.FirstName}"/>
+                                    <Run Text=" "/>
+                                    <Run Text="{Binding Path=MostUsingMember.LastName}"/>
+                                </TextBlock>
                             </WrapPanel>
                             <WrapPanel>
                                 <TextBlock Text="Kilometer sejlet" Width="100"/>
