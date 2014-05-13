@@ -105,22 +105,16 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         DistancesPerDay = DistancesPerDay,
                         CampSites = CampSites,
                         Members = SelectedMembers.Select(mvm => mvm.Member).ToList(),
-                        Status = LongTripForm.BoatStatus.Awaiting
+                        Status = LongTripForm.BoatStatus.Awaiting,
+                        ResponsibleMember = _members[0]
                     };
 
                     db.LongTripForm.Add(longTripForm);
                     db.SaveChanges();
-                });
-            }
-        }
 
-        public ICommand CreateLongTripForm
-        {
-            get
-            {
-                return
-                    GetCommand<object>(
-                        a => ProtocolSystem.NavigateToPage(() => new CreateLongTripForm(), "OPRET NY LANGTUR"));
+                    // Returner til Kilometerstatistik.
+                    throw new NotImplementedException("Return to DistanceStatistics");
+                });
             }
         }
 
