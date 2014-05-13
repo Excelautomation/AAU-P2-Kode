@@ -7,6 +7,7 @@ using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
+using ARK.HelperFunctions;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
@@ -18,8 +19,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
         private Trip _selectedTrip;
         private double _customDistance;
-        private bool _canEndTrip;
-        private Regex _validDistance = new Regex(@"(?'number'\d+(?:(?:,|.)\d+)?)");
+        private readonly Regex _validDistance = new Regex(@"(?'number'\d+(?:(?:,|.)\d+)?)");
         private DateTime _latestData;
 
         // Constructor
@@ -77,42 +77,31 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public bool CanEndTrip
-        {
-            get
-            {
-                return _canEndTrip;
-            }
-            set
-            {
-                _canEndTrip = value;
-                Notify();
-            }
-        }
-
         public ICommand EndTrip
         {
             get
             {
-                return GetCommand<object>(e =>
-                {
-                    if (SelectedStdTrip != null)
+                return new RelayCommand(
+                    e =>
                     {
-                        SelectedTrip.Title = SelectedStdTrip.Title;
-                        SelectedTrip.Direction = SelectedStdTrip.Direction;
-                        SelectedTrip.Distance = SelectedStdTrip.Distance;
-                    }
+                        if (SelectedStdTrip != null)
+                        {
+                            SelectedTrip.Title = SelectedStdTrip.Title;
+                            SelectedTrip.Direction = SelectedStdTrip.Direction;
+                            SelectedTrip.Distance = SelectedStdTrip.Distance;
+                        }
 
-                    // set Custom distance if different from default
-                    SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : SelectedTrip.Distance;
-                    SelectedTrip.TripEndedTime = DateTime.Now;
-                    _db.SaveChanges();
+                        // set Custom distance if different from default
+                        SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : SelectedTrip.Distance;
+                        SelectedTrip.TripEndedTime = DateTime.Now;
+                        _db.SaveChanges();
 
-                    var mainViewModel = base.Parent as ProtocolSystemMainViewModel;
-                    this.GetActiveTrips();
-                    mainViewModel.UpdateDailyKilometers();
-                    mainViewModel.UpdateNumBoatsOut();
-                });
+                        var mainViewModel = base.Parent as ProtocolSystemMainViewModel;
+                        this.GetActiveTrips();
+                        mainViewModel.UpdateDailyKilometers();
+                        mainViewModel.UpdateNumBoatsOut();
+                    },
+                    e => this.SelectedStdTrip != null || this.CustomDistance > 0);
             }
         }
 
@@ -123,22 +112,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return GetCommand<IList>(st =>
                 {
                     var temp = st.Cast<StandardTrip>();
-                    SelectedStdTrips = temp;
-                    if (this.SelectedStdTrips.Count() == 1)
-                    {
-                        this.CanEndTrip = true;
-                        this.SelectedStdTrip = this.SelectedStdTrips.Single();
-                    }
-                    else
-                    {
-                        this.CanEndTrip = false;
-                        this.SelectedStdTrip = null;
-                    }
+                    this.SelectedStdTrip = temp.FirstOrDefault();
                 });
             }
         }
-
-        public IEnumerable<StandardTrip> SelectedStdTrips { get; set; }
 
         public Trip SelectedTrip
         {
@@ -165,15 +142,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private void CheckCanEndTrip(object sender, KeyboardEventArgs args)
         {
             CaptureCollection temp;
-            if ((temp = _validDistance.Match(args.Text).Groups["number"].Captures).Count > 0)
-            {
-                this.CustomDistance = Convert.ToDouble(temp[0].Value);
-                this.CanEndTrip = true;
-            }
-            else if (this.SelectedStdTrip == null)
-            {
-                this.CanEndTrip = false;
-            }
+            this.CustomDistance = (temp = _validDistance.Match(args.Text).Groups["number"].Captures).Count > 0 ? Convert.ToDouble(temp[0].Value) : 0;
         }
     }
 }
