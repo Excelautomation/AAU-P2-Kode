@@ -49,31 +49,49 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0">
-                            <Run Text="Type:"/>
+                        
+                        
+                        <TextBlock Grid.Row="0" Text="{Binding Path=Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                        
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1">
+                            <Run Text="Skadetype:" FontWeight="Bold"/>
                             <Run Text="{Binding Path=Type}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="1">
-                            <Run Text="Oprettelse:"/>
-                            <Run Text="{Binding Path=Date}"/>
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2">
+                            <Run Text="Registreret:" FontWeight="Bold"/>
+                            <Run Text="{Binding Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="2">
-                            <Run Text="Type:"/>
-                            <Run Text="{Binding Path=Type}"/>
+
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="3">
+                            <Run Text="Anvendelighed:" FontWeight="Bold"/>
+                            <Run>
+                                <Run.Style>
+                                    <Style TargetType="Run">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Functional}" Value="True">
+                                                <Setter Property="Foreground" Value="OrangeRed"/>
+                                                <Setter Property="Text" Value="Anvendelig"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Functional}" Value="False">
+                                                <Setter Property="Foreground" Value="Red"/>
+                                                <Setter Property="Text" Value="Ikke anvendelig"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Run.Style>
+                            </Run>
                         </TextBlock>
-                        <TextBlock Grid.Column="3">
-                            <Run Text="Er Funktionel:"/>
-                            <Run Text="{Binding Path=Functional}"/>
-                        </TextBlock>
+                        
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
