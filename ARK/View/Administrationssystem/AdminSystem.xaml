@@ -268,19 +268,19 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Image Source="/View/images/table_tab_search.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                                <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
-                                           FontFamily="Calibri" 
-                                           FontSize="14">
+                                <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}">
                                     <Run Text="SØGNING"/>
                                 </TextBlock>
                             </Grid>
                         </WrapPanel>
                     </Border>
 
-                    <administrationssystem1:SearchTextBox x:Name="SearchTextBox" Margin="-4,0,1,5" SearchEventTimeDelay="00:00:00.20" Height="25" Text="{Binding Path=SearchText}">
+                    <administrationssystem1:SearchTextBox x:Name="SearchTextBox" Margin="-4,0,1,5" SearchEventTimeDelay="00:00:00.20" 
+                                                          Height="25" Text="{Binding Path=SearchText}" Padding="10,0,0,0">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Search">
-                                <i:InvokeCommandAction Command="{Binding Path=SearchChangedCommand}" CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}" />
+                                <i:InvokeCommandAction Command="{Binding Path=SearchChangedCommand}" CommandParameter="{Binding ElementName=SearchTextBox, 
+                                    Path=Text}" />
                             </i:EventTrigger>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding Path=GotFocus}" CommandParameter="{Binding ElementName=SearchTextBox}" />
@@ -298,9 +298,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Source="/View/images/filter.png" Grid.Column="0" Height="16" 
                                        Width="16" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                                <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"
-                                           FontFamily="Calibri" 
-                                           FontSize="14">
+                                <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}">
                                     <Run Text="FILTER"/>
                                 </TextBlock>
                             </Grid>
@@ -311,7 +309,7 @@
                             BorderBrush="{StaticResource SearchTextBox_Border}" Margin="-4,0,1,5">
                         <StackPanel HorizontalAlignment="Stretch" Margin="0,4,0,0" DockPanel.Dock="Left" 
                                     VerticalAlignment="Top">
-                            <ContentControl Content="{Binding Path=Filter}" Margin="5,0,5,5" />
+                            <ContentControl Content="{Binding Path=Filter}" Margin="10,0,5,5" />
                         </StackPanel>
                     </Border>
 
