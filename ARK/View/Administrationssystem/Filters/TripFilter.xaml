@@ -6,20 +6,25 @@
              xmlns:filters="clr-namespace:ARK.ViewModel.Administrationssystem.Filters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    
     <UserControl.DataContext>
         <filters:TripFilterViewModel />
     </UserControl.DataContext>
 
+    <UserControl.Resources>
+        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource styleCheckBox}"/>
+    </UserControl.Resources>
+
     <StackPanel>
-        <Label FontSize="18">Bådtype</Label>
+        <Label Style="{StaticResource styleHeadlineFilters}">Bådtype</Label>
         <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
         <ItemsControl ItemsSource="{Binding Path=ControlsBoatType}"></ItemsControl>
 
-        <Label FontSize="18">Distance</Label>
+        <Label Style="{StaticResource styleHeadlineFilters}">Distance</Label>
         <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
         <ItemsControl ItemsSource="{Binding Path=ControlsDistance}"></ItemsControl>
 
-        <Label FontSize="18">År</Label>
+        <Label Style="{StaticResource styleHeadlineFilters}">År</Label>
         <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
         <ItemsControl ItemsSource="{Binding Path=ControlsYear}"></ItemsControl>
     </StackPanel>
