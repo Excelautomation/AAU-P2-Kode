@@ -60,9 +60,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
                 ResetData();
             };
-
-            // Initializes the radiobuttons
-            Direction = "Øst";
         }
 
         private void LoadMembers()
@@ -239,9 +236,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
                     ConfirmTripData();
 
-                    var mainViewModel = Parent as ProtocolSystemMainViewModel;
-                    mainViewModel.ShowDialog(new BeginTripBoatsConfirm());
-
                     //ShowDialog(new BeginTripBoatsConfirm());
                 }); 
             }
@@ -281,12 +275,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 trip.LongTrip = LongTrip;
                 trip.Direction = Direction;
 
-                // viser confirm trip skærmen
-                //var mainViewModel = Parent as ProtocolSystemMainViewModel;
                 var dlg = new BeginTripBoatsConfirm();
                 var ConfirmTripViewModel = (BeginTripBoatsConfirmViewModel)dlg.DataContext;
                 ConfirmTripViewModel.Trip = trip;
-                //mainViewModel.NavigateToPage(() => dlg, "Confirm");
+                ProtocolSystem.ShowDialog(dlg);
 
                 // hold øje med om denne bliver kørt
                 //mainViewModel.UpdateNumBoatsOut();
