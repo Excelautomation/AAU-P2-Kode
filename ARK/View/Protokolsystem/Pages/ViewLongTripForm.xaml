@@ -81,15 +81,15 @@
                                     <Style TargetType="Run">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Status}" Value="Awaiting">
-                                                <Setter Property="Foreground" Value="Orange"/>
+                                                <Setter Property="Foreground" Value="DarkOrange"/>
                                                 <Setter Property="Text" Value="Afventer godkendelse"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Status}" Value="Accepted">
-                                                <Setter Property="Foreground" Value="Green"/>
+                                                <Setter Property="Foreground" Value="MediumSeaGreen"/>
                                                 <Setter Property="Text" Value="Godkendt"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Status}" Value="Denied">
-                                                <Setter Property="Foreground" Value="Red"/>
+                                                <Setter Property="Foreground" Value="IndianRed"/>
                                                 <Setter Property="Text" Value="Aflyst"/>
                                             </DataTrigger>
                                         </Style.Triggers>

@@ -16,6 +16,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private List<DamageForm> _damageForms;
         private FrameworkElement _infoPage;
 
+        private DamageForm _selectedDamageForm;
+
+        public DamageForm SelectedDamageForm
+        {
+            get { return _selectedDamageForm; }
+            set { _selectedDamageForm = value; UpdateInfo(); }
+        }
+
+
         public ViewDamageFormViewModel()
         {
             var db = DbArkContext.GetDbContext();
@@ -64,9 +73,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void UpdateInfo()
         {
-            //Info. = new ObservableCollection<Boat> { SelectedBoat };
-            //Info.SelectedMembers = SelectedMembers;
+            Info.SelectedDamageForm = SelectedDamageForm;
 
+            
             ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
     }
