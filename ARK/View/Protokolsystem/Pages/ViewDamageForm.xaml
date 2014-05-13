@@ -42,9 +42,9 @@
         </Border>
 
         <ListView x:Name="lstDamgeForm" 
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=DamageForms}" Grid.Row="1" 
                   VerticalAlignment="Stretch"
-                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   SelectedItem="{Binding Path=SelectedDamageForm, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
