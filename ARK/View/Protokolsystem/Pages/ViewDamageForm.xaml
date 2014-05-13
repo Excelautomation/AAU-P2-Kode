@@ -6,7 +6,7 @@
              xmlns:Protokolsystem="clr-namespace:ARK.ViewModel.Protokolsystem"
              xmlns:pages="clr-namespace:ARK.ViewModel.Protokolsystem.Pages"
              d:DesignHeight="500"
-             d:DesignWidth="500"
+             d:DesignWidth="700"
              mc:Ignorable="d">
 
     <UserControl.DataContext>
@@ -58,10 +58,25 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
-                        
-                        <TextBlock Grid.Row="0" Text="{Binding Path=Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
-                        
+
+                        <StackPanel Grid.Row="0">
+                            <Border BorderThickness="3" Width="200">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Functional}" Value="False">
+                                                <Setter Property="BorderBrush" Value="IndianRed"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Functional}" Value="True">
+                                                <Setter Property="BorderBrush" Value="MediumSeaGreen"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                            <TextBlock Text="{Binding Path=Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                        </StackPanel>
+
                         <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1">
                             <Run Text="Skadetype:" FontWeight="Bold"/>
                             <Run Text="{Binding Path=Type}"/>
@@ -69,55 +84,16 @@
 
                         <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2">
                             <Run Text="Registreret:" FontWeight="Bold"/>
-                            <Run Text="{Binding Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                            <Run Text="{Binding Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="3">
-                            <Run Text="Anvendelighed:" FontWeight="Bold"/>
-                            <Run>
-                                <Run.Style>
-                                    <Style TargetType="Run">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=Functional}" Value="True">
-                                                <Setter Property="Foreground" Value="MediumSeaGreen"/>
-                                                <Setter Property="Text" Value="Anvendelig"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=Functional}" Value="False">
-                                                <Setter Property="Foreground" Value="IndianRed"/>
-                                                <Setter Property="Text" Value="Ikke anvendelig"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Run.Style>
-                            </Run>
-                        </TextBlock>
                         
-
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <DockPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,5,0,0" LastChildFill="False">
-
-            <Button x:Name="btnRectifyDamageForm"
-                    Margin="0,0,3,0"
-                    DockPanel.Dock="Left"
-                    Command="{Binding ViewDamageForm}"
-            	    Style="{StaticResource ResourceKey=btnFilter}" 
-            	    Background="{DynamicResource ChangeBorder}"
-            	    BorderBrush="{StaticResource InfoBorder}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/document_inspector.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="SKADE&#xA;UDBEDRET" />
-                </Grid>
-            </Button>
 
             <Button x:Name="btnActiveDamgeForms"
                     Margin="0,0,3,0"
@@ -174,6 +150,25 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="INDSEND&#xA;SKADE" />
                 </Grid>
             </Button>
+            
+            <Button x:Name="btnRectifyDamageForm"
+                    DockPanel.Dock="Right"
+                    Command="{Binding FixDamageForm}"
+            	    Style="{StaticResource ResourceKey=btnFilter}" 
+            	    Background="{DynamicResource ChangeBorder}"
+            	    BorderBrush="{StaticResource InfoBorder}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/accept.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="SKADE&#xA;UDBEDRET" />
+                </Grid>
+            </Button>
+            
         </DockPanel>
     </Grid>
 </UserControl>
