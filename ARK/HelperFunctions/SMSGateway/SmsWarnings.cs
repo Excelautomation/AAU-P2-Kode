@@ -30,6 +30,7 @@ namespace ARK.HelperFunctions.SMSGateway
             "Hej {0} Bekræft venligst med OK, at du har det godt. Venlig hilsen Aalborg Roklub";
         private const string MessageInvalidResponse = "Bekræftelsen blev ikke modtaget";
         private const string MessageValidResponse = "Bekræftelsen blev succesfuldt modtaget";
+        private const string MessageNotHomeAdministration = "Nogle af medlemmerne på rotur er ikke kommet hjem endnu";
 
         public SmsWarnings()
         {
@@ -42,19 +43,36 @@ namespace ARK.HelperFunctions.SMSGateway
         {
             // Gør kun dette her når solen er nede
 
-            using (var db = new DbArkContext())
+            if (IsAfterSunset() || true)
             {
-                var warnings = GetTripWarningSms(db).ToList();
-                var responses = db.GetSMS.ToList();
 
-                HandleWarningSms(warnings);
-                HandleResponseSms(warnings, responses);
+                using (var db = new DbArkContext())
+                {
+                    var warnings = GetTripWarningSms(db).ToList();
+                    var responses = db.GetSMS.ToList();
 
-                // Fjern tidligere sms'er
-                db.GetSMS.RemoveRange(responses);
+                    HandleWarningSms(warnings);
+                    HandleResponseSms(warnings, responses);
 
-                db.SaveChanges();
+                    // Fjern tidligere sms'er
+                    db.GetSMS.RemoveRange(responses);
+
+                    db.SaveChanges();
+                }
             }
+        }
+
+        private void HandleNoResponseSms(IEnumerable<TripWarningSms> warnings)
+        {
+            foreach (var warn in warnings
+                .Where(warn => !warn.RecievedSms.HasValue)
+                .Where(warn => warn.SentSms != null
+                               && (DateTime.Now - warn.SentSms.Value).TotalMinutes > 15))
+            {
+                //throw new NotImplementedException();
+                Gateway.SendSms(Sender, "random number", MessageNotHomeAdministration);
+            }
+
         }
 
         private void HandleResponseSms(IEnumerable<TripWarningSms> warnings, IEnumerable<GetSMS> responses)
