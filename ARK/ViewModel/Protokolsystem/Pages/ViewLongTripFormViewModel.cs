@@ -15,6 +15,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         // Fields
         private List<LongTripForm> _longTripForms;
         private  FrameworkElement _infoPage;
+        private LongTripForm _selectedLongTripForm;
 
         // Constructor
         public ViewLongTripFormViewModel()
@@ -24,6 +25,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             ParentAttached += (sender, e) =>
             {
                 LongTripForms = db.LongTripForm.ToList();
+                SelectedLongTripForm = LongTripForms[0];
 
                 UpdateInfo();
             };
@@ -34,6 +36,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get { return _longTripForms; }
             set { _longTripForms = value; Notify(); }
+        }
+
+        public LongTripForm SelectedLongTripForm
+        {
+            get { return _selectedLongTripForm; }
+            set { _selectedLongTripForm = value; Notify(); }
         }
 
         public ICommand CreateLongTripForm
@@ -64,8 +72,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void UpdateInfo()
         {
-            //Info. = new ObservableCollection<Boat> { SelectedBoat };
-            //Info.SelectedMembers = SelectedMembers;
+            Info.SelectedLongTripForm = SelectedLongTripForm;
 
             ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
