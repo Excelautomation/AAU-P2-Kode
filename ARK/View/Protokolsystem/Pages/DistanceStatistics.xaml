@@ -115,19 +115,18 @@
                   SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="45"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="53"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Style="{StaticResource imgMedal}"/>
-                        <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}">
+                    <DockPanel>
+                        
+                        <Label Width="45" Style="{StaticResource imgMedal}"/>
+                        
+                        <TextBlock Width="250" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Path=Member.FirstName}" FontWeight="Normal"/>
                             <Run Text="{Binding Path=Member.LastName}" FontWeight="Normal"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding Path=Distance}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />
-                    </Grid>
+                        
+                        <TextBlock Text="{Binding Path=Distance}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />
+                    
+                    </DockPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             
@@ -144,45 +143,40 @@
                   SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <StackPanel>
 
-                        <TextBlock Text="{Binding Path=Trip.Boat.Name}" Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
-
-                        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}" HorizontalAlignment="Right">
+                        <DockPanel>
+                            <TextBlock Width="250" Text="{Binding Path=Trip.Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
+                            <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}" HorizontalAlignment="Right">
                             <Run Text="{Binding Path=Trip.Distance}"/>
                             <Run Text="Km"/>
                         </TextBlock>
+                        </DockPanel>
 
-                        <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}">
+                        <DockPanel>
+                            <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Start tid:" FontWeight="Bold" />
                             <Run Text="{Binding Path=Trip.TripStartTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
+                            <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Right">
+                                <Run Text="Tid ude:" FontWeight="Bold"/>
+                                <Run Text="{Binding Path=Trip.TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
+                            </TextBlock>
+                        </DockPanel>
+
                         
-                        <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource lstViewContent}">
+                        
+                        <TextBlock Style="{StaticResource lstViewContent}">
                             <Run Text="Slut tid:" FontWeight="Bold"/>
                             <Run Text="{Binding Trip.TripEndedTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
                         </TextBlock>
 
-                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" Visibility="{Binding Path=Editable, Converter={StaticResource BoolToVis}}">
+                        <DockPanel Visibility="{Binding Path=Editable, Converter={StaticResource BoolToVis}}">
                             <CheckBox Style="{StaticResource ResourceKey=styleCheckBox}" IsChecked="{Binding Path=Editable, Mode=OneWay}"/>
                             <TextBlock Text="Redigerbar" Style="{StaticResource ResourceKey=styleContent}" FontWeight="Bold" Foreground="#FF2A9900"/>
-                        </StackPanel>
+                        </DockPanel>
                             
-                        <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" HorizontalAlignment="Right">
-                            <Run Text="Tid ude:" FontWeight="Bold"/>
-                            <Run Text="{Binding Path=Trip.TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
-                        </TextBlock>
-                    </Grid>
+                        </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -279,7 +273,7 @@
             </Button>
         
             <Button x:Name="btnCustomDistance" 
-                    DockPanel.Dock="Right"
+                    DockPanel.Dock="Right" 
             	    Command="{Binding ToggleKeyboard}"
             	    Background="{StaticResource ChangeBG}"
             	    BorderBrush="{StaticResource ChangeBorder}">

@@ -48,18 +48,9 @@
                   SelectedItem="{Binding Path=SelectedDamageForm, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <StackPanel>
 
-                        <StackPanel Grid.Row="0">
+                        <StackPanel>
                             <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
                                 <Border.Style>
                                     <Style TargetType="Border">
@@ -77,18 +68,24 @@
                             <TextBlock Text="{Binding Path=Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
                         </StackPanel>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="1">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                            <Run Text="Anmelder:" FontWeight="Bold"/>
+                            <Run Text="{Binding Path=RegisteringMember.FirstName}"/>
+                            <Run Text="{Binding Path=RegisteringMember.LastName}"/>
+                        </TextBlock>
+                        
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Skadetype:" FontWeight="Bold"/>
                             <Run Text="{Binding Path=Type}"/>
                         </TextBlock>
 
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Grid.Row="2">
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="Registreret:" FontWeight="Bold"/>
                             <Run Text="{Binding Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
 
                         
-                    </Grid>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
