@@ -10,6 +10,7 @@ using ARK.View.Protokolsystem.Filters;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Protokolsystem.Data;
+using ARK.Model;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
@@ -21,6 +22,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private IEnumerable<MemberDistanceViewModel> _memberKmCollection;
         private IEnumerable<MemberDistanceViewModel> _memberKmCollectionFiltered;
         private MemberDistanceViewModel _selectedMember;
+        private TripViewModel _selectedTrip;
+
 
         // Constructor
         public DistanceStatisticsViewModel()
@@ -43,6 +46,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
+
+        public TripViewModel SelectedTrip
+        {
+            get { return _selectedTrip; }
+            set { 
+                _selectedTrip = value; Notify(); }
+        }
+        
         public MemberDistanceViewModel SelectedMember
         {
             get { return _selectedMember; }
