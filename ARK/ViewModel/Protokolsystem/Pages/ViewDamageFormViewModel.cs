@@ -15,6 +15,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
     {
         private List<DamageForm> _damageForms;
         private FrameworkElement _infoPage;
+        DbArkContext db = DbArkContext.GetDbContext();
 
         private DamageForm _selectedDamageForm;
 
@@ -27,7 +28,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         public ViewDamageFormViewModel()
         {
-            var db = DbArkContext.GetDbContext();
 
             ParentAttached += (sender, e) =>
             {
@@ -60,7 +60,21 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "AKTIVE SKADES BLANKETTER"));
+                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
+            }
+        }
+
+        public ICommand FixDamageForm
+        {
+            get
+            {
+                return GetCommand<object>(e => 
+                {
+                    SelectedDamageForm.Closed = true;
+                    db.SaveChanges();
+                    DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
+                    SelectedDamageForm = DamageForms.First();
+                });
             }
         }
 
