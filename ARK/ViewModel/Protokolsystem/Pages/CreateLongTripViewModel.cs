@@ -94,7 +94,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand<object>(d =>
                 {
-                    var db = new DbArkContext();
+                    var db = DbArkContext.GetDbContext();
                     var longTripForm = new LongTripForm
                     {
                         FormCreated = DateTime.Now,
@@ -106,14 +106,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         CampSites = CampSites,
                         Members = SelectedMembers.Select(mvm => mvm.Member).ToList(),
                         Status = LongTripForm.BoatStatus.Awaiting,
-                        ResponsibleMember = _members[0]
+                        ResponsibleMember = SelectedMembers[0].Member
                     };
 
                     db.LongTripForm.Add(longTripForm);
                     db.SaveChanges();
 
                     // Returner til Kilometerstatistik.
-                    throw new NotImplementedException("Return to DistanceStatistics");
+                    ProtocolSystem.StatisticsDistance.Execute(null);
                 });
             }
         }

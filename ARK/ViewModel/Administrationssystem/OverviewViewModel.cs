@@ -35,6 +35,8 @@ namespace ARK.ViewModel.Administrationssystem
 
             ParentAttached += (sender, e) => Task.Factory.StartNew(() =>
             {
+                LoadingData = true;
+
                 // Load data
                 using (var db = new DbArkContext())
                 {
@@ -62,6 +64,7 @@ namespace ARK.ViewModel.Administrationssystem
 
                     // Nulstil filter
                     ResetFilter();
+                    LoadingData = false;
                 }
             }).Wait(500);
 
@@ -69,6 +72,14 @@ namespace ARK.ViewModel.Administrationssystem
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
+        }
+
+        public bool LoadingData
+        {
+            get { return _loadingData; }
+            set { _loadingData = value;
+                Notify();
+            }
         }
 
         public IEnumerable<DamageForm> Skadesblanketter
@@ -136,6 +147,7 @@ namespace ARK.ViewModel.Administrationssystem
         private Boat _selectedBoat;
         private DamageForm _selectedDamageForm;
         private LongTripForm _selectedLongDistanceForm;
+        private bool _loadingData;
 
         public DamageForm SelectedDamageForm
         {
