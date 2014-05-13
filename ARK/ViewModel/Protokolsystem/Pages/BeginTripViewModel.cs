@@ -233,11 +233,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        private IInfoContainerViewModel GetInfoContainerViewModel
-        {
-            get { return Parent as IInfoContainerViewModel; }
-        }
-
         public bool EnableMembers
         {
             get { return _enableMembers; }
@@ -265,7 +260,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             Info.SelectedBoat = new ObservableCollection<Boat> {SelectedBoat};
             Info.SelectedMembers = SelectedMembers;
 
-            GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
+            ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
 
         #region Filter
