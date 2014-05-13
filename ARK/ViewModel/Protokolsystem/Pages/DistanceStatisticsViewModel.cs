@@ -6,9 +6,11 @@ using System.Windows;
 using System.Windows.Input;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
+using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Filters;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.ViewModel.Protokolsystem.Additional;
 using ARK.ViewModel.Protokolsystem.Data;
 using ARK.Model;
 
@@ -22,6 +24,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private IEnumerable<MemberDistanceViewModel> _memberKmCollection;
         private IEnumerable<MemberDistanceViewModel> _memberKmCollectionFiltered;
         private MemberDistanceViewModel _selectedMember;
+        private FrameworkElement _additionalInfoPage;
         private TripViewModel _selectedTrip;
 
 
@@ -46,14 +49,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
 
-
-        public TripViewModel SelectedTrip
-        {
-            get { return _selectedTrip; }
-            set { 
-                _selectedTrip = value; Notify(); }
-        }
-        
         public MemberDistanceViewModel SelectedMember
         {
             get { return _selectedMember; }
@@ -61,6 +56,19 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 _selectedMember = value;
                 Notify();
+
+                UpdateInfo();
+            }
+        }
+
+        public TripViewModel SelectedTrip
+        {
+            get { return _selectedTrip; }
+            set { 
+                _selectedTrip = value;
+                Notify();
+
+                UpdateInfo();
             }
         }
 
@@ -152,6 +160,24 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     member.UpdateDistance();
                 }
             }
+        }
+
+        public FrameworkElement InfoPage
+        {
+            get { return _additionalInfoPage ?? (_additionalInfoPage = new DistanceStatisticsAdditionalInfo()); }
+        }
+
+        public DistanceStatisticsAdditionalInfoViewModel Info
+        {
+            get { return InfoPage.DataContext as DistanceStatisticsAdditionalInfoViewModel; }
+        }
+
+        private void UpdateInfo()
+        {
+            Info.SelectedMember = SelectedMember;
+            Info.SelectedTrip = SelectedTrip;
+
+            ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
     }
 }

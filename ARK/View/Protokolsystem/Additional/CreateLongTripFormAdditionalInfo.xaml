@@ -59,11 +59,9 @@
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
             <TextBlock Style="{StaticResource ResourceKey=txbHeader}">
-                <Run Text="BESÆTNING"/>
+                <Run Text="Deltagere"/>
                 <Run Text="(" FontWeight="Normal"/>
                 <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> 
-                <Run Text=" / " FontWeight="Normal"/>
-                <Run Text="{Binding Path=BoatNumberOfSeats, Mode=OneWay}"/>
                 <Run Text=")" FontWeight="Normal"/>
             </TextBlock>
         </Border>
@@ -144,6 +142,9 @@
                                         <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding Path=IsResponsible, Converter={StaticResource BoolToVis}}">
                                             <TextBlock Text="Langtursstyrmand: " FontSize="13px" FontWeight="Normal"/>
                                             <TextBlock Text="{Binding Path=Member.LongTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding Path=IsResponsible, Converter={StaticResource BoolToVis}}">
+                                            <TextBlock Text="Turansvarlig" FontSize="13px" FontWeight="Normal"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>

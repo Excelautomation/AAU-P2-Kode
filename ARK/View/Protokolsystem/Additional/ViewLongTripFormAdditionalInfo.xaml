@@ -60,7 +60,7 @@
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
             <TextBlock Style="{StaticResource ResourceKey=txbHeader}">
-                <Run Text="BESÆTNING"/>
+                <Run Text="DELTAGERE"/>
             </TextBlock>
         </Border>
 

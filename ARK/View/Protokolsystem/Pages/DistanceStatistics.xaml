@@ -118,15 +118,15 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="45"/>
-                            <ColumnDefinition Width="250"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="53"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Style="{StaticResource imgMedal}"/>
                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Path=Member.FirstName}" FontWeight="Normal"/>
                             <Run Text="{Binding Path=Member.LastName}" FontWeight="Normal"/>
                         </TextBlock>
-                        <TextBlock Grid.Column="2" Text="{Binding Path=Distance}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding Path=Distance}" Style="{StaticResource ResourceKey=lstListViewHeadline}" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -140,13 +140,13 @@
 
         <ListView x:Name="LastTrips" 
                   ItemsSource="{Binding Path=SelectedMember.FilteredTrips}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0"
-                  SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}"
-                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -279,7 +279,7 @@
             </Button>
         
             <Button x:Name="btnCustomDistance" 
-                    DockPanel.Dock="Right" 
+                    DockPanel.Dock="Right"
             	    Command="{Binding ToggleKeyboard}"
             	    Background="{StaticResource ChangeBG}"
             	    BorderBrush="{StaticResource ChangeBorder}">
