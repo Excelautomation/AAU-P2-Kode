@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ARK.HelperFunctions;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Additional;
@@ -87,6 +88,19 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get { return GetCommand<MemberDistanceViewModel>(e => { SelectedMember = e; }); }
         }
 
+        public ICommand ChangeDistance
+        {
+            get
+            {
+                return new RelayCommand(
+                    x =>
+                    {
+                        base.ToggleKeyboard.Execute(null);
+                    },
+                    x => this.SelectedTrip != null && this.SelectedTrip.Editable);
+            }
+        }
+
         #region Filter
 
         public FrameworkElement Filter
@@ -151,6 +165,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     .Select((member, i) => new MemberDistanceViewModel(member))
                     .OrderByDescending(member => member.Distance)
                     .ToList();
+
+                _memberKmCollection.Aggregate(1, (acc, val) =>
+                {
+                    val.Position = acc;
+                    return acc + 1;
+                });
             }
             else
             {
