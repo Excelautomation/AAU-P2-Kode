@@ -68,7 +68,7 @@
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Registreret:" FontWeight="Bold"/>
-                <Run Text="{Binding SelectedDamageForm.Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
+                <Run Text="{Binding SelectedDamageForm.Date, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
