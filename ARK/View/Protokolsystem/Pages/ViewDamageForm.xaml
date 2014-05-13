@@ -50,20 +50,30 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock  Grid.Column="0" Text="{Binding Path=Type}"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=Date}"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Path=Functional}"/>
-                        
-
-
+                        <TextBlock Grid.Column="0">
+                            <Run Text="Type:"/>
+                            <Run Text="{Binding Path=Type}"/>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1">
+                            <Run Text="Oprettelse:"/>
+                            <Run Text="{Binding Path=Date}"/>
+                        </TextBlock>
+                        <TextBlock Grid.Column="2">
+                            <Run Text="Type:"/>
+                            <Run Text="{Binding Path=Type}"/>
+                        </TextBlock>
+                        <TextBlock Grid.Column="3">
+                            <Run Text="Er Funktionel:"/>
+                            <Run Text="{Binding Path=Functional}"/>
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
