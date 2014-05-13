@@ -71,7 +71,8 @@
         </Border>
 
         <ListView x:Name="AllBoatsList" Grid.Column="0" Grid.Row="1"
-                  SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}" AlternationCount="2" 
+                  SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}"
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch" Grid.RowSpan="2">
             <ListView.ItemTemplate>
