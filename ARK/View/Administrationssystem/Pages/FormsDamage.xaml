@@ -8,81 +8,80 @@
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="600">
+    
     <UserControl.DataContext>
         <VM:FormsDamageViewModel></VM:FormsDamageViewModel>
     </UserControl.DataContext>
+    
     <UserControl.Resources>
         <valueConverters:BoolToStringConverter x:Key="Funktionel" FalseValue="Nej" TrueValue="Ja" />
         <valueConverters:BoolToStringConverter x:Key="Status" FalseValue="Åben" TrueValue="Lukket" />
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
     </UserControl.Resources>
+    
     <StackPanel>
-        
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" FontSize="20" HorizontalAlignment="Center" Margin="4" Content="Skadesblanket"/>
+            <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
+                            Grid.Column="0" Grid.Row="0" Background="#FFEAEAEA">
+                <WrapPanel Margin="0,2,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/View/images/table_error.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
+                                   Foreground="Black">
+                            <Run Text="SKADE OPLYSNINGER"/>
+                        </TextBlock>
+                    </Grid>
+                </WrapPanel>
+            </Border>
 
-
-            <WrapPanel Grid.Row="1" Margin="4" HorizontalAlignment="Center">
-
-                <StackPanel Width="400" Margin="4">
+            <WrapPanel Grid.Row="1" Margin="4" HorizontalAlignment="Left">
+                <StackPanel HorizontalAlignment="Stretch" Margin="4">
                     <WrapPanel>
-                        <TextBlock Text="Anmelder" Width="100"/>
+                        <TextBlock Text="Anmelder: " FontWeight="SemiBold"/>
                         <TextBlock Text="{Binding Path=DamageForm.RegisteringMember.FirstName}"/>
                         <TextBlock Text=" "/>
                         <TextBlock Text="{Binding Path=DamageForm.RegisteringMember.LastName}"/>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Båd" Width="100"/>
+                        <TextBlock Text="Båd: " FontWeight="SemiBold"/>
                         <TextBlock Text="{Binding Path=DamageForm.Boat.Name}"/>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Indsendt" Width="100"/>
+                        <TextBlock Text="Dato (Indsendt): " FontWeight="SemiBold" />
                         <TextBlock Text="{Binding Path=DamageForm.Date, StringFormat=d}"/>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Skadetype" Width="100"/>
+                        <TextBlock Text="Skadetype: " FontWeight="SemiBold" />
                         <TextBlock Text="{Binding Path=DamageForm.Type}"/>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Funktionel" Width="100"/>
+                        <TextBlock Text="Funktionel: " FontWeight="SemiBold" />
                         <TextBlock Text="{Binding Path=DamageForm.Functional, Converter={StaticResource Funktionel}}"/>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Status" Width="100"/>
-                        <TextBlock Text="{Binding Path=DamageForm.Closed, Converter={StaticResource Status}}">
-                             <!--<TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Åben"/>
-                                    <Setter Property="Foreground" Value="Green"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=DamageForm.Closed, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                            <Setter Property="Text" Value="Lukket"/>
-                                            <Setter Property="Foreground" Value="Red"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>-->
-                        </TextBlock>
+                        <TextBlock Text="Status: " FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding Path=DamageForm.Closed, Converter={StaticResource Status}}"/>
                     </WrapPanel>
-                </StackPanel>
-
-                <StackPanel Width="400" Margin="4">
-                    <Label Content="Kommentarer"/>
                     <WrapPanel Width="250" HorizontalAlignment="Left">
-                        <TextBox AcceptsReturn="True" Height="130" Name="CommentTextbox" Width="250" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
-                        <Button Content="Gem ændringer" Width="100" Command="{Binding SaveChanges}"/>
+                        <TextBlock Text="Kommentarer: " FontWeight="SemiBold" />
+                        <TextBox AcceptsReturn="True" Height="159" Name="CommentTextbox" Width="250" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
+                        <Button Content="Gem ændringer" Width="100" Command="{Binding SaveChanges}" Margin="0,5,0,0" Height="24"/>
                     </WrapPanel>
                 </StackPanel>
-
             </WrapPanel>
 
-            <WrapPanel Grid.Row="2" Margin="4" HorizontalAlignment="Center">
+            <WrapPanel Grid.Row="2" Margin="4" HorizontalAlignment="Left">
                 <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=OpenDamageForm}">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -105,6 +104,7 @@
                         <Label Content="Åben skadesblanket"/>
                     </StackPanel>
                 </Button>
+                
                 <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=CloseDamageForm}">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -128,7 +128,6 @@
                 </Button>
             </WrapPanel>
             
-            
             <TextBlock Grid.Row="3" FontSize="20">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
@@ -141,8 +140,6 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-
-            
             
         </Grid>
     </StackPanel>

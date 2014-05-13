@@ -75,7 +75,7 @@
                                             <TextBlock Style="{StaticResource lstListViewHeadline}" Text="{Binding Boat.Name}" />
                                             
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Indsendt af: " FontWeight="SemiBold" />
+                                                <TextBlock Text="Anmelder: " FontWeight="SemiBold" />
                                                 <TextBlock>
                                                     <Run Text="{Binding RegisteringMember.FirstName}" />
                                                     <Run Text="{Binding RegisteringMember.LastName}" />
