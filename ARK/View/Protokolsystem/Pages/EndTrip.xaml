@@ -149,23 +149,10 @@
             <Button x:Name="btnCustomDistance"
                     DockPanel.Dock="Right"
                     Margin="0,0,3,0"
-        		    Command="{Binding ToggleKeyboard}"
+        		    Command="{Binding SetCustomDistance}"
         		    Background="{StaticResource ChangeBG}"
-        		    BorderBrush="{StaticResource ChangeBorder}" Width="148">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=btnFilter}">
-                        <Style.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Path=SelectedTrip}" Value="{x:Null}"/>
-                                </MultiDataTrigger.Conditions>
-                                <MultiDataTrigger.Setters>
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                </MultiDataTrigger.Setters>
-                            </MultiDataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+        		    BorderBrush="{StaticResource ChangeBorder}" Width="148"
+                    Style="{StaticResource btnFilter}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>

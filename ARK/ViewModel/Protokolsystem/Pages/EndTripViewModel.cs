@@ -39,12 +39,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 }
                 this.GetActiveTrips();
 
-                base.ProtocolSystem.KeyboardTextChanged += this.CheckCanEndTrip;
+                base.ProtocolSystem.KeyboardTextChanged += this.MonitorCustomDistance;
+
+                this.ResetPage();
             };
 
             ParentDetached += (sender, args) =>
             {
-                base.ProtocolSystem.KeyboardTextChanged -= this.CheckCanEndTrip;
+                base.ProtocolSystem.KeyboardTextChanged -= this.MonitorCustomDistance;
             };
 
             TimeCounter.StopTime();
@@ -105,6 +107,16 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
+        public ICommand SetCustomDistance
+        {
+            get
+            {
+                return new RelayCommand(
+                    x => base.ToggleKeyboard.Execute(null),
+                    x => this.SelectedTrip != null);
+            }
+        }
+
         public ICommand StdTripSelected
         {
             get
@@ -139,10 +151,17 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
         }
 
-        private void CheckCanEndTrip(object sender, KeyboardEventArgs args)
+        private void MonitorCustomDistance(object sender, KeyboardEventArgs args)
         {
             CaptureCollection temp;
             this.CustomDistance = (temp = _validDistance.Match(args.Text).Groups["number"].Captures).Count > 0 ? Convert.ToDouble(temp[0].Value) : 0;
+        }
+
+        private void ResetPage()
+        {
+            this.SelectedTrip = null;
+            this.SelectedStdTrip = null;
+            base.ProtocolSystem.KeyboardClear();
         }
     }
 }
