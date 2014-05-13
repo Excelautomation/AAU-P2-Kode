@@ -19,7 +19,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
         private Trip _selectedTrip;
         private double _customDistance;
-        private readonly Regex _validDistance = new Regex(@"(?'number'\d+(?:(?:,|.)\d+)?)");
         private DateTime _latestData;
 
         // Constructor
@@ -105,6 +104,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         this.GetActiveTrips();
                         mainViewModel.UpdateDailyKilometers();
                         mainViewModel.UpdateNumBoatsOut();
+                        this.ResetPage();
                     },
                     e => this.SelectedStdTrip != null || this.CustomDistance > 0);
             }
@@ -156,8 +156,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void MonitorCustomDistance(object sender, KeyboardEventArgs args)
         {
-            CaptureCollection temp;
-            this.CustomDistance = (temp = _validDistance.Match(args.Text).Groups["number"].Captures).Count > 0 ? Convert.ToDouble(temp[0].Value) : 0;
+            double temp;
+            InputValidation.PositiveNumFromString(args.Text, out temp);
+            this.CustomDistance = temp;
         }
 
         private void ResetPage()

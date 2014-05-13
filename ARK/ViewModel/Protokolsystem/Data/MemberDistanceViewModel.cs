@@ -10,6 +10,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
     public class MemberDistanceViewModel : ViewModelBase
     {
         private double _distance;
+        private int _position;
         private IEnumerable<TripViewModel> _filteredTrips;
         private Member _member;
         private readonly IEnumerable<TripViewModel> _trips;
@@ -54,6 +55,16 @@ namespace ARK.ViewModel.Protokolsystem.Data
             private set
             {
                 _distance = value;
+                Notify();
+            }
+        }
+
+        public int Position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value;
                 Notify();
             }
         }
