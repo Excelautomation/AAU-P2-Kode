@@ -12,6 +12,7 @@
     <Style x:Key="lblMinorHeadline" TargetType="Label">
         <Setter Property="FontFamily" Value="Corbel"/>
         <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--Grid-->
