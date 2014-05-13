@@ -51,7 +51,6 @@ namespace ARK.ViewModel.Administrationssystem
                         ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
                         window.Show();
 
-
                         e.Close();
                     }
                     else
