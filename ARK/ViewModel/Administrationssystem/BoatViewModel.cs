@@ -226,20 +226,13 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 var members = _trips
                     .Where(trip => trip.Boat.Id == CurrentBoat.Id)
-                    .SelectMany(trip => trip.Members);
-
-                var m3 = CurrentBoat.Trips.SelectMany(trip => trip.Members);
-
-                var o2 = m3.Select(member => CurrentBoat.Trips
                     .SelectMany(trip => trip.Members)
-                    .Count(m => m == member));
+                    .ToList();
 
-                return (from member in CurrentBoat.Trips
-                                       .SelectMany(trip => trip.Members)
-                                       .Distinct()
-                        orderby CurrentBoat.Trips
-                                .SelectMany(trip => trip.Members)
-                                .Count(m => m == member) descending
+                return (from member in members
+                                    .Distinct()
+                        orderby members
+                                .Count(m => m.Id == member.Id) descending
                         select member).First();
             }
         }
