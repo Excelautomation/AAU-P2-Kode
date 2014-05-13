@@ -42,7 +42,7 @@
                                         <ColumnDefinition Width="25"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/View/images/document_layout.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <Image Source="/View/images/table_error.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                     <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
                                            Foreground="Black">
                                         <Run Text="SKADEBLANKETTER (AKTIVE)"/>
@@ -75,7 +75,7 @@
                                             <TextBlock Style="{StaticResource lstListViewHeadline}" Text="{Binding Boat.Name}" />
                                             
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Indsendt af: " FontWeight="Bold" />
+                                                <TextBlock Text="Indsendt af: " FontWeight="SemiBold" />
                                                 <TextBlock>
                                                     <Run Text="{Binding RegisteringMember.FirstName}" />
                                                     <Run Text="{Binding RegisteringMember.LastName}" />
@@ -83,12 +83,12 @@
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Skadetype: " FontWeight="Bold" />
+                                                <TextBlock Text="Skadetype: " FontWeight="SemiBold" />
                                                 <TextBlock Text="{Binding Type}" />
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Dato (indsendt): " FontWeight="Bold" />
+                                                <TextBlock Text="Dato (indsendt): " FontWeight="SemiBold" />
                                                 <TextBlock Text="{Binding Date, StringFormat={}{0:dd/MM/yy}}" />
                                             </StackPanel>
                                         </StackPanel>
@@ -107,10 +107,9 @@
                                         <ColumnDefinition Width="25"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/View/images/session_idle_time.png" Grid.Column="0" Height="16" Width="16" 
+                                    <Image Source="/View/images/calendar_view_month.png" Grid.Column="0" Height="16" Width="16" 
                                            VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                    <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
-                                           Foreground="Black">
+                                    <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}" Foreground="Black">
                                         <Run Text="LANGTURSBLANKETTER (AKTIVE)"/>
                                     </TextBlock>
                                 </Grid>
@@ -141,21 +140,21 @@
                                             
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock>
-                                                    <Run Text="Turansvarlig:" FontWeight="Bold"/>
+                                                    <Run Text="Turansvarlig:" FontWeight="SemiBold"/>
                                                     <Run Text="" />
                                                 </TextBlock>
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock>
-                                                    <Run Text="Afgang:" FontWeight="Bold"/>
+                                                    <Run Text="Afgang:" FontWeight="SemiBold"/>
                                                     <Run Text="{Binding PlannedStartDate, StringFormat={}{0:dd/MM/yy}}" />
                                                 </TextBlock>
                                             </StackPanel>
 
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock>
-                                                    <Run Text="Hjemkomst:" FontWeight="Bold"/>
+                                                    <Run Text="Hjemkomst:" FontWeight="SemiBold"/>
                                                     <Run Text="{Binding PlannedEndDate, StringFormat={}{0:dd/MM/yy}}" />
                                                 </TextBlock>
                                             </StackPanel>
@@ -177,8 +176,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/View/images/boat_icon_bigger.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                    <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
-                                           Foreground="Black">
+                                    <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}" Foreground="Black">
                                         <Run Text="BÅDE PÅ VANDET"/>
                                     </TextBlock>
                                 </Grid>
@@ -210,14 +208,14 @@
                                             
                                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                                 <TextBlock >
-                                                    <Run Text="Kategori: " FontWeight="Bold"/>
+                                                    <Run Text="Kategori: " FontWeight="SemiBold"/>
                                                     <Run Text="{Binding SpecificBoatType}" />
                                                 </TextBlock>
                                             </StackPanel>
 
                                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                                 <TextBlock>
-                                                    <Run Text="Pladser: " FontWeight="Bold"/>
+                                                    <Run Text="Pladser: " FontWeight="SemiBold"/>
                                                     <Run Text="{Binding NumberofSeats}" />
                                                 </TextBlock>
                                             </StackPanel>

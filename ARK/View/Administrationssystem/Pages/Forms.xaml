@@ -8,9 +8,15 @@
              xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
+    
     <UserControl.DataContext>
         <administrationssystem:FormsViewModel />
     </UserControl.DataContext>
+    
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -29,17 +35,13 @@
             <ColumnDefinition Width="4"/>
             <ColumnDefinition Width="809*"/>
         </Grid.ColumnDefinitions>
-        <WrapPanel Margin="5,0,0,0" Grid.ColumnSpan="3">
-            <Image Height="32" Source="/View/images/application_side_list.png"/>
-            <Label FontSize="28" >BLANKETTER</Label>
-        </WrapPanel>
         <DockPanel Grid.Row="2" >
             <TabControl Margin="0,0,5,5" Width="320" SelectedIndex="{Binding SelectedTabIndex}">
                 <TabItem Name="FormsDamageFormOverview">
                     <TabItem.Header>
                         <WrapPanel DockPanel.Dock="Top">
-                            <Image Margin="4" Source="../../images/application_side_list_red.png" Height="24"/>
-                            <Label Margin="4" FontSize="16" Content="Skader" FontWeight="Bold"/>
+                            <Image Margin="4" Source="/View/images/table_error.png" Height="16"/>
+                            <Label Margin="4" Style="{StaticResource styleHeadlineFilters}" Content="Skader" FontWeight="Bold"/>
                         </WrapPanel>
                     </TabItem.Header>
                     <DockPanel>
@@ -61,22 +63,22 @@
                                     <DockPanel Margin="0,5,0,5">
                                         <StackPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Båd:" FontSize="14px"/>
-                                                <TextBlock Text="{Binding Boat.Name}" FontSize="14px"/>
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Båd:"/>
+                                                <TextBlock Text="{Binding Boat.Name}"/>
                                             </WrapPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Medlem:" FontSize="14px" />
-                                                <TextBlock Text="{Binding RegisteringMember.FirstName}" FontSize="14px" />
-                                                <TextBlock Text=" " FontSize="14px" />
-                                                <TextBlock Text="{Binding RegisteringMember.LastName}" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Medlem:" />
+                                                <TextBlock Text="{Binding RegisteringMember.FirstName}" />
+                                                <TextBlock Text=" "/>
+                                                <TextBlock Text="{Binding RegisteringMember.LastName}" />
                                             </WrapPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Type: " FontSize="14px" />
-                                                <TextBlock Text="{Binding Type}" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Type: "/>
+                                                <TextBlock Text="{Binding Type}" />
                                             </WrapPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Dato: " FontSize="14px" />
-                                                <TextBlock Text="{Binding Date, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Dato: "/>
+                                                <TextBlock Text="{Binding Date, StringFormat={}{0:dd/MM/yy}}" />
                                             </WrapPanel>
                                         </StackPanel>
                                     </DockPanel>
@@ -94,14 +96,14 @@
                 <TabItem Name="FormsLongTripOverview">
                     <TabItem.Header>
                         <WrapPanel>
-                            <Image Margin="4" Source="../../images/application_side_list_blue.png" Height="24"/>
-                            <Label Margin="4" FontSize="16" Content="Langture" FontWeight="Bold"/>
+                            <Image Margin="4" Source="/View/images/calendar_view_month.png" Height="16"/>
+                            <Label Margin="4" Style="{StaticResource styleHeadlineFilters}" Content="Langture" FontWeight="Bold"/>
                         </WrapPanel>
                     </TabItem.Header>
+                    
                     <DockPanel>
-                        
-                        <ListView Margin="10" Name="LongDistanceListView" SelectedIndex="{Binding Path=SelectedIndexLongDistanceForms}" ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
-
+                        <ListView Margin="10" Name="LongDistanceListView" SelectedIndex="{Binding Path=SelectedIndexLongDistanceForms}" 
+                                  ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="Background" Value="White"/>
@@ -119,7 +121,6 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <DockPanel Margin="0,5,0,5">
-
                                         <StackPanel>
                                             <WrapPanel>
                                                 <TextBlock FontWeight="SemiBold" Width="80" Text="Båd:" FontSize="14px" />
