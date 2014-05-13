@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
-             mc:Ignorable="d" d:DesignWidth="1121.053" d:DesignHeight="1200.134">
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600">
     <UserControl.DataContext>
         <VM:BoatViewModel/>
     </UserControl.DataContext>
@@ -46,7 +46,6 @@
         </WrapPanel>
         
         <DockPanel Grid.Row="2">
-            <Label DockPanel.Dock="Top" Margin="4" Content="Både"/>
             <ListView Margin="4" DockPanel.Dock="Bottom" x:Name="BoatList" ItemsSource="{Binding Path=Boats}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single" SelectedItem="{Binding Path=CurrentBoat, Mode=TwoWay}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -73,15 +72,21 @@
         </DockPanel>
         
         <DockPanel Grid.Row="2" Grid.Column="2" >
-            <Label DockPanel.Dock="Top" Margin="4" Content="Detaljer"/>
+            <Label DockPanel.Dock="Top" Margin="4" Content="Detaljer" Style="{DynamicResource lblMinorHeadline}"/>
             <Border BorderBrush="Gray" BorderThickness="1" Margin="4">
                 <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
                     <DockPanel>
                         
                     <WrapPanel DockPanel.Dock="Top" Margin="10" Background="White" HorizontalAlignment="Center" VerticalAlignment="Top">
 
-                        <StackPanel Width="250" Margin="4">
-                            <Label Content="Basal info" Style="{DynamicResource lblMinorHeadline}"/>
+                            <Border Width="250" BorderThickness="1" BorderBrush="Gray" Margin="4">
+                                <StackPanel>
+                                    <Border Style="{DynamicResource brdHeadline}" Background="AliceBlue">
+                                        <WrapPanel Margin="0,2,0,0">
+                                            <Image Source="/View/images/document_info.png" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                            <TextBlock Text="Basal information" Foreground="Black" FontSize="18"/>
+                                        </WrapPanel>
+                                    </Border>
                             <WrapPanel>
                                 <TextBlock Text="Navn" Width="100"/>
                                 <TextBlock Text="{Binding Path=CurrentBoat.Name}"/>
@@ -127,9 +132,10 @@
                                 <TextBox Text="{Binding Path=CurrentBoat.Year, Mode=TwoWay}"/>
                             </WrapPanel>
                         </StackPanel>
+                            </Border>
 
-                            <StackPanel Width="250" Margin="4">
-                            <DockPanel>
+                            <Border Width="250" BorderThickness="1" BorderBrush="Gray" Margin="4">
+                                <StackPanel>
                                 <Border Style="{DynamicResource ResourceKey=brdHeadline}" Background="AliceBlue">
                                     <WrapPanel Margin="0,2,0,0">
                                         <Image Source="/View/images/user.png" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -138,9 +144,8 @@
                                         <TextBlock Text=")" Foreground="Black" FontSize="18"/>
                                     </WrapPanel>
                                 </Border>
-                            </DockPanel>
                             <WrapPanel>
-                                <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
+                                        <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly" Margin="4">
                                     <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -176,16 +181,19 @@
                                 </ScrollViewer>
                             </WrapPanel>
                         </StackPanel>
+                            </Border>
                         
-                        <StackPanel Width="250" Margin="4">
+                            <Border Width="250" BorderThickness="1" BorderBrush="Gray" Margin="4">
+                            <StackPanel>
                                 <Border Style="{DynamicResource brdHeadline}" Background="AliceBlue">
                                     <WrapPanel Margin="0,2,0,0">
                                         <Image Source="/View/images/document_info.png" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                         <TextBlock Text="Yderligere information" Foreground="Black" FontSize="18"/>
                                     </WrapPanel>
                                 </Border>
-                            <TextBox Text="{Binding Path=CurrentBoat.InformationString, Mode=TwoWay}" TextWrapping="Wrap" Height="150" VerticalScrollBarVisibility="Auto"/>
+                                    <TextBox Text="{Binding Path=CurrentBoat.InformationString, Mode=TwoWay}" TextWrapping="Wrap" Height="160" VerticalScrollBarVisibility="Auto" Margin="4"/>
                         </StackPanel>
+                        </Border>
 
                     </WrapPanel>
                     <StackPanel Width="250" DockPanel.Dock="Bottom" Margin="10">
