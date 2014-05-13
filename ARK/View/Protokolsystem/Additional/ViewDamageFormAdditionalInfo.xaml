@@ -106,9 +106,11 @@
         <StackPanel Orientation="Vertical" Grid.Row="3" Background="White">
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Skadetype:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedDamageForm.Type}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Skadebeskrivelse:" FontWeight="Bold"/>
+                <Run Text="{Binding SelectedDamageForm.Description}"/>
             </TextBlock>
         </StackPanel>
 

@@ -21,7 +21,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         public DamageForm SelectedDamageForm
         {
             get { return _selectedDamageForm; }
-            set { _selectedDamageForm = value; UpdateInfo(); }
+            set { _selectedDamageForm = value; Notify(); UpdateInfo(); }
         }
 
 
@@ -32,6 +32,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             ParentAttached += (sender, e) =>
             {
                 DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
+
+                // Select first instance
+                SelectedDamageForm = DamageForms.First();
 
                 // Vis info
                 UpdateInfo();
