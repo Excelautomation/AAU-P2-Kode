@@ -27,6 +27,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private Boat _selectedBoat;
         private FrameworkElement _infoPage;
 
+        private string _campSites;
+        private string _tourDescription;
+        private string _distancesPerDay;
+        private DateTime? _plannedStartDate;
+        private DateTime? _plannedEndDate;
+
         // Constructor
         public CreateLongTripViewModel()
         {
@@ -48,14 +54,49 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         }
 
         // Properties
-        public DateTime? PlannedStartDate { get; set; }
-        public DateTime? PlannedEndDate { get; set; }
+        public DateTime? PlannedStartDate
+        {
+            get { return _plannedStartDate; }
+            set { _plannedStartDate = value; NotifyCustom("AllDataFilled"); }
+        }
+        public DateTime? PlannedEndDate
+        {
+            get { return _plannedEndDate; }
+            set { _plannedEndDate = value; NotifyCustom("AllDataFilled"); }
+        }
+        public string TourDescription
+        {
+            get { return _tourDescription; }
+            set
+            {
+                _tourDescription = value;
+                NotifyCustom("AllDataFilled");
+            }
+        }
+        public string DistancesPerDay
+        {
+            get { return _distancesPerDay; }
+            set
+            {
+                _distancesPerDay = value;
+                NotifyCustom("AllDataFilled");
+            }
+        }
+        public string CampSites
+        {
+            get { return _campSites; }
+            set
+            {
+                _campSites = value;
+                NotifyCustom("AllDataFilled");
+            }
+        }
+
         public List<Boat> Boats
         {
             get { return _boats; }
             set { _boats = value; Notify(); }
         }
-        
         public Boat SelectedBoat
         {
             get { return _selectedBoat; }
@@ -67,9 +108,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public string TourDescription { get; set; }
-        public string DistancesPerDay { get; set; }
-        public string CampSites { get; set; }
+        public bool AllDataFilled 
+        {
+            get
+            {
+                return TourDescription != null && DistancesPerDay != null && CampSites != null 
+                    && PlannedStartDate != null && PlannedEndDate != null
+                    && SelectedMembers.Count > 0;
+            } 
+        }
 
         public List<MemberViewModel> MembersFiltered
         {
@@ -77,6 +124,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             set
             {
                 _membersFiltered = value;
+
                 Notify();
             }
         }
