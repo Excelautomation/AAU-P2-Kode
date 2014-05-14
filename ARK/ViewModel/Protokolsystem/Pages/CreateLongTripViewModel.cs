@@ -183,7 +183,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public ICommand AddBlanc
+        public ICommand AddBlank
         {
             get
             {

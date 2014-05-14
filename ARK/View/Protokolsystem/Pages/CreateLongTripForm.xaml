@@ -137,7 +137,7 @@
 
             <!--Tilføj blank-->
             <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
-                    Command="{Binding Path=AddBlanc}"
+                    Command="{Binding Path=AddBlank}"
                     Background="{StaticResource AddBG}"
                     BorderBrush="{StaticResource AddBorder}" Height="46" Width="Auto">
                 <Grid>
