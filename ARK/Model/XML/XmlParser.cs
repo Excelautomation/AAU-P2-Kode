@@ -65,7 +65,6 @@ namespace ARK.Model.XML
         public static void UpdateMembersFromFtp(bool saveChanges = true)
         {
             var context = DbArkContext.GetDbContext();
-
             var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
             var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
 

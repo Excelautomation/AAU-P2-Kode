@@ -116,6 +116,11 @@ namespace ARK.Model.DB
                 .WithOptional()
                 .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<TripWarningSms>()
+                .HasRequired(tws => tws.Trip)
+                .WithOptional()
+                .WillCascadeOnDelete(true);
+
             base.OnModelCreating(modelBuilder);
         }
     }
