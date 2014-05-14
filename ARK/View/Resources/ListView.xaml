@@ -2,14 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="styleListViewItem" TargetType="{x:Type ListViewItem}">
-        <Style.Triggers>
-            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                <Setter Property="Background" Value="#FFF3F3F3"></Setter>
-            </Trigger>
-            <Trigger Property="ItemsControl.AlternationIndex" Value="2">
-                <Setter Property="Background" Value="White"></Setter>
-            </Trigger>
-        </Style.Triggers>
         <Style.Resources>
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#CBE8F6" />
             <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#CBE8F6" />
@@ -27,6 +19,18 @@
                             <Setter Property="Foreground" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
+                    <ControlTemplate.Resources>
+                        <Style>
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Border.Background" Value="#FFF3F3F3"/>
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="2">
+                                    <Setter Property="Border.Background" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ControlTemplate.Resources>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

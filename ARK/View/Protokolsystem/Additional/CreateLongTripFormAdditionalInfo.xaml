@@ -59,7 +59,7 @@
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
             <TextBlock Style="{StaticResource ResourceKey=txbHeader}">
-                <Run Text="Deltagere"/>
+                <Run Text="DELTAGERE"/>
                 <Run Text="(" FontWeight="Normal"/>
                 <Run Text="{Binding Path=SelectedMembers.Count, Mode=OneWay}"/> 
                 <Run Text=")" FontWeight="Normal"/>
