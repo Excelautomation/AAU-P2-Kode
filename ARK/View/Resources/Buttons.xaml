@@ -115,14 +115,14 @@
     Background & Border
     -->
     <LinearGradientBrush x:Key="InfoBG" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FF9786FB" Offset="0"/>
-        <GradientStop Color="#FF644DF1" Offset="0.5"/>
-        <GradientStop Color="#FF2F1CA8" Offset="1"/>
+        <GradientStop Color="#FF6EBDD4" Offset="0"/>
+        <GradientStop Color="#FF549EB4" Offset="0.5"/>
+        <GradientStop Color="#FF306C7E" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="InfoBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFAA9CFF" Offset="0"/>
-        <GradientStop Color="#FF7D68FB" Offset="0.5"/>
-        <GradientStop Color="#FF21118B" Offset="1"/>
+        <GradientStop Color="#FF43879B" Offset="0"/>
+        <GradientStop Color="#FF65BBD4" Offset="0.5"/>
+        <GradientStop Color="#FF316B7C" Offset="1"/>
     </LinearGradientBrush>
 
     <!--
@@ -176,7 +176,8 @@
         <GradientStop Offset="1.0" Color="WhiteSmoke"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="SelectedBorder" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Offset="0.0" Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+        <GradientStop Offset="0.0" Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
+        <GradientStop Offset="1.0" Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
     </LinearGradientBrush>
 
 
