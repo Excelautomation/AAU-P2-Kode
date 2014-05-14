@@ -231,13 +231,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get 
             { 
                 return GetCommand<object>(e =>{
-
-                    //var btb = new BeginTripBoats();
-                    //var btvm = (BeginTripViewModel)btb.DataContext;
-
                     ConfirmTripData();
-
-                    //ShowDialog(new BeginTripBoatsConfirm());
                 }); 
             }
         }
