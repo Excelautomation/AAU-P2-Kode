@@ -14,40 +14,41 @@
         <pages:BeginTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
     <UserControl.Resources>
-        <valueconverter:RadioButtonToStringConverter x:Key="RadioButtonToString"/>
+        <valueconverter:RadioButtonToStringConverter x:Key="RadioButtonToString" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource styleListViewItem}">
+        <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}"
+               BasedOn="{StaticResource styleListViewItem}">
             <Setter Property="Visibility" 
-                Value="{Binding Visible, Converter={StaticResource BoolToVis}}"/>
+                    Value="{Binding Visible, Converter={StaticResource BoolToVis}}" />
         </Style>
     </UserControl.Resources>
 
     <!--Content-->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*"/>
-            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="32" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="0" Grid.Row="0">
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image Source="/View/images/boat_icon_bigger.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}">
-                        <Run Text="VÆLG BÅD ( ANTAL:"/>
-                        <Run Text="{Binding Items.Count, ElementName=AllBoatsList, Mode=OneWay}"/>
-                        <Run Text=")"/>
+                        <Run Text="VÆLG BÅD ( ANTAL:" />
+                        <Run Text="{Binding Items.Count, ElementName=AllBoatsList, Mode=OneWay}" />
+                        <Run Text=")" />
                     </TextBlock>
                 </Grid>
             </WrapPanel>
@@ -57,14 +58,15 @@
             <WrapPanel Margin="0,2,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" />
                     <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}">
-                        <Run Text="VÆLG BESÆTNING ( ANTAL:"/>
-                        <Run Text="{Binding Path=MembersCount, Mode=OneWay}"/>
-                        <Run Text=")"/>
+                        <Run Text="VÆLG BESÆTNING ( ANTAL:" />
+                        <Run Text="{Binding Path=MembersCount, Mode=OneWay}" />
+                        <Run Text=")" />
                     </TextBlock>
                 </Grid>
             </WrapPanel>
@@ -77,35 +79,34 @@
                   VerticalAlignment="Stretch" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
+                    <StackPanel Background="Transparent">
                     <StackPanel>
-                        
-                        <StackPanel>
                             <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
                                 <Border.Style>
                                     <Style TargetType="Border">
-                                        <Setter Property="BorderBrush" Value="SeaGreen"/>
+                                        <Setter Property="BorderBrush" Value="SeaGreen" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=BoatOut}" Value="True">
-                                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                                                <Setter Property="BorderBrush" Value="DarkOrange" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Boat.Damaged}" Value="True">
-                                                <Setter Property="BorderBrush" Value="IndianRed"/>
+                                                <Setter Property="BorderBrush" Value="IndianRed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Border.Style>
                             </Border>
-                            <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}"/>
+                            <TextBlock Text="{Binding Name}" Style="{DynamicResource ResourceKey=lstListViewHeadline}" />
                         </StackPanel>
                         
                         <DockPanel>
                             <TextBlock Width="80" Style="{DynamicResource ResourceKey=lstViewContent}">
-                                <Run Text="Pladser: " FontWeight="Bold"/>
-                                <Run Text="{Binding NumberofSeats}"/>
+                                <Run Text="Pladser: " FontWeight="Bold" />
+                                <Run Text="{Binding NumberofSeats}" />
                             </TextBlock>
                             <TextBlock Style="{DynamicResource ResourceKey=lstViewContent}">
-                                <Run Text="Kategori: " FontWeight="Bold"/>
-                                <Run Text="{Binding SpecificBoatType}"/>
+                                <Run Text="Kategori: " FontWeight="Bold" />
+                                <Run Text="{Binding SpecificBoatType}" />
                             </TextBlock>
                         </DockPanel>
 
@@ -116,16 +117,18 @@
 
         <ListView Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" AlternationCount="2" 
                   ItemsSource="{Binding Path=MembersFiltered}"
-                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}" SelectionMode="Multiple" 
+                  ff:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedMembers}"
+                  SelectionMode="Multiple"
                   IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" 
                   ItemContainerStyle="{StaticResource ItemContainerStyle}" Margin="5,0,0,0"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
-                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}" IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
-                            <Run Text="{Binding Path=Member.FirstName}"/>
-                            <Run Text="{Binding Path=Member.LastName}"/>
+                    <DockPanel Background="Transparent"  Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
+                        <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}"
+                                   IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
+                            <Run Text="{Binding Path=Member.FirstName}" />
+                            <Run Text="{Binding Path=Member.LastName}" />
                         </TextBlock>
                     </DockPanel>
                 </DataTemplate>
@@ -134,9 +137,9 @@
 
         <Grid Grid.Row="2" Grid.Column="1" Margin="5,5,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
             <Button x:Name="btnAddGuest" Grid.Column="0"
                     Style="{StaticResource styleButtons}" 
@@ -146,15 +149,15 @@
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
                 <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" 
                            Style="{StaticResource ResourceKey=btnImage}" />
                     <TextBlock Grid.Column="3" Text="TILFØJ&#10;GÆST" FontSize="16"
-                               VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1"/>
+                               VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1" />
                 </Grid>
             </Button>
             <Button x:Name="btnAddBlank" Grid.Column="2" VerticalAlignment="Top"
@@ -165,30 +168,41 @@
                     BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/shape_square_add.png" Style="{StaticResource ResourceKey=btnImage}" />
-                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" FontSize="16" VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1"/>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/shape_square_add.png"
+                           Style="{StaticResource ResourceKey=btnImage}" />
+                    <TextBlock Grid.Column="3" Text="TILFØJ&#10;BLANK" FontSize="16" VerticalAlignment="Center"
+                               Margin="11,0,0,0" Panel.ZIndex="1" />
                 </Grid>
             </Button>
         </Grid>
 
         <!--Direction-->
         <Border Name="Filters" Height="40" VerticalAlignment="Top" 
-                BorderBrush="#FF999999" BorderThickness="0,2,0,2" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Stretch"
+                BorderBrush="#FF999999" BorderThickness="0,2,0,2" Grid.ColumnSpan="2" Grid.Row="3"
+                HorizontalAlignment="Stretch"
                 Margin="0,5,0,0">
             <DockPanel Background="#FFFBFBFB" LastChildFill="False">
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="ØST" Margin="3,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
-                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - NORD&#10;OM EGHOLM" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
-                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - SYD&#10;OM EGHOLM" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
-                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
-                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="LANGTUR" Margin="0,0,30,0" GroupName="{Binding Name, ElementName=Filters}"
-                             Command="{Binding DirectionSelected}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="ØST" Margin="3,0,30,0"
+                             GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}"
+                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - NORD&#10;OM EGHOLM" Margin="0,0,30,0"
+                             GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}"
+                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="VEST - SYD&#10;OM EGHOLM" Margin="0,0,30,0"
+                             GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}"
+                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                <RadioButton DockPanel.Dock="Left" Width="Auto" Content="LANGTUR" Margin="0,0,30,0"
+                             GroupName="{Binding Name, ElementName=Filters}"
+                             Command="{Binding DirectionSelected}"
+                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
             </DockPanel>
         </Border>
 
@@ -204,20 +218,20 @@
                     BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" HorizontalAlignment="Left">
                         <Image.Style>
                             <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png"/>
+                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/keyboard.png"/>
+                                        <Setter Property="Source" Value="/View/images/keyboard.png" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -228,10 +242,10 @@
                             <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR"/>
+                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;TASTATUR"/>
+                                        <Setter Property="Text" Value="VIS&#10;TASTATUR" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -248,20 +262,20 @@
                     BorderBrush="{StaticResource SearchFilterBorder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1">
                         <Image.Style>
                             <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/filter_delete.png"/>
+                                        <Setter Property="Source" Value="/View/images/filter_delete.png" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/filter.png"/>
+                                        <Setter Property="Source" Value="/View/images/filter.png" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -272,10 +286,10 @@
                             <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;FILTER"/>
+                                        <Setter Property="Text" Value="SKJUL&#10;FILTER" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableFilters}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;FILTER"/>
+                                        <Setter Property="Text" Value="VIS&#10;FILTER" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -293,13 +307,15 @@
             	    BorderBrush="{StaticResource BeginBorder}" Width="Auto">
                 <Grid Margin="0,0,-2,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/View/images/document_page_next.png" />
-                    <TextBlock Grid.Column="3" Text="BEGYND&#xA;ROTUR" VerticalAlignment="Center" Margin="11,0,0,0" Panel.ZIndex="1" />
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}"
+                           Source="/View/images/document_page_next.png" />
+                    <TextBlock Grid.Column="3" Text="BEGYND&#xA;ROTUR" VerticalAlignment="Center" Margin="11,0,0,0"
+                               Panel.ZIndex="1" />
                 </Grid>
             </Button>
         </DockPanel>

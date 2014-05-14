@@ -33,9 +33,8 @@
 
     <Grid Width="1020" Margin="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="49"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -44,14 +43,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Content="{Binding Path=CurrentPage}" Margin="3,0,3,0"/>
-
-        <StackPanel x:Name="Buttons" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="3,0,3,6">
-            <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=EnableSearch, Converter={StaticResource BoolToVis}}" Height="182"/>
-            <ContentControl Content="{Binding Path=Filter}" Visibility="{Binding Path=EnableFilters, Converter={StaticResource BoolToVis}}" Height="182"/>
-        </StackPanel>
-
-        <Grid HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="196" Grid.Row="0" Grid.RowSpan="3" Margin="-2,0,0,0">
+        <Grid HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="196" Grid.Row="1" Margin="-2,0,0,0">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Repeat">
                     <LinearGradientBrush.RelativeTransform>
@@ -168,47 +160,22 @@
                         Command="{Binding Path=AdminLogin}">
                     <TextBlock Style="{StaticResource ResourceKey=txbProtokol}" Text="ADMINISTRATIONS&#xA;PANEL" />
                 </Button>
-                
-                <Popup IsOpen="{Binding Path=DialogShow}" 
-                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                       PlacementTarget="{Binding ElementName=gridtest}" Placement="Center"
-                       PopupAnimation="Slide" AllowsTransparency="True">
-                    <Border BorderBrush="#FF8B8B8B" BorderThickness="3" 
-                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="640" Height="600">
-                        <Border.Effect>
-                            <DropShadowEffect Opacity="0.34"/>
-                        </Border.Effect>
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFEEEEEE" Offset="0"/>
-                                <GradientStop Color="White" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <ContentControl Content="{Binding Path=DialogElement}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,10"/>
-                    </Border>
-                </Popup>
             </Grid>
         </Grid>
 
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Grid.RowSpan="3" Margin="0,0,-5,0" Grid.Column="2">
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Repeat">
-                    <LinearGradientBrush.RelativeTransform>
-                        <TransformGroup>
-                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                            <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </LinearGradientBrush.RelativeTransform>
-                    <GradientStop Color="White" Offset="0.974"/>
-                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
-            <ContentControl Content="{Binding Path=CurrentInfo}"/>
-        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="49"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid x:Name="gridtest" Grid.Row="0" Grid.Column="1" Height="45" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Height="45" VerticalAlignment="Top">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF818181" Offset="0"/>
@@ -223,7 +190,7 @@
             <Label x:Name="HeadlineLabel" Style="{StaticResource ResourceKey=lblSuperHeadline}" 
                    Foreground="White" Grid.Column="0" Content="{Binding Path=CurrentPageTitle}" 
                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Padding="10, 4, 0, 0"/>
-            <Grid Grid.Column="2" Margin="0,5,0,0">
+                <Grid Grid.Column="1" Margin="0,5,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
@@ -232,19 +199,66 @@
                     <Image Source="/View/images/boat_icon_bigger.png" Height="16" Width="16" />
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Foreground="White">
                         <Run Text="  BÅDE PÅ VANDET:"/>
-                        <Run Text="{Binding NumBoatsOut}"/>
-                    </TextBlock>
+                    <Run Text="{Binding NumBoatsOut}"/>
+                </TextBlock>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal">
                     <Image Source="/View/images/chart_up_color.png" Height="16" Width="16" />
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Foreground="White">
                         <Run Text="  DAGENS KILOMETER:"/>
-                        <Run Text="{Binding DailyKilometers}"/>
+                    <Run Text="{Binding DailyKilometers}"/>
                         <Run Text="Km"/>
-                    </TextBlock>
+                </TextBlock>
                 </StackPanel>
             </Grid>
+            </Grid>
+
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="768" Grid.Row="0" Grid.RowSpan="3" Margin="0,0,-5,0" Grid.Column="1">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Repeat">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="White" Offset="0.974"/>
+                        <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <ContentControl Content="{Binding Path=CurrentInfo}"/>
+            </Grid>
+
+            <ContentControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Content="{Binding Path=CurrentPage}" Margin="3,0,3,0"/>
+            
+            <StackPanel x:Name="Buttons" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="3,0,3,6">
+                <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=EnableSearch, Converter={StaticResource BoolToVis}}" Height="182"/>
+                <ContentControl Content="{Binding Path=Filter}" Visibility="{Binding Path=EnableFilters, Converter={StaticResource BoolToVis}}" Height="182"/>
+            </StackPanel>
         </Grid>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" x:Name="gridtest"/>
+
+        <Popup IsOpen="{Binding Path=DialogShow}" 
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                       PlacementTarget="{Binding ElementName=gridtest}" Placement="Center"
+                       PopupAnimation="Slide" AllowsTransparency="True">
+            <Border BorderBrush="#FF8B8B8B" BorderThickness="3" 
+                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="740" Height="580">
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.34"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEEEEEE" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentControl Content="{Binding Path=DialogElement}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,10"/>
+            </Border>
+        </Popup>
     </Grid>
 </Window>
