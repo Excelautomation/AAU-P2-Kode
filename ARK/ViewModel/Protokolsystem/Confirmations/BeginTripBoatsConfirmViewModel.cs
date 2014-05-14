@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using ARK.Model;
 using ARK.Model.DB;
@@ -62,6 +63,11 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                 _trip = value; 
                 Notify(); 
             }
+        }
+
+        public DateTime Sunset
+        {
+            get { return ARK.HelperFunctions.SunsetClass.Sunset; }
         }
     }
 }

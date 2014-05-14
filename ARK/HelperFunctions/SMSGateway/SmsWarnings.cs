@@ -69,8 +69,17 @@ namespace ARK.HelperFunctions.SMSGateway
                 .Where(warn => warn.SentSms != null
                                && (DateTime.Now - warn.SentSms.Value).TotalMinutes > 15))
             {
-                //throw new NotImplementedException();
-                Gateway.SendSms(Sender, "random number", MessageNotHomeAdministration);
+                using (var db = new DbArkContext())
+                {
+                    var numbers = db.Admin
+                        .Where(a => a.ContactDark && a.Member.Phone != null)
+                        .Select(a => a.Member.Phone);
+
+                    foreach (var number in numbers)
+                    {
+                        Gateway.SendSms(Sender, number, MessageNotHomeAdministration);
+                    }
+                }
             }
 
         }
