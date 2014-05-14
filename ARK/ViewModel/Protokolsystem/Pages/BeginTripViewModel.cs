@@ -164,7 +164,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public ICommand AddBlanc
+        public ICommand AddBlank
         {
             get
             {
@@ -199,7 +199,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(x =>
                 {
                     var temp = x as string;
-                    this.Direction = temp;
+                    this.Direction = temp.Trim( new []{'\n'});
                 });
             }
         }
