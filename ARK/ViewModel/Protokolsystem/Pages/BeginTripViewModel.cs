@@ -276,8 +276,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 ConfirmTripViewModel.Trip = trip;
                 ProtocolSystem.ShowDialog(dlg);
 
-                // hold øje med om denne bliver kørt
-                //mainViewModel.UpdateNumBoatsOut();
             }
         }
 
