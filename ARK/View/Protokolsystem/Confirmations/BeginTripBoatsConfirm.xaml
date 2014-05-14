@@ -121,10 +121,52 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="0"
+                <WrapPanel Grid.ColumnSpan="2" Grid.Row="0">
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold"
                            HorizontalAlignment="Left" VerticalAlignment="Top" TextDecorations="Underline">
                     <Run Text="BESÆTNING" FontSize="16"/>
-                </TextBlock>
+                    </TextBlock>
+
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold"
+                           HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Run>
+                        <Run.Style>
+                            <Style TargetType="Run">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=HasGuests}" Value="true">
+                                        <Setter Property="Text" Value="  (+"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Run.Style>
+                    </Run>
+                    <Run>
+                        <Run.Style>
+                            <Style TargetType="Run">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=HasGuests}" Value="true">
+                                        <Setter Property="Text" Value="{Binding Path=GuestCount}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Run.Style>
+                    </Run>
+                    <Run>
+                        <Run.Style>
+                            <Style TargetType="Run">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=GuestPluralis}" Value="true">
+                                        <Setter Property="Text" Value=" Gæster)"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=GuestSingularis}" Value="true">
+                                        <Setter Property="Text" Value=" Gæst)"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Run.Style>
+                    </Run>
+                    </TextBlock>
+                </WrapPanel>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" PanningMode="VerticalOnly" MaxHeight="250">
                     <ItemsControl x:Name="AllMembersList" ItemsSource="{Binding Path=Trip.Members}">
