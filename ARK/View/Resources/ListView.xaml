@@ -19,18 +19,6 @@
                             <Setter Property="Foreground" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
-                    <ControlTemplate.Resources>
-                        <Style>
-                            <Style.Triggers>
-                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                    <Setter Property="Border.Background" Value="#FFF3F3F3"/>
-                                </Trigger>
-                                <Trigger Property="ItemsControl.AlternationIndex" Value="2">
-                                    <Setter Property="Border.Background" Value="White"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ControlTemplate.Resources>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
