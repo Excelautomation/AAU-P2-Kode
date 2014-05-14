@@ -26,11 +26,6 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             }
         }
 
-        public BeginTripBoatsConfirmViewModel()
-        {
-           
-        }
-
         public ICommand Save
         {
             get
