@@ -74,18 +74,45 @@
                 <Button x:Name="BeginTrip" Grid.Row="0" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding StartTrip}"
-            	        Background="{StaticResource BeginBG}"
-            	        BorderBrush="{StaticResource BeginBorder}" 
                         Width="Auto" Height="90">
                     <TextBlock Text="START&#xA;ROTUR" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="StartBorder" Background="{StaticResource BeginBG}" BorderBrush="{StaticResource BeginBorder}">
+                                <TextBlock x:Name="StartText" Text="BÅDE PÅ&#xA;VANDET" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="START ROTUR">
+                                    <Setter TargetName="StartText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="StartBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
+                
+                
                 <Button x:Name="EndTrip" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding EndTrip}"
-            	        Background="{StaticResource EndBG}"
-            	        BorderBrush="{StaticResource EndBorder}" 
-                        Width="Auto" Height="90">
-                    <TextBlock Text="AFSLUT&#xA;ROTUR" />
+                        Width="Auto" Height="90" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="EndBorder" Background="{StaticResource EndBG}" BorderBrush="{StaticResource EndBorder}" Width="Auto" Height="Auto">
+                                <TextBlock x:Name="EndText" Text="BÅDE PÅ&#xA;VANDET" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="AFSLUT ROTUR">
+                                    <Setter TargetName="EndText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="EndBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
 
             </Grid>
@@ -100,26 +127,66 @@
                 <Button x:Name="boatsOverview" Grid.Row="0" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding BoatsOut}"
-            	        Background="{StaticResource InfoBG}"
-            	        BorderBrush="{StaticResource InfoBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Text="BÅDE PÅ&#xA;VANDET" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="BoatsOutBorder" Background="{StaticResource InfoBG}" BorderBrush="{StaticResource InfoBorder}">
+                                <TextBlock x:Name="BoatsOutText" Text="BÅDE PÅ&#xA;VANDET" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="BÅDE PÅ VANDET">
+                                    <Setter TargetName="BoatsOutText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="BoatsOutBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
+                
+                
                 <Button x:Name="DistanceStatistics" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding StatisticsDistance}"
-            	        Background="{StaticResource InfoBG}"
-            	        BorderBrush="{StaticResource InfoBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Text="KILOMETER&#xA;STATISTIK" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="KilometerBorder" Background="{StaticResource InfoBG}" BorderBrush="{StaticResource InfoBorder}">
+                                <TextBlock x:Name="KilometerText" Text="KILOMETER&#xA;STATISTIK" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="KILOMETERSTATISTIK">
+                                    <Setter TargetName="KilometerText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="KilometerBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
+                
+                
                 <Button x:Name="MembersInformation" Grid.Row="2" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding MemberInformation}"
-            	        Background="{StaticResource InfoBG}"
-            	        BorderBrush="{StaticResource InfoBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Text="MEDLEMS&#xA;INFORMATIONER" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="DistanceBorder" Background="{StaticResource InfoBG}" BorderBrush="{StaticResource InfoBorder}">
+                                <TextBlock x:Name="DistanceText" Text="MEDLEMS&#xA;INFORMATIONER" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="MEDLEMSINFORMATION">
+                                    <Setter TargetName="DistanceText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="DistanceBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </Grid>
 
@@ -132,18 +199,44 @@
                 <Button x:Name="CreateLongDistance" Grid.Row="0" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding ViewLongTripForm}"
-            	        Background="{StaticResource SubmitBG}"
-            	        BorderBrush="{StaticResource SubmitBorder}" 
                         Width="Auto" Height="62">
-                    <TextBlock Text="LANGTURE" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="LongTripBorder" Background="{StaticResource SubmitBG}" BorderBrush="{StaticResource SubmitBorder}">
+                                <TextBlock x:Name="LongTripText" Text="LANGTURE" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="LANGTURSBLANKETTER">
+                                    <Setter TargetName="LongTripText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="LongTripBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
+                
+                
                 <Button x:Name="CreateDamage" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
-            	        Command="{Binding ViewDamageForm}" 
-                        Background="{StaticResource SubmitBG}"
-            	        BorderBrush="{StaticResource SubmitBorder}" 
+            	        Command="{Binding ViewDamageForm}"
                         Width="Auto" Height="62">
-                    <TextBlock Text="SKADER" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="DamageButtonBorder" Background="{StaticResource SubmitBG}" BorderBrush="{StaticResource SubmitBorder}">
+                                <TextBlock x:Name="DamageButtonText" Text="SKADER" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="SKADEBLANKETTER">
+                                    <Setter TargetName="DamageButtonText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="DamageButtonBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+                            
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </Grid>
 
