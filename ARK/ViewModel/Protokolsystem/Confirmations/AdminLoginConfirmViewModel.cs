@@ -21,10 +21,29 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         public string Username { get; set; }
         public string Password { get; set; }
 
+        public AdminLoginConfirmViewModel()
+        {
+            ParentAttached += AdminLoginConfirmViewModel_ParentAttached;
+        }
+
+        void AdminLoginConfirmViewModel_ParentAttached(object sender, EventArgs e)
+        {
+            ProtocolSystem.EnableSearch = true;
+
+            // Unbind event
+            ParentAttached -= AdminLoginConfirmViewModel_ParentAttached;
+        }
+
         public string ErrorLabel
         {
             get { return _errorLabel; }
             set { _errorLabel = value; Notify(); }
+        }
+
+        public override void Hide()
+        {
+            ProtocolSystem.KeyboardClear();
+            base.Hide();
         }
 
         public ICommand Login

@@ -28,6 +28,12 @@
                     </DataTrigger.Value>
                     <Setter Property="Background" Value="LightGreen"/>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Member.ShortTripCox}">
+                    <DataTrigger.Value>
+                        <sys:Boolean>False</sys:Boolean>
+                    </DataTrigger.Value>
+                    <Setter Property="Background" Value="Transparent"/>
+                </DataTrigger>
             </Style.Triggers>
             <Style.Resources>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource lstViewContent}"/>
