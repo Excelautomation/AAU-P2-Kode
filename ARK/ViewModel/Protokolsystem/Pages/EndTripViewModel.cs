@@ -8,10 +8,12 @@ using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
 using ARK.HelperFunctions;
+using ARK.View.Protokolsystem.Confirmations;
+using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
-    class EndTripViewModel : ProtokolsystemContentViewModelBase
+    public class EndTripViewModel : ProtokolsystemContentViewModelBase 
     {
         // Fields
         private List<StandardTrip> _standardTrips;
@@ -116,7 +118,18 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return new RelayCommand(
-                    x => base.ToggleKeyboard.Execute(null),
+                    x => 
+                    {
+                        var ConfirmView = new ChangeDistanceConfirm();
+                        var ConfirmViewModel = (ChangeDistanceConfirmViewModel)ConfirmView.DataContext;
+
+                        ConfirmViewModel.EndTripVM = this;
+                        ConfirmViewModel.LocalDistance = SelectedTrip.Distance;
+
+                        ProtocolSystem.ShowDialog(ConfirmView);
+
+                        base.ToggleKeyboard.Execute(null);
+                    },
                     x => this.SelectedTrip != null);
             }
         }

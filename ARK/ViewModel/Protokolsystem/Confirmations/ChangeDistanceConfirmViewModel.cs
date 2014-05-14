@@ -17,6 +17,13 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         // Fields
         private double _localDistance;
         private DistanceStatisticsViewModel _distanceStatisticsVM;
+        private EndTripViewModel _EndTripVM;
+
+        public EndTripViewModel EndTripVM
+        {
+            get { return _EndTripVM; }
+            set { _EndTripVM = value; Notify(); }
+        }
 
         public ChangeDistanceConfirmViewModel()
         {
@@ -41,15 +48,24 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             {
                 return GetCommand(e => 
                 {
-                    DistanceStatisticsVM.SelectedTrip.Trip.Distance = LocalDistance;
-                    DbArkContext.GetDbContext().SaveChanges();
-                    DistanceStatisticsVM.NotifyTripList();
-                    var a = DistanceStatisticsVM.SelectedMember;
-                    DistanceStatisticsVM.SelectedMember = null;
-                    DistanceStatisticsVM.SelectedMember = a;
-                    
+                    if (DistanceStatisticsVM != null) 
+                    { 
+                        DistanceStatisticsVM.SelectedTrip.Trip.Distance = LocalDistance;
+                        DbArkContext.GetDbContext().SaveChanges();
+                        DistanceStatisticsVM.NotifyTripList();
+                        var a = DistanceStatisticsVM.SelectedMember;
+                        DistanceStatisticsVM.SelectedMember = null;
+                        DistanceStatisticsVM.SelectedMember = a;
+                    }
+                    else if (EndTripVM != null)
+                    {
+                        EndTripVM.SelectedTrip.Distance = LocalDistance;
+                        DbArkContext.GetDbContext().SaveChanges();
+                        // Lister bliver nok heller ikke opdateret her
+                    }
 
                     Hide();
+                    ProtocolSystem.StatisticsDistance.Execute(null);
                 });
             }
         }
