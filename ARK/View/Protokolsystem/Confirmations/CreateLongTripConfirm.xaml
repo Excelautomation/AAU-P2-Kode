@@ -127,10 +127,10 @@
 
                     <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
                         <TextBlock Margin="0,5,0,0" Style="{StaticResource ResourceKey=lstViewContent}">
-                            <Run Text="{Binding Path=LongTrip.PlannedStartDate}"/>
+                            <Run Text="{Binding Path=LongTrip.PlannedStartDate, Mode=OneWay, StringFormat=d}"/>
                         </TextBlock>
                         <TextBlock Margin="0,5,0,0" Style="{StaticResource ResourceKey=lstViewContent}">
-                            <Run Text="{Binding Path=LongTrip.PlannedEndDate}"/>
+                            <Run Text="{Binding Path=LongTrip.PlannedEndDate, Mode=OneWay, StringFormat=d}"/>
                         </TextBlock>
                         <TextBlock Margin="0,5,0,0" Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="{Binding Path=LongTrip.DistancesPerDay}"/>
@@ -143,7 +143,6 @@
                         </TextBlock>
                         <TextBlock Margin="0,0,3,0" Style="{StaticResource ResourceKey=lstViewContent}">
                             <Run Text="{Binding Path=LongTrip.ResponsibleMember.FirstName}"/>
-                            <Run Text=" "/>
                             <Run Text="{Binding Path=LongTrip.ResponsibleMember.LastName}"/>
                         </TextBlock>
                     </StackPanel>
@@ -238,8 +237,8 @@
                                     </Grid.ColumnDefinitions>
 
                                     <WrapPanel Margin="5,0,0,0" Grid.Column="0">
-                                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=FirstName}" FontSize="16"/>
-                                        <TextBlock Text="{Binding Path=LastName}" FontSize="16"/>
+                                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=FirstName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                                        <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                                     </WrapPanel>
                                 </Grid>
                             </DataTemplate>
