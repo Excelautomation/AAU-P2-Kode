@@ -30,7 +30,7 @@ namespace ARK.ViewModel.Base
 
         protected ICommand GetCommand<T>(Action<T> executeMethod, Func<T, bool> canExecute)
         {
-            return new DelegateCommand<T>(executeMethod, canExecute);
+            return new RelayCommand<T>(executeMethod, canExecute);
         }
     }
 }
