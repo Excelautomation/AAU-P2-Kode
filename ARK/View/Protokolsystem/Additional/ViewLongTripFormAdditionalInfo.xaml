@@ -74,13 +74,16 @@
                                     <DataTrigger Binding="{Binding Path=SelectedLongTripForm.Status}" Value="Awaiting">
                                         <Setter Property="Foreground" Value="DarkOrange"/>
                                         <Setter Property="Text" Value="Afventer godkendelse"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=SelectedLongTripForm.Status}" Value="Accepted">
                                         <Setter Property="Foreground" Value="MediumSeaGreen"/>
                                         <Setter Property="Text" Value="Godkendt"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=SelectedLongTripForm.Status}" Value="Denied">
-                                        <Setter Property="Foreground" Value="IndianRed"/>
+                                        <Setter Property="Foreground" Value="IndianRed" />
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
                                         <Setter Property="Text" Value="Aflyst"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -92,7 +95,7 @@
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Oprettelsesdato:" FontWeight="Bold"/>
-                <Run Text="{Binding Path=SelectedLongTripForm.FormCreated, Mode=OneWay, StringFormat={}{0:dd/MM/y} }"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.FormCreated, Mode=OneWay, StringFormat={}{0:dd/MM/yy} }"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
@@ -113,12 +116,12 @@
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Afgangstidspunkt:" FontWeight="Bold"/>
-                <Run Text="{Binding Path=SelectedLongTripForm.PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/y} }"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy} }"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Hjemkomsttidspunkt:" FontWeight="Bold"/>
-                <Run Text="{Binding Path=SelectedLongTripForm.PlannedEndDate, Mode=OneWay, StringFormat={}{0:dd/MM/y} }"/>
+                <Run Text="{Binding Path=SelectedLongTripForm.PlannedEndDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy} }"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
