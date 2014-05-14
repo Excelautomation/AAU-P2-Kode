@@ -149,7 +149,8 @@
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Besætning:" FontWeight="Bold"/>
             </TextBlock>
-            <ListView ItemsSource="{Binding Path=SelectedLongTripForm.Members}" BorderBrush="{x:Null}">
+            <ListView ItemsSource="{Binding Path=SelectedLongTripForm.Members}" BorderBrush="{x:Null}"
+                      MaxHeight="300" ScrollViewer.PanningMode="VerticalOnly" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
