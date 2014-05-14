@@ -94,7 +94,6 @@
             </WrapPanel>
         </Border>
 
-
         <ListView ItemsSource="{Binding Path=MembersFiltered}" 
                   Grid.Column="1" Grid.Row="1" x:Name="AllMembersList" 
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
