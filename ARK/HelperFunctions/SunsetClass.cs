@@ -19,7 +19,7 @@ namespace ARK.HelperFunctions
             private set { _sunset = value; }
         }
 
-        internal static void StartSunsetTask(CancellationTokenSource wtoken)
+        internal static void StartSunsetTask(CancellationToken token)
         {
             if (_task == null)
             {
@@ -29,9 +29,9 @@ namespace ARK.HelperFunctions
                     {
                         Sunset = XmlParser.GetSunsetFromXml();
                         var delay = DateTime.Today.AddDays(1).AddHours(2) - DateTime.Now;
-                        await Task.Delay(delay, wtoken.Token);
+                        await Task.Delay(delay, token);
                     }
-                }, wtoken.Token);
+                }, token);
             }
             else
             {
