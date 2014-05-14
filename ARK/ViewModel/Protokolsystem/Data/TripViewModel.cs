@@ -21,7 +21,7 @@ namespace ARK.ViewModel.Protokolsystem.Data
         public Trip Trip
         {
             get { return _trip; }
-            private set
+            set
             {
                 this._trip = value;
                 Notify();

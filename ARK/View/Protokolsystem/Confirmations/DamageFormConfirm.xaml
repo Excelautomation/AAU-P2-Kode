@@ -180,7 +180,7 @@
 						<ColumnDefinition Width="100"/>
 					</Grid.ColumnDefinitions>
 					<Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/cancel.png" />
-					<TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ANNULLER" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="NULSTIL OG&#xA;ANNULLER" />
 				</Grid>
 			</Button>
             
