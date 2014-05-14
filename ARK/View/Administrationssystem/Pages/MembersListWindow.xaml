@@ -60,6 +60,9 @@
                 <Label Width="80" Margin="4" Content="Kodeord:"/>
                 <TextBox Width="180" Margin="4" Text="{Binding Path=NewAdmin.Password, Mode=OneWayToSource}"/>
             </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBlock Margin="4" FontStyle="Italic" Text="*Brugernavn og kodeord er ikke case-sensitive"/>
+            </WrapPanel>
         </StackPanel>
 
         <DockPanel HorizontalAlignment="Stretch" Grid.Row="3">
