@@ -10,6 +10,8 @@ using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Protokolsystem.Additional;
 using ARK.ViewModel.Protokolsystem.Data;
+using ARK.View.Protokolsystem.Confirmations;
+using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
@@ -144,14 +146,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public ICommand AddLongTrip
+        public ICommand ShowConfirmationDialog
         {
             get
             {
                 return GetCommand(() =>
                 {
                     var db = DbArkContext.GetDbContext();
-                    var longTripForm = new LongTripForm
+                    LongTripForm longTripForm = null;
+                    longTripForm = new LongTripForm
                     {
                         FormCreated = DateTime.Now,
                         PlannedStartDate = PlannedStartDate ?? DateTime.MinValue,
@@ -165,11 +168,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         ResponsibleMember = Info.ResponsibleMember.Member
                     };
 
-                    db.LongTripForm.Add(longTripForm);
-                    db.SaveChanges();
+                    var ConfirmView = new CreateLongTripConfirm();
+                    var ConfirmViewModel = (CreateLongTripConfirmViewModel)ConfirmView.DataContext;
 
-                    // Returner til Kilometerstatistik.
-                    ProtocolSystem.StatisticsDistance.Execute(null);
+                    ConfirmViewModel.LongTrip = longTripForm;
+
+                    ProtocolSystem.ShowDialog(ConfirmView);
                 });
             }
         }

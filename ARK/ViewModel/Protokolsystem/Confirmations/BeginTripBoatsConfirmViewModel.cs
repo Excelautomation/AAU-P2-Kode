@@ -35,6 +35,8 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                     DbArkContext.GetDbContext().Trip.Add(Trip);
                     DbArkContext.GetDbContext().SaveChanges();
 
+                    ProtocolSystem.UpdateNumBoatsOut();
+
                     Hide();
                     ProtocolSystem.StatisticsDistance.Execute(null);
                 });

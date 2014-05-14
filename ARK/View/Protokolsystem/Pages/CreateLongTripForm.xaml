@@ -351,7 +351,7 @@
             <Button x:Name="btnSendLongTrip"
                     DockPanel.Dock="Right"
                     Margin="3,0,0,0"
-        		    Command="{Binding AddLongTrip}"
+        		    Command="{Binding ShowConfirmationDialog}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
                 <Button.Style>
