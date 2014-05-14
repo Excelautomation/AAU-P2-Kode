@@ -129,6 +129,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             MemberKmCollectionFiltered =
                 MemberKmCollectionFiltered.OrderByDescending(member => member.Distance).ToList();
+
+            MemberKmCollectionFiltered.Aggregate(1, (acc, val) =>
+            {
+                val.Position = acc;
+                return acc + 1;
+            });
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
@@ -181,12 +187,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     .Select((member, i) => new MemberDistanceViewModel(member))
                     .OrderByDescending(member => member.Distance)
                     .ToList();
-
-                _memberKmCollection.Aggregate(1, (acc, val) =>
-                {
-                    val.Position = acc;
-                    return acc + 1;
-                });
             }
             else
             {
