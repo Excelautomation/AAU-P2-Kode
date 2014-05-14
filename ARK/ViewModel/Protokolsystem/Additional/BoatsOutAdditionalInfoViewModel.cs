@@ -40,7 +40,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         public TripWarningSms WarningSms
         {
             get { return _warningSms; }
-            set { _warningSms = value; }
+            set { _warningSms = value; NotifyCustom("SmsSentToBoat"); NotifyCustom("SmsRecievedFromBoat"); NotifyCustom("SmsSentToAdministration"); }
         }
 
         public DateTime? SmsSentToBoat
@@ -48,9 +48,12 @@ namespace ARK.ViewModel.Protokolsystem.Additional
             get 
             {
                 if (WarningSms != null)
+                {
                     return WarningSms.SentSms;
+                }
                 else
                     return null;
+                
             }
         }
 
@@ -59,9 +62,12 @@ namespace ARK.ViewModel.Protokolsystem.Additional
             get
             {
                 if (WarningSms != null)
+                {
                     return WarningSms.RecievedSms;
+                }
                 else
                     return null;
+                
             }
         }
 
@@ -69,9 +75,17 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                //if (WarningSms != null)
-                //    return WarningSms.;
-                //else
+                if (SmsSentToBoat != null)
+                {
+                    DateTime time = (DateTime)SmsSentToBoat;
+                    if (DateTime.Compare(time, DateTime.Now.AddMinutes(-15)) < 0)
+                    {
+                        return SmsSentToBoat.Value.AddMinutes(15);
+                    }
+                    else 
+                        return null;
+                }
+                else
                     return null;
             }
         }

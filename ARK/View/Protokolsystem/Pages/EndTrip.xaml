@@ -73,7 +73,9 @@
                         <WrapPanel>
                             <TextBlock Text="Tid ude: " Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
                             <TextBlock  Style="{StaticResource ResourceKey=lstViewContent}">
-                                <Run Text="{Binding Path=TimeBoatOut.Hours, Mode=OneWay}" /><Run Text=":" /><Run Text="{Binding Path=TimeBoatOut.Minutes, Mode=OneWay}" />
+                                <Run Text="{Binding Path=TimeBoatOut.Hours, Mode=OneWay}" />
+                                <Run Text=":" />
+                                <Run Text="{Binding Path=TimeBoatOut.Minutes, Mode=OneWay}" />
                             </TextBlock>
                         </WrapPanel>
                     </WrapPanel>
