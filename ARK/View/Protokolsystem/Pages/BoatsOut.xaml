@@ -39,7 +39,8 @@
             </WrapPanel>
         </Border>
 
-        <ListView x:Name="lstBoatsOut" ItemsSource="{Binding Path=TripsOngoing}" SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}" Grid.Row="1" VerticalAlignment="Stretch"
+        <ListView x:Name="lstBoatsOut" ItemsSource="{Binding Path=TripsOngoing}" 
+                  SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}" Grid.Row="1" VerticalAlignment="Stretch"
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>

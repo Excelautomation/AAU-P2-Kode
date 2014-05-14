@@ -79,9 +79,9 @@
                   VerticalAlignment="Stretch" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Background="Transparent">
+                    <StackPanel Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <StackPanel>
-                            <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
+                           <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
                                 <Border.Style>
                                     <Style TargetType="Border">
                                         <Setter Property="BorderBrush" Value="SeaGreen" />
@@ -109,7 +109,6 @@
                                 <Run Text="{Binding SpecificBoatType}" />
                             </TextBlock>
                         </DockPanel>
-
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -124,7 +123,8 @@
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Background="Transparent"  Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
+                    <DockPanel Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                               Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVis}}">
                         <TextBlock x:Name="txbMember" Style="{DynamicResource ResourceKey=lstListViewHeadline}"
                                    IsEnabled="{Binding ElementName=ViewModel, Path=EnableMembers}">
                             <Run Text="{Binding Path=Member.FirstName}" />

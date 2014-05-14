@@ -46,8 +46,7 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
                         <StackPanel>
                             <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
                                 <Border.Style>
