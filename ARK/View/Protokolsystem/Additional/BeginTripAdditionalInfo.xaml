@@ -23,6 +23,7 @@
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
                         <Setter Property="Text" Value="Skadet"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -32,6 +33,7 @@
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
                         <Setter Property="Text" Value="På vandet"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -41,16 +43,20 @@
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
                         <Setter Property="Text" Value="Klar til brug"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <Trigger Property="Text" Value="Klar til brug">
                     <Setter Property="Foreground" Value="SeaGreen"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
                 </Trigger>
                 <Trigger Property="Text" Value="På vandet">
                     <Setter Property="Foreground" Value="DarkOrange"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
                 </Trigger>
                 <Trigger Property="Text" Value="Skadet">
                     <Setter Property="Foreground" Value="IndianRed"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
