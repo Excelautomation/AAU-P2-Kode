@@ -68,7 +68,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/View/images/error.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Text="VÆLG EN SKADEBESKRIVELSE" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
+                    <TextBlock Text="VÆLG EN SKADESTYPE" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
                 </Grid>
             </WrapPanel>
         </Border>
@@ -81,7 +81,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/View/images/comments_add.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Text="TILKNYT YDERLIGERE BEMÆRKNINGER" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
+                    <TextBlock Text="TILKNYT EN SKADESBESKRIVELSE" Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}"/>
                 </Grid>
             </WrapPanel>
         </Border>
@@ -217,7 +217,8 @@
             <Button x:Name="btnSendInjury"
                     DockPanel.Dock="Right"
                     Margin="3,0,0,0"
-        		    Command="{Binding AddDamageForm}"
+        		    Style="{StaticResource ResourceKey=btnFilter}" 
+        		    Command="{Binding OpenConfirmDialog}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
                 <Button.Style>
