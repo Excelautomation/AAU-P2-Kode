@@ -83,12 +83,13 @@
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Start tid:" FontWeight="Bold"/>
-                <Run Text="{Binding Path=SelectedTrip.TripStartTime}"/>
+                <Run Text="{Binding Path=SelectedTrip.TripStartTime, StringFormat={}{0:dd/MM/yy HH:mm}}"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Tid ude:" FontWeight="Bold"/>
-                <Run Text="{Binding Path=SelectedTrip.TimeBoatOut, Mode=OneWay}"/>
+                <Run Text="{Binding Path=SelectedTrip.TimeBoatOut, Mode=OneWay, StringFormat={}{0:hh\\:mm}}" />
+                
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
@@ -104,7 +105,7 @@
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="SMS modtaget fra båd:" FontWeight="Bold"/>
-                <Run Text="{Binding Path=SmsRecievedFromBoat, Mode=OneWay, StringFormat={}{0:HH:mm} }"/>
+                <Run Text="{Binding Path=SmsRecievedFromBoat , Mode=OneWay, StringFormat={}{0:HH:mm} }"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
