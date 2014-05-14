@@ -53,7 +53,7 @@ namespace ARK.HelperFunctions.SMSGateway
 
                     HandleWarningSms(warnings);
                     HandleResponseSms(warnings, responses);
-                    HandleNoResponseSms(warnings);
+                    HandleNoResponseSms(warnings, db);
 
                     // Fjern tidligere sms'er
                     db.GetSMS.RemoveRange(responses);
@@ -63,27 +63,24 @@ namespace ARK.HelperFunctions.SMSGateway
             }
         }
 
-        private void HandleNoResponseSms(IEnumerable<TripWarningSms> warnings)
+        private void HandleNoResponseSms(IEnumerable<TripWarningSms> warnings, DbArkContext db)
         {
             foreach (var warn in warnings
                 .Where(warn => !warn.RecievedSms.HasValue)
-                .Where(warn => warn.SentSms != null
-                               && warn.SentAdminSms != null
-                               && (DateTime.Now - warn.SentSms.Value).TotalMinutes > 15))
+                .Where(warn => warn.SentSms.HasValue
+                               && !warn.SentAdminSms.HasValue).AsEnumerable()
+                .Where(warn => (DateTime.Now - warn.SentSms.Value).TotalMinutes > 15))
             {
-                using (var db = new DbArkContext())
+                var numbers = db.Admin
+                    .Where(a => a.ContactDark && a.Member.Phone != null)
+                    .Select(a => a.Member.Phone);
+
+                foreach (var number in numbers)
                 {
-                    var numbers = db.Admin
-                        .Where(a => a.ContactDark && a.Member.Phone != null)
-                        .Select(a => a.Member.Phone);
-
-                    foreach (var number in numbers)
-                    {
-                        Gateway.SendSms(Sender, number, MessageNotHomeAdministration);
-                    }
-
-                    warn.SentAdminSms = DateTime.Now;
+                    Gateway.SendSms(Sender, number, MessageNotHomeAdministration);
                 }
+
+                warn.SentAdminSms = DateTime.Now;
             }
 
         }

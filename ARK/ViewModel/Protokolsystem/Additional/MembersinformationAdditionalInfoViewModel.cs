@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
-    class MembersinformationAdditionalInfoViewModel : ContentViewModelBase
+    public class MembersInformationAdditionalInfoViewModel : ContentViewModelBase
     {
         // Fields
         private Member _selectedMember;

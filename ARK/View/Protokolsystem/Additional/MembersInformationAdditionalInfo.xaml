@@ -11,7 +11,7 @@
              mc:Ignorable="d" >
     
     <UserControl.DataContext>
-        <VM:MembersinformationAdditionalInfoViewModel/>
+        <VM:MembersInformationAdditionalInfoViewModel/>
     </UserControl.DataContext>
 
     <UserControl.Resources>

@@ -86,9 +86,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get { return _additionalInfoPage ?? (_additionalInfoPage = new MembersInformationAdditionalInfo()); }
         }
 
-        public MembersinformationAdditionalInfoViewModel Info
+        public MembersInformationAdditionalInfoViewModel Info
         {
-            get { return InfoPage.DataContext as MembersinformationAdditionalInfoViewModel; }
+            get { return InfoPage.DataContext as MembersInformationAdditionalInfoViewModel; }
         }
 
         public IInfoContainerViewModel GetInfoContainerViewModel
