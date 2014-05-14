@@ -15,26 +15,43 @@
     <UserControl.DataContext>
         <pages:DistanceStatisticsViewModel/>
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        
-        <Style x:Key="Medal" TargetType="Image">
-            <Setter Property="Visibility" Value="Collapsed"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Position}" Value="1">
-                    <Setter Property="Visibility" Value="Visible"/>
-                    <Setter Property="Source" Value="/View/images/medal_award_Gold.png"></Setter>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Position}" Value="2">
-                    <Setter Property="Visibility" Value="Visible"/>
-                    <Setter Property="Source" Value="/View/images/medal_award_Silver.png"></Setter>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Position}" Value="3">
-                    <Setter Property="Visibility" Value="Visible"/>
-                    <Setter Property="Source" Value="/View/images/medal_award_Bronze.png"></Setter>
-                </DataTrigger>
-            </Style.Triggers>
+
+        <Style x:Key="Medal" TargetType="StackPanel">
+            <Style.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Position}" Value="1">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Source" Value="/View/images/medal_award_Gold.png"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Position}" Value="2">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Source" Value="/View/images/medal_award_Silver.png"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Position}" Value="3">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Source" Value="/View/images/medal_award_Bronze.png"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstListViewHeadline}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Position}" Value="1">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Position}" Value="2">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Position}" Value="3">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Style.Resources>
         </Style>
 
         <Style x:Key="styleContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
@@ -103,11 +120,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <!--<Image Grid.Column="0" Width="16" Height="16" HorizontalAlignment="Left" Style="{StaticResource Medal}"/>-->
-                        <TextBlock Grid.Column="0" Margin="0,-5,0,0" HorizontalAlignment="Left" Style="{StaticResource lstListViewHeadline}">
-                            <Run Text="{Binding Position}"/>
-                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource Medal}">
+                            <Image Grid.Column="0" Width="16" Height="16" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Column="0" Margin="0,-5,0,0" HorizontalAlignment="Left">
+                                <Run Text="{Binding Position}"/>
+                            </TextBlock>
+                        </StackPanel>
                         <TextBlock Width="Auto"  Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Path=Member.FirstName}" FontWeight="Normal"/>
                             <Run Text="{Binding Path=Member.LastName}" FontWeight="Normal"/>
@@ -115,11 +133,11 @@
                         <TextBlock Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Path=Distance, Mode=OneWay}"/>
                         </TextBlock>
-                    
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
+
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding Path=MemberSelectionChanged}" CommandParameter="{Binding ElementName=Members, Path=SelectedItem}" />
@@ -225,7 +243,7 @@
                     </TextBlock>
                 </Grid>
             </Button>
-           
+
             <Button Name="btnShowFilter"
                     DockPanel.Dock="Left"
                     Style="{StaticResource ResourceKey=btnFilter}" 
@@ -269,7 +287,7 @@
                     </TextBlock>
                 </Grid>
             </Button>
-        
+
             <Button x:Name="btnCustomDistance" 
                     DockPanel.Dock="Right" 
                     Style="{StaticResource btnFilter}"
