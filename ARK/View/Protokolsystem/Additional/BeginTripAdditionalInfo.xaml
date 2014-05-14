@@ -14,6 +14,46 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        <Style x:Key="StatusColor" TargetType="Run">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding SelectedBoat.Usable}" Value="False"/>
+                        <Condition Binding="{Binding SelectedBoat.BoatOut}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Text" Value="Skadet"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding SelectedBoat.Usable}" Value="True"/>
+                        <Condition Binding="{Binding SelectedBoat.BoatOut}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Text" Value="På vandet"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding SelectedBoat.Usable}" Value="True"/>
+                        <Condition Binding="{Binding SelectedBoat.BoatOut}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Text" Value="Klar til brug"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <Trigger Property="Text" Value="Klar til brug">
+                    <Setter Property="Foreground" Value="SeaGreen"/>
+                </Trigger>
+                <Trigger Property="Text" Value="På vandet">
+                    <Setter Property="Foreground" Value="DarkOrange"/>
+                </Trigger>
+                <Trigger Property="Text" Value="Skadet">
+                    <Setter Property="Foreground" Value="IndianRed"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="styleStack" TargetType="StackPanel">
             <Style.Setters>
                 <Setter Property="Margin" Value="5,5,0,0"/>
@@ -100,6 +140,10 @@
             <TextBlock Style="{StaticResource ResourceKey=styleContent}">
                 <Run Text="Kategori:" FontWeight="Bold"/>
                 <Run Text="{Binding SelectedBoat.SpecificBoatType}"/>
+            </TextBlock>
+            <TextBlock Style="{StaticResource styleContent}">
+                <Run Text="Status:" FontWeight="Bold"/>
+                <Run Style="{StaticResource StatusColor}"/>
             </TextBlock>
             <TextBlock Text="Åbne skadesanmeldelser:" Style="{StaticResource ResourceKey=styleContent}" 
                         FontWeight="Bold"/>
