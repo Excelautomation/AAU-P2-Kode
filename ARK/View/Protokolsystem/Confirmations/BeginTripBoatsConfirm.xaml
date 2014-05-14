@@ -102,8 +102,8 @@
                         </TextBlock>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Mørkets frembrud:" Width="70" Style="{StaticResource ResourceKey=lstViewContent}"/>
-                        <TextBlock Text="{Binding Path=Sunset, Mode=OneWay, StringFormat={}{0:HH:mm}}" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                        <TextBlock Text="Mørkets frembrud:" Width="70" FontWeight="Bold" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                        <TextBlock VerticalAlignment="Bottom" Text="{Binding Path=Sunset, Mode=OneWay, StringFormat={}{0:HH:mm}}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                     </WrapPanel>
                 </StackPanel>
 
@@ -131,8 +131,8 @@
                                     </Grid.ColumnDefinitions>
 
                                     <WrapPanel Margin="5,0,0,0" Grid.Column="0">
-                                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=FirstName}" FontSize="16"/>
-                                        <TextBlock Text="{Binding Path=LastName}" FontSize="16"/>
+                                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=FirstName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                                        <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                                     </WrapPanel>
                                 </Grid>
                             </DataTemplate>
