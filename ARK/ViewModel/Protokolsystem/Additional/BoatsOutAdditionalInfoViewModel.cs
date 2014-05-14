@@ -4,13 +4,22 @@ using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
 using System.Collections.ObjectModel;
-
+using ARK.Model.DB;
+using System;
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
     public class BoatsOutAdditionalInfoViewModel : ContentViewModelBase
     {
         // Fields
         private Trip _selectedTrip;
+        DbArkContext db;
+
+        // Constructor
+        public BoatsOutAdditionalInfoViewModel()
+        {
+            db = DbArkContext.GetDbContext();
+            WarningSms = db.TripWarningSms.SingleOrDefault(t => t.Trip == SelectedTrip);
+        }
 
         // Properties
         public Trip SelectedTrip
@@ -19,29 +28,45 @@ namespace ARK.ViewModel.Protokolsystem.Additional
             set { _selectedTrip = value; Notify(); }
         }
 
+        private TripWarningSms _warningSms;
 
-
-        private bool _smsSentToBoat;
-
-        public bool SmsSentToBoat
+        public TripWarningSms WarningSms
         {
-            get { return _smsSentToBoat; }
-            set { _smsSentToBoat = value; Notify(); }
+            get { return _warningSms; }
+            set { _warningSms = value; }
         }
 
-        private bool _smsRecievedFromBoat;
-
-        public bool SmsRecievedFromBoat
+        public DateTime? SmsSentToBoat
         {
-            get { return _smsRecievedFromBoat; }
-            set { _smsRecievedFromBoat = value; Notify(); }
+            get 
+            {
+                if (WarningSms != null)
+                    return WarningSms.SentSms;
+                else
+                    return null;
+            }
         }
-        private bool _smsSentToAdministration;
 
-        public bool SmsSentToAdministration
+        public DateTime? SmsRecievedFromBoat
         {
-            get { return _smsSentToAdministration; }
-            set { _smsSentToAdministration = value; Notify(); }
+            get
+            {
+                if (WarningSms != null)
+                    return WarningSms.RecievedSms;
+                else
+                    return null;
+            }
+        }
+
+        public DateTime? SmsSentToAdministration
+        {
+            get
+            {
+                //if (WarningSms != null)
+                //    return WarningSms.;
+                //else
+                    return null;
+            }
         }
     }
 }
