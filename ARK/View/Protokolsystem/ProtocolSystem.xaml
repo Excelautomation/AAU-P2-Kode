@@ -241,6 +241,7 @@
                     <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Foreground="White">
                         <Run Text="  DAGENS KILOMETER:"/>
                         <Run Text="{Binding DailyKilometers}"/>
+                        <Run Text="Km"/>
                     </TextBlock>
                 </StackPanel>
             </Grid>

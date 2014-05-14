@@ -82,17 +82,12 @@
                             <Run Text="Startdato:" FontWeight="Bold"/>
                             <Run Text="{Binding Path=PlannedStartDate, Mode=OneWay, StringFormat={}{0:dd/MM/yy}}"/>
                         </TextBlock>
-
-                        
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <DockPanel Grid.Row="5" Grid.ColumnSpan="2" Margin="0,5,0,0" LastChildFill="False">
-
-
-
             <Button x:Name="btnMakeNewLongTripForm"
                     DockPanel.Dock="Left"
             	    Style="{StaticResource ResourceKey=btnFilter}" 
@@ -110,8 +105,6 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;LANGTUR" />
                 </Grid>
             </Button>
-
-
         </DockPanel>
     </Grid>
 </UserControl>
