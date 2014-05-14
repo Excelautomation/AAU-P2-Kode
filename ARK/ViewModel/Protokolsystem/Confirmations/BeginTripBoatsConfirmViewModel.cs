@@ -51,7 +51,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return GetCommand(() => Hide());
+                return GetCommand(Hide);
             }
         }
 

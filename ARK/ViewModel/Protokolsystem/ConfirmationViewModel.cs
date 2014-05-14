@@ -9,7 +9,7 @@ namespace ARK.ViewModel.Protokolsystem
             get { return GetCommand(e => Hide()); }
         }
 
-        public void Hide()
+        public virtual void Hide()
         {
             ProtocolSystem.HideDialog();
         }
