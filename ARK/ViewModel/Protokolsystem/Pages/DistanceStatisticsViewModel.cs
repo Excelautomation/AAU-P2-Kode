@@ -15,10 +15,12 @@ using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Protokolsystem.Additional;
 using ARK.ViewModel.Protokolsystem.Data;
 using ARK.Model;
+using ARK.View.Protokolsystem.Confirmations;
+using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
-    internal class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
+    public class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         // Fields
         private readonly DbArkContext _db;
@@ -85,6 +87,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
+        public void NotifyTripList()
+        {
+            NotifyCustom("SelectedMember");
+            NotifyCustom("SelectedTrip");
+        }
+
         public ICommand MemberSelectionChanged
         {
             get { return GetCommand(e => { SelectedMember = (MemberDistanceViewModel)e; }); }
@@ -107,6 +115,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(
                     x =>
                     {
+                        var ConfirmView = new ChangeDistanceConfirm();
+                        var ConfirmViewModel = (ChangeDistanceConfirmViewModel)ConfirmView.DataContext;
+
+                        ConfirmViewModel.DistanceStatisticsVM = this;
+                        ConfirmViewModel.LocalDistance = this.SelectedTrip.Trip.Distance;
+                        ProtocolSystem.ShowDialog(ConfirmView);
+
                         DistanceSelector = !DistanceSelector;
                     },
                     x => this.SelectedTrip != null && this.SelectedTrip.Editable);
