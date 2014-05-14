@@ -14,10 +14,6 @@
         <pages:CreateLongTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
 
-    <UserControl.Resources>
-
-    </UserControl.Resources>
-
     <!--Content-->
     <Grid>
         <Grid.ColumnDefinitions>
@@ -359,7 +355,7 @@
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
                 <Button.Style>
-                    <Style TargetType="Button"> 
+                    <Style TargetType="Button" BasedOn="{StaticResource btnFilter}"> 
                         <Setter Property="IsEnabled" Value="False"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=AllDataFilled}" Value="true">
