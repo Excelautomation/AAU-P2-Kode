@@ -141,7 +141,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return SelectedBoat != null && SelectedMember != null
-                    && SelectedDamageType != null && Description != null;
+                    && SelectedDamageType != null;
             }
         }
 
