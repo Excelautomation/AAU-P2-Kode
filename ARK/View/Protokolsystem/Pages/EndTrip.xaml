@@ -68,7 +68,7 @@
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel Orientation="Vertical" >
+                    <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Orientation="Vertical">
                         <TextBlock Text="{Binding Boat.Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
                         <WrapPanel>
                             <TextBlock Text="Tid ude: " Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold"/>
@@ -99,7 +99,7 @@
             </ListView.Style>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
