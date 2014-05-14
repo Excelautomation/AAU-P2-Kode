@@ -142,7 +142,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand(() =>
                 {
-                    var db = DbArkContext.GetDbContext();
                     LongTripForm longTripForm = null;
                     longTripForm = new LongTripForm
                     {
@@ -155,7 +154,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         CampSites = CampSites,
                         Members = SelectedMembers.Select(mvm => mvm.Member).ToList(),
                         Status = LongTripForm.BoatStatus.Awaiting,
-                        ResponsibleMember = Info.ResponsibleMember.Member
+                        ResponsibleMember = Info.ResponsibleMember != null ? Info.ResponsibleMember.Member : null
                     };
                     var ConfirmView = new CreateLongTripConfirm();
                     var ConfirmViewModel = (CreateLongTripConfirmViewModel)ConfirmView.DataContext;
@@ -163,13 +162,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     ConfirmViewModel.LongTrip = longTripForm;
 
                     ProtocolSystem.ShowDialog(ConfirmView);
-                }, () => PlannedStartDate.HasValue &&
-                         PlannedEndDate.HasValue &&
-                         Info.ResponsibleMember != null &&
-                         !string.IsNullOrEmpty(TourDescription) &&
-                         !string.IsNullOrEmpty(DistancesPerDay) &&
-                         !string.IsNullOrEmpty(CampSites) &&
-                         SelectedMembers.Any());
+                });
             }
         }
 
