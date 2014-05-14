@@ -41,35 +41,4 @@ namespace ARK.ViewModel.Base
             _execute(parameter);
         }
     }
-
-
-    public class RelayCommand<T> : ICommand
-    {
-        readonly Action<T> _execute;
-        readonly Func<T, bool> _canExecute;
-
-        public RelayCommand(Action<T> executeMethod, Func<T, bool> canExecuteMethod)
-        {
-            if (executeMethod == null) throw new ArgumentNullException("execute");
-            _execute = executeMethod;
-            _canExecute = canExecuteMethod;
-        }
-
-        [DebuggerStepThrough]
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute((T)parameter);
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute((T)parameter);
-        }
-    }
 }

@@ -92,11 +92,8 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Window>(e =>
-                {
-                    e.Close();
-                }
-            );}
+                return GetCommand(e => ((Window)e).Close());
+            }
         }
 
         #endregion
@@ -163,11 +160,11 @@ namespace ARK.ViewModel.Administrationssystem
             get
             {
                 return
-                    GetCommand<string>(
+                    GetCommand(
                         s =>
                         {
                             if (SearchTextChanged != null) 
-                                SearchTextChanged(this, new SearchEventArgs(s));
+                                SearchTextChanged(this, new SearchEventArgs((string)s));
                         });
             }
         }

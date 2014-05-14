@@ -37,19 +37,21 @@ namespace ARK.ViewModel.Protokolsystem.Additional
 
         public ICommand ResponsibleMemberClick
         {
-            get { return GetCommand<object>(e => { SelectResponsible = !SelectResponsible; }); }
+            get { return GetCommand(() => { SelectResponsible = !SelectResponsible; }); }
         }
 
         public ICommand MemberClicked
         {
             get
             {
-                return GetCommand<MemberViewModel>(member =>
+                return GetCommand(member =>
                 {
+                    var memberVm = (MemberViewModel) member;
+
                     if (SelectResponsible)
-                        ResponsibleMember = member;
+                        ResponsibleMember = memberVm;
                     else
-                        RemoveMember.Execute(member);
+                        RemoveMember.Execute(memberVm);
                 });
             }
         }

@@ -53,7 +53,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
             }
         }
 
@@ -61,7 +61,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(a => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
+                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
             }
         }
 
@@ -69,7 +69,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(e => 
+                return GetCommand(() => 
                 {
                     SelectedDamageForm.Closed = true;
                     db.SaveChanges();

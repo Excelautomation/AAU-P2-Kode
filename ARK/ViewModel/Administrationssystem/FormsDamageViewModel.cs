@@ -33,14 +33,14 @@ namespace ARK.ViewModel.Administrationssystem
 
         public ICommand SaveChanges
         {
-            get { return GetCommand<object>(e => Save()); }
+            get { return GetCommand(Save); }
         }
 
         public ICommand CloseDamageForm
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     DamageForm.Closed = true;
 
@@ -53,7 +53,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     DamageForm.Closed = false;
                     Save();
@@ -70,7 +70,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     DamageForm.Closed = true;
                     Save();

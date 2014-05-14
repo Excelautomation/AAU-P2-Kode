@@ -112,9 +112,9 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Trip>(e =>
+                return GetCommand(e =>
                 {
-                    CurrentTrip = e;
+                    CurrentTrip = (Trip)e;
                     //LocalTrip = CurrentTrip;
                     RecentSave = false;
                 });
@@ -126,7 +126,7 @@ namespace ARK.ViewModel.Administrationssystem
             get 
             {
                 //CurrentTrip = LocalTrip;
-                return GetCommand<object>(e => Save()); 
+                return GetCommand(Save); 
             }
         }
 
@@ -135,7 +135,7 @@ namespace ARK.ViewModel.Administrationssystem
             get
             {
                 
-                return GetCommand<object>(e => Reload());
+                return GetCommand(Reload);
             }
         }
 
@@ -144,7 +144,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     NewBoatDialog = new BoatListWindow();
                     NewBoatDialog.DataContext = this;
@@ -157,15 +157,14 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Boat>(e =>
+                return GetCommand(e =>
                 {
                     NewBoatDialog.Close();
                     using (var db = new DbArkContext())
                     {
                         db.Trip.Attach(CurrentTrip);
-                        CurrentTrip.Boat = e;
+                        CurrentTrip.Boat = (Boat)e;
                     }
-                    CurrentTrip.Boat = e;
                     NotifyCustom("CurrentTrip");
                 });
             }

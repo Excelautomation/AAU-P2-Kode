@@ -50,7 +50,7 @@ namespace ARK.ViewModel.Base
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     // If keyboardstate is on ignore check for currentSelectedTextBox
                     if (KeyboardToggled)
@@ -97,7 +97,7 @@ namespace ARK.ViewModel.Base
 
         public ICommand GotFocus
         {
-            get { return GetCommand<FrameworkElement>(element => { CurrentSelectedTextBox = element; }); }
+            get { return GetCommand(element => { CurrentSelectedTextBox = (FrameworkElement)element; }); }
         }
 
         public bool KeyboardToggled
