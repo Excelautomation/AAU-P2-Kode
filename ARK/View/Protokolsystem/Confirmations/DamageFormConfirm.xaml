@@ -180,7 +180,7 @@
 						<ColumnDefinition Width="100"/>
 					</Grid.ColumnDefinitions>
 					<Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/cancel.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="NULSTIL OG&#xA;ANNULLER" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="NULSTIL" />
 				</Grid>
 			</Button>
             
@@ -218,7 +218,7 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_edit.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ÆNDRE&#xA;INDHOLD" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="TILBAGE" />
                 </Grid>
             </Button>
         </DockPanel>

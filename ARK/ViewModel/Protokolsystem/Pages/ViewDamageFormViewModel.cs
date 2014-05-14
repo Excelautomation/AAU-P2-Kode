@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using ARK.Model.DB;
 using System.Linq;
 using ARK.ViewModel.Protokolsystem.Additional;
+using ARK.View.Protokolsystem.Confirmations;
+using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
@@ -68,14 +70,23 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand(() => 
                 {
-                    SelectedDamageForm.Closed = true;
-                    db.SaveChanges();
-                    DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
 
-                    if (DamageForms.Any())
-                        SelectedDamageForm = DamageForms.First();
+                    var ConfirmView = new DamageFormConfirm();
+                    var ConfirmViewModel = (DamageFormConfirmViewModel)ConfirmView.DataContext;
+
+                    ConfirmViewModel.DamageForm = SelectedDamageForm;
+
+                    ProtocolSystem.ShowDialog(ConfirmView);
                 });
             }
+        }
+
+        public void ResetList()
+        {
+            DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
+
+            if (DamageForms.Any())
+                SelectedDamageForm = DamageForms.First();
         }
 
         private FrameworkElement InfoPage

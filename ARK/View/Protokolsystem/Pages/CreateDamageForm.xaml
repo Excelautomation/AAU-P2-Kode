@@ -231,7 +231,7 @@
             <Button x:Name="btnSendInjury"
                     DockPanel.Dock="Right"
                     Margin="3,0,0,0"
-        		    Command="{Binding OpenConfirmDialog}"
+        		    Command="{Binding SubmitForm}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
                 <Button.Style>
