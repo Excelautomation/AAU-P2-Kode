@@ -151,7 +151,8 @@ namespace ARK
 
             Current.Exit += (sender, e) =>
             {
-                if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb")
+                if (windowsIdentity != null && (windowsIdentity.Name == "SAHB-WIN7\\sahb" ||
+                    windowsIdentity.Name == "Jonas-BB\\Jonas"))
                 {
                     // KILL IT!
                     System.Diagnostics.Process.GetCurrentProcess().Kill();

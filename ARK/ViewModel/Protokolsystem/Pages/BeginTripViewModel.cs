@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using ARK.HelperFunctions;
@@ -125,9 +126,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             set
             {
                 if (_selectedBoat == value || // Nothing changed - silently discard - STACKOVERFLOW IF NOT DISCARDED (Keyboard chaning LV)
-                    value == null) 
+                    value == null)
                     return;
-                
+
                 _selectedBoat = value;
 
                 ProtocolSystem.KeyboardClear();
@@ -190,7 +191,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     }
                 });
             }
-                    }
+        }
 
         public ICommand DirectionSelected
         {
@@ -199,7 +200,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(x =>
                 {
                     var temp = x as string;
-                    this.Direction = temp.Trim(new[] { '\n' });
+                    this.Direction = Regex.Replace(temp, @"\n", string.Empty);
                 });
             }
         }
@@ -228,8 +229,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         public ICommand ShowConfirmDialog
         {
-            get 
-            { 
+            get
+            {
                 return new RelayCommand(
                     x => ConfirmTripData(),
                     x => this.SelectedBoat != null && this.SelectedMembers.Count == this.SelectedBoat.NumberofSeats && this.Direction != null);
@@ -293,7 +294,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         //                Members = new List<Member>(),
         //                Boat = SelectedBoat
         //            };
-                
+
         //            foreach (var m in SelectedMembers.Select(member => member.Member))
         //            {
         //                if (m.Id == -1)
@@ -315,7 +316,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         //            trip.LongTrip = LongTrip;
         //            trip.Direction = Direction;
-                
+
         //            // åbner dialog vinduet
         //            ShowDialog(new BeginTripBoatsConfirm()); 
         //        });
@@ -363,8 +364,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats
-                    where boat.Filter(args.SearchEventArgs.SearchText)
-                    select boat;
+                        where boat.Filter(args.SearchEventArgs.SearchText)
+                        select boat;
 
                 foreach (
                     MemberViewModel member in

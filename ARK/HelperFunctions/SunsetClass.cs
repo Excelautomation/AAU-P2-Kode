@@ -15,9 +15,9 @@ namespace ARK.HelperFunctions
         {
             get
             {
-                var val = _sunset != DateTime.MinValue ? _sunset : (_sunset = XmlParser.GetSunsetFromXml());
-                Console.WriteLine();
-                return val;
+                return _sunset != DateTime.MinValue && _sunset.Date == DateTime.Now.Date
+                    ? _sunset
+                    : (_sunset = XmlParser.GetSunsetFromXml());
             }
         }
     }
