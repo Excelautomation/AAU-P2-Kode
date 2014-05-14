@@ -102,12 +102,8 @@
                         </TextBlock>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Width="70" Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Mørkets frembrud:" FontWeight="Bold"/>
-                        </TextBlock>
-                        <TextBlock VerticalAlignment="Bottom" Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Ubundet" />
-                        </TextBlock>
+                        <TextBlock Text="Mørkets frembrud:" Width="70" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                        <TextBlock Text="{Binding Path=Sunset, Mode=OneWay}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                     </WrapPanel>
                 </StackPanel>
 
