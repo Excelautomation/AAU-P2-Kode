@@ -9,5 +9,6 @@ namespace ARK.Model
         public Trip Trip { get; set; }
         public DateTime? SentSms { get; set; }
         public DateTime? RecievedSms { get; set; }
+        public DateTime? SentAdminSms { get; set; }
     }
 }
