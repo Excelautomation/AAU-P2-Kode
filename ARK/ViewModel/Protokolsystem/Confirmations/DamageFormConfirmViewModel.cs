@@ -37,7 +37,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                     db.DamageForm.Add(DamageForm);
                     db.SaveChanges();
                     Hide();
-                    ProtocolSystem.ViewDamageForm.Execute(null);
+                    ProtocolSystem.StatisticsDistance.Execute(null);
                 });
             }
         }
