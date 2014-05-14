@@ -199,7 +199,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(x =>
                 {
                     var temp = x as string;
-                    this.Direction = temp.Trim( new []{'\n'});
+                    this.Direction = temp.Trim(new[] { '\n' });
                 });
             }
         }
@@ -230,13 +230,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get 
             { 
-                return GetCommand<object>(e =>{
-                    ConfirmTripData();
-                }); 
+                return new RelayCommand(
+                    x => ConfirmTripData(),
+                    x => this.SelectedBoat != null && this.SelectedMembers.Count == this.SelectedBoat.NumberofSeats && this.Direction != null);
             }
         }
 
-        public void ConfirmTripData ()
+        public void ConfirmTripData()
         {
             {
                 Trip trip = new Trip
