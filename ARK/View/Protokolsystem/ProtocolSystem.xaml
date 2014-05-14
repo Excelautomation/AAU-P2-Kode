@@ -211,6 +211,10 @@
                                     <Setter TargetName="LongTripText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
                                     <Setter TargetName="LongTripBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
                                 </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="OPRET NY LANGTUR">
+                                    <Setter TargetName="LongTripText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="LongTripBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
                             </ControlTemplate.Triggers>
 
                         </ControlTemplate>
@@ -230,6 +234,10 @@
 
                             <ControlTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="SKADEBLANKETTER">
+                                    <Setter TargetName="DamageButtonText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
+                                    <Setter TargetName="DamageButtonBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="OPRET NY SKADE">
                                     <Setter TargetName="DamageButtonText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
                                     <Setter TargetName="DamageButtonBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
                                 </DataTrigger>

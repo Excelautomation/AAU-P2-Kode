@@ -184,7 +184,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return
                     GetCommand(
-                        () => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "AKTIVE LANGTURS BLANKETTER"));
+                        () => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
             }
         }
 
