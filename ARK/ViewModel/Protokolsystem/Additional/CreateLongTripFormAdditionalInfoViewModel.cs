@@ -51,7 +51,10 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                     if (SelectResponsible)
                         ResponsibleMember = memberVm;
                     else
+                    {
+                        memberVm.IsResponsible = false;
                         RemoveMember.Execute(memberVm);
+                    }
                 });
             }
         }
