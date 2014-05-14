@@ -24,7 +24,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     DbArkContext.GetDbContext().Trip.Add(Trip);
                     DbArkContext.GetDbContext().SaveChanges();
@@ -39,7 +39,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return GetCommand<object>(e => 
+                return GetCommand(() => 
                 {
                     Hide();
                     ProtocolSystem.StatisticsDistance.Execute(null);
@@ -51,7 +51,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return GetCommand<object>(e => Hide());
+                return GetCommand(() => Hide());
             }
         }
 

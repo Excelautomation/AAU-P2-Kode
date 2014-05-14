@@ -126,8 +126,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    GetCommand<object>(
-                        a => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+                    GetCommand(
+                        () => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
             }
         }
 
@@ -136,31 +136,31 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    GetCommand<object>(
-                        a => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "AKTIVE SKADES BLANKETTER"));
+                    GetCommand(
+                        () => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "AKTIVE SKADES BLANKETTER"));
             }
         }
 
         public ICommand MemberSelectionChanged
         {
-            get { return GetCommand<Member>(e => { SelectedMember = e; }); }
+            get { return GetCommand(e => { SelectedMember = (Member)e; }); }
         }
 
         public ICommand BoatSelectionChanged
         {
-            get { return GetCommand<Boat>(b => { SelectedBoat = b; }); }
+            get { return GetCommand(b => { SelectedBoat = (Boat)b; }); }
         }
 
         public ICommand DamageTypeSelected
         {
-            get { return GetCommand<DamageType>(d => { SelectedDamageType = d; }); }
+            get { return GetCommand(d => { SelectedDamageType = (DamageType)d; }); }
         }
 
         public ICommand AddDamageForm
         {
             get
             {
-                return GetCommand<object>(d =>
+                return GetCommand(() =>
                 {
                     // Fjern evt tjek her i VM og lav button inactive ind til betingelser er ok.
                     if (SelectedBoat != null && SelectedMember != null && SelectedDamageType != null)

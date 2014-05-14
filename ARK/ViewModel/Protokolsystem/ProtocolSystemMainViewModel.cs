@@ -233,7 +233,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand AdminLogin
         {
-            get { return GetCommand<object>(e => ShowDialog(new AdminLoginConfirm())); }
+            get { return GetCommand(() => ShowDialog(new AdminLoginConfirm())); }
         }
 
         public bool DialogShow

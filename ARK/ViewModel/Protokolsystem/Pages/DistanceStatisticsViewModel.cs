@@ -87,7 +87,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         public ICommand MemberSelectionChanged
         {
-            get { return GetCommand<MemberDistanceViewModel>(e => { SelectedMember = e; }); }
+            get { return GetCommand(e => { SelectedMember = (MemberDistanceViewModel)e; }); }
         }
 
         private bool DistanceSelector

@@ -28,9 +28,10 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Window>(e =>
+                return GetCommand(e =>
                 {
-                    e.Close();
+                    var window = e as Window;
+                    if (window != null) window.Close();
                 });
             }
         }
@@ -39,7 +40,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Window>(e =>
+                return GetCommand(e =>
                 {
                     DbArkContext db = DbArkContext.GetDbContext();
                     
@@ -47,11 +48,11 @@ namespace ARK.ViewModel.Administrationssystem
 
                     if (admin != null && admin.Username == Username && admin.Password == ((AdminLogin)e).PasswordBox.Password)
                     {
-                        var window = new AdminSystem();
-                        ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
-                        window.Show();
+                        var adminSystem = new AdminSystem();
+                        ((AdminSystemViewModel)adminSystem.DataContext).CurrentLoggedInUser = admin;
+                        adminSystem.Show();
 
-                        e.Close();
+                        ((Window)e).Close();
                     }
                     else
                     {

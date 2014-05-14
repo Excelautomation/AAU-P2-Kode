@@ -148,7 +148,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(d =>
+                return GetCommand(() =>
                 {
                     var db = DbArkContext.GetDbContext();
                     var longTripForm = new LongTripForm
@@ -179,8 +179,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    GetCommand<object>(
-                        a => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "AKTIVE LANGTURS BLANKETTER"));
+                    GetCommand(
+                        () => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "AKTIVE LANGTURS BLANKETTER"));
             }
         }
 
@@ -188,7 +188,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(d =>
+                return GetCommand(() =>
                 {
                     if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
                     {
@@ -202,7 +202,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(d =>
+                return GetCommand(() =>
                 {
                     if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
                     {

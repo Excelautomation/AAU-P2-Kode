@@ -36,7 +36,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     LongDistanceForm.Status = LongTripForm.BoatStatus.Accepted;
 
@@ -49,7 +49,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     LongDistanceForm.Status = LongTripForm.BoatStatus.Denied;
                     Save();

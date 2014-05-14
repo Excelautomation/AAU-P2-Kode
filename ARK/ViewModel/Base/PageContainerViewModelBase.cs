@@ -55,7 +55,7 @@ namespace ARK.ViewModel.Base
 
         public ICommand GetNavigateCommand(Func<FrameworkElement> page, string pageTitle)
         {
-            return GetCommand<object>(obj => NavigateToPage(page, pageTitle));
+            return GetCommand(() => NavigateToPage(page, pageTitle));
         }
     }
 }

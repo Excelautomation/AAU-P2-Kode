@@ -177,8 +177,8 @@ namespace ARK.ViewModel.Administrationssystem
             get
             {
                 return
-                    GetCommand<FrameworkElement>(
-                        element => ContentViewModelBase.GetKeyboard(this).GotFocus.Execute(element));
+                    GetCommand(
+                        element => ContentViewModelBase.GetKeyboard(this).GotFocus.Execute((FrameworkElement)element));
             }
         }
 
@@ -198,12 +198,12 @@ namespace ARK.ViewModel.Administrationssystem
             get
             {
                 return
-                    GetCommand<DamageForm>(
+                    GetCommand(
                         e =>
                         {
                             if (e == null) return;
 
-                            GoToDamageForm(e);
+                            GoToDamageForm((DamageForm)e);
                         });
             }
         }
@@ -212,11 +212,11 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<LongTripForm>(e =>
+                return GetCommand(e =>
                 {
                     if (e == null) return;
 
-                    GoToLongDistanceForm(e);
+                    GoToLongDistanceForm((LongTripForm)e);
                 });
             }
         }

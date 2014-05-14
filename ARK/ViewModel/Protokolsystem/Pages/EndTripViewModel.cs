@@ -124,9 +124,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<IList>(st =>
+                return GetCommand(st =>
                 {
-                    var temp = st.Cast<StandardTrip>();
+                    var temp = ((IList)st).Cast<StandardTrip>();
                     this.SelectedStdTrip = temp.FirstOrDefault();
                 });
             }

@@ -58,14 +58,16 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return GetCommand<MemberViewModel>(member =>
+                return GetCommand(member =>
                 {
                     if (member == null) return;
 
-                    if (member.Member.Id < 0)
+                    var memberVm = (MemberViewModel) member;
+
+                    if (memberVm.Member.Id < 0)
                     {
                         var temp = SelectedMembers.ToList();
-                        temp.Remove(member);
+                        temp.Remove(memberVm);
 
                         // Clear because of sync
                         SelectedMembers.Clear();
@@ -73,7 +75,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                             SelectedMembers.Add(m);
                     }
                     else
-                        SelectedMembers.Remove(member);
+                        SelectedMembers.Remove(memberVm);
                 });
             }
         }

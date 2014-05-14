@@ -102,12 +102,12 @@ namespace ARK.ViewModel.Administrationssystem
 
         public ICommand SaveChanges
         {
-            get { return GetCommand<object>(e => Save()); }
+            get { return GetCommand(Save); }
         }
 
         public ICommand CancelChanges
         {
-            get { return GetCommand<object>(e => Reload()); }
+            get { return GetCommand(Reload); }
         }
 
         #region State
