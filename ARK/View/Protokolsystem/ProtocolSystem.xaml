@@ -6,7 +6,7 @@
         Left="0" Top="0"
         WindowStyle="None"
         ResizeMode="NoResize"
-        WindowStartupLocation="Manual">
+        WindowStartupLocation="Manual" WindowState="Maximized">
 
     <Window.DataContext>
         <Protokolsystem:ProtocolSystemMainViewModel />
@@ -80,18 +80,15 @@
                             <Border x:Name="StartBorder" Background="{StaticResource BeginBG}" BorderBrush="{StaticResource BeginBorder}">
                                 <TextBlock x:Name="StartText" Text="START&#xA;ROTUR" />
                             </Border>
-
                             <ControlTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="START ROTUR">
                                     <Setter TargetName="StartText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
                                     <Setter TargetName="StartBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
                                 </DataTrigger>
                             </ControlTemplate.Triggers>
-
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                
                 
                 <Button x:Name="EndTrip" Grid.Row="1" VerticalAlignment="Top" 
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
