@@ -31,7 +31,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                 if (_selectedTrip != null)
                     WarningSms = db.TripWarningSms.FirstOrDefault(t => t.Trip.Id == SelectedTrip.Id);
                 
-                Notify(); 
+                Notify();
             }
         }
 
