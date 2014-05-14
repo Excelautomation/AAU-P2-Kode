@@ -87,7 +87,7 @@
                     <Image Source="/View/images/user_striper.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}">
                         <Run Text="VÆLG DELTAGERE ( ANTAL:"/>
-                        <Run Text="{Binding Path=MembersCount, Mode=OneWay}"/>
+                        <Run Text="{Binding Path=MembersFiltered.Count, Mode=OneWay}"/>
                         <Run Text=")"/>
                     </TextBlock>
                 </Grid>
