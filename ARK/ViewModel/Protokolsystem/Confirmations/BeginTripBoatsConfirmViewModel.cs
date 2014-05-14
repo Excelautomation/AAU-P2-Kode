@@ -16,6 +16,16 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         // Fields
         private Trip _trip;
 
+        public Trip Trip
+        {
+            get { return _trip; }
+            set
+            {
+                _trip = value;
+                Notify();
+            }
+        }
+
         public BeginTripBoatsConfirmViewModel()
         {
            
@@ -31,7 +41,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                     DbArkContext.GetDbContext().SaveChanges();
 
                     Hide();
-                    ProtocolSystem.BoatsOut.Execute(null);
+                    ProtocolSystem.StatisticsDistance.Execute(null);
                 });
             }
         }
