@@ -132,7 +132,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             }
         }
 
-        public DateTime DateTimeFromPicker
+        public DateTime? DateTimeFromPicker
         {
             get { return DateTimeFrom.HasValue ? DateTimeFrom.Value : DateTime.MinValue; }
             set
@@ -142,9 +142,9 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             }
         }
 
-        public DateTime DateTimeToPicker
+        public DateTime? DateTimeToPicker
         {
-            get { return DateTimeTo.HasValue ? DateTimeTo.Value : DateTime.MinValue; }
+            get { return DateTimeTo; }
             set
             {
                 DateTimeTo = value;
@@ -266,8 +266,8 @@ namespace ARK.ViewModel.Protokolsystem.Filters
                     return items;
 
                 IEnumerable<TripViewModel> trips = items.Cast<TripViewModel>().ToList();
-                return trips.Where(o => (!StartDate.HasValue || o.Trip.TripStartTime >= StartDate) &&
-                    (!EndDate.HasValue || o.Trip.TripStartTime <= EndDate)).Cast<T>();
+                return trips.Where(o => (!StartDate.HasValue || o.Trip.TripStartTime.Date >= StartDate.Value.Date) &&
+                    (!EndDate.HasValue || o.Trip.TripStartTime.Date <= EndDate.Value.Date)).Cast<T>();
             }
         }
     }
