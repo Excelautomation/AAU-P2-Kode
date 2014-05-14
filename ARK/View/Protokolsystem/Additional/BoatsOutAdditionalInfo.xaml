@@ -99,17 +99,17 @@
             <!--SMS tidspunkt for forsendelsen og modtagelsen-->
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="SMS sendt til båd:" FontWeight="Bold"/>
-                <Run Text="{Binding path}"/>
+                <Run Text="{Binding Path=SmsSentToBoat, Mode=OneWay, StringFormat={}{0:HH:mm} }"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="SMS modtaget fra båd:" FontWeight="Bold"/>
-                <Run Text="{Binding path}"/>
+                <Run Text="{Binding Path=SmsRecievedFromBoat, Mode=OneWay, StringFormat={}{0:HH:mm} }"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="SMS sendt til administrationen:" FontWeight="Bold"/>
-                <Run Text="{Binding path}"/>
+                <Run Text="{Binding Path=SmsSentToAdministration, Mode=OneWay, StringFormat={}{0:HH:mm} }"/>
             </TextBlock>
         </StackPanel>
 
