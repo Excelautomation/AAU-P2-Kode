@@ -226,12 +226,12 @@
                    HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Run Text="BESÆTNING" FontSize="16"/>
                 </TextBlock>
-                
-                <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1" PanningMode="VerticalOnly">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1" PanningMode="VerticalOnly" MaxHeight="250">
                     <ItemsControl x:Name="AllMembersList" ItemsSource="{Binding Path=LongTrip.Members}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="5">
+                                <Grid Margin="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
