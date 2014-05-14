@@ -365,19 +365,8 @@
                     Margin="3,0,0,0"
         		    Command="{Binding ShowConfirmationDialog}"
         		    Background="{StaticResource SubmitBG}"
-        		    BorderBrush="{StaticResource SubmitBorder}">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource btnFilter}"> 
-                        <Setter Property="IsEnabled" Value="False"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=AllDataFilled}" Value="true">
-                                <DataTrigger.Setters>
-                                    <Setter Property="IsEnabled" Value="True"/>
-                                </DataTrigger.Setters>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+        		    BorderBrush="{StaticResource SubmitBorder}"
+                    Style="{StaticResource btnFilter}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>

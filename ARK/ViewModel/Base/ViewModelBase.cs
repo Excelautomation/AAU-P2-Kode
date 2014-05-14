@@ -28,6 +28,11 @@ namespace ARK.ViewModel.Base
             return GetCommand(e => executeMethod());
         }
 
+        protected ICommand GetCommand(Action executeMethod, Func<bool> canExecute)
+        {
+            return GetCommand(e => executeMethod(), e => canExecute());
+        }
+
         protected ICommand GetCommand(Action<object> executeMethod)
         {
             return new RelayCommand(executeMethod);
