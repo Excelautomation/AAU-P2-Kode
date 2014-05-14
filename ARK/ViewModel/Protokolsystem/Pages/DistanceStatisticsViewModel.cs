@@ -129,7 +129,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             MemberKmCollectionFiltered =
                 MemberKmCollectionFiltered.OrderByDescending(member => member.Distance).ToList();
+        }
 
+        private void UpdateRank()
+        {
             MemberKmCollectionFiltered.Aggregate(1, (acc, val) =>
             {
                 val.Position = acc;
@@ -150,15 +153,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 // Order filter
                 OrderFilter();
+                UpdateRank();
 
                 return;
-            }
-
-            // Search
-            if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
-            {
-                MemberKmCollectionFiltered =
-                    MemberKmCollectionFiltered.Where(member => member.Member.Filter(args.SearchEventArgs.SearchText)).ToList();
             }
 
             // Filter
@@ -168,8 +165,17 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                     elm.UpdateFilter(args);
             }
 
+
             // Order filter
             OrderFilter();
+            UpdateRank();
+
+            // Search
+            if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
+            {
+                MemberKmCollectionFiltered =
+                    MemberKmCollectionFiltered.Where(member => member.Member.Filter(args.SearchEventArgs.SearchText)).ToList();
+            }
         }
 
         #endregion
