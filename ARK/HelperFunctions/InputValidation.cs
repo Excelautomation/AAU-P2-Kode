@@ -26,7 +26,7 @@ namespace ARK.HelperFunctions
             CaptureCollection temp;
             if ((temp = FirstDoubleFromString.Match(input).Groups["number"].Captures).Count > 0)
             {
-                number = Convert.ToDouble(temp[0]);
+                number = Convert.ToDouble(temp[0].Value);
                 return true;
             }
             else
