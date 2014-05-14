@@ -61,7 +61,7 @@
 
         <Border Style="{StaticResource ResourceKey=brdHeader}" Grid.Row="2">
             <TextBlock Style="{StaticResource ResourceKey=txbHeader}">
-                <Run Text="TURENS OPLYSNINGER"/>
+                <Run Text="TURENS BESÆTNING"/>
             </TextBlock>
         </Border>
 
@@ -114,48 +114,17 @@
             </TextBlock>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="3" Background="White">
-            <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                      FontSize="18" BorderBrush="{x:Null}" Background="White">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.RemoveMember}" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <ContentPresenter />
-                                </ControlTemplate>
-                            </Button.Template>
-                            <Button.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Style="{StaticResource styleStack}">
-                                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
-                                            <TextBlock Text=" " />
-                                            <TextBlock Text="{Binding Path=Member.FirstName}"/>
-                                            <TextBlock Text=" " />
-                                            <TextBlock Text="{Binding Path=Member.LastName}"/>
-                                        </StackPanel>
-                                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                                            <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
-                                            <TextBlock Text="{Binding Path=Member.ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-
+        <ListView x:Name="lstBoatsOut" ItemsSource="{Binding Path=SelectedTrip.Members}" 
+                  Grid.Row="3" VerticalAlignment="Stretch"
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding Path=FirstName}"/>
+                        <Run Text="{Binding Path=LastName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>
