@@ -18,40 +18,23 @@
     
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        <valueConverters:ListViewItemToOrdinalConverter x:Key="OrdinalConverter"/>
-        <DataTemplate x:Key="GoldMedal">
-            
-        </DataTemplate>
-        <DataTemplate x:Key="SilverMedal">
-            <Image Source="/View/images/medal_award_Silver.png" Width="16" Height="16" HorizontalAlignment="Left"/>
-        </DataTemplate>
-        <DataTemplate x:Key="BronzeMedal">
-            <Image Source="/View/images/medal_award_Bronze.png" Width="16" Height="16" HorizontalAlignment="Left"/>
-        </DataTemplate>
-        <DataTemplate x:Key="NoMedal">
-            <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}" 
-                       Margin="0,-5,0,0"
-                       Text="{Binding Position}" HorizontalAlignment="Left"/>
-        </DataTemplate>
-        <Style x:Key="imgMedal" TargetType="Label">
-            <Setter Property="ContentTemplate" Value="{StaticResource NoMedal}"/>
-            <!--<Style.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsLoaded}" Value="True"/>
-                        <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="0"/>
-                    </MultiDataTrigger.Conditions>
-                    <MultiDataTrigger.Setters>
-                        <Setter Property="ContentTemplate" Value="{StaticResource GoldMedal}"/>
-                    </MultiDataTrigger.Setters>
-                </MultiDataTrigger>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="1">
-                    <Setter Property="ContentTemplate" Value="{StaticResource SilverMedal}"/>
+        
+        <Style x:Key="Medal" TargetType="Image">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Position}" Value="1">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Source" Value="/View/images/medal_award_Gold.png"></Setter>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Value="2">
-                    <Setter Property="ContentTemplate" Value="{StaticResource BronzeMedal}"/>
+                <DataTrigger Binding="{Binding Position}" Value="2">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Source" Value="/View/images/medal_award_Silver.png"></Setter>
                 </DataTrigger>
-            </Style.Triggers>-->
+                <DataTrigger Binding="{Binding Position}" Value="3">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Source" Value="/View/images/medal_award_Bronze.png"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="styleContent" TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=lstViewContent}">
@@ -116,18 +99,19 @@
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="30"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
                         
-                        <Label Width="30" Style="{StaticResource imgMedal}"/>
-                        
+                        <!--<Image Grid.Column="0" Width="16" Height="16" HorizontalAlignment="Left" Style="{StaticResource Medal}"/>-->
+                        <TextBlock Grid.Column="0" Margin="0,-5,0,0" HorizontalAlignment="Left" Style="{StaticResource lstListViewHeadline}">
+                            <Run Text="{Binding Position}"/>
+                        </TextBlock>
                         <TextBlock Width="Auto"  Grid.Column="1" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Path=Member.FirstName}" FontWeight="Normal"/>
                             <Run Text="{Binding Path=Member.LastName}" FontWeight="Normal"/>
                         </TextBlock>
-
                         <TextBlock Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding Path=Distance, Mode=OneWay}"/>
                         </TextBlock>
