@@ -31,13 +31,13 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return GetCommand<AdminLoginConfirm>(e =>
+                return GetCommand(e =>
                 {
                     DbArkContext db = DbArkContext.GetDbContext();
 
                     Admin admin = db.Admin.Find(Username);
 
-                    if (admin != null && admin.Username == Username && admin.Password == e.PasswordBox.Password )
+                    if (admin != null && admin.Username == Username && admin.Password == ((AdminLoginConfirm)e).PasswordBox.Password )
                     {
                         var window = new AdminSystem();
                         ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;

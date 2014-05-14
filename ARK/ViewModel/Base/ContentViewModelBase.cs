@@ -38,7 +38,7 @@ namespace ARK.ViewModel.Base
 
         public ICommand GotFocus
         {
-            get { return GetCommand<FrameworkElement>(element => GetKeyboard().GotFocus.Execute(element)); }
+            get { return GetCommand(element => GetKeyboard().GotFocus.Execute((FrameworkElement) element)); }
         }
 
         private IKeyboardContainerViewModelBase GetKeyboard()

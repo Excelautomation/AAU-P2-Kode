@@ -6,7 +6,7 @@ namespace ARK.ViewModel.Protokolsystem
     {
         public ICommand CommandHide
         {
-            get { return GetCommand<object>(e => Hide()); }
+            get { return GetCommand(e => Hide()); }
         }
 
         public void Hide()

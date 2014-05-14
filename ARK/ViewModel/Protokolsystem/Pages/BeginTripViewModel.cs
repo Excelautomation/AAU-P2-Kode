@@ -168,7 +168,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(d =>
+                return GetCommand(() =>
                 {
                     if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
                     {
@@ -182,7 +182,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand<object>(d =>
+                return GetCommand(() =>
                 {
                     if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
                     {

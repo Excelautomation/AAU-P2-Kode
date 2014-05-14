@@ -89,7 +89,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     // if current season started less then 183 days ago promt the user!
                     if (CurrentSeason != null && DateTime.Compare(CurrentSeason.SeasonStart.AddDays(183), DateTime.Now) > 0 )
@@ -155,18 +155,20 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<DamageType>(e =>
+                return GetCommand(e =>
                 {
                     // If list is empty return safely
                     if (e == null) return;
 
+                    var damageType = (DamageType) e;
+
                     // Create a copy of the selected damagetype from database
                     CurrentDamageType = new DamageType()
                     {
-                        Type = e.Type
+                        Type = damageType.Type
                     };
                     // Remember reference to the selected damagetype in the list synced with database
-                    ReferenceToCurrentDamageType = e;
+                    ReferenceToCurrentDamageType = damageType;
 
                     // Give feedback
                     FeedbackDamageType = Feedback.Default;
@@ -178,7 +180,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<DamageType>(e =>
+                return GetCommand(() =>
                 {
                     // Save the selected damagetype to the list synced with database
                     ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
@@ -208,7 +210,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<DamageType>(e =>
+                return GetCommand(() =>
                 {
                     // Revert changes made by user
                     // Copy from database to the selected damagetype
@@ -227,7 +229,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<DamageType>(e =>
+                return GetCommand(() =>
                 {
                     // Preconfigured damagetype to create
                     DamageType NewDamageType = new DamageType()
@@ -252,7 +254,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     // Remove selected damagetype from list
                     _db.DamageType.Remove(ReferenceToCurrentDamageType);
@@ -321,20 +323,22 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<StandardTrip>(e =>
+                return GetCommand(e =>
                 {
                     // If the list is empty return safely
                     if (e == null) return;
 
+                    var standardTrip = (StandardTrip)e;
+
                     // Create a copy from the selected item
                     CurrentStandardTrip = new StandardTrip()
                     {
-                        Distance = e.Distance,
-                        Direction = e.Direction,
-                        Title = e.Title
+                        Distance = standardTrip.Distance,
+                        Direction = standardTrip.Direction,
+                        Title = standardTrip.Title
                     };
                     // Save reference to the original position of the selected item
-                    ReferenceToCurrentStandardTrip = e;
+                    ReferenceToCurrentStandardTrip = standardTrip;
 
                     // Give feedback
                     FeedbackStandardTrip = Feedback.Default;
@@ -346,7 +350,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<StandardTrip>(e =>
+                return GetCommand(() =>
                 {
                     int tmptrip = CurrentStandardTrip.Id;
 
@@ -380,7 +384,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     // Copies original info from database to the selected standardtrip
                     CurrentStandardTrip = new StandardTrip()
@@ -399,7 +403,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<StandardTrip>(e =>
+                return GetCommand(() =>
                 {
                     // Create an object with premade info
                     StandardTrip NewStandardTrip = new StandardTrip()
@@ -426,7 +430,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     // Remove selected trip
                     _db.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
@@ -516,23 +520,25 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Admin>(e =>
+                return GetCommand(e =>
                 {
                     // If the list is empty return safely (Should not be possibly for admins)
                     if (e == null) return;
+
+                    var admin = (Admin) e;
 
                     // Sets CurrentAdmin to contain a copy of the selected item
                     // This object contains the direct changes made by the user
                     CurrentAdmin = new Admin()
                     {
-                        Username = e.Username,
-                        Password = e.Password,
-                        ContactTrip = e.ContactTrip,
-                        ContactDark = e.ContactDark,
-                        Member = e.Member
+                        Username = admin.Username,
+                        Password = admin.Password,
+                        ContactTrip = admin.ContactTrip,
+                        ContactDark = admin.ContactDark,
+                        Member = admin.Member
                     };
                     // Sets reference to the selected admin in database
-                    ReferenceToCurrentAdmin = e;
+                    ReferenceToCurrentAdmin = admin;
 
                     // Give feedback
                     FeedbackAdmin = Feedback.Default;
@@ -544,7 +550,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Admin>(e =>
+                return GetCommand(() =>
                 {
                     // Save a temp. reference to the selected admin
                     int tempindex = SelectedAdmin;
@@ -579,7 +585,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     // Reloads all the original values for the selected admin
                     CurrentAdmin = new Admin()
@@ -600,7 +606,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Admin>(e =>
+                return GetCommand(() =>
                 {
                     // Create a new object to store the info of the desired admin
                     NewAdmin = new Admin();
@@ -652,7 +658,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<object>(e =>
+                return GetCommand(() =>
                 {
                     // Keep a temp. reference to the selected admin
                     // Refresh from database and select the desired admin again
@@ -697,10 +703,10 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand<Member>(e =>
+                return GetCommand(e =>
                 {
                     // Assign a member as foreign key to the desired administrator
-                    NewAdmin.Member = e;
+                    NewAdmin.Member = (Member)e;
                     MembersListWindow.Close();
                 });
             }

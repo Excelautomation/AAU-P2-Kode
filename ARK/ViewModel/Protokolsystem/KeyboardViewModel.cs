@@ -32,14 +32,14 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand SendKeyCommand
         {
-            get { return GetCommand<string>(s => { Text += s; }); }
+            get { return GetCommand(s => { Text += (string)s; }); }
         }
 
         public ICommand SendBackspaceCommand
         {
             get
             {
-                return GetCommand<string>(s =>
+                return GetCommand(e =>
                 {
                     if (Text.Length > 0)
                         Text = Text.Substring(0, Text.Length - 1);
@@ -49,7 +49,7 @@ namespace ARK.ViewModel.Protokolsystem
 
         public ICommand ClearCommand
         {
-            get { return GetCommand<string>(s => { Text = ""; }); }
+            get { return GetCommand(s => { Text = ""; }); }
         }
 
         public event EventHandler<KeyboardEventArgs> TextChanged;
