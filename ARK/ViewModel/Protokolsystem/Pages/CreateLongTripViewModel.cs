@@ -190,10 +190,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand(() =>
                 {
-                    if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
-                    {
-                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -1, FirstName = "Blank" }));
-                    }
+                    SelectedMembers.Add(new MemberViewModel(new Member() { Id = -1, FirstName = "Blank" }));
                 });
             }
         }
@@ -204,10 +201,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand(() =>
                 {
-                    if (SelectedMembers.Count < SelectedBoat.NumberofSeats)
-                    {
-                        SelectedMembers.Add(new MemberViewModel(new Member() { Id = -2, FirstName = "Gæst" }));
-                    }
+                    SelectedMembers.Add(new MemberViewModel(new Member() { Id = -2, FirstName = "Gæst" }));
                 });
             }
         }
