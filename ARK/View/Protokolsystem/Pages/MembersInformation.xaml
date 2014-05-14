@@ -93,6 +93,18 @@
                     BorderBrush="{StaticResource SearchFilterBorder}"
                     Margin="0,0,3,0">
                 <Grid>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
+                                    <Setter Property="Background" Value="{StaticResource ResourceKey=SearchFilterBG}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="32"/>

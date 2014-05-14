@@ -161,7 +161,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return
                     GetCommand(
-                        () => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "AKTIVE SKADES BLANKETTER"));
+                        () => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
             }
         }
 
