@@ -343,7 +343,7 @@
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                        PlacementTarget="{Binding ElementName=gridtest}" Placement="Center"
                        PopupAnimation="Slide" AllowsTransparency="True">
-            <Border BorderBrush="#FF8B8B8B" BorderThickness="3" 
+            <Border BorderBrush="#FF8B8B8B" BorderThickness="2" Margin="0,-2,0,0"
                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="740" Height="580">
                 <Border.Effect>
                     <DropShadowEffect Opacity="0.34"/>

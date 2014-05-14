@@ -64,18 +64,18 @@
                     <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="Pladser:" FontWeight="Bold"/>
                     </TextBlock>
-                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="Kategori:" FontWeight="Bold"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="{Binding Path=Trip.Boat.Name, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="{Binding Path=Trip.Boat.NumberofSeats}"/>
                     </TextBlock>
-                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="{Binding Path=Trip.Boat.SpecificBoatType}"/>
                     </TextBlock>
                 </StackPanel>
@@ -86,28 +86,33 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
                 <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Top" TextDecorations="Underline">
+                           HorizontalAlignment="Left" VerticalAlignment="Top" TextDecorations="Underline">
                     <Run Text="TUR OPLYSNINGER" FontSize="16"/>
                 </TextBlock>
 
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                    <WrapPanel>
-                        <TextBlock Margin="0,0,0,5" Width="70" Style="{StaticResource ResourceKey=lstViewContent}">
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="Retning:" FontWeight="Bold"/>
-                        </TextBlock>
-                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="{Binding Path=Trip.Direction}" />
-                        </TextBlock>
-                    </WrapPanel>
-                    <WrapPanel>
-                        <TextBlock Text="Mørkets frembrud:" Width="112" FontWeight="Bold" Style="{StaticResource ResourceKey=lstViewContent}"/>
-                        <TextBlock VerticalAlignment="Bottom" Text="{Binding Path=Sunset, Mode=OneWay, StringFormat={}{0:HH:mm}}" Style="{StaticResource ResourceKey=lstViewContent}"/>
-                    </WrapPanel>
+                    </TextBlock>
+                    
+                    <TextBlock Text="Solnedgang:" FontWeight="Bold" Style="{StaticResource ResourceKey=lstViewContent}" Height="20"/>
                 </StackPanel>
 
-
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
+                            <Run Text="{Binding Path=Trip.Direction}" />
+                    </TextBlock>
+                    <TextBlock VerticalAlignment="Bottom" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
+                        <Run Text="kl. "/>
+                        <Run Text="{Binding Path=Sunset, Mode=OneWay, StringFormat={}{0:HH:mm}}"/>
+                    </TextBlock>
+                </StackPanel>
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="2" Margin="10,10,0,0">
@@ -129,9 +134,11 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <WrapPanel Margin="5,0,0,0" Grid.Column="0">
-                                        <TextBlock Text="{Binding Path=FirstName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
-                                        <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                                    <WrapPanel Grid.Column="0" Margin="-2,-1,0,0">
+                                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                                            <Run Text="{Binding Path=FirstName}"/>
+                                            <Run Text="{Binding Path=LastName}"/>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </Grid>
                             </DataTemplate>
@@ -158,7 +165,7 @@
 						<ColumnDefinition Width="100"/>
 					</Grid.ColumnDefinitions>
 					<Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/cancel.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="NULSTIL OG&#xA;ANNULLER" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="NULSTIL&#xA;ROTUR" />
 				</Grid>
 			</Button>
 
