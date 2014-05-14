@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using ARK.Model;
@@ -73,6 +74,29 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             {
                 return GetCommand(() =>
                 {
+                    var members = Trip.Members;
+                    Trip.Members = new List<Member>();
+
+                    // Add selected members to trip
+                    foreach (var m in members)
+                    {
+                        if (m.Id == -1)
+                        {
+                            //-1 is a blank spot => Do nothing
+                        }
+                        else if (m.Id == -2)
+                        {
+                            //-2 is a guest => Increment the crew count, but don't add the member to the member list
+                            Trip.CrewCount++;
+                        }
+                        else
+                        {
+                            //Add the member reference and increment the crew count
+                            Trip.Members.Add(m);
+                            Trip.CrewCount++;
+                        }
+                    }
+
                     DbArkContext.GetDbContext().Trip.Add(Trip);
                     DbArkContext.GetDbContext().SaveChanges();
 
@@ -106,7 +130,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
 
         public DateTime Sunset
         {
-            get { return ARK.HelperFunctions.SunsetClass.Sunset; }
+            get { return HelperFunctions.SunsetClass.Sunset; }
         }
     }
 }

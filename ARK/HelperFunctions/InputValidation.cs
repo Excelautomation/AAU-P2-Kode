@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Dynamic;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ARK.HelperFunctions
@@ -24,8 +25,11 @@ namespace ARK.HelperFunctions
         public static bool PositiveNumFromString(string input, out double number)
         {
             CaptureCollection temp;
+
             if ((temp = FirstDoubleFromString.Match(input).Groups["number"].Captures).Count > 0)
             {
+                MessageBox.Show(temp[0].Value);
+
                 number = Convert.ToDouble(temp[0].Value);
                 return true;
             }

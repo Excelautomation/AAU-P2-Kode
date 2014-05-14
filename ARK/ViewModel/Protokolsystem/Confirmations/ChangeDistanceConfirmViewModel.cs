@@ -14,58 +14,47 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
     public class ChangeDistanceConfirmViewModel : ConfirmationViewModelBase
     {
+        private Trip _selectedTrip;
+        private string _selectedDistance;
         // Fields
-        private double _localDistance;
-        private DistanceStatisticsViewModel _distanceStatisticsVM;
-        private EndTripViewModel _EndTripVM;
 
-        public EndTripViewModel EndTripVM
+        public Trip SelectedTrip
         {
-            get { return _EndTripVM; }
-            set { _EndTripVM = value; Notify(); }
+            get { return _selectedTrip; }
+            set
+        {
+                _selectedTrip = value; Notify();
+        
+                if (_selectedTrip != null)
+                    SelectedDistance = _selectedTrip.Distance.ToString();
         }
-
-        public ChangeDistanceConfirmViewModel()
-        {
-            //LocalDistance = DistanceStatisticsVM.SelectedTrip.Trip.Distance;
         }
         
-        public DistanceStatisticsViewModel DistanceStatisticsVM
+        public string SelectedDistance
         {
-            get { return _distanceStatisticsVM; }
-            set { _distanceStatisticsVM = value; Notify(); }
-        }
-        
-        public double LocalDistance
-        {
-            get { return _localDistance; }
-            set { _localDistance = value; Notify(); }
+            get { return _selectedDistance; }
+            set
+            {
+                _selectedDistance = value;
+                Notify();
+            }
         }
 
         public ICommand SaveChanges
         {
             get
             {
+                double tmp;
                 return GetCommand(e => 
                 {
-                    if (DistanceStatisticsVM != null) 
-                    { 
-                        DistanceStatisticsVM.SelectedTrip.Trip.Distance = LocalDistance;
+                    SelectedTrip.Distance = double.Parse(SelectedDistance);
+                    SelectedTrip.TripEndedTime = DateTime.Now;
                         DbArkContext.GetDbContext().SaveChanges();
-                        DistanceStatisticsVM.NotifyTripList();
-                        var a = DistanceStatisticsVM.SelectedMember;
-                        DistanceStatisticsVM.SelectedMember = null;
-                        DistanceStatisticsVM.SelectedMember = a;
-                    }
-                    else if (EndTripVM != null)
-                    {
-                        EndTripVM.SelectedTrip.Distance = LocalDistance;
-                        DbArkContext.GetDbContext().SaveChanges();
-                    }
-
-                    Hide();
+                    base.Hide();
                     ProtocolSystem.StatisticsDistance.Execute(null);
-                });
+                }, e => !string.IsNullOrEmpty(SelectedDistance) 
+                    && double.TryParse(SelectedDistance, out tmp) 
+                    && double.Parse(SelectedDistance) > 0);
             }
         }
 
@@ -73,13 +62,8 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return GetCommand(e =>
-                {
-                    Hide();
-                });
+                return GetCommand(Hide);
             }
         }
-
-
     }
 }

@@ -12,9 +12,7 @@ namespace ARK.ViewModel.Protokolsystem.Filters
     {
         private bool _dateTimeAll;
         private bool _dateTimeDay;
-        private DateTime? _dateTimeFrom;
         private bool _dateTimeMonth;
-        private DateTime? _dateTimeTo;
         private bool _dateTimeWeek;
         private bool _statisticsAll;
         private bool _statisticsErgometer;
@@ -22,11 +20,16 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         private bool _statisticsInrigger;
         private bool _statisticsKajak;
         private bool _statisticsOutrigger;
+        private bool _dateTimeYear;
+        private bool _dateTimeHalfYear;
 
         public DistanceStatisticsFilterViewModel()
         {
             CurrentBoatType = new CategoryFilter<TripViewModel>(trip => true);
             CurrentDateTimeFilter = new DateTimeFilter();
+
+            DateTimeFromPicker = DateTime.Now;
+            DateTimeToPicker = DateTime.Now;
 
             StatisticsAll = true;
             DateTimeAll = true;
@@ -45,8 +48,9 @@ namespace ARK.ViewModel.Protokolsystem.Filters
                 _dateTimeAll = value;
                 if (value)
                 {
-                    DateTimeFrom = null;
-                    DateTimeTo = null;
+                    DateTimeToPicker = DateTime.Now;
+
+                    FilterByDates = false;
 
                     UpdateDateTime();
                 }
@@ -64,8 +68,10 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
                 if (value)
                 {
-                    DateTimeFrom = DateTime.Now.AddDays(-1);
-                    DateTimeTo = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddDays(-1);
+                    DateTimeToPicker = DateTime.Now;
+
+                    FilterByDates = true;
 
                     UpdateDateTime();
                 }
@@ -83,8 +89,10 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
                 if (value)
                 {
-                    DateTimeFrom = DateTime.Now.AddDays(-7);
-                    DateTimeTo = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddDays(-7);
+                    DateTimeToPicker = DateTime.Now;
+
+                    FilterByDates = true;
 
                     UpdateDateTime();
                 }
@@ -102,8 +110,10 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
                 if (value)
                 {
-                    DateTimeFrom = DateTime.Now.AddMonths(-1);
-                    DateTimeTo = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddMonths(-1);
+                    DateTimeToPicker = DateTime.Now;
+
+                    FilterByDates = true;
 
                     UpdateDateTime();
                 }
@@ -112,43 +122,73 @@ namespace ARK.ViewModel.Protokolsystem.Filters
             }
         }
 
-        private DateTime? DateTimeFrom
+        public bool DateTimeHalfYear
         {
-            get { return _dateTimeFrom; }
+            get { return _dateTimeHalfYear; }
             set
             {
-                _dateTimeFrom = value;
+                _dateTimeHalfYear = value;
+
+                if (value)
+                {
+                    DateTimeFromPicker = DateTime.Now.AddMonths(-6);
+                    DateTimeToPicker = DateTime.Now;
+
+                    FilterByDates = true;
+
+                    UpdateDateTime();
+                }
+
                 Notify();
             }
         }
 
-        private DateTime? DateTimeTo
+        public bool DateTimeYear
         {
-            get { return _dateTimeTo; }
+            get { return _dateTimeYear; }
             set
             {
-                _dateTimeTo = value;
+                _dateTimeYear = value;
+
+                if (value)
+                {
+                    DateTimeFromPicker = DateTime.Now.AddYears(-1);
+                    DateTimeToPicker = DateTime.Now;
+
+                    FilterByDates = true;
+
+                    UpdateDateTime();
+                }
+
                 Notify();
             }
         }
+
+        private DateTime? DateTimeFrom { get; set; }
+        private DateTime? DateTimeTo { get; set; }
 
         public DateTime? DateTimeFromPicker
         {
-            get { return DateTimeFrom.HasValue ? DateTimeFrom.Value : DateTime.MinValue; }
+            get { return DateTimeFrom; }
             set
             {
                 DateTimeFrom = value;
-                UpdateDateTime();
+
+                //FilterByDates = true;
+                //UpdateDateTime();
+                Notify();
             }
         }
 
-        public DateTime? DateTimeToPicker
+        public DateTime DateTimeToPicker
         {
-            get { return DateTimeTo; }
+            get { return DateTimeTo.HasValue ? DateTimeTo.Value : DateTime.Now; }
             set
             {
                 DateTimeTo = value;
-                UpdateDateTime();
+
+                //UpdateDateTime();
+                Notify();
             }
         }
 
@@ -239,11 +279,13 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         private void UpdateDateTime()
         {
-            CurrentDateTimeFilter.StartDate = DateTimeFrom;
+            CurrentDateTimeFilter.StartDate = FilterByDates ? DateTimeFrom : DateTime.MinValue;
             CurrentDateTimeFilter.EndDate = DateTimeTo;
 
             UpdateFilter();
         }
+
+        public bool FilterByDates { get; set; }
 
         private void UpdateFilter()
         {

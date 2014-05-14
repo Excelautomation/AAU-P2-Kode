@@ -44,14 +44,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 SelectedTrip = null;
 
                 // Bind keyboard
-                base.ProtocolSystem.KeyboardTextChanged += this.MonitorCustomDistance;
+                //base.ProtocolSystem.KeyboardTextChanged += this.MonitorCustomDistance;
 
                 this.ResetPage();
             };
 
             ParentDetached += (sender, args) =>
             {
-                base.ProtocolSystem.KeyboardTextChanged -= this.MonitorCustomDistance;
+                //base.ProtocolSystem.KeyboardTextChanged -= this.MonitorCustomDistance;
             };
 
             TimeCounter.StopTime();
@@ -103,10 +103,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         SelectedTrip.TripEndedTime = DateTime.Now;
                         _db.SaveChanges();
 
-                        var mainViewModel = base.Parent as ProtocolSystemMainViewModel;
                         this.GetActiveTrips();
-                        mainViewModel.UpdateDailyKilometers();
-                        mainViewModel.UpdateNumBoatsOut();
+                        ProtocolSystem.UpdateDailyKilometers();
+                        ProtocolSystem.UpdateNumBoatsOut();
                         this.ResetPage();
                     },
                     e => this.SelectedStdTrip != null || this.CustomDistance > 0);
@@ -120,15 +119,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(
                     x => 
                     {
-                        var ConfirmView = new ChangeDistanceConfirm();
-                        var ConfirmViewModel = (ChangeDistanceConfirmViewModel)ConfirmView.DataContext;
+                        var confirmView = new ChangeDistanceConfirm();
+                        var confirmViewModel = (ChangeDistanceConfirmViewModel)confirmView.DataContext;
 
-                        ConfirmViewModel.EndTripVM = this;
-                        ConfirmViewModel.LocalDistance = SelectedTrip.Distance;
+                        confirmViewModel.SelectedTrip = this.SelectedTrip;
+                        ProtocolSystem.ShowDialog(confirmView);
 
-                        ProtocolSystem.ShowDialog(ConfirmView);
-
-                        base.ToggleKeyboard.Execute(null);
+                        base.ProtocolSystem.EnableSearch = true;
                     },
                     x => this.SelectedTrip != null);
             }
@@ -174,13 +171,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private void GetStandardTrips()
         {
             StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
-        }
-
-        private void MonitorCustomDistance(object sender, KeyboardEventArgs args)
-        {
-            double temp;
-            InputValidation.PositiveNumFromString(args.Text, out temp);
-            this.CustomDistance = temp;
         }
 
         private void ResetPage()

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:con="clr-namespace:ARK.ViewModel.Protokolsystem.Confirmations"
              x:Name="AdminLoginConfirmWindow"
@@ -65,15 +65,17 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <TextBox FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26" Text="{Binding Path=Username}">
-                    <TextBox.Style>
-                        <Style></Style>
-                    </TextBox.Style>
-                </TextBox>
+                <TextBox x:Name="UsernameBox" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26" Text="{Binding Path=Username}"/>
                 <PasswordBox x:Name="PasswordBox" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26">
                     <PasswordBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminLoginConfirmWindow}"/>
                     </PasswordBox.InputBindings>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="GotFocus">
+                            <i:InvokeCommandAction Command="{Binding Path=GotFocus}"
+                                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=PasswordBox}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </PasswordBox>
                 <TextBlock Grid.Row="2"  Text="{Binding Path=ErrorLabel}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Foreground="#FFFF5F5F" TextWrapping="Wrap" Margin="0,0,0,0" Height="31"/>
 
