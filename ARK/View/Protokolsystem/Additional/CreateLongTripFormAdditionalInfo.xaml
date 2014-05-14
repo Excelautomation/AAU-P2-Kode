@@ -110,49 +110,51 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" Grid.Row="0" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                      FontSize="18" BorderBrush="{x:Null}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.MemberClicked}" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <ContentPresenter />
-                                </ControlTemplate>
-                            </Button.Template>
-                            <Button.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Style="{StaticResource styleStack}">
-                                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
-                                            <TextBlock Text=" " />
-                                            <TextBlock Text="{Binding Path=Member.FirstName}"/>
-                                            <TextBlock Text=" " />
-                                            <TextBlock Text="{Binding Path=Member.LastName}"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="0" PanningMode="VerticalOnly" MaxHeight="360">
+                <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              FontSize="18" BorderBrush="{x:Null}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding ElementName=MemberInfo, Path=DataContext.MemberClicked}" 
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Button.Template>
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Style="{StaticResource styleStack}">
+                                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
+                                                <TextBlock Text=" " />
+                                                <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                                <TextBlock Text=" " />
+                                                <TextBlock Text="{Binding Path=Member.LastName}"/>
+                                            </StackPanel>
+                                            <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding Path=IsResponsible, Converter={StaticResource BoolToVis}}">
+                                                <TextBlock Text="Langtursstyrmand: " FontSize="13px" FontWeight="Normal"/>
+                                                <TextBlock Text="{Binding Path=Member.LongTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
+                                            </StackPanel>
+                                            <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding Path=IsResponsible, Converter={StaticResource BoolToVis}}">
+                                                <TextBlock Text="Turansvarlig" FontSize="13px" FontWeight="Normal"/>
+                                            </StackPanel>
                                         </StackPanel>
-                                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding Path=IsResponsible, Converter={StaticResource BoolToVis}}">
-                                            <TextBlock Text="Langtursstyrmand: " FontSize="13px" FontWeight="Normal"/>
-                                            <TextBlock Text="{Binding Path=Member.LongTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
-                                        </StackPanel>
-                                        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding Path=IsResponsible, Converter={StaticResource BoolToVis}}">
-                                            <TextBlock Text="Turansvarlig" FontSize="13px" FontWeight="Normal"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
             <Button x:Name="btnSelectResponsible" Grid.Row="1" VerticalAlignment="Top"
                     Command="{Binding Path=ResponsibleMemberClick}"
                     Background="{DynamicResource AddBG}"
