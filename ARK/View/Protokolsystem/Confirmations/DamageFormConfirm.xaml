@@ -127,10 +127,10 @@
 
                 <StackPanel Orientation="Vertical" Grid.Row="1">
                     <TextBlock Margin="0,5,0,0" Style="{StaticResource ResourceKey=lstViewContent}" >
-                            <Run Text="Type" FontWeight="SemiBold"/>
+                            <Run Text="Type:" FontWeight="SemiBold"/>
                     </TextBlock>
                     <TextBlock Margin="0,5,0,0" Style="{StaticResource ResourceKey=lstViewContent}" >
-                            <Run Text="Beskrivelse" FontWeight="SemiBold"/>
+                            <Run Text="Beskrivelse:" FontWeight="SemiBold"/>
                     </TextBlock>
                 </StackPanel>
 
