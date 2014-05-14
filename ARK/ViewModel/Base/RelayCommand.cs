@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ARK.HelperFunctions
+namespace ARK.ViewModel.Base
 {
     /// <summary>
     /// Implementation of the ICommand interface
@@ -43,6 +39,37 @@ namespace ARK.HelperFunctions
         public void Execute(object parameter)
         {
             _execute(parameter);
+        }
+    }
+
+
+    public class RelayCommand<T> : ICommand
+    {
+        readonly Action<T> _execute;
+        readonly Func<T, bool> _canExecute;
+
+        public RelayCommand(Action<T> executeMethod, Func<T, bool> canExecuteMethod)
+        {
+            if (executeMethod == null) throw new ArgumentNullException("execute");
+            _execute = executeMethod;
+            _canExecute = canExecuteMethod;
+        }
+
+        [DebuggerStepThrough]
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute((T)parameter);
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute((T)parameter);
         }
     }
 }
