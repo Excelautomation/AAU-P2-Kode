@@ -36,8 +36,6 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             {
                 return GetCommand(() =>
                 {
-                    //DamageForm.Description = string.Concat(DamageForm.Description, "\n\nKommentar\n", Comment);
-
                     DamageForm.Description = Comment;
                     DamageForm.Closed = true;
 

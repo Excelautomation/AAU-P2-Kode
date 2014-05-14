@@ -70,13 +70,13 @@
         </Grid>
 
         <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="1">
-            <Button x:Name="btnCancel" 
+            <Button x:Name="btnChange" 
+                    Command="{Binding Path=Cancel}"
 					DockPanel.Dock="Left"
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
-					Background="{StaticResource SearchFilterBG}"
-					BorderBrush="{StaticResource SearchFilterBorder}" Margin="0,0,0,0"
-                    Command="{Binding Path=Cancel}">
+					Background="{DynamicResource ChangeBG}"
+					BorderBrush="{StaticResource ChangeBorder}" Margin="0,0,3,0" Width="Auto">
                 <Grid Margin="0,0,-2,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -84,8 +84,8 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/cancel.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="NULSTIL OG&#xA;ANNULLER" />
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_edit.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="TILBAGE" />
                 </Grid>
             </Button>
 
