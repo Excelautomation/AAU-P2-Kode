@@ -61,15 +61,6 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             }
         }
 
-        public Trip Trip
-        {
-            get { return _trip; }
-            set { 
-                _trip = value; 
-                Notify(); 
-            }
-        }
-
         public DateTime Sunset
         {
             get { return ARK.HelperFunctions.SunsetClass.Sunset; }
