@@ -111,7 +111,7 @@
                 <Run Text="{Binding SelectedDamageForm.Type}"/>
             </TextBlock>
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
-                <Run Text="Skadebeskrivelse:" FontWeight="Bold"/>
+                <Run Text="Kommentar:" FontWeight="Bold"/>
                 <Run Text="{Binding SelectedDamageForm.Description}"/>
             </TextBlock>
         </StackPanel>

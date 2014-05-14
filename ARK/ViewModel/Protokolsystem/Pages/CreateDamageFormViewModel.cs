@@ -180,7 +180,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get { return GetCommand(d => { SelectedDamageType = (DamageType)d; }); }
         }
 
-        public ICommand OpenConfirmDialog
+        public ICommand SubmitForm
         {
             get
             {
@@ -199,12 +199,10 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         damageForm.Description = Description;
                         damageForm.Functional = IsFunctional;
 
-                        var ConfirmView = new DamageFormConfirm();
-                        var ConfirmViewModel = (DamageFormConfirmViewModel)ConfirmView.DataContext;
+                        DbArkContext.GetDbContext().DamageForm.Add(damageForm);
+                        DbArkContext.GetDbContext().SaveChanges();
 
-                        ConfirmViewModel.DamageForm = damageForm;
-
-                        ProtocolSystem.ShowDialog(ConfirmView);
+                        ProtocolSystem.StatisticsDistance.Execute(null);
                     }
                 });
             }

@@ -36,8 +36,11 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             {
                 return GetCommand(() =>
                 {
-                    DamageForm.Description = string.Concat(DamageForm.Description, "\n\nKommentar\n", Comment);
-                    db.DamageForm.Add(DamageForm);
+                    //DamageForm.Description = string.Concat(DamageForm.Description, "\n\nKommentar\n", Comment);
+
+                    DamageForm.Description = Comment;
+                    DamageForm.Closed = true;
+
                     db.SaveChanges();
                     Hide();
                     ProtocolSystem.StatisticsDistance.Execute(null);
