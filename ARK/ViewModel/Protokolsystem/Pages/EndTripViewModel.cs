@@ -20,6 +20,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private Trip _selectedTrip;
         private double _customDistance;
         private DateTime _latestData;
+        private StandardTrip _selectedStdTrip;
 
         // Constructor
         public EndTripViewModel()
@@ -142,7 +143,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        private StandardTrip SelectedStdTrip { get; set; }
+        public StandardTrip SelectedStdTrip
+        {
+            get { return _selectedStdTrip; }
+            set
+            {
+                _selectedStdTrip = value;
+                Notify();
+            }
+        }
 
         private void GetActiveTrips()
         {
