@@ -91,10 +91,12 @@
                                 <DataTrigger Binding="{Binding SelectedDamageForm.Functional}" Value="True">
                                     <Setter Property="Foreground" Value="MediumSeaGreen"/>
                                     <Setter Property="Text" Value="Anvendelig"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding SelectedDamageForm.Functional}" Value="False">
                                     <Setter Property="Foreground" Value="IndianRed"/>
                                     <Setter Property="Text" Value="Ikke anvendelig"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
