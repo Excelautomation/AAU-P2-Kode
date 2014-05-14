@@ -110,16 +110,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public bool AllDataFilled 
-        {
-            get
-            {
-                return TourDescription != null && DistancesPerDay != null && CampSites != null 
-                    && PlannedStartDate != null && PlannedEndDate != null
-                    && SelectedMembers.Count > 0;
-            } 
-        }
-
         public List<MemberViewModel> MembersFiltered
         {
             get { return _membersFiltered; }
@@ -167,14 +157,19 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         Status = LongTripForm.BoatStatus.Awaiting,
                         ResponsibleMember = Info.ResponsibleMember.Member
                     };
-
                     var ConfirmView = new CreateLongTripConfirm();
                     var ConfirmViewModel = (CreateLongTripConfirmViewModel)ConfirmView.DataContext;
-
+                    
                     ConfirmViewModel.LongTrip = longTripForm;
 
                     ProtocolSystem.ShowDialog(ConfirmView);
-                });
+                }, () => PlannedStartDate.HasValue &&
+                         PlannedEndDate.HasValue &&
+                         Info.ResponsibleMember != null &&
+                         !string.IsNullOrEmpty(TourDescription) &&
+                         !string.IsNullOrEmpty(DistancesPerDay) &&
+                         !string.IsNullOrEmpty(CampSites) &&
+                         SelectedMembers.Any());
             }
         }
 
@@ -192,10 +187,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    SelectedMembers.Add(new MemberViewModel(new Member() { Id = -1, FirstName = "Blank" }));
-                });
+                return GetCommand(() => SelectedMembers.Add(new MemberViewModel(new Member { Id = -1, FirstName = "Blank" })));
             }
         }
 
@@ -203,10 +195,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    SelectedMembers.Add(new MemberViewModel(new Member() { Id = -2, FirstName = "Gæst" }));
-                });
+                return GetCommand(() => SelectedMembers.Add(new MemberViewModel(new Member { Id = -2, FirstName = "Gæst" })));
             }
         }
 
