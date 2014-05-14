@@ -280,6 +280,7 @@
         
             <Button x:Name="btnCustomDistance" 
                     DockPanel.Dock="Right" 
+                    Style="{StaticResource btnFilter}"
             	    Command="{Binding ChangeDistance}"
             	    Background="{StaticResource ChangeBG}"
             	    BorderBrush="{StaticResource ChangeBorder}">
