@@ -75,11 +75,10 @@
             	        Style="{StaticResource ResourceKey=btnProtokol}"  
             	        Command="{Binding StartTrip}"
                         Width="Auto" Height="90">
-                    <TextBlock Text="START&#xA;ROTUR" />
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border x:Name="StartBorder" Background="{StaticResource BeginBG}" BorderBrush="{StaticResource BeginBorder}">
-                                <TextBlock x:Name="StartText" Text="BÅDE PÅ&#xA;VANDET" />
+                                <TextBlock x:Name="StartText" Text="START&#xA;ROTUR" />
                             </Border>
 
                             <ControlTemplate.Triggers>
@@ -101,7 +100,7 @@
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border x:Name="EndBorder" Background="{StaticResource EndBG}" BorderBrush="{StaticResource EndBorder}" Width="Auto" Height="Auto">
-                                <TextBlock x:Name="EndText" Text="BÅDE PÅ&#xA;VANDET" />
+                                <TextBlock x:Name="EndText" Text="AFSLUT&#xA;ROTUR" />
                             </Border>
 
                             <ControlTemplate.Triggers>
