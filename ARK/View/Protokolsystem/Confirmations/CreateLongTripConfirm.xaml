@@ -25,6 +25,7 @@
                 <RowDefinition Height="10*"/>
                 
                 <RowDefinition Height="80*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -247,6 +248,8 @@
                 </ScrollViewer>
                 
             </Grid>
+            
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" Foreground="Red" Text="{Binding Path=Errors}" HorizontalAlignment="Center" TextAlignment="Center"/>
         </Grid>
 
         <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="1">
