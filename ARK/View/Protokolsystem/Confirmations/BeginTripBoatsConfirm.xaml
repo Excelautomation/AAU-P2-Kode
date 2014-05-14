@@ -53,15 +53,15 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Top">
+                   HorizontalAlignment="Left" VerticalAlignment="Top" TextDecorations="Underline">
                     <Run Text="BÅDENS OPLYSNINGER" FontSize="16"/>
                 </TextBlock>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="Navn:" FontWeight="Bold"/>
                     </TextBlock>
-                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}" Height="20">
                         <Run Text="Pladser:" FontWeight="Bold"/>
                     </TextBlock>
                     <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
@@ -88,7 +88,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Top">
+                   HorizontalAlignment="Left" VerticalAlignment="Top" TextDecorations="Underline">
                     <Run Text="TUR OPLYSNINGER" FontSize="16"/>
                 </TextBlock>
 
@@ -102,7 +102,7 @@
                         </TextBlock>
                     </WrapPanel>
                     <WrapPanel>
-                        <TextBlock Text="Mørkets frembrud:" Width="70" FontWeight="Bold" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                        <TextBlock Text="Mørkets frembrud:" Width="112" FontWeight="Bold" Style="{StaticResource ResourceKey=lstViewContent}"/>
                         <TextBlock VerticalAlignment="Bottom" Text="{Binding Path=Sunset, Mode=OneWay, StringFormat={}{0:HH:mm}}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                     </WrapPanel>
                 </StackPanel>
@@ -117,21 +117,20 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="0"
-                   HorizontalAlignment="Left" VerticalAlignment="Top">
+                           HorizontalAlignment="Left" VerticalAlignment="Top" TextDecorations="Underline">
                     <Run Text="BESÆTNING" FontSize="16"/>
                 </TextBlock>
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1" PanningMode="VerticalOnly" MaxHeight="250">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" PanningMode="VerticalOnly" MaxHeight="250">
                     <ItemsControl x:Name="AllMembersList" ItemsSource="{Binding Path=Trip.Members}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="2">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-
                                     <WrapPanel Margin="5,0,0,0" Grid.Column="0">
-                                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=FirstName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                                        <TextBlock Text="{Binding Path=FirstName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                                         <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                                     </WrapPanel>
                                 </Grid>
@@ -197,7 +196,7 @@
 						<ColumnDefinition Width="100"/>
 					</Grid.ColumnDefinitions>
 					<Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_edit.png" />
-					<TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ÆNDRE&#xA;INDHOLD" />
+					<TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="REDIGER&#xA;INDHOLD" />
 				</Grid>
 			</Button>
 		</DockPanel>
