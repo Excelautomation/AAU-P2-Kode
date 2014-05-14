@@ -8,7 +8,10 @@
              xmlns:con="clr-namespace:ARK.ViewModel.Protokolsystem.Confirmations"
              x:Name="AdminLoginConfirmWindow"
              mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
-
+    <UserControl.DataContext>
+        <con:ChangeDistanceConfirmViewModel/>
+    </UserControl.DataContext>
+    
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -57,7 +60,7 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <TextBox FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                         Width="192" Height="26" Text="">
+                         Width="192" Height="26" Text="{Binding Path=LocalDistance}">
                     <TextBox.Style>
                         <Style></Style>
                     </TextBox.Style>
@@ -73,7 +76,7 @@
 					Style="{StaticResource ResourceKey=btnFilter}"  
 					Background="{StaticResource SearchFilterBG}"
 					BorderBrush="{StaticResource SearchFilterBorder}" Margin="0,0,0,0"
-                    Command="{Binding Path=CommandHide}">
+                    Command="{Binding Path=Cancel}">
                 <Grid Margin="0,0,-2,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
@@ -82,12 +85,12 @@
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/cancel.png" />
-                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="ANNULLER" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="NULSTIL OG&#xA;ANNULLER" />
                 </Grid>
             </Button>
 
             <Button x:Name="btnBeginTripNow" 
-                    Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminLoginConfirmWindow}"
+                    Command="{Binding Path=SaveChanges}"
 					DockPanel.Dock="Right"
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
@@ -102,7 +105,7 @@
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/accept.png" />
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" 
-                               Text="ÆNDRE&#xA;DISTANCE" />
+                               Text="GEM&#xA;ÆNDRING" />
                 </Grid>
             </Button>
         </DockPanel>
