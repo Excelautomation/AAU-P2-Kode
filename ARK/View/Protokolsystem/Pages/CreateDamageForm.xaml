@@ -121,7 +121,7 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <TextBox Text="{Binding Path=Description, Mode=TwoWay}" Style="{StaticResource ResourceKey=txbUserinput}" Grid.Row="3" Grid.Column="1" Height="100" Margin="5,0,0,0"/>
+        <TextBox Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource ResourceKey=txbUserinput}" Grid.Row="3" Grid.Column="1" Height="100" Margin="5,0,0,0"/>
 
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Vertical">
             <ComboBox x:Name="DamageTypeComboBox" ItemsSource="{Binding Path=DamageTypes, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="32">
@@ -214,16 +214,24 @@
                     </TextBlock>
                 </Grid>
             </Button>
-            
-
-
             <Button x:Name="btnSendInjury"
                     DockPanel.Dock="Right"
                     Margin="3,0,0,0"
-        		    Style="{StaticResource ResourceKey=btnFilter}" 
         		    Command="{Binding AddDamageForm}"
         		    Background="{StaticResource SubmitBG}"
         		    BorderBrush="{StaticResource SubmitBorder}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource btnFilter}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=AllFieldsFilled}" Value="True">
+                                <DataTrigger.Setters>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>

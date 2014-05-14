@@ -19,6 +19,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private DamageForm _selectedDamageForm;
         private DamageType _selectedDamageType;
         private Member _selectedMember;
+        private string _description;
+        private bool _isFunctional;
 
         // constructor
         public CreateDamageFormViewModel()
@@ -94,12 +96,22 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 _selectedDamageType = value;
                 Notify();
+                NotifyCustom("AllFieldsFilled");
             }
         }
 
-        public string Description { get; set; }
 
-        public bool IsFunctional { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; NotifyCustom("AllFieldsFilled"); }
+        }
+
+        public bool IsFunctional
+        {
+            get { return _isFunctional; }
+            set { _isFunctional = value; NotifyCustom("AllFieldsFilled"); }
+        }
 
         public List<DamageForm> ActiveDamageForms
         {
@@ -118,6 +130,16 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 _selectedDamageForm = value;
                 Notify();
+                NotifyCustom("AllFieldsFilled");
+            }
+        }
+
+        public bool AllFieldsFilled
+        {
+            get
+            {
+                return SelectedBoat != null && SelectedMember != null
+                    && SelectedDamageType != null && Description != null;
             }
         }
 
