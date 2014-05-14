@@ -128,7 +128,7 @@
     </ApplicationDefinition>
     <Compile Include="HelperFunctions\CloneFunctions.cs" />
     <Compile Include="HelperFunctions\InputValidation.cs" />
-    <Compile Include="HelperFunctions\RelayCommand.cs" />
+    <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="HelperFunctions\SMSGateway\ISMSGateway.cs" />
     <Compile Include="HelperFunctions\SMSGateway\SmsWarnings.cs" />
     <Compile Include="Model\TripWarningSms.cs" />
@@ -352,7 +352,6 @@
     <Compile Include="ViewModel\Protokolsystem\Pages\BeginTripViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\FormsViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\BoatViewModel.cs" />
-    <Compile Include="ViewModel\Base\DelegateCommand.cs" />
     <Compile Include="ViewModel\Administrationssystem\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\OverviewViewModel.cs" />
     <Compile Include="ViewModel\Base\TimeCounter.cs" />

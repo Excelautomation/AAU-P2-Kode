@@ -9,6 +9,7 @@ using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Filters;
+using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
 using ARK.ViewModel.Protokolsystem.Additional;
