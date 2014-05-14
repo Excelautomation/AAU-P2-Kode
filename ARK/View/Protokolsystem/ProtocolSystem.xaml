@@ -99,7 +99,8 @@
                         Width="Auto" Height="90" >
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border x:Name="EndBorder" Background="{StaticResource EndBG}" BorderBrush="{StaticResource EndBorder}" Width="Auto" Height="Auto">
+                            <Border x:Name="EndBorder" Background="{StaticResource EndBG}" BorderBrush="{StaticResource EndBorder}" 
+                                    Width="Auto" Height="Auto">
                                 <TextBlock x:Name="EndText" Text="AFSLUT&#xA;ROTUR" />
                             </Border>
 
@@ -109,7 +110,6 @@
                                     <Setter TargetName="EndBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
                                 </DataTrigger>
                             </ControlTemplate.Triggers>
-
                         </ControlTemplate>
                     </Button.Template>
                 </Button>

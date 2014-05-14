@@ -155,47 +155,46 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             </ScrollViewer>
+            
             <Button x:Name="btnSelectResponsible" Grid.Row="0" VerticalAlignment="Top"
                     Command="{Binding Path=ResponsibleMemberClick}"
-                    Background="{DynamicResource AddBG}"
-                    BorderBrush="{DynamicResource AddBorder}" Height="46" Width="Auto"
-                    Margin="0,0,0,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="32"/>
-                        <ColumnDefinition Width="8"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left">
-                        <Image.Style>
-                            <Style BasedOn="{StaticResource ResourceKey=btnImage}" TargetType="Image">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="false">
-                                        <Setter Property="Source" Value="/View/images/user_striper.png"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="true">
-                                        <Setter Property="Source" Value="/View/images/user_delete.png"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <TextBlock Grid.Column="3" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18">
-                        <TextBlock.Style>
-                            <Style BasedOn="{StaticResource ResourceKey=ButtonStyle}" TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="True">
-                                        <Setter Property="Text" Value="FJERN&#10;MEDLEMMER"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="False">
-                                        <Setter Property="Text" Value="VÆLG&#10;ANSVARLIG"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </Grid>
+                    BorderBrush="{DynamicResource ChangeBorder}" Height="46" Width="Auto"
+                    Margin="0,1,0,0">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="tmpBorder" Grid.ColumnSpan="4"/>
+                            <TextBlock Grid.Column="3" x:Name="tmpText" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18">
+                                <TextBlock.Style>
+                                    <Style BasedOn="{StaticResource ResourceKey=ButtonStyle}" TargetType="TextBlock"/>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <Image x:Name="tmpImage" Grid.Column="1">
+                                <Image.Style>
+                                    <Style BasedOn="{StaticResource ResourceKey=btnImage}" TargetType="Image"/>
+                                </Image.Style>
+                            </Image>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="True">
+                                <Setter TargetName="tmpBorder" Property="Background" Value="{StaticResource EndBG}"/>
+                                <Setter TargetName="tmpText" Property="Text" Value="FJERN&#10;MEDLEMMER"/>
+                                <Setter TargetName="tmpImage" Property="Source" Value="/View/images/status_busy.png"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="False">
+                                <Setter TargetName="tmpBorder" Property="Background" Value="{StaticResource BeginBG}"/>
+                                <Setter TargetName="tmpText" Property="Text" Value="VÆLG&#10;ANSVARLIG"/>
+                                <Setter TargetName="tmpImage" Property="Source" Value="/View/images/user_striper_big.png"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
         </Grid>        
     </Grid>
