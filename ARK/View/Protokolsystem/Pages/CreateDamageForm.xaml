@@ -90,7 +90,7 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
+                    <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
                         <TextBlock Style="{DynamicResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding FirstName}"/>
                             <Run Text="{Binding LastName}"/>
@@ -109,7 +109,7 @@
                   Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
                         <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ResourceKey=lstListViewHeadline}"/>
                     </Grid>
                 </DataTemplate>

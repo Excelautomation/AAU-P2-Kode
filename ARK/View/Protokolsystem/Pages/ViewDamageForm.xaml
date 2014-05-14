@@ -58,8 +58,7 @@
                   SelectedItem="{Binding Path=SelectedDamageForm, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
                         <StackPanel>
                             <Border BorderThickness="3" Width="50" HorizontalAlignment="Left">
                                 <Border.Style>
