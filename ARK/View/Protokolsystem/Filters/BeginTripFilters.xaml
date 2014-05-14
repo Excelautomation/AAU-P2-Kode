@@ -16,7 +16,7 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Name="Kategori" Header="Kategorier" Grid.Column="0" Style="{StaticResource ResourceKey=grbProperty}" 
+        <GroupBox Name="Kategori" Header="Båd efter Kategori" Grid.Column="0" Style="{StaticResource ResourceKey=grbProperty}" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid Margin="4,8,0,4">
                 <Grid.ColumnDefinitions>
@@ -36,7 +36,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Name="Type" Header="Type" Grid.Column="1" Style="{StaticResource ResourceKey=grbProperty}"
+        <GroupBox Name="Type" Header="Båd efter Type" Grid.Column="1" Style="{StaticResource ResourceKey=grbProperty}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid Margin="4,8,0,4">
                 <Grid.ColumnDefinitions>
