@@ -18,14 +18,21 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         public BoatsOutAdditionalInfoViewModel()
         {
             db = DbArkContext.GetDbContext();
-            WarningSms = db.TripWarningSms.SingleOrDefault(t => t.Trip == SelectedTrip);
+
         }
 
         // Properties
         public Trip SelectedTrip
         {
             get { return _selectedTrip; }
-            set { _selectedTrip = value; Notify(); }
+            set 
+            { 
+                _selectedTrip = value;
+                if (_selectedTrip != null)
+                    WarningSms = db.TripWarningSms.FirstOrDefault(t => t.Trip.Id == SelectedTrip.Id);
+                
+                Notify(); 
+            }
         }
 
         private TripWarningSms _warningSms;
