@@ -44,13 +44,15 @@
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
                     <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeAll, Mode=TwoWay}"/>
-                    <DatePicker SelectedDate="{Binding Path=DateTimeFromPicker, Mode=TwoWay}" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="White" Margin="0,0,2,1" FontSize="14"/>
+                    <!--<DatePicker SelectedDate="{Binding Path=DateTimeFromPicker, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="White" Margin="0,0,2,1" FontSize="14"/>-->
+                    <RadioButton Content="Uge" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeWeek, Mode=TwoWay}" DockPanel.Dock="Bottom"/>
                     <RadioButton Content="Dag" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeDay, Mode=TwoWay}"/>
                 </DockPanel>
                 <DockPanel Grid.Column="1">
-                    <RadioButton Content="Uge" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeWeek, Mode=TwoWay}"/>
-                    <DatePicker SelectedDate="{Binding Path=DateTimeToPicker, Mode=TwoWay}" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="White" Margin="0,0,2,1" FontSize="14"/>
-                    <RadioButton Content="Måned" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeMonth, Mode=TwoWay}"/>
+                    <!--<DatePicker SelectedDate="{Binding Path=DateTimeToPicker, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="White" Margin="0,0,2,1" FontSize="14"/>-->
+                    <RadioButton Content="Måned" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeMonth, Mode=TwoWay}"/>
+                    <RadioButton Content="År" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeYear, Mode=TwoWay}"/>
+                    <RadioButton Content="Halvår" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked="{Binding Path=DateTimeHalfYear, Mode=TwoWay}"/>
                 </DockPanel>
             </Grid>
         </GroupBox>

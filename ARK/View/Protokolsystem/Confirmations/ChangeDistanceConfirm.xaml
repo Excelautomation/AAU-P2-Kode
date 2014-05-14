@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:con="clr-namespace:ARK.ViewModel.Protokolsystem.Confirmations"
+             xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              x:Name="AdminLoginConfirmWindow"
              mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
     <UserControl.DataContext>
@@ -59,12 +60,8 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <TextBox FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                         Width="192" Height="26" Text="{Binding Path=LocalDistance}">
-                    <TextBox.Style>
-                        <Style></Style>
-                    </TextBox.Style>
-                </TextBox>
+                <TextBox FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top"  x:Name="DistanceConfirm"
+                         Width="192" Height="26" Text="{Binding Path=SelectedDistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="2"  Text="{Binding Path=ErrorLabel}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Foreground="#FFFF5F5F" TextWrapping="Wrap" Margin="0,0,0,0" Height="31"/>
             </Grid>
         </Grid>

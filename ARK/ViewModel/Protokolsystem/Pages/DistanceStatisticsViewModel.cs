@@ -104,7 +104,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             set
             {
                 _distanceSelector = value;
-                base.ToggleKeyboard.Execute(null);
+                base.ProtocolSystem.EnableSearch = true;
             }
         }
 
@@ -115,17 +115,25 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(
                     x =>
                     {
-                        var ConfirmView = new ChangeDistanceConfirm();
-                        var ConfirmViewModel = (ChangeDistanceConfirmViewModel)ConfirmView.DataContext;
+                        DistanceSelector = true;
 
-                        ConfirmViewModel.DistanceStatisticsVM = this;
-                        ConfirmViewModel.LocalDistance = this.SelectedTrip.Trip.Distance;
-                        ProtocolSystem.ShowDialog(ConfirmView);
+                        var confirmView = new ChangeDistanceConfirm();
+                        var confirmViewModel = (ChangeDistanceConfirmViewModel)confirmView.DataContext;
 
-                        DistanceSelector = !DistanceSelector;
+                        confirmViewModel.SelectedTrip = this.SelectedTrip.Trip;
+                        ProtocolSystem.ShowDialog(confirmView);
+
+                        confirmViewModel.WindowHide += confirmViewModel_WindowHide;
                     },
                     x => this.SelectedTrip != null && this.SelectedTrip.Editable);
             }
+        }
+
+        void confirmViewModel_WindowHide(object sender, EventArgs e)
+        {
+            ((ChangeDistanceConfirmViewModel) sender).WindowHide -= confirmViewModel_WindowHide;
+
+            DistanceSelector = false;
         }
 
         #region Filter
