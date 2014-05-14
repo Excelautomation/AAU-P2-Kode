@@ -5,6 +5,8 @@ using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Protokolsystem.Pages;
 using System;
+using ARK.View.Protokolsystem.Confirmations;
+using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
@@ -178,7 +180,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get { return GetCommand(d => { SelectedDamageType = (DamageType)d; }); }
         }
 
-        public ICommand AddDamageForm
+        public ICommand OpenConfirmDialog
         {
             get
             {
@@ -197,11 +199,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                         damageForm.Description = Description;
                         damageForm.Functional = IsFunctional;
 
-                        DbArkContext db = DbArkContext.GetDbContext();
+                        var ConfirmView = new DamageFormConfirm();
+                        var ConfirmViewModel = (DamageFormConfirmViewModel)ConfirmView.DataContext;
 
-                        db.DamageForm.Add(damageForm);
-                        db.SaveChanges();
+                        ConfirmViewModel.DamageForm = damageForm;
 
+                        ProtocolSystem.ShowDialog(ConfirmView);
                     }
                 });
             }
