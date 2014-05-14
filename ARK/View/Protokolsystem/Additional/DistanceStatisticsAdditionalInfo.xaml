@@ -79,26 +79,31 @@
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Outrigger: " FontWeight="Bold"/>
                 <Run Text="{Binding Path=KmOutrigger, Mode=OneWay}"/>
+                <Run Text="Km"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Inrigger: " FontWeight="Bold"/>
                 <Run Text="{Binding Path=KmInrigger, Mode=OneWay}"/>
+                <Run Text="Km"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Kajak: " FontWeight="Bold"/>
                 <Run Text="{Binding Path=KmKajak, Mode=OneWay}"/>
+                <Run Text="Km"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Ergometer: " FontWeight="Bold"/>
                 <Run Text="{Binding Path=KmErgometer, Mode=OneWay}"/>
+                <Run Text="Km"/>
             </TextBlock>
 
             <TextBlock Style="{StaticResource ResourceKey=styleContent}" >
                 <Run Text="Gig: " FontWeight="Bold"/>
                 <Run Text="{Binding Path=KmGig, Mode=OneWay}"/>
+                <Run Text="Km"/>
             </TextBlock>
         </StackPanel>
 
