@@ -6,7 +6,7 @@
         Left="0" Top="0"
         WindowStyle="None"
         ResizeMode="NoResize"
-        WindowStartupLocation="Manual" WindowState="Maximized">
+        WindowStartupLocation="Manual" WindowState="Maximized" SizeToContent="WidthAndHeight">
 
     <Window.DataContext>
         <Protokolsystem:ProtocolSystemMainViewModel />
