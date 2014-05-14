@@ -135,7 +135,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 SelectedMembers.Clear();
                 UpdateInfo();
 
-                EnableMembers = true;
+                if (value.Usable && !value.BoatOut)
+                {
+                    this.EnableMembers = true;
+                }
+                else
+                {
+                    this.EnableMembers = false;
+                }
             }
         }
 
@@ -200,7 +207,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(x =>
                 {
                     var temp = x as string;
-                    this.Direction = Regex.Replace(temp, @"\n", string.Empty);
+                    this.Direction = Regex.Replace(temp, @"\n", " ");
                 });
             }
         }
