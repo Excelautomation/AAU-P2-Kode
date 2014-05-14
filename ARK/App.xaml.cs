@@ -23,6 +23,12 @@ namespace ARK
     {
         public App()
         {
+#if RELEASE || DEBUG
+            // Start thread which downloads the sunset time every day
+            var wtoken = new CancellationTokenSource();
+            SunsetClass.StartSunsetTask(wtoken);
+#endif
+
             // Thread that checks if a new season needs to be started
             var checkForNewSeasonThread = new Thread(() =>
             {
