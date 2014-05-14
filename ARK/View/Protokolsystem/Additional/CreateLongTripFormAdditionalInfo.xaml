@@ -164,7 +164,20 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Source="/View/images/user_add.png" Style="{StaticResource ResourceKey=btnImage}" />
+                    <Image Grid.Column="1" HorizontalAlignment="Left">
+                        <Image.Style>
+                            <Style BasedOn="{StaticResource ResourceKey=btnImage}" TargetType="Image">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="false">
+                                        <Setter Property="Source" Value="/View/images/user_striper.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="true">
+                                        <Setter Property="Source" Value="/View/images/user_delete.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                     <TextBlock Grid.Column="3" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18">
                         <TextBlock.Style>
                             <Style BasedOn="{StaticResource ResourceKey=ButtonStyle}" TargetType="TextBlock">
