@@ -228,14 +228,21 @@
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Style="{StaticResource ResourceKey=lstViewContent}"  FontWeight="Bold" Foreground="White">
-                    <Run Text="BÅDE PÅ VANDET:"/>
-                    <Run Text="{Binding NumBoatsOut}"/>
-                </TextBlock>
-                <TextBlock Grid.Row="1" Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Foreground="White">
-                    <Run Text="DAGENS KILOMETER:"/>
-                    <Run Text="{Binding DailyKilometers}"/>
-                </TextBlock>
+                <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Image Source="/View/images/boat_icon_bigger.png" Height="16" Width="16" />
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Foreground="White">
+                        <Run Text="  BÅDE PÅ VANDET:"/>
+                        <Run Text="{Binding NumBoatsOut}"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Image Source="/View/images/chart_up_color.png" Height="16" Width="16" />
+                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}" FontWeight="Bold" Foreground="White">
+                        <Run Text="  DAGENS KILOMETER:"/>
+                        <Run Text="{Binding DailyKilometers}"/>
+                    </TextBlock>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>
