@@ -251,82 +251,18 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 {
                     Id = db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
                     TripStartTime = DateTime.Now,
-                    Members = new List<Member>(),
-                    Boat = SelectedBoat
+                    Members = new List<Member>(SelectedMembers.Select(member => member.Member)),
+                    Boat = SelectedBoat,
+                    LongTrip = LongTrip,
+                    Direction = Direction
                 };
 
-                // Add selected members to trip
-                foreach (var m in SelectedMembers.Select(member => member.Member))
-                {
-                    if (m.Id == -1)
-                    {
-                        //-1 is a blank spot => Do nothing
-                    }
-                    else if (m.Id == -2)
-                    {
-                        //-2 is a guest => Increment the crew count, but don't add the member to the member list
-                        trip.CrewCount++;
-                    }
-                    else
-                    {
-                        //Add the member reference and increment the crew count
-                        trip.Members.Add(m);
-                        trip.CrewCount++;
-                    }
-                }
-
-                trip.LongTrip = LongTrip;
-                trip.Direction = Direction;
-
                 var dlg = new BeginTripBoatsConfirm();
-                var ConfirmTripViewModel = (BeginTripBoatsConfirmViewModel)dlg.DataContext;
-                ConfirmTripViewModel.Trip = trip;
+                var confirmTripViewModel = (BeginTripBoatsConfirmViewModel)dlg.DataContext;
+                confirmTripViewModel.Trip = trip;
                 ProtocolSystem.ShowDialog(dlg);
-
             }
         }
-
-        //public ICommand ShowConfirmDialog
-        //{
-        //    get 
-        //    { 
-        //        return GetCommand<object>(e =>
-        //        {    
-        //            var trip = new Trip
-        //            {
-        //                Id = _db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
-        //                TripStartTime = DateTime.Now,
-        //                Members = new List<Member>(),
-        //                Boat = SelectedBoat
-        //            };
-
-        //            foreach (var m in SelectedMembers.Select(member => member.Member))
-        //            {
-        //                if (m.Id == -1)
-        //                {
-        //                    //-1 is a blank spot => Do nothing
-        //                }
-        //                else if (m.Id == -2)
-        //                {
-        //                    //-2 is a guest => Increment the crew count, but don't add the member to the member list
-        //                    trip.CrewCount++;
-        //                }
-        //                else
-        //                {
-        //                    //Add the member reference and increment the crew count
-        //                    trip.Members.Add(m);
-        //                    trip.CrewCount++;
-        //                }
-        //            }
-
-        //            trip.LongTrip = LongTrip;
-        //            trip.Direction = Direction;
-
-        //            // åbner dialog vinduet
-        //            ShowDialog(new BeginTripBoatsConfirm()); 
-        //        });
-        //    }
-        //}
 
         private void UpdateInfo()
         {

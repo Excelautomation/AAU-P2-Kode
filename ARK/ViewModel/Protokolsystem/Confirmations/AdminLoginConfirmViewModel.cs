@@ -43,6 +43,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         public override void Hide()
         {
             ProtocolSystem.KeyboardClear();
+            ProtocolSystem.EnableSearch = false;
             base.Hide();
         }
 

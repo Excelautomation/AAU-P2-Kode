@@ -22,9 +22,22 @@ namespace ARK.ViewModel.Base
             {
                 if (CurrentSelectedTextBox == null) return;
 
+                // Update currentselectedtextbox text
                 var textBox = CurrentSelectedTextBox as TextBox;
                 if (textBox != null)
                     textBox.Text = KeyboardText;
+
+                // Update passwordtext
+
+                if (!string.IsNullOrEmpty(KeyboardText))
+                {
+                    var passwordbox = CurrentSelectedTextBox as PasswordBox;
+                    if (passwordbox != null)
+                    {
+                        passwordbox.Password += KeyboardText;
+                        KeyboardClear();
+                    }
+                }
             };
         }
 
@@ -75,6 +88,7 @@ namespace ARK.ViewModel.Base
                 // Unbind event if current is not null
                 if (_currentSelectedTextBox != null)
                 {
+                    // Handle textbox
                     var ctextbox = CurrentSelectedTextBox as TextBox;
                     if (ctextbox != null)
                         ctextbox.TextChanged -= textbox_TextChanged;
@@ -91,6 +105,13 @@ namespace ARK.ViewModel.Base
 
                     // Bind eventhandler to support twoway
                     textbox.TextChanged += textbox_TextChanged;
+                }
+
+                // Handle passwordbox
+                var passwordbox = CurrentSelectedTextBox as PasswordBox;
+                if (passwordbox != null)
+                {
+                    KeyboardText = "";
                 }
             }
         }

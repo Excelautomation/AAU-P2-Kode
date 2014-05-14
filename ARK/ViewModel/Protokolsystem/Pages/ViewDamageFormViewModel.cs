@@ -71,12 +71,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return GetCommand(() => 
                 {
 
-                    var ConfirmView = new DamageFormConfirm();
-                    var ConfirmViewModel = (DamageFormConfirmViewModel)ConfirmView.DataContext;
+                    var confirmView = new DamageFormConfirm();
+                    var confirmViewModel = (DamageFormConfirmViewModel)confirmView.DataContext;
 
-                    ConfirmViewModel.DamageForm = SelectedDamageForm;
+                    confirmViewModel.DamageForm = SelectedDamageForm;
 
-                    ProtocolSystem.ShowDialog(ConfirmView);
+                    ProtocolSystem.ShowDialog(confirmView);
+
+                    ProtocolSystem.EnableSearch = true;
                 });
             }
         }
