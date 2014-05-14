@@ -31,8 +31,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
             ParentAttached += (sender, e) =>
             {
-                Members = db.Member.ToList();
-                Boats = db.Boat.ToList();
+                Members = db.Member.OrderBy(x => x.FirstName).ToList();
+                Boats = db.Boat.OrderBy(x => x.Name).ToList();
                 DamageTypes = db.DamageType.ToList();
                 ActiveDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
             };
