@@ -12,6 +12,16 @@
     <UserControl.DataContext>
         <pages:ViewDamageFormViewModel/>
     </UserControl.DataContext>
+    
+    <UserControl.Resources>
+        <Style x:Key="StyleIsEnabled" TargetType="Button" BasedOn="{StaticResource btnFilter}">
+            <Style.Triggers>
+                <DataTrigger >
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
 
     <!--Indhold-->
     <Grid>
@@ -114,9 +124,20 @@
             <Button x:Name="btnRectifyDamageForm"
                     DockPanel.Dock="Right"
                     Command="{Binding FixDamageForm}"
-            	    Style="{StaticResource ResourceKey=btnFilter}" 
             	    Background="{DynamicResource ChangeBorder}"
             	    BorderBrush="{StaticResource InfoBorder}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource btnFilter}">
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedDamageForm}" Value="{x:Null}">
+                                <DataTrigger.Setters>
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8"/>
