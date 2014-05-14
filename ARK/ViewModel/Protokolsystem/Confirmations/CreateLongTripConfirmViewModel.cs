@@ -71,6 +71,8 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             {
                 return GetCommand(() =>
                 {
+                    LongTrip.Members = LongTrip.Members.Where(member => member.Id >= 0).ToList();
+
                     DbArkContext.GetDbContext().LongTripForm.Add(LongTrip);
                     DbArkContext.GetDbContext().SaveChanges();
                     
@@ -104,10 +106,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    Hide();
-                });
+                return GetCommand(Hide);
             }
         }
     }
