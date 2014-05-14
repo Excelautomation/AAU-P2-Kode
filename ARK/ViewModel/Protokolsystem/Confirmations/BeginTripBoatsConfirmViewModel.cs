@@ -6,6 +6,7 @@ using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows;
+using ARK.View.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
@@ -34,12 +35,23 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             }
         }
 
-
-        public ICommand CloseWindow
+        public ICommand CancelTrip
         {
             get
             {
-                return GetCommand<object>(e => ProtocolSystem.HideDialog());
+                return GetCommand<object>(e => 
+                {
+                    Hide();
+                    ProtocolSystem.StatisticsDistance.Execute(null);
+                });
+            }
+        }
+
+        public ICommand ChangeTrip
+        {
+            get
+            {
+                return GetCommand<object>(e => Hide());
             }
         }
 

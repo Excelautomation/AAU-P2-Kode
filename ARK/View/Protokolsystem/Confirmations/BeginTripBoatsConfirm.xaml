@@ -58,34 +58,30 @@
                 </TextBlock>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="Navn:" FontWeight="Bold"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="Pladser:" FontWeight="Bold"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="Kategori:" FontWeight="Bold"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="{Binding Path=Trip.Boat.Name, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="{Binding Path=Trip.Boat.NumberofSeats}"/>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                    <TextBlock Margin="0,0,5,0" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="{Binding Path=Trip.Boat.SpecificBoatType}"/>
                     </TextBlock>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="1" Margin="10,10,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -97,21 +93,25 @@
                 </TextBlock>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                    <WrapPanel>
+                        <TextBlock Margin="0,0,0,5" Width="70" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="Retning:" FontWeight="Bold"/>
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
-                        <Run Text="Mørkets frembrud:" FontWeight="Bold"/>
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="{Binding Path=Trip.Direction}" />
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource ResourceKey=lstViewContent}">
+                        </TextBlock>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Width="70" Style="{StaticResource ResourceKey=lstViewContent}">
+                        <Run Text="Mørkets frembrud:" FontWeight="Bold"/>
+                        </TextBlock>
+                        <TextBlock VerticalAlignment="Bottom" Style="{StaticResource ResourceKey=lstViewContent}">
                         <Run Text="Ubundet" />
-                    </TextBlock>
+                        </TextBlock>
+                    </WrapPanel>
                 </StackPanel>
+
+
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="2" Margin="10,10,0,0">
@@ -149,7 +149,7 @@
 
         <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="1">
 			<Button x:Name="btnCancel"
-                    Command="{Binding Path=CloseWindow}"
+                    Command="{Binding Path=CancelTrip}"
 					DockPanel.Dock="Left"
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
@@ -187,6 +187,7 @@
 			</Button>
 
 			<Button x:Name="btnChange" 
+                    Command="{Binding Path=ChangeTrip}"
 					DockPanel.Dock="Right"
 					VerticalAlignment="Top" 
 					Style="{StaticResource ResourceKey=btnFilter}"  
