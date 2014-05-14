@@ -15,6 +15,7 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
         public partial class sun
         {
+
             private decimal versionField;
 
             private sunLocation locationField;
@@ -95,6 +96,7 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunLocation
         {
+
             private decimal latitudeField;
 
             private decimal longitudeField;
@@ -130,6 +132,7 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunDate
         {
+
             private byte dayField;
 
             private byte monthField;
@@ -195,13 +198,13 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunMorning
         {
-            private System.DateTime sunriseField;
+
+            private string sunriseField;
 
             private sunMorningTwilight twilightField;
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime sunrise
+            public string sunrise
             {
                 get
                 {
@@ -231,15 +234,15 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunMorningTwilight
         {
-            private System.DateTime civilField;
 
-            private System.DateTime nauticalField;
+            private string civilField;
 
-            private System.DateTime astronomicalField;
+            private string nauticalField;
+
+            private string astronomicalField;
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime civil
+            public string civil
             {
                 get
                 {
@@ -252,8 +255,7 @@ namespace ARK.Model.XML
             }
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime nautical
+            public string nautical
             {
                 get
                 {
@@ -266,8 +268,7 @@ namespace ARK.Model.XML
             }
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime astronomical
+            public string astronomical
             {
                 get
                 {
@@ -284,13 +285,13 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunEvening
         {
-            private System.DateTime sunsetField;
+
+            private string sunsetField;
 
             private sunEveningTwilight twilightField;
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime sunset
+            public string sunset
             {
                 get
                 {
@@ -320,15 +321,15 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunEveningTwilight
         {
-            private System.DateTime civilField;
 
-            private System.DateTime nauticalField;
+            private string civilField;
 
-            private System.DateTime astronomicalField;
+            private string nauticalField;
+
+            private string astronomicalField;
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime civil
+            public string civil
             {
                 get
                 {
@@ -341,8 +342,7 @@ namespace ARK.Model.XML
             }
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime nautical
+            public string nautical
             {
                 get
                 {
@@ -355,8 +355,7 @@ namespace ARK.Model.XML
             }
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute(DataType = "time")]
-            public System.DateTime astronomical
+            public string astronomical
             {
                 get
                 {

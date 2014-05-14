@@ -103,7 +103,7 @@
                     </WrapPanel>
                     <WrapPanel>
                         <TextBlock Text="Mørkets frembrud:" Width="70" Style="{StaticResource ResourceKey=lstViewContent}"/>
-                        <TextBlock Text="{Binding Path=Sunset, Mode=OneWay}" Style="{StaticResource ResourceKey=lstViewContent}"/>
+                        <TextBlock Text="{Binding Path=Sunset, Mode=OneWay, StringFormat={}{0:HH:mm}}" Style="{StaticResource ResourceKey=lstViewContent}"/>
                     </WrapPanel>
                 </StackPanel>
 
