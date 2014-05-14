@@ -114,7 +114,8 @@
                   SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Margin="0,0,0,-1">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" 
+                          Margin="0,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30"/>
                             <ColumnDefinition Width="*"/>
