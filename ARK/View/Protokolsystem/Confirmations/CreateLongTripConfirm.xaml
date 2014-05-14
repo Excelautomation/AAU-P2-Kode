@@ -221,7 +221,7 @@
                 </TextBlock>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" PanningMode="VerticalOnly" MaxHeight="250">
-                    <ItemsControl x:Name="AllMembersList" ItemsSource="{Binding Path=Trip.Members}">
+                    <ItemsControl x:Name="AllMembersList" ItemsSource="{Binding Path=LongTrip.Members}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="2">

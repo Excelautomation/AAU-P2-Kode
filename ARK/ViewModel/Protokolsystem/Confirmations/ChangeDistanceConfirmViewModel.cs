@@ -61,7 +61,6 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                     {
                         EndTripVM.SelectedTrip.Distance = LocalDistance;
                         DbArkContext.GetDbContext().SaveChanges();
-                        // Lister bliver nok heller ikke opdateret her
                     }
 
                     Hide();
