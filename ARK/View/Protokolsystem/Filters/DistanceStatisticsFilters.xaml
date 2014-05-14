@@ -16,7 +16,7 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Name="Kilometerstatistik" Header="Kilometerstatistik" Grid.Column="0" Style="{StaticResource ResourceKey=grbProperty}"
+        <GroupBox Name="Kilometerstatistik" Header="Kilometer efter type" Grid.Column="0" Style="{StaticResource ResourceKey=grbProperty}"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid Margin="4,8,0,4">
                 <Grid.ColumnDefinitions>
@@ -32,6 +32,25 @@
                     <RadioButton Content="Inrigger" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometerstatistik}" IsChecked="{Binding Path=StatisticsInrigger}"/>
                     <RadioButton Content="Outrigger" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometerstatistik}" IsChecked="{Binding Path=StatisticsOutrigger}"/>
                     <RadioButton Content="Gig" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometerstatistik}" IsChecked="{Binding Path=StatisticsGig}"/>
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Name="Kilometertid" Header="Kilometer efter tid" Grid.Column="1" Style="{StaticResource ResourceKey=grbProperty}"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid Margin="4,8,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="0">
+                    <RadioButton Content="Alle" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked=""/>
+                    <DatePicker SelectedDate="" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="White" Margin="0,0,2,1" FontSize="14"/>
+                    <RadioButton Content="Dag" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked=""/>
+                </DockPanel>
+                <DockPanel Grid.Column="1">
+                    <RadioButton Content="Uge" DockPanel.Dock="Top" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked=""/>
+                    <DatePicker SelectedDate="" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="White" Margin="0,0,2,1" FontSize="14"/>
+                    <RadioButton Content="Måned" DockPanel.Dock="Bottom" GroupName="{Binding Name, ElementName=Kilometertid}" IsChecked=""/>
                 </DockPanel>
             </Grid>
         </GroupBox>
