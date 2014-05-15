@@ -24,14 +24,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         public DamageForm SelectedDamageForm
         {
             get { return _selectedDamageForm; }
-            set { 
-                _selectedDamageForm = value; Notify(); UpdateInfo(); }
+            set 
+            { 
+                _selectedDamageForm = value; Notify(); UpdateInfo(); 
+            }
         }
-
 
         public ViewDamageFormViewModel()
         {
-
             ParentAttached += (sender, e) =>
             {
                 DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
@@ -70,7 +70,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return GetCommand(() => 
                 {
-
                     var confirmView = new DamageFormConfirm();
                     var confirmViewModel = (DamageFormConfirmViewModel)confirmView.DataContext;
 

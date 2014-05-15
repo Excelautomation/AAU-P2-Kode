@@ -35,7 +35,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         private FrameworkElement _infoPage; // Informationpage
         private Boat _selectedBoat; // Holds the selected boat
 
-
         private DateTime _latestData;
 
         public BeginTripViewModel()

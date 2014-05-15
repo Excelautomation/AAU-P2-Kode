@@ -79,6 +79,5 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                 });
             }
         }
-
     }
 }

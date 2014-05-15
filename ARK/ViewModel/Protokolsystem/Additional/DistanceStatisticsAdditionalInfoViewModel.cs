@@ -18,7 +18,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         private double _kmKajak;
         private double _kmErgometer;
         private double _kmGig;
-        // Fields
+
         public MemberDistanceViewModel SelectedMember
         {
             get { return _selectedMember; }

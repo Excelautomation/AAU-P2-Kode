@@ -203,7 +203,6 @@ namespace ARK
                 else
                     currentSeason = db.Season.AsEnumerable().Last(x => true);
 
-
                 // if current seasonEnd is before today add new season.
                 if (DateTime.Compare(currentSeason.SeasonEnd, DateTime.Now) <= 0)
                 {
