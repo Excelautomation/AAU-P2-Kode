@@ -19,7 +19,6 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
 
         public BeginTripBoatsConfirmViewModel()
         {
-
         }
 
         public Trip Trip

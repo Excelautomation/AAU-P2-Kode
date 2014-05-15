@@ -69,7 +69,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         public TripViewModel SelectedTrip
         {
             get { return _selectedTrip; }
-            set { 
+            set 
+            { 
                 _selectedTrip = value;
                 Notify();
 

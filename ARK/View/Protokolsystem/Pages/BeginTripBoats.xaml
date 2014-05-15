@@ -14,7 +14,6 @@
         <pages:BeginTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
     <UserControl.Resources>
-        <valueconverter:RadioButtonToStringConverter x:Key="RadioButtonToString" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Style x:Key="ItemContainerStyle" TargetType="{x:Type ListViewItem}"
                BasedOn="{StaticResource styleListViewItem}">

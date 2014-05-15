@@ -19,7 +19,8 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         public LongTripForm LongTrip 
         {
             get { return _longTrip; }
-            set { 
+            set 
+            { 
                 _longTrip = value; 
                 Notify();
                 UpdateErrors();

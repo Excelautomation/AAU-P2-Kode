@@ -10,13 +10,9 @@ namespace ARK.View.ValueConverters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-
             if (value == null)
                 return FalseValue;
             return (bool)value ? TrueValue : FalseValue;
-
-
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

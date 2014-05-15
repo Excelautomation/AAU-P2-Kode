@@ -17,7 +17,5 @@ namespace ARK.ViewModel.Protokolsystem.Additional
             get { return _selectedLongTripForm; }
             set { _selectedLongTripForm = value; Notify(); }
         }
-        
-
     }
 }

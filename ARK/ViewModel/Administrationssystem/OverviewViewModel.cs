@@ -77,7 +77,9 @@ namespace ARK.ViewModel.Administrationssystem
         public bool LoadingData
         {
             get { return _loadingData; }
-            set { _loadingData = value;
+            set 
+            { 
+                _loadingData = value;
                 Notify();
             }
         }
