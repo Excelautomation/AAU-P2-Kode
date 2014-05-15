@@ -86,11 +86,17 @@
                                     <Style TargetType="Border">
                                         <Setter Property="BorderBrush" Value="SeaGreen" />
                                         <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=Usable}" Value="False"/>
+                                                    <Condition Binding="{Binding Path=BoatOut}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <MultiDataTrigger.Setters>
+                                                    <Setter Property="BorderBrush" Value="IndianRed"/>
+                                                </MultiDataTrigger.Setters>
+                                            </MultiDataTrigger>
                                             <DataTrigger Binding="{Binding Path=BoatOut}" Value="True">
                                                 <Setter Property="BorderBrush" Value="DarkOrange" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Path=Boat.Damaged}" Value="True">
-                                                <Setter Property="BorderBrush" Value="IndianRed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
