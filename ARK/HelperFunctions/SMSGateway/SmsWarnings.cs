@@ -15,7 +15,6 @@ namespace ARK.HelperFunctions.SMSGateway
 {
     public class DemoSMSGateway : ISmsGateway
     {
-
         public bool SendSms(string sender, string reciever, string message)
         {
             Debug.WriteLine("Sender sms til " + reciever + " fra " + sender + " med beskeden " + message);
@@ -45,7 +44,6 @@ namespace ARK.HelperFunctions.SMSGateway
 
             if (IsAfterSunset() || true)
             {
-
                 using (var db = new DbArkContext())
                 {
                     var warnings = GetTripWarningSms(db).ToList();
@@ -167,15 +165,12 @@ namespace ARK.HelperFunctions.SMSGateway
                             && !trip.LongTrip)
                     .ToList();
             }
-
             return output;
         }
 
         private bool IsAfterSunset()
         {
             return XmlParser.GetSunsetFromXml() > DateTime.Now;
-        }
-
-        
+        }        
     }
 }

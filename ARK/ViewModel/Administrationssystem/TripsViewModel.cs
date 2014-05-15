@@ -19,14 +19,9 @@ namespace ARK.ViewModel.Administrationssystem
         public BoatListWindow NewBoatDialog;
         private List<Boat> _allBoats;
         private Trip _currentTrip;
-        //private Trip _localTrip;
-        
-
         private bool _recentSave;
         private List<Trip> _trips;
         private IEnumerable<Trip> _tripsFiltered;
-
-        
 
         public TripsViewModel()
         {
@@ -46,10 +41,7 @@ namespace ARK.ViewModel.Administrationssystem
                         CurrentTrip = _trips[0];
                         //LocalTrip = CurrentTrip;
                     }
-                }
-
-
-                
+                }        
                 // Reset filter
                 ResetFilter();
             };
@@ -58,8 +50,6 @@ namespace ARK.ViewModel.Administrationssystem
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
             filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
-
-
         }
 
         public IEnumerable<Trip> TripsFiltered
@@ -139,7 +129,6 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-
         public ICommand ShowBoatDialog
         {
             get
@@ -177,8 +166,6 @@ namespace ARK.ViewModel.Administrationssystem
                 db.Entry(CurrentTrip).State = EntityState.Modified; // Får bådudskiftning i ture til at fucke op.
                 db.SaveChanges();
             }
-            //Reload();
-
             // Trigger notify - reset lists
             UpdateList<Trip>(TripsFiltered);
 

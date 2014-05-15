@@ -10,7 +10,6 @@ using ARK.ViewModel.Base;
 using System.Windows;
 using ARK.View.Administrationssystem.Pages;
 
-
 namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : ContentViewModelBase
@@ -167,6 +166,7 @@ namespace ARK.ViewModel.Administrationssystem
                     {
                         Type = damageType.Type
                     };
+
                     // Remember reference to the selected damagetype in the list synced with database
                     ReferenceToCurrentDamageType = damageType;
 

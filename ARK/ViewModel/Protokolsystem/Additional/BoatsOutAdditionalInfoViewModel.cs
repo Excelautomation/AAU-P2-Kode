@@ -53,7 +53,6 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                 }
                 else
                     return null;
-                
             }
         }
 
@@ -66,8 +65,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
                     return WarningSms.RecievedSms;
                 }
                 else
-                    return null;
-                
+                    return null;                
             }
         }
 

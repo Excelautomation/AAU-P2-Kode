@@ -190,9 +190,6 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         #region Commands
-
-
-
         public ICommand SelectDamageFormCommand
         {
             get
