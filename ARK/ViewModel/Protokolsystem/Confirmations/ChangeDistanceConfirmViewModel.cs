@@ -22,14 +22,14 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get { return _selectedTrip; }
             set
-        {
+            {
                 _selectedTrip = value; Notify();
-        
+
                 if (_selectedTrip != null)
                     SelectedDistance = _selectedTrip.Distance.ToString();
+            }
         }
-        }
-        
+
         public string SelectedDistance
         {
             get { return _selectedDistance; }
@@ -45,15 +45,15 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             get
             {
                 double tmp;
-                return GetCommand(e => 
+                return GetCommand(e =>
                 {
                     SelectedTrip.Distance = double.Parse(SelectedDistance);
                     SelectedTrip.TripEndedTime = DateTime.Now;
-                        DbArkContext.GetDbContext().SaveChanges();
+                    DbArkContext.GetDbContext().SaveChanges();
                     base.Hide();
                     ProtocolSystem.StatisticsDistance.Execute(null);
-                }, e => !string.IsNullOrEmpty(SelectedDistance) 
-                    && double.TryParse(SelectedDistance, out tmp) 
+                }, e => !string.IsNullOrEmpty(SelectedDistance)
+                    && double.TryParse(SelectedDistance, out tmp)
                     && double.Parse(SelectedDistance) > 0);
             }
         }
