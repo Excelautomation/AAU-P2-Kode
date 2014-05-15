@@ -65,22 +65,9 @@
                 <Setter Property="Margin" Value="5,5,0,0"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="Orientation" Value="Vertical"/>
+                <Setter Property="Background" Value="Transparent"/>
             </Style.Setters>
-                
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Member.ShortTripCox}">
-                    <DataTrigger.Value>
-                        <sys:Boolean>True</sys:Boolean>
-                    </DataTrigger.Value>
-                    <Setter Property="Background" Value="LightGreen"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Member.ShortTripCox}">
-                    <DataTrigger.Value>
-                        <sys:Boolean>False</sys:Boolean>
-                    </DataTrigger.Value>
-                    <Setter Property="Background" Value="Transparent"/>
-                </DataTrigger>
-            </Style.Triggers>
+
             <Style.Resources>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource lstViewContent}"/>
             </Style.Resources>
@@ -185,20 +172,13 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <StackPanel Style="{StaticResource styleStack}">
-                                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
-                                        <TextBlock Text=" " />
-                                        <TextBlock Text="{Binding Path=Member.FirstName}"/>
-                                        <TextBlock Text=" " />
-                                        <TextBlock Text="{Binding Path=Member.LastName}"/>
-                                    </StackPanel>
-                                    <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Orientation="Horizontal">
-                                        <TextBlock Text="Korttursstyrmand: " FontSize="13px" FontWeight="Normal"/>
-                                        <TextBlock Text="{Binding Path=Member.ShortTripCox, Converter={StaticResource YesNo}}" FontSize="13px" FontWeight="Bold"/>
-                                    </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource styleStack}">
+                                    <TextBlock Text="{Binding Path=Member.MemberNumber}"/>
+                                    <TextBlock Text=" " />
+                                    <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                    <TextBlock Text=" " />
+                                    <TextBlock Text="{Binding Path=Member.LastName}"/>
                                 </StackPanel>
                             </Grid>
                         </Button.Content>
