@@ -14,7 +14,7 @@ namespace ARK.HelperFunctions
 {
     public static class InputValidation
     {
-        private static readonly Regex FirstDoubleFromString = new Regex(@"(?'number'\d+(?:(?:,|.)\d+)?)", RegexOptions.Compiled);
+        private static readonly Regex FirstDoubleFromString = new Regex(@"(?'number'\d+(?:(?:,|\.)\d+)?)", RegexOptions.Compiled);
 
         /// <summary>
         /// Finds the first occurence of a number, with or without decimal part, in the input string.
