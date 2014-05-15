@@ -16,10 +16,6 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
     {
         // Fields
         private Trip _trip;
-        private bool _hasGuests;
-        private int _guestCount;
-        private bool _guestPluralis;
-        private bool _guestSingularis;
 
         public BeginTripBoatsConfirmViewModel()
         {
@@ -31,42 +27,10 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             get { return _trip; }
             set
             {
-                _trip = value;
-
-                if (value.CrewCount > value.Members.Count)
-                {
-                    HasGuests = true;
-                    GuestCount = value.CrewCount - value.Members.Count;
-                    if (GuestCount == 1)
-                        GuestSingularis = true;
-                    else
-                        GuestPluralis = true;
-                }
-
-                Notify();
+                _trip = value; Notify();
             }
         }
 
-        public bool HasGuests 
-        {
-            get { return _hasGuests; }
-            set { _hasGuests = value; Notify(); }
-        }
-        public int GuestCount
-        {
-            get { return _guestCount; }
-            set { _guestCount = value; Notify(); }
-        }
-        public bool GuestPluralis
-        {
-            get { return _guestPluralis; }
-            set { _guestPluralis = value; Notify(); }
-        }
-        public bool GuestSingularis
-        {
-            get { return _guestSingularis; }
-            set { _guestSingularis = value; Notify(); }
-        }
 
         public ICommand Save
         {
