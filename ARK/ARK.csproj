@@ -590,6 +590,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Diagrams\Model.cd" />
     <None Include="Diagrams\ProtokolsystemMain.cd" />
     <None Include="Diagrams\ViewModelAdminSystem.cd" />
     <None Include="Diagrams\ViewModelAdminSystemMain.cd" />
