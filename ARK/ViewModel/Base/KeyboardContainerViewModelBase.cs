@@ -11,7 +11,7 @@ using KeyboardEventArgs = ARK.ViewModel.Protokolsystem.KeyboardEventArgs;
 
 namespace ARK.ViewModel.Base
 {
-    public class KeyboardContainerViewModelBase : PageContainerViewModelBase, IKeyboardContainerViewModelBase
+    public abstract class KeyboardContainerViewModelBase : PageContainerViewModelBase, IKeyboardContainerViewModelBase
     {
         #region Fields
 

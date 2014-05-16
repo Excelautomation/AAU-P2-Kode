@@ -6,14 +6,16 @@ using ARK.ViewModel.Base.Filter;
 
 namespace ARK.ViewModel.Administrationssystem.Filters
 {
-    public class OverviewFilterViewModel : FilterViewModelBase
+    public class OverviewFilterViewModel : FilterViewModelBase, IFilter
     {
+        private bool _boatsOut;
+        private bool _showDamages;
+        private bool _longTrip;
+
         #region Constructors and Destructors
 
         public OverviewFilterViewModel()
         {
-            this.CurrentFilter = new OverViewFilter();
-
             this.Damages = true;
             this.LongTrip = true;
             this.BoatsOut = true;
@@ -27,29 +29,27 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             get
             {
-                return this.CurrentFilter.ShowBoatsOut;
+                return this._boatsOut;
             }
 
             set
             {
-                this.CurrentFilter.ShowBoatsOut = value;
+                this._boatsOut = value;
                 this.Notify();
                 this.CallEvent();
             }
         }
 
-        public OverViewFilter CurrentFilter { get; set; }
-
         public bool Damages
         {
             get
             {
-                return this.CurrentFilter.ShowDamages;
+                return _showDamages;
             }
 
             set
             {
-                this.CurrentFilter.ShowDamages = value;
+                this._showDamages = value;
                 this.Notify();
                 this.CallEvent();
             }
@@ -59,12 +59,12 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             get
             {
-                return this.CurrentFilter.ShowLongTrip;
+                return _longTrip;
             }
 
             set
             {
-                this.CurrentFilter.ShowLongTrip = value;
+                this._longTrip = value;
                 this.Notify();
                 this.CallEvent();
             }
@@ -76,7 +76,39 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
         public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<IFilter> { this.CurrentFilter };
+            return new List<IFilter> { this };
+        }
+
+        public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
+        {
+            if (!this.Damages && !this.LongTrip && !this.BoatsOut)
+            {
+                return new List<T>();
+            }
+
+            if (typeof(DamageForm) == typeof(T))
+            {
+                if (this.Damages)
+                {
+                    return items;
+                }
+            }
+            else if (typeof(LongTripForm) == typeof(T))
+            {
+                if (this.LongTrip)
+                {
+                    return items;
+                }
+            }
+            else if (typeof(Boat) == typeof(T))
+            {
+                if (this.BoatsOut)
+                {
+                    return items;
+                }
+            }
+
+            return new List<T>();
         }
 
         #endregion
@@ -85,58 +117,9 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
         private void CallEvent()
         {
-            this.OnFilterChanged();
+            base.OnFilterChanged();
         }
 
         #endregion
-
-        public class OverViewFilter : IFilter
-        {
-            #region Public Properties
-
-            public bool ShowBoatsOut { get; set; }
-
-            public bool ShowDamages { get; set; }
-
-            public bool ShowLongTrip { get; set; }
-
-            #endregion
-
-            #region Public Methods and Operators
-
-            public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
-            {
-                if (!this.ShowDamages && !this.ShowLongTrip && !this.ShowBoatsOut)
-                {
-                    return new List<T>();
-                }
-
-                if (typeof(DamageForm) == typeof(T))
-                {
-                    if (this.ShowDamages)
-                    {
-                        return items;
-                    }
-                }
-                else if (typeof(LongTripForm) == typeof(T))
-                {
-                    if (this.ShowLongTrip)
-                    {
-                        return items;
-                    }
-                }
-                else if (typeof(Boat) == typeof(T))
-                {
-                    if (this.ShowBoatsOut)
-                    {
-                        return items;
-                    }
-                }
-
-                return new List<T>();
-            }
-
-            #endregion
-        }
     }
 }

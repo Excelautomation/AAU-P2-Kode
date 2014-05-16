@@ -1,38 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ARK.ViewModel.Base.Filter.FilterChangedEventArgs" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+  <Class Name="ARK.ViewModel.Base.Filter.FilterChangedEventArgs">
+    <Position X="4.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAEAAA=</HashCode>
       <FileName>ViewModel\Base\Filter\FilterChangedEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ARK.ViewModel.Base.Filter.FilterContent" Collapsed="true">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+  <Class Name="ARK.ViewModel.Base.Filter.FilterContent">
+    <Position X="7.75" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AEAAAkAAAAAiAABAEAEAAAAAABCgAAAAAIAAAAAAACA=</HashCode>
       <FileName>ViewModel\Base\Filter\FilterContent.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ARK.ViewModel.Base.Filter.FilterEventArgs" Collapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+  <Class Name="ARK.ViewModel.Base.Filter.FilterEventArgs">
+    <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\Base\Filter\FilterEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ARK.ViewModel.Base.Filter.SearchEventArgs" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+  <Class Name="ARK.ViewModel.Base.Filter.SearchEventArgs">
+    <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\Base\Filter\SearchEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="ARK.ViewModel.Base.Filter.IFilter" Collapsed="true">
-    <Position X="0.5" Y="2.75" Width="1.5" />
+  <Interface Name="ARK.ViewModel.Base.Filter.IFilter">
+    <Position X="0.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\Base\Filter\IFilter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ARK.ViewModel.Base.Interfaces.Filter.IFilterContentViewModel">
+    <Position X="2.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Base\Interfaces\Filter\IFilterContentViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ARK.ViewModel.Base.Interfaces.Filter.IFilterViewModel">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Base\Interfaces\Filter\IFilterViewModel.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

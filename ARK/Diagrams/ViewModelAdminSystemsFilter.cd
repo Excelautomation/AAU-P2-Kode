@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ARK.ViewModel.Administrationssystem.Filters.BoatFilterViewModel" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAQAAgAAAAAAAAAEQBAgAEAgBAABAAIBAAAAAgAACAA=</HashCode>
+      <FileName>ViewModel\Administrationssystem\Filters\BoatFilterViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ARK.ViewModel.Administrationssystem.Filters.FormsFilterViewModel" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEABAgAAAAAAAAAAQBAAAAAAAAAACAAAAQAAAAAQAAI=</HashCode>
+      <FileName>ViewModel\Administrationssystem\Filters\FormsFilterViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ARK.ViewModel.Administrationssystem.Filters.OverviewFilterViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgAAAAAAAAAAQFAAAAEAAAAAIAAAAAAAAAQAAAA=</HashCode>
+      <FileName>ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ARK.ViewModel.Administrationssystem.Filters.TripFilterViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAgAAAAACIAAAABAAAACAAAAAIACAAEAAAAAAACA=</HashCode>
+      <FileName>ViewModel\Administrationssystem\Filters\TripFilterViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ARK.ViewModel.Base.FilterViewModelBase">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAABgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Base\FilterViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
