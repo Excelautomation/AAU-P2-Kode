@@ -34,8 +34,6 @@ namespace ARK.ViewModel.Administrationssystem
 
         private FrameworkElement _filterLongDistance;
 
-        private bool _longTripForm;
-
         private IEnumerable<LongTripForm> _longTripForms;
 
         private List<LongTripForm> _longTripFormsNonFiltered;
@@ -47,8 +45,6 @@ namespace ARK.ViewModel.Administrationssystem
         private int _selectedIndexLongDistanceForms;
 
         private int _selectedTabIndex;
-
-        private int _tabSelectedIndex;
 
         #endregion
 

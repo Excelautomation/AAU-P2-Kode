@@ -8,7 +8,6 @@ using System.Windows.Input;
 using ARK.HelperFunctions;
 using ARK.Model.DB;
 using ARK.Model;
-using ARK.Model.DB;
 using ARK.View.Administrationssystem;
 using ARK.ViewModel.Base;
 
