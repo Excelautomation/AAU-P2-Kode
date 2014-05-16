@@ -126,12 +126,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ark.Designer.cs" />
-    <Compile Include="ark1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ark.edmx</DependentUpon>
-    </Compile>
     <Compile Include="HelperFunctions\CloneFunctions.cs" />
     <Compile Include="HelperFunctions\InputValidation.cs" />
     <Compile Include="HelperFunctions\PasswordHashing.cs" />
@@ -602,13 +596,6 @@
     <Resource Include="View\Administrationssystem\Fonts\arialbd.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\arialbi.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\ariali.ttf" />
-    <EntityDeploy Include="ark.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ark1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ark.edmx.diagram">
-      <DependentUpon>ark.edmx</DependentUpon>
-    </None>
     <None Include="ClassDiagram1.cd" />
     <None Include="Diagrams\ViewModelProtokolsystemData.cd" />
     <None Include="Diagrams\ViewModelProtokolsystemConfirmation.cd" />
