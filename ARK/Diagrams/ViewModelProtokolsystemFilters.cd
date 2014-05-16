@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="ARK.ViewModel.Protokolsystem.Filters.BeginTripFiltersViewModel" Collapsed="true">
+    <Position X="1.5" Y="3.25" Width="2.25" />
+    <AssociationLine Name="CurrentBoatType" Type="ARK.ViewModel.Protokolsystem.Filters.CategoryFilter&lt;T&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.256" Y="0.305" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="CurrentBoatSizeFilter" Type="ARK.ViewModel.Protokolsystem.Filters.CategoryFilter&lt;T&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.627" Y="0.648" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IgBSAEAAgAAAIgAAEJIAIIAEAAAAxAABAAQAoChSIAg=</HashCode>
+      <FileName>ViewModel\Protokolsystem\Filters\BeginTripFiltersViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentBoatSizeFilter" />
+      <Property Name="CurrentBoatType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ARK.ViewModel.Protokolsystem.Filters.CategoryFilter&lt;T&gt;" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Protokolsystem\Filters\CategoryFilter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ARK.ViewModel.Protokolsystem.Filters.DistanceStatisticsFilterViewModel" Collapsed="true">
+    <Position X="4.25" Y="3.25" Width="2.5" />
+    <AssociationLine Name="CurrentBoatType" Type="ARK.ViewModel.Protokolsystem.Filters.CategoryFilter&lt;T&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.316" Y="0.569" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="CurrentDateTimeFilter" Type="ARK.ViewModel.Protokolsystem.Filters.DateTimeFilter">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.588" Y="0.497" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABACBQAQAAAgAAAEEBAVUAAI0RACAAQAIQECAIACADg=</HashCode>
+      <FileName>ViewModel\Protokolsystem\Filters\DistanceStatisticsFilterViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentBoatType" />
+      <Property Name="CurrentDateTimeFilter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ARK.ViewModel.Base.FilterViewModelBase" Collapsed="true">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAABgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Base\FilterViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ARK.ViewModel.Base.ViewModelBase" Collapsed="true">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAIAABAAAAAAABAAAA=</HashCode>
+      <FileName>ViewModel\Base\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ARK.ViewModel.Protokolsystem.Filters.DateTimeFilter" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>ViewModel\Protokolsystem\Filters\DateTimeFilter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

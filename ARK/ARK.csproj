@@ -168,6 +168,7 @@
     <Compile Include="ViewModel\Protokolsystem\Confirmations\BeginTripBoatsConfirmViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Data\TripViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Filters\CategoryFilter.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Filters\DateTimeFilter.cs" />
     <Compile Include="ViewModel\Protokolsystem\KeyboardEventArgs.cs" />
     <Compile Include="ViewModel\Protokolsystem\Pages\CreateDamageFormViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Pages\CreateLongTripViewModel.cs" />
@@ -589,7 +590,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Diagrams\ProtokolsystemMain.cd" />
     <None Include="Diagrams\ViewModelAdminSystem.cd" />
+    <None Include="Diagrams\ViewModelAdminSystemMain.cd" />
+    <None Include="Diagrams\ViewModelAdminSystemsFilter.cd" />
     <None Include="Diagrams\ViewModelClasses.cd" />
     <None Include="Diagrams\ViewModelFilterClasses.cd" />
     <None Include="Diagrams\ViewModelInterfaces.cd" />
@@ -605,6 +609,10 @@
       <DependentUpon>ark.edmx</DependentUpon>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Diagrams\ViewModelProtokolsystemData.cd" />
+    <None Include="Diagrams\ViewModelProtokolsystemConfirmation.cd" />
+    <None Include="Diagrams\ViewModelProtokolsystemAdditional.cd" />
+    <None Include="Diagrams\ViewModelProtokolsystemFilters.cd" />
     <None Include="Diagrams\ViewModelProtokolsystem.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

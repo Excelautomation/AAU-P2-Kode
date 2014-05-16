@@ -1,22 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ARK.ViewModel.Administrationssystem.AdminLoginViewModel" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="2.25" Y="2" Width="2" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAAAAIRgAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>ViewModel\Administrationssystem\AdminLoginViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ARK.ViewModel.Administrationssystem.AdminSystemViewModel" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>KAAAIIAEKAAACAABEAIAAYIAEBEEALAERBUBAAIAGwQ=</HashCode>
-      <FileName>ViewModel\Administrationssystem\AdminSystemViewModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="ARK.ViewModel.Administrationssystem.BoatViewModel" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="5.75" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gAAAAIIABBAAgAgAUIACAAAAgRQAAJAACAEBEAAAAQA=</HashCode>
       <FileName>ViewModel\Administrationssystem\BoatViewModel.cs</FileName>
@@ -24,29 +16,31 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ARK.ViewModel.Administrationssystem.FormsDamageViewModel" Collapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="3" Y="3.5" Width="2" />
     <TypeIdentifier>
       <HashCode>gABAAIAAAQAgAAACEAIAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\Administrationssystem\FormsDamageViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ARK.ViewModel.Administrationssystem.FormsLongTripViewModel" Collapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+    <Position X="3.25" Y="4.5" Width="2" />
+    <InheritanceLine Type="ARK.ViewModel.Base.ContentViewModelBase" ManuallyRouted="true">
+      <Path>
+        <Point X="6.625" Y="2.691" />
+        <Point X="6.625" Y="3.148" />
+        <Point X="5.427" Y="3.148" />
+        <Point X="5.427" Y="4.367" />
+        <Point X="4.25" Y="4.367" />
+        <Point X="4.25" Y="4.5" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAEAAAIAAAAAQAAAAQgAAAAAAAIAA=</HashCode>
       <FileName>ViewModel\Administrationssystem\FormsLongTripViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ARK.ViewModel.Administrationssystem.FormsViewModel" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>QBBAAAIIIAQgACSOFBMCYAgQABEAAAICAAADAAIAAAA=</HashCode>
-      <FileName>ViewModel\Administrationssystem\FormsViewModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="ARK.ViewModel.Administrationssystem.OverviewViewModel" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+    <Position X="0.75" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gQAAggAACBAAAAAAEEUhYIACABAASNFBAAADAAAACgA=</HashCode>
       <FileName>ViewModel\Administrationssystem\OverviewViewModel.cs</FileName>
@@ -54,46 +48,55 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ARK.ViewModel.Administrationssystem.SettingsViewModel" Collapsed="true">
-    <Position X="4" Y="2.5" Width="1.5" />
+    <Position X="6.75" Y="4.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>OIAAgchgAgCNhBlAFwgAAQACFiSMDACgAAKMCAUAE5g=</HashCode>
       <FileName>ViewModel\Administrationssystem\SettingsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ARK.ViewModel.Administrationssystem.TripsViewModel" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Position X="8.25" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gAEAAIIAAEAAgAIAEIACSAAAABAAAgAASAkBAAAAAIA=</HashCode>
       <FileName>ViewModel\Administrationssystem\TripsViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ARK.ViewModel.Administrationssystem.Filters.BoatFilterViewModel" Collapsed="true">
+  <Class Name="ARK.ViewModel.Base.ViewModelBase" Collapsed="true">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAQBAggAAgBAABAAIAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModel\Administrationssystem\Filters\BoatFilterViewModel.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAIAABAAAAAAABAAAA=</HashCode>
+      <FileName>ViewModel\Base\ViewModelBase.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ARK.ViewModel.Administrationssystem.Filters.FormsFilterViewModel" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+  <Class Name="ARK.ViewModel.Base.ContentViewModelBase" Collapsed="true">
+    <Position X="5.75" Y="2" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAAAAAQBAAAAAAAAQACAAAAQAAAAAAAAA=</HashCode>
-      <FileName>ViewModel\Administrationssystem\Filters\FormsFilterViewModel.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAQAAQAAEAAACAAAAAAAIAAAA=</HashCode>
+      <FileName>ViewModel\Base\ContentViewModelBase.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ARK.ViewModel.Administrationssystem.Filters.OverviewFilterViewModel" Collapsed="true">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+  <Class Name="ARK.ViewModel.Administrationssystem.FormsViewModel" Collapsed="true">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <InheritanceLine Type="ARK.ViewModel.Base.PageContainerViewModelBase" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="11.25" Y="2.691" />
+        <Point X="11.25" Y="3.5" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAAAAAAQBAAgAAAAAAAIAAAAAAAAAQAAAA=</HashCode>
-      <FileName>ViewModel\Administrationssystem\Filters\OverviewFilterViewModel.cs</FileName>
+      <HashCode>QBBAAAIIIAQgACSOFBMCYAgQABEAAAICAAADAAIAAAA=</HashCode>
+      <FileName>ViewModel\Administrationssystem\FormsViewModel.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ARK.ViewModel.Administrationssystem.Filters.TripFilterViewModel" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="2.5" Width="1.5" />
+  <Class Name="ARK.ViewModel.Base.PageContainerViewModelBase" Collapsed="true">
+    <Position X="10.5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAgAAAAACIAAAABAAAACAAAAAIACAAEAAAAAAACA=</HashCode>
-      <FileName>ViewModel\Administrationssystem\Filters\TripFilterViewModel.cs</FileName>
+      <HashCode>CAAAAAIEAAAAAAAAAIAAAAAAAAAAAAAAAABAAAAAAAI=</HashCode>
+      <FileName>ViewModel\Base\PageContainerViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
