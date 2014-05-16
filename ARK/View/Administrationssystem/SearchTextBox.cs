@@ -16,7 +16,6 @@ namespace ARK.View.Administrationssystem
     public class SearchTextBox : TextBox
     {
         //http://davidowens.wordpress.com/2009/02/18/wpf-search-text-box/
-
         public static DependencyProperty LabelTextProperty =
             DependencyProperty.Register(
                 "LabelText",
