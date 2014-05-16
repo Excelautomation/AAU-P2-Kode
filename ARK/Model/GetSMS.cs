@@ -4,31 +4,21 @@ namespace ARK.Model
 {
     public class GetSMS : IEquatable<GetSMS>
     {
-        public int Id { get; set; }
+        #region Public Properties
+
         public string From { get; set; }
-        public string Text { get; set; }
-        public DateTime RecievedDate { get; set; }
+
         public bool Handled { get; set; }
 
-        public bool Equals(GetSMS other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id;
-        }
+        public int Id { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((GetSMS) obj);
-        }
+        public DateTime RecievedDate { get; set; }
 
-        public override int GetHashCode()
-        {
-            return Id;
-        }
+        public string Text { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         public static bool operator ==(GetSMS left, GetSMS right)
         {
@@ -39,5 +29,47 @@ namespace ARK.Model
         {
             return !Equals(left, right);
         }
+
+        public bool Equals(GetSMS other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return this.Equals((GetSMS)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id;
+        }
+
+        #endregion
     }
 }

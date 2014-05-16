@@ -19,9 +19,13 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class MembersListWindow : Window
     {
+        #region Constructors and Destructors
+
         public MembersListWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

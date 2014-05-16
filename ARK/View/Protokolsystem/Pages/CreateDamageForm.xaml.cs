@@ -7,9 +7,13 @@ namespace ARK.View.Protokolsystem.Pages
     /// </summary>
     public partial class CreateDamageForm : UserControl
     {
+        #region Constructors and Destructors
+
         public CreateDamageForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

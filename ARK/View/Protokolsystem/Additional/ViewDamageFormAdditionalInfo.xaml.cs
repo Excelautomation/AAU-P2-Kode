@@ -20,9 +20,13 @@ namespace ARK.View.Protokolsystem.Additional
     /// </summary>
     public partial class ViewDamageFormAdditionalInfo : UserControl
     {
+        #region Constructors and Destructors
+
         public ViewDamageFormAdditionalInfo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

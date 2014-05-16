@@ -7,9 +7,13 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class Baede : UserControl
     {
+        #region Constructors and Destructors
+
         public Baede()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

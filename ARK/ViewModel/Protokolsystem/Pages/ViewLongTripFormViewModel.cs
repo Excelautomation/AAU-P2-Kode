@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Protokolsystem.Additional;
@@ -10,47 +11,80 @@ using ARK.ViewModel.Protokolsystem.Additional;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
-    class ViewLongTripFormViewModel : ProtokolsystemContentViewModelBase
+    internal class ViewLongTripFormViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
+        #region Fields
+
+        private FrameworkElement _infoPage;
+
         private List<LongTripForm> _longTripForms;
-        private  FrameworkElement _infoPage;
+
         private LongTripForm _selectedLongTripForm;
 
+        #endregion
+
         // Constructor
+        #region Constructors and Destructors
+
         public ViewLongTripFormViewModel()
         {
             var db = DbArkContext.GetDbContext();
 
-            ParentAttached += (sender, e) =>
-            {
-                LongTripForms = db.LongTripForm.ToList();
+            this.ParentAttached += (sender, e) =>
+                {
+                    this.LongTripForms = db.LongTripForm.ToList();
 
-                if (LongTripForms.Any())
-                    SelectedLongTripForm = LongTripForms.First();
+                    if (this.LongTripForms.Any())
+                    {
+                        this.SelectedLongTripForm = this.LongTripForms.First();
+                    }
 
-                UpdateInfo();
-            };
+                    this.UpdateInfo();
+                };
         }
 
-        // Props
-        public List<LongTripForm> LongTripForms
-        {
-            get { return _longTripForms; }
-            set { _longTripForms = value; Notify(); }
-        }
+        #endregion
 
-        public LongTripForm SelectedLongTripForm
-        {
-            get { return _selectedLongTripForm; }
-            set { _selectedLongTripForm = value; Notify(); UpdateInfo(); }
-        }
+        #region Public Properties
 
         public ICommand CreateLongTripForm
         {
             get
             {
-                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new CreateLongTripForm(), "OPRET NY LANGTUR"));
+                return
+                    this.GetCommand(
+                        () => this.ProtocolSystem.NavigateToPage(() => new CreateLongTripForm(), "OPRET NY LANGTUR"));
+            }
+        }
+
+        // Props
+        public List<LongTripForm> LongTripForms
+        {
+            get
+            {
+                return this._longTripForms;
+            }
+
+            set
+            {
+                this._longTripForms = value;
+                this.Notify();
+            }
+        }
+
+        public LongTripForm SelectedLongTripForm
+        {
+            get
+            {
+                return this._selectedLongTripForm;
+            }
+
+            set
+            {
+                this._selectedLongTripForm = value;
+                this.Notify();
+                this.UpdateInfo();
             }
         }
 
@@ -58,25 +92,43 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
+                return
+                    this.GetCommand(
+                        () => this.ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        private ViewLongTripFormAdditionalInfoViewModel Info
+        {
+            get
+            {
+                return this.InfoPage.DataContext as ViewLongTripFormAdditionalInfoViewModel;
             }
         }
 
         private FrameworkElement InfoPage
         {
-            get { return _infoPage ?? (_infoPage = new ViewLongTripFormAdditionalInfo()); }
+            get
+            {
+                return this._infoPage ?? (this._infoPage = new ViewLongTripFormAdditionalInfo());
+            }
         }
 
-        private ViewLongTripFormAdditionalInfoViewModel Info
-        {
-            get { return InfoPage.DataContext as ViewLongTripFormAdditionalInfoViewModel; }
-        }
+        #endregion
+
+        #region Methods
 
         private void UpdateInfo()
         {
-            Info.SelectedLongTripForm = SelectedLongTripForm;
+            this.Info.SelectedLongTripForm = this.SelectedLongTripForm;
 
-            ProtocolSystem.ChangeInfo(InfoPage, Info);
+            this.ProtocolSystem.ChangeInfo(this.InfoPage, this.Info);
         }
+
+        #endregion
     }
 }

@@ -1,42 +1,36 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
+
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
-using System.Collections.ObjectModel;
-using System.Windows;
-using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
     public class ChangeDistanceConfirmViewModel : ConfirmationViewModelBase
     {
-        private Trip _selectedTrip;
+        #region Fields
+
         private string _selectedDistance;
+
+        private Trip _selectedTrip;
+
+        #endregion
+
         // Fields
+        #region Public Properties
 
-        public Trip SelectedTrip
+        public ICommand Cancel
         {
-            get { return _selectedTrip; }
-            set
+            get
             {
-                _selectedTrip = value; Notify();
-
-                if (_selectedTrip != null)
-                    SelectedDistance = _selectedTrip.Distance.ToString();
-            }
-        }
-
-        public string SelectedDistance
-        {
-            get { return _selectedDistance; }
-            set
-            {
-                _selectedDistance = value;
-                Notify();
+                return this.GetCommand(this.Hide);
             }
         }
 
@@ -45,25 +39,54 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             get
             {
                 double tmp;
-                return GetCommand(e =>
-                {
-                    SelectedTrip.Distance = double.Parse(SelectedDistance);
-                    SelectedTrip.TripEndedTime = DateTime.Now;
-                    DbArkContext.GetDbContext().SaveChanges();
-                    base.Hide();
-                    ProtocolSystem.StatisticsDistance.Execute(null);
-                }, e => !string.IsNullOrEmpty(SelectedDistance)
-                    && double.TryParse(SelectedDistance, out tmp)
-                    && double.Parse(SelectedDistance) > 0);
+                return this.GetCommand(
+                    e =>
+                        {
+                            this.SelectedTrip.Distance = double.Parse(this.SelectedDistance);
+                            this.SelectedTrip.TripEndedTime = DateTime.Now;
+                            DbArkContext.GetDbContext().SaveChanges();
+                            this.Hide();
+                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                        }, 
+                    e =>
+                    !string.IsNullOrEmpty(this.SelectedDistance) && double.TryParse(this.SelectedDistance, out tmp)
+                    && double.Parse(this.SelectedDistance) > 0);
             }
         }
 
-        public ICommand Cancel
+        public string SelectedDistance
         {
             get
             {
-                return GetCommand(Hide);
+                return this._selectedDistance;
+            }
+
+            set
+            {
+                this._selectedDistance = value;
+                this.Notify();
             }
         }
+
+        public Trip SelectedTrip
+        {
+            get
+            {
+                return this._selectedTrip;
+            }
+
+            set
+            {
+                this._selectedTrip = value;
+                this.Notify();
+
+                if (this._selectedTrip != null)
+                {
+                    this.SelectedDistance = this._selectedTrip.Distance.ToString();
+                }
+            }
+        }
+
+        #endregion
     }
 }

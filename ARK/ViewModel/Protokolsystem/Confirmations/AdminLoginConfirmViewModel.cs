@@ -1,9 +1,4 @@
-﻿using ARK.Model;
-using ARK.Model.DB;
-using ARK.View.Administrationssystem;
-using ARK.View.Protokolsystem.Confirmations;
-using ARK.ViewModel.Administrationssystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,65 +7,102 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
+using ARK.Model;
+using ARK.Model.DB;
+using ARK.View.Administrationssystem;
+using ARK.View.Protokolsystem.Confirmations;
+using ARK.ViewModel.Administrationssystem;
+
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
-    class AdminLoginConfirmViewModel : ConfirmationViewModelBase
+    internal class AdminLoginConfirmViewModel : ConfirmationViewModelBase
     {
+        #region Fields
+
         private string _errorLabel;
 
-        public string Username { get; set; }
-        public string Password { get; set; }
+        #endregion
+
+        #region Constructors and Destructors
 
         public AdminLoginConfirmViewModel()
         {
-            ParentAttached += AdminLoginConfirmViewModel_ParentAttached;
+            this.ParentAttached += this.AdminLoginConfirmViewModel_ParentAttached;
         }
 
-        void AdminLoginConfirmViewModel_ParentAttached(object sender, EventArgs e)
-        {
-            ProtocolSystem.EnableSearch = true;
+        #endregion
 
-            // Unbind event
-            ParentAttached -= AdminLoginConfirmViewModel_ParentAttached;
-        }
+        #region Public Properties
 
         public string ErrorLabel
         {
-            get { return _errorLabel; }
-            set { _errorLabel = value; Notify(); }
-        }
+            get
+            {
+                return this._errorLabel;
+            }
 
-        public override void Hide()
-        {
-            ProtocolSystem.KeyboardClear();
-            ProtocolSystem.EnableSearch = false;
-            base.Hide();
+            set
+            {
+                this._errorLabel = value;
+                this.Notify();
+            }
         }
 
         public ICommand Login
         {
             get
             {
-                return GetCommand(e =>
-                {
-                    DbArkContext db = DbArkContext.GetDbContext();
+                return this.GetCommand(
+                    e =>
+                        {
+                            DbArkContext db = DbArkContext.GetDbContext();
 
-                    Admin admin = db.Admin.Find(Username);
+                            Admin admin = db.Admin.Find(this.Username);
 
-                    if (admin != null && admin.Username == Username && admin.Password == ((AdminLoginConfirm)e).PasswordBox.Password )
-                    {
-                        var window = new AdminSystem();
-                        ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
-                        window.Show();
+                            if (admin != null && admin.Username == this.Username
+                                && admin.Password == ((AdminLoginConfirm)e).PasswordBox.Password)
+                            {
+                                var window = new AdminSystem();
+                                ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;
+                                window.Show();
 
-                        Hide();
-                    }
-                    else
-                    {
-                        ErrorLabel = "Brugernavn eller adgangskode ugyldig!";
-                    }
-                });
+                                this.Hide();
+                            }
+                            else
+                            {
+                                this.ErrorLabel = "Brugernavn eller adgangskode ugyldig!";
+                            }
+                        });
             }
         }
+
+        public string Password { get; set; }
+
+        public string Username { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public override void Hide()
+        {
+            this.ProtocolSystem.KeyboardClear();
+            this.ProtocolSystem.EnableSearch = false;
+            base.Hide();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void AdminLoginConfirmViewModel_ParentAttached(object sender, EventArgs e)
+        {
+            this.ProtocolSystem.EnableSearch = true;
+
+            // Unbind event
+            this.ParentAttached -= this.AdminLoginConfirmViewModel_ParentAttached;
+        }
+
+        #endregion
     }
 }

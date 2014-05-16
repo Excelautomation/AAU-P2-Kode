@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+
 using ARK.ViewModel.Protokolsystem.Data;
 using ARK.ViewModel.Protokolsystem.Pages;
 
@@ -9,10 +10,16 @@ namespace ARK.View.Protokolsystem.Pages
     /// </summary>
     public partial class EndTrip : UserControl
     {
+        #region Constructors and Destructors
+
         public EndTrip()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Methods
 
         private void lstStandardTrip_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -27,5 +34,7 @@ namespace ARK.View.Protokolsystem.Pages
 
             this.lstStandardTrip.SelectionChanged += this.lstStandardTrip_SelectionChanged;
         }
+
+        #endregion
     }
 }

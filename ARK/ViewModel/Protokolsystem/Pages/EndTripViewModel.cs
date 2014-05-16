@@ -4,83 +4,102 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+
+using ARK.HelperFunctions;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.ViewModel.Base;
-using ARK.HelperFunctions;
 using ARK.View.Protokolsystem.Confirmations;
+using ARK.ViewModel.Base;
 using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
-    public class EndTripViewModel : ProtokolsystemContentViewModelBase 
+    public class EndTripViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        private List<StandardTrip> _standardTrips;
-        private List<Trip> _activeTrips;
+        #region Fields
+
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
-        private Trip _selectedTrip;
+
+        private List<Trip> _activeTrips;
+
         private double _customDistance;
+
         private DateTime _latestData;
+
         private StandardTrip _selectedStdTrip;
 
+        private Trip _selectedTrip;
+
+        private List<StandardTrip> _standardTrips;
+
+        #endregion
+
         // Constructor
+        #region Constructors and Destructors
+
         public EndTripViewModel()
         {
             TimeCounter.StartTimer();
 
-            ParentAttached += (sender, args) =>
-            {
-                if (this.StandardTrips == null || (DateTime.Now - _latestData).TotalHours > 1)
+            this.ParentAttached += (sender, args) =>
                 {
-                    // Indlæs data
-                    this.GetStandardTrips();
+                    if (this.StandardTrips == null || (DateTime.Now - this._latestData).TotalHours > 1)
+                    {
+                        // Indlæs data
+                        this.GetStandardTrips();
 
-                    _latestData = DateTime.Now;
-                }
-                this.GetActiveTrips();
+                        this._latestData = DateTime.Now;
+                    }
 
-                // Reset selected trip
-                SelectedTrip = null;
+                    this.GetActiveTrips();
 
-                // Bind keyboard
-                //base.ProtocolSystem.KeyboardTextChanged += this.MonitorCustomDistance;
+                    // Reset selected trip
+                    this.SelectedTrip = null;
 
-                this.ResetPage();
-            };
+                    // Bind keyboard
+                    // base.ProtocolSystem.KeyboardTextChanged += this.MonitorCustomDistance;
+                    this.ResetPage();
+                };
 
-            ParentDetached += (sender, args) =>
-            {
-                //base.ProtocolSystem.KeyboardTextChanged -= this.MonitorCustomDistance;
-            };
+            this.ParentDetached += (sender, args) =>
+                {
+                    // base.ProtocolSystem.KeyboardTextChanged -= this.MonitorCustomDistance;
+                };
 
             TimeCounter.StopTime();
         }
 
+        #endregion
+
         // Props
-        public List<StandardTrip> StandardTrips
+        #region Public Properties
+
+        public List<Trip> ActiveTrips
         {
-            get { return _standardTrips; }
+            get
+            {
+                return this._activeTrips;
+            }
+
             set
             {
-                _standardTrips = value;
-                Notify();
+                this._activeTrips = value;
+                this.Notify();
             }
         }
 
         public double CustomDistance
         {
-            get { return _customDistance; }
-            set { _customDistance = value; Notify(); }
-        }
+            get
+            {
+                return this._customDistance;
+            }
 
-        public List<Trip> ActiveTrips
-        {
-            get { return _activeTrips; }
             set
             {
-                _activeTrips = value;
-                Notify();
+                this._customDistance = value;
+                this.Notify();
             }
         }
 
@@ -90,25 +109,55 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 return new RelayCommand(
                     e =>
-                    {
-                        if (SelectedStdTrip != null)
                         {
-                            SelectedTrip.Title = SelectedStdTrip.Title;
-                            SelectedTrip.Direction = SelectedStdTrip.Direction;
-                            SelectedTrip.Distance = SelectedStdTrip.Distance;
-                        }
+                            if (this.SelectedStdTrip != null)
+                            {
+                                this.SelectedTrip.Title = this.SelectedStdTrip.Title;
+                                this.SelectedTrip.Direction = this.SelectedStdTrip.Direction;
+                                this.SelectedTrip.Distance = this.SelectedStdTrip.Distance;
+                            }
 
-                        // set Custom distance if different from default
-                        SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : SelectedTrip.Distance;
-                        SelectedTrip.TripEndedTime = DateTime.Now;
-                        _db.SaveChanges();
+                            // set Custom distance if different from default
+                            this.SelectedTrip.Distance = this.CustomDistance > 0
+                                                             ? this.CustomDistance
+                                                             : this.SelectedTrip.Distance;
+                            this.SelectedTrip.TripEndedTime = DateTime.Now;
+                            this._db.SaveChanges();
 
-                        this.GetActiveTrips();
-                        ProtocolSystem.UpdateDailyKilometers();
-                        ProtocolSystem.UpdateNumBoatsOut();
-                        this.ResetPage();
-                    },
+                            this.GetActiveTrips();
+                            this.ProtocolSystem.UpdateDailyKilometers();
+                            this.ProtocolSystem.UpdateNumBoatsOut();
+                            this.ResetPage();
+                        }, 
                     e => this.SelectedStdTrip != null || this.CustomDistance > 0);
+            }
+        }
+
+        public StandardTrip SelectedStdTrip
+        {
+            get
+            {
+                return this._selectedStdTrip;
+            }
+
+            set
+            {
+                this._selectedStdTrip = value;
+                this.Notify();
+            }
+        }
+
+        public Trip SelectedTrip
+        {
+            get
+            {
+                return this._selectedTrip;
+            }
+
+            set
+            {
+                this._selectedTrip = value;
+                this.Notify();
             }
         }
 
@@ -117,17 +166,31 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return new RelayCommand(
-                    x => 
-                    {
-                        var confirmView = new ChangeDistanceConfirm();
-                        var confirmViewModel = (ChangeDistanceConfirmViewModel)confirmView.DataContext;
+                    x =>
+                        {
+                            var confirmView = new ChangeDistanceConfirm();
+                            var confirmViewModel = (ChangeDistanceConfirmViewModel)confirmView.DataContext;
 
-                        confirmViewModel.SelectedTrip = this.SelectedTrip;
-                        ProtocolSystem.ShowDialog(confirmView);
+                            confirmViewModel.SelectedTrip = this.SelectedTrip;
+                            this.ProtocolSystem.ShowDialog(confirmView);
 
-                        base.ProtocolSystem.EnableSearch = true;
-                    },
+                            base.ProtocolSystem.EnableSearch = true;
+                        }, 
                     x => this.SelectedTrip != null);
+            }
+        }
+
+        public List<StandardTrip> StandardTrips
+        {
+            get
+            {
+                return this._standardTrips;
+            }
+
+            set
+            {
+                this._standardTrips = value;
+                this.Notify();
             }
         }
 
@@ -135,42 +198,27 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand(st =>
-                {
-                    var temp = ((IList)st).Cast<StandardTrip>();
-                    this.SelectedStdTrip = temp.FirstOrDefault();
-                });
+                return this.GetCommand(
+                    st =>
+                        {
+                            var temp = ((IList)st).Cast<StandardTrip>();
+                            this.SelectedStdTrip = temp.FirstOrDefault();
+                        });
             }
         }
 
-        public Trip SelectedTrip
-        {
-            get { return _selectedTrip; }
-            set
-            {
-                _selectedTrip = value;
-                Notify();
-            }
-        }
+        #endregion
 
-        public StandardTrip SelectedStdTrip
-        {
-            get { return _selectedStdTrip; }
-            set
-            {
-                _selectedStdTrip = value;
-                Notify();
-            }
-        }
+        #region Methods
 
         private void GetActiveTrips()
         {
-            ActiveTrips = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
+            this.ActiveTrips = this._db.Trip.Where(t => t.TripEndedTime == null).ToList();
         }
 
         private void GetStandardTrips()
         {
-            StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
+            this.StandardTrips = this._db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
         }
 
         private void ResetPage()
@@ -179,5 +227,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             this.SelectedStdTrip = null;
             base.ProtocolSystem.KeyboardClear();
         }
+
+        #endregion
     }
 }

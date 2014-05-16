@@ -232,8 +232,7 @@
             <Button x:Name="btnMenuLogout" Content="Logud" FontSize="14" 
                     Foreground="Black" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
                     VerticalAlignment="Top" Width="115" Margin="85,70,0,0" FontFamily="Calibri" 
-                    Command="{Binding Path=Logout}" CommandParameter="{Binding ElementName=AdminPanel}">
-            </Button>
+                    Command="{Binding Path=Logout}" CommandParameter="{Binding ElementName=AdminPanel}" />
         </Grid>
         
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding Path=FilterBarVisibility}">
@@ -347,7 +346,7 @@
                                         <!--<Setter Property="Source" Value="/View/images/keyboard_delete.png"></Setter>-->
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=KeyboardToggled}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/keyboard.png"></Setter>
+                                        <Setter Property="Source" Value="/View/images/keyboard.png" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -358,10 +357,10 @@
                             <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=KeyboardToggled}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR"></Setter>
+                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=KeyboardToggled}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;TASTATUR"></Setter>
+                                        <Setter Property="Text" Value="VIS&#10;TASTATUR" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>

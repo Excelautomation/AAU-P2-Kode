@@ -6,36 +6,27 @@ namespace ARK.Model
 {
     public class Trip : IEquatable<Trip>
     {
-        public int Id { get; set; }
-        public double Distance { get; set; }            // Distance rowed.
-        public bool LongTrip { get; set; }              // bool that states if the tour is a long trip, and therefore holds no Direction.
-        public DateTime TripStartTime { get; set; }     // no further explanation needed
-        public DateTime? TripEndedTime { get; set; }    // no further explanation needed
-        public string Direction { get; set; }           // Starting direction that is ment to be displayed douring the tour for security reasons.   
-        public string Title { get; set; }               // Helping title for the user to decide the distance that the boat have sailed.
-        public int CrewCount { get; set; }
- 
-        //Foreign key
+        #region Public Properties
+
+        public virtual Boat Boat { get; set; }
+
         public int BoatId { get; set; }
 
-        //Navigation properties
-        public virtual Boat Boat { get; set; }
+        public int CrewCount { get; set; }
+
+        public string Direction { get; set; }
+
+        public double Distance { get; set; }
+
+        public int Id { get; set; }
+
+        // Distance rowed.
+        public bool LongTrip { get; set; }
+
+        // bool that states if the tour is a long trip, and therefore holds no Direction.
         public virtual ICollection<Member> Members { get; set; }
 
-        //Not mapped properties
-        public bool TripEnded
-        {
-            get
-            {
-                if (TripEndedTime != null && TripEndedTime != TripStartTime)
-                {
-                    return true;
-                }
-                else
-                    return false;
-            }
-        }
-
+        // Not mapped properties
         public TimeSpan TimeBoatOut
         {
             get
@@ -51,25 +42,30 @@ namespace ARK.Model
             }
         }
 
-        public bool Equals(Trip other)
+        public string Title { get; set; }
+
+        public bool TripEnded
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id;
+            get
+            {
+                if (this.TripEndedTime != null && this.TripEndedTime != this.TripStartTime)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Trip)obj);
-        }
+        public DateTime? TripEndedTime { get; set; }
 
-        public override int GetHashCode()
-        {
-            return Id;
-        }
+        public DateTime TripStartTime { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         public static bool operator ==(Trip left, Trip right)
         {
@@ -80,5 +76,47 @@ namespace ARK.Model
         {
             return !Equals(left, right);
         }
+
+        public bool Equals(Trip other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return this.Equals((Trip)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id;
+        }
+
+        #endregion
     }
 }

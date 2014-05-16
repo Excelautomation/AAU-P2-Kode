@@ -20,9 +20,13 @@ namespace ARK.View.Administrationssystem.Filters
     /// </summary>
     public partial class FormsFilterDamage : UserControl
     {
+        #region Constructors and Destructors
+
         public FormsFilterDamage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

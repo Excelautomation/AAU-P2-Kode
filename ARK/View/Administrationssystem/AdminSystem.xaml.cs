@@ -7,9 +7,13 @@ namespace ARK.View.Administrationssystem
     /// </summary>
     public partial class AdminSystem : Window
     {
+        #region Constructors and Destructors
+
         public AdminSystem()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

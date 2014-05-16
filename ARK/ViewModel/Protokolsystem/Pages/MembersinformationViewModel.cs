@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
@@ -13,100 +14,153 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class MembersinformationViewModel : ProtokolsystemContentViewModelBase
     {
-        private IEnumerable<Member> _membersFiltered;
+        #region Fields
+
+        private FrameworkElement _additionalInfoPage;
+
+        private DateTime _latestData;
+
         private IEnumerable<Member> _members;
+
+        private IEnumerable<Member> _membersFiltered;
 
         private Member _selectedMember;
 
-        private FrameworkElement _additionalInfoPage;
-        private DateTime _latestData;
-
         private DbArkContext db;
 
+        #endregion
+
         // Constructor
+        #region Constructors and Destructors
+
         public MembersinformationViewModel()
         {
-            db = DbArkContext.GetDbContext();
+            this.db = DbArkContext.GetDbContext();
 
-            ParentAttached += (sender, args) =>
-            {
-                // Load data
-                LoadMembers();
-                MembersFiltered = _members;
+            this.ParentAttached += (sender, args) =>
+                {
+                    // Load data
+                    this.LoadMembers();
+                    this.MembersFiltered = this._members;
 
-                // Set selected member
-                SelectedMember = MembersFiltered.First();
+                    // Set selected member
+                    this.SelectedMember = this.MembersFiltered.First();
 
-                // Setup keyboard listener
-                ProtocolSystem.KeyboardTextChanged += ProtocolSystem_KeyboardTextChanged;
+                    // Setup keyboard listener
+                    this.ProtocolSystem.KeyboardTextChanged += this.ProtocolSystem_KeyboardTextChanged;
 
-                // Update info
-                UpdateInfo();
-            };
+                    // Update info
+                    this.UpdateInfo();
+                };
 
-            ParentDetached += (sender, args) =>
-            {
-                ProtocolSystem.KeyboardTextChanged -= ProtocolSystem_KeyboardTextChanged;
-            };
+            this.ParentDetached +=
+                (sender, args) =>
+                    {
+                        this.ProtocolSystem.KeyboardTextChanged -= this.ProtocolSystem_KeyboardTextChanged;
+                    };
         }
 
-        private void LoadMembers()
-        {
-            if (MembersFiltered == null || (DateTime.Now - _latestData).TotalHours > 1)
-            {
-                _latestData = DateTime.Now;
+        #endregion
 
-                _members = new List<Member>(db.Member)
-                    .Select(x => { x.FirstName = x.FirstName.Trim(); return x; })
-                    .OrderBy(x => x.FirstName)
-                    .ToList();
+        #region Public Properties
+
+        public IInfoContainerViewModel GetInfoContainerViewModel
+        {
+            get
+            {
+                return this.Parent as IInfoContainerViewModel;
             }
         }
 
-        private void ProtocolSystem_KeyboardTextChanged(object sender, KeyboardEventArgs e)
+        public MembersInformationAdditionalInfoViewModel Info
         {
-            MembersFiltered = string.IsNullOrEmpty(e.Text) ? _members : _members.Where(member => member.Filter(e.Text)).ToList();
+            get
+            {
+                return this.InfoPage.DataContext as MembersInformationAdditionalInfoViewModel;
+            }
+        }
+
+        public FrameworkElement InfoPage
+        {
+            get
+            {
+                return this._additionalInfoPage ?? (this._additionalInfoPage = new MembersInformationAdditionalInfo());
+            }
         }
 
         // Properties
         public IEnumerable<Member> MembersFiltered
         {
-            get { return _membersFiltered; }
-            set { _membersFiltered = value; Notify(); }
+            get
+            {
+                return this._membersFiltered;
+            }
+
+            set
+            {
+                this._membersFiltered = value;
+                this.Notify();
+            }
         }
 
         public Member SelectedMember
         {
-            get { return _selectedMember; }
-            set { _selectedMember = value; Notify(); UpdateInfo(); }
+            get
+            {
+                return this._selectedMember;
+            }
+
+            set
+            {
+                this._selectedMember = value;
+                this.Notify();
+                this.UpdateInfo();
+            }
         }
 
-        public FrameworkElement InfoPage
-        {
-            get { return _additionalInfoPage ?? (_additionalInfoPage = new MembersInformationAdditionalInfo()); }
-        }
-
-        public MembersInformationAdditionalInfoViewModel Info
-        {
-            get { return InfoPage.DataContext as MembersInformationAdditionalInfoViewModel; }
-        }
-
-        public IInfoContainerViewModel GetInfoContainerViewModel
-        {
-            get { return Parent as IInfoContainerViewModel; }
-        }
+        #endregion
 
         // Methods
+        #region Public Methods and Operators
+
         public void Sort(Func<Member, string> predicate)
         {
-            MembersFiltered = MembersFiltered.OrderBy(predicate).ToList();
+            this.MembersFiltered = this.MembersFiltered.OrderBy(predicate).ToList();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void LoadMembers()
+        {
+            if (this.MembersFiltered == null || (DateTime.Now - this._latestData).TotalHours > 1)
+            {
+                this._latestData = DateTime.Now;
+
+                this._members = new List<Member>(this.db.Member).Select(
+                    x =>
+                        {
+                            x.FirstName = x.FirstName.Trim();
+                            return x;
+                        }).OrderBy(x => x.FirstName).ToList();
+            }
+        }
+
+        private void ProtocolSystem_KeyboardTextChanged(object sender, KeyboardEventArgs e)
+        {
+            this.MembersFiltered = string.IsNullOrEmpty(e.Text)
+                                       ? this._members
+                                       : this._members.Where(member => member.Filter(e.Text)).ToList();
         }
 
         private void UpdateInfo()
         {
-            Info.SelectedMember = SelectedMember;
+            this.Info.SelectedMember = this.SelectedMember;
 
-            GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
+            this.GetInfoContainerViewModel.ChangeInfo(this.InfoPage, this.Info);
         }
+
+        #endregion
     }
 }

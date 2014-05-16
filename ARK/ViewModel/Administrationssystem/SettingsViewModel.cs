@@ -2,582 +2,153 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.ViewModel.Base;
-using System.Windows;
 using ARK.View.Administrationssystem.Pages;
+using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : ContentViewModelBase
     {
-        public enum Feedback
-        {
-            Default, Save, Cancel, Delete, Create, Error
-        }
+        #region Fields
+
+        public MembersListWindow MembersListWindow;
+
+        private DamageType ReferenceToCurrentDamageType;
+
+        private StandardTrip ReferenceToCurrentStandardTrip;
+
+        private ObservableCollection<Admin> _admins;
+
+        private Admin _currentAdmin;
+
+        private DamageType _currentDamageType;
+
+        private Season _currentSeason;
+
+        private StandardTrip _currentStandardTrip;
+
+        private ObservableCollection<DamageType> _damageTypes;
+
         private DbArkContext _db;
 
-        // General page
-        private Season _currentSeason;
+        private bool _displaySeasonErrorLabel = false;
+
+        private string _errorAdmin;
+
+        private string _errorDamageType;
+
+        private string _errorStandardTrip;
+
+        private Feedback _feedbackAdmin;
+
+        private Feedback _feedbackDamageType;
+
+        private Feedback _feedbackStandardTrip;
+
+        private ObservableCollection<Member> _members;
+
+        private Admin _newAdmin;
+
+        private Admin _referenceToCurrentAdmin;
+
+        private int _selectedAdmin;
+
+        private int _selectedDamageType;
+
+        private int _selectedStandardTrip;
+
+        private ObservableCollection<StandardTrip> _standardTrips;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public SettingsViewModel()
         {
             // Initialize database and get data in a single thread(lock)
-            _db = DbArkContext.GetDbContext();
-            lock (_db)
+            this._db = DbArkContext.GetDbContext();
+            lock (this._db)
             {
-                DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(e => e.Type));
-                StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(e => e.Title));
-                Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(e => e.Member.FirstName));
-                Members = new ObservableCollection<Member>(_db.Member.OrderBy(e => e.FirstName));
+                this.DamageTypes = new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(e => e.Type));
+                this.StandardTrips = new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(e => e.Title));
+                this.Admins = new ObservableCollection<Admin>(this._db.Admin.OrderBy(e => e.Member.FirstName));
+                this.Members = new ObservableCollection<Member>(this._db.Member.OrderBy(e => e.FirstName));
             }
 
             // Initialize the selected items in the respective lists.
-            if (Admins.Any())
+            if (this.Admins.Any())
             {
-                SelectedAdmin = 0;
-                CurrentAdmin = Admins[0];
-                ReferenceToCurrentAdmin = CurrentAdmin;
+                this.SelectedAdmin = 0;
+                this.CurrentAdmin = this.Admins[0];
+                this.ReferenceToCurrentAdmin = this.CurrentAdmin;
             }
-            if (DamageTypes.Any())
+
+            if (this.DamageTypes.Any())
             {
-                SelectedDamageType = 0;
-                CurrentDamageType = DamageTypes[0];
-                ReferenceToCurrentDamageType = CurrentDamageType;
+                this.SelectedDamageType = 0;
+                this.CurrentDamageType = this.DamageTypes[0];
+                this.ReferenceToCurrentDamageType = this.CurrentDamageType;
             }
-            if (StandardTrips.Any())
+
+            if (this.StandardTrips.Any())
             {
-                SelectedStandardTrip = 0;
-                CurrentStandardTrip = StandardTrips[0];
-                ReferenceToCurrentStandardTrip = CurrentStandardTrip;
+                this.SelectedStandardTrip = 0;
+                this.CurrentStandardTrip = this.StandardTrips[0];
+                this.ReferenceToCurrentStandardTrip = this.CurrentStandardTrip;
             }
 
             // Check seasons
-            if (!_db.Season.Any(x => true))
+            if (!this._db.Season.Any(x => true))
             {
-                CurrentSeason = new Season();
-                _db.Season.Add(CurrentSeason);
+                this.CurrentSeason = new Season();
+                this._db.Season.Add(this.CurrentSeason);
             }
             else
             {
-                CurrentSeason = _db.Season.AsEnumerable().Last(x => true);
-            }
-        }
-
-        #region General
-        private bool _displaySeasonErrorLabel = false;
-
-        public bool DisplaySeasonErrorLabel
-        {
-            get { return _displaySeasonErrorLabel; }
-            set { _displaySeasonErrorLabel = value; Notify(); }
-        }
-
-        public Season CurrentSeason
-        {
-            get { return _currentSeason; }
-            set { _currentSeason = value; Notify(); }
-        }
-
-        public DateTime Today { get { return DateTime.Now; } }
-
-        public ICommand NewSeason
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // if current season started less then 183 days ago promt the user!
-                    if (CurrentSeason != null && DateTime.Compare(CurrentSeason.SeasonStart.AddDays(183), DateTime.Now) > 0 )
-                    {
-                        // promp the user that the current season is less than a half year old!
-                        //throw new NotImplementedException();
-                        DisplaySeasonErrorLabel = true;
-                    }
-                    else
-                    {
-                        CurrentSeason.SeasonEnd = DateTime.Now;
-                        Season tmpSeason = new Season();
-                        _db.Season.Add(tmpSeason);
-                        CurrentSeason = tmpSeason;
-                        _db.SaveChanges();
-                        DisplaySeasonErrorLabel = false;
-                    }
-                });
+                this.CurrentSeason = this._db.Season.AsEnumerable().Last(x => true);
             }
         }
 
         #endregion
 
-        #region DamageTypes
-        private DamageType ReferenceToCurrentDamageType;
-        private ObservableCollection<DamageType> _damageTypes;
-        private DamageType _currentDamageType;
-        private Feedback _feedbackDamageType;
-        private int _selectedDamageType;
-        private string _errorDamageType;
+        #region Enums
 
-        public string ErrorDamageType
+        public enum Feedback
         {
-            get { return _errorDamageType; }
-            set { _errorDamageType = value; Notify(); }
+            Default, 
+
+            Save, 
+
+            Cancel, 
+
+            Delete, 
+
+            Create, 
+
+            Error
         }
 
-        public int SelectedDamageType
-        {
-            get { return _selectedDamageType; }
-            set { _selectedDamageType = value; Notify(); }
-        }
-
-        public Feedback FeedbackDamageType
-        {
-            get { return _feedbackDamageType; }
-            set { _feedbackDamageType = value; Notify(); }
-        }
-
-        public ObservableCollection<DamageType> DamageTypes
-        {
-            get { return _damageTypes; }
-            set { _damageTypes = value; Notify(); }
-        }
-
-        public DamageType CurrentDamageType
-        {
-            get { return _currentDamageType; }
-            set { _currentDamageType = value; Notify(); }
-        }
-
-        public ICommand SelectedChangeDamageType
-        {
-            get
-            {
-                return GetCommand(e =>
-                {
-                    // If list is empty return safely
-                    if (e == null) return;
-
-                    var damageType = (DamageType) e;
-
-                    // Create a copy of the selected damagetype from database
-                    CurrentDamageType = new DamageType()
-                    {
-                        Type = damageType.Type
-                    };
-
-                    // Remember reference to the selected damagetype in the list synced with database
-                    ReferenceToCurrentDamageType = damageType;
-
-                    // Give feedback
-                    FeedbackDamageType = Feedback.Default;
-                });
-            }
-        }
-
-        public ICommand SaveChangesDamageTypes
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Save the selected damagetype to the list synced with database
-                    ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
-
-                    // Try to save changes to databse
-                    try
-                    {
-                        _db.SaveChanges();
-                    }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
-                    {
-                        // The sleceted damagetype has likely been deleted in database
-                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
-                        ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
-                        FeedbackDamageType = Feedback.Error;
-                        return;
-                    }
-
-                    // Refresh database and give feedback
-                    DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
-                    FeedbackDamageType = Feedback.Save;
-                });
-            }
-        }
-
-        public ICommand CancelChangesDamageTypes
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Revert changes made by user
-                    // Copy from database to the selected damagetype
-                    CurrentDamageType = new DamageType()
-                    {
-                        Type = ReferenceToCurrentDamageType.Type
-                    };
-
-                    // Give feedback
-                    FeedbackDamageType = Feedback.Cancel;
-                });
-            }
-        }
-
-        public ICommand CreateDamageType
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Preconfigured damagetype to create
-                    DamageType NewDamageType = new DamageType()
-                    {
-                        Type = "Ny skadetype"
-                    };
-
-                    // Add new damagetype
-                    _db.DamageType.Add(NewDamageType);
-                    _db.SaveChanges();
-                    DamageTypes.Add(NewDamageType);
-
-                    // Refresh from database, select new damagetype and give feedback
-                    DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
-                    SelectedDamageType = DamageTypes.IndexOf(DamageTypes.First(m => m.Type == NewDamageType.Type));
-                    FeedbackDamageType = Feedback.Create;
-                });
-            }
-        }
-
-        public ICommand DeleteDamageType
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Remove selected damagetype from list
-                    _db.DamageType.Remove(ReferenceToCurrentDamageType);
-
-                    // Try to save Changes to database
-                    try
-                    {
-                        _db.SaveChanges();
-                    }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
-                    {
-                        // The selected damagetype has likely already been deleted
-                        DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
-                        ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
-                        FeedbackDamageType = Feedback.Error;
-                        return;
-                    }
-                    // Refresh database, select last item and give feedback
-                    DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
-                    SelectedDamageType = DamageTypes.Count - 1;
-                    FeedbackDamageType = Feedback.Delete;
-                });
-            }
-        }
         #endregion
 
-        #region Standardture
-        private StandardTrip ReferenceToCurrentStandardTrip;
-        private ObservableCollection<StandardTrip> _standardTrips;
-        private StandardTrip _currentStandardTrip;
-        private Feedback _feedbackStandardTrip;
-        private int _selectedStandardTrip;
-        private string _errorStandardTrip;
-
-        public string ErrorStandardTrip
-        {
-            get { return _errorStandardTrip; }
-            set { _errorStandardTrip = value; Notify(); }
-        }
-
-        public int SelectedStandardTrip
-        {
-            get { return _selectedStandardTrip; }
-            set { _selectedStandardTrip = value; Notify(); }
-        }
-
-        public Feedback FeedbackStandardTrip
-        {
-            get { return _feedbackStandardTrip; }
-            set { _feedbackStandardTrip = value; Notify(); }
-        }
-
-        public ObservableCollection<StandardTrip> StandardTrips
-        {
-            get { return _standardTrips; }
-            set { _standardTrips = value; Notify(); }
-        }
-
-        public StandardTrip CurrentStandardTrip
-        {
-            get { return _currentStandardTrip; }
-            set { _currentStandardTrip = value; Notify(); }
-        }
-
-        public ICommand SelectedChangeStandardTrip
-        {
-            get
-            {
-                return GetCommand(e =>
-                {
-                    // If the list is empty return safely
-                    if (e == null) return;
-
-                    var standardTrip = (StandardTrip)e;
-
-                    // Create a copy from the selected item
-                    CurrentStandardTrip = new StandardTrip()
-                    {
-                        Distance = standardTrip.Distance,
-                        Direction = standardTrip.Direction,
-                        Title = standardTrip.Title
-                    };
-                    // Save reference to the original position of the selected item
-                    ReferenceToCurrentStandardTrip = standardTrip;
-
-                    // Give feedback
-                    FeedbackStandardTrip = Feedback.Default;
-                });
-            }
-        }
-
-        public ICommand SaveChangesStandardTrips
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    int tmptrip = CurrentStandardTrip.Id;
-
-                    // Copies data from userinput to the list synched with the database
-                    ReferenceToCurrentStandardTrip.Distance = CurrentStandardTrip.Distance;
-                    ReferenceToCurrentStandardTrip.Title = CurrentStandardTrip.Title;
-                    ReferenceToCurrentStandardTrip.Direction = CurrentStandardTrip.Direction;
-
-                    // Try to save changes
-                    try
-                    {
-                        _db.SaveChanges();
-                    }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
-                    {
-                        // The standardtrip has likely been deleted in the database
-                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
-                        ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
-                        FeedbackStandardTrip = Feedback.Error;
-                        return;
-                    }
-
-                    // Reload database and give feedback.
-                    StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
-                    FeedbackStandardTrip = Feedback.Save;
-                });
-            }
-        }
-
-        public ICommand CancelChangesStandardTrips
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Copies original info from database to the selected standardtrip
-                    CurrentStandardTrip = new StandardTrip()
-                    {
-                        Distance = ReferenceToCurrentStandardTrip.Distance,
-                        Direction = ReferenceToCurrentStandardTrip.Direction,
-                        Title = ReferenceToCurrentStandardTrip.Title
-                    };
-                    // Give feedback
-                    FeedbackStandardTrip = Feedback.Cancel;
-                });
-            }
-        }
-
-        public ICommand CreateStandardTrip
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Create an object with premade info
-                    StandardTrip NewStandardTrip = new StandardTrip()
-                    {
-                        Title = "Ny standardtur",
-                        Direction = "Vest",
-                        Distance = 5
-                    };
-
-                    // Add the new object to list and database
-                    _db.StandardTrip.Add(NewStandardTrip);
-                    _db.SaveChanges();
-                    StandardTrips.Add(NewStandardTrip);
-
-                    // (hopefully) selects the new standardtrip and give feedback
-                    StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
-                    SelectedStandardTrip = StandardTrips.IndexOf(StandardTrips.First(m => m.Title == NewStandardTrip.Title));
-                    FeedbackStandardTrip = Feedback.Create;
-                });
-            }
-        }
-
-        public ICommand DeleteStandardTrip
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Remove selected trip
-                    _db.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
-
-                    // Try to save changes
-                    try
-                    {
-                        _db.SaveChanges();
-                    }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
-                    {
-                        // The selected standardtrip has likely already been deleted from database
-                        StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
-                        ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
-                        FeedbackStandardTrip = Feedback.Error;
-                        return;
-                    }
-                    // Refresh database, select last standardtrip and give feedback
-                    StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
-                    SelectedStandardTrip = StandardTrips.Count - 1;
-                    FeedbackDamageType = Feedback.Delete;
-                });
-            }
-        }
-        #endregion
-
-        #region Administratorer
-        private Admin _referenceToCurrentAdmin;
-        private ObservableCollection<Admin> _admins;
-        private Admin _currentAdmin;
-        private ObservableCollection<Member> _members;
-        public MembersListWindow MembersListWindow;
-        private Feedback _feedbackAdmin;
-        private int _selectedAdmin;
-        private string _errorAdmin;
-        private Admin _newAdmin;
-
-        public string ErrorAdmin
-        {
-            get { return _errorAdmin; }
-            set { _errorAdmin = value; Notify(); }
-        }
-
-        public Admin NewAdmin
-        {
-            get { return _newAdmin; }
-            set { _newAdmin = value; Notify(); }
-        }
-
-        public int SelectedAdmin
-        {
-            get { return _selectedAdmin; }
-            set { _selectedAdmin = value; Notify(); }
-        }
-
-        public Feedback FeedbackAdmin
-        {
-            get { return _feedbackAdmin; }
-            set { _feedbackAdmin = value; Notify(); }
-        }
-
-        public Admin ReferenceToCurrentAdmin
-        {
-            get { return _referenceToCurrentAdmin; }
-            set { _referenceToCurrentAdmin = value; Notify(); }
-        }
+        #region Public Properties
 
         public ObservableCollection<Admin> Admins
         {
-            get { return _admins; }
-            set { _admins = value; Notify(); }
-        }
-
-        public ObservableCollection<Member> Members
-        {
-            get { return _members; }
-            set { _members = value; Notify(); }
-        }
-
-        public Admin CurrentAdmin
-        {
-            get { return _currentAdmin; }
-            set { _currentAdmin = value; Notify(); }
-        }
-
-        public ICommand SelectedChangeAdmin
-        {
             get
             {
-                return GetCommand(e =>
-                {
-                    // If the list is empty return safely (Should not be possibly for admins)
-                    if (e == null) return;
-
-                    var admin = (Admin) e;
-
-                    // Sets CurrentAdmin to contain a copy of the selected item
-                    // This object contains the direct changes made by the user
-                    CurrentAdmin = new Admin()
-                    {
-                        Username = admin.Username,
-                        Password = admin.Password,
-                        ContactTrip = admin.ContactTrip,
-                        ContactDark = admin.ContactDark,
-                        Member = admin.Member
-                    };
-                    // Sets reference to the selected admin in database
-                    ReferenceToCurrentAdmin = admin;
-
-                    // Give feedback
-                    FeedbackAdmin = Feedback.Default;
-                });
+                return this._admins;
             }
-        }
 
-        public ICommand SaveChangesAdmins
-        {
-            get
+            set
             {
-                return GetCommand(() =>
-                {
-                    // Save a temp. reference to the selected admin
-                    int tempindex = SelectedAdmin;
-                    
-                    // Retrieve changes from selected admin
-                    ReferenceToCurrentAdmin.ContactTrip = CurrentAdmin.ContactTrip;
-                    ReferenceToCurrentAdmin.ContactDark = CurrentAdmin.ContactDark;
-
-                    // Try to save changes to database
-                    try
-                    {
-                        _db.SaveChanges();
-                    }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
-                    {
-                        // The selected admin has likely been deleted
-                        Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(m => m.Member.FirstName));
-                        ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
-                        FeedbackAdmin = Feedback.Error;
-                        return;
-                    }
-
-                    // Refresh from database, reselect the previously selected admin and give feedback
-                    Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(m => m.Member.FirstName));
-                    SelectedAdmin = tempindex;
-                    FeedbackAdmin = Feedback.Save;
-                });
+                this._admins = value;
+                this.Notify();
             }
         }
 
@@ -585,20 +156,66 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    // Reloads all the original values for the selected admin
-                    CurrentAdmin = new Admin()
-                    {
-                        Username = ReferenceToCurrentAdmin.Username,
-                        Password = ReferenceToCurrentAdmin.Password,
-                        Member = ReferenceToCurrentAdmin.Member,
-                        ContactDark = ReferenceToCurrentAdmin.ContactDark,
-                        ContactTrip = ReferenceToCurrentAdmin.ContactTrip
-                    };
-                    // Give feedback through view
-                    FeedbackAdmin = Feedback.Cancel;
-                });
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Reloads all the original values for the selected admin
+                            this.CurrentAdmin = new Admin()
+                                                    {
+                                                        Username = this.ReferenceToCurrentAdmin.Username, 
+                                                        Password = this.ReferenceToCurrentAdmin.Password, 
+                                                        Member = this.ReferenceToCurrentAdmin.Member, 
+                                                        ContactDark = this.ReferenceToCurrentAdmin.ContactDark, 
+                                                        ContactTrip = this.ReferenceToCurrentAdmin.ContactTrip
+                                                    };
+
+                            // Give feedback through view
+                            this.FeedbackAdmin = Feedback.Cancel;
+                        });
+            }
+        }
+
+        public ICommand CancelChangesDamageTypes
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Revert changes made by user
+                            // Copy from database to the selected damagetype
+                            this.CurrentDamageType = new DamageType() { Type = this.ReferenceToCurrentDamageType.Type };
+
+                            // Give feedback
+                            this.FeedbackDamageType = Feedback.Cancel;
+                        });
+            }
+        }
+
+        public ICommand CancelChangesStandardTrips
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Copies original info from database to the selected standardtrip
+                            this.CurrentStandardTrip = new StandardTrip()
+                                                           {
+                                                               Distance =
+                                                                   this.ReferenceToCurrentStandardTrip
+                                                                   .Distance, 
+                                                               Direction =
+                                                                   this.ReferenceToCurrentStandardTrip
+                                                                   .Direction, 
+                                                               Title =
+                                                                   this.ReferenceToCurrentStandardTrip
+                                                                   .Title
+                                                           };
+
+                            // Give feedback
+                            this.FeedbackStandardTrip = Feedback.Cancel;
+                        });
             }
         }
 
@@ -606,55 +223,182 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    // Create a new object to store the info of the desired admin
-                    NewAdmin = new Admin();
-                    
-                    // Initialize and open a new window for the user
-                    // Get the required info for creating an admin through the new window
-                    MembersListWindow = new View.Administrationssystem.Pages.MembersListWindow();
-                    MembersListWindow.DataContext = this;
-                    MembersListWindow.ShowDialog();
-                    NewAdmin.ContactDark = false;
-                    NewAdmin.ContactTrip = false;
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Create a new object to store the info of the desired admin
+                            this.NewAdmin = new Admin();
 
-                    // Refresh from database
-                    Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+                            // Initialize and open a new window for the user
+                            // Get the required info for creating an admin through the new window
+                            this.MembersListWindow = new View.Administrationssystem.Pages.MembersListWindow();
+                            this.MembersListWindow.DataContext = this;
+                            this.MembersListWindow.ShowDialog();
+                            this.NewAdmin.ContactDark = false;
+                            this.NewAdmin.ContactTrip = false;
 
-                    // Check there already exists an admin with the same username og member
-                    // Also check if user made a password and username
-                    if (NewAdmin.Username.Length == 0 || NewAdmin.Password.Length == 0)
-                    {
-                        System.Windows.MessageBox.Show("Brugernavn og kodeord er påkrævet!");
-                        return;
-                    }
-                    else if (Admins.Any(m => m.Member == NewAdmin.Member))
-                    {
-                        System.Windows.MessageBox.Show("Det valgte medlem er allerede administrator!");
-                        return;
-                    }
-                    else if (Admins.Any(m => m.Username == NewAdmin.Username))
-                    {
-                        System.Windows.MessageBox.Show("Det ønskede brugernavn eksisterer allerede!");
-                        return;
-                    }
+                            // Refresh from database
+                            this.Admins = new ObservableCollection<Admin>(this._db.Admin.ToList());
 
-                    // Convert username and password to lower-case
-                    NewAdmin.Username = NewAdmin.Username.ToLower();
-                    NewAdmin.Password = NewAdmin.Password.ToLower();
+                            // Check there already exists an admin with the same username og member
+                            // Also check if user made a password and username
+                            if (this.NewAdmin.Username.Length == 0 || this.NewAdmin.Password.Length == 0)
+                            {
+                                System.Windows.MessageBox.Show("Brugernavn og kodeord er påkrævet!");
+                                return;
+                            }
+                            else if (this.Admins.Any(m => m.Member == this.NewAdmin.Member))
+                            {
+                                System.Windows.MessageBox.Show("Det valgte medlem er allerede administrator!");
+                                return;
+                            }
+                            else if (this.Admins.Any(m => m.Username == this.NewAdmin.Username))
+                            {
+                                System.Windows.MessageBox.Show("Det ønskede brugernavn eksisterer allerede!");
+                                return;
+                            }
 
-                    // Add the new admin to database and list
-                    _db.Admin.Add(NewAdmin);
-                    Admins.Add(NewAdmin);
+                            // Convert username and password to lower-case
+                            this.NewAdmin.Username = this.NewAdmin.Username.ToLower();
+                            this.NewAdmin.Password = this.NewAdmin.Password.ToLower();
 
-                    // Try to save changes to database
-                    _db.SaveChanges();
+                            // Add the new admin to database and list
+                            this._db.Admin.Add(this.NewAdmin);
+                            this.Admins.Add(this.NewAdmin);
 
-                    // Change focus in view to the last admin in the list and give feedback
-                    SelectedAdmin = Admins.Count - 1;
-                    FeedbackAdmin = Feedback.Create;
-                });
+                            // Try to save changes to database
+                            this._db.SaveChanges();
+
+                            // Change focus in view to the last admin in the list and give feedback
+                            this.SelectedAdmin = this.Admins.Count - 1;
+                            this.FeedbackAdmin = Feedback.Create;
+                        });
+            }
+        }
+
+        public ICommand CreateDamageType
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Preconfigured damagetype to create
+                            DamageType NewDamageType = new DamageType() { Type = "Ny skadetype" };
+
+                            // Add new damagetype
+                            this._db.DamageType.Add(NewDamageType);
+                            this._db.SaveChanges();
+                            this.DamageTypes.Add(NewDamageType);
+
+                            // Refresh from database, select new damagetype and give feedback
+                            this.DamageTypes =
+                                new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
+                            this.SelectedDamageType =
+                                this.DamageTypes.IndexOf(this.DamageTypes.First(m => m.Type == NewDamageType.Type));
+                            this.FeedbackDamageType = Feedback.Create;
+                        });
+            }
+        }
+
+        public ICommand CreateStandardTrip
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Create an object with premade info
+                            StandardTrip NewStandardTrip = new StandardTrip()
+                                                               {
+                                                                   Title = "Ny standardtur", 
+                                                                   Direction = "Vest", 
+                                                                   Distance = 5
+                                                               };
+
+                            // Add the new object to list and database
+                            this._db.StandardTrip.Add(NewStandardTrip);
+                            this._db.SaveChanges();
+                            this.StandardTrips.Add(NewStandardTrip);
+
+                            // (hopefully) selects the new standardtrip and give feedback
+                            this.StandardTrips =
+                                new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
+                            this.SelectedStandardTrip =
+                                this.StandardTrips.IndexOf(
+                                    this.StandardTrips.First(m => m.Title == NewStandardTrip.Title));
+                            this.FeedbackStandardTrip = Feedback.Create;
+                        });
+            }
+        }
+
+        public Admin CurrentAdmin
+        {
+            get
+            {
+                return this._currentAdmin;
+            }
+
+            set
+            {
+                this._currentAdmin = value;
+                this.Notify();
+            }
+        }
+
+        public DamageType CurrentDamageType
+        {
+            get
+            {
+                return this._currentDamageType;
+            }
+
+            set
+            {
+                this._currentDamageType = value;
+                this.Notify();
+            }
+        }
+
+        public Season CurrentSeason
+        {
+            get
+            {
+                return this._currentSeason;
+            }
+
+            set
+            {
+                this._currentSeason = value;
+                this.Notify();
+            }
+        }
+
+        public StandardTrip CurrentStandardTrip
+        {
+            get
+            {
+                return this._currentStandardTrip;
+            }
+
+            set
+            {
+                this._currentStandardTrip = value;
+                this.Notify();
+            }
+        }
+
+        public ObservableCollection<DamageType> DamageTypes
+        {
+            get
+            {
+                return this._damageTypes;
+            }
+
+            set
+            {
+                this._damageTypes = value;
+                this.Notify();
             }
         }
 
@@ -662,44 +406,526 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    // Keep a temp. reference to the selected admin
-                    // Refresh from database and select the desired admin again
-                    string tmpId = ReferenceToCurrentAdmin.Username;
-                    Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
-                    ReferenceToCurrentAdmin = Admins.First(m => m.Username == tmpId);
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Keep a temp. reference to the selected admin
+                            // Refresh from database and select the desired admin again
+                            string tmpId = this.ReferenceToCurrentAdmin.Username;
+                            this.Admins = new ObservableCollection<Admin>(this._db.Admin.ToList());
+                            this.ReferenceToCurrentAdmin = this.Admins.First(m => m.Username == tmpId);
 
-                    // Check if there's only one admin
-                    if (Admins.Count == 1)
-                    {
-                        ErrorAdmin = "Sidste administrator kan ikke slettes!";
-                        FeedbackAdmin = Feedback.Error;
-                        return;
-                    }
+                            // Check if there's only one admin
+                            if (this.Admins.Count == 1)
+                            {
+                                this.ErrorAdmin = "Sidste administrator kan ikke slettes!";
+                                this.FeedbackAdmin = Feedback.Error;
+                                return;
+                            }
 
-                    // Remove admin
-                    _db.Admin.Remove(ReferenceToCurrentAdmin);
-                    Admins.Remove(ReferenceToCurrentAdmin);
+                            // Remove admin
+                            this._db.Admin.Remove(this.ReferenceToCurrentAdmin);
+                            this.Admins.Remove(this.ReferenceToCurrentAdmin);
 
-                    // Try to save changes.
-                    try
-                    {
-                        _db.SaveChanges();
-                    }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
-                    {
-                        // The admin has likely already been deleted
-                        Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(m => m.Member.FirstName));
-                        ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
-                        FeedbackAdmin = Feedback.Error;
-                        return;
-                    }
-                    
-                    // Change focus in view to the last admin in the list and give feedback
-                    SelectedAdmin = Admins.Count - 1;
-                    FeedbackAdmin = Feedback.Delete;
-                });
+                            // Try to save changes.
+                            try
+                            {
+                                this._db.SaveChanges();
+                            }
+                            catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                            {
+                                // The admin has likely already been deleted
+                                this.Admins =
+                                    new ObservableCollection<Admin>(this._db.Admin.OrderBy(m => m.Member.FirstName));
+                                this.ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
+                                this.FeedbackAdmin = Feedback.Error;
+                                return;
+                            }
+
+                            // Change focus in view to the last admin in the list and give feedback
+                            this.SelectedAdmin = this.Admins.Count - 1;
+                            this.FeedbackAdmin = Feedback.Delete;
+                        });
+            }
+        }
+
+        public ICommand DeleteDamageType
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Remove selected damagetype from list
+                            this._db.DamageType.Remove(this.ReferenceToCurrentDamageType);
+
+                            // Try to save Changes to database
+                            try
+                            {
+                                this._db.SaveChanges();
+                            }
+                            catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                            {
+                                // The selected damagetype has likely already been deleted
+                                this.DamageTypes =
+                                    new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
+                                this.ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
+                                this.FeedbackDamageType = Feedback.Error;
+                                return;
+                            }
+
+                            // Refresh database, select last item and give feedback
+                            this.DamageTypes =
+                                new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
+                            this.SelectedDamageType = this.DamageTypes.Count - 1;
+                            this.FeedbackDamageType = Feedback.Delete;
+                        });
+            }
+        }
+
+        public ICommand DeleteStandardTrip
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Remove selected trip
+                            this._db.StandardTrip.Remove(this.ReferenceToCurrentStandardTrip);
+
+                            // Try to save changes
+                            try
+                            {
+                                this._db.SaveChanges();
+                            }
+                            catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                            {
+                                // The selected standardtrip has likely already been deleted from database
+                                this.StandardTrips =
+                                    new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
+                                this.ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
+                                this.FeedbackStandardTrip = Feedback.Error;
+                                return;
+                            }
+
+                            // Refresh database, select last standardtrip and give feedback
+                            this.StandardTrips =
+                                new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
+                            this.SelectedStandardTrip = this.StandardTrips.Count - 1;
+                            this.FeedbackDamageType = Feedback.Delete;
+                        });
+            }
+        }
+
+        public bool DisplaySeasonErrorLabel
+        {
+            get
+            {
+                return this._displaySeasonErrorLabel;
+            }
+
+            set
+            {
+                this._displaySeasonErrorLabel = value;
+                this.Notify();
+            }
+        }
+
+        public string ErrorAdmin
+        {
+            get
+            {
+                return this._errorAdmin;
+            }
+
+            set
+            {
+                this._errorAdmin = value;
+                this.Notify();
+            }
+        }
+
+        public string ErrorDamageType
+        {
+            get
+            {
+                return this._errorDamageType;
+            }
+
+            set
+            {
+                this._errorDamageType = value;
+                this.Notify();
+            }
+        }
+
+        public string ErrorStandardTrip
+        {
+            get
+            {
+                return this._errorStandardTrip;
+            }
+
+            set
+            {
+                this._errorStandardTrip = value;
+                this.Notify();
+            }
+        }
+
+        public Feedback FeedbackAdmin
+        {
+            get
+            {
+                return this._feedbackAdmin;
+            }
+
+            set
+            {
+                this._feedbackAdmin = value;
+                this.Notify();
+            }
+        }
+
+        public Feedback FeedbackDamageType
+        {
+            get
+            {
+                return this._feedbackDamageType;
+            }
+
+            set
+            {
+                this._feedbackDamageType = value;
+                this.Notify();
+            }
+        }
+
+        public Feedback FeedbackStandardTrip
+        {
+            get
+            {
+                return this._feedbackStandardTrip;
+            }
+
+            set
+            {
+                this._feedbackStandardTrip = value;
+                this.Notify();
+            }
+        }
+
+        public ObservableCollection<Member> Members
+        {
+            get
+            {
+                return this._members;
+            }
+
+            set
+            {
+                this._members = value;
+                this.Notify();
+            }
+        }
+
+        public Admin NewAdmin
+        {
+            get
+            {
+                return this._newAdmin;
+            }
+
+            set
+            {
+                this._newAdmin = value;
+                this.Notify();
+            }
+        }
+
+        public ICommand NewSeason
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // if current season started less then 183 days ago promt the user!
+                            if (this.CurrentSeason != null
+                                && DateTime.Compare(this.CurrentSeason.SeasonStart.AddDays(183), DateTime.Now) > 0)
+                            {
+                                // promp the user that the current season is less than a half year old!
+                                // throw new NotImplementedException();
+                                this.DisplaySeasonErrorLabel = true;
+                            }
+                            else
+                            {
+                                this.CurrentSeason.SeasonEnd = DateTime.Now;
+                                Season tmpSeason = new Season();
+                                this._db.Season.Add(tmpSeason);
+                                this.CurrentSeason = tmpSeason;
+                                this._db.SaveChanges();
+                                this.DisplaySeasonErrorLabel = false;
+                            }
+                        });
+            }
+        }
+
+        public Admin ReferenceToCurrentAdmin
+        {
+            get
+            {
+                return this._referenceToCurrentAdmin;
+            }
+
+            set
+            {
+                this._referenceToCurrentAdmin = value;
+                this.Notify();
+            }
+        }
+
+        public ICommand SaveChangesAdmins
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Save a temp. reference to the selected admin
+                            int tempindex = this.SelectedAdmin;
+
+                            // Retrieve changes from selected admin
+                            this.ReferenceToCurrentAdmin.ContactTrip = this.CurrentAdmin.ContactTrip;
+                            this.ReferenceToCurrentAdmin.ContactDark = this.CurrentAdmin.ContactDark;
+
+                            // Try to save changes to database
+                            try
+                            {
+                                this._db.SaveChanges();
+                            }
+                            catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                            {
+                                // The selected admin has likely been deleted
+                                this.Admins =
+                                    new ObservableCollection<Admin>(this._db.Admin.OrderBy(m => m.Member.FirstName));
+                                this.ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
+                                this.FeedbackAdmin = Feedback.Error;
+                                return;
+                            }
+
+                            // Refresh from database, reselect the previously selected admin and give feedback
+                            this.Admins =
+                                new ObservableCollection<Admin>(this._db.Admin.OrderBy(m => m.Member.FirstName));
+                            this.SelectedAdmin = tempindex;
+                            this.FeedbackAdmin = Feedback.Save;
+                        });
+            }
+        }
+
+        public ICommand SaveChangesDamageTypes
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Save the selected damagetype to the list synced with database
+                            this.ReferenceToCurrentDamageType.Type = this.CurrentDamageType.Type;
+
+                            // Try to save changes to databse
+                            try
+                            {
+                                this._db.SaveChanges();
+                            }
+                            catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                            {
+                                // The sleceted damagetype has likely been deleted in database
+                                this.DamageTypes =
+                                    new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
+                                this.ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
+                                this.FeedbackDamageType = Feedback.Error;
+                                return;
+                            }
+
+                            // Refresh database and give feedback
+                            this.DamageTypes =
+                                new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
+                            this.FeedbackDamageType = Feedback.Save;
+                        });
+            }
+        }
+
+        public ICommand SaveChangesStandardTrips
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            int tmptrip = this.CurrentStandardTrip.Id;
+
+                            // Copies data from userinput to the list synched with the database
+                            this.ReferenceToCurrentStandardTrip.Distance = this.CurrentStandardTrip.Distance;
+                            this.ReferenceToCurrentStandardTrip.Title = this.CurrentStandardTrip.Title;
+                            this.ReferenceToCurrentStandardTrip.Direction = this.CurrentStandardTrip.Direction;
+
+                            // Try to save changes
+                            try
+                            {
+                                this._db.SaveChanges();
+                            }
+                            catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
+                            {
+                                // The standardtrip has likely been deleted in the database
+                                this.StandardTrips =
+                                    new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
+                                this.ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
+                                this.FeedbackStandardTrip = Feedback.Error;
+                                return;
+                            }
+
+                            // Reload database and give feedback.
+                            this.StandardTrips =
+                                new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
+                            this.FeedbackStandardTrip = Feedback.Save;
+                        });
+            }
+        }
+
+        public int SelectedAdmin
+        {
+            get
+            {
+                return this._selectedAdmin;
+            }
+
+            set
+            {
+                this._selectedAdmin = value;
+                this.Notify();
+            }
+        }
+
+        public ICommand SelectedChangeAdmin
+        {
+            get
+            {
+                return this.GetCommand(
+                    e =>
+                        {
+                            // If the list is empty return safely (Should not be possibly for admins)
+                            if (e == null)
+                            {
+                                return;
+                            }
+
+                            var admin = (Admin)e;
+
+                            // Sets CurrentAdmin to contain a copy of the selected item
+                            // This object contains the direct changes made by the user
+                            this.CurrentAdmin = new Admin()
+                                                    {
+                                                        Username = admin.Username, 
+                                                        Password = admin.Password, 
+                                                        ContactTrip = admin.ContactTrip, 
+                                                        ContactDark = admin.ContactDark, 
+                                                        Member = admin.Member
+                                                    };
+
+                            // Sets reference to the selected admin in database
+                            this.ReferenceToCurrentAdmin = admin;
+
+                            // Give feedback
+                            this.FeedbackAdmin = Feedback.Default;
+                        });
+            }
+        }
+
+        public ICommand SelectedChangeDamageType
+        {
+            get
+            {
+                return this.GetCommand(
+                    e =>
+                        {
+                            // If list is empty return safely
+                            if (e == null)
+                            {
+                                return;
+                            }
+
+                            var damageType = (DamageType)e;
+
+                            // Create a copy of the selected damagetype from database
+                            this.CurrentDamageType = new DamageType() { Type = damageType.Type };
+
+                            // Remember reference to the selected damagetype in the list synced with database
+                            this.ReferenceToCurrentDamageType = damageType;
+
+                            // Give feedback
+                            this.FeedbackDamageType = Feedback.Default;
+                        });
+            }
+        }
+
+        public ICommand SelectedChangeStandardTrip
+        {
+            get
+            {
+                return this.GetCommand(
+                    e =>
+                        {
+                            // If the list is empty return safely
+                            if (e == null)
+                            {
+                                return;
+                            }
+
+                            var standardTrip = (StandardTrip)e;
+
+                            // Create a copy from the selected item
+                            this.CurrentStandardTrip = new StandardTrip()
+                                                           {
+                                                               Distance = standardTrip.Distance, 
+                                                               Direction = standardTrip.Direction, 
+                                                               Title = standardTrip.Title
+                                                           };
+
+                            // Save reference to the original position of the selected item
+                            this.ReferenceToCurrentStandardTrip = standardTrip;
+
+                            // Give feedback
+                            this.FeedbackStandardTrip = Feedback.Default;
+                        });
+            }
+        }
+
+        public int SelectedDamageType
+        {
+            get
+            {
+                return this._selectedDamageType;
+            }
+
+            set
+            {
+                this._selectedDamageType = value;
+                this.Notify();
+            }
+        }
+
+        public int SelectedStandardTrip
+        {
+            get
+            {
+                return this._selectedStandardTrip;
+            }
+
+            set
+            {
+                this._selectedStandardTrip = value;
+                this.Notify();
             }
         }
 
@@ -707,12 +933,35 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand(e =>
-                {
-                    // Assign a member as foreign key to the desired administrator
-                    NewAdmin.Member = (Member)e;
-                    MembersListWindow.Close();
-                });
+                return this.GetCommand(
+                    e =>
+                        {
+                            // Assign a member as foreign key to the desired administrator
+                            this.NewAdmin.Member = (Member)e;
+                            this.MembersListWindow.Close();
+                        });
+            }
+        }
+
+        public ObservableCollection<StandardTrip> StandardTrips
+        {
+            get
+            {
+                return this._standardTrips;
+            }
+
+            set
+            {
+                this._standardTrips = value;
+                this.Notify();
+            }
+        }
+
+        public DateTime Today
+        {
+            get
+            {
+                return DateTime.Now;
             }
         }
 

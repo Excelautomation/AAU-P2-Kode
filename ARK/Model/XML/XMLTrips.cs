@@ -7,13 +7,18 @@ namespace ARK.Model.XML
 {
     public class XMLTrips
     {
-
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         [XmlRoot(Namespace = "", IsNullable = false)]
         public partial class dataroot
         {
+            #region Fields
+
             private DateTime generatedField;
+
+            #endregion
+
+            #region Public Properties
 
             /// <remarks/>
             [XmlElement("Tur")]
@@ -25,20 +30,46 @@ namespace ARK.Model.XML
             {
                 get
                 {
-                    return generatedField;
+                    return this.generatedField;
                 }
+
                 set
                 {
-                    generatedField = value;
+                    this.generatedField = value;
                 }
             }
+
+            #endregion
         }
 
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         public partial class datarootTur
         {
+            #region Fields
+
             private DateTime datoField;
+
+            #endregion
+
+            #region Public Properties
+
+            /// <remarks/>
+            public byte BådID { get; set; }
+
+            /// <remarks/>
+            public DateTime Dato
+            {
+                get
+                {
+                    return this.datoField;
+                }
+
+                set
+                {
+                    this.datoField = value;
+                }
+            }
 
             /// <remarks/>
             public ushort ID { get; set; }
@@ -47,23 +78,7 @@ namespace ARK.Model.XML
             public byte Kilometer { get; set; }
 
             /// <remarks/>
-            public DateTime Dato
-            {
-                get
-                {
-                    return datoField;
-                }
-                set
-                {
-                    datoField = value;
-                }
-            }
-
-            /// <remarks/>
             public byte Langtur { get; set; }
-
-            /// <remarks/>
-            public byte BådID { get; set; }
 
             /// <remarks/>
             public ushort Nr1 { get; set; }
@@ -123,9 +138,8 @@ namespace ARK.Model.XML
             /// <remarks/>
             [XmlIgnore()]
             public bool Nr9Specified { get; set; }
+
+            #endregion
         }
-
-
     }
 }
-

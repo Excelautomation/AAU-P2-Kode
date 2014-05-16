@@ -1,48 +1,78 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
+
 using ARK.HelperFunctions.SMSGateway;
 
 namespace ARK.Model.DB
 {
     public class DbArkContext : DbContext
     {
+        #region Static Fields
+
         private static DbArkContext _dbContext;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public DbArkContext()
             : base("DefaultDB")
         {
-            //Database.SetInitializer<DbArkContext>(new DropCreateDatabaseAlways<DbArkContext>());
+            // Database.SetInitializer<DbArkContext>(new DropCreateDatabaseAlways<DbArkContext>());
             Database.SetInitializer(new MySqlInitializer());
-            Database.Log = s => Debug.WriteLine("DBContext: " + s);
+            this.Database.Log = s => Debug.WriteLine("DBContext: " + s);
         }
 
-        public DbSet<FTPInfo> FtpInfo { get; set; }
-        public DbSet<DamageType> DamageType { get; set; }
-        public DbSet<Boat> Boat { get; set; }
-        public DbSet<LongTripForm> LongTripForm { get; set; }
-        public DbSet<Member> Member { get; set; }
-        public DbSet<DamageForm> DamageForm { get; set; }
-        public DbSet<Trip> Trip { get; set; }
-        public DbSet<GetSMS> GetSMS { get; set; }
-        public DbSet<SMS> SMS { get; set; }
-        public DbSet<StandardTrip> StandardTrip { get; set; }
+        #endregion
+
+        #region Public Properties
+
         public DbSet<Admin> Admin { get; set; }
+
+        public DbSet<Boat> Boat { get; set; }
+
+        public DbSet<DamageForm> DamageForm { get; set; }
+
+        public DbSet<DamageType> DamageType { get; set; }
+
+        public DbSet<FTPInfo> FtpInfo { get; set; }
+
+        public DbSet<GetSMS> GetSMS { get; set; }
+
+        public DbSet<LongTripForm> LongTripForm { get; set; }
+
+        public DbSet<Member> Member { get; set; }
+
+        public DbSet<SMS> SMS { get; set; }
+
         public DbSet<Season> Season { get; set; }
-        public DbSet<TripWarningSms> TripWarningSms { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
-        
+
+        public DbSet<StandardTrip> StandardTrip { get; set; }
+
+        public DbSet<Trip> Trip { get; set; }
+
+        public DbSet<TripWarningSms> TripWarningSms { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         public static DbArkContext GetDbContext()
         {
             return _dbContext ?? (_dbContext = new DbArkContext());
         }
 
+        #endregion
+
+        #region Methods
+
         protected override void Dispose(bool disposing)
         {
             // TODO Fjern denne
-
             Debug.WriteLine("Disposing DBContext");
             base.Dispose(disposing);
         }
@@ -58,17 +88,11 @@ namespace ARK.Model.DB
                 .Ignore(b => b.TripsSailed)
                 .Ignore(b => b.LongDistanceTripsSailed);
 
-            modelBuilder.Entity<Boat>()
-                .Property(b => b.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<Boat>().Property(b => b.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            modelBuilder.Entity<Trip>()
-                .Property(b => b.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<Trip>().Property(b => b.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            modelBuilder.Entity<Member>()
-                .Property(b => b.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<Member>().Property(b => b.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<LongTripForm>()
                 .HasOptional(ltf => ltf.Boat)
@@ -82,9 +106,7 @@ namespace ARK.Model.DB
                 .HasForeignKey(ltf => ltf.ResponsibleMemberId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<LongTripForm>()
-                .HasMany(ldf => ldf.Members)
-                .WithMany(m => m.LongDistanceForms);
+            modelBuilder.Entity<LongTripForm>().HasMany(ldf => ldf.Members).WithMany(m => m.LongDistanceForms);
 
             modelBuilder.Entity<Trip>()
                 .HasRequired(t => t.Boat)
@@ -92,9 +114,7 @@ namespace ARK.Model.DB
                 .HasForeignKey(t => t.BoatId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Trip>()
-                .HasMany(t => t.Members)
-                .WithMany(m => m.Trips);
+            modelBuilder.Entity<Trip>().HasMany(t => t.Members).WithMany(m => m.Trips);
 
             modelBuilder.Entity<DamageForm>()
                 .HasRequired(df => df.RegisteringMember)
@@ -108,20 +128,15 @@ namespace ARK.Model.DB
                 .HasForeignKey(df => df.BoatId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Admin>()
-                .HasKey(a => a.Username);
+            modelBuilder.Entity<Admin>().HasKey(a => a.Username);
 
-            modelBuilder.Entity<Admin>()
-                .HasRequired(a => a.Member)
-                .WithOptional()
-                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Admin>().HasRequired(a => a.Member).WithOptional().WillCascadeOnDelete(true);
 
-            modelBuilder.Entity<TripWarningSms>()
-                .HasRequired(tws => tws.Trip)
-                .WithOptional()
-                .WillCascadeOnDelete(true);
+            modelBuilder.Entity<TripWarningSms>().HasRequired(tws => tws.Trip).WithOptional().WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
         }
+
+        #endregion
     }
 }

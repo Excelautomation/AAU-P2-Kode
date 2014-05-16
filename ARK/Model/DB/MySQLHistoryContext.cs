@@ -6,12 +6,16 @@ namespace ARK.Model.DB
 {
     public class MySqlHistoryContext : HistoryContext
     {
-        public MySqlHistoryContext(
-          DbConnection existingConnection,
-          string defaultSchema)
+        #region Constructors and Destructors
+
+        public MySqlHistoryContext(DbConnection existingConnection, string defaultSchema)
             : base(existingConnection, defaultSchema)
         {
         }
+
+        #endregion
+
+        #region Methods
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -19,5 +23,7 @@ namespace ARK.Model.DB
             modelBuilder.Entity<HistoryRow>().Property(h => h.MigrationId).HasMaxLength(100).IsRequired();
             modelBuilder.Entity<HistoryRow>().Property(h => h.ContextKey).HasMaxLength(200).IsRequired();
         }
+
+        #endregion
     }
 }

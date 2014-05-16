@@ -10,7 +10,7 @@
              mc:Ignorable="d" Width="200" Height="768">
 
     <UserControl.DataContext>
-        <VM:DistanceStatisticsAdditionalInfoViewModel></VM:DistanceStatisticsAdditionalInfoViewModel>
+        <VM:DistanceStatisticsAdditionalInfoViewModel />
     </UserControl.DataContext>
 
     <UserControl.Resources>
@@ -141,11 +141,11 @@
                             <Button.Content>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <StackPanel Style="{StaticResource styleStack}">
                                         <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Dynamic;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,7 +14,15 @@ namespace ARK.HelperFunctions
 {
     public static class InputValidation
     {
-        private static readonly Regex FirstDoubleFromString = new Regex(@"(?'number'\d+(?:(?:,|\.)\d+)?)", RegexOptions.Compiled);
+        #region Static Fields
+
+        private static readonly Regex FirstDoubleFromString = new Regex(
+            @"(?'number'\d+(?:(?:,|\.)\d+)?)", 
+            RegexOptions.Compiled);
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// Finds the first occurence of a number, with or without decimal part, in the input string.
@@ -39,5 +47,7 @@ namespace ARK.HelperFunctions
                 return false;
             }
         }
+
+        #endregion
     }
 }

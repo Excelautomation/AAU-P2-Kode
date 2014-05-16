@@ -2,14 +2,18 @@
 
 namespace ARK.View.Protokolsystem.Confirmations
 {
-	/// <summary>
+    /// <summary>
     /// Interaction logic for CreateLongTripConfirm.xaml
-	/// </summary>
-	public partial class CreateLongTripConfirm : UserControl
-	{
+    /// </summary>
+    public partial class CreateLongTripConfirm : UserControl
+    {
+        #region Constructors and Destructors
+
         public CreateLongTripConfirm()
-		{
-			this.InitializeComponent();
-		}
-	}
+        {
+            this.InitializeComponent();
+        }
+
+        #endregion
+    }
 }

@@ -19,9 +19,13 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class BoatListWindow : Window
     {
+        #region Constructors and Destructors
+
         public BoatListWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

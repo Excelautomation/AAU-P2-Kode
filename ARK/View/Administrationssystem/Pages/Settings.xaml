@@ -107,10 +107,10 @@
                                             <Style TargetType="TextBox">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding ElementName=TimeOfDarkCheckBox, Path=IsChecked}" Value="True">
-                                                        <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        <Setter Property="IsEnabled" Value="False" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding ElementName=TimeOfDarkCheckBox, Path=IsChecked}" Value="False">
-                                                        <Setter Property="IsEnabled" Value="True"></Setter>
+                                                        <Setter Property="IsEnabled" Value="True" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -118,8 +118,7 @@
                                     </TextBox>
                                     <WrapPanel HorizontalAlignment="Right">
                                         <TextBlock Margin="4">Håndtér automatisk</TextBlock>
-                                        <CheckBox Name="TimeOfDarkCheckBox" IsChecked="True" Margin="4" VerticalAlignment="Center">
-                                        </CheckBox>
+                                        <CheckBox Name="TimeOfDarkCheckBox" IsChecked="True" Margin="4" VerticalAlignment="Center" />
                                     </WrapPanel>
                                 </DockPanel>
                                 <DockPanel>

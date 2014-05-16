@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <VMFilter:FormsFilterViewModel></VMFilter:FormsFilterViewModel>
+        <VMFilter:FormsFilterViewModel />
     </UserControl.DataContext>
 
     <UserControl.Resources>
@@ -15,8 +15,8 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <CheckBox Content="Afventer" IsChecked="{Binding Path=ShowOpen, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Afviste" IsChecked="{Binding Path=ShowDenied, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Godkendte" IsChecked="{Binding Path=ShowAccepted, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Afventer" IsChecked="{Binding Path=ShowOpen, Mode=TwoWay}" />
+        <CheckBox Content="Afviste" IsChecked="{Binding Path=ShowDenied, Mode=TwoWay}" />
+        <CheckBox Content="Godkendte" IsChecked="{Binding Path=ShowAccepted, Mode=TwoWay}" />
     </StackPanel>
 </UserControl>

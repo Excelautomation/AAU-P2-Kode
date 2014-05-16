@@ -2,35 +2,29 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+
 using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Base
 {
     public abstract class ViewModelBase : IViewModelBase
     {
+        #region Public Events
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void Notify([CallerMemberName] string propertyName = "")
-        {
-            NotifyCustom(propertyName);
-        }
+        #endregion
 
-        protected void NotifyCustom(string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        #region Methods
 
         protected ICommand GetCommand(Action executeMethod)
         {
-            return GetCommand(e => executeMethod());
+            return this.GetCommand(e => executeMethod());
         }
 
         protected ICommand GetCommand(Action executeMethod, Func<bool> canExecute)
         {
-            return GetCommand(e => executeMethod(), e => canExecute());
+            return this.GetCommand(e => executeMethod(), e => canExecute());
         }
 
         protected ICommand GetCommand(Action<object> executeMethod)
@@ -42,5 +36,20 @@ namespace ARK.ViewModel.Base
         {
             return new RelayCommand(executeMethod, canExecute);
         }
+
+        protected void Notify([CallerMemberName] string propertyName = "")
+        {
+            this.NotifyCustom(propertyName);
+        }
+
+        protected void NotifyCustom(string propertyName = "")
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
     }
 }
