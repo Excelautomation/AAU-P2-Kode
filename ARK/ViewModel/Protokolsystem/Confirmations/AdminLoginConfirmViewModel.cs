@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-
+using ARK.HelperFunctions;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Administrationssystem;
@@ -60,7 +60,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                             Admin admin = db.Admin.Find(this.Username);
 
                             if (admin != null && admin.Username == this.Username
-                                && admin.Password == ((AdminLoginConfirm)e).PasswordBox.Password)
+                                && PasswordHashing.VerifyHashedPassword(admin.Password, ((AdminLoginConfirm)e).PasswordBox.Password))
                             {
                                 var window = new AdminSystem();
                                 ((AdminSystemViewModel)window.DataContext).CurrentLoggedInUser = admin;

@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-
+using ARK.HelperFunctions;
+using ARK.Model.DB;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Administrationssystem;
@@ -31,13 +32,13 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return this.GetCommand(
                     e =>
-                        {
-                            var window = e as Window;
+                {
+                    var window = e as Window;
                             if (window != null)
                             {
                                 window.Close();
                             }
-                        });
+                });
             }
         }
 
@@ -61,25 +62,24 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return this.GetCommand(
                     e =>
-                        {
-                            DbArkContext db = DbArkContext.GetDbContext();
-
+                {
+                    DbArkContext db = DbArkContext.GetDbContext();
+                    
                             Admin admin = db.Admin.Find(this.Username);
 
-                            if (admin != null && admin.Username == this.Username
-                                && admin.Password == ((AdminLogin)e).PasswordBox.Password)
-                            {
-                                var adminSystem = new AdminSystem();
-                                ((AdminSystemViewModel)adminSystem.DataContext).CurrentLoggedInUser = admin;
-                                adminSystem.Show();
+                    if (admin != null && admin.Username == Username && PasswordHashing.VerifyHashedPassword(admin.Password, ((AdminLogin)e).PasswordBox.Password))
+                    {
+                        var adminSystem = new AdminSystem();
+                        ((AdminSystemViewModel)adminSystem.DataContext).CurrentLoggedInUser = admin;
+                        adminSystem.Show();
 
-                                ((Window)e).Close();
-                            }
-                            else
-                            {
+                        ((Window)e).Close();
+                    }
+                    else
+                    {
                                 this.ErrorLabel = "Brugernavn eller adgangskode ugyldig";
-                            }
-                        });
+                    }
+                });
             }
         }
 
