@@ -126,6 +126,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ark.Designer.cs" />
+    <Compile Include="ark1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ark.edmx</DependentUpon>
+    </Compile>
     <Compile Include="HelperFunctions\CloneFunctions.cs" />
     <Compile Include="HelperFunctions\InputValidation.cs" />
     <Compile Include="HelperFunctions\PasswordHashing.cs" />
@@ -222,11 +228,6 @@
       <DependentUpon>Trips.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Administrationssystem\SearchTextBox.cs" />
-    <Compile Include="ark.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ark.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Model\Extensions\MembersExtention.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
@@ -588,18 +589,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Diagrams\ViewModelAdminSystem.cd" />
+    <None Include="Diagrams\ViewModelClasses.cd" />
+    <None Include="Diagrams\ViewModelFilterClasses.cd" />
+    <None Include="Diagrams\ViewModelInterfaces.cd" />
     <Resource Include="View\Administrationssystem\Fonts\arial.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\arialbd.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\arialbi.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\ariali.ttf" />
-    <None Include="ark.edmx">
+    <EntityDeploy Include="ark.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ark.Designer.cs</LastGenOutput>
-    </None>
+      <LastGenOutput>ark1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="ark.edmx.diagram">
       <DependentUpon>ark.edmx</DependentUpon>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Diagrams\ViewModelProtokolsystem.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
