@@ -67,7 +67,6 @@ namespace ARK
 
             // CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
             // CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
-
             Current.ShutdownMode = System.Windows.ShutdownMode.OnLastWindowClose;
 
             WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();

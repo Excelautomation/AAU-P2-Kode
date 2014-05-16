@@ -54,6 +54,7 @@ namespace ARK.HelperFunctions
             {
                 throw new ArgumentNullException("hashedPassword");
             }
+
             if (password == null)
             {
                 throw new ArgumentNullException("password");
@@ -62,7 +63,6 @@ namespace ARK.HelperFunctions
             byte[] hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
 
             // Verify a version 0 (see comment above) password hash.
-
             if (hashedPasswordBytes.Length != (1 + SaltSize + PBKDF2SubkeyLength) || hashedPasswordBytes[0] != 0x00)
             {
                 // Wrong length or version header.
@@ -79,6 +79,7 @@ namespace ARK.HelperFunctions
             {
                 generatedSubkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
             }
+
             return ByteArraysEqual(storedSubkey, generatedSubkey);
         }
 
@@ -101,6 +102,7 @@ namespace ARK.HelperFunctions
             {
                 areSame &= (a[i] == b[i]);
             }
+
             return areSame;
         }
     }
