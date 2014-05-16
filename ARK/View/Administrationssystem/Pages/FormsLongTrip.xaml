@@ -7,14 +7,18 @@
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="600">
-    
+
     <UserControl.DataContext>
         <VM:FormsLongTripViewModel/>
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <valueConverters:EnumToStringConverter x:Key="Status" Enum1="Afventer" Enum2="Godkendt" Enum3="Afvist"/>
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="170"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -26,13 +30,13 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" Visibility="{Binding Path=SearchVisibility}" 
-                            Grid.Column="0" Grid.Row="0" Background="#FFEAEAEA">
-            <WrapPanel Margin="0,2,0,0">
+                Background="#FFEAEAEA" HorizontalAlignment="Stretch">
+            <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left" Width="287">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25"/>
@@ -47,76 +51,78 @@
             </WrapPanel>
         </Border>
 
-        <WrapPanel Grid.Row="1" HorizontalAlignment="Left" Margin="4">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" TextBlock.FontWeight="SemiBold">
-                <TextBlock Text="Ansvarlig: "/>
-                <TextBlock Text="Båd: "/>
-                <TextBlock Text="Oprettet: " />
-                <TextBlock Text="Status: " />
-                <TextBlock Text="Afrejse: "/>
-                <TextBlock Text="Hjemkomst: " />
-                <TextBlock Text="Dagsdistancer: "/>
-                <TextBlock Text="Turbeskrivelse: "/>
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Stretch">
-                <WrapPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+                <TextBlock Text="Ansvarlig: " FontWeight="SemiBold" />
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0,0,3,0" Text="{Binding Path=LongDistanceForm.ResponsibleMember.FirstName}"/>
                     <TextBlock Text="{Binding Path=LongDistanceForm.ResponsibleMember.LastName}"/>
-                </WrapPanel>
-                <TextBlock Text="{Binding Path=LongDistanceForm.Boat.Name}"/>
-                <TextBlock Text="{Binding Path=LongDistanceForm.FormCreated, ConverterCulture='da-DK', StringFormat=d}"/>
-                <TextBlock Text="{Binding Path=LongDistanceForm.Status, Converter={StaticResource Status}}"/>
-                <TextBox Text="{Binding Path=LongDistanceForm.PlannedStartDate, 
-                        ConverterCulture='da-DK', StringFormat=d}" HorizontalAlignment="Left"/>
-                <TextBox Text="{Binding Path=LongDistanceForm.PlannedEndDate, ConverterCulture='da-DK', StringFormat=d}"/>
-                <TextBox Text="{Binding Path=LongDistanceForm.DistancesPerDay}"/>
-                <TextBox Height="160" DockPanel.Dock="Bottom" Text="{Binding Path=LongDistanceForm.Text}"/>
-            </StackPanel>
-        </WrapPanel>
+                </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1">
+                <TextBlock Text="Båd: " FontWeight="SemiBold" Margin="0,5,0,0"/>
+                <TextBlock Text="{Binding Path=LongDistanceForm.Boat.Name}"/>
+
+                <TextBlock Text="Oprettet: " FontWeight="SemiBold" Margin="0,5,0,0" />
+                <TextBlock Text="{Binding Path=LongDistanceForm.FormCreated, ConverterCulture='da-DK', StringFormat=d}"/>
+
+                <TextBlock Text="Status: " FontWeight="SemiBold" Margin="0,5,0,0" />
+                <TextBlock Text="{Binding Path=LongDistanceForm.Status, Converter={StaticResource Status}}"/>
+
+                <TextBlock Text="Afrejse: " FontWeight="SemiBold" Margin="0,5,0,0"/>
+                <TextBox Text="{Binding Path=LongDistanceForm.PlannedStartDate, 
+                        ConverterCulture='da-DK', StringFormat=d}" />
+
+                <TextBlock Text="Hjemkomst: " FontWeight="SemiBold" Margin="0,5,0,0" />
+                <TextBox Text="{Binding Path=LongDistanceForm.PlannedEndDate, ConverterCulture='da-DK', StringFormat=d}"/>
+
+                <TextBlock Text="Dagsdistancer: " FontWeight="SemiBold" Margin="0,5,0,0"/>
+                <TextBox Text="{Binding Path=LongDistanceForm.DistancesPerDay}"/>
+
+                <TextBlock Text="Turbeskrivelse: " FontWeight="SemiBold" Margin="0,5,0,0"/>
+                <TextBox Text="{Binding Path=LongDistanceForm.Text}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal" Margin="-6,6,0,0">
+                <Button x:Name="button" Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}" >
+                    <StackPanel Width="80">
+                        <Image Source="../../images/map_add.png" Height="32"/>
+                        <Label Content="Godkend" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding RejectForm}" Margin="8,0,0,0" Width="{Binding Width, ElementName=button}">
+                    <StackPanel Width="80">
+                        <Image Source="../../images/map_delete.png" Height="32" />
+                        <Label Content="Afvis" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="20,4,4,4">
             <WrapPanel>
-                <Image Source="../../images/user.png" Height="24"/>
-                <TextBlock Text="Deltagere på turen" FontWeight="SemiBold"/>
+                <TextBlock Text="Deltagere på turen:" FontWeight="SemiBold"/>
             </WrapPanel>
             <WrapPanel>
                 <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <WrapPanel Margin="3">
-                                <Label Margin="5,0,0,0" Content="{Binding Path=FirstName}" FontSize="18"/>
-                                <Label Content="{Binding Path=LastName}" FontSize="18"/>
+                            <WrapPanel Margin="0">
+                                <TextBlock Style="{StaticResource lstViewContent}">
+                                    <Run Text="{Binding Path=FirstName}"/>
+                                    <Run Text="{Binding Path=LastName}"/>
+                                </TextBlock>
                             </WrapPanel>
-
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </WrapPanel>
         </StackPanel>
 
-        <WrapPanel Margin="4" Grid.Row="2" HorizontalAlignment="Left">
-            <Button Margin="4" Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}">
-                <StackPanel Margin="4">
-                    <Image Source="../../images/accept.png" Height="32"/>
-                    <Label Content="Godkend Langtursblanket"/>
-                </StackPanel>
-            </Button>
-            <Button Margin="4" Background="Transparent" BorderBrush="Transparent" Command="{Binding RejectForm}">
-                <StackPanel Margin="4">
-                    <Image Source="../../images/cross.png" Height="32"/>
-                    <Label Content="Afvis Langtursblanket"/>
-                </StackPanel>
-            </Button>
-        </WrapPanel>
-        
         <StackPanel Grid.Row="3">
             <TextBlock Margin="0,10,0,0" FontSize="20" HorizontalAlignment="Center">
                 <TextBlock.Style>
@@ -125,27 +131,6 @@
                             <DataTrigger Binding="{Binding RecentChange, UpdateSourceTrigger=PropertyChanged}" Value="true">
                                 <Setter Property="Text" Value="Ændring gemt"/>
                                 <Setter Property="Foreground" Value="Green"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-
-            <TextBlock Margin="0,10,0,0" FontSize="20">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status}" Value="Awaiting">
-                                <Setter Property="Text" Value="Denne langtursanmodning afventer beslutning"/>
-                                <Setter Property="Foreground" Value="Black"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status}" Value="Accepted">
-                                <Setter Property="Text" Value="Denne langtursanmodning er blevet godkendt"/>
-                                <Setter Property="Foreground" Value="Green"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=LongDistanceForm.Status}" Value="Denied">
-                                <Setter Property="Text" Value="Denne langtursanmodning er blevet Afvist"/>
-                                <Setter Property="Foreground" Value="Red"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
