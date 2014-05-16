@@ -9,238 +9,126 @@ namespace ARK.View.Administrationssystem
 {
     public enum SearchMode
     {
-        Instant, 
-
-        Delayed, 
+        Instant,
+        Delayed,
     }
 
     public class SearchTextBox : TextBox
     {
-        #region Static Fields
+        public static DependencyProperty LabelTextProperty =
+            DependencyProperty.Register(
+                "LabelText",
+                typeof(string),
+                typeof(SearchTextBox));
 
-        public static readonly RoutedEvent SearchEvent = EventManager.RegisterRoutedEvent(
-            "Search", 
-            RoutingStrategy.Bubble, 
-            typeof(RoutedEventHandler), 
-            typeof(SearchTextBox));
+        public static DependencyProperty LabelTextColorProperty =
+            DependencyProperty.Register(
+                "LabelTextColor",
+                typeof(Brush),
+                typeof(SearchTextBox));
+
+        public static DependencyProperty SearchModeProperty =
+            DependencyProperty.Register(
+                "SearchMode",
+                typeof(SearchMode),
+                typeof(SearchTextBox),
+                new PropertyMetadata(SearchMode.Instant));
+
+        private static readonly DependencyPropertyKey HasTextPropertyKey =
+            DependencyProperty.RegisterReadOnly(
+                "HasText",
+                typeof(bool),
+                typeof(SearchTextBox),
+                new PropertyMetadata());
 
         public static DependencyProperty HasTextProperty = HasTextPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey IsMouseLeftButtonDownPropertyKey =
+            DependencyProperty.RegisterReadOnly(
+                "IsMouseLeftButtonDown",
+                typeof(bool),
+                typeof(SearchTextBox),
+                new PropertyMetadata());
 
         public static DependencyProperty IsMouseLeftButtonDownProperty =
             IsMouseLeftButtonDownPropertyKey.DependencyProperty;
 
-        public static DependencyProperty LabelTextColorProperty = DependencyProperty.Register(
-            "LabelTextColor", 
-            typeof(Brush), 
-            typeof(SearchTextBox));
-
-        public static DependencyProperty LabelTextProperty = DependencyProperty.Register(
-            "LabelText", 
-            typeof(string), 
-            typeof(SearchTextBox));
-
         public static DependencyProperty SearchEventTimeDelayProperty =
             DependencyProperty.Register(
-                "SearchEventTimeDelay", 
-                typeof(Duration), 
-                typeof(SearchTextBox), 
+                "SearchEventTimeDelay",
+                typeof(Duration),
+                typeof(SearchTextBox),
                 new FrameworkPropertyMetadata(
-                    new Duration(new TimeSpan(0, 0, 0, 0, 500)), 
+                    new Duration(new TimeSpan(0, 0, 0, 0, 500)),
                     OnSearchEventTimeDelayChanged));
 
-        public static DependencyProperty SearchModeProperty = DependencyProperty.Register(
-            "SearchMode", 
-            typeof(SearchMode), 
-            typeof(SearchTextBox), 
-            new PropertyMetadata(SearchMode.Instant));
-
-        private static readonly DependencyPropertyKey HasTextPropertyKey = DependencyProperty.RegisterReadOnly(
-            "HasText", 
-            typeof(bool), 
-            typeof(SearchTextBox), 
-            new PropertyMetadata());
-
-        private static readonly DependencyPropertyKey IsMouseLeftButtonDownPropertyKey =
-            DependencyProperty.RegisterReadOnly(
-                "IsMouseLeftButtonDown", 
-                typeof(bool), 
-                typeof(SearchTextBox), 
-                new PropertyMetadata());
-
-        #endregion
-
-        #region Fields
+        public static readonly RoutedEvent SearchEvent =
+            EventManager.RegisterRoutedEvent(
+                "Search",
+                RoutingStrategy.Bubble,
+                typeof(RoutedEventHandler),
+                typeof(SearchTextBox));
 
         private readonly DispatcherTimer searchEventDelayTimer;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         static SearchTextBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(SearchTextBox), 
+                typeof(SearchTextBox),
                 new FrameworkPropertyMetadata(typeof(SearchTextBox)));
         }
 
         public SearchTextBox()
         {
-            this.searchEventDelayTimer = new DispatcherTimer();
-            this.searchEventDelayTimer.Interval = this.SearchEventTimeDelay.TimeSpan;
-            this.searchEventDelayTimer.Tick += this.OnSeachEventDelayTimerTick;
-        }
-
-        #endregion
-
-        #region Public Events
-
-        public event RoutedEventHandler Search
-        {
-            add
-            {
-                this.AddHandler(SearchEvent, value);
-            }
-
-            remove
-            {
-                this.RemoveHandler(SearchEvent, value);
-            }
-        }
-
-        #endregion
-
-        #region Public Properties
-
-        public bool HasText
-        {
-            get
-            {
-                return (bool)this.GetValue(HasTextProperty);
-            }
-
-            private set
-            {
-                this.SetValue(HasTextPropertyKey, value);
-            }
-        }
-
-        public bool IsMouseLeftButtonDown
-        {
-            get
-            {
-                return (bool)this.GetValue(IsMouseLeftButtonDownProperty);
-            }
-
-            private set
-            {
-                this.SetValue(IsMouseLeftButtonDownPropertyKey, value);
-            }
+            searchEventDelayTimer = new DispatcherTimer();
+            searchEventDelayTimer.Interval = SearchEventTimeDelay.TimeSpan;
+            searchEventDelayTimer.Tick += OnSeachEventDelayTimerTick;
         }
 
         public string LabelText
         {
-            get
-            {
-                return (string)this.GetValue(LabelTextProperty);
-            }
-
-            set
-            {
-                this.SetValue(LabelTextProperty, value);
-            }
+            get { return (string)GetValue(LabelTextProperty); }
+            set { SetValue(LabelTextProperty, value); }
         }
 
         public Brush LabelTextColor
         {
-            get
-            {
-                return (Brush)this.GetValue(LabelTextColorProperty);
-            }
-
-            set
-            {
-                this.SetValue(LabelTextColorProperty, value);
-            }
-        }
-
-        public Duration SearchEventTimeDelay
-        {
-            get
-            {
-                return (Duration)this.GetValue(SearchEventTimeDelayProperty);
-            }
-
-            set
-            {
-                this.SetValue(SearchEventTimeDelayProperty, value);
-            }
+            get { return (Brush)GetValue(LabelTextColorProperty); }
+            set { SetValue(LabelTextColorProperty, value); }
         }
 
         public SearchMode SearchMode
         {
-            get
-            {
-                return (SearchMode)this.GetValue(SearchModeProperty);
-            }
-
-            set
-            {
-                this.SetValue(SearchModeProperty, value);
-            }
+            get { return (SearchMode)GetValue(SearchModeProperty); }
+            set { SetValue(SearchModeProperty, value); }
         }
 
-        #endregion
-
-        #region Public Methods and Operators
-
-        public override void OnApplyTemplate()
+        public bool HasText
         {
-            base.OnApplyTemplate();
-
-            var iconBorder = this.GetTemplateChild("PART_SearchIconBorder") as Border;
-            if (iconBorder != null)
-            {
-                iconBorder.MouseLeftButtonDown += this.IconBorder_MouseLeftButtonDown;
-                iconBorder.MouseLeftButtonUp += this.IconBorder_MouseLeftButtonUp;
-                iconBorder.MouseLeave += this.IconBorder_MouseLeave;
-            }
+            get { return (bool)GetValue(HasTextProperty); }
+            private set { SetValue(HasTextPropertyKey, value); }
         }
 
-        #endregion
-
-        #region Methods
-
-        protected override void OnKeyDown(KeyEventArgs e)
+        public Duration SearchEventTimeDelay
         {
-            if (e.Key == Key.Escape && this.SearchMode == SearchMode.Instant)
-            {
-                this.Text = string.Empty;
-            }
-            else if ((e.Key == Key.Return || e.Key == Key.Enter) && this.SearchMode == SearchMode.Delayed)
-            {
-                this.RaiseSearchEvent();
-            }
-            else
-            {
-                base.OnKeyDown(e);
-            }
+            get { return (Duration)GetValue(SearchEventTimeDelayProperty); }
+            set { SetValue(SearchEventTimeDelayProperty, value); }
         }
 
-        protected override void OnTextChanged(TextChangedEventArgs e)
+        public bool IsMouseLeftButtonDown
         {
-            base.OnTextChanged(e);
-
-            this.HasText = this.Text.Length != 0;
-
-            if (this.SearchMode == SearchMode.Instant)
-            {
-                this.searchEventDelayTimer.Stop();
-                this.searchEventDelayTimer.Start();
-            }
+            get { return (bool)GetValue(IsMouseLeftButtonDownProperty); }
+            private set { SetValue(IsMouseLeftButtonDownPropertyKey, value); }
         }
 
-        private static void OnSearchEventTimeDelayChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private void OnSeachEventDelayTimerTick(object o, EventArgs e)
+        {
+            searchEventDelayTimer.Stop();
+            RaiseSearchEvent();
+        }
+
+        private static void OnSearchEventTimeDelayChanged(
+            DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var stb = o as SearchTextBox;
             if (stb != null)
@@ -250,48 +138,86 @@ namespace ARK.View.Administrationssystem
             }
         }
 
-        private void IconBorder_MouseLeave(object obj, MouseEventArgs e)
+        protected override void OnTextChanged(TextChangedEventArgs e)
         {
-            this.IsMouseLeftButtonDown = false;
+            base.OnTextChanged(e);
+
+            HasText = Text.Length != 0;
+
+            if (SearchMode == SearchMode.Instant)
+            {
+                searchEventDelayTimer.Stop();
+                searchEventDelayTimer.Start();
+            }
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            var iconBorder = GetTemplateChild("PART_SearchIconBorder") as Border;
+            if (iconBorder != null)
+            {
+                iconBorder.MouseLeftButtonDown += IconBorder_MouseLeftButtonDown;
+                iconBorder.MouseLeftButtonUp += IconBorder_MouseLeftButtonUp;
+                iconBorder.MouseLeave += IconBorder_MouseLeave;
+            }
         }
 
         private void IconBorder_MouseLeftButtonDown(object obj, MouseButtonEventArgs e)
         {
-            this.IsMouseLeftButtonDown = true;
+            IsMouseLeftButtonDown = true;
         }
 
         private void IconBorder_MouseLeftButtonUp(object obj, MouseButtonEventArgs e)
         {
-            if (!this.IsMouseLeftButtonDown)
+            if (!IsMouseLeftButtonDown) return;
+
+            if (HasText && SearchMode == SearchMode.Instant)
             {
-                return;
+                Text = "";
             }
 
-            if (this.HasText && this.SearchMode == SearchMode.Instant)
+            if (HasText && SearchMode == SearchMode.Delayed)
             {
-                this.Text = string.Empty;
+                RaiseSearchEvent();
             }
 
-            if (this.HasText && this.SearchMode == SearchMode.Delayed)
-            {
-                this.RaiseSearchEvent();
-            }
-
-            this.IsMouseLeftButtonDown = false;
+            IsMouseLeftButtonDown = false;
         }
 
-        private void OnSeachEventDelayTimerTick(object o, EventArgs e)
+        private void IconBorder_MouseLeave(object obj, MouseEventArgs e)
         {
-            this.searchEventDelayTimer.Stop();
-            this.RaiseSearchEvent();
+            IsMouseLeftButtonDown = false;
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape && SearchMode == SearchMode.Instant)
+            {
+                Text = "";
+            }
+            else if ((e.Key == Key.Return || e.Key == Key.Enter) &&
+                     SearchMode == SearchMode.Delayed)
+            {
+                RaiseSearchEvent();
+            }
+            else
+            {
+                base.OnKeyDown(e);
+            }
         }
 
         private void RaiseSearchEvent()
         {
             var args = new RoutedEventArgs(SearchEvent);
-            this.RaiseEvent(args);
+            RaiseEvent(args);
         }
 
-        #endregion
+        public event RoutedEventHandler Search
+        {
+            add { AddHandler(SearchEvent, value); }
+            remove { RemoveHandler(SearchEvent, value); }
+        }
     }
 }

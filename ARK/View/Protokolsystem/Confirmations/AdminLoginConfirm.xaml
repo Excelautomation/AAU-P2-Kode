@@ -65,7 +65,7 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="UsernameBox" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26" Text="{Binding Path=Username}"/>
+                <TextBox x:Name="UsernameBox" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26" Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <PasswordBox x:Name="PasswordBox" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="26">
                     <PasswordBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding Path=Login}" CommandParameter="{Binding ElementName=AdminLoginConfirmWindow}"/>
