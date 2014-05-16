@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using ARK.HelperFunctions;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Administrationssystem.Pages;
@@ -260,7 +260,7 @@ namespace ARK.ViewModel.Administrationssystem
 
                             // Convert username and password to lower-case
                             this.NewAdmin.Username = this.NewAdmin.Username.ToLower();
-                            this.NewAdmin.Password = this.NewAdmin.Password.ToLower();
+                            this.NewAdmin.Password = PasswordHashing.HashPassword(this.NewAdmin.Password.ToLower());
 
                             // Add the new admin to database and list
                             this._db.Admin.Add(this.NewAdmin);
