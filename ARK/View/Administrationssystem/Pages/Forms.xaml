@@ -123,22 +123,22 @@
                                     <DockPanel Margin="0,5,0,5">
                                         <StackPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Båd:" FontSize="14px" />
-                                                <TextBlock Text="{Binding Boat.Name}" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Båd:"/>
+                                                <TextBlock Text="{Binding Boat.Name}"/>
                                             </WrapPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Ansvarlig:" FontSize="14px" />
-                                                <TextBlock Text="{Binding Members[0].FirstName}" FontSize="14px"/>
-                                                <TextBlock Text=" " FontSize="14px"/>
-                                                <TextBlock Text="{Binding Members[0].LastName}" FontSize="14px"/>
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Ansvarlig:" />
+                                                <TextBlock Text="{Binding Members[0].FirstName}" />
+                                                <TextBlock Text=" "/>
+                                                <TextBlock Text="{Binding Members[0].LastName}" />
                                             </WrapPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Afgang:" FontSize="14px" />
-                                                <TextBlock Text="{Binding PlannedStartDate, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Afgang: "/>
+                                                <TextBlock Text="{Binding PlannedStartDate, StringFormat=d}" />
                                             </WrapPanel>
                                             <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Hjemkomst:" FontSize="14px" />
-                                                <TextBlock Text="{Binding PlannedEndDate, StringFormat=d}" FontSize="14px" />
+                                                <TextBlock FontWeight="SemiBold" Width="80" Text="Hjemkomst: "/>
+                                                <TextBlock Text="{Binding PlannedEndDate, StringFormat=d}"  />
                                             </WrapPanel>
                                         </StackPanel>
                                     </DockPanel>
