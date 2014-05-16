@@ -596,7 +596,6 @@
     <Resource Include="View\Administrationssystem\Fonts\arialbd.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\arialbi.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\ariali.ttf" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Diagrams\ViewModelProtokolsystemData.cd" />
     <None Include="Diagrams\ViewModelProtokolsystemConfirmation.cd" />
     <None Include="Diagrams\ViewModelProtokolsystemAdditional.cd" />
