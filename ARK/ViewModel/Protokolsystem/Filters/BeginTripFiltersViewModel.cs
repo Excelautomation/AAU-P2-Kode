@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
@@ -9,225 +10,337 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 {
     internal class BeginTripFiltersViewModel : FilterViewModelBase
     {
+        #region Fields
+
+        private bool _categoryAllSizesChecked;
+
         private bool _categoryAllTypesChecked;
+
+        private bool _categoryEightChecked;
+
         private bool _categoryErgometerChecked;
+
+        private bool _categoryFourChecked;
+
         private bool _categoryGigChecked;
+
         private bool _categoryInriggerChecked;
+
         private bool _categoryKajakChecked;
-        private bool _categoryOutriggerChecked;
+
+        private bool _categoryLongTourChecked;
 
         // Boat size filtering
         private bool _categoryOneChecked;
-        private bool _categoryTwoChecked;
-        private bool _categoryFourChecked;
+
+        private bool _categoryOutriggerChecked;
+
         private bool _categorySixChecked;
-        private bool _categoryEightChecked;
-        private bool _categoryAllSizesChecked;
-        private bool _categoryLongTourChecked;
+
+        private bool _categoryTwoChecked;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public BeginTripFiltersViewModel()
         {
-            CurrentBoatType = new CategoryFilter<Boat>(boat => true);
-            CurrentBoatSizeFilter = new CategoryFilter<Boat>(boat => true);
+            this.CurrentBoatType = new CategoryFilter<Boat>(boat => true);
+            this.CurrentBoatSizeFilter = new CategoryFilter<Boat>(boat => true);
 
-            CategoryAllChecked = true;
-            CategoryAllSizesChecked = true;
+            this.CategoryAllChecked = true;
+            this.CategoryAllSizesChecked = true;
 
-            UpdateFilter();
+            this.UpdateFilter();
         }
 
-        public CategoryFilter<Boat> CurrentBoatSizeFilter { get; set; }
-        public CategoryFilter<Boat> CurrentBoatType { get; set; }
+        #endregion
 
-        #region Category
+        #region Public Properties
+
         public bool CategoryAllChecked
         {
-            get { return _categoryAllTypesChecked; }
+            get
+            {
+                return this._categoryAllTypesChecked;
+            }
+
             set
             {
-                _categoryAllTypesChecked = value;
+                this._categoryAllTypesChecked = value;
                 if (value)
-                    UpdateCategory(boat => true);
+                {
+                    this.UpdateCategory(boat => true);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
 
-        public bool CategoryKajakChecked
+        public bool CategoryAllSizesChecked
         {
-            get { return _categoryKajakChecked; }
+            get
+            {
+                return this._categoryAllSizesChecked;
+            }
+
             set
             {
-                _categoryKajakChecked = value;
+                this._categoryAllSizesChecked = value;
                 if (value)
-                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Kajak);
+                {
+                    this.UpdateSide(boat => true);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
 
-        public bool CategoryOutriggerChecked
+        public bool CategoryEightChecked
         {
-            get { return _categoryOutriggerChecked; }
+            get
+            {
+                return this._categoryEightChecked;
+            }
+
             set
             {
-                _categoryOutriggerChecked = value;
+                this._categoryEightChecked = value;
                 if (value)
-                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Outrigger);
+                {
+                    this.UpdateSide(boat => boat.NumberofSeats > 8);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
 
         public bool CategoryErgometerChecked
         {
-            get { return _categoryErgometerChecked; }
+            get
+            {
+                return this._categoryErgometerChecked;
+            }
+
             set
             {
-                _categoryErgometerChecked = value;
+                this._categoryErgometerChecked = value;
                 if (value)
-                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Ergometer);
+                {
+                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Ergometer);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
 
-        public bool CategoryInriggerChecked
+        public bool CategoryFourChecked
         {
-            get { return _categoryInriggerChecked; }
+            get
+            {
+                return this._categoryFourChecked;
+            }
+
             set
             {
-                _categoryInriggerChecked = value;
+                this._categoryFourChecked = value;
                 if (value)
-                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Inrigger);
+                {
+                    this.UpdateSide(boat => boat.NumberofSeats == 4 || boat.NumberofSeats == 5);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
 
         public bool CategoryGigChecked
         {
-            get { return _categoryGigChecked; }
+            get
+            {
+                return this._categoryGigChecked;
+            }
+
             set
             {
-                _categoryGigChecked = value;
+                this._categoryGigChecked = value;
                 if (value)
-                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Gig);
+                {
+                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Gig);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
-        #endregion
 
-        #region Size
-        public bool CategoryOneChecked
+        public bool CategoryInriggerChecked
         {
-            get { return _categoryOneChecked ; }
+            get
+            {
+                return this._categoryInriggerChecked;
+            }
+
             set
             {
-                _categoryOneChecked = value; 
-                
+                this._categoryInriggerChecked = value;
                 if (value)
-                    UpdateSide(boat => boat.NumberofSeats == 1);
+                {
+                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Inrigger);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
-        public bool CategoryTwoChecked
-        {
-            get { return _categoryTwoChecked; }
-            set 
-            { 
-                _categoryTwoChecked = value;
-                if (value)
-                    UpdateSide(boat => boat.NumberofSeats == 2 || boat.NumberofSeats == 3);
 
-                Notify();
-            }
-        }
-        public bool CategoryFourChecked
+        public bool CategoryKajakChecked
         {
-            get { return _categoryFourChecked; }
-            set 
-            { 
-                _categoryFourChecked = value;
-                if (value)
-                    UpdateSide(boat => boat.NumberofSeats == 4 || boat.NumberofSeats == 5);
-
-                Notify();
-            }
-        }
-        public bool CategorySixChecked
-        {
-            get { return _categorySixChecked; }
-            set 
-            { 
-                _categorySixChecked = value;
-                if (value)
-                    UpdateSide(boat => boat.NumberofSeats == 6);
-
-                Notify();
-            }
-        }
-        public bool CategoryEightChecked
-        {
-            get { return _categoryEightChecked; }
-            set 
-            { 
-                _categoryEightChecked = value;
-                if (value)
-                    UpdateSide(boat => boat.NumberofSeats > 8);
-
-                Notify();
-            }
-        }
-        public bool CategoryAllSizesChecked
-        {
-            get { return _categoryAllSizesChecked; }
-            set 
+            get
             {
-                _categoryAllSizesChecked = value;
-                if (value)
-                    UpdateSide(boat => true);
+                return this._categoryKajakChecked;
+            }
 
-                Notify();
+            set
+            {
+                this._categoryKajakChecked = value;
+                if (value)
+                {
+                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Kajak);
+                }
+
+                this.Notify();
             }
         }
+
         public bool CategoryLongTourChecked
         {
-            get { return _categoryLongTourChecked; }
-            set 
-            { 
-                _categoryLongTourChecked = value;
-                if (value)
-                    UpdateSide(boat => boat.LongTripBoat);
+            get
+            {
+                return this._categoryLongTourChecked;
+            }
 
-                Notify();
+            set
+            {
+                this._categoryLongTourChecked = value;
+                if (value)
+                {
+                    this.UpdateSide(boat => boat.LongTripBoat);
+                }
+
+                this.Notify();
             }
         }
-#endregion
+
+        public bool CategoryOneChecked
+        {
+            get
+            {
+                return this._categoryOneChecked;
+            }
+
+            set
+            {
+                this._categoryOneChecked = value;
+
+                if (value)
+                {
+                    this.UpdateSide(boat => boat.NumberofSeats == 1);
+                }
+
+                this.Notify();
+            }
+        }
+
+        public bool CategoryOutriggerChecked
+        {
+            get
+            {
+                return this._categoryOutriggerChecked;
+            }
+
+            set
+            {
+                this._categoryOutriggerChecked = value;
+                if (value)
+                {
+                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Outrigger);
+                }
+
+                this.Notify();
+            }
+        }
+
+        public bool CategorySixChecked
+        {
+            get
+            {
+                return this._categorySixChecked;
+            }
+
+            set
+            {
+                this._categorySixChecked = value;
+                if (value)
+                {
+                    this.UpdateSide(boat => boat.NumberofSeats == 6);
+                }
+
+                this.Notify();
+            }
+        }
+
+        public bool CategoryTwoChecked
+        {
+            get
+            {
+                return this._categoryTwoChecked;
+            }
+
+            set
+            {
+                this._categoryTwoChecked = value;
+                if (value)
+                {
+                    this.UpdateSide(boat => boat.NumberofSeats == 2 || boat.NumberofSeats == 3);
+                }
+
+                this.Notify();
+            }
+        }
+
+        public CategoryFilter<Boat> CurrentBoatSizeFilter { get; set; }
+
+        public CategoryFilter<Boat> CurrentBoatType { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public override IEnumerable<IFilter> GetFilter()
+        {
+            return new List<IFilter> { this.CurrentBoatType, this.CurrentBoatSizeFilter };
+        }
+
+        #endregion
+
+        #region Methods
 
         private void UpdateCategory(Func<Boat, bool> filter)
         {
-            CurrentBoatType.Filter = filter;
+            this.CurrentBoatType.Filter = filter;
 
-            UpdateFilter();
-        }
-
-        private void UpdateSide(Func<Boat, bool> filter)
-        {
-            CurrentBoatSizeFilter.Filter = filter;
-            UpdateFilter();
+            this.UpdateFilter();
         }
 
         private void UpdateFilter()
         {
-            base.OnFilterChanged();
+            this.OnFilterChanged();
         }
 
-        public override IEnumerable<IFilter> GetFilter()
+        private void UpdateSide(Func<Boat, bool> filter)
         {
-            return new List<IFilter> {CurrentBoatType, CurrentBoatSizeFilter};
+            this.CurrentBoatSizeFilter.Filter = filter;
+            this.UpdateFilter();
         }
+
+        #endregion
     }
 }

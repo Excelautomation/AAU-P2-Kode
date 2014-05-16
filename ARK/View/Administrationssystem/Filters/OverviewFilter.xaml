@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <UserControl.DataContext>
-        <VMFilter:OverviewFilterViewModel></VMFilter:OverviewFilterViewModel>
+        <VMFilter:OverviewFilterViewModel />
     </UserControl.DataContext>
 
     <UserControl.Resources>
@@ -16,8 +16,8 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <CheckBox Content="Skader" IsChecked="{Binding Path=Damages, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Langtur" IsChecked="{Binding Path=LongTrip, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Både ude" IsChecked="{Binding Path=BoatsOut, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Skader" IsChecked="{Binding Path=Damages, Mode=TwoWay}" />
+        <CheckBox Content="Langtur" IsChecked="{Binding Path=LongTrip, Mode=TwoWay}" />
+        <CheckBox Content="Både ude" IsChecked="{Binding Path=BoatsOut, Mode=TwoWay}" />
     </StackPanel>
 </UserControl>

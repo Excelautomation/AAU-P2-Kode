@@ -8,6 +8,20 @@ namespace ARK.HelperFunctions
 {
     public static class CloneFunctions
     {
+        #region Public Methods and Operators
+
+        public static IEnumerable<T> CloneCollection<T>(IEnumerable<T> input) where T : class, new()
+        {
+            var output = new List<T>();
+
+            foreach (var item in input)
+            {
+                output.Add(CloneObject(item));
+            }
+
+            return output;
+        }
+
         public static T CloneObject<T>(T input) where T : class, new()
         {
             var inputType = input.GetType();
@@ -15,12 +29,14 @@ namespace ARK.HelperFunctions
 
             var fields = inputType.GetFields().Where(x => x.Name != "_entityWrapper");
             var colFields = fields.Where(x => x.FieldType != typeof(string) && GetEnumerableType(x.FieldType) != null);
-            var simpleFields =
-                fields.Where(x => x.FieldType == typeof(string) || GetEnumerableType(x.FieldType) == null);
+            var simpleFields = fields.Where(
+                x => x.FieldType == typeof(string) || GetEnumerableType(x.FieldType) == null);
 
             var readWriteProps = inputType.GetProperties().Where(x => x.CanRead && x.CanWrite);
-            var colProps = readWriteProps.Where(x => GetEnumerableType(x.PropertyType) != null && x.PropertyType != typeof(string));
-            var simpleProps = readWriteProps.Where(x => x.PropertyType == typeof(string) || GetEnumerableType(x.PropertyType) == null);
+            var colProps =
+                readWriteProps.Where(x => GetEnumerableType(x.PropertyType) != null && x.PropertyType != typeof(string));
+            var simpleProps =
+                readWriteProps.Where(x => x.PropertyType == typeof(string) || GetEnumerableType(x.PropertyType) == null);
 
             foreach (var field in simpleFields)
             {
@@ -45,23 +61,13 @@ namespace ARK.HelperFunctions
             return output;
         }
 
-        public static IEnumerable<T> CloneCollection<T>(IEnumerable<T> input) where T : class, new()
-        {
-            var output = new List<T>();
-
-            foreach (var item in input)
-            {
-                output.Add(CloneObject(item));
-            }
-
-            return output;
-        }
-
         public static Type GetEnumerableType(Type type)
         {
             return (from intType in type.GetInterfaces()
-                where intType.IsGenericType && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                select intType.GetGenericArguments()[0]).FirstOrDefault();
+                    where intType.IsGenericType && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                    select intType.GetGenericArguments()[0]).FirstOrDefault();
         }
+
+        #endregion
     }
 }

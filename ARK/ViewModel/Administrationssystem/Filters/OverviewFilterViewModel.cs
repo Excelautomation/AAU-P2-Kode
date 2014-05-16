@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
@@ -7,90 +8,135 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 {
     public class OverviewFilterViewModel : FilterViewModelBase
     {
+        #region Constructors and Destructors
+
         public OverviewFilterViewModel()
         {
-            CurrentFilter = new OverViewFilter();
+            this.CurrentFilter = new OverViewFilter();
 
-            Damages = true;
-            LongTrip = true;
-            BoatsOut = true;
+            this.Damages = true;
+            this.LongTrip = true;
+            this.BoatsOut = true;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public bool BoatsOut
+        {
+            get
+            {
+                return this.CurrentFilter.ShowBoatsOut;
+            }
+
+            set
+            {
+                this.CurrentFilter.ShowBoatsOut = value;
+                this.Notify();
+                this.CallEvent();
+            }
         }
 
         public OverViewFilter CurrentFilter { get; set; }
 
         public bool Damages
         {
-            get { return CurrentFilter.ShowDamages; }
+            get
+            {
+                return this.CurrentFilter.ShowDamages;
+            }
+
             set
             {
-                CurrentFilter.ShowDamages = value;
-                Notify();
-                CallEvent();
+                this.CurrentFilter.ShowDamages = value;
+                this.Notify();
+                this.CallEvent();
             }
         }
 
         public bool LongTrip
         {
-            get { return CurrentFilter.ShowLongTrip; }
+            get
+            {
+                return this.CurrentFilter.ShowLongTrip;
+            }
+
             set
             {
-                CurrentFilter.ShowLongTrip = value;
-                Notify();
-                CallEvent();
+                this.CurrentFilter.ShowLongTrip = value;
+                this.Notify();
+                this.CallEvent();
             }
         }
 
-        public bool BoatsOut
-        {
-            get { return CurrentFilter.ShowBoatsOut; }
-            set
-            {
-                CurrentFilter.ShowBoatsOut = value;
-                Notify();
-                CallEvent();
-            }
-        }
+        #endregion
 
-        private void CallEvent()
-        {
-            OnFilterChanged();
-        }
-
+        #region Public Methods and Operators
 
         public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<IFilter> {CurrentFilter};
+            return new List<IFilter> { this.CurrentFilter };
         }
+
+        #endregion
+
+        #region Methods
+
+        private void CallEvent()
+        {
+            this.OnFilterChanged();
+        }
+
+        #endregion
 
         public class OverViewFilter : IFilter
         {
-            public bool ShowDamages { get; set; }
-            public bool ShowLongTrip { get; set; }
+            #region Public Properties
+
             public bool ShowBoatsOut { get; set; }
+
+            public bool ShowDamages { get; set; }
+
+            public bool ShowLongTrip { get; set; }
+
+            #endregion
+
+            #region Public Methods and Operators
 
             public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
-                if (!ShowDamages && !ShowLongTrip && !ShowBoatsOut)
+                if (!this.ShowDamages && !this.ShowLongTrip && !this.ShowBoatsOut)
+                {
                     return new List<T>();
+                }
 
-                if (typeof (DamageForm) == typeof (T))
+                if (typeof(DamageForm) == typeof(T))
                 {
-                    if (ShowDamages)
+                    if (this.ShowDamages)
+                    {
                         return items;
+                    }
                 }
-                else if (typeof (LongTripForm) == typeof (T))
+                else if (typeof(LongTripForm) == typeof(T))
                 {
-                    if (ShowLongTrip)
+                    if (this.ShowLongTrip)
+                    {
                         return items;
+                    }
                 }
-                else if (typeof (Boat) == typeof (T))
+                else if (typeof(Boat) == typeof(T))
                 {
-                    if (ShowBoatsOut)
+                    if (this.ShowBoatsOut)
+                    {
                         return items;
+                    }
                 }
 
                 return new List<T>();
             }
+
+            #endregion
         }
     }
 }

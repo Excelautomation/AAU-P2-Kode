@@ -20,9 +20,13 @@ namespace ARK.View.Administrationssystem.Filters
     /// </summary>
     public partial class TripFilter : UserControl
     {
+        #region Constructors and Destructors
+
         public TripFilter()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

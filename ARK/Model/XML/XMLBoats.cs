@@ -12,7 +12,13 @@ namespace ARK.Model.XML
         [XmlRoot(Namespace = "", IsNullable = false)]
         public partial class dataroot
         {
+            #region Fields
+
             private DateTime generatedField;
+
+            #endregion
+
+            #region Public Properties
 
             /// <remarks/>
             [XmlElement("BådeSpecifik")]
@@ -24,33 +30,41 @@ namespace ARK.Model.XML
             {
                 get
                 {
-                    return generatedField;
+                    return this.generatedField;
                 }
+
                 set
                 {
-                    generatedField = value;
+                    this.generatedField = value;
                 }
             }
+
+            #endregion
         }
 
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         public partial class datarootBådeSpecifik
         {
-            /// <remarks/>
-            public byte ID { get; set; }
-
-            /// <remarks/>
-            public string Navn { get; set; }
-
-            /// <remarks/>
-            public byte AntalPladser { get; set; }
+            #region Public Properties
 
             /// <remarks/>
             public byte Aktiv { get; set; }
 
             /// <remarks/>
+            public byte AntalPladser { get; set; }
+
+            /// <remarks/>
             public byte BådType { get; set; }
+
+            /// <remarks/>
+            public byte ID { get; set; }
+
+            /// <remarks/>
+            public byte LangtursBåd { get; set; }
+
+            /// <remarks/>
+            public string Navn { get; set; }
 
             /// <remarks/>
             public byte Roforbud { get; set; }
@@ -58,9 +72,7 @@ namespace ARK.Model.XML
             /// <remarks/>
             public byte SpecifikBådType { get; set; }
 
-            /// <remarks/>
-            public byte LangtursBåd { get; set; }
+            #endregion
         }
     }
 }
-

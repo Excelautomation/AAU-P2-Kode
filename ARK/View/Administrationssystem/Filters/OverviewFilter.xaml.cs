@@ -20,9 +20,13 @@ namespace ARK.View.Administrationssystem.Filters
     /// </summary>
     public partial class OverviewFilter : UserControl
     {
+        #region Constructors and Destructors
+
         public OverviewFilter()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

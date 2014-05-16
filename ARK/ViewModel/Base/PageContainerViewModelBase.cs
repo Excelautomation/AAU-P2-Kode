@@ -1,61 +1,92 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+
 using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Base
 {
     public abstract class PageContainerViewModelBase : ViewModelBase, IPageContainerViewModelBase
     {
+        #region Fields
+
         private FrameworkElement _currentPage;
+
         private string _currentPageTitle;
+
+        #endregion
+
+        #region Public Properties
 
         public FrameworkElement CurrentPage
         {
-            get { return _currentPage; }
+            get
+            {
+                return this._currentPage;
+            }
+
             protected set
             {
-                _currentPage = value;
-                Notify();
+                this._currentPage = value;
+                this.Notify();
             }
         }
 
         public string CurrentPageTitle
         {
-            get { return _currentPageTitle; }
+            get
+            {
+                return this._currentPageTitle;
+            }
+
             protected set
             {
-                _currentPageTitle = value;
-                Notify();
+                this._currentPageTitle = value;
+                this.Notify();
             }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public ICommand GetNavigateCommand(Func<FrameworkElement> page, string pageTitle)
+        {
+            return this.GetCommand(() => this.NavigateToPage(page, pageTitle));
         }
 
         public virtual void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
             // Check page
-            if (page == null) throw new ArgumentNullException("page");
+            if (page == null)
+            {
+                throw new ArgumentNullException("page");
+            }
 
             // Check if currentpage is null, if cond. is true then cleanup
-            if (CurrentPage != null)
+            if (this.CurrentPage != null)
             {
-                var vm = CurrentPage.DataContext as IContentViewModelBase;
-                if (vm != null) vm.Parent = null;
+                var vm = this.CurrentPage.DataContext as IContentViewModelBase;
+                if (vm != null)
+                {
+                    vm.Parent = null;
+                }
             }
 
             // Set current page and text
-            CurrentPage = page();
-            CurrentPageTitle = pageTitle;
+            this.CurrentPage = page();
+            this.CurrentPageTitle = pageTitle;
 
             // Check viewModel
-            var viewModel = CurrentPage.DataContext as IContentViewModelBase;
+            var viewModel = this.CurrentPage.DataContext as IContentViewModelBase;
 
             // Set parent
-            if (viewModel != null) viewModel.Parent = this;
+            if (viewModel != null)
+            {
+                viewModel.Parent = this;
+            }
         }
 
-        public ICommand GetNavigateCommand(Func<FrameworkElement> page, string pageTitle)
-        {
-            return GetCommand(() => NavigateToPage(page, pageTitle));
-        }
+        #endregion
     }
 }

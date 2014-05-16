@@ -7,102 +7,111 @@ namespace ARK.Model.XML
 {
     public class XMLMembers
     {
+        #region Enums
+
         /// <remarks/>
         [XmlType(IncludeInSchema = false)]
         public enum ItemsChoiceType
         {
+            /// <remarks/>
+            Adresse1, 
 
             /// <remarks/>
-            Adresse1,
+            Adresse2, 
 
             /// <remarks/>
-            Adresse2,
+            By, 
 
             /// <remarks/>
-            By,
+            EMail, 
 
             /// <remarks/>
-            EMail,
+            EMail2, 
 
             /// <remarks/>
-            EMail2,
+            Efternavn, 
 
             /// <remarks/>
-            Efternavn,
+            Fornavn, 
 
             /// <remarks/>
-            Fornavn,
+            Frigivet, 
 
             /// <remarks/>
-            Frigivet,
+            FrigivetDato, 
 
             /// <remarks/>
-            FrigivetDato,
+            Fødselsdato, 
 
             /// <remarks/>
-            Fødselsdato,
+            ID, 
 
             /// <remarks/>
-            ID,
+            Kajakret, 
 
             /// <remarks/>
-            Kajakret,
+            KajakretDato, 
 
             /// <remarks/>
-            KajakretDato,
+            Korttursstyrmand, 
 
             /// <remarks/>
-            Korttursstyrmand,
+            KorttursstyrmandDato, 
 
             /// <remarks/>
-            KorttursstyrmandDato,
+            Langtursstyrmand, 
 
             /// <remarks/>
-            Langtursstyrmand,
+            LangtursstyrmandDato, 
 
             /// <remarks/>
-            LangtursstyrmandDato,
+            MedlemsNr, 
 
             /// <remarks/>
-            MedlemsNr,
+            Outriggerret, 
 
             /// <remarks/>
-            Outriggerret,
+            OutriggerretDato, 
 
             /// <remarks/>
-            OutriggerretDato,
+            PostNr, 
 
             /// <remarks/>
-            PostNr,
+            Scullerret, 
 
             /// <remarks/>
-            Scullerret,
+            ScullerretDato, 
 
             /// <remarks/>
-            ScullerretDato,
+            Svømmeprøve, 
 
             /// <remarks/>
-            Svømmeprøve,
+            SvømmeprøveDato, 
 
             /// <remarks/>
-            SvømmeprøveDato,
+            Telefon, 
 
             /// <remarks/>
-            Telefon,
+            TelefonArbejde, 
 
             /// <remarks/>
-            TelefonArbejde,
-
-            /// <remarks/>
-            TelefonMobil,
+            TelefonMobil, 
         }
+
+        #endregion
 
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         [XmlRoot(Namespace = "", IsNullable = false)]
         public partial class dataroot
         {
+            #region Fields
+
             private DateTime generatedField;
+
+            #endregion
+
+            #region Public Properties
 
             /// <remarks/>
             [XmlElement("AktiveMedlemmer")]
@@ -114,40 +123,81 @@ namespace ARK.Model.XML
             {
                 get
                 {
-                    return generatedField;
+                    return this.generatedField;
                 }
+
                 set
                 {
-                    generatedField = value;
+                    this.generatedField = value;
                 }
             }
+
+            #endregion
         }
 
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         public partial class datarootAktiveMedlemmer
         {
+            #region Public Properties
+
             /// <remarks/>
-            [XmlElement("Adresse1", typeof(string)), XmlElement("Adresse2", typeof(string)), XmlElement("By", typeof(string)), XmlElement("EMail", typeof(string)), XmlElement("EMail2", typeof(string)), XmlElement("Efternavn", typeof(string)), XmlElement("Fornavn", typeof(string)), XmlElement("Frigivet", typeof(byte)), XmlElement("FrigivetDato", typeof(DateTime)), XmlElement("Fødselsdato", typeof(DateTime)), XmlElement("ID", typeof(ushort)), XmlElement("Kajakret", typeof(byte)), XmlElement("KajakretDato", typeof(DateTime)), XmlElement("Korttursstyrmand", typeof(byte)), XmlElement("KorttursstyrmandDato", typeof(DateTime)), XmlElement("Langtursstyrmand", typeof(byte)), XmlElement("LangtursstyrmandDato", typeof(DateTime)), XmlElement("MedlemsNr", typeof(byte)), XmlElement("Outriggerret", typeof(byte)), XmlElement("OutriggerretDato", typeof(DateTime)), XmlElement("PostNr", typeof(ushort)), XmlElement("Scullerret", typeof(byte)), XmlElement("ScullerretDato", typeof(DateTime)), XmlElement("Svømmeprøve", typeof(byte)), XmlElement("SvømmeprøveDato", typeof(DateTime)), XmlElement("Telefon", typeof(string)), XmlElement("TelefonArbejde", typeof(string)), XmlElement("TelefonMobil", typeof(string)), XmlChoiceIdentifier("ItemsElementName")]
+            [XmlElement("Adresse1", typeof(string))]
+            [XmlElement("Adresse2", typeof(string))]
+            [XmlElement("By", typeof(string))]
+            [XmlElement("EMail", typeof(string))]
+            [XmlElement("EMail2", typeof(string))]
+            [XmlElement("Efternavn", typeof(string))]
+            [XmlElement("Fornavn", typeof(string))]
+            [XmlElement("Frigivet", typeof(byte))]
+            [XmlElement("FrigivetDato", typeof(DateTime))]
+            [XmlElement("Fødselsdato", typeof(DateTime))]
+            [XmlElement("ID", typeof(ushort))]
+            [XmlElement("Kajakret", typeof(byte))]
+            [XmlElement("KajakretDato", typeof(DateTime))]
+            [XmlElement("Korttursstyrmand", typeof(byte))]
+            [XmlElement("KorttursstyrmandDato", typeof(DateTime))]
+            [XmlElement("Langtursstyrmand", typeof(byte))]
+            [XmlElement("LangtursstyrmandDato", typeof(DateTime))]
+            [XmlElement("MedlemsNr", typeof(byte))]
+            [XmlElement("Outriggerret", typeof(byte))]
+            [XmlElement("OutriggerretDato", typeof(DateTime))]
+            [XmlElement("PostNr", typeof(ushort))]
+            [XmlElement("Scullerret", typeof(byte))]
+            [XmlElement("ScullerretDato", typeof(DateTime))]
+            [XmlElement("Svømmeprøve", typeof(byte))]
+            [XmlElement("SvømmeprøveDato", typeof(DateTime))]
+            [XmlElement("Telefon", typeof(string))]
+            [XmlElement("TelefonArbejde", typeof(string))]
+            [XmlElement("TelefonMobil", typeof(string))]
+            [XmlChoiceIdentifier("ItemsElementName")]
             public object[] Items { get; set; }
 
             /// <remarks/>
-            [XmlElement("ItemsElementName"), XmlIgnore()]
+            [XmlElement("ItemsElementName")]
+            [XmlIgnore()]
             public ItemsChoiceType[] ItemsElementName { get; set; }
+
+            #endregion
+
+            #region Public Methods and Operators
 
             public object GetObjFromName(ItemsChoiceType name)
             {
                 object obj;
                 try
                 {
-                    obj = Items[Array.IndexOf(ItemsElementName, name)];
+                    obj = this.Items[Array.IndexOf(this.ItemsElementName, name)];
                 }
                 catch (IndexOutOfRangeException)
                 {
                     obj = null;
                 }
+
                 return obj;
             }
+
+            #endregion
         }
     }
 }

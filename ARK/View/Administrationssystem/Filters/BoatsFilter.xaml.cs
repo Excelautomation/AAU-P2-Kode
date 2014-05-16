@@ -20,9 +20,13 @@ namespace ARK.View.Administrationssystem.Filters
     /// </summary>
     public partial class BoatsFilter : UserControl
     {
+        #region Constructors and Destructors
+
         public BoatsFilter()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

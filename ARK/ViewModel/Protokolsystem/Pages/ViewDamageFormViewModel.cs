@@ -1,66 +1,71 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using ARK.View.Protokolsystem.Additional;
-using ARK.View.Protokolsystem.Pages;
+
 using ARK.Model;
-using System.Collections.Generic;
 using ARK.Model.DB;
-using System.Linq;
-using ARK.ViewModel.Protokolsystem.Additional;
+using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Confirmations;
+using ARK.View.Protokolsystem.Pages;
+using ARK.ViewModel.Protokolsystem.Additional;
 using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
-    class ViewDamageFormViewModel : ProtokolsystemContentViewModelBase
+    internal class ViewDamageFormViewModel : ProtokolsystemContentViewModelBase
     {
+        #region Fields
+
         private List<DamageForm> _damageForms;
+
         private FrameworkElement _infoPage;
-        DbArkContext db = DbArkContext.GetDbContext();
 
         private DamageForm _selectedDamageForm;
 
-        public DamageForm SelectedDamageForm
-        {
-            get { return _selectedDamageForm; }
-            set 
-            { 
-                _selectedDamageForm = value; Notify(); UpdateInfo(); 
-            }
-        }
+        private DbArkContext db = DbArkContext.GetDbContext();
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public ViewDamageFormViewModel()
         {
-            ParentAttached += (sender, e) =>
-            {
-                DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
+            this.ParentAttached += (sender, e) =>
+                {
+                    this.DamageForms = this.db.DamageForm.Where(x => x.Closed == false).ToList();
 
-                // Vis info
-                UpdateInfo();
-            };
+                    // Vis info
+                    this.UpdateInfo();
+                };
         }
 
-        public List<DamageForm> DamageForms
-        {
-            get { return _damageForms; }
-            set { _damageForms = value; Notify(); }
-        }
-        
+        #endregion
+
+        #region Public Properties
 
         public ICommand CreateDamageForm
         {
             get
             {
-                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+                return
+                    this.GetCommand(
+                        () => this.ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
             }
         }
 
-        public ICommand ViewDamageForm
+        public List<DamageForm> DamageForms
         {
             get
             {
-                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
+                return this._damageForms;
+            }
+
+            set
+            {
+                this._damageForms = value;
+                this.Notify();
             }
         }
 
@@ -68,44 +73,91 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand(() => 
-                {
-                    var confirmView = new DamageFormConfirm();
-                    var confirmViewModel = (DamageFormConfirmViewModel)confirmView.DataContext;
+                return this.GetCommand(
+                    () =>
+                        {
+                            var confirmView = new DamageFormConfirm();
+                            var confirmViewModel = (DamageFormConfirmViewModel)confirmView.DataContext;
 
-                    confirmViewModel.DamageForm = SelectedDamageForm;
+                            confirmViewModel.DamageForm = this.SelectedDamageForm;
 
-                    ProtocolSystem.ShowDialog(confirmView);
+                            this.ProtocolSystem.ShowDialog(confirmView);
 
-                    ProtocolSystem.EnableSearch = true;
-                });
+                            this.ProtocolSystem.EnableSearch = true;
+                        });
             }
         }
 
-        public void ResetList()
+        public DamageForm SelectedDamageForm
         {
-            DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
+            get
+            {
+                return this._selectedDamageForm;
+            }
 
-            if (DamageForms.Any())
-                SelectedDamageForm = DamageForms.First();
+            set
+            {
+                this._selectedDamageForm = value;
+                this.Notify();
+                this.UpdateInfo();
+            }
+        }
+
+        public ICommand ViewDamageForm
+        {
+            get
+            {
+                return
+                    this.GetCommand(
+                        () => this.ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        private ViewDamageFormAdditionalInfoViewModel Info
+        {
+            get
+            {
+                return this.InfoPage.DataContext as ViewDamageFormAdditionalInfoViewModel;
+            }
         }
 
         private FrameworkElement InfoPage
         {
-            get { return _infoPage ?? (_infoPage = new ViewDamageFormAdditionalInfo()); }
+            get
+            {
+                return this._infoPage ?? (this._infoPage = new ViewDamageFormAdditionalInfo());
+            }
         }
 
-        private ViewDamageFormAdditionalInfoViewModel Info
+        #endregion
+
+        #region Public Methods and Operators
+
+        public void ResetList()
         {
-            get { return InfoPage.DataContext as ViewDamageFormAdditionalInfoViewModel; }
+            this.DamageForms = this.db.DamageForm.Where(x => x.Closed == false).ToList();
+
+            if (this.DamageForms.Any())
+            {
+                this.SelectedDamageForm = this.DamageForms.First();
+            }
         }
+
+        #endregion
+
+        #region Methods
 
         private void UpdateInfo()
         {
-            Info.SelectedDamageForm = SelectedDamageForm;
+            this.Info.SelectedDamageForm = this.SelectedDamageForm;
 
-
-            ProtocolSystem.ChangeInfo(InfoPage, Info);
+            this.ProtocolSystem.ChangeInfo(this.InfoPage, this.Info);
         }
+
+        #endregion
     }
 }

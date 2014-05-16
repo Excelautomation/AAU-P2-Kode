@@ -6,100 +6,125 @@ namespace ARK.Model
 {
     public class Boat : IEquatable<Boat>
     {
+        #region Enums
+
         public enum BoatType
         {
-            None = 0,
-            Inrigger = 1,
-            Outrigger = 2,
-            Kajak = 3,
-            Gig = 4,
-            Ergometer = 5,
+            None = 0, 
+
+            Inrigger = 1, 
+
+            Outrigger = 2, 
+
+            Kajak = 3, 
+
+            Gig = 4, 
+
+            Ergometer = 5, 
+
             Ukendt = 6
         }
 
-        public static BoatType[] GetBoatTypes()
+        #endregion
+
+        // states if the boat have seating for cox
+        #region Public Properties
+
+        public bool Active { get; set; }
+
+        public bool BoatOut
         {
-            return new BoatType[]
+            get
             {
-                BoatType.Inrigger,
-                BoatType.Outrigger,
-                BoatType.Kajak,
-                BoatType.Gig,
-                BoatType.Ergometer
-            };
+                return this.GetActiveTrip != default(Trip);
+            }
         }
 
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int NumberofSeats { get; set; }          // The number of rowers in the boat without the Deckofficer
-        public bool HaveCox { get; set; }       // states if the boat have seating for cox
-        public bool Active { get; set; }                // states if the boat is not retired/dead
-        public BoatType SpecificBoatType { get; set; }
-        public bool LongTripBoat { get; set; }          // states if the boat is accepted for long tips
-        public int NewPrice { get; set; }
-        public int Year { get; set; }
-        public string InformationString { get; set; }
-
-        //Navigation properties
-        public virtual ICollection<Trip> Trips { get; set; }
+        // states if the boat is not retired/dead
         public virtual ICollection<DamageForm> DamageForms { get; set; }
-        public virtual ICollection<LongTripForm> LongTripForms { get; set; }
 
-        //Not mapped properties
-        public bool Usable                              // states if the boat is in a usable condition
+        public bool Damaged
         {
-            get { return DamageForms != null && !DamageForms.Any(x => !x.Functional && !x.Closed); }
-        }
-
-        public bool Damaged                             // Damaged or not
-        {
-            get { return DamageForms != null && DamageForms.Count != 0; }
+            // Damaged or not
+            get
+            {
+                return this.DamageForms != null && this.DamageForms.Count != 0;
+            }
         }
 
         public Trip GetActiveTrip
         {
-            get { return Trips.FirstOrDefault(trip => trip.TripEndedTime == null); }
+            get
+            {
+                return this.Trips.FirstOrDefault(trip => trip.TripEndedTime == null);
+            }
         }
 
-        public bool BoatOut
-        {
-            get { return GetActiveTrip != default(Trip); }
-        }
+        public bool HaveCox { get; set; }
+
+        public int Id { get; set; }
+
+        public string InformationString { get; set; }
 
         public double KilometersSailed
         {
-            get { return this.Trips.Sum(t => t.Distance); }
-        }
-
-        public int TripsSailed
-        {
-            get { return this.Trips.Count; }
+            get
+            {
+                return this.Trips.Sum(t => t.Distance);
+            }
         }
 
         public int LongDistanceTripsSailed
         {
-            get { return this.Trips.Count(t => t.LongTrip); }
+            get
+            {
+                return this.Trips.Count(t => t.LongTrip);
+            }
         }
 
-        //Interfaces
-        public bool Equals(Boat other)
+        public bool LongTripBoat { get; set; }
+
+        public virtual ICollection<LongTripForm> LongTripForms { get; set; }
+
+        public string Name { get; set; }
+
+        public int NewPrice { get; set; }
+
+        public int NumberofSeats { get; set; }
+
+        public BoatType SpecificBoatType { get; set; }
+
+        public virtual ICollection<Trip> Trips { get; set; }
+
+        public int TripsSailed
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id;
+            get
+            {
+                return this.Trips.Count;
+            }
         }
 
-        public override bool Equals(object obj)
+        public bool Usable
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Boat)obj);
+            // states if the boat is in a usable condition
+            get
+            {
+                return this.DamageForms != null && !this.DamageForms.Any(x => !x.Functional && !x.Closed);
+            }
         }
 
-        public override int GetHashCode()
+        public int Year { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public static BoatType[] GetBoatTypes()
         {
-            return Id;
+            return new[]
+                       {
+                          BoatType.Inrigger, BoatType.Outrigger, BoatType.Kajak, BoatType.Gig, BoatType.Ergometer 
+                       };
         }
 
         public static bool operator ==(Boat left, Boat right)
@@ -111,5 +136,48 @@ namespace ARK.Model
         {
             return !Equals(left, right);
         }
+
+        // Interfaces
+        public bool Equals(Boat other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return this.Equals((Boat)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id;
+        }
+
+        #endregion
     }
 }

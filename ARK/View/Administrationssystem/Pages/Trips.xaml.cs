@@ -20,9 +20,13 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class Trips : UserControl
     {
+        #region Constructors and Destructors
+
         public Trips()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

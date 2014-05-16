@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+
 using ARK.Model;
 using ARK.View.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
@@ -11,147 +12,211 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class AdminSystemViewModel : KeyboardContainerViewModelBase, IFilterContainerViewModel
     {
-        private bool _enableFilters;
-        private bool _enableSearch;
-        private string _searchText;
+        #region Fields
+
         private Admin _currentLoggedInUser;
+
+        private bool _enableFilters;
+
+        private bool _enableSearch;
+
+        private FrameworkElement _filter;
+
+        private Baede _pageBoats;
+
+        private Blanketter _pageForms;
+
+        private Oversigt _pageOverview;
+
+        private Trips _pageTrips;
+
+        private string _searchText;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public AdminSystemViewModel()
         {
             TimeCounter.StartTimer();
 
             // Start oversigten
-            MenuOverview.Execute(null);
+            this.MenuOverview.Execute(null);
 
             TimeCounter.StopTime();
         }
 
+        #endregion
+
+        #region Public Events
+
+        public event EventHandler<FilterEventArgs> FilterTextChanged;
+
+        public event EventHandler<SearchEventArgs> SearchTextChanged;
+
+        #endregion
+
+        #region Public Properties
+
+        public int ContentRow
+        {
+            get
+            {
+                return this.EnableSearch && this.EnableFilters ? 2 : 0;
+            }
+        }
+
+        public int ContentRowSpan
+        {
+            get
+            {
+                return this.EnableSearch && this.EnableFilters ? 1 : 3;
+            }
+        }
+
         public Admin CurrentLoggedInUser
         {
-            get { return _currentLoggedInUser; }
+            get
+            {
+                return this._currentLoggedInUser;
+            }
+
             set
             {
-                _currentLoggedInUser = value;
-                Notify();
-        }
-        }
-        
-        #region Pages
-
-        public ICommand MenuOverview
-        {
-            get { return GetNavigateCommand(() => PageOverview, "Overview"); }
+                this._currentLoggedInUser = value;
+                this.Notify();
+            }
         }
 
-        public ICommand MenuForms
+        public bool EnableFilters
         {
-            get { return GetNavigateCommand(() => PageForms, "Forms"); }
+            get
+            {
+                return this._enableFilters;
+            }
+
+            set
+            {
+                this._enableFilters = value;
+                this.Notify();
+                this.NotifyFilter();
+            }
         }
 
-        public ICommand MenuBoats
+        public bool EnableSearch
         {
-            get { return GetNavigateCommand(() => PageBoats, "Boats"); }
+            get
+            {
+                return this._enableSearch;
+            }
+
+            set
+            {
+                this._enableSearch = value;
+                this.Notify();
+                this.NotifyFilter();
+            }
         }
 
-        public ICommand MenuTrips
+        public FrameworkElement Filter
         {
-            get { return GetNavigateCommand(() => PageTrips, "Trips"); }
+            get
+            {
+                return this._filter;
+            }
+
+            set
+            {
+                IFilterViewModel filterViewModel;
+
+                if (this._filter != null)
+                {
+                    // Unbind event
+                    filterViewModel = this._filter.DataContext as IFilterViewModel;
+                    if (filterViewModel != null)
+                    {
+                        filterViewModel.FilterChanged -= this.filter_FilterChanged;
+                    }
+                }
+
+                this._filter = value;
+
+                // Tjek at filter ikke er null
+                if (this._filter != null)
+                {
+                    // Bind event
+                    filterViewModel = this._filter.DataContext as IFilterViewModel;
+                    if (filterViewModel != null)
+                    {
+                        filterViewModel.FilterChanged += this.filter_FilterChanged;
+                    }
+                }
+
+                this.Notify();
+            }
         }
 
-        public ICommand MenuConfigurations
+        public Visibility FilterBarVisibility
         {
-            get { return GetNavigateCommand(() => PageConfigurations, "Configurations"); }
+            get
+            {
+                return this.EnableSearch && this.EnableFilters ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
-        private Oversigt PageOverview
+        public Visibility FiltersVisibility
         {
-            get { return _pageOverview ?? (_pageOverview = new Oversigt()); }
-        }
-
-        private Blanketter PageForms
-        {
-            get { return _pageForms ?? (_pageForms = new Blanketter()); }
-        }
-
-        private Baede PageBoats
-        {
-            get { return _pageBoats ?? (_pageBoats = new Baede()); }
-        }
-
-        private Trips PageTrips
-        {
-            get { return _pageTrips ?? (_pageTrips = new Trips()); }
-        }
-
-        private Indstillinger PageConfigurations
-        {
-            get { return new Indstillinger(); }
+            get
+            {
+                return this.EnableFilters ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         public ICommand Logout
         {
             get
             {
-                return GetCommand(e => ((Window)e).Close());
+                return this.GetCommand(e => ((Window)e).Close());
             }
         }
 
-        #endregion
-
-        #region Filter
-
-        private FrameworkElement _filter;
-        private Baede _pageBoats;
-        private Blanketter _pageForms;
-        private Oversigt _pageOverview;
-        private Trips _pageTrips;
-
-        public void UpdateFilter()
+        public ICommand MenuBoats
         {
-            var viewModelbase = CurrentPage.DataContext as IFilterContentViewModel;
-            if (viewModelbase != null)
+            get
             {
-                Filter = viewModelbase.Filter;
-            }
-            else
-                Filter = null;
-        }
-
-        public FrameworkElement Filter
-        {
-            get { return _filter; }
-            set
-            {
-                IFilterViewModel filterViewModel;
-
-                if (_filter != null)
-                {
-                    // Unbind event
-                    filterViewModel = _filter.DataContext as IFilterViewModel;
-                    if (filterViewModel != null) filterViewModel.FilterChanged -= filter_FilterChanged;
-                }
-
-                _filter = value;
-
-                // Tjek at filter ikke er null
-                if (_filter != null)
-                {
-                    // Bind event
-                    filterViewModel = _filter.DataContext as IFilterViewModel;
-                    if (filterViewModel != null) filterViewModel.FilterChanged += filter_FilterChanged;
-                }
-
-                Notify();
+                return this.GetNavigateCommand(() => this.PageBoats, "Boats");
             }
         }
 
-        public string SearchText
+        public ICommand MenuConfigurations
         {
-            get { return _searchText; }
-            set
+            get
             {
-                _searchText = value;
-                Notify();
+                return this.GetNavigateCommand(() => this.PageConfigurations, "Configurations");
+            }
+        }
+
+        public ICommand MenuForms
+        {
+            get
+            {
+                return this.GetNavigateCommand(() => this.PageForms, "Forms");
+            }
+        }
+
+        public ICommand MenuOverview
+        {
+            get
+            {
+                return this.GetNavigateCommand(() => this.PageOverview, "Overview");
+            }
+        }
+
+        public ICommand MenuTrips
+        {
+            get
+            {
+                return this.GetNavigateCommand(() => this.PageTrips, "Trips");
             }
         }
 
@@ -159,94 +224,134 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return
-                    GetCommand(
-                        s =>
+                return this.GetCommand(
+                    s =>
                         {
-                            if (SearchTextChanged != null) 
-                                SearchTextChanged(this, new SearchEventArgs((string)s));
+                            if (this.SearchTextChanged != null)
+                            {
+                                this.SearchTextChanged(this, new SearchEventArgs((string)s));
+                            }
                         });
+            }
+        }
+
+        public string SearchText
+        {
+            get
+            {
+                return this._searchText;
+            }
+
+            set
+            {
+                this._searchText = value;
+                this.Notify();
             }
         }
 
         public Visibility SearchVisibility
         {
-            get { return EnableSearch ? Visibility.Visible : Visibility.Collapsed; }
-        }
-
-        public Visibility FiltersVisibility
-        {
-            get { return EnableFilters ? Visibility.Visible : Visibility.Collapsed; }
-        }
-
-        public Visibility FilterBarVisibility
-        {
-            get { return EnableSearch && EnableFilters ? Visibility.Visible : Visibility.Collapsed; }
-        }
-
-        public int ContentRow
-        {
-            get { return EnableSearch && EnableFilters ? 2 : 0; }
-        }
-
-        public int ContentRowSpan
-        {
-            get { return EnableSearch && EnableFilters ? 1 : 3; }
-        }
-
-        public event EventHandler<SearchEventArgs> SearchTextChanged;
-        public event EventHandler<FilterEventArgs> FilterTextChanged;
-
-        public bool EnableSearch
-        {
-            get { return _enableSearch; }
-            set
+            get
             {
-                _enableSearch = value;
-                Notify();
-                NotifyFilter();
+                return this.EnableSearch ? Visibility.Visible : Visibility.Collapsed;
             }
-        }
-
-        public bool EnableFilters
-        {
-            get { return _enableFilters; }
-            set
-            {
-                _enableFilters = value;
-                Notify();
-                NotifyFilter();
-            }
-        }
-
-        private void filter_FilterChanged(object sender, FilterEventArgs e)
-        {
-            if (FilterTextChanged != null)
-                FilterTextChanged(sender, e);
-        }
-
-        private void NotifyFilter()
-        {
-            NotifyCustom("SearchVisibility");
-            NotifyCustom("FiltersVisibility");
-            NotifyCustom("FilterBarVisibility");
-            NotifyCustom("ContentRow");
-            NotifyCustom("ContentRowSpan");
         }
 
         #endregion
 
+        #region Properties
+
+        private Baede PageBoats
+        {
+            get
+            {
+                return this._pageBoats ?? (this._pageBoats = new Baede());
+            }
+        }
+
+        private Indstillinger PageConfigurations
+        {
+            get
+            {
+                return new Indstillinger();
+            }
+        }
+
+        private Blanketter PageForms
+        {
+            get
+            {
+                return this._pageForms ?? (this._pageForms = new Blanketter());
+            }
+        }
+
+        private Oversigt PageOverview
+        {
+            get
+            {
+                return this._pageOverview ?? (this._pageOverview = new Oversigt());
+            }
+        }
+
+        private Trips PageTrips
+        {
+            get
+            {
+                return this._pageTrips ?? (this._pageTrips = new Trips());
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
-            EnableSearch = false;
-            EnableFilters = false;
+            this.EnableSearch = false;
+            this.EnableFilters = false;
 
             base.NavigateToPage(page, pageTitle);
 
-            SearchText = "";
+            this.SearchText = string.Empty;
 
             // Set filter
-            UpdateFilter();
+            this.UpdateFilter();
         }
+
+        public void UpdateFilter()
+        {
+            var viewModelbase = this.CurrentPage.DataContext as IFilterContentViewModel;
+            if (viewModelbase != null)
+            {
+                this.Filter = viewModelbase.Filter;
+            }
+            else
+            {
+                this.Filter = null;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void NotifyFilter()
+        {
+            this.NotifyCustom("SearchVisibility");
+            this.NotifyCustom("FiltersVisibility");
+            this.NotifyCustom("FilterBarVisibility");
+            this.NotifyCustom("ContentRow");
+            this.NotifyCustom("ContentRowSpan");
+        }
+
+        private void filter_FilterChanged(object sender, FilterEventArgs e)
+        {
+            if (this.FilterTextChanged != null)
+            {
+                this.FilterTextChanged(sender, e);
+            }
+        }
+
+        #endregion
     }
 }

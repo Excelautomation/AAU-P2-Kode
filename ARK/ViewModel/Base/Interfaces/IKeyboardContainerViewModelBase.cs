@@ -1,19 +1,36 @@
 ﻿using System;
 using System.Windows.Input;
+
 using KeyboardEventArgs = ARK.ViewModel.Protokolsystem.KeyboardEventArgs;
 
 namespace ARK.ViewModel.Base.Interfaces
 {
     public interface IKeyboardContainerViewModelBase : IViewModelBase
     {
-        string KeyboardText { get; }
+        #region Public Events
+
+        event EventHandler<KeyboardEventArgs> KeyboardTextChanged;
+
+        #endregion
+
+        #region Public Properties
 
         ICommand GotFocus { get; }
+
+        string KeyboardText { get; }
+
         bool KeyboardToggled { get; }
-        event EventHandler<KeyboardEventArgs> KeyboardTextChanged;
+
+        #endregion
+
+        #region Public Methods and Operators
+
         void KeyboardClear();
 
-        void KeyboardShow();
         void KeyboardHide();
+
+        void KeyboardShow();
+
+        #endregion
     }
 }

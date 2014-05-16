@@ -20,9 +20,13 @@ namespace ARK.View.Protokolsystem.Additional
     /// </summary>
     public partial class MembersInformationAdditionalInfo : UserControl
     {
+        #region Constructors and Destructors
+
         public MembersInformationAdditionalInfo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

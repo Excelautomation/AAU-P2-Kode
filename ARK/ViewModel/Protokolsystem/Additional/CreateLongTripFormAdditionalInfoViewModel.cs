@@ -1,62 +1,90 @@
 ﻿using System.Windows.Input;
+
 using ARK.ViewModel.Protokolsystem.Data;
 
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
     public class CreateLongTripFormAdditionalInfoViewModel : MemberSelectorViewModel
     {
-        private bool _selectResponsible;
+        #region Fields
+
         private MemberViewModel _responsibleMember;
 
-        public bool SelectResponsible
-        {
-            get { return _selectResponsible; }
-            set
-            {
-                _selectResponsible = value;
-                Notify();
-            }
-        }
+        private bool _selectResponsible;
 
-        public MemberViewModel ResponsibleMember
-        {
-            get { return _responsibleMember; }
-            set
-            {
-                if (_responsibleMember != null)
-                    _responsibleMember.IsResponsible = false;
-                
-                _responsibleMember = value;
+        #endregion
 
-                if (_responsibleMember != null)
-                    _responsibleMember.IsResponsible = true;
-                
-                Notify();
-            }
-        }
-
-        public ICommand ResponsibleMemberClick
-        {
-            get { return GetCommand(() => { SelectResponsible = !SelectResponsible; }); }
-        }
+        #region Public Properties
 
         public ICommand MemberClicked
         {
             get
             {
-                return GetCommand(member =>
-                {
-                    var memberVm = (MemberViewModel) member;
+                return this.GetCommand(
+                    member =>
+                        {
+                            var memberVm = (MemberViewModel)member;
 
-                    if (SelectResponsible)
-                        ResponsibleMember = memberVm;
-                    else
-                    {
-                        memberVm.IsResponsible = false;
-                        RemoveMember.Execute(memberVm);
-                    }
-                });
+                            if (this.SelectResponsible)
+                            {
+                                this.ResponsibleMember = memberVm;
+                            }
+                            else
+                            {
+                                memberVm.IsResponsible = false;
+                                this.RemoveMember.Execute(memberVm);
+                            }
+                        });
             }
         }
+
+        public MemberViewModel ResponsibleMember
+        {
+            get
+            {
+                return this._responsibleMember;
+            }
+
+            set
+            {
+                if (this._responsibleMember != null)
+                {
+                    this._responsibleMember.IsResponsible = false;
+                }
+
+                this._responsibleMember = value;
+
+                if (this._responsibleMember != null)
+                {
+                    this._responsibleMember.IsResponsible = true;
+                }
+
+                this.Notify();
+            }
+        }
+
+        public ICommand ResponsibleMemberClick
+        {
+            get
+            {
+                return this.GetCommand(() => { this.SelectResponsible = !this.SelectResponsible; });
+            }
+        }
+
+        public bool SelectResponsible
+        {
+            get
+            {
+                return this._selectResponsible;
+            }
+
+            set
+            {
+                this._selectResponsible = value;
+                this.Notify();
+            }
+        }
+
+        #endregion
     }
 }
