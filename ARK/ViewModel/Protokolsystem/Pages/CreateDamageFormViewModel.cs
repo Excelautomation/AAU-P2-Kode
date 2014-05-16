@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.View.Protokolsystem.Pages;
-using System;
 using ARK.View.Protokolsystem.Confirmations;
+using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
@@ -13,126 +14,61 @@ namespace ARK.ViewModel.Protokolsystem.Pages
     internal class CreateDamageFormViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
+        #region Fields
+
         private List<DamageForm> _activeDamageForms;
+
         private List<Boat> _boats;
+
         private List<DamageType> _damageTypes;
-        private List<Member> _members;
-        private Boat _selectedBoat;
-        private DamageForm _selectedDamageForm;
-        private DamageType _selectedDamageType;
-        private Member _selectedMember;
+
         private string _description;
+
         private bool _isFunctional;
 
+        private List<Member> _members;
+
+        private Boat _selectedBoat;
+
+        private DamageForm _selectedDamageForm;
+
+        private DamageType _selectedDamageType;
+
+        private Member _selectedMember;
+
+        #endregion
+
         // constructor
+        #region Constructors and Destructors
+
         public CreateDamageFormViewModel()
         {
             DbArkContext db = DbArkContext.GetDbContext();
 
-            ParentAttached += (sender, e) =>
-            {
-                Members = db.Member.OrderBy(x => x.FirstName).ToList();
-                Boats = db.Boat.OrderBy(x => x.Name).ToList();
-                DamageTypes = db.DamageType.ToList();
-                ActiveDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
-            };
+            this.ParentAttached += (sender, e) =>
+                {
+                    this.Members = db.Member.OrderBy(x => x.FirstName).ToList();
+                    this.Boats = db.Boat.OrderBy(x => x.Name).ToList();
+                    this.DamageTypes = db.DamageType.ToList();
+                    this.ActiveDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
+                };
         }
 
-        // Properties
-        // injury reporter
-        public Member SelectedMember
-        {
-            get { return _selectedMember; }
-            set
-            {
-                _selectedMember = value;
-                Notify();
-            }
-        }
+        #endregion
 
-        public List<Member> Members
-        {
-            get { return _members; }
-            set
-            {
-                _members = value;
-                Notify();
-            }
-        }
-
-        // injured boat
-        public Boat SelectedBoat
-        {
-            get { return _selectedBoat; }
-            set
-            {
-                _selectedBoat = value;
-                Notify();
-            }
-        }
-
-        public List<Boat> Boats
-        {
-            get { return _boats; }
-            set
-            {
-                _boats = value;
-                Notify();
-            }
-        }
-
-        public List<DamageType> DamageTypes
-        {
-            get { return _damageTypes; }
-            set
-            {
-                _damageTypes = value;
-                Notify();
-            }
-        }
-
-        public DamageType SelectedDamageType
-        {
-            get { return _selectedDamageType; }
-            set
-            {
-                _selectedDamageType = value;
-                Notify();
-                NotifyCustom("AllFieldsFilled");
-            }
-        }
-
-
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; NotifyCustom("AllFieldsFilled"); }
-        }
-
-        public bool IsFunctional
-        {
-            get { return _isFunctional; }
-            set { _isFunctional = value; NotifyCustom("AllFieldsFilled"); }
-        }
+        #region Public Properties
 
         public List<DamageForm> ActiveDamageForms
         {
-            get { return _activeDamageForms; }
-            set
+            get
             {
-                _activeDamageForms = value;
-                Notify();
+                return this._activeDamageForms;
             }
-        }
 
-        public DamageForm SelectedDamageForm
-        {
-            get { return _selectedDamageForm; }
             set
             {
-                _selectedDamageForm = value;
-                Notify();
-                NotifyCustom("AllFieldsFilled");
+                this._activeDamageForms = value;
+                this.Notify();
             }
         }
 
@@ -140,8 +76,31 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return SelectedBoat != null && SelectedMember != null
-                    && SelectedDamageType != null;
+                return this.SelectedBoat != null && this.SelectedMember != null && this.SelectedDamageType != null;
+            }
+        }
+
+        public ICommand BoatSelectionChanged
+        {
+            get
+            {
+                return this.GetCommand(b => { this.SelectedBoat = (Boat)b; });
+            }
+        }
+
+        // Properties
+        // injury reporter
+        public List<Boat> Boats
+        {
+            get
+            {
+                return this._boats;
+            }
+
+            set
+            {
+                this._boats = value;
+                this.Notify();
             }
         }
 
@@ -150,8 +109,170 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    GetCommand(
-                        () => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+                    this.GetCommand(
+                        () => this.ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+            }
+        }
+
+        public ICommand DamageTypeSelected
+        {
+            get
+            {
+                return this.GetCommand(d => { this.SelectedDamageType = (DamageType)d; });
+            }
+        }
+
+        public List<DamageType> DamageTypes
+        {
+            get
+            {
+                return this._damageTypes;
+            }
+
+            set
+            {
+                this._damageTypes = value;
+                this.Notify();
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return this._description;
+            }
+
+            set
+            {
+                this._description = value;
+                this.NotifyCustom("AllFieldsFilled");
+            }
+        }
+
+        public bool IsFunctional
+        {
+            get
+            {
+                return this._isFunctional;
+            }
+
+            set
+            {
+                this._isFunctional = value;
+                this.NotifyCustom("AllFieldsFilled");
+            }
+        }
+
+        public ICommand MemberSelectionChanged
+        {
+            get
+            {
+                return this.GetCommand(e => { this.SelectedMember = (Member)e; });
+            }
+        }
+
+        public List<Member> Members
+        {
+            get
+            {
+                return this._members;
+            }
+
+            set
+            {
+                this._members = value;
+                this.Notify();
+            }
+        }
+
+        // injured boat
+        public Boat SelectedBoat
+        {
+            get
+            {
+                return this._selectedBoat;
+            }
+
+            set
+            {
+                this._selectedBoat = value;
+                this.Notify();
+            }
+        }
+
+        public DamageForm SelectedDamageForm
+        {
+            get
+            {
+                return this._selectedDamageForm;
+            }
+
+            set
+            {
+                this._selectedDamageForm = value;
+                this.Notify();
+                this.NotifyCustom("AllFieldsFilled");
+            }
+        }
+
+        public DamageType SelectedDamageType
+        {
+            get
+            {
+                return this._selectedDamageType;
+            }
+
+            set
+            {
+                this._selectedDamageType = value;
+                this.Notify();
+                this.NotifyCustom("AllFieldsFilled");
+            }
+        }
+
+        public Member SelectedMember
+        {
+            get
+            {
+                return this._selectedMember;
+            }
+
+            set
+            {
+                this._selectedMember = value;
+                this.Notify();
+            }
+        }
+
+        public ICommand SubmitForm
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            // Fjern evt tjek her i VM og lav button inactive ind til betingelser er ok.
+                            if (this.SelectedBoat != null && this.SelectedMember != null
+                                && this.SelectedDamageType != null)
+                            {
+                                var damageForm = new DamageForm();
+                                damageForm.RegisteringMember = this.SelectedMember; // Member
+                                damageForm.Boat = this.SelectedBoat; // Boat
+
+                                // set damagetype
+                                damageForm.Type = this.SelectedDamageType.Type;
+
+                                // set additional description
+                                damageForm.Description = this.Description;
+                                damageForm.Functional = this.IsFunctional;
+
+                                DbArkContext.GetDbContext().DamageForm.Add(damageForm);
+                                DbArkContext.GetDbContext().SaveChanges();
+
+                                this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            }
+                        });
             }
         }
 
@@ -160,52 +281,11 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    GetCommand(
-                        () => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
+                    this.GetCommand(
+                        () => this.ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
             }
         }
 
-        public ICommand MemberSelectionChanged
-        {
-            get { return GetCommand(e => { SelectedMember = (Member)e; }); }
-        }
-
-        public ICommand BoatSelectionChanged
-        {
-            get { return GetCommand(b => { SelectedBoat = (Boat)b; }); }
-        }
-
-        public ICommand DamageTypeSelected
-        {
-            get { return GetCommand(d => { SelectedDamageType = (DamageType)d; }); }
-        }
-
-        public ICommand SubmitForm
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    // Fjern evt tjek her i VM og lav button inactive ind til betingelser er ok.
-                    if (SelectedBoat != null && SelectedMember != null && SelectedDamageType != null)
-                    {
-                        var damageForm = new DamageForm();
-                        damageForm.RegisteringMember = SelectedMember; // Member
-                        damageForm.Boat = SelectedBoat; // Boat
-                        // set damagetype
-                        damageForm.Type = SelectedDamageType.Type;
-
-                        // set additional description
-                        damageForm.Description = Description;
-                        damageForm.Functional = IsFunctional;
-
-                        DbArkContext.GetDbContext().DamageForm.Add(damageForm);
-                        DbArkContext.GetDbContext().SaveChanges();
-
-                        ProtocolSystem.StatisticsDistance.Execute(null);
-                    }
-                });
-            }
-        }
+        #endregion
     }
 }

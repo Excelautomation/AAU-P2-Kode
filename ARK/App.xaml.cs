@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
@@ -7,12 +8,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+
 using ARK.HelperFunctions;
 using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.XML;
-using System.Globalization;
 
 namespace ARK
 {
@@ -21,46 +22,57 @@ namespace ARK
     /// </summary>
     public partial class App : Application
     {
+        #region Constructors and Destructors
+
         public App()
         {
 #if RELEASE || DEBUG
+
             // Start thread which downloads the sunset time every day
             var wtoken = new CancellationTokenSource();
             SunsetClass.StartSunsetTask(wtoken.Token);
 #endif
 
             // Thread that checks if a new season needs to be started
-            var checkForNewSeasonThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    DateTime tomorrowAtTree = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 3,
-                        00, 00);
-
-                    tomorrowAtTree = tomorrowAtTree.AddDays(1);
-
-                    TimeSpan TimeToTreeOCloc = tomorrowAtTree - DateTime.Now;
-
-                    try
+            var checkForNewSeasonThread = new Thread(
+                () =>
                     {
-                        Thread.Sleep((int) TimeToTreeOCloc.TotalMilliseconds); // sleep until 3.00 hours
-                    }
-                    catch (ThreadInterruptedException)
-                    {
-                        break;
-                    }
+                        while (true)
+                        {
+                            DateTime tomorrowAtTree = new DateTime(
+                                DateTime.Now.Year, 
+                                DateTime.Now.Month, 
+                                DateTime.Now.Day, 
+                                3, 
+                                00, 
+                                00);
 
-                    CheckCurrentSeasonEnd();
-                }
+                            tomorrowAtTree = tomorrowAtTree.AddDays(1);
 
-            });
+                            TimeSpan TimeToTreeOCloc = tomorrowAtTree - DateTime.Now;
+
+                            try
+                            {
+                                Thread.Sleep((int)TimeToTreeOCloc.TotalMilliseconds); // sleep until 3.00 hours
+                            }
+                            catch (ThreadInterruptedException)
+                            {
+                                break;
+                            }
+
+                            this.CheckCurrentSeasonEnd();
+                        }
+                    });
             checkForNewSeasonThread.Start();
-            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
-            //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
-            var thr = new Thread(() =>
-            {
-                var db = DbArkContext.GetDbContext();
-                /*while (true)
+
+            // CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
+            // CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
+            var thr = new Thread(
+                () =>
+                    {
+                        var db = DbArkContext.GetDbContext();
+
+                        /*while (true)
                 {
                     //SUNSET
                     bool sunset = false;
@@ -148,7 +160,7 @@ namespace ARK
                     db.SaveChanges();
                     Thread.Sleep(5000);
                 }*/
-            });
+                    });
 
             WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
             if (windowsIdentity != null && windowsIdentity.Name == "SAHB-WIN7\\sahb1")
@@ -159,20 +171,63 @@ namespace ARK
             Current.ShutdownMode = System.Windows.ShutdownMode.OnMainWindowClose;
 
             Current.Exit += (sender, e) =>
-            {
-                if (windowsIdentity != null && (windowsIdentity.Name == "SAHB-WIN7\\sahb" ||
-                    windowsIdentity.Name == "Jonas-BB\\Jonas"))
                 {
-                    // KILL IT!
-                    System.Diagnostics.Process.GetCurrentProcess().Kill();
-                }
+                    if (windowsIdentity != null
+                        && (windowsIdentity.Name == "SAHB-WIN7\\sahb" || windowsIdentity.Name == "Jonas-BB\\Jonas"))
+                    {
+                        // KILL IT!
+                        System.Diagnostics.Process.GetCurrentProcess().Kill();
+                    }
 
-                if (thr.ThreadState == ThreadState.Running)
-                    thr.Abort();
-                if (checkForNewSeasonThread.ThreadState == ThreadState.Running ||
-                    checkForNewSeasonThread.ThreadState == ThreadState.WaitSleepJoin)
-                    checkForNewSeasonThread.Interrupt();
-            };
+                    if (thr.ThreadState == ThreadState.Running)
+                    {
+                        thr.Abort();
+                    }
+
+                    if (checkForNewSeasonThread.ThreadState == ThreadState.Running
+                        || checkForNewSeasonThread.ThreadState == ThreadState.WaitSleepJoin)
+                    {
+                        checkForNewSeasonThread.Interrupt();
+                    }
+                };
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public static T GetChildOfType<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj == null)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+            {
+                var child = VisualTreeHelper.GetChild(depObj, i);
+
+                var result = (child as T) ?? GetChildOfType<T>(child);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
+
+        #region Methods
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            EventManager.RegisterClassHandler(
+                typeof(DatePicker), 
+                DatePicker.LoadedEvent, 
+                new RoutedEventHandler(this.DatePicker_Loaded));
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -180,15 +235,15 @@ namespace ARK
 #if AdministrationsSystem
             this.StartupUri = new Uri("/View/Administrationssystem/AdminSystem.xaml", UriKind.Relative);
 #else
-    #if DEBUG
+#if DEBUG
             this.StartupUri = new Uri("/MainWindow.xaml", UriKind.Relative);
-    #else
+#else
             this.StartupUri = new Uri("/View/Protokolsystem/ProtocolSystem.xaml", UriKind.Relative);
     #endif
 #endif
         }
 
-        void CheckCurrentSeasonEnd()
+        private void CheckCurrentSeasonEnd()
         {
             using (var db = new DbArkContext())
             {
@@ -201,7 +256,9 @@ namespace ARK
                     db.Season.Add(currentSeason);
                 }
                 else
+                {
                     currentSeason = db.Season.AsEnumerable().Last(x => true);
+                }
 
                 // if current seasonEnd is before today add new season.
                 if (DateTime.Compare(currentSeason.SeasonEnd, DateTime.Now) <= 0)
@@ -215,40 +272,29 @@ namespace ARK
 
         // Opdater Watermark
         // http://matthamilton.net/datepicker-watermark
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            EventManager.RegisterClassHandler(typeof(DatePicker),
-                DatePicker.LoadedEvent,
-                new RoutedEventHandler(DatePicker_Loaded));
-        }
-
-        void DatePicker_Loaded(object sender, RoutedEventArgs e)
+        private void DatePicker_Loaded(object sender, RoutedEventArgs e)
         {
             var dp = sender as DatePicker;
-            if (dp == null) return;
+            if (dp == null)
+            {
+                return;
+            }
 
             var tb = GetChildOfType<DatePickerTextBox>(dp);
-            if (tb == null) return;
+            if (tb == null)
+            {
+                return;
+            }
 
             var wm = tb.Template.FindName("PART_Watermark", tb) as ContentControl;
-            if (wm == null) return;
+            if (wm == null)
+            {
+                return;
+            }
 
             wm.Content = "Vælg en dato";
         }
 
-        public static T GetChildOfType<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj == null) return null;
-
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-            {
-                var child = VisualTreeHelper.GetChild(depObj, i);
-
-                var result = (child as T) ?? GetChildOfType<T>(child);
-                if (result != null) return result;
-            }
-            return null;
-        }
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
@@ -8,140 +9,217 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 {
     internal class BoatFilterViewModel : FilterViewModelBase
     {
+        #region Constructors and Destructors
+
         public BoatFilterViewModel()
         {
-            CurrentFilter = new BoatFilter();
-            ShowBoatsOut = true;
-            ShowBoatsHome = true;
-            ShowBoatsUnderService = true;
-            ShowBoatsDamaged = true;
-            ShowInactiveBoats = true;
-            ShowFunctionalBoats = true;
+            this.CurrentFilter = new BoatFilter();
+            this.ShowBoatsOut = true;
+            this.ShowBoatsHome = true;
+            this.ShowBoatsUnderService = true;
+            this.ShowBoatsDamaged = true;
+            this.ShowInactiveBoats = true;
+            this.ShowFunctionalBoats = true;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public BoatFilter CurrentFilter { get; set; }
 
-        public bool ShowBoatsOut
+        public bool ShowBoatsDamaged
         {
-            get { return CurrentFilter.ShowBoatsOut; }
+            get
+            {
+                return this.CurrentFilter.ShowBoatsDamaged;
+            }
+
             set
             {
-                CurrentFilter.ShowBoatsOut = value;
-                Notify();
+                this.CurrentFilter.ShowBoatsDamaged = value;
+                this.Notify();
 
-                CallEvent();
+                this.CallEvent();
             }
         }
 
         public bool ShowBoatsHome
         {
-            get { return CurrentFilter.ShowBoatsHome; }
+            get
+            {
+                return this.CurrentFilter.ShowBoatsHome;
+            }
+
             set
             {
-                CurrentFilter.ShowBoatsHome = value;
-                Notify();
+                this.CurrentFilter.ShowBoatsHome = value;
+                this.Notify();
 
-                CallEvent();
+                this.CallEvent();
+            }
+        }
+
+        public bool ShowBoatsOut
+        {
+            get
+            {
+                return this.CurrentFilter.ShowBoatsOut;
+            }
+
+            set
+            {
+                this.CurrentFilter.ShowBoatsOut = value;
+                this.Notify();
+
+                this.CallEvent();
             }
         }
 
         public bool ShowBoatsUnderService
         {
-            get { return CurrentFilter.ShowBoatsUnderService; }
-            set
+            get
             {
-                CurrentFilter.ShowBoatsUnderService = value;
-                Notify();
-
-                CallEvent();
+                return this.CurrentFilter.ShowBoatsUnderService;
             }
-        }
 
-        public bool ShowBoatsDamaged
-        {
-            get { return CurrentFilter.ShowBoatsDamaged; }
             set
             {
-                CurrentFilter.ShowBoatsDamaged = value;
-                Notify();
+                this.CurrentFilter.ShowBoatsUnderService = value;
+                this.Notify();
 
-                CallEvent();
-            }
-        }
-
-        public bool ShowInactiveBoats
-        {
-            get { return CurrentFilter.ShowInactiveBoats; }
-            set
-            {
-                CurrentFilter.ShowInactiveBoats = value;
-                Notify();
-
-                CallEvent();
+                this.CallEvent();
             }
         }
 
         public bool ShowFunctionalBoats
         {
-            get { return CurrentFilter.ShowFunctionalBoats; }
+            get
+            {
+                return this.CurrentFilter.ShowFunctionalBoats;
+            }
+
             set
             {
-                CurrentFilter.ShowFunctionalBoats = value;
-                Notify();
+                this.CurrentFilter.ShowFunctionalBoats = value;
+                this.Notify();
 
-                CallEvent();
+                this.CallEvent();
             }
         }
 
-        private void CallEvent()
+        public bool ShowInactiveBoats
         {
-            OnFilterChanged();
+            get
+            {
+                return this.CurrentFilter.ShowInactiveBoats;
+            }
+
+            set
+            {
+                this.CurrentFilter.ShowInactiveBoats = value;
+                this.Notify();
+
+                this.CallEvent();
+            }
         }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<IFilter> {CurrentFilter};
+            return new List<IFilter> { this.CurrentFilter };
         }
+
+        #endregion
+
+        #region Methods
+
+        private void CallEvent()
+        {
+            this.OnFilterChanged();
+        }
+
+        #endregion
 
         public class BoatFilter : IFilter
         {
-            public bool ShowBoatsOut { get; set; }
-            public bool ShowBoatsHome { get; set; }
-            public bool ShowBoatsUnderService { get; set; }
+            #region Public Properties
+
             public bool ShowBoatsDamaged { get; set; }
-            public bool ShowInactiveBoats { get; set; }
+
+            public bool ShowBoatsHome { get; set; }
+
+            public bool ShowBoatsOut { get; set; }
+
+            public bool ShowBoatsUnderService { get; set; }
+
             public bool ShowFunctionalBoats { get; set; }
+
+            public bool ShowInactiveBoats { get; set; }
+
+            #endregion
+
+            #region Public Methods and Operators
 
             public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
-                if (!ShowBoatsOut && !ShowBoatsHome && !ShowBoatsUnderService && !ShowBoatsDamaged && !ShowInactiveBoats &&
-                    !ShowFunctionalBoats)
+                if (!this.ShowBoatsOut && !this.ShowBoatsHome && !this.ShowBoatsUnderService && !this.ShowBoatsDamaged
+                    && !this.ShowInactiveBoats && !this.ShowFunctionalBoats)
+                {
                     return new List<T>();
+                }
 
-                if (typeof (Boat) != typeof (T))
+                if (typeof(Boat) != typeof(T))
+                {
                     return items;
+                }
 
                 IEnumerable<Boat> boats = items.Cast<Boat>().ToList();
                 var outputBoatsOutIn = new List<Boat>();
                 var outputDamage = new List<Boat>();
 
-                if (ShowBoatsOut)
-                    outputBoatsOutIn = FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => boat.BoatOut)).ToList();
-                if (ShowBoatsHome)
-                    outputBoatsOutIn = FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => !boat.BoatOut)).ToList();
+                if (this.ShowBoatsOut)
+                {
+                    outputBoatsOutIn =
+                        FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => boat.BoatOut)).ToList();
+                }
 
-                if (ShowBoatsUnderService)
+                if (this.ShowBoatsHome)
+                {
+                    outputBoatsOutIn =
+                        FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => !boat.BoatOut)).ToList();
+                }
+
+                if (this.ShowBoatsUnderService)
+                {
                     outputDamage =
-                        FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged && !boat.Usable)).ToList();
-                if (ShowBoatsDamaged)
+                        FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged && !boat.Usable))
+                            .ToList();
+                }
+
+                if (this.ShowBoatsDamaged)
+                {
                     outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged)).ToList();
-                if (ShowInactiveBoats)
+                }
+
+                if (this.ShowInactiveBoats)
+                {
                     outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => !boat.Active)).ToList();
-                if (ShowFunctionalBoats)
-                    outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Usable && boat.Active)).ToList();
+                }
+
+                if (this.ShowFunctionalBoats)
+                {
+                    outputDamage =
+                        FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Usable && boat.Active)).ToList();
+                }
 
                 return outputBoatsOutIn.Where(boat => outputDamage.Any(boat2 => boat == boat2)).Cast<T>();
             }
+
+            #endregion
         }
     }
 }

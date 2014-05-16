@@ -5,34 +5,53 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ARK.Model.DB;
+
 using ARK.Model;
+using ARK.Model.DB;
 using ARK.View.Administrationssystem;
 using ARK.ViewModel.Base;
 
 namespace ARK.ViewModel.Administrationssystem
 {
-    class AdminLoginViewModel : ViewModelBase
+    internal class AdminLoginViewModel : ViewModelBase
     {
+        #region Fields
+
         private string _errorLabel;
 
-        public string Username { get; set; }
+        #endregion
+
+        #region Public Properties
+
         public AdminLogin AdminLogin { get; set; }
-        public string ErrorLabel
-        {
-            get { return _errorLabel; }
-            set { _errorLabel = value; Notify(); }
-        }
 
         public ICommand CloseWindow
         {
             get
             {
-                return GetCommand(e =>
-                {
-                    var window = e as Window;
-                    if (window != null) window.Close();
-                });
+                return this.GetCommand(
+                    e =>
+                        {
+                            var window = e as Window;
+                            if (window != null)
+                            {
+                                window.Close();
+                            }
+                        });
+            }
+        }
+
+        public string ErrorLabel
+        {
+            get
+            {
+                return this._errorLabel;
+            }
+
+            set
+            {
+                this._errorLabel = value;
+                this.Notify();
             }
         }
 
@@ -40,26 +59,32 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand(e =>
-                {
-                    DbArkContext db = DbArkContext.GetDbContext();
-                    
-                    Admin admin = db.Admin.Find(Username);
+                return this.GetCommand(
+                    e =>
+                        {
+                            DbArkContext db = DbArkContext.GetDbContext();
 
-                    if (admin != null && admin.Username == Username && admin.Password == ((AdminLogin)e).PasswordBox.Password)
-                    {
-                        var adminSystem = new AdminSystem();
-                        ((AdminSystemViewModel)adminSystem.DataContext).CurrentLoggedInUser = admin;
-                        adminSystem.Show();
+                            Admin admin = db.Admin.Find(this.Username);
 
-                        ((Window)e).Close();
-                    }
-                    else
-                    {
-                        ErrorLabel = "Brugernavn eller adgangskode ugyldig";
-                    }
-                });
+                            if (admin != null && admin.Username == this.Username
+                                && admin.Password == ((AdminLogin)e).PasswordBox.Password)
+                            {
+                                var adminSystem = new AdminSystem();
+                                ((AdminSystemViewModel)adminSystem.DataContext).CurrentLoggedInUser = admin;
+                                adminSystem.Show();
+
+                                ((Window)e).Close();
+                            }
+                            else
+                            {
+                                this.ErrorLabel = "Brugernavn eller adgangskode ugyldig";
+                            }
+                        });
             }
         }
+
+        public string Username { get; set; }
+
+        #endregion
     }
 }

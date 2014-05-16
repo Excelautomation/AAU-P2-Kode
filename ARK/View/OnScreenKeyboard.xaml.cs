@@ -7,9 +7,13 @@ namespace ARK.View
     /// </summary>
     public partial class OnScreenKeyboard : UserControl
     {
+        #region Constructors and Destructors
+
         public OnScreenKeyboard()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

@@ -7,9 +7,13 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class FormsDamage : UserControl
     {
+        #region Constructors and Destructors
+
         public FormsDamage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

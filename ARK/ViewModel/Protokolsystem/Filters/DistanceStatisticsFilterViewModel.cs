@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
@@ -10,307 +11,426 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 {
     internal class DistanceStatisticsFilterViewModel : FilterViewModelBase
     {
+        #region Fields
+
         private bool _dateTimeAll;
+
         private bool _dateTimeDay;
-        private bool _dateTimeMonth;
-        private bool _dateTimeWeek;
-        private bool _statisticsAll;
-        private bool _statisticsErgometer;
-        private bool _statisticsGig;
-        private bool _statisticsInrigger;
-        private bool _statisticsKajak;
-        private bool _statisticsOutrigger;
-        private bool _dateTimeYear;
+
         private bool _dateTimeHalfYear;
+
+        private bool _dateTimeMonth;
+
+        private bool _dateTimeWeek;
+
+        private bool _dateTimeYear;
+
+        private bool _statisticsAll;
+
+        private bool _statisticsErgometer;
+
+        private bool _statisticsGig;
+
+        private bool _statisticsInrigger;
+
+        private bool _statisticsKajak;
+
+        private bool _statisticsOutrigger;
+
+        #endregion
+
+        #region Constructors and Destructors
 
         public DistanceStatisticsFilterViewModel()
         {
-            CurrentBoatType = new CategoryFilter<TripViewModel>(trip => true);
-            CurrentDateTimeFilter = new DateTimeFilter();
+            this.CurrentBoatType = new CategoryFilter<TripViewModel>(trip => true);
+            this.CurrentDateTimeFilter = new DateTimeFilter();
 
-            DateTimeFromPicker = DateTime.Now;
-            DateTimeToPicker = DateTime.Now;
+            this.DateTimeFromPicker = DateTime.Now;
+            this.DateTimeToPicker = DateTime.Now;
 
-            StatisticsAll = true;
-            DateTimeAll = true;
+            this.StatisticsAll = true;
+            this.DateTimeAll = true;
 
-            UpdateFilter();
+            this.UpdateFilter();
         }
 
+        #endregion
+
+        #region Public Properties
+
         public CategoryFilter<TripViewModel> CurrentBoatType { get; set; }
+
         public DateTimeFilter CurrentDateTimeFilter { get; set; }
 
         public bool DateTimeAll
         {
-            get { return _dateTimeAll; }
+            get
+            {
+                return this._dateTimeAll;
+            }
+
             set
             {
-                _dateTimeAll = value;
+                this._dateTimeAll = value;
                 if (value)
                 {
-                    DateTimeToPicker = DateTime.Now;
+                    this.DateTimeToPicker = DateTime.Now;
 
-                    FilterByDates = false;
+                    this.FilterByDates = false;
 
-                    UpdateDateTime();
+                    this.UpdateDateTime();
                 }
 
-                Notify();
+                this.Notify();
             }
         }
 
         public bool DateTimeDay
         {
-            get { return _dateTimeDay; }
+            get
+            {
+                return this._dateTimeDay;
+            }
+
             set
             {
-                _dateTimeDay = value;
+                this._dateTimeDay = value;
 
                 if (value)
                 {
-                    DateTimeFromPicker = DateTime.Now.AddDays(-1);
-                    DateTimeToPicker = DateTime.Now;
+                    this.DateTimeFromPicker = DateTime.Now.AddDays(-1);
+                    this.DateTimeToPicker = DateTime.Now;
 
-                    FilterByDates = true;
+                    this.FilterByDates = true;
 
-                    UpdateDateTime();
+                    this.UpdateDateTime();
                 }
 
-                Notify();
+                this.Notify();
             }
         }
 
-        public bool DateTimeWeek
+        public DateTime? DateTimeFromPicker
         {
-            get { return _dateTimeWeek; }
-            set
+            get
             {
-                _dateTimeWeek = value;
-
-                if (value)
-                {
-                    DateTimeFromPicker = DateTime.Now.AddDays(-7);
-                    DateTimeToPicker = DateTime.Now;
-
-                    FilterByDates = true;
-
-                    UpdateDateTime();
-                }
-
-                Notify();
+                return this.DateTimeFrom;
             }
-        }
 
-        public bool DateTimeMonth
-        {
-            get { return _dateTimeMonth; }
             set
             {
-                _dateTimeMonth = value;
+                this.DateTimeFrom = value;
 
-                if (value)
-                {
-                    DateTimeFromPicker = DateTime.Now.AddMonths(-1);
-                    DateTimeToPicker = DateTime.Now;
-
-                    FilterByDates = true;
-
-                    UpdateDateTime();
-                }
-
-                Notify();
+                // FilterByDates = true;
+                // UpdateDateTime();
+                this.Notify();
             }
         }
 
         public bool DateTimeHalfYear
         {
-            get { return _dateTimeHalfYear; }
+            get
+            {
+                return this._dateTimeHalfYear;
+            }
+
             set
             {
-                _dateTimeHalfYear = value;
+                this._dateTimeHalfYear = value;
 
                 if (value)
                 {
-                    DateTimeFromPicker = DateTime.Now.AddMonths(-6);
-                    DateTimeToPicker = DateTime.Now;
+                    this.DateTimeFromPicker = DateTime.Now.AddMonths(-6);
+                    this.DateTimeToPicker = DateTime.Now;
 
-                    FilterByDates = true;
+                    this.FilterByDates = true;
 
-                    UpdateDateTime();
+                    this.UpdateDateTime();
                 }
 
-                Notify();
+                this.Notify();
             }
         }
 
-        public bool DateTimeYear
+        public bool DateTimeMonth
         {
-            get { return _dateTimeYear; }
+            get
+            {
+                return this._dateTimeMonth;
+            }
+
             set
             {
-                _dateTimeYear = value;
+                this._dateTimeMonth = value;
 
                 if (value)
                 {
-                    DateTimeFromPicker = DateTime.Now.AddYears(-1);
-                    DateTimeToPicker = DateTime.Now;
+                    this.DateTimeFromPicker = DateTime.Now.AddMonths(-1);
+                    this.DateTimeToPicker = DateTime.Now;
 
-                    FilterByDates = true;
+                    this.FilterByDates = true;
 
-                    UpdateDateTime();
+                    this.UpdateDateTime();
                 }
 
-                Notify();
-            }
-        }
-
-        private DateTime? DateTimeFrom { get; set; }
-        private DateTime? DateTimeTo { get; set; }
-
-        public DateTime? DateTimeFromPicker
-        {
-            get { return DateTimeFrom; }
-            set
-            {
-                DateTimeFrom = value;
-
-                //FilterByDates = true;
-                //UpdateDateTime();
-                Notify();
+                this.Notify();
             }
         }
 
         public DateTime DateTimeToPicker
         {
-            get { return DateTimeTo.HasValue ? DateTimeTo.Value : DateTime.Now; }
+            get
+            {
+                return this.DateTimeTo.HasValue ? this.DateTimeTo.Value : DateTime.Now;
+            }
+
             set
             {
-                DateTimeTo = value;
+                this.DateTimeTo = value;
 
-                //UpdateDateTime();
-                Notify();
+                // UpdateDateTime();
+                this.Notify();
             }
         }
 
-        public bool StatisticsAll
+        public bool DateTimeWeek
         {
-            get { return _statisticsAll; }
+            get
+            {
+                return this._dateTimeWeek;
+            }
+
             set
             {
-                _statisticsAll = value;
-                if (value)
-                    UpdateCategory(trip => true);
+                this._dateTimeWeek = value;
 
-                Notify();
+                if (value)
+                {
+                    this.DateTimeFromPicker = DateTime.Now.AddDays(-7);
+                    this.DateTimeToPicker = DateTime.Now;
+
+                    this.FilterByDates = true;
+
+                    this.UpdateDateTime();
+                }
+
+                this.Notify();
+            }
+        }
+
+        public bool DateTimeYear
+        {
+            get
+            {
+                return this._dateTimeYear;
+            }
+
+            set
+            {
+                this._dateTimeYear = value;
+
+                if (value)
+                {
+                    this.DateTimeFromPicker = DateTime.Now.AddYears(-1);
+                    this.DateTimeToPicker = DateTime.Now;
+
+                    this.FilterByDates = true;
+
+                    this.UpdateDateTime();
+                }
+
+                this.Notify();
+            }
+        }
+
+        public bool FilterByDates { get; set; }
+
+        public bool StatisticsAll
+        {
+            get
+            {
+                return this._statisticsAll;
+            }
+
+            set
+            {
+                this._statisticsAll = value;
+                if (value)
+                {
+                    this.UpdateCategory(trip => true);
+                }
+
+                this.Notify();
             }
         }
 
         public bool StatisticsErgometer
         {
-            get { return _statisticsErgometer; }
-            set
+            get
             {
-                _statisticsErgometer = value;
-                if (value)
-                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Ergometer);
-
-                Notify();
+                return this._statisticsErgometer;
             }
-        }
 
-        public bool StatisticsKajak
-        {
-            get { return _statisticsKajak; }
             set
             {
-                _statisticsKajak = value;
+                this._statisticsErgometer = value;
                 if (value)
-                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Kajak);
+                {
+                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Ergometer);
+                }
 
-                Notify();
-            }
-        }
-
-        public bool StatisticsInrigger
-        {
-            get { return _statisticsInrigger; }
-            set
-            {
-                _statisticsInrigger = value;
-                if (value)
-                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Inrigger);
-
-                Notify();
+                this.Notify();
             }
         }
 
         public bool StatisticsGig
         {
-            get { return _statisticsGig; }
+            get
+            {
+                return this._statisticsGig;
+            }
+
             set
             {
-                _statisticsGig = value;
+                this._statisticsGig = value;
                 if (value)
-                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Gig);
+                {
+                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Gig);
+                }
 
-                Notify();
+                this.Notify();
+            }
+        }
+
+        public bool StatisticsInrigger
+        {
+            get
+            {
+                return this._statisticsInrigger;
+            }
+
+            set
+            {
+                this._statisticsInrigger = value;
+                if (value)
+                {
+                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Inrigger);
+                }
+
+                this.Notify();
+            }
+        }
+
+        public bool StatisticsKajak
+        {
+            get
+            {
+                return this._statisticsKajak;
+            }
+
+            set
+            {
+                this._statisticsKajak = value;
+                if (value)
+                {
+                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Kajak);
+                }
+
+                this.Notify();
             }
         }
 
         public bool StatisticsOutrigger
         {
-            get { return _statisticsOutrigger; }
+            get
+            {
+                return this._statisticsOutrigger;
+            }
+
             set
             {
-                _statisticsOutrigger = value;
+                this._statisticsOutrigger = value;
                 if (value)
-                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Outrigger);
+                {
+                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Outrigger);
+                }
 
-                Notify();
+                this.Notify();
             }
         }
 
+        #endregion
+
+        #region Properties
+
+        private DateTime? DateTimeFrom { get; set; }
+
+        private DateTime? DateTimeTo { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public override IEnumerable<IFilter> GetFilter()
+        {
+            return new List<IFilter> { this.CurrentBoatType, this.CurrentDateTimeFilter };
+        }
+
+        #endregion
+
+        #region Methods
+
         private void UpdateCategory(Func<TripViewModel, bool> filter)
         {
-            CurrentBoatType.Filter = filter;
+            this.CurrentBoatType.Filter = filter;
 
-            UpdateFilter();
+            this.UpdateFilter();
         }
 
         private void UpdateDateTime()
         {
-            CurrentDateTimeFilter.StartDate = FilterByDates ? DateTimeFrom : DateTime.MinValue;
-            CurrentDateTimeFilter.EndDate = DateTimeTo;
+            this.CurrentDateTimeFilter.StartDate = this.FilterByDates ? this.DateTimeFrom : DateTime.MinValue;
+            this.CurrentDateTimeFilter.EndDate = this.DateTimeTo;
 
-            UpdateFilter();
+            this.UpdateFilter();
         }
-
-        public bool FilterByDates { get; set; }
 
         private void UpdateFilter()
         {
-            base.OnFilterChanged();
+            this.OnFilterChanged();
         }
 
-        public override IEnumerable<IFilter> GetFilter()
-        {
-            return new List<IFilter> {CurrentBoatType, CurrentDateTimeFilter};
-        }
+        #endregion
 
         public class DateTimeFilter : IFilter
         {
-            public DateTime? StartDate { get; set; }
+            #region Public Properties
+
             public DateTime? EndDate { get; set; }
+
+            public DateTime? StartDate { get; set; }
+
+            #endregion
+
+            #region Public Methods and Operators
 
             public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
             {
-                if (typeof (T) != typeof (TripViewModel))
+                if (typeof(T) != typeof(TripViewModel))
+                {
                     return items;
+                }
 
                 IEnumerable<TripViewModel> trips = items.Cast<TripViewModel>().ToList();
-                return trips.Where(o => (!StartDate.HasValue || o.Trip.TripStartTime.Date >= StartDate.Value.Date) &&
-                    (!EndDate.HasValue || o.Trip.TripStartTime.Date <= EndDate.Value.Date)).Cast<T>();
+                return
+                    trips.Where(
+                        o =>
+                        (!this.StartDate.HasValue || o.Trip.TripStartTime.Date >= this.StartDate.Value.Date)
+                        && (!this.EndDate.HasValue || o.Trip.TripStartTime.Date <= this.EndDate.Value.Date)).Cast<T>();
             }
+
+            #endregion
         }
     }
 }

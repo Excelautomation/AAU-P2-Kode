@@ -135,10 +135,10 @@
                                             <TextBox Text="{Binding CurrentTrip.Direction, StringFormat=Time, Mode=TwoWay}" VerticalContentAlignment="Center" FontSize="18" Grid.Row="1" Grid.Column="1"/>
 
                                             <TextBlock Text="Starttid:" Grid.Row="2" Grid.Column="0"/>
-                                            <Toolkit:DateTimePicker FontSize="16" Grid.Row="2" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay, StringFormat=Short}" DockPanel.Dock="Right"></Toolkit:DateTimePicker>
-                                            
+                                            <Toolkit:DateTimePicker FontSize="16" Grid.Row="2" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay, StringFormat=Short}" DockPanel.Dock="Right" />
+
                                             <TextBlock Text="Sluttid:" Grid.Row="3" Grid.Column="0"/>
-                                            <Toolkit:DateTimePicker FontSize="16" Grid.Row="3" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" DockPanel.Dock="Right"></Toolkit:DateTimePicker>
+                                            <Toolkit:DateTimePicker FontSize="16" Grid.Row="3" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" DockPanel.Dock="Right" />
 
                                             <TextBlock Text="Tid ude:" Grid.Row="4" Grid.Column="0"/>
                                             <TextBlock Grid.Row="4" Grid.Column="1">

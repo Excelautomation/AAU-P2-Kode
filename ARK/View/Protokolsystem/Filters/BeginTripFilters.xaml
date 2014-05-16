@@ -7,7 +7,7 @@
              mc:Ignorable="d">
     
     <UserControl.DataContext>
-        <VMFilter:BeginTripFiltersViewModel></VMFilter:BeginTripFiltersViewModel>
+        <VMFilter:BeginTripFiltersViewModel />
     </UserControl.DataContext>
     
     <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

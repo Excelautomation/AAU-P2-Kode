@@ -20,9 +20,13 @@ namespace ARK.View.Protokolsystem.Additional
     /// </summary>
     public partial class BoatsOutAdditionalInfo : UserControl
     {
+        #region Constructors and Destructors
+
         public BoatsOutAdditionalInfo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

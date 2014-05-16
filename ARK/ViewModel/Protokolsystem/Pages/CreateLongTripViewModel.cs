@@ -4,135 +4,216 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Protokolsystem.Additional;
+using ARK.View.Protokolsystem.Confirmations;
 using ARK.View.Protokolsystem.Pages;
 using ARK.ViewModel.Protokolsystem.Additional;
-using ARK.ViewModel.Protokolsystem.Data;
-using ARK.View.Protokolsystem.Confirmations;
 using ARK.ViewModel.Protokolsystem.Confirmations;
+using ARK.ViewModel.Protokolsystem.Data;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
     public class CreateLongTripViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
+        #region Fields
 
         private readonly ObservableCollection<MemberViewModel> _selectedMembers =
             new ObservableCollection<MemberViewModel>(); // Members in boat
 
-        private List<LongTripForm> _longTripForms;
-        private List<Member> _members = new List<Member>();
-        private List<MemberViewModel> _membersFiltered;
         private List<Boat> _boats;
-        private Boat _selectedBoat;
-        private FrameworkElement _infoPage;
 
         private string _campSites;
-        private string _tourDescription;
+
         private string _distancesPerDay;
-        private DateTime? _plannedStartDate;
+
+        private FrameworkElement _infoPage;
+
+        private List<LongTripForm> _longTripForms;
+
+        private List<Member> _members = new List<Member>();
+
+        private List<MemberViewModel> _membersFiltered;
+
         private DateTime? _plannedEndDate;
 
+        private DateTime? _plannedStartDate;
+
+        private Boat _selectedBoat;
+
+        private string _tourDescription;
+
+        #endregion
+
         // Constructor
+        #region Constructors and Destructors
+
         public CreateLongTripViewModel()
         {
             DbArkContext db = DbArkContext.GetDbContext();
 
             // Load of data
-            ParentAttached += (sender, e) =>
+            this.ParentAttached += (sender, e) =>
+                {
+                    this._members = db.Member.OrderBy(x => x.FirstName).ToList();
+                    this.MembersFiltered = this._members.Select(member => new MemberViewModel(member)).ToList();
+
+                    // get long trip forms
+                    this.LongTripForms = db.LongTripForm.OrderBy(x => x.FormCreated).Where(x => true).ToList();
+                    this.Boats = db.Boat.Where(x => x.Active).ToList();
+
+                    // Set info
+                    this.UpdateInfo();
+                };
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public ICommand AddBlank
+        {
+            get
             {
-                _members = db.Member.OrderBy(x => x.FirstName).ToList();
-                MembersFiltered = _members.Select(member => new MemberViewModel(member)).ToList();
+                return
+                    this.GetCommand(
+                        () => this.SelectedMembers.Add(new MemberViewModel(new Member { Id = -1, FirstName = "Blank" })));
+            }
+        }
 
-                // get long trip forms
-                LongTripForms = db.LongTripForm.OrderBy(x => x.FormCreated).Where(x => true).ToList();
-                Boats = db.Boat.Where(x => x.Active).ToList();
-
-                // Set info
-                UpdateInfo();
-            };
+        public ICommand AddGuest
+        {
+            get
+            {
+                return
+                    this.GetCommand(
+                        () => this.SelectedMembers.Add(new MemberViewModel(new Member { Id = -2, FirstName = "Gæst" })));
+            }
         }
 
         // Properties
-        public DateTime? PlannedStartDate
+        public List<Boat> Boats
         {
-            get { return _plannedStartDate; }
-            set { _plannedStartDate = value; NotifyCustom("AllDataFilled"); }
-        }
-        public DateTime? PlannedEndDate
-        {
-            get { return _plannedEndDate; }
-            set { _plannedEndDate = value; NotifyCustom("AllDataFilled"); }
-        }
-        public string TourDescription
-        {
-            get { return _tourDescription; }
-            set
+            get
             {
-                _tourDescription = value;
-                NotifyCustom("AllDataFilled");
+                return this._boats;
             }
-        }
-        public string DistancesPerDay
-        {
-            get { return _distancesPerDay; }
+
             set
             {
-                _distancesPerDay = value;
-                NotifyCustom("AllDataFilled");
-            }
-        }
-        public string CampSites
-        {
-            get { return _campSites; }
-            set
-            {
-                _campSites = value;
-                NotifyCustom("AllDataFilled");
+                this._boats = value;
+                this.Notify();
             }
         }
 
-        public List<Boat> Boats
+        public string CampSites
         {
-            get { return _boats; }
-            set { _boats = value; Notify(); }
-        }
-        public Boat SelectedBoat
-        {
-            get { return _selectedBoat; }
+            get
+            {
+                return this._campSites;
+            }
+
             set
             {
-                _selectedBoat = value;
-                Notify();
-                UpdateInfo();
+                this._campSites = value;
+                this.NotifyCustom("AllDataFilled");
+            }
+        }
+
+        public string DistancesPerDay
+        {
+            get
+            {
+                return this._distancesPerDay;
+            }
+
+            set
+            {
+                this._distancesPerDay = value;
+                this.NotifyCustom("AllDataFilled");
+            }
+        }
+
+        public List<LongTripForm> LongTripForms
+        {
+            get
+            {
+                return this._longTripForms;
+            }
+
+            set
+            {
+                this._longTripForms = value;
+                this.Notify();
             }
         }
 
         public List<MemberViewModel> MembersFiltered
         {
-            get { return _membersFiltered; }
+            get
+            {
+                return this._membersFiltered;
+            }
+
             set
             {
-                _membersFiltered = value;
+                this._membersFiltered = value;
 
-                Notify();
+                this.Notify();
+            }
+        }
+
+        public DateTime? PlannedEndDate
+        {
+            get
+            {
+                return this._plannedEndDate;
+            }
+
+            set
+            {
+                this._plannedEndDate = value;
+                this.NotifyCustom("AllDataFilled");
+            }
+        }
+
+        public DateTime? PlannedStartDate
+        {
+            get
+            {
+                return this._plannedStartDate;
+            }
+
+            set
+            {
+                this._plannedStartDate = value;
+                this.NotifyCustom("AllDataFilled");
+            }
+        }
+
+        public Boat SelectedBoat
+        {
+            get
+            {
+                return this._selectedBoat;
+            }
+
+            set
+            {
+                this._selectedBoat = value;
+                this.Notify();
+                this.UpdateInfo();
             }
         }
 
         public ObservableCollection<MemberViewModel> SelectedMembers
         {
-            get { return _selectedMembers; }
-        }
-
-        public List<LongTripForm> LongTripForms
-        {
-            get { return _longTripForms; }
-            set
+            get
             {
-                _longTripForms = value;
-                Notify();
+                return this._selectedMembers;
             }
         }
 
@@ -140,29 +221,50 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    LongTripForm longTripForm = null;
-                    longTripForm = new LongTripForm
-                    {
-                        FormCreated = DateTime.Now,
-                        PlannedStartDate = PlannedStartDate ?? DateTime.MinValue,
-                        PlannedEndDate = PlannedEndDate ?? DateTime.MinValue,
-                        Boat = SelectedBoat,
-                        TourDescription = TourDescription,
-                        DistancesPerDay = DistancesPerDay,
-                        CampSites = CampSites,
-                        Members = SelectedMembers.Select(mvm => mvm.Member).ToList(),
-                        Status = LongTripForm.BoatStatus.Awaiting,
-                        ResponsibleMember = Info.ResponsibleMember != null ? Info.ResponsibleMember.Member : null
-                    };
-                    var ConfirmView = new CreateLongTripConfirm();
-                    var ConfirmViewModel = (CreateLongTripConfirmViewModel)ConfirmView.DataContext;
-                    
-                    ConfirmViewModel.LongTrip = longTripForm;
+                return this.GetCommand(
+                    () =>
+                        {
+                            LongTripForm longTripForm = null;
+                            longTripForm = new LongTripForm
+                                               {
+                                                   FormCreated = DateTime.Now, 
+                                                   PlannedStartDate =
+                                                       this.PlannedStartDate ?? DateTime.MinValue, 
+                                                   PlannedEndDate = this.PlannedEndDate ?? DateTime.MinValue, 
+                                                   Boat = this.SelectedBoat, 
+                                                   TourDescription = this.TourDescription, 
+                                                   DistancesPerDay = this.DistancesPerDay, 
+                                                   CampSites = this.CampSites, 
+                                                   Members =
+                                                       this.SelectedMembers.Select(mvm => mvm.Member)
+                                                       .ToList(), 
+                                                   Status = LongTripForm.BoatStatus.Awaiting, 
+                                                   ResponsibleMember =
+                                                       this.Info.ResponsibleMember != null
+                                                           ? this.Info.ResponsibleMember.Member
+                                                           : null
+                                               };
+                            var ConfirmView = new CreateLongTripConfirm();
+                            var ConfirmViewModel = (CreateLongTripConfirmViewModel)ConfirmView.DataContext;
 
-                    ProtocolSystem.ShowDialog(ConfirmView);
-                });
+                            ConfirmViewModel.LongTrip = longTripForm;
+
+                            this.ProtocolSystem.ShowDialog(ConfirmView);
+                        });
+            }
+        }
+
+        public string TourDescription
+        {
+            get
+            {
+                return this._tourDescription;
+            }
+
+            set
+            {
+                this._tourDescription = value;
+                this.NotifyCustom("AllDataFilled");
             }
         }
 
@@ -171,43 +273,43 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    GetCommand(
-                        () => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
+                    this.GetCommand(
+                        () => this.ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
             }
         }
 
-        public ICommand AddBlank
-        {
-            get
-            {
-                return GetCommand(() => SelectedMembers.Add(new MemberViewModel(new Member { Id = -1, FirstName = "Blank" })));
-            }
-        }
+        #endregion
 
-        public ICommand AddGuest
+        #region Properties
+
+        private CreateLongTripFormAdditionalInfoViewModel Info
         {
             get
             {
-                return GetCommand(() => SelectedMembers.Add(new MemberViewModel(new Member { Id = -2, FirstName = "Gæst" })));
+                return this.InfoPage.DataContext as CreateLongTripFormAdditionalInfoViewModel;
             }
         }
 
         private FrameworkElement InfoPage
         {
-            get { return _infoPage ?? (_infoPage = new CreateLongTripFormAdditionalInfo()); }
+            get
+            {
+                return this._infoPage ?? (this._infoPage = new CreateLongTripFormAdditionalInfo());
+            }
         }
 
-        private CreateLongTripFormAdditionalInfoViewModel Info
-        {
-            get { return InfoPage.DataContext as CreateLongTripFormAdditionalInfoViewModel; }
-        }
+        #endregion
+
+        #region Methods
 
         private void UpdateInfo()
         {
-            Info.SelectedBoat = SelectedBoat;
-            Info.SelectedMembers = SelectedMembers;
+            this.Info.SelectedBoat = this.SelectedBoat;
+            this.Info.SelectedMembers = this.SelectedMembers;
 
-            ProtocolSystem.ChangeInfo(InfoPage, Info);
+            this.ProtocolSystem.ChangeInfo(this.InfoPage, this.Info);
         }
+
+        #endregion
     }
 }

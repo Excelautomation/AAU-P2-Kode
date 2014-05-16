@@ -5,49 +5,77 @@ namespace ARK.ViewModel.Protokolsystem.Data
 {
     public class MemberViewModel : ViewModelBase
     {
-        private Member _member;
-        private bool _visible;
+        #region Fields
+
         private bool _isResponsible;
 
-        public MemberViewModel(Member member) : this(member, true)
+        private Member _member;
+
+        private bool _visible;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        public MemberViewModel(Member member)
+            : this(member, true)
         {
         }
 
         public MemberViewModel(Member member, bool visible)
         {
-            Member = member;
-            Visible = visible;
+            this.Member = member;
+            this.Visible = visible;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public bool IsResponsible
+        {
+            get
+            {
+                return this._isResponsible;
+            }
+
+            set
+            {
+                this._isResponsible = value;
+                this.Notify();
+            }
         }
 
         public Member Member
         {
-            get { return _member; }
+            get
+            {
+                return this._member;
+            }
+
             set
             {
-                _member = value;
-                Notify();
+                this._member = value;
+                this.Notify();
             }
         }
 
         public bool Visible
         {
-            get { return _visible; }
+            get
+            {
+                return this._visible;
+            }
+
             set
             {
-                _visible = value;
-                Notify();
+                this._visible = value;
+                this.Notify();
             }
         }
 
+        #endregion
+
         // Is responsible for longtrip (not used in begintrip)
-        public bool IsResponsible
-        {
-            get { return _isResponsible; }
-            set
-            {
-                _isResponsible = value;
-                Notify();
-            }
-        }
     }
 }

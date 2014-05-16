@@ -6,7 +6,7 @@
         x:Name="AdminWindow">
 
     <Window.DataContext>
-        <VM:AdminLoginViewModel></VM:AdminLoginViewModel>
+        <VM:AdminLoginViewModel />
     </Window.DataContext>
     <Grid FocusManager.FocusedElement="{Binding ElementName=UserBox}">
         <Label Content="Brugernavn:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="102" FontFamily="Arial" FontSize="16"/>

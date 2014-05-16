@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+
 using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
@@ -19,44 +20,52 @@ namespace ARK
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Constructors and Destructors
+
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Methods
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //var window = new AdminLogin();
+            // var window = new AdminLogin();
             var window = new AdminSystem();
-            ShowWindow(window);
+            this.ShowWindow(window);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var window = new ProtocolSystem();
-            ShowWindow(window);
-        }
-
-        private void ShowWindow(Window window)
-        {
-            window.Show();
-            Hide();
-
-            window.Closing += (sender, e) => Close();
+            this.ShowWindow(window);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //SmsWarnings warn = new SmsWarnings();
-            //warn.Test();
+            // SmsWarnings warn = new SmsWarnings();
+            // warn.Test();
 
-            //XmlParser.UpdateDataFromFtp();
+            // XmlParser.UpdateDataFromFtp();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             var window = new AdminLogin();
-            ShowWindow(window);
+            this.ShowWindow(window);
         }
+
+        private void ShowWindow(Window window)
+        {
+            window.Show();
+            this.Hide();
+
+            window.Closing += (sender, e) => this.Close();
+        }
+
+        #endregion
     }
 }

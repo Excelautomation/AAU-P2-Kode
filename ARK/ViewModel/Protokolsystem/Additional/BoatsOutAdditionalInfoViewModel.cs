@@ -1,58 +1,57 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
+
 using ARK.Model;
+using ARK.Model.DB;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Interfaces;
-using System.Collections.ObjectModel;
-using ARK.Model.DB;
-using System;
+
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
     public class BoatsOutAdditionalInfoViewModel : ContentViewModelBase
     {
         // Fields
+        #region Fields
+
         private Trip _selectedTrip;
-        DbArkContext db;
-
-        // Constructor
-        public BoatsOutAdditionalInfoViewModel()
-        {
-            db = DbArkContext.GetDbContext();
-
-        }
-
-        // Properties
-        public Trip SelectedTrip
-        {
-            get { return _selectedTrip; }
-            set 
-            { 
-                _selectedTrip = value;
-                if (_selectedTrip != null)
-                    WarningSms = db.TripWarningSms.FirstOrDefault(t => t.Trip.Id == SelectedTrip.Id);
-                
-                Notify();
-            }
-        }
 
         private TripWarningSms _warningSms;
 
-        public TripWarningSms WarningSms
+        private DbArkContext db;
+
+        #endregion
+
+        // Constructor
+        #region Constructors and Destructors
+
+        public BoatsOutAdditionalInfoViewModel()
         {
-            get { return _warningSms; }
-            set { _warningSms = value; NotifyCustom("SmsSentToBoat"); NotifyCustom("SmsRecievedFromBoat"); NotifyCustom("SmsSentToAdministration"); }
+            this.db = DbArkContext.GetDbContext();
         }
 
-        public DateTime? SmsSentToBoat
+        #endregion
+
+        // Properties
+        #region Public Properties
+
+        public Trip SelectedTrip
         {
-            get 
+            get
             {
-                if (WarningSms != null)
+                return this._selectedTrip;
+            }
+
+            set
+            {
+                this._selectedTrip = value;
+                if (this._selectedTrip != null)
                 {
-                    return WarningSms.SentSms;
+                    this.WarningSms = this.db.TripWarningSms.FirstOrDefault(t => t.Trip.Id == this.SelectedTrip.Id);
                 }
-                else
-                    return null;
+
+                this.Notify();
             }
         }
 
@@ -60,12 +59,14 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                if (WarningSms != null)
+                if (this.WarningSms != null)
                 {
-                    return WarningSms.RecievedSms;
+                    return this.WarningSms.RecievedSms;
                 }
                 else
-                    return null;                
+                {
+                    return null;
+                }
             }
         }
 
@@ -73,19 +74,56 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                if (SmsSentToBoat != null)
+                if (this.SmsSentToBoat != null)
                 {
-                    DateTime time = (DateTime)SmsSentToBoat;
+                    DateTime time = (DateTime)this.SmsSentToBoat;
                     if (DateTime.Compare(time, DateTime.Now.AddMinutes(-15)) < 0)
                     {
-                        return SmsSentToBoat.Value.AddMinutes(15);
+                        return this.SmsSentToBoat.Value.AddMinutes(15);
                     }
-                    else 
+                    else
+                    {
                         return null;
+                    }
                 }
                 else
+                {
                     return null;
+                }
             }
         }
+
+        public DateTime? SmsSentToBoat
+        {
+            get
+            {
+                if (this.WarningSms != null)
+                {
+                    return this.WarningSms.SentSms;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public TripWarningSms WarningSms
+        {
+            get
+            {
+                return this._warningSms;
+            }
+
+            set
+            {
+                this._warningSms = value;
+                this.NotifyCustom("SmsSentToBoat");
+                this.NotifyCustom("SmsRecievedFromBoat");
+                this.NotifyCustom("SmsSentToAdministration");
+            }
+        }
+
+        #endregion
     }
 }

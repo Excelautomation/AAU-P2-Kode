@@ -20,9 +20,13 @@ namespace ARK.View.Protokolsystem.Additional
     /// </summary>
     public partial class DistanceStatisticsAdditionalInfo : UserControl
     {
+        #region Constructors and Destructors
+
         public DistanceStatisticsAdditionalInfo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

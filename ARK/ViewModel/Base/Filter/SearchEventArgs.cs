@@ -4,11 +4,19 @@ namespace ARK.ViewModel.Base.Filter
 {
     public class SearchEventArgs : EventArgs
     {
+        #region Constructors and Destructors
+
         public SearchEventArgs(string searchText)
         {
-            SearchText = searchText;
+            this.SearchText = searchText;
         }
 
+        #endregion
+
+        #region Public Properties
+
         public string SearchText { get; private set; }
+
+        #endregion
     }
 }

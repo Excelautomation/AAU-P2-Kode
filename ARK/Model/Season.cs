@@ -8,31 +8,41 @@ namespace ARK.Model
 {
     public class Season
     {
+        #region Constructors and Destructors
+
         public Season()
         {
-            SeasonStart = DateTime.Now;
-            SeasonEnd = SeasonStart;
-            SeasonEnd = SeasonEnd.AddYears(1);
+            this.SeasonStart = DateTime.Now;
+            this.SeasonEnd = this.SeasonStart;
+            this.SeasonEnd = this.SeasonEnd.AddYears(1);
         }
 
-        public int Id { get; set; }
-        public DateTime SeasonStart { get; set; }
-        public DateTime SeasonEnd { get; set; }
+        #endregion
 
-        public DateTime LatestSeasonEnd
-        {
-            get
-            {
-                return SeasonStart.AddDays(365 + 183);
-            }
-        }
+        #region Public Properties
 
         public DateTime EarliestSeasonEnd
         {
             get
             {
-                return SeasonStart.AddDays(183);
+                return this.SeasonStart.AddDays(183);
             }
         }
+
+        public int Id { get; set; }
+
+        public DateTime LatestSeasonEnd
+        {
+            get
+            {
+                return this.SeasonStart.AddDays(365 + 183);
+            }
+        }
+
+        public DateTime SeasonEnd { get; set; }
+
+        public DateTime SeasonStart { get; set; }
+
+        #endregion
     }
 }

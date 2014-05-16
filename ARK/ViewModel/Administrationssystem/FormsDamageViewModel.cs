@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Windows.Input;
+
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
@@ -8,61 +9,27 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsDamageViewModel : ContentViewModelBase
     {
-        private bool _recentChange;
+        #region Fields
+
         private DamageForm _damageForm;
 
-        public bool RecentChange
-        {
-            get { return _recentChange; }
-            set
-            {
-                _recentChange = value;
-                Notify();
-            }
-        }
+        private bool _recentChange;
 
-        public DamageForm DamageForm
-        {
-            get { return _damageForm; }
-            set
-            {
-                _damageForm = value;
-                Notify();
-            }
-        }
+        #endregion
 
-        public ICommand SaveChanges
-        {
-            get { return GetCommand(Save); }
-        }
+        #region Public Properties
 
         public ICommand CloseDamageForm
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    DamageForm.Closed = true;
+                return this.GetCommand(
+                    () =>
+                        {
+                            this.DamageForm.Closed = true;
 
-                    Save();
-                });
-            }
-        }
-
-        public ICommand OpenDamageForm
-        {
-            get
-            {
-                return GetCommand(() =>
-                {
-                    DamageForm.Closed = false;
-                    Save();
-
-                    var vm = (FormsViewModel)Parent;
-                    var tempdmf2 = vm.DamageForms;
-                    vm.DamageForms = null;
-                    vm.DamageForms = tempdmf2;
-                });
+                            this.Save();
+                        });
             }
         }
 
@@ -70,28 +37,89 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return GetCommand(() =>
-                {
-                    DamageForm.Closed = true;
-                    Save();
+                return this.GetCommand(
+                    () =>
+                        {
+                            this.DamageForm.Closed = true;
+                            this.Save();
 
-                    var vm = (FormsViewModel)Parent;
-                    var tempdmf2 = vm.DamageForms;
-                    vm.DamageForms = null;
-                    vm.DamageForms = tempdmf2;
-                });
+                            var vm = (FormsViewModel)this.Parent;
+                            var tempdmf2 = vm.DamageForms;
+                            vm.DamageForms = null;
+                            vm.DamageForms = tempdmf2;
+                        });
             }
         }
+
+        public DamageForm DamageForm
+        {
+            get
+            {
+                return this._damageForm;
+            }
+
+            set
+            {
+                this._damageForm = value;
+                this.Notify();
+            }
+        }
+
+        public ICommand OpenDamageForm
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                        {
+                            this.DamageForm.Closed = false;
+                            this.Save();
+
+                            var vm = (FormsViewModel)this.Parent;
+                            var tempdmf2 = vm.DamageForms;
+                            vm.DamageForms = null;
+                            vm.DamageForms = tempdmf2;
+                        });
+            }
+        }
+
+        public bool RecentChange
+        {
+            get
+            {
+                return this._recentChange;
+            }
+
+            set
+            {
+                this._recentChange = value;
+                this.Notify();
+            }
+        }
+
+        public ICommand SaveChanges
+        {
+            get
+            {
+                return this.GetCommand(this.Save);
+            }
+        }
+
+        #endregion
+
+        #region Methods
 
         private void Save()
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(DamageForm).State = EntityState.Modified;
+                db.Entry(this.DamageForm).State = EntityState.Modified;
                 db.SaveChanges();
             }
 
-            RecentChange = true;
+            this.RecentChange = true;
         }
+
+        #endregion
     }
 }

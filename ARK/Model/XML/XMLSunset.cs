@@ -15,42 +15,21 @@ namespace ARK.Model.XML
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
         public partial class sun
         {
-
-            private decimal versionField;
-
-            private sunLocation locationField;
+            #region Fields
 
             private sunDate dateField;
 
-            private sunMorning morningField;
-
             private sunEvening eveningField;
 
-            /// <remarks/>
-            public decimal version
-            {
-                get
-                {
-                    return this.versionField;
-                }
-                set
-                {
-                    this.versionField = value;
-                }
-            }
+            private sunLocation locationField;
 
-            /// <remarks/>
-            public sunLocation location
-            {
-                get
-                {
-                    return this.locationField;
-                }
-                set
-                {
-                    this.locationField = value;
-                }
-            }
+            private sunMorning morningField;
+
+            private decimal versionField;
+
+            #endregion
+
+            #region Public Properties
 
             /// <remarks/>
             public sunDate date
@@ -59,22 +38,10 @@ namespace ARK.Model.XML
                 {
                     return this.dateField;
                 }
+
                 set
                 {
                     this.dateField = value;
-                }
-            }
-
-            /// <remarks/>
-            public sunMorning morning
-            {
-                get
-                {
-                    return this.morningField;
-                }
-                set
-                {
-                    this.morningField = value;
                 }
             }
 
@@ -85,61 +52,75 @@ namespace ARK.Model.XML
                 {
                     return this.eveningField;
                 }
+
                 set
                 {
                     this.eveningField = value;
                 }
             }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class sunLocation
-        {
-
-            private decimal latitudeField;
-
-            private decimal longitudeField;
 
             /// <remarks/>
-            public decimal latitude
+            public sunLocation location
             {
                 get
                 {
-                    return this.latitudeField;
+                    return this.locationField;
                 }
+
                 set
                 {
-                    this.latitudeField = value;
+                    this.locationField = value;
                 }
             }
 
             /// <remarks/>
-            public decimal longitude
+            public sunMorning morning
             {
                 get
                 {
-                    return this.longitudeField;
+                    return this.morningField;
                 }
+
                 set
                 {
-                    this.longitudeField = value;
+                    this.morningField = value;
                 }
             }
+
+            /// <remarks/>
+            public decimal version
+            {
+                get
+                {
+                    return this.versionField;
+                }
+
+                set
+                {
+                    this.versionField = value;
+                }
+            }
+
+            #endregion
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunDate
         {
+            #region Fields
 
             private byte dayField;
+
+            private byte dstField;
 
             private byte monthField;
 
             private byte timezoneField;
 
-            private byte dstField;
+            #endregion
+
+            #region Public Properties
 
             /// <remarks/>
             public byte day
@@ -148,9 +129,24 @@ namespace ARK.Model.XML
                 {
                     return this.dayField;
                 }
+
                 set
                 {
                     this.dayField = value;
+                }
+            }
+
+            /// <remarks/>
+            public byte dst
+            {
+                get
+                {
+                    return this.dstField;
+                }
+
+                set
+                {
+                    this.dstField = value;
                 }
             }
 
@@ -161,6 +157,7 @@ namespace ARK.Model.XML
                 {
                     return this.monthField;
                 }
+
                 set
                 {
                     this.monthField = value;
@@ -174,121 +171,29 @@ namespace ARK.Model.XML
                 {
                     return this.timezoneField;
                 }
+
                 set
                 {
                     this.timezoneField = value;
                 }
             }
 
-            /// <remarks/>
-            public byte dst
-            {
-                get
-                {
-                    return this.dstField;
-                }
-                set
-                {
-                    this.dstField = value;
-                }
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class sunMorning
-        {
-
-            private string sunriseField;
-
-            private sunMorningTwilight twilightField;
-
-            /// <remarks/>
-            public string sunrise
-            {
-                get
-                {
-                    return this.sunriseField;
-                }
-                set
-                {
-                    this.sunriseField = value;
-                }
-            }
-
-            /// <remarks/>
-            public sunMorningTwilight twilight
-            {
-                get
-                {
-                    return this.twilightField;
-                }
-                set
-                {
-                    this.twilightField = value;
-                }
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class sunMorningTwilight
-        {
-
-            private string civilField;
-
-            private string nauticalField;
-
-            private string astronomicalField;
-
-            /// <remarks/>
-            public string civil
-            {
-                get
-                {
-                    return this.civilField;
-                }
-                set
-                {
-                    this.civilField = value;
-                }
-            }
-
-            /// <remarks/>
-            public string nautical
-            {
-                get
-                {
-                    return this.nauticalField;
-                }
-                set
-                {
-                    this.nauticalField = value;
-                }
-            }
-
-            /// <remarks/>
-            public string astronomical
-            {
-                get
-                {
-                    return this.astronomicalField;
-                }
-                set
-                {
-                    this.astronomicalField = value;
-                }
-            }
+            #endregion
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunEvening
         {
+            #region Fields
 
             private string sunsetField;
 
             private sunEveningTwilight twilightField;
+
+            #endregion
+
+            #region Public Properties
 
             /// <remarks/>
             public string sunset
@@ -297,6 +202,7 @@ namespace ARK.Model.XML
                 {
                     return this.sunsetField;
                 }
+
                 set
                 {
                     this.sunsetField = value;
@@ -310,23 +216,45 @@ namespace ARK.Model.XML
                 {
                     return this.twilightField;
                 }
+
                 set
                 {
                     this.twilightField = value;
                 }
             }
+
+            #endregion
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class sunEveningTwilight
         {
+            #region Fields
+
+            private string astronomicalField;
 
             private string civilField;
 
             private string nauticalField;
 
-            private string astronomicalField;
+            #endregion
+
+            #region Public Properties
+
+            /// <remarks/>
+            public string astronomical
+            {
+                get
+                {
+                    return this.astronomicalField;
+                }
+
+                set
+                {
+                    this.astronomicalField = value;
+                }
+            }
 
             /// <remarks/>
             public string civil
@@ -335,6 +263,7 @@ namespace ARK.Model.XML
                 {
                     return this.civilField;
                 }
+
                 set
                 {
                     this.civilField = value;
@@ -348,11 +277,121 @@ namespace ARK.Model.XML
                 {
                     return this.nauticalField;
                 }
+
                 set
                 {
                     this.nauticalField = value;
                 }
             }
+
+            #endregion
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class sunLocation
+        {
+            #region Fields
+
+            private decimal latitudeField;
+
+            private decimal longitudeField;
+
+            #endregion
+
+            #region Public Properties
+
+            /// <remarks/>
+            public decimal latitude
+            {
+                get
+                {
+                    return this.latitudeField;
+                }
+
+                set
+                {
+                    this.latitudeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public decimal longitude
+            {
+                get
+                {
+                    return this.longitudeField;
+                }
+
+                set
+                {
+                    this.longitudeField = value;
+                }
+            }
+
+            #endregion
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class sunMorning
+        {
+            #region Fields
+
+            private string sunriseField;
+
+            private sunMorningTwilight twilightField;
+
+            #endregion
+
+            #region Public Properties
+
+            /// <remarks/>
+            public string sunrise
+            {
+                get
+                {
+                    return this.sunriseField;
+                }
+
+                set
+                {
+                    this.sunriseField = value;
+                }
+            }
+
+            /// <remarks/>
+            public sunMorningTwilight twilight
+            {
+                get
+                {
+                    return this.twilightField;
+                }
+
+                set
+                {
+                    this.twilightField = value;
+                }
+            }
+
+            #endregion
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class sunMorningTwilight
+        {
+            #region Fields
+
+            private string astronomicalField;
+
+            private string civilField;
+
+            private string nauticalField;
+
+            #endregion
+
+            #region Public Properties
 
             /// <remarks/>
             public string astronomical
@@ -361,11 +400,42 @@ namespace ARK.Model.XML
                 {
                     return this.astronomicalField;
                 }
+
                 set
                 {
                     this.astronomicalField = value;
                 }
             }
+
+            /// <remarks/>
+            public string civil
+            {
+                get
+                {
+                    return this.civilField;
+                }
+
+                set
+                {
+                    this.civilField = value;
+                }
+            }
+
+            /// <remarks/>
+            public string nautical
+            {
+                get
+                {
+                    return this.nauticalField;
+                }
+
+                set
+                {
+                    this.nauticalField = value;
+                }
+            }
+
+            #endregion
         }
     }
 }

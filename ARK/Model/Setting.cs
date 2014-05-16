@@ -8,9 +8,14 @@ namespace ARK.Model
 {
     public class Setting
     {
+        #region Public Properties
+
         public int Id { get; set; }
-        
+
         public string Name { get; set; }
+
         public string Value { get; set; }
+
+        #endregion
     }
 }

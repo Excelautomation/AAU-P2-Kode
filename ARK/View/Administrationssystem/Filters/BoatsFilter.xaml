@@ -12,16 +12,16 @@
     </UserControl.Resources>
     
     <UserControl.DataContext>
-        <VMFilter:BoatFilterViewModel></VMFilter:BoatFilterViewModel>
+        <VMFilter:BoatFilterViewModel />
     </UserControl.DataContext>
     
     <StackPanel>
-        <CheckBox Content="Både ude" IsChecked="{Binding Path=ShowBoatsOut, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Både hjemme" IsChecked="{Binding Path=ShowBoatsHome, Mode=TwoWay}"></CheckBox>
-        <Separator Height="20"></Separator>
-        <CheckBox Content="Både under reparation" IsChecked="{Binding Path=ShowBoatsUnderService, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Beskadige både" IsChecked="{Binding Path=ShowBoatsDamaged, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Inaktive både" IsChecked="{Binding Path=ShowInactiveBoats, Mode=TwoWay}"></CheckBox>
-        <CheckBox Content="Funktionelle både" IsChecked="{Binding Path=ShowFunctionalBoats, Mode=TwoWay}"></CheckBox>
+        <CheckBox Content="Både ude" IsChecked="{Binding Path=ShowBoatsOut, Mode=TwoWay}" />
+        <CheckBox Content="Både hjemme" IsChecked="{Binding Path=ShowBoatsHome, Mode=TwoWay}" />
+        <Separator Height="20" />
+        <CheckBox Content="Både under reparation" IsChecked="{Binding Path=ShowBoatsUnderService, Mode=TwoWay}" />
+        <CheckBox Content="Beskadige både" IsChecked="{Binding Path=ShowBoatsDamaged, Mode=TwoWay}" />
+        <CheckBox Content="Inaktive både" IsChecked="{Binding Path=ShowInactiveBoats, Mode=TwoWay}" />
+        <CheckBox Content="Funktionelle både" IsChecked="{Binding Path=ShowFunctionalBoats, Mode=TwoWay}" />
     </StackPanel>
 </UserControl>

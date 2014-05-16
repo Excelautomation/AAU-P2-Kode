@@ -20,9 +20,13 @@ namespace ARK.View.Protokolsystem.Additional
     /// </summary>
     public partial class BeginTripAdditionalInfo : UserControl
     {
+        #region Constructors and Destructors
+
         public BeginTripAdditionalInfo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

@@ -7,9 +7,13 @@ namespace ARK.View.Protokolsystem.Pages
     /// </summary>
     public partial class DistanceStatistics : UserControl
     {
+        #region Constructors and Destructors
+
         public DistanceStatistics()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

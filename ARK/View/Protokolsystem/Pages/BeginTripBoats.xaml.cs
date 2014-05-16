@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+
 using ARK.ViewModel.Protokolsystem.Data;
 using ARK.ViewModel.Protokolsystem.Pages;
 
@@ -9,10 +10,16 @@ namespace ARK.View.Protokolsystem.Pages
     /// </summary>
     public partial class BeginTripBoats : UserControl
     {
+        #region Constructors and Destructors
+
         public BeginTripBoats()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Methods
 
         private void AllMembersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -21,8 +28,10 @@ namespace ARK.View.Protokolsystem.Pages
 
             if (vm.SelectedMembers.Count > vm.SelectedBoat.NumberofSeats)
             {
-                vm.SelectedMembers.Remove((MemberViewModel) e.AddedItems[0]);
+                vm.SelectedMembers.Remove((MemberViewModel)e.AddedItems[0]);
             }
         }
+
+        #endregion
     }
 }

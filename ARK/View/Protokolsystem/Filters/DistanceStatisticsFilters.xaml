@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="300">
     
     <UserControl.DataContext>
-        <VMFilter:DistanceStatisticsFilterViewModel></VMFilter:DistanceStatisticsFilterViewModel>
+        <VMFilter:DistanceStatisticsFilterViewModel />
     </UserControl.DataContext>
     
     <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

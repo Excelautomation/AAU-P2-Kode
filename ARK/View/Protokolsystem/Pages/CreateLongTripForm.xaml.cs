@@ -7,9 +7,13 @@ namespace ARK.View.Protokolsystem.Pages
     /// </summary>
     public partial class CreateLongTripForm : UserControl
     {
+        #region Constructors and Destructors
+
         public CreateLongTripForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

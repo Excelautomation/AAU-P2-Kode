@@ -334,10 +334,10 @@
                             <Style TargetType="Image" BasedOn="{StaticResource ResourceKey=btnImage}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
-                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png"></Setter>
+                                        <Setter Property="Source" Value="/View/images/keyboard_delete.png" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
-                                        <Setter Property="Source" Value="/View/images/keyboard.png"></Setter>
+                                        <Setter Property="Source" Value="/View/images/keyboard.png" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -348,10 +348,10 @@
                             <Style TargetType="TextBlock" BasedOn="{StaticResource ResourceKey=ButtonStyle}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="True">
-                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR"></Setter>
+                                        <Setter Property="Text" Value="SKJUL&#10;TASTATUR" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=ProtocolSystem.EnableSearch}" Value="False">
-                                        <Setter Property="Text" Value="VIS&#10;TASTATUR"></Setter>
+                                        <Setter Property="Text" Value="VIS&#10;TASTATUR" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>

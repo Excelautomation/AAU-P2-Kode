@@ -10,35 +10,66 @@ namespace ARK.ViewModel.Base
     /// <remarks>
     /// This implementation of RelayCommand was created by Josh Smith http://msdn.microsoft.com/en-us/magazine/dd419663.aspx
     /// </remarks>
-    public class RelayCommand : ICommand 
-    { 
-        readonly Action<object> _execute; 
-        readonly Predicate<object> _canExecute; 
+    public class RelayCommand : ICommand
+    {
+        #region Fields
 
-        public RelayCommand(Action<object> execute) : this(execute, null) { }
+        private readonly Predicate<object> _canExecute;
+
+        private readonly Action<object> _execute;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        public RelayCommand(Action<object> execute)
+            : this(execute, null)
+        {
+        }
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            if (execute == null) throw new ArgumentNullException("execute"); 
-            _execute = execute; 
-            _canExecute = canExecute; 
+            if (execute == null)
+            {
+                throw new ArgumentNullException("execute");
+            }
+
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
+
+        #endregion
+
+        #region Public Events
+
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute(parameter);
-        } 
-        
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; } 
-            remove { CommandManager.RequerySuggested -= value; }
+            return this._canExecute == null || this._canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            this._execute(parameter);
         }
+
+        #endregion
     }
 }

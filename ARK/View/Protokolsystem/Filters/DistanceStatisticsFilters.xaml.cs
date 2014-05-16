@@ -7,9 +7,13 @@ namespace ARK.View.Protokolsystem.Filters
     /// </summary>
     public partial class DistanceStatisticsFilters : UserControl
     {
+        #region Constructors and Destructors
+
         public DistanceStatisticsFilters()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

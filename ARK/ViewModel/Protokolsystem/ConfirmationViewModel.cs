@@ -6,19 +6,36 @@ namespace ARK.ViewModel.Protokolsystem
 {
     public class ConfirmationViewModelBase : ProtokolsystemContentViewModelBase
     {
+        #region Public Events
+
+        public event EventHandler WindowHide;
+
+        #endregion
+
+        #region Public Properties
+
         public ICommand CommandHide
         {
-            get { return GetCommand(e => Hide()); }
+            get
+            {
+                return this.GetCommand(e => this.Hide());
+            }
         }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         public virtual void Hide()
         {
-            ProtocolSystem.HideDialog();
+            this.ProtocolSystem.HideDialog();
 
-            if (WindowHide != null)
-                WindowHide(this, new EventArgs());
+            if (this.WindowHide != null)
+            {
+                this.WindowHide(this, new EventArgs());
+            }
         }
 
-        public event EventHandler WindowHide;
+        #endregion
     }
 }

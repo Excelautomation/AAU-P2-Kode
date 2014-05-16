@@ -1,25 +1,36 @@
 ﻿using System.Windows.Controls;
+
 using ARK.ViewModel.Base;
 
 namespace ARK.View.Protokolsystem.Confirmations
 {
-	/// <summary>
-	/// Interaction logic for ChangeDistanceConfirm.xaml
-	/// </summary>
-	public partial class ChangeDistanceConfirm : UserControl
-	{
+    using System;
+
+    /// <summary>
+    /// Interaction logic for ChangeDistanceConfirm.xaml
+    /// </summary>
+    public partial class ChangeDistanceConfirm : UserControl
+    {
+        #region Constructors and Destructors
+
         public ChangeDistanceConfirm()
-		{
-			this.InitializeComponent();
-            ((ContentViewModelBase)this.DataContext).ParentAttached += AdminLoginConfirm_ParentAttached;
-        }
-
-        void AdminLoginConfirm_ParentAttached(object sender, System.EventArgs e)
         {
-            var vm = ((ContentViewModelBase)this.DataContext);
-
-            vm.ParentAttached -= AdminLoginConfirm_ParentAttached;
-            vm.GotFocus.Execute(DistanceConfirm);
+            this.InitializeComponent();
+            ((ContentViewModelBase)this.DataContext).ParentAttached += this.AdminLoginConfirm_ParentAttached;
         }
-	}
+
+        #endregion
+
+        #region Methods
+
+        private void AdminLoginConfirm_ParentAttached(object sender, EventArgs e)
+        {
+            var vm = (ContentViewModelBase)this.DataContext;
+
+            vm.ParentAttached -= this.AdminLoginConfirm_ParentAttached;
+            vm.GotFocus.Execute(this.DistanceConfirm);
+        }
+
+        #endregion
+    }
 }

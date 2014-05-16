@@ -20,9 +20,13 @@ namespace ARK.View.Protokolsystem.Additional
     /// </summary>
     public partial class CreateLongTripFormAdditionalInfo : UserControl
     {
+        #region Constructors and Destructors
+
         public CreateLongTripFormAdditionalInfo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
     }
 }

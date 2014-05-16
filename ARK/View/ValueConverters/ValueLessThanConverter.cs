@@ -3,18 +3,33 @@ using System.Windows.Data;
 
 namespace ARK.View.ValueConverters
 {
+    using System.Globalization;
+
     public class ValueLessThanConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        #region Public Methods and Operators
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((int)value < (int)parameter)
+            {
                 return (bool)true;
-            else return (bool)false;
+            }
+            else
+            {
+                return (bool)false;
+            }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(
+            object value, 
+            Type targetType, 
+            object parameter, 
+            CultureInfo culture)
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }
