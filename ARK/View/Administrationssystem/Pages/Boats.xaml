@@ -23,6 +23,18 @@
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
 
+        <!--Border style-->
+        <Style x:Key="styleContentBorders" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Background" Value="#FFF7F7F7"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="170"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
         <valueConverters:BoolToStringConverter x:Key="YesNo" FalseValue="Nej" TrueValue="Ja" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
@@ -76,136 +88,178 @@
             <Border BorderBrush="Gray" BorderThickness="1" Margin="4">
                 <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
                     <DockPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        <WrapPanel DockPanel.Dock="Top" Margin="10" Background="White" HorizontalAlignment="Center" VerticalAlignment="Top">
-
-                            <Border Width="250" BorderThickness="1" BorderBrush="Gray" Margin="4">
-                                <StackPanel>
-                                    <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" Visibility="{Binding Path=SearchVisibility}" 
+                            <!--Båd oplysninger-->
+                            <StackPanel Grid.Row="0" Grid.Column="0">
+                                <Border Width="250" Margin="4">
+                                    <StackPanel>
+                                        <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" Visibility="{Binding Path=SearchVisibility}" 
                                             Background="#FFEAEAEA" HorizontalAlignment="Stretch">
-                                        <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left" Width="287">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="25"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Image Source="/View/images/document_info.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                                <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
+                                            <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left" Width="287">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="25"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Source="/View/images/document_info.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                    <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
                                                            Foreground="Black">
-                                                    <Run Text="TUR OPLYSNINGER"/>
+                                                    <Run Text="BÅD OPLYSNINGER"/>
+                                                    </TextBlock>
+                                                </Grid>
+                                            </WrapPanel>
+                                        </Border>
+                                        <Border Style="{StaticResource styleContentBorders}">
+                                            <StackPanel>
+                                                <TextBlock Text="Navn:" FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding Path=CurrentBoat.Name}"/>
+
+                                                <TextBlock Text="Pladser:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <TextBlock Text="{Binding Path=CurrentBoat.NumberofSeats}"/>
+
+                                                <TextBlock Text="Kategori:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <TextBlock Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
+
+                                                <TextBlock Text="Aktiv:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <CheckBox VerticalAlignment="Center" x:Name="AktivBox" IsChecked="{Binding Path=CurrentBoat.Active, Mode=TwoWay}"/>
+
+                                                <TextBlock Text="Mest anvendende:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Path=MostUsingMember.FirstName}"/>
+                                                    <Run Text=" "/>
+                                                    <Run Text="{Binding Path=MostUsingMember.LastName}"/>
                                                 </TextBlock>
-                                            </Grid>
-                                        </WrapPanel>
+
+                                                <TextBlock Text="Kilometer sejlet:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <TextBlock Text="{Binding Path=CurrentBoat.KilometersSailed}"/>
+
+                                                <TextBlock Text="Ture sejlet:" FontWeight="SemiBold" Margin="0,5,0,0" />
+                                                <TextBlock Text="{Binding Path=CurrentBoat.TripsSailed}"/>
+
+                                                <TextBlock Text="Langture sejlet:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <TextBlock Text="{Binding Path=CurrentBoat.LongDistanceTripsSailed}"/>
+
+                                                <TextBlock Text="Ny pris:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <TextBox Text="{Binding Path=CurrentBoat.NewPrice, Mode=TwoWay}"/>
+
+                                                <TextBlock Text="Årgang:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                                <TextBox Text="{Binding Path=CurrentBoat.Year, Mode=TwoWay}"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!--Tur oplysninger-->
+                                <StackPanel Grid.Row="0">
+                                    <Border Width="250" Margin="4">
+                                        <StackPanel>
+                                            <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" Visibility="{Binding Path=SearchVisibility}" 
+                                                    Background="#FFEAEAEA" HorizontalAlignment="Stretch">
+                                                <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left" Width="287">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="25"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image Source="/View/images/document_info.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                        <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
+                                                                   Foreground="Black">
+                                                            <Run Text="TUR OPLYSNINGER ("/>
+                                                            <Run Text="{Binding Path=CurrentBoat.Trips.Count}"/>
+                                                            <Run Text=")"/>
+                                                        </TextBlock>
+                                                    </Grid>
+                                                </WrapPanel>
+                                            </Border>
+
+                                            <Border Style="{StaticResource styleContentBorders}">
+                                                <WrapPanel>
+                                                    <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly" Margin="4">
+                                                        <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Grid Margin="4">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="95"/>
+                                                                            <ColumnDefinition Width="auto"/>
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <StackPanel Margin="5,0,0,0" Grid.Column="0">
+                                                                            <WrapPanel>
+                                                                                <TextBlock Width="80" TextWrapping="Wrap" Text="{Binding Path=Direction}"/>
+                                                                            </WrapPanel>
+                                                                            <WrapPanel>
+                                                                                <TextBlock Text="{Binding Path=Distance}"/>
+                                                                                <TextBlock Text=" Km"/>
+                                                                            </WrapPanel>
+                                                                        </StackPanel>
+                                                                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
+                                                                            <WrapPanel>
+                                                                                <TextBlock Text="Start:  "/>
+                                                                                <TextBlock Text="{Binding Path=TripStartTime, ConverterCulture='da-DK'}"/>
+                                                                            </WrapPanel>
+                                                                            <WrapPanel>
+                                                                                <TextBlock Text="Slut:   "/>
+                                                                                <TextBlock Text="{Binding Path=TripEndedTime, ConverterCulture='da-DK'}"/>
+                                                                            </WrapPanel>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </ScrollViewer>
+                                                </WrapPanel>
+                                            </Border>
+                                        </StackPanel>
                                     </Border>
-                                    <WrapPanel>
-                                        <TextBlock Text="Navn" Width="100"/>
-                                        <TextBlock Text="{Binding Path=CurrentBoat.Name}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Pladser" Width="100"/>
-                                        <TextBlock Text="{Binding Path=CurrentBoat.NumberofSeats}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Kategori" Width="100"/>
-                                        <TextBlock Text="{Binding Path=CurrentBoat.SpecificBoatType}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Aktiv" Width="100"/>
-                                        <CheckBox VerticalAlignment="Center" x:Name="AktivBox" IsChecked="{Binding Path=CurrentBoat.Active, Mode=TwoWay}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Mest anvendende:" Width="100"/>
-                                        <TextBlock>
-                                    <Run Text="{Binding Path=MostUsingMember.FirstName}"/>
-                                    <Run Text=" "/>
-                                    <Run Text="{Binding Path=MostUsingMember.LastName}"/>
-                                        </TextBlock>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Kilometer sejlet" Width="100"/>
-                                        <TextBlock Text="{Binding Path=CurrentBoat.KilometersSailed}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Ture sejlet" Width="100"/>
-                                        <TextBlock Text="{Binding Path=CurrentBoat.TripsSailed}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Langture sejlet" Width="100"/>
-                                        <TextBlock Text="{Binding Path=CurrentBoat.LongDistanceTripsSailed}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Ny pris" Width="100"/>
-                                        <TextBox Text="{Binding Path=CurrentBoat.NewPrice, Mode=TwoWay}"/>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock Text="Årgang" Width="100"/>
-                                        <TextBox Text="{Binding Path=CurrentBoat.Year, Mode=TwoWay}"/>
-                                    </WrapPanel>
                                 </StackPanel>
-                            </Border>
 
-                            <Border Width="250" BorderThickness="1" BorderBrush="Gray" Margin="4">
-                                <StackPanel>
-                                    <Border Style="{DynamicResource ResourceKey=brdHeadline}" Background="AliceBlue">
-                                        <WrapPanel Margin="0,2,0,0">
-                                            <Image Source="/View/images/user.png" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                            <TextBlock Text="Ture (" Foreground="Black" FontSize="18"/>
-                                            <TextBlock Text="{Binding Path=CurrentBoat.Trips.Count}" Foreground="Black" FontSize="18"/>
-                                            <TextBlock Text=")" Foreground="Black" FontSize="18"/>
-                                        </WrapPanel>
+                                <!--Yderligere oplysninger-->
+                                <StackPanel Grid.Row="1">
+                                    <Border Width="250" Margin="4">
+                                        <StackPanel>
+                                            <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" Visibility="{Binding Path=SearchVisibility}" 
+                                            Background="#FFEAEAEA" HorizontalAlignment="Stretch">
+                                                <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left" Width="287">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="25"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image Source="/View/images/document_info.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                        <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
+                                                           Foreground="Black">
+                                                    <Run Text="YDERLIGERE OPLYSNINGER"/>
+                                                        </TextBlock>
+                                                    </Grid>
+                                                </WrapPanel>
+                                            </Border>
+                                            <Border Style="{StaticResource styleContentBorders}">
+                                                <TextBox Text="{Binding Path=CurrentBoat.InformationString, Mode=TwoWay}" TextWrapping="Wrap" Height="160" VerticalScrollBarVisibility="Auto" Margin="4"/>
+                                            </Border>
+                                        </StackPanel>
                                     </Border>
-                                    <WrapPanel>
-                                        <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly" Margin="4">
-                                            <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Grid Margin="4">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="95"/>
-                                                                <ColumnDefinition Width="auto"/>
-                                                            </Grid.ColumnDefinitions>
-
-                                                            <StackPanel Margin="5,0,0,0" Grid.Column="0">
-                                                                <WrapPanel>
-                                                                    <TextBlock Width="80" TextWrapping="Wrap" Text="{Binding Path=Direction}"/>
-                                                                </WrapPanel>
-                                                                <WrapPanel>
-                                                                    <TextBlock Text="{Binding Path=Distance}"/>
-                                                                    <TextBlock Text=" Km"/>
-                                                                </WrapPanel>
-                                                            </StackPanel>
-                                                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
-                                                                <WrapPanel>
-                                                                    <TextBlock Text="Start:  "/>
-                                                                    <TextBlock Text="{Binding Path=TripStartTime, ConverterCulture='da-DK'}"/>
-                                                                </WrapPanel>
-                                                                <WrapPanel>
-                                                                    <TextBlock Text="Slut:   "/>
-                                                                    <TextBlock Text="{Binding Path=TripEndedTime, ConverterCulture='da-DK'}"/>
-                                                                </WrapPanel>
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </ScrollViewer>
-                                    </WrapPanel>
                                 </StackPanel>
-                            </Border>
-
-                            <Border Width="250" BorderThickness="1" BorderBrush="Gray" Margin="4">
-                                <StackPanel>
-                                    <Border Style="{DynamicResource brdHeadline}" Background="AliceBlue">
-                                        <WrapPanel Margin="0,2,0,0">
-                                            <Image Source="/View/images/document_info.png" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                            <TextBlock Text="Yderligere information" Foreground="Black" FontSize="18"/>
-                                        </WrapPanel>
-                                    </Border>
-                                    <TextBox Text="{Binding Path=CurrentBoat.InformationString, Mode=TwoWay}" TextWrapping="Wrap" Height="160" VerticalScrollBarVisibility="Auto" Margin="4"/>
-                                </StackPanel>
-                            </Border>
-
-                        </WrapPanel>
+                            </Grid>
+                        </Grid>
+                       
                         <StackPanel Width="250" DockPanel.Dock="Bottom" Margin="10">
                             <WrapPanel>
                                 <Button FontSize="20" Padding="4" Margin="4" HorizontalAlignment="Left" Content="Ok" Command="{Binding Path=SaveChanges}" Background="#CCFFCC"/>

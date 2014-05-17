@@ -39,24 +39,16 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="0.118"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFF9F7F7" Offset="0.056"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid>        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
+            
             <TabControl Background="Transparent" Grid.Row="1">
-
-
                 <TabItem Header="  Generelt  " FontSize="20">
-                    <DockPanel HorizontalAlignment="Left" Margin="10">
+                    <DockPanel HorizontalAlignment="Stretch" Margin="10">
                         <StackPanel>
                             <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
                                     Grid.ColumnSpan="2" Grid.Row="0" Background="#FFEAEAEA">
