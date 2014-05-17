@@ -48,7 +48,7 @@
                                         <Run Text="SKADEBLANKETTER (AKTIVE)"/>
                                     </TextBlock>
                                 </Grid>
-                        </WrapPanel>
+                            </WrapPanel>
                         </Border>
 
                         <!--Skadeblanketter-->
