@@ -78,9 +78,6 @@
                 <Button Content="Gem ændringer" Width="100" Command="{Binding SaveChanges}" Margin="0,5,0,0" HorizontalAlignment="Right" Height="24"/>
             </StackPanel>
 
-
-
-
             <WrapPanel Grid.Row="2" Margin="0,4,0,0" HorizontalAlignment="Left">
                 <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=OpenDamageForm}">
                     <Button.Style>
@@ -117,7 +114,7 @@
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
-                    <StackPanel>
+                    <StackPanel >
                         <WrapPanel HorizontalAlignment="Center">
                             <Image Source="../../images/application_delete.png" Height="32"/>
                         </WrapPanel>
