@@ -8,17 +8,30 @@
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="600">
-    
+
     <UserControl.DataContext>
         <VM:FormsDamageViewModel />
     </UserControl.DataContext>
-    
+
     <UserControl.Resources>
         <valueConverters:BoolToStringConverter x:Key="Funktionel" FalseValue="Nej" TrueValue="Ja" />
         <valueConverters:BoolToStringConverter x:Key="Status" FalseValue="Åben" TrueValue="Lukket" />
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+
+        <!--Border style-->
+        <Style x:Key="styleContentBorders" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Background" Value="#FFF7F7F7"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="27"/>
+        </Style>
     </UserControl.Resources>
-    
+
     <StackPanel>
         <Grid>
             <Grid.RowDefinitions>
@@ -49,80 +62,86 @@
                 </WrapPanel>
             </Border>
 
-            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Stretch" Margin="4">
-                <TextBlock Text="Anmelder: " FontWeight="SemiBold"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0,0,3,0" Text="{Binding Path=DamageForm.RegisteringMember.FirstName}"/>
-                    <TextBlock Text="{Binding Path=DamageForm.RegisteringMember.LastName}"/>
+            <Border Grid.Row="1" HorizontalAlignment="Stretch" MinWidth="250" Style="{StaticResource styleContentBorders}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Anmelder: " FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="0,0,3,0" Text="{Binding Path=DamageForm.RegisteringMember.FirstName}"/>
+                        <TextBlock Text="{Binding Path=DamageForm.RegisteringMember.LastName}"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Båd: " FontWeight="SemiBold" Margin="0,10,0,0" />
+                    <TextBlock Text="{Binding Path=DamageForm.Boat.Name}"/>
+
+                    <TextBlock Text="Dato (Indsendt): " FontWeight="SemiBold" Margin="0,10,0,0"  />
+                    <TextBlock Text="{Binding Path=DamageForm.Date, StringFormat=d}"/>
+
+                    <TextBlock Text="Skadetype: " FontWeight="SemiBold" Margin="0,10,0,0"  />
+                    <TextBlock Text="{Binding Path=DamageForm.Type}"/>
+
+                    <TextBlock Text="Funktionel: " FontWeight="SemiBold" Margin="0,10,0,0"  />
+                    <TextBlock Text="{Binding Path=DamageForm.Functional, Converter={StaticResource Funktionel}}"/>
+
+                    <TextBlock Text="Status: " FontWeight="SemiBold" Margin="0,10,0,0" />
+                    <TextBlock Text="{Binding Path=DamageForm.Closed, Converter={StaticResource Status}}"/>
                 </StackPanel>
+            </Border>
 
-                <TextBlock Text="Båd: " FontWeight="SemiBold" Margin="0,5,0,0" />
-                <TextBlock Text="{Binding Path=DamageForm.Boat.Name}"/>
+            <Border HorizontalAlignment="Left" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" MinWidth="250" Margin="10,0,0,0" Style="{StaticResource styleContentBorders}" Width="260">
+                <StackPanel >
+                    <TextBlock Text="Kommentarer: " FontWeight="SemiBold" />
+                    <TextBox AcceptsReturn="True" Height="208" Name="CommentTextbox" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
+                    <Button Content="Gem ændringer" Width="150" Command="{Binding SaveChanges}" Margin="0,5,0,0" HorizontalAlignment="Right" Height="24"/>
+                </StackPanel>
+            </Border>
 
-                <TextBlock Text="Dato (Indsendt): " FontWeight="SemiBold" Margin="0,5,0,0"  />
-                <TextBlock Text="{Binding Path=DamageForm.Date, StringFormat=d}"/>
+            <Border Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,80,0" Width="250" HorizontalAlignment="Left" Style="{StaticResource styleContentBorders}">
+                <WrapPanel >
+                    <Button Background="Transparent" BorderBrush="Transparent" Width="60" Command="{Binding Path=OpenDamageForm}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="true">
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="false">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
 
-                <TextBlock Text="Skadetype: " FontWeight="SemiBold" Margin="0,5,0,0"  />
-                <TextBlock Text="{Binding Path=DamageForm.Type}"/>
+                        <StackPanel>
+                            <WrapPanel HorizontalAlignment="Center">
+                                <Image Source="../../images/application_add.png" Height="32" Margin="0,4,0,0"/>
+                            </WrapPanel>
+                            <Label Content="Åben"/>
+                        </StackPanel>
+                    </Button>
 
-                <TextBlock Text="Funktionel: " FontWeight="SemiBold" Margin="0,5,0,0"  />
-                <TextBlock Text="{Binding Path=DamageForm.Functional, Converter={StaticResource Funktionel}}"/>
+                    <Button Background="Transparent" Width="60" BorderBrush="Transparent" Command="{Binding Path=CloseDamageForm}" Margin="30,0,0,0" >
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="false">
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="true">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel>
+                            <WrapPanel HorizontalAlignment="Center">
+                                <Image Source="../../images/application_delete.png" Height="32" Margin="0,4,0,0"/>
+                            </WrapPanel>
+                            <Label Content="Luk"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+            </Border>
 
-                <TextBlock Text="Status: " FontWeight="SemiBold" Margin="0,5,0,0" />
-                <TextBlock Text="{Binding Path=DamageForm.Closed, Converter={StaticResource Status}}"/>
-            </StackPanel>
-
-            <StackPanel Grid.Column="1" Grid.Row="1" Width="250" Margin="20,4,0,0" HorizontalAlignment="Left">
-                <TextBlock Text="Kommentarer: " FontWeight="SemiBold" />
-                <TextBox AcceptsReturn="True" Height="159" Name="CommentTextbox" Width="250" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
-                <Button Content="Gem ændringer" Width="100" Command="{Binding SaveChanges}" Margin="0,5,0,0" HorizontalAlignment="Right" Height="24"/>
-            </StackPanel>
-
-            <WrapPanel Grid.Row="2" Margin="0,4,0,0" HorizontalAlignment="Left">
-                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=OpenDamageForm}">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="true">
-                                    <Setter Property="IsEnabled" Value="True"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="false">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    
-                    <StackPanel>
-                        <WrapPanel HorizontalAlignment="Center">
-                            <Image Source="../../images/application_add.png" Height="32"/>
-                        </WrapPanel>
-                        <Label Content="Åben"/>
-                    </StackPanel>
-                </Button>
-                
-                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding Path=CloseDamageForm}" >
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="false">
-                                    <Setter Property="IsEnabled" Value="True"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=DamageForm.Closed}" Value="true">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <StackPanel >
-                        <WrapPanel HorizontalAlignment="Center">
-                            <Image Source="../../images/application_delete.png" Height="32"/>
-                        </WrapPanel>
-                        <Label Content="Luk"/>
-                    </StackPanel>
-                </Button>
-            </WrapPanel>
-            
             <TextBlock Grid.Row="3" FontSize="20">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
@@ -135,7 +154,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            
+
         </Grid>
     </StackPanel>
 </UserControl>
