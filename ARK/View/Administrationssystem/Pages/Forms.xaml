@@ -62,6 +62,9 @@
                                 <DataTemplate>
                                     <DockPanel Margin="0,5,0,5">
                                         <StackPanel>
+                                            <StackPanel.Resources>
+                                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                            </StackPanel.Resources>
                                             <WrapPanel>
                                                 <TextBlock FontWeight="SemiBold" Width="80" Text="Båd:"/>
                                                 <TextBlock Text="{Binding Boat.Name}"/>
@@ -122,6 +125,9 @@
                                 <DataTemplate>
                                     <DockPanel Margin="0,5,0,5">
                                         <StackPanel>
+                                            <StackPanel.Resources>
+                                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                            </StackPanel.Resources>
                                             <WrapPanel>
                                                 <TextBlock FontWeight="SemiBold" Width="80" Text="Båd:"/>
                                                 <TextBlock Text="{Binding Boat.Name}"/>

@@ -18,6 +18,9 @@
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="170"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
 
         <!--Border style-->
@@ -37,12 +40,12 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" Visibility="{Binding Path=SearchVisibility}" 
-                Background="#FFEAEAEA" HorizontalAlignment="Stretch">
+                Background="#FFEAEAEA" Width="460" HorizontalAlignment="Left">
             <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left" Width="287">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -97,20 +100,20 @@
             </Border>
 
             <Border Grid.Row="1" Margin="0,6,0,0" Style="{StaticResource styleContentBorders}" HorizontalAlignment="Stretch">
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="button" Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}" >
+                <DockPanel LastChildFill="False">
+                    <Button x:Name="button" DockPanel.Dock="Left" Margin="0,8,0,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding AcceptForm}" >
                         <StackPanel Width="80">
                             <Image Source="../../images/map_add.png" Height="32"/>
-                            <Label Content="Godkend" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Godkend" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding RejectForm}" Margin="8,0,0,0" Width="{Binding Width, ElementName=button}">
+                    <Button Background="Transparent" DockPanel.Dock="Right" BorderBrush="Transparent" Command="{Binding RejectForm}" Width="{Binding Width, ElementName=button}">
                         <StackPanel Width="80">
-                            <Image Source="../../images/map_delete.png" Height="32" />
-                            <Label Content="Afvis" HorizontalAlignment="Center"/>
+                            <Image Source="../../images/map_delete.png" Height="32" Margin="0,8,0,0" />
+                            <TextBlock Text="Afvis" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                </StackPanel>
+                </DockPanel>
             </Border>
         </Grid>
 
@@ -119,20 +122,22 @@
                 <WrapPanel>
                     <TextBlock Text="Deltagere på turen:" FontWeight="SemiBold"/>
                 </WrapPanel>
-                <WrapPanel>
-                    <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <WrapPanel Margin="0">
-                                    <TextBlock Style="{StaticResource lstViewContent}">
+                <Border Background="White" BorderBrush="Gray" BorderThickness="1" Height="444">
+                    <WrapPanel>
+                        <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Margin="0">
+                                        <TextBlock Style="{StaticResource lstViewContent}">
                                         <Run Text="{Binding Path=FirstName}"/>
                                         <Run Text="{Binding Path=LastName}"/>
-                                    </TextBlock>
-                                </WrapPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </WrapPanel>
+                                        </TextBlock>
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </WrapPanel>
+                </Border>
             </StackPanel>
         </Border>
 
