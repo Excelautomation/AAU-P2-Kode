@@ -11,6 +11,12 @@
 
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="27"/>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -58,12 +64,12 @@
 
         <StackPanel Grid.Row="2">
             <WrapPanel>
-                <TextBlock Width="80" Margin="4" Text="Brugernavn:"/>
-                <TextBox Width="180" Margin="4" Text="{Binding Path=NewAdmin.Username, Mode=OneWayToSource}"/>
+                <TextBlock Width="80" Margin="4" Text="Brugernavn:" FontWeight="SemiBold"/>
+                <TextBox Width="195" Margin="4" Text="{Binding Path=NewAdmin.Username, Mode=OneWayToSource}"/>
             </WrapPanel>
             <WrapPanel>
-                <TextBlock Width="80" Margin="4" Text="Kodeord:"/>
-                <TextBox Width="180" Margin="4" Text="{Binding Path=NewAdmin.Password, Mode=OneWayToSource}"/>
+                <TextBlock Width="80" Margin="4" Text="Kodeord:" FontWeight="SemiBold"/>
+                <TextBox Width="195" Margin="4" Text="{Binding Path=NewAdmin.Password, Mode=OneWayToSource}"/>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center">
                 <TextBlock Margin="4" FontStyle="Italic" Text="*Brugernavn og kodeord er ikke case-sensitive"/>
@@ -71,8 +77,8 @@
         </StackPanel>
 
         <DockPanel HorizontalAlignment="Stretch" Grid.Row="3" Margin="5" LastChildFill="False">
-            <Button Content="Annuller" HorizontalAlignment="Right" Height="25" IsCancel="True" DockPanel.Dock="Left" Width="80"/>
-            <Button Content="Opret" Width="80" Height="25"
+            <Button Content="Annuller" HorizontalAlignment="Right" Height="25" IsCancel="True" DockPanel.Dock="Left" Width="90"/>
+            <Button Content="Opret" Width="90" Height="25"
                     Command="{Binding Path=ShowMembersContinue}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItem}" DockPanel.Dock="Right"/>
         </DockPanel>
 

@@ -17,6 +17,9 @@
         <Style x:Key="GreyWhNotSelected" TargetType="DockPanel">
             <Style.Resources>
                 <Style TargetType="Button">
+                    <Setter Property="FontFamily" Value="Calibri"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Height" Value="27"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding SelectedItem, ElementName=AdminList}" Value="{x:Null}">
                             <Setter Property="IsEnabled" Value="False" />
@@ -37,17 +40,28 @@
             <Setter Property="Background" Value="#FFF7F7F7"/>
             <Setter Property="Padding" Value="15"/>
         </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="27"/>
+        </Style>
+
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
     </UserControl.Resources>
 
-    <Grid>        
+    <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            
+
             <TabControl Background="Transparent" Grid.Row="1">
-                <TabItem Header="  Generelt  " FontSize="20">
+                <TabItem Header="  Generelt  ">
                     <DockPanel HorizontalAlignment="Stretch" Margin="10">
                         <StackPanel>
                             <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
@@ -69,12 +83,16 @@
                             <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
                                 <StackPanel>
                                     <DockPanel>
-                                        <TextBlock Width="250" Margin="4" Text="Nuværende sæsonstart:"/>
-                                        <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" Text="{Binding Path=CurrentSeason.SeasonStart, ConverterCulture=da-DK}" Width="200"/>
+                                        <TextBlock Width="250" Margin="4" Text="Nuværende sæsonstart:" FontWeight="SemiBold"/>
+                                        <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" 
+                                                 Text="{Binding Path=CurrentSeason.SeasonStart, ConverterCulture=da-DK}" Width="215" Height="29"/>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:"/>
-                                        <DatePicker DisplayDateStart="{Binding Path=CurrentSeason.EarliestSeasonEnd, Mode=OneWay}" DisplayDateEnd="{Binding Path=CurrentSeason.LatestSeasonEnd, Mode=OneWay}" Name="EndSeasonDatePicker" SelectedDate="{Binding Path=CurrentSeason.SeasonEnd, Mode=TwoWay}" HorizontalAlignment="Right" Margin="4" Width="200"/>
+                                        <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:" FontWeight="SemiBold"/>
+                                        <DatePicker DisplayDateStart="{Binding Path=CurrentSeason.EarliestSeasonEnd, Mode=OneWay}" 
+                                                    DisplayDateEnd="{Binding Path=CurrentSeason.LatestSeasonEnd, Mode=OneWay}" 
+                                                    Name="EndSeasonDatePicker" SelectedDate="{Binding Path=CurrentSeason.SeasonEnd, Mode=TwoWay}" 
+                                                    HorizontalAlignment="Right" Margin="4" Width="215" Height="29" FontFamily="Calibri" FontSize="14"/>
                                     </DockPanel>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -83,7 +101,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Grid.Column="0" VerticalAlignment="Center" Command="{Binding Path=NewSeason}" 
+                                        <Button Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Command="{Binding Path=NewSeason}" 
                                                 Content="Start ny sæson" Padding="5" Width="150"/>
 
                                         <DockPanel Grid.Column="2" Margin="4" HorizontalAlignment="Right" Width="250">
@@ -100,9 +118,9 @@
                                                 </Style>
                                             </DockPanel.Style>
 
-                                            <Image Height="32" Source="/View/images/cross.png" Margin="4"/>
 
-                                            <TextBlock Text="Sæson er ikke mere end 6 mdr gammel!" TextWrapping="Wrap" Foreground="Red" Margin="4"/>
+                                            <TextBlock Text="Én sæson skal mindst være 6 måneder gammel" TextWrapping="Wrap" 
+                                                       Foreground="Red" Margin="4" HorizontalAlignment="Right"/>
 
                                         </DockPanel>
                                     </Grid>
@@ -128,8 +146,8 @@
                             <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
                                 <StackPanel>
                                     <DockPanel>
-                                        <TextBlock Margin="4" Background="Transparent">I dag forventes mørkets frembrud klokken:</TextBlock>
-                                        <TextBox Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center">
+                                        <TextBlock Text="I dag forventes mørkets frembrud klokken:" Margin="4" FontWeight="SemiBold"/>
+                                        <TextBox Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center" VerticalAlignment="Top">
                                             <TextBox.Style>
                                                 <Style TargetType="TextBox">
                                                     <Style.Triggers>
@@ -148,12 +166,12 @@
                                             <CheckBox Name="TimeOfDarkCheckBox" IsChecked="True" Margin="4" VerticalAlignment="Center" />
                                         </WrapPanel>
                                     </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock Margin="4">Besked ved mørkets frembrud til udrejste både skal forsinkes med:</TextBlock>
+                                    <DockPanel Margin="0,5,0,0">
+                                        <TextBlock Text="Udsæt bekræftelses-SMS med:" Margin="4" FontWeight="SemiBold"/>
                                         <ComboBox Margin="4" SelectedIndex="0" Width="90" HorizontalAlignment="Right">5 min</ComboBox>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBlock Margin="4">En båds reaktion på en besked ved mørkets frembrud skal ske indenfor:</TextBlock>
+                                        <TextBlock Text="Båden skal give en tilbagemelding indenfor:" Margin="4" FontWeight="SemiBold"/>
                                         <ComboBox Margin="4" SelectedIndex="0" Width="90" HorizontalAlignment="Right">15 min</ComboBox>
                                     </DockPanel>
                                 </StackPanel>
@@ -163,7 +181,7 @@
                 </TabItem>
 
 
-                <TabItem Header="  Skadetyper  " FontSize="20">
+                <TabItem Header="  Skadetyper  " >
                     <StackPanel HorizontalAlignment="Center" Margin="10">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -191,16 +209,19 @@
 
                             <StackPanel Grid.Column="2" Margin="4,10,4,4">
                                 <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
-                                    <StackPanel Width="auto">
+                                    <StackPanel Width="Auto">
                                         <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Type:"/>
-                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentDamageType.Type}"/>
+                                            <TextBlock Width="210" Margin="4" Text="Type:" FontWeight="SemiBold"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentDamageType.Type}"/>
                                         </WrapPanel>
 
-                                        <DockPanel Style="{StaticResource GreyWhNotSelected}">
-                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesDamageTypes}"/>
-                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangeDamageTypes}"/>
-                                            <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet skadetype" Command="{Binding Path=DeleteDamageType}" HorizontalAlignment="Right"/>
+                                        <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" Margin="0,10,0,0">
+                                            <Button Margin="4" Content="OK" DockPanel.Dock="Right" 
+                                                    Command="{Binding Path=SaveChangesDamageTypes}" Width="100"/>
+                                            <Button Background="#FFDEDE" Margin="4" Content="Annuller" 
+                                                    Command="{Binding Path=CancelChangeDamageTypes}" Width="100"/>
+                                            <Button Margin="4" Content="Slet" Width="100"
+                                                    Command="{Binding Path=DeleteDamageType}" HorizontalAlignment="Right"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -273,16 +294,14 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
+                                    <Button Command="{Binding CreateDamageType}" Margin="-10,0,0,0" Content="Opret ny skadetype" Width="250"/>
                                 </WrapPanel>
-                                <Button Padding="5" Command="{Binding CreateDamageType}" Margin="56,4,260,4" Width="200" Content="Opret ny skadetype"/>
-
                             </StackPanel>
-
                         </Grid>
                     </StackPanel>
                 </TabItem>
 
-                <TabItem Header="  Standardture  " FontSize="20">
+                <TabItem Header="  Standardture  ">
                     <DockPanel HorizontalAlignment="Center" Margin="10">
                         <Grid>
 
@@ -311,23 +330,23 @@
                             </DockPanel>
                             <StackPanel Grid.Column="2" Margin="4">
                                 <Border Margin="4" Style="{StaticResource styleContentBorders}">
-                                    <StackPanel Width="auto">
+                                    <StackPanel Width="Auto">
                                         <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Titel:"/>
-                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Title}"/>
+                                            <TextBlock Width="210" Margin="4" Text="Titel:" FontWeight="SemiBold"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Title}"/>
                                         </WrapPanel>
                                         <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Retning:"/>
-                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Direction}"/>
+                                            <TextBlock Width="210" Margin="4" Text="Retning:" FontWeight="SemiBold"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Direction}"/>
                                         </WrapPanel>
                                         <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Distance:"/>
-                                            <TextBox Width="320" Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
+                                            <TextBlock Width="210" Margin="4" Text="Distance:" FontWeight="SemiBold"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
                                         </WrapPanel>
-                                        <DockPanel Style="{StaticResource GreyWhNotSelected}">
-                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding Path=SaveChangesStandardTrips}"/>
-                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesStandardTrips}"/>
-                                            <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet standardtur" Command="{Binding Path=DeleteStandardTrip}" HorizontalAlignment="Right"/>
+                                        <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" Margin="0,10,0,0">
+                                            <Button Margin="4" DockPanel.Dock="Right" Content="Ok" Command="{Binding Path=SaveChangesStandardTrips}" Width="100"/>
+                                            <Button Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesStandardTrips}" Width="100"/>
+                                            <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteStandardTrip}" HorizontalAlignment="Right" Width="100"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -399,15 +418,15 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
+                                    <Button Margin="-10,0,0,0" Command="{Binding CreateStandardTrip}" Width="250" Content="Opret ny standardtur" Height="28"/>
                                 </WrapPanel>
-                                <Button Padding="5" Command="{Binding CreateStandardTrip}" Margin="46,4,258,4" Width="220" Content="Opret ny standardtur"/>
                             </StackPanel>
                         </Grid>
                     </DockPanel>
                 </TabItem>
 
 
-                <TabItem Header="  Administratorer  " FontSize="20">
+                <TabItem Header="  Administratorer  ">
                     <DockPanel HorizontalAlignment="Center" Margin="10">
                         <Grid>
 
@@ -439,50 +458,41 @@
                                 </ListView>
                             </DockPanel>
 
-                            <StackPanel Grid.Column="2" Margin="4">
+                            <StackPanel Grid.Column="2" Margin="4" Width="516">
                                 <Border Margin="4,4,0,4" Style="{StaticResource styleContentBorders}">
-                                    <StackPanel Width="auto">
-                                        <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Brugernavn:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Username}"/>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                        <TextBlock Margin="4" Text="Brugernavn:" FontWeight="SemiBold" />
+                                        <TextBlock Text="{Binding CurrentAdmin.Username}" />
+
+                                        <TextBlock Margin="4,10,0,0" Text="Medlemsnr.:" FontWeight="SemiBold" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding CurrentAdmin.Member.Id}"/>
+
+                                        <TextBlock Margin="4,10,0,0" Text="E-mail:" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding CurrentAdmin.Member.Email1}"/>
+
+                                        <TextBlock Margin="4,10,0,0" Text="Telefon:" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding CurrentAdmin.Member.Phone}"/>
+
+                                        <TextBlock Margin="4,10,0,0" Text="Kontakt ved:" FontWeight="SemiBold"/>
+
+                                        <WrapPanel HorizontalAlignment="Left">
+                                            <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactTrip}" VerticalAlignment="Center"/>
+                                            <TextBlock Margin="4" Text="Langtursblanketter"/>
                                         </WrapPanel>
-                                        <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Medlemsnr.:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Member.Id}"/>
-                                        </WrapPanel>
-                                        <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="E-mail:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Member.Email1}"/>
-                                        </WrapPanel>
-                                        <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Telefon:"/>
-                                            <TextBlock Width="320" Margin="4" Text="{Binding CurrentAdmin.Member.Phone}"/>
-                                        </WrapPanel>
-                                        <WrapPanel>
-                                            <TextBlock Width="150" Margin="4" Text="Kontakt ved:"/>
-                                            <StackPanel Width="320">
-                                                <WrapPanel HorizontalAlignment="Left">
-                                                    <TextBlock Margin="4" Text="Langtursblanketter"/>
-                                                    <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactTrip}" VerticalAlignment="Center"/>
-                                                </WrapPanel>
-                                                <WrapPanel HorizontalAlignment="Left">
-                                                    <TextBlock Margin="4" Text="Mørkets frembrud"/>
-                                                    <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
-                                                </WrapPanel>
-                                            </StackPanel>
+                                        <WrapPanel HorizontalAlignment="Left">
+                                            <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
+                                            <TextBlock Margin="4" Text="Mørkets frembrud"/>
                                         </WrapPanel>
 
-                                        <DockPanel Style="{StaticResource GreyWhNotSelected}">
-                                            <Button Padding="5" Background="#CCFFCC" Margin="4" Content="Ok" Command="{Binding SaveChangesAdmins}"/>
-                                            <Button Padding="5" Background="#FFDEDE" Margin="4" Content="Annuller" Command="{Binding CancelChangesAdmins}"/>
-                                            <Button Padding="5" Background="#FF0000" Foreground="#FFFFFF" Margin="4" Content="Slet administrator" Command="{Binding Path=DeleteAdmin}" HorizontalAlignment="Right"/>
+                                        <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" HorizontalAlignment="Stretch" Margin="0,10,0,0">
+                                            <Button Margin="4" Width="100" DockPanel.Dock="Right" Content="OK" Command="{Binding SaveChangesAdmins}"/>
+                                            <Button Margin="4" Width="100" Content="Annuller" Command="{Binding CancelChangesAdmins}"/>
+                                            <Button Margin="4" Width="100" Content="Slet" Command="{Binding Path=DeleteAdmin}" HorizontalAlignment="Right"/>
                                         </DockPanel>
-
                                     </StackPanel>
-
                                 </Border>
 
-                                <WrapPanel Margin="4">
+                                <WrapPanel Margin="0,4,4,4">
 
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
@@ -552,7 +562,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <Button Padding="5" Command="{Binding CreateAdmin}" Margin="4" Width="240" Content="Opret ny administrator"/>
+                                    <Button Command="{Binding CreateAdmin}" Width="250" Content="Opret ny administrator" Margin="-6,0,0,0" Height="28"/>
 
                                 </WrapPanel>
 

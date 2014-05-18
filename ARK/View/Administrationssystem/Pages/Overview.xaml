@@ -16,23 +16,33 @@
     
     <UserControl.Resources>
         <valueConverters:ValueLessThanConverter x:Key="WindowDownsize"/>
-
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
 
         <Style x:Key="styleForms" TargetType="ListViewItem">
             <Setter Property="Margin" Value="2,2,5,0"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="#FF767676"/>
             <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FFBFBFBF"/>
         </Style>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <!--Border style-->
+        <Style x:Key="styleContentBorders" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Background" Value="#FFF7F7F7"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
         <ScrollViewer PanningMode="VerticalOnly" VerticalScrollBarVisibility="Auto"
                       BorderThickness="1" BorderBrush="Black">
             <StackPanel>
+                
                 <StackPanel>
+                    
+                    <!--Skadeblanketter-->
                     <StackPanel Visibility="{Binding Path=ShowSkader}">
                         <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
                             Grid.Column="0" Grid.Row="0" Background="#FFEAEAEA">
@@ -51,53 +61,55 @@
                             </WrapPanel>
                         </Border>
 
-                        <!--Skadeblanketter-->
-                        <ListView Margin="0,5,0,5" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch" 
+                        <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
+                            <ListView Margin="0,5,0,5" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch" 
                                   SelectedItem="{Binding Path=SelectedDamageForm}">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                HorizontalAlignment="Left" IsItemsHost="True" />
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.Template>
-                                <ControlTemplate>
-                                    <ItemsPresenter/>
-                                </ControlTemplate>
-                            </ListView.Template>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Padding="10">
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Style="{StaticResource lstListViewHeadline}" Text="{Binding Boat.Name}" />
-                                            
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Anmelder: " FontWeight="SemiBold" />
-                                                <TextBlock>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.Template>
+                                    <ControlTemplate>
+                                        <ItemsPresenter/>
+                                    </ControlTemplate>
+                                </ListView.Template>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="10">
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Style="{StaticResource lstListViewHeadline}" Text="{Binding Boat.Name}" />
+
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Anmelder: " FontWeight="SemiBold" />
+                                                    <TextBlock>
                                                     <Run Text="{Binding RegisteringMember.FirstName}" />
                                                     <Run Text="{Binding RegisteringMember.LastName}" />
-                                                </TextBlock>
-                                            </StackPanel>
+                                                    </TextBlock>
+                                                </StackPanel>
 
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Skadetype: " FontWeight="SemiBold" />
-                                                <TextBlock Text="{Binding Type}" />
-                                            </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Skadetype: " FontWeight="SemiBold" />
+                                                    <TextBlock Text="{Binding Type}" />
+                                                </StackPanel>
 
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Dato (indsendt): " FontWeight="SemiBold" />
-                                                <TextBlock Text="{Binding Date, StringFormat={}{0:dd/MM/yy}}" />
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Dato (indsendt): " FontWeight="SemiBold" />
+                                                    <TextBlock Text="{Binding Date, StringFormat={}{0:dd/MM/yy}}" />
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Border>
                     </StackPanel>
 
+                    <!--Langtursblanketter-->
                     <StackPanel Visibility="{Binding Path=ShowLangtur}">
                         <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
                                 Grid.Column="0" Grid.Row="0" Background="#FFEAEAEA">
@@ -116,53 +128,54 @@
                             </WrapPanel>
                         </Border>
 
-                        <!--Langtursblanketter-->
-                        <ListView Margin="0,5,0,5" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedLongDistanceForm}">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                        <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
+                            <ListView Margin="0,5,0,5" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedLongDistanceForm}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                HorizontalAlignment="Left" IsItemsHost="True" />
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.Template>
-                                <ControlTemplate>
-                                    <ItemsPresenter/>
-                                </ControlTemplate>
-                            </ListView.Template>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Padding="10">
-                                        <StackPanel Orientation="Vertical">
-                                            <TextBlock Text="{Binding Boat.Name}" Style="{StaticResource lstListViewHeadline}"/>
-                                            
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.Template>
+                                    <ControlTemplate>
+                                        <ItemsPresenter/>
+                                    </ControlTemplate>
+                                </ListView.Template>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="10">
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{Binding Boat.Name}" Style="{StaticResource lstListViewHeadline}"/>
+
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock>
                                                     <Run Text="Turansvarlig:" FontWeight="SemiBold"/>
                                                     <Run Text="" />
-                                                </TextBlock>
-                                            </StackPanel>
+                                                    </TextBlock>
+                                                </StackPanel>
 
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock>
                                                     <Run Text="Afgang:" FontWeight="SemiBold"/>
                                                     <Run Text="{Binding PlannedStartDate, StringFormat={}{0:dd/MM/yy}}" />
-                                                </TextBlock>
-                                            </StackPanel>
+                                                    </TextBlock>
+                                                </StackPanel>
 
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock>
                                                     <Run Text="Hjemkomst:" FontWeight="SemiBold"/>
                                                     <Run Text="{Binding PlannedEndDate, StringFormat={}{0:dd/MM/yy}}" />
-                                                </TextBlock>
+                                                    </TextBlock>
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Border>
                     </StackPanel>
 
                     <!--Både af vandet-->
@@ -180,50 +193,52 @@
                                         <Run Text="BÅDE PÅ VANDET"/>
                                     </TextBlock>
                                 </Grid>
-                        </WrapPanel>
+                            </WrapPanel>
                         </Border>
 
-                        <ListView Name="OverviewBoatsOutList" HorizontalAlignment="Left" 
+                        <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
+                            <ListView Name="OverviewBoatsOutList" HorizontalAlignment="Left" 
                                   Margin="0,5,0,20" BorderThickness="0" ItemsSource="{Binding Path=BoatsOut}" SelectedItem="{Binding Path=SelectedBoat}">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Width="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                HorizontalAlignment="Left" IsItemsHost="True" Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.Template>
-                                <ControlTemplate>
-                                    <ItemsPresenter/>
-                                </ControlTemplate>
-                            </ListView.Template>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Padding="10" Background="Transparent">
-                                        <StackPanel Orientation="Vertical">
-                                            
-                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Style="{StaticResource lstListViewHeadline}" />
-                                            
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                                <TextBlock >
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.Template>
+                                    <ControlTemplate>
+                                        <ItemsPresenter/>
+                                    </ControlTemplate>
+                                </ListView.Template>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="10" Background="Transparent">
+                                            <StackPanel Orientation="Vertical">
+
+                                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Style="{StaticResource lstListViewHeadline}" />
+
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                                    <TextBlock >
                                                     <Run Text="Kategori: " FontWeight="SemiBold"/>
                                                     <Run Text="{Binding SpecificBoatType}" />
-                                                </TextBlock>
-                                            </StackPanel>
+                                                    </TextBlock>
+                                                </StackPanel>
 
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                                <TextBlock>
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                                    <TextBlock>
                                                     <Run Text="Pladser: " FontWeight="SemiBold"/>
                                                     <Run Text="{Binding NumberofSeats}" />
-                                                </TextBlock>
+                                                    </TextBlock>
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Border>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
