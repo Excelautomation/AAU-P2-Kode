@@ -51,6 +51,12 @@
             <Setter Property="FontFamily" Value="Calibri"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
+        
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -62,7 +68,7 @@
 
             <TabControl Background="Transparent" Grid.Row="1">
                 <TabItem Header="  Generelt  ">
-                    <DockPanel HorizontalAlignment="Stretch" Margin="10">
+                    <DockPanel HorizontalAlignment="Left" Margin="10" Width="900">
                         <StackPanel>
                             <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
                                     Grid.ColumnSpan="2" Grid.Row="0" Background="#FFEAEAEA">
@@ -104,7 +110,7 @@
                                         <Button Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Command="{Binding Path=NewSeason}" 
                                                 Content="Start ny sæson" Padding="5" Width="150"/>
 
-                                        <DockPanel Grid.Column="2" Margin="4" HorizontalAlignment="Right" Width="250">
+                                        <DockPanel Grid.Column="2" Margin="4" HorizontalAlignment="Right" Width="250" >
                                             <DockPanel.Style>
                                                 <Style TargetType="DockPanel">
                                                     <Style.Triggers>
@@ -118,11 +124,11 @@
                                                 </Style>
                                             </DockPanel.Style>
 
-
-                                            <TextBlock Text="Én sæson skal mindst være 6 måneder gammel" TextWrapping="Wrap" 
+                                        </DockPanel>
+                                        
+                                        <TextBlock Text="Én sæson skal mindst være 6 måneder gammel" Grid.Column="2" TextWrapping="Wrap" 
                                                        Foreground="Red" Margin="4" HorizontalAlignment="Right"/>
 
-                                        </DockPanel>
                                     </Grid>
                                 </StackPanel>
                             </Border>
@@ -147,7 +153,7 @@
                                 <StackPanel>
                                     <DockPanel>
                                         <TextBlock Text="I dag forventes mørkets frembrud klokken:" Margin="4" FontWeight="SemiBold"/>
-                                        <TextBox Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center" VerticalAlignment="Top">
+                                        <TextBox Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14">
                                             <TextBox.Style>
                                                 <Style TargetType="TextBox">
                                                     <Style.Triggers>
@@ -182,7 +188,7 @@
 
 
                 <TabItem Header="  Skadetyper  " >
-                    <StackPanel HorizontalAlignment="Center" Margin="10">
+                    <StackPanel HorizontalAlignment="Left" Margin="10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="320"/>
@@ -190,12 +196,16 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="4">
-                                <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" DockPanel.Dock="Top"
-                                          ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedDamageType}" Height="491">
+                                <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" 
+                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="530"
+                                          ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedDamageType}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Margin="0,2,0,2">
-                                                <Label Content="{Binding Path=Type}"/>
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                </StackPanel.Resources>
+                                                <TextBlock Text="{Binding Path=Type}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -207,9 +217,15 @@
                                 </ListView>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="2" Margin="4,10,4,4">
-                                <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
+                            <StackPanel Grid.Column="2" Margin="4">
+                                <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}" Margin="4">
                                     <StackPanel Width="Auto">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="FontFamily" Value="Calibri"/>
+                                                <Setter Property="FontSize" Value="14"/>
+                                            </Style>
+                                        </StackPanel.Resources>
                                         <WrapPanel>
                                             <TextBlock Width="210" Margin="4" Text="Type:" FontWeight="SemiBold"/>
                                             <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentDamageType.Type}"/>
@@ -218,7 +234,7 @@
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" Margin="0,10,0,0">
                                             <Button Margin="4" Content="OK" DockPanel.Dock="Right" 
                                                     Command="{Binding Path=SaveChangesDamageTypes}" Width="100"/>
-                                            <Button Background="#FFDEDE" Margin="4" Content="Annuller" 
+                                            <Button Margin="4" Content="Annuller" 
                                                     Command="{Binding Path=CancelChangeDamageTypes}" Width="100"/>
                                             <Button Margin="4" Content="Slet" Width="100"
                                                     Command="{Binding Path=DeleteDamageType}" HorizontalAlignment="Right"/>
@@ -302,23 +318,26 @@
                 </TabItem>
 
                 <TabItem Header="  Standardture  ">
-                    <DockPanel HorizontalAlignment="Center" Margin="10">
+                    <DockPanel HorizontalAlignment="Left" Margin="10">
                         <Grid>
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="320"/>
                                 <ColumnDefinition Width="4"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <DockPanel Grid.Column="0" Margin="4">
-                                <ListView x:Name="StandardTripList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom"
-                                          ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedStandardTrip}" SelectedItem="{Binding Path=CurrentStandardTrip}">
+                            <StackPanel Grid.Column="0" Margin="4" >
+                                <ListView x:Name="StandardTripList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                          ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedStandardTrip}"  MinHeight="530"
+                                          SelectedItem="{Binding Path=CurrentStandardTrip}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <WrapPanel Margin="0,2,0,2">
-                                                <Label Content="{Binding Path=Title}"/>
-                                            </WrapPanel>
+                                            <StackPanel Margin="0,2,0,2">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                </StackPanel.Resources>
+                                                <TextBlock Text="{Binding Path=Title}"/>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <i:Interaction.Triggers>
@@ -327,10 +346,16 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ListView>
-                            </DockPanel>
+                            </StackPanel>
                             <StackPanel Grid.Column="2" Margin="4">
-                                <Border Margin="4" Style="{StaticResource styleContentBorders}">
+                                <Border Margin="4" Style="{StaticResource styleContentBorders}" >
                                     <StackPanel Width="Auto">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="FontFamily" Value="Calibri"/>
+                                                <Setter Property="FontSize" Value="14"/>
+                                            </Style>
+                                        </StackPanel.Resources>
                                         <WrapPanel>
                                             <TextBlock Width="210" Margin="4" Text="Titel:" FontWeight="SemiBold"/>
                                             <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Title}"/>
@@ -344,7 +369,7 @@
                                             <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
                                         </WrapPanel>
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" Margin="0,10,0,0">
-                                            <Button Margin="4" DockPanel.Dock="Right" Content="Ok" Command="{Binding Path=SaveChangesStandardTrips}" Width="100"/>
+                                            <Button Margin="4" DockPanel.Dock="Right" Content="OK" Command="{Binding Path=SaveChangesStandardTrips}" Width="100"/>
                                             <Button Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesStandardTrips}" Width="100"/>
                                             <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteStandardTrip}" HorizontalAlignment="Right" Width="100"/>
                                         </DockPanel>
@@ -427,26 +452,29 @@
 
 
                 <TabItem Header="  Administratorer  ">
-                    <DockPanel HorizontalAlignment="Center" Margin="10">
+                    <DockPanel HorizontalAlignment="Left" Margin="10">
                         <Grid>
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="320"/>
                                 <ColumnDefinition Width="4"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <DockPanel Grid.Column="0" Margin="4">
-                                <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" DockPanel.Dock="Bottom" IsSynchronizedWithCurrentItem="True"
+                            <StackPanel Grid.Column="0" Margin="4">
+                                <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                          IsSynchronizedWithCurrentItem="True" MinHeight="530"
                                           ItemsSource="{Binding Path=Admins}" SelectedIndex="{Binding Path=SelectedAdmin}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Margin="0,2,0,2">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                </StackPanel.Resources>
                                                 <WrapPanel>
-                                                    <Label Content="{Binding Path=Member.FirstName}"/>
-                                                    <Label Content="{Binding Path=Member.LastName}"/>
+                                                    <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                                    <TextBlock Text="{Binding Path=Member.LastName}"/>
                                                 </WrapPanel>
-                                                <Label Content="{Binding Path=Username}"/>
+                                                <TextBlock Text="{Binding Path=Username}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -456,31 +484,34 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ListView>
-                            </DockPanel>
+                            </StackPanel>
 
                             <StackPanel Grid.Column="2" Margin="4" Width="516">
                                 <Border Margin="4,4,0,4" Style="{StaticResource styleContentBorders}">
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                                        <TextBlock Margin="4" Text="Brugernavn:" FontWeight="SemiBold" />
+                                        <StackPanel.Resources>
+                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                        </StackPanel.Resources>
+                                        <TextBlock Text="Brugernavn:" FontWeight="SemiBold" />
                                         <TextBlock Text="{Binding CurrentAdmin.Username}" />
 
-                                        <TextBlock Margin="4,10,0,0" Text="Medlemsnr.:" FontWeight="SemiBold" HorizontalAlignment="Left"/>
+                                        <TextBlock Margin="0,10,0,0" Text="Medlemsnr.:" FontWeight="SemiBold" HorizontalAlignment="Left"/>
                                         <TextBlock Text="{Binding CurrentAdmin.Member.Id}"/>
 
-                                        <TextBlock Margin="4,10,0,0" Text="E-mail:" FontWeight="SemiBold"/>
+                                        <TextBlock Margin="0,10,0,0" Text="E-mail:" FontWeight="SemiBold"/>
                                         <TextBlock Text="{Binding CurrentAdmin.Member.Email1}"/>
 
-                                        <TextBlock Margin="4,10,0,0" Text="Telefon:" FontWeight="SemiBold"/>
+                                        <TextBlock Margin="0,10,0,0" Text="Telefon:" FontWeight="SemiBold"/>
                                         <TextBlock Text="{Binding CurrentAdmin.Member.Phone}"/>
 
-                                        <TextBlock Margin="4,10,0,0" Text="Kontakt ved:" FontWeight="SemiBold"/>
+                                        <TextBlock Margin="0,10,0,0" Text="Kontakt ved:" FontWeight="SemiBold"/>
 
                                         <WrapPanel HorizontalAlignment="Left">
-                                            <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactTrip}" VerticalAlignment="Center"/>
+                                            <CheckBox Margin="0,4,4,4" IsChecked="{Binding CurrentAdmin.ContactTrip}" VerticalAlignment="Center"/>
                                             <TextBlock Margin="4" Text="Langtursblanketter"/>
                                         </WrapPanel>
                                         <WrapPanel HorizontalAlignment="Left">
-                                            <CheckBox Margin="4" IsChecked="{Binding CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
+                                            <CheckBox Margin="0,4,4,4" IsChecked="{Binding CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
                                             <TextBlock Margin="4" Text="Mørkets frembrud"/>
                                         </WrapPanel>
 
