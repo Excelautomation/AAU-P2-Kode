@@ -19,225 +19,115 @@
 
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
 
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="27"/>
+        </Style>
+
+        <!--Border style-->
+        <Style x:Key="styleContentBorders" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Background" Value="#FFF7F7F7"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
     </UserControl.Resources>
     
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="0.118"/>
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFF9F7F7" Offset="0.056"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition Height="5"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500*" MinWidth="150" MaxWidth="500"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="809*"/>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Row="2" >
-            <Grid Margin="0,0,5,5">
-                <Border BorderBrush="Gray" BorderThickness="1">
-                    <DockPanel>
-                        <ListView x:Name="TripList" ItemsSource="{Binding Path=TripsFiltered}" SelectedItem="{Binding Path=CurrentTrip, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Width="350">
-                                        <StackPanel Margin="10">
-                                            <TextBlock Text="{Binding Boat.Name}" FontSize="18"/>
-                                            <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Text="Starttid: " FontSize="14px" />
-                                                <TextBlock Text="{Binding TripStartTime, ConverterCulture='da-DK'}" FontSize="14px" />
-                                            </WrapPanel>
-                                        </StackPanel>
-                                        <StackPanel Margin="210,10,10,10">
-                                            <WrapPanel>
-                                                <TextBlock Text="{Binding Distance}" FontSize="18px" />
-                                                <TextBlock Text=" Km" FontSize="18px" />
-                                            </WrapPanel>
-                                            <WrapPanel>
-                                                <TextBlock FontWeight="SemiBold" Text="Tid ude: " FontSize="14px" />
-                                                <TextBlock FontSize="14px" Text="{Binding TimeBoatOut, StringFormat=hh\\:mm}"/>
-                                            </WrapPanel>
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=TripList, Path=SelectedItem}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ListView>
-                    </DockPanel>
-                </Border>
-            </Grid>
-        </DockPanel>
-        <DockPanel Grid.Row="2" Grid.Column="2" >
-            <Grid Margin="5,0,5,5">
-                <Border BorderBrush="Gray" BorderThickness="1">
-                    <DockPanel>
-                        <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
-                            <StackPanel HorizontalAlignment="Left">
-                                <Border Margin="25" CornerRadius="15" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="10"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="280"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.Resources>
-                                                <Style BasedOn="{StaticResource DetailsTextbox}" TargetType="{x:Type TextBlock}"/>
-                                            </Grid.Resources>
-                                            <TextBlock Text="Båd ude:" Grid.Row="0" Grid.Column="0"/>
-                                            <DockPanel Grid.Column="1">
-                                                <Button Command="{Binding Path=ShowBoatDialog}" DockPanel.Dock="Right">
-                                                    <Image Height="32" Source="../../images/yacht.png"/>
-                                                </Button>
-                                                <TextBlock DockPanel.Dock="Left" Text="{Binding CurrentTrip.Boat.Name}" Grid.Row="0" Grid.Column="1"/>
-                                            </DockPanel>
-
-                                            <TextBlock Text="Retning:" Grid.Row="1" Grid.Column="0"/>
-                                            <TextBox Text="{Binding CurrentTrip.Direction, StringFormat=Time, Mode=TwoWay}" VerticalContentAlignment="Center" FontSize="18" Grid.Row="1" Grid.Column="1"/>
-
-                                            <TextBlock Text="Starttid:" Grid.Row="2" Grid.Column="0"/>
-                                            <Toolkit:DateTimePicker FontSize="16" Grid.Row="2" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay, StringFormat=Short}" DockPanel.Dock="Right" />
-
-                                            <TextBlock Text="Sluttid:" Grid.Row="3" Grid.Column="0"/>
-                                            <Toolkit:DateTimePicker FontSize="16" Grid.Row="3" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" DockPanel.Dock="Right" />
-
-                                            <TextBlock Text="Tid ude:" Grid.Row="4" Grid.Column="0"/>
-                                            <TextBlock Grid.Row="4" Grid.Column="1">
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}{0:D2}:{1:D2}">
-                                                        <Binding Path="CurrentTrip.TimeBoatOut.Hours" />
-                                                        <Binding Path="CurrentTrip.TimeBoatOut.Minutes" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-
-                                            <TextBlock Text="Distance:" Grid.Row="5" Grid.Column="0"/>
-                                            <WrapPanel Grid.Row="5" Grid.Column="1">
-                                                <TextBox Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Text="{Binding CurrentTrip.Distance, Mode=TwoWay}"/>
-                                                <TextBlock VerticalAlignment="Center" Text=" Km"/>
-                                            </WrapPanel>
-
-                                            <TextBlock Text="Langtur:" Grid.Row="6" Grid.Column="0"/>
-                                            <TextBlock  Grid.Row="6" Grid.Column="1"/>
-                                            <ComboBox  Width="100" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" x:Name="LongDistance" SelectedIndex="{Binding CurrentTrip.LongTrip}" FontSize="16" Background="#EEEEEE">
-                                                <ComboBoxItem Content="Nej"/>
-                                                <ComboBoxItem Content="Ja"/>
-                                            </ComboBox>
-
-                                        </Grid>
-                                        <DockPanel Grid.Row="2" >
-                                            <Button Padding="3" HorizontalAlignment="Left" Content="Gem ændringer" FontSize="18" Command="{Binding Path=SaveChanges}"/>
-                                            <Button Padding="3" HorizontalAlignment="Right" Content="Annullér ændringer" FontSize="18" Command="{Binding Path=CancelChanges}"/>
-                                        </DockPanel>
-
-                                        <TextBlock FontSize="16" Margin="8,10,0,0" VerticalAlignment="Center" Grid.Row="3" Grid.ColumnSpan="3" >
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                            <Setter Property="Foreground" Value="Green"/>
-                                                            <Setter Property="Text" Value="Ændringer gemt"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </Grid>
-                                </Border>
-
-                                <Grid HorizontalAlignment="Center" Margin="0,0,0,50">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Border Style="{DynamicResource ResourceKey=brdHeadline}" Width="195" Background="AliceBlue">
-                                        <WrapPanel Margin="0,2,0,0">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="20"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Image Source="/View/images/user.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                                <WrapPanel Grid.Column="1">
-                                                    <TextBlock Text="Medlemmer ude (" Foreground="Black" FontSize="18"/>
-                                                    <TextBlock Text="{Binding Path=CurrentTrip.Members.Count}" Foreground="Black" FontSize="18"/>
-                                                    <TextBlock Text=")" Foreground="Black" FontSize="18"/>
-                                                </WrapPanel>
-                                            </Grid>
+        
+        <Grid Grid.Column="0">
+            <Border BorderBrush="Gray" BorderThickness="1">
+                <DockPanel>
+                    <ListView x:Name="TripList" ItemsSource="{Binding Path=TripsFiltered}" SelectedItem="{Binding Path=CurrentTrip, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="350">
+                                    <StackPanel Margin="10">
+                                        <TextBlock Text="{Binding Boat.Name}" FontSize="18"/>
+                                        <WrapPanel>
+                                            <TextBlock FontWeight="SemiBold" Text="Starttid: " FontSize="14px" />
+                                            <TextBlock Text="{Binding TripStartTime, ConverterCulture='da-DK'}" FontSize="14px" />
                                         </WrapPanel>
-                                    </Border>
-
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1" PanningMode="VerticalOnly">
-                                        <ItemsControl x:Name="AllMembersList" ItemsSource="{Binding Path=CurrentTrip.Members}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid Margin="5">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="95"/>
-                                                            <ColumnDefinition Width="auto"/>
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <WrapPanel Margin="5,0,0,0" Grid.Column="0">
-                                                            <TextBlock Width="95" Margin="0,0,3,0" Text="{Binding Path=FirstName}"/>
-                                                            <TextBlock Text="{Binding Path=LastName}"/>
-                                                        </WrapPanel>
-                                                        <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
-                                                            <TextBlock Margin="0,0,3,0" Text="tlf:"/>
-                                                            <TextBlock Text="{Binding Path=Phone}"/>
-                                                        </WrapPanel>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-                                    </ScrollViewer>
+                                    </StackPanel>
+                                    <StackPanel Margin="210,10,10,10">
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Distance}" FontSize="18px" />
+                                            <TextBlock Text=" Km" FontSize="18px" />
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <TextBlock FontWeight="SemiBold" Text="Tid ude: " FontSize="14px" />
+                                            <TextBlock FontSize="14px" Text="{Binding TimeBoatOut, StringFormat=hh\\:mm}"/>
+                                        </WrapPanel>
+                                    </StackPanel>
                                 </Grid>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </DockPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=TripList, Path=SelectedItem}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
+                <Border Margin="4,4,0,4" Style="{StaticResource styleContentBorders}">
+                    <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                        <TextBlock Text="Båd ude:" Grid.Row="0" Grid.Column="0"/>
+
+                        <DockPanel>
+                            <Button Command="{Binding Path=ShowBoatDialog}" DockPanel.Dock="Right">
+                                <Image Height="32" Source="../../images/yacht.png"/>
+                            </Button>
+                            <TextBlock DockPanel.Dock="Left" Text="{Binding CurrentTrip.Boat.Name}" Grid.Row="0" Grid.Column="1"/>
+                        </DockPanel>
+
+                        <TextBlock Text="Retning:" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox Text="{Binding CurrentTrip.Direction, StringFormat=Time, Mode=TwoWay}" VerticalContentAlignment="Center" FontSize="18" Grid.Row="1" Grid.Column="1"/>
+
+                        <TextBlock Text="Starttid:" Grid.Row="2" Grid.Column="0"/>
+                        <Toolkit:DateTimePicker FontSize="16" Grid.Row="2" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay, StringFormat=Short}" DockPanel.Dock="Right" />
+
+                        <TextBlock Text="Sluttid:" Grid.Row="3" Grid.Column="0"/>
+                        <Toolkit:DateTimePicker FontSize="16" Grid.Row="3" Grid.Column="1" Value="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" DockPanel.Dock="Right" />
+
+                        <TextBlock Text="Tid ude:" Grid.Row="4" Grid.Column="0"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0:D2}:{1:D2}">
+                                    <Binding Path="CurrentTrip.TimeBoatOut.Hours" />
+                                    <Binding Path="CurrentTrip.TimeBoatOut.Minutes" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+
+                        <TextBlock Text="Distance:"/>
+                        <WrapPanel Grid.Row="5" Grid.Column="1">
+                            <TextBox Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Text="{Binding CurrentTrip.Distance, Mode=TwoWay}"/>
+                            <TextBlock VerticalAlignment="Center" Text=" Km"/>
+                        </WrapPanel>
+
+                        <TextBlock Text="Langtur:"/>
+                        <TextBlock  Grid.Row="6" Grid.Column="1"/>
+                        <ComboBox  Width="100" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" x:Name="LongDistance" SelectedIndex="{Binding CurrentTrip.LongTrip}" FontSize="16" Background="#EEEEEE">
+                            <ComboBoxItem Content="Nej"/>
+                            <ComboBoxItem Content="Ja"/>
+                        </ComboBox>
+                    </StackPanel>
                 </Border>
-            </Grid>
-        </DockPanel>
+            </ScrollViewer>
 
+        </Grid>
 
-
-        <GridSplitter HorizontalAlignment="Right" Margin="0,35,0,0"
-			VerticalAlignment="Stretch" 
-			Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
-			Width="5" Background="Gray"/>
     </Grid>
 
 </UserControl>

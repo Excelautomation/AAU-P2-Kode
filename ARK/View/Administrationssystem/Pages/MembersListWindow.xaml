@@ -63,6 +63,12 @@
         </ListView>
 
         <StackPanel Grid.Row="2">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="FontFamily" Value="Calibri"/>
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+            </StackPanel.Resources>
             <WrapPanel>
                 <TextBlock Width="80" Margin="4" Text="Brugernavn:" FontWeight="SemiBold"/>
                 <TextBox Width="195" Margin="4" Text="{Binding Path=NewAdmin.Username, Mode=OneWayToSource}"/>

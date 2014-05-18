@@ -46,7 +46,7 @@
             </Grid.ColumnDefinitions>
 
             <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
-                            Grid.ColumnSpan="2" Grid.Row="0" Background="#FFEAEAEA">
+                            Grid.ColumnSpan="2" Width="520" HorizontalAlignment="Left" Grid.Row="0" Background="#FFEAEAEA">
                 <WrapPanel Margin="0,2,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -89,15 +89,22 @@
 
             <Border HorizontalAlignment="Left" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" MinWidth="250" Margin="10,0,0,0" Style="{StaticResource styleContentBorders}" Width="260">
                 <StackPanel >
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="FontFamily" Value="Calibri"/>
+                            <Setter Property="FontSize" Value="14"/>
+                        </Style>
+                    </StackPanel.Resources>
                     <TextBlock Text="Kommentarer: " FontWeight="SemiBold" />
-                    <TextBox AcceptsReturn="True" Height="208" Name="CommentTextbox" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}"/>
+                    <TextBox AcceptsReturn="True" Name="CommentTextbox" TextWrapping="Wrap" 
+                             VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}" Height="314"/>
                     <Button Content="Gem ændringer" Width="150" Command="{Binding SaveChanges}" Margin="0,5,0,0" HorizontalAlignment="Right" Height="24"/>
                 </StackPanel>
             </Border>
 
             <Border Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,80,0" Width="250" HorizontalAlignment="Left" Style="{StaticResource styleContentBorders}">
-                <WrapPanel >
-                    <Button Background="Transparent" BorderBrush="Transparent" Width="60" Command="{Binding Path=OpenDamageForm}">
+                <DockPanel LastChildFill="False">
+                    <Button Background="Transparent" BorderBrush="Transparent" DockPanel.Dock="Left" Command="{Binding Path=OpenDamageForm}">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Style.Triggers>
@@ -110,16 +117,13 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-
-                        <StackPanel>
-                            <WrapPanel HorizontalAlignment="Center">
-                                <Image Source="../../images/application_add.png" Height="32" Margin="0,4,0,0"/>
-                            </WrapPanel>
-                            <Label Content="Åben"/>
+                        <StackPanel Width="80" HorizontalAlignment="Center" Orientation="Vertical">
+                            <Image Source="../../images/application_add.png" Height="32" Margin="0,4,0,0"/>
+                            <TextBlock Text="Åben" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Background="Transparent" Width="60" BorderBrush="Transparent" Command="{Binding Path=CloseDamageForm}" Margin="30,0,0,0" >
+                    <Button Background="Transparent" DockPanel.Dock="Right" BorderBrush="Transparent" Command="{Binding Path=CloseDamageForm}" Margin="30,0,0,0" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Style.Triggers>
@@ -132,14 +136,12 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-                        <StackPanel>
-                            <WrapPanel HorizontalAlignment="Center">
-                                <Image Source="../../images/application_delete.png" Height="32" Margin="0,4,0,0"/>
-                            </WrapPanel>
-                            <Label Content="Luk"/>
+                        <StackPanel Width="80" HorizontalAlignment="Center" Orientation="Vertical">
+                            <Image Source="../../images/application_delete.png" Height="32" Margin="0,4,0,0"/>
+                            <TextBlock Text="Luk" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                </WrapPanel>
+                </DockPanel>
             </Border>
 
             <TextBlock Grid.Row="3" FontSize="20">
