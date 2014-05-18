@@ -82,6 +82,10 @@
                                     <DataTemplate>
                                         <Border Padding="10">
                                             <StackPanel Orientation="Vertical">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                </StackPanel.Resources>
+                                                
                                                 <TextBlock Style="{StaticResource lstListViewHeadline}" Text="{Binding Boat.Name}" />
 
                                                 <StackPanel Orientation="Horizontal">
@@ -148,6 +152,9 @@
                                     <DataTemplate>
                                         <Border Padding="10">
                                             <StackPanel Orientation="Vertical">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                </StackPanel.Resources>
                                                 <TextBlock Text="{Binding Boat.Name}" Style="{StaticResource lstListViewHeadline}"/>
 
                                                 <StackPanel Orientation="Horizontal">
@@ -217,6 +224,9 @@
                                     <DataTemplate>
                                         <Border Padding="10" Background="Transparent">
                                             <StackPanel Orientation="Vertical">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                </StackPanel.Resources>
 
                                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Style="{StaticResource lstListViewHeadline}" />
 
