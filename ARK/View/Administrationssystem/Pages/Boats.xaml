@@ -23,6 +23,12 @@
             <Setter Property="FontStyle" Value="Normal"/>
         </Style>
 
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="27"/>
+        </Style>
+
         <!--Border style-->
         <Style x:Key="styleContentBorders" TargetType="Border">
             <Setter Property="CornerRadius" Value="3"/>
@@ -74,10 +80,13 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="5,0,5,0">
-                            <TextBlock Text="{Binding Name}" FontSize="18"/>
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                            </StackPanel.Resources>
+                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                             <WrapPanel>
-                                <TextBlock Margin="0,0,2,0" Text="Mest anvendende:" FontSize="12"/>
-                                <TextBlock Text="Ubundet" FontSize="12"/>
+                                <TextBlock Margin="0,0,2,0" Text="Mest afvendt af:"/>
+                                <TextBlock Text="Ukendt"/>
                             </WrapPanel>
                         </StackPanel>
                     </DataTemplate>
@@ -178,7 +187,6 @@
                                                     </Style>
                                                 </TextBlock.Style>
                                             </TextBlock>
-
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>

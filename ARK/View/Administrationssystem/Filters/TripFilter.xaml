@@ -17,15 +17,15 @@
 
     <StackPanel>
         <Label Style="{StaticResource styleHeadlineFilters}">Bådtype</Label>
-        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
+        <Rectangle Margin="0,-10,0,0" Height="1" Fill="Gray"/>
         <ItemsControl ItemsSource="{Binding Path=ControlsBoatType}" />
 
         <Label Style="{StaticResource styleHeadlineFilters}">Distance</Label>
-        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
+        <Rectangle Margin="0,-10,0,0" Height="1" Fill="Gray"/>
         <ItemsControl ItemsSource="{Binding Path=ControlsDistance}" />
 
         <Label Style="{StaticResource styleHeadlineFilters}">År</Label>
-        <Rectangle Margin="5,-10,5,0" Height="1" Fill="Gray"/>
+        <Rectangle Margin="0,-10,0,0" Height="1" Fill="Gray"/>
         <ItemsControl ItemsSource="{Binding Path=ControlsYear}" />
     </StackPanel>
 </UserControl>
