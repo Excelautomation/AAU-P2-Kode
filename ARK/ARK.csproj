@@ -335,7 +335,7 @@
     <Compile Include="ViewModel\Base\ContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IContentViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\Filter\IFilterContainerViewModel.cs" />
-    <Compile Include="ViewModel\Base\Interfaces\IInfoContainerViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\IInfoContainerViewModel.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IKeyboardContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IPageContainerViewModelBase.cs" />
     <Compile Include="ViewModel\Base\Interfaces\IViewModelBase.cs" />

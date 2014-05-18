@@ -84,8 +84,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(
-                    () =>
+                return new RelayCommand(
+                    x =>
                         {
                             if (this.SelectedMembers.Count < this.SelectedBoat.NumberofSeats)
                             {
@@ -100,8 +100,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(
-                    () =>
+                return new RelayCommand(
+                    x =>
                         {
                             if (this.SelectedMembers.Count < this.SelectedBoat.NumberofSeats)
                             {
@@ -300,12 +300,21 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             // Load data. Check the boats activitylevel on a 8-day-basis
             DateTime limit = DateTime.Now.AddDays(-8);
 
-            this._boats =
+            this._boats = (from boat in db.Boat
+                where boat.Active
+                orderby boat.Trips.Any(trip => trip.TripEndedTime == null),
+                    boat.Trips.Count(trip => trip.TripStartTime > limit) descending
+                select boat) 
+                .Include(boat => boat.Trips)
+                .ToList();
+                          
+
+            /*this._boats =
                 this.db.Boat.Where(boat => boat.Active)
                     .OrderBy(boat => boat.Trips.Any(trip => trip.TripEndedTime == null))
                     .ThenByDescending(boat => boat.Trips.Count(trip => trip.TripStartTime > limit))
                     .Include(boat => boat.Trips)
-                    .ToList();
+                    .ToList();*/
         }
 
         private void LoadMembers()
