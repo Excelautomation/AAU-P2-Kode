@@ -42,7 +42,7 @@ namespace ARK.ViewModel.Base
             this.NotifyCustom(propertyName);
         }
 
-        protected void NotifyCustom(string propertyName = "")
+        protected void NotifyCustom(string propertyName)
         {
             if (this.PropertyChanged != null)
             {

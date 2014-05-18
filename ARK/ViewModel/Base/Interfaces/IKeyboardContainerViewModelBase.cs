@@ -5,7 +5,7 @@ using KeyboardEventArgs = ARK.ViewModel.Protokolsystem.KeyboardEventArgs;
 
 namespace ARK.ViewModel.Base.Interfaces
 {
-    public interface IKeyboardContainerViewModelBase : IViewModelBase
+    public interface IKeyboardContainerViewModelBase : IPageContainerViewModelBase
     {
         #region Public Events
 
