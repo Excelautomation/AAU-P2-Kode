@@ -1,0 +1,964 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DiagramarkModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Password" Type="longtext" />
+          <Property Name="Member_Id" Type="int" Nullable="false" />
+          <Property Name="ContactTrip" Type="bool" Nullable="false" />
+          <Property Name="ContactDark" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Boats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="longtext" />
+          <Property Name="NumberofSeats" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bool" Nullable="false" />
+          <Property Name="SpecificBoatType" Type="int" Nullable="false" />
+          <Property Name="LongTripBoat" Type="bool" Nullable="false" />
+          <Property Name="HaveCox" Type="bool" Nullable="false" />
+          <Property Name="NewPrice" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="InformationString" Type="longtext" />
+        </EntityType>
+        <EntityType Name="DamageForms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Type" Type="longtext" />
+          <Property Name="Description" Type="longtext" />
+          <Property Name="Functional" Type="bool" Nullable="false" />
+          <Property Name="Closed" Type="bool" Nullable="false" />
+          <Property Name="RegisteringMemberId" Type="int" Nullable="false" />
+          <Property Name="BoatId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DamageTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="longtext" />
+        </EntityType>
+        <EntityType Name="FTPInfoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="longtext" />
+          <Property Name="HostName" Type="longtext" />
+          <Property Name="Username" Type="longtext" />
+          <Property Name="Password" Type="longtext" />
+          <Property Name="Port" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GetSMS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="From" Type="longtext" />
+          <Property Name="Text" Type="longtext" />
+          <Property Name="RecievedDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Handled" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LongTripFormMembers">
+          <Key>
+            <PropertyRef Name="LongTripForm_Id" />
+            <PropertyRef Name="Member_Id" />
+          </Key>
+          <Property Name="LongTripForm_Id" Type="int" Nullable="false" />
+          <Property Name="Member_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LongTripForms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoatId" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="FormCreated" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="PlannedStartDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="PlannedEndDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="TourDescription" Type="longtext" />
+          <Property Name="DistancesPerDay" Type="longtext" />
+          <Property Name="CampSites" Type="longtext" />
+          <Property Name="ResponsibleMemberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bool" Nullable="false" />
+          <Property Name="MemberNumber" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="longtext" />
+          <Property Name="LastName" Type="longtext" />
+          <Property Name="Address1" Type="longtext" />
+          <Property Name="Address2" Type="longtext" />
+          <Property Name="ZipCode" Type="int" Nullable="false" />
+          <Property Name="City" Type="longtext" />
+          <Property Name="Phone" Type="longtext" />
+          <Property Name="PhoneWork" Type="longtext" />
+          <Property Name="Cellphone" Type="longtext" />
+          <Property Name="Email1" Type="longtext" />
+          <Property Name="Email2" Type="longtext" />
+          <Property Name="Birthday" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Released" Type="bool" Nullable="false" />
+          <Property Name="SwimmingTest" Type="bool" Nullable="false" />
+          <Property Name="ShortTripCox" Type="bool" Nullable="false" />
+          <Property Name="LongTripCox" Type="bool" Nullable="false" />
+          <Property Name="MayUseSculler" Type="bool" Nullable="false" />
+          <Property Name="MayUseOutrigger" Type="bool" Nullable="false" />
+          <Property Name="MayUseKayak" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seasons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeasonStart" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="SeasonEnd" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="longtext" />
+          <Property Name="Value" Type="longtext" />
+        </EntityType>
+        <EntityType Name="SMS">
+          <Key>
+            <PropertyRef Name="Reciever" />
+          </Key>
+          <Property Name="Reciever" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="longtext" />
+          <Property Name="Dispatched" Type="bool" Nullable="false" />
+          <Property Name="Message" Type="longtext" />
+          <Property Name="approved" Type="bool" Nullable="false" />
+          <Property Name="Time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Handled" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StandardTrips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="longtext" />
+          <Property Name="Distance" Type="double" Nullable="false" />
+          <Property Name="Direction" Type="longtext" />
+        </EntityType>
+        <EntityType Name="TripMembers">
+          <Key>
+            <PropertyRef Name="Trip_Id" />
+            <PropertyRef Name="Member_Id" />
+          </Key>
+          <Property Name="Trip_Id" Type="int" Nullable="false" />
+          <Property Name="Member_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Distance" Type="double" Nullable="false" />
+          <Property Name="LongTrip" Type="bool" Nullable="false" />
+          <Property Name="TripStartTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="TripEndedTime" Type="datetime" Precision="0" />
+          <Property Name="BoatId" Type="int" Nullable="false" />
+          <Property Name="Direction" Type="longtext" />
+          <Property Name="Title" Type="longtext" />
+          <Property Name="CrewCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TripWarningSms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SentSms" Type="datetime" Precision="0" />
+          <Property Name="RecievedSms" Type="datetime" Precision="0" />
+          <Property Name="SentAdminSms" Type="datetime" Precision="0" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Admins_Members_Member_Id">
+          <End Role="Members" Type="Self.Members" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DamageForms_Boats_BoatId">
+          <End Role="Boats" Type="Self.Boats" Multiplicity="1" />
+          <End Role="DamageForms" Type="Self.DamageForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DamageForms">
+              <PropertyRef Name="BoatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DamageForms_Members_RegisteringMemberId">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="DamageForms" Type="Self.DamageForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DamageForms">
+              <PropertyRef Name="RegisteringMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LongTripFormMembers_LongTripForms_LongTripForm_Id">
+          <End Role="LongTripForms" Type="Self.LongTripForms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LongTripFormMembers" Type="Self.LongTripFormMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LongTripForms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LongTripFormMembers">
+              <PropertyRef Name="LongTripForm_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LongTripFormMembers_Members_Member_Id">
+          <End Role="Members" Type="Self.Members" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LongTripFormMembers" Type="Self.LongTripFormMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LongTripFormMembers">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LongTripForms_Boats_BoatId">
+          <End Role="Boats" Type="Self.Boats" Multiplicity="0..1" />
+          <End Role="LongTripForms" Type="Self.LongTripForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LongTripForms">
+              <PropertyRef Name="BoatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LongTripForms_Members_ResponsibleMemberId">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="LongTripForms" Type="Self.LongTripForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LongTripForms">
+              <PropertyRef Name="ResponsibleMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripMembers_Members_Member_Id">
+          <End Role="Members" Type="Self.Members" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TripMembers" Type="Self.TripMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TripMembers">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripMembers_Trips_Trip_Id">
+          <End Role="Trips" Type="Self.Trips" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TripMembers" Type="Self.TripMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TripMembers">
+              <PropertyRef Name="Trip_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trips_Boats_BoatId">
+          <End Role="Boats" Type="Self.Boats" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="BoatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripWarningSms_Trips_Id">
+          <End Role="Trips" Type="Self.Trips" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TripWarningSms" Type="Self.TripWarningSms" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TripWarningSms">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiagramarkModelStoreContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="Boats" EntityType="Self.Boats" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="DamageForms" EntityType="Self.DamageForms" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="DamageTypes" EntityType="Self.DamageTypes" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="FTPInfoes" EntityType="Self.FTPInfoes" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="GetSMS" EntityType="Self.GetSMS" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="LongTripFormMembers" EntityType="Self.LongTripFormMembers" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="LongTripForms" EntityType="Self.LongTripForms" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="Seasons" EntityType="Self.Seasons" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="SMS" EntityType="Self.SMS" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="StandardTrips" EntityType="Self.StandardTrips" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="TripMembers" EntityType="Self.TripMembers" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="Trips" EntityType="Self.Trips" Schema="ark" store:Type="Tables" />
+          <EntitySet Name="TripWarningSms" EntityType="Self.TripWarningSms" Schema="ark" store:Type="Tables" />
+          <AssociationSet Name="FK_Admins_Members_Member_Id" Association="Self.FK_Admins_Members_Member_Id">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamageForms_Boats_BoatId" Association="Self.FK_DamageForms_Boats_BoatId">
+            <End Role="Boats" EntitySet="Boats" />
+            <End Role="DamageForms" EntitySet="DamageForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamageForms_Members_RegisteringMemberId" Association="Self.FK_DamageForms_Members_RegisteringMemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="DamageForms" EntitySet="DamageForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LongTripFormMembers_LongTripForms_LongTripForm_Id" Association="Self.FK_LongTripFormMembers_LongTripForms_LongTripForm_Id">
+            <End Role="LongTripForms" EntitySet="LongTripForms" />
+            <End Role="LongTripFormMembers" EntitySet="LongTripFormMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LongTripFormMembers_Members_Member_Id" Association="Self.FK_LongTripFormMembers_Members_Member_Id">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="LongTripFormMembers" EntitySet="LongTripFormMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LongTripForms_Boats_BoatId" Association="Self.FK_LongTripForms_Boats_BoatId">
+            <End Role="Boats" EntitySet="Boats" />
+            <End Role="LongTripForms" EntitySet="LongTripForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LongTripForms_Members_ResponsibleMemberId" Association="Self.FK_LongTripForms_Members_ResponsibleMemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="LongTripForms" EntitySet="LongTripForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripMembers_Members_Member_Id" Association="Self.FK_TripMembers_Members_Member_Id">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="TripMembers" EntitySet="TripMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripMembers_Trips_Trip_Id" Association="Self.FK_TripMembers_Trips_Trip_Id">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="TripMembers" EntitySet="TripMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trips_Boats_BoatId" Association="Self.FK_Trips_Boats_BoatId">
+            <End Role="Boats" EntitySet="Boats" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripWarningSms_Trips_Id" Association="Self.FK_TripWarningSms_Trips_Id">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="TripWarningSms" EntitySet="TripWarningSms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiagramarkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Member_Id" Type="Int32" Nullable="false" />
+          <Property Name="ContactTrip" Type="Boolean" Nullable="false" />
+          <Property Name="ContactDark" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_Admins_Members_Member_Id" FromRole="Admins" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Boats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="NumberofSeats" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="SpecificBoatType" Type="Int32" Nullable="false" />
+          <Property Name="LongTripBoat" Type="Boolean" Nullable="false" />
+          <Property Name="HaveCox" Type="Boolean" Nullable="false" />
+          <Property Name="NewPrice" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="InformationString" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DamageForms" Relationship="Self.FK_DamageForms_Boats_BoatId" FromRole="Boats" ToRole="DamageForms" />
+          <NavigationProperty Name="LongTripForms" Relationship="Self.FK_LongTripForms_Boats_BoatId" FromRole="Boats" ToRole="LongTripForms" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK_Trips_Boats_BoatId" FromRole="Boats" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="DamageForms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Functional" Type="Boolean" Nullable="false" />
+          <Property Name="Closed" Type="Boolean" Nullable="false" />
+          <Property Name="RegisteringMemberId" Type="Int32" Nullable="false" />
+          <Property Name="BoatId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Boats" Relationship="Self.FK_DamageForms_Boats_BoatId" FromRole="DamageForms" ToRole="Boats" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_DamageForms_Members_RegisteringMemberId" FromRole="DamageForms" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="DamageTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FTPInfoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="HostName" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Port" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GetSMS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Text" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="RecievedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Handled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LongTripForms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoatId" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="FormCreated" Type="DateTime" Nullable="false" />
+          <Property Name="PlannedStartDate" Type="DateTime" Nullable="false" />
+          <Property Name="PlannedEndDate" Type="DateTime" Nullable="false" />
+          <Property Name="TourDescription" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="DistancesPerDay" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="CampSites" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="ResponsibleMemberId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Boats" Relationship="Self.FK_LongTripForms_Boats_BoatId" FromRole="LongTripForms" ToRole="Boats" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_LongTripForms_Members_ResponsibleMemberId" FromRole="LongTripForms" ToRole="Members" />
+          <NavigationProperty Name="Members1" Relationship="Self.LongTripFormMembers" FromRole="LongTripForms" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="MemberNumber" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneWork" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Cellphone" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Email1" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Email2" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" />
+          <Property Name="Released" Type="Boolean" Nullable="false" />
+          <Property Name="SwimmingTest" Type="Boolean" Nullable="false" />
+          <Property Name="ShortTripCox" Type="Boolean" Nullable="false" />
+          <Property Name="LongTripCox" Type="Boolean" Nullable="false" />
+          <Property Name="MayUseSculler" Type="Boolean" Nullable="false" />
+          <Property Name="MayUseOutrigger" Type="Boolean" Nullable="false" />
+          <Property Name="MayUseKayak" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK_Admins_Members_Member_Id" FromRole="Members" ToRole="Admins" />
+          <NavigationProperty Name="DamageForms" Relationship="Self.FK_DamageForms_Members_RegisteringMemberId" FromRole="Members" ToRole="DamageForms" />
+          <NavigationProperty Name="LongTripForms" Relationship="Self.FK_LongTripForms_Members_ResponsibleMemberId" FromRole="Members" ToRole="LongTripForms" />
+          <NavigationProperty Name="LongTripForms1" Relationship="Self.LongTripFormMembers" FromRole="Members" ToRole="LongTripForms" />
+          <NavigationProperty Name="Trips" Relationship="Self.TripMembers" FromRole="Members" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="Seasons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeasonStart" Type="DateTime" Nullable="false" />
+          <Property Name="SeasonEnd" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SMS">
+          <Key>
+            <PropertyRef Name="Reciever" />
+          </Key>
+          <Property Name="Reciever" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Dispatched" Type="Boolean" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="approved" Type="Boolean" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
+          <Property Name="Handled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StandardTrips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Distance" Type="Double" Nullable="false" />
+          <Property Name="Direction" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Distance" Type="Double" Nullable="false" />
+          <Property Name="LongTrip" Type="Boolean" Nullable="false" />
+          <Property Name="TripStartTime" Type="DateTime" Nullable="false" />
+          <Property Name="TripEndedTime" Type="DateTime" />
+          <Property Name="BoatId" Type="Int32" Nullable="false" />
+          <Property Name="Direction" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="CrewCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Boats" Relationship="Self.FK_Trips_Boats_BoatId" FromRole="Trips" ToRole="Boats" />
+          <NavigationProperty Name="TripWarningSms" Relationship="Self.FK_TripWarningSms_Trips_Id" FromRole="Trips" ToRole="TripWarningSms" />
+          <NavigationProperty Name="Members" Relationship="Self.TripMembers" FromRole="Trips" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="TripWarningSms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SentSms" Type="DateTime" />
+          <Property Name="RecievedSms" Type="DateTime" />
+          <Property Name="SentAdminSms" Type="DateTime" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK_TripWarningSms_Trips_Id" FromRole="TripWarningSms" ToRole="Trips" />
+        </EntityType>
+        <Association Name="FK_Admins_Members_Member_Id">
+          <End Role="Members" Type="Self.Members" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="Member_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DamageForms_Boats_BoatId">
+          <End Role="Boats" Type="Self.Boats" Multiplicity="1" />
+          <End Role="DamageForms" Type="Self.DamageForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DamageForms">
+              <PropertyRef Name="BoatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LongTripForms_Boats_BoatId">
+          <End Role="Boats" Type="Self.Boats" Multiplicity="0..1" />
+          <End Role="LongTripForms" Type="Self.LongTripForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LongTripForms">
+              <PropertyRef Name="BoatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trips_Boats_BoatId">
+          <End Role="Boats" Type="Self.Boats" Multiplicity="1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="BoatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DamageForms_Members_RegisteringMemberId">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="DamageForms" Type="Self.DamageForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DamageForms">
+              <PropertyRef Name="RegisteringMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LongTripForms_Members_ResponsibleMemberId">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="LongTripForms" Type="Self.LongTripForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LongTripForms">
+              <PropertyRef Name="ResponsibleMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TripWarningSms_Trips_Id">
+          <End Role="Trips" Type="Self.Trips" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TripWarningSms" Type="Self.TripWarningSms" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TripWarningSms">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LongTripFormMembers">
+          <End Role="LongTripForms" Type="Self.LongTripForms" Multiplicity="*" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+        </Association>
+        <Association Name="TripMembers">
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admins" />
+          <EntitySet Name="Boats" EntityType="Self.Boats" />
+          <EntitySet Name="DamageForms" EntityType="Self.DamageForms" />
+          <EntitySet Name="DamageTypes" EntityType="Self.DamageTypes" />
+          <EntitySet Name="FTPInfoes" EntityType="Self.FTPInfoes" />
+          <EntitySet Name="GetSMS" EntityType="Self.GetSMS" />
+          <EntitySet Name="LongTripForms" EntityType="Self.LongTripForms" />
+          <EntitySet Name="Members" EntityType="Self.Members" />
+          <EntitySet Name="Seasons" EntityType="Self.Seasons" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" />
+          <EntitySet Name="SMS" EntityType="Self.SMS" />
+          <EntitySet Name="StandardTrips" EntityType="Self.StandardTrips" />
+          <EntitySet Name="Trips" EntityType="Self.Trips" />
+          <EntitySet Name="TripWarningSms" EntityType="Self.TripWarningSms" />
+          <AssociationSet Name="FK_Admins_Members_Member_Id" Association="Self.FK_Admins_Members_Member_Id">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamageForms_Boats_BoatId" Association="Self.FK_DamageForms_Boats_BoatId">
+            <End Role="Boats" EntitySet="Boats" />
+            <End Role="DamageForms" EntitySet="DamageForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LongTripForms_Boats_BoatId" Association="Self.FK_LongTripForms_Boats_BoatId">
+            <End Role="Boats" EntitySet="Boats" />
+            <End Role="LongTripForms" EntitySet="LongTripForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trips_Boats_BoatId" Association="Self.FK_Trips_Boats_BoatId">
+            <End Role="Boats" EntitySet="Boats" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamageForms_Members_RegisteringMemberId" Association="Self.FK_DamageForms_Members_RegisteringMemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="DamageForms" EntitySet="DamageForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LongTripForms_Members_ResponsibleMemberId" Association="Self.FK_LongTripForms_Members_ResponsibleMemberId">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="LongTripForms" EntitySet="LongTripForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TripWarningSms_Trips_Id" Association="Self.FK_TripWarningSms_Trips_Id">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="TripWarningSms" EntitySet="TripWarningSms" />
+          </AssociationSet>
+          <AssociationSet Name="LongTripFormMembers" Association="Self.LongTripFormMembers">
+            <End Role="LongTripForms" EntitySet="LongTripForms" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="TripMembers" Association="Self.TripMembers">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DiagramarkModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="DiagramarkModel.Admins">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Member_Id" ColumnName="Member_Id" />
+                <ScalarProperty Name="ContactTrip" ColumnName="ContactTrip" />
+                <ScalarProperty Name="ContactDark" ColumnName="ContactDark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boats">
+            <EntityTypeMapping TypeName="DiagramarkModel.Boats">
+              <MappingFragment StoreEntitySet="Boats">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NumberofSeats" ColumnName="NumberofSeats" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SpecificBoatType" ColumnName="SpecificBoatType" />
+                <ScalarProperty Name="LongTripBoat" ColumnName="LongTripBoat" />
+                <ScalarProperty Name="HaveCox" ColumnName="HaveCox" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="InformationString" ColumnName="InformationString" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DamageForms">
+            <EntityTypeMapping TypeName="DiagramarkModel.DamageForms">
+              <MappingFragment StoreEntitySet="DamageForms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Functional" ColumnName="Functional" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="RegisteringMemberId" ColumnName="RegisteringMemberId" />
+                <ScalarProperty Name="BoatId" ColumnName="BoatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DamageTypes">
+            <EntityTypeMapping TypeName="DiagramarkModel.DamageTypes">
+              <MappingFragment StoreEntitySet="DamageTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FTPInfoes">
+            <EntityTypeMapping TypeName="DiagramarkModel.FTPInfoes">
+              <MappingFragment StoreEntitySet="FTPInfoes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HostName" ColumnName="HostName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GetSMS">
+            <EntityTypeMapping TypeName="DiagramarkModel.GetSMS">
+              <MappingFragment StoreEntitySet="GetSMS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="RecievedDate" ColumnName="RecievedDate" />
+                <ScalarProperty Name="Handled" ColumnName="Handled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LongTripForms">
+            <EntityTypeMapping TypeName="DiagramarkModel.LongTripForms">
+              <MappingFragment StoreEntitySet="LongTripForms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BoatId" ColumnName="BoatId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FormCreated" ColumnName="FormCreated" />
+                <ScalarProperty Name="PlannedStartDate" ColumnName="PlannedStartDate" />
+                <ScalarProperty Name="PlannedEndDate" ColumnName="PlannedEndDate" />
+                <ScalarProperty Name="TourDescription" ColumnName="TourDescription" />
+                <ScalarProperty Name="DistancesPerDay" ColumnName="DistancesPerDay" />
+                <ScalarProperty Name="CampSites" ColumnName="CampSites" />
+                <ScalarProperty Name="ResponsibleMemberId" ColumnName="ResponsibleMemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="DiagramarkModel.Members">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="MemberNumber" ColumnName="MemberNumber" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PhoneWork" ColumnName="PhoneWork" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="SwimmingTest" ColumnName="SwimmingTest" />
+                <ScalarProperty Name="ShortTripCox" ColumnName="ShortTripCox" />
+                <ScalarProperty Name="LongTripCox" ColumnName="LongTripCox" />
+                <ScalarProperty Name="MayUseSculler" ColumnName="MayUseSculler" />
+                <ScalarProperty Name="MayUseOutrigger" ColumnName="MayUseOutrigger" />
+                <ScalarProperty Name="MayUseKayak" ColumnName="MayUseKayak" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seasons">
+            <EntityTypeMapping TypeName="DiagramarkModel.Seasons">
+              <MappingFragment StoreEntitySet="Seasons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SeasonStart" ColumnName="SeasonStart" />
+                <ScalarProperty Name="SeasonEnd" ColumnName="SeasonEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="DiagramarkModel.Settings">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SMS">
+            <EntityTypeMapping TypeName="DiagramarkModel.SMS">
+              <MappingFragment StoreEntitySet="SMS">
+                <ScalarProperty Name="Reciever" ColumnName="Reciever" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Dispatched" ColumnName="Dispatched" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="approved" ColumnName="approved" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Handled" ColumnName="Handled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StandardTrips">
+            <EntityTypeMapping TypeName="DiagramarkModel.StandardTrips">
+              <MappingFragment StoreEntitySet="StandardTrips">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="DiagramarkModel.Trips">
+              <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="LongTrip" ColumnName="LongTrip" />
+                <ScalarProperty Name="TripStartTime" ColumnName="TripStartTime" />
+                <ScalarProperty Name="TripEndedTime" ColumnName="TripEndedTime" />
+                <ScalarProperty Name="BoatId" ColumnName="BoatId" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CrewCount" ColumnName="CrewCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripWarningSms">
+            <EntityTypeMapping TypeName="DiagramarkModel.TripWarningSms">
+              <MappingFragment StoreEntitySet="TripWarningSms">
+                <ScalarProperty Name="SentSms" ColumnName="SentSms" />
+                <ScalarProperty Name="RecievedSms" ColumnName="RecievedSms" />
+                <ScalarProperty Name="SentAdminSms" ColumnName="SentAdminSms" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LongTripFormMembers" TypeName="DiagramarkModel.LongTripFormMembers" StoreEntitySet="LongTripFormMembers">
+            <EndProperty Name="LongTripForms">
+              <ScalarProperty Name="Id" ColumnName="LongTripForm_Id" />
+            </EndProperty>
+            <EndProperty Name="Members">
+              <ScalarProperty Name="Id" ColumnName="Member_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TripMembers" TypeName="DiagramarkModel.TripMembers" StoreEntitySet="TripMembers">
+            <EndProperty Name="Members">
+              <ScalarProperty Name="Id" ColumnName="Member_Id" />
+            </EndProperty>
+            <EndProperty Name="Trips">
+              <ScalarProperty Name="Id" ColumnName="Trip_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
