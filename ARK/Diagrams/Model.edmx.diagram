@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b2fef945f95244d5b3aae1a039a772d9" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="DiagramarkModel.Admins" Width="1.5" PointX="6.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.Boats" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.DamageForms" Width="1.5" PointX="0.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.DamageTypes" Width="1.5" PointX="0.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.FTPInfoes" Width="1.5" PointX="2.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.GetSMS" Width="1.5" PointX="4" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.LongTripForms" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.Members" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.Seasons" Width="1.5" PointX="2.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.Settings" Width="1.5" PointX="5.625" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.SMS" Width="1.5" PointX="0.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.StandardTrips" Width="1.5" PointX="4" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.Trips" Width="1.5" PointX="2.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiagramarkModel.TripWarningSms" Width="1.5" PointX="6.375" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="DiagramarkModel.FK_Admins_Members_Member_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiagramarkModel.FK_DamageForms_Boats_BoatId" ManuallyRouted="false" />
+        <AssociationConnector Association="DiagramarkModel.FK_LongTripForms_Boats_BoatId" ManuallyRouted="false" />
+        <AssociationConnector Association="DiagramarkModel.FK_Trips_Boats_BoatId" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="DiagramarkModel.FK_DamageForms_Members_RegisteringMemberId" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="DiagramarkModel.FK_LongTripForms_Members_ResponsibleMemberId" ManuallyRouted="false" />
+        <AssociationConnector Association="DiagramarkModel.FK_TripWarningSms_Trips_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiagramarkModel.LongTripFormMembers" ManuallyRouted="false" />
+        <AssociationConnector Association="DiagramarkModel.TripMembers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
