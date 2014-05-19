@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -172,12 +173,9 @@ namespace ARK.ViewModel.Administrationssystem
                     e =>
                         {
                             this.NewBoatDialog.Close();
-                            using (var db = new DbArkContext())
-                            {
-                                db.Trip.Attach(this.CurrentTrip);
-                                this.CurrentTrip.Boat = (Boat)e;
-                            }
-                            
+
+                            this.CurrentTrip.Boat = ((Boat)e);
+                            this.CurrentTrip.BoatId = this.CurrentTrip.Boat.Id;
 
                             this.NotifyCustom("CurrentTrip");
                         });
@@ -238,7 +236,12 @@ namespace ARK.ViewModel.Administrationssystem
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(this.CurrentTrip).State = EntityState.Modified; // Får bådudskiftning i ture til at fucke op.
+                Trip trip = db.Trip.Find(this.CurrentTrip.Id);
+                db.Entry(trip).CurrentValues.SetValues(this.CurrentTrip);
+
+                db.Entry(trip).State = EntityState.Modified;
+                db.Entry(trip.Boat).State = EntityState.Modified;
+
                 db.SaveChanges();
             }
 
