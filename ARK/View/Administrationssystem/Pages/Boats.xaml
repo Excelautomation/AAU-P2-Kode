@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:VM="clr-namespace:ARK.ViewModel.Administrationssystem"
              xmlns:valueConverters="clr-namespace:ARK.View.ValueConverters"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600">
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800">
 
     <UserControl.DataContext>
         <VM:BoatViewModel/>
@@ -199,6 +199,7 @@
                                     </Border>
                                 </StackPanel>
 
+                                <!-- Tur oplysninger -->
                                 <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -227,12 +228,13 @@
                                                     </WrapPanel>
                                                 </Border>
 
-                                                <Border Style="{StaticResource styleContentBorders}">
-                                                    <WrapPanel Margin="-5,0,0,0">
+                                                <Border Style="{StaticResource styleContentBorders}" Height="530">
+                                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                        <WrapPanel Margin="0,0,0,0">
                                                         <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
                                                             <ItemsControl.ItemTemplate>
                                                                 <DataTemplate>
-                                                                    <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="215"
+                                                                    <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="190"
                                                                                 Margin="0,0,0,8" Padding="4">
                                                                         <StackPanel Orientation="Vertical" >
                                                                             <StackPanel.Resources>
@@ -261,6 +263,7 @@
                                                             </ItemsControl.ItemTemplate>
                                                         </ItemsControl>
                                                     </WrapPanel>
+                                                    </ScrollViewer>
                                                 </Border>
                                             </StackPanel>
                                         </Border>
