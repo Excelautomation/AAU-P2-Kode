@@ -67,6 +67,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Border Style="{StaticResource styleContentBorders}" HorizontalAlignment="Stretch">
@@ -87,19 +88,20 @@
                     <TextBlock Text="{Binding Path=LongDistanceForm.Status, Converter={StaticResource Status}}"/>
 
                     <TextBlock Text="Afrejse: " FontWeight="SemiBold" Margin="0,10,0,0"/>
-                    <TextBox Text="{Binding Path=LongDistanceForm.PlannedStartDate, 
+                    <DatePicker Text="{Binding Path=LongDistanceForm.PlannedStartDate, Mode=TwoWay, 
                                 ConverterCulture='da-DK', StringFormat=d}" />
 
                     <TextBlock Text="Hjemkomst: " FontWeight="SemiBold" Margin="0,10,0,0" />
-                    <TextBox Text="{Binding Path=LongDistanceForm.PlannedEndDate, ConverterCulture='da-DK', StringFormat=d}"/>
+                    <DatePicker Text="{Binding Path=LongDistanceForm.PlannedEndDate, Mode=TwoWay,
+                                ConverterCulture='da-DK', StringFormat=d}"/>
 
                     <TextBlock Text="Dagsdistancer: " FontWeight="SemiBold" Margin="0,10,0,0"/>
                     <TextBox Text="{Binding Path=LongDistanceForm.DistancesPerDay}"/>
 
                     <TextBlock Text="Turbeskrivelse: " FontWeight="SemiBold" Margin="0,10,0,0"/>
-                    <StackPanel>
-                        <TextBox Text="{Binding Path=LongDistanceForm.Text}"/>
-                    </StackPanel>
+                    <TextBox Text="{Binding Path=LongDistanceForm.TourDescription}"/>
+                    
+                    <Button Margin="0,10,0,0" Content="Gem ændringer" Command="{Binding SaveChanges}" HorizontalAlignment="Stretch" Height="24"/>
                 </StackPanel>
             </Border>
 
@@ -126,7 +128,7 @@
                 <WrapPanel Margin="0,0,5,0">
                     <TextBlock Text="Deltagere på turen:" FontWeight="SemiBold"/>
                 </WrapPanel>
-                <Border Background="White" BorderBrush="Gray" BorderThickness="1" Height="444" Width="215" HorizontalAlignment="Left">
+                <Border Background="White" BorderBrush="Gray" BorderThickness="1" MinHeight="480" Width="215" HorizontalAlignment="Left">
                     <WrapPanel>
                         <ItemsControl ItemsSource="{Binding Path=LongDistanceForm.Members}" Height="210">
                             <ItemsControl.ItemTemplate>
