@@ -44,14 +44,8 @@
             <ColumnDefinition Width="809*" />
         </Grid.ColumnDefinitions>
 
-        <!--<StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Height="102" Margin="0,2,0,0">
-            <Image Source="/View/images/logo.gif" Stretch="Uniform" Height="90"/>
-            <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="19"
-				HorizontalAlignment="Center" Foreground="#0a42f7" 
-				VerticalAlignment="Bottom" Margin="0,-20,0,10"/>
-        </StackPanel>-->
-        <Image Source="/View/images/aalborg_roklub_logo.png" />
         <!--Menu: Top-->
+        <Image Source="/View/images/aalborg_roklub_logo.png" />
         <Grid Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
