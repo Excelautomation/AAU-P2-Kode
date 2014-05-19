@@ -64,6 +64,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Båd Liste -->
         <DockPanel Grid.Row="2">
             <ListView Margin="4" DockPanel.Dock="Bottom" x:Name="BoatList" ItemsSource="{Binding Path=Boats}"
                       IsSynchronizedWithCurrentItem="True" SelectionMode="Single" SelectedItem="{Binding Path=CurrentBoat, Mode=TwoWay}">
@@ -94,6 +95,7 @@
             </ListView>
         </DockPanel>
 
+        <!-- Detaljer -->
         <Grid Margin="5,0,5,5" Grid.Row="2" Grid.Column="2" >
             <Border BorderBrush="Gray" BorderThickness="1">
                 <ScrollViewer Background="#DDDDDD">
@@ -171,6 +173,12 @@
 
                                                     <TextBlock Text="Årgang:" FontWeight="SemiBold" Margin="0,10,0,0"/>
                                                     <TextBox Text="{Binding Path=CurrentBoat.Year, Mode=TwoWay}"/>
+
+                                                    <TextBlock Text="Yderligere oplysninger:" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                                    <TextBox Text="{Binding Path=CurrentBoat.InformationString, Mode=TwoWay}"/>
+
+                                                    <Button Content="Gem ændringer" Width="140" Command="{Binding SaveChanges}" Margin="0,10,0,0" HorizontalAlignment="Stretch" Height="24"/>
+
                                                 </StackPanel>
                                             </Border>
 
@@ -225,27 +233,27 @@
                                                             <ItemsControl.ItemTemplate>
                                                                 <DataTemplate>
                                                                     <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="215"
-                                                                            Margin="0,0,0,8" Padding="4">
+                                                                                Margin="0,0,0,8" Padding="4">
                                                                         <StackPanel Orientation="Vertical" >
                                                                             <StackPanel.Resources>
                                                                                 <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
                                                                             </StackPanel.Resources>
                                                                             <TextBlock>
-                                                                                <Run Text="Retning:" FontWeight="SemiBold"/>
-                                                                                <Run Text="{Binding Path=Direction}"/>
+                                                                                    <Run Text="Retning:" FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=Direction}"/>
                                                                             </TextBlock>
                                                                             <TextBlock>
-                                                                                <Run Text="Distance:" FontWeight="SemiBold"/>
-                                                                                <Run Text="{Binding Path=Distance}"/>
-                                                                                <Run Text="Km"/>
+                                                                                    <Run Text="Distance:" FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=Distance}"/>
+                                                                                    <Run Text="Km"/>
                                                                             </TextBlock>
                                                                             <TextBlock>
-                                                                                <Run Text="Start: " FontWeight="SemiBold"/>
-                                                                                <Run Text="{Binding Path=TripStartTime, ConverterCulture='da-DK'}"/>
+                                                                                    <Run Text="Start: " FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=TripStartTime, ConverterCulture='da-DK'}"/>
                                                                             </TextBlock>
                                                                             <TextBlock>
-                                                                                <Run Text="Slut: " FontWeight="SemiBold"/>
-                                                                                <Run Text="{Binding Path=TripEndedTime, ConverterCulture='da-DK'}"/>
+                                                                                    <Run Text="Slut: " FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=TripEndedTime, ConverterCulture='da-DK'}"/>
                                                                             </TextBlock>
                                                                         </StackPanel>
                                                                     </Border>
@@ -259,7 +267,7 @@
                                     </StackPanel>
 
                                     <!--Yderligere oplysninger-->
-                                    <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                                    <!--<StackPanel Grid.Row="1" Margin="0,10,0,0">
                                         <Border>
                                             <StackPanel>
                                                 <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" Visibility="{Binding Path=SearchVisibility}" 
@@ -287,7 +295,7 @@
                                                 </Border>
                                             </StackPanel>
                                         </Border>
-                                    </StackPanel>
+                                    </StackPanel>-->
                                 </Grid>
                             </Grid>
                         </DockPanel>

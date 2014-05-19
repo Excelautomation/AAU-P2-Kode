@@ -74,6 +74,18 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        public ICommand SaveChanges
+        {
+            get
+            {
+                return this.GetCommand(
+                    () =>
+                    {
+                        Save();
+                    });
+            }
+        }
+
         #endregion
 
         #region Methods

@@ -197,7 +197,7 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="4">
                                 <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" 
-                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="530"
+                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="530" ScrollViewer.VerticalScrollBarVisibility="Auto"
                                           ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedDamageType}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -216,7 +216,8 @@
                                     </i:Interaction.Triggers>
                                 </ListView>
                             </StackPanel>
-
+                            
+                            <!-- Detaljer -->
                             <StackPanel Grid.Column="2" Margin="4">
                                 <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}" Margin="4">
                                     <StackPanel Width="Auto">
@@ -235,14 +236,16 @@
                                             <Button Margin="4" Content="OK" DockPanel.Dock="Right" 
                                                     Command="{Binding Path=SaveChangesDamageTypes}" Width="100"/>
                                             <Button Margin="4" Content="Annuller" 
-                                                    Command="{Binding Path=CancelChangeDamageTypes}" Width="100"/>
+                                                    Command="{Binding Path=CancelChangesDamageTypes}" Width="100"/>
                                             <Button Margin="4" Content="Slet" Width="100"
                                                     Command="{Binding Path=DeleteDamageType}" HorizontalAlignment="Right"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
-
-                                <WrapPanel Margin="4">
+                                
+                                <Button Command="{Binding CreateDamageType}" Margin="23,0,0,0" HorizontalAlignment="Left" Content="Opret ny skadetype" Width="250"/>
+                                
+                                <WrapPanel Margin="10">
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
                                             <Style TargetType="Image">
@@ -310,7 +313,6 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <Button Command="{Binding CreateDamageType}" Margin="-10,0,0,0" Content="Opret ny skadetype" Width="250"/>
                                 </WrapPanel>
                             </StackPanel>
                         </Grid>
@@ -326,27 +328,32 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0" Margin="4" >
-                                <ListView x:Name="StandardTripList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                          ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedStandardTrip}"  MinHeight="530"
-                                          SelectedItem="{Binding Path=CurrentStandardTrip}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Margin="0,2,0,2">
-                                                <StackPanel.Resources>
-                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
-                                                </StackPanel.Resources>
-                                                <TextBlock Text="{Binding Path=Title}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding Path=SelectedChangeStandardTrip}" CommandParameter="{Binding ElementName=StandardTripList, Path=SelectedItem}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </ListView>
+                            <!-- Standard ture liste -->
+                            <StackPanel Grid.Column="0" Margin="4">
+                                
+                                    <ListView Height="530" x:Name="StandardTripList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                              ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedStandardTrip}"
+                                              SelectedItem="{Binding Path=CurrentStandardTrip}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="0,2,0,2">
+                                                    <StackPanel.Resources>
+                                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                    </StackPanel.Resources>
+                                                    <TextBlock Text="{Binding Path=Title}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding Path=SelectedChangeStandardTrip}" CommandParameter="{Binding ElementName=StandardTripList, Path=SelectedItem}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListView>
+                               
                             </StackPanel>
+                            
+                            <!-- Detaljer -->
                             <StackPanel Grid.Column="2" Margin="4">
                                 <Border Margin="4" Style="{StaticResource styleContentBorders}" >
                                     <StackPanel Width="Auto">
@@ -375,7 +382,10 @@
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
-                                <WrapPanel Margin="4">
+
+                                <Button Margin="23,0,0,0" Command="{Binding CreateStandardTrip}" Width="250" Content="Opret ny standardtur" HorizontalAlignment="Left" Height="28"/>
+
+                                <WrapPanel Margin="10">
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
                                             <Style TargetType="Image">
@@ -443,7 +453,6 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <Button Margin="-10,0,0,0" Command="{Binding CreateStandardTrip}" Width="250" Content="Opret ny standardtur" Height="28"/>
                                 </WrapPanel>
                             </StackPanel>
                         </Grid>
@@ -460,30 +469,34 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
+                            <!-- Administrator liste-->
                             <StackPanel Grid.Column="0" Margin="4">
-                                <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
+                                    <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                           IsSynchronizedWithCurrentItem="True" MinHeight="530"
                                           ItemsSource="{Binding Path=Admins}" SelectedIndex="{Binding Path=SelectedAdmin}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Margin="0,2,0,2">
-                                                <StackPanel.Resources>
-                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
-                                                </StackPanel.Resources>
-                                                <WrapPanel>
-                                                    <TextBlock Text="{Binding Path=Member.FirstName}"/>
-                                                    <TextBlock Text="{Binding Path=Member.LastName}"/>
-                                                </WrapPanel>
-                                                <TextBlock Text="{Binding Path=Username}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding Path=SelectedChangeAdmin}" CommandParameter="{Binding ElementName=AdminList, Path=SelectedItem}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </ListView>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="0,2,0,2">
+                                                    <StackPanel.Resources>
+                                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                    </StackPanel.Resources>
+                                                    <WrapPanel>
+                                                        <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                                        <TextBlock Text=" "/>
+                                                        <TextBlock Text="{Binding Path=Member.LastName}"/>
+                                                    </WrapPanel>
+                                                    <TextBlock Text="{Binding Path=Username}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding Path=SelectedChangeAdmin}" CommandParameter="{Binding ElementName=AdminList, Path=SelectedItem}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListView>
+                                </ScrollViewer>
                             </StackPanel>
 
                             <StackPanel Grid.Column="2" Margin="4" Width="516">
@@ -523,7 +536,9 @@
                                     </StackPanel>
                                 </Border>
 
-                                <WrapPanel Margin="0,4,4,4">
+                                <Button Command="{Binding CreateAdmin}" Width="250" Content="Opret ny administrator" Margin="23,0,0,0" HorizontalAlignment="Left" Height="28"/>
+
+                                <WrapPanel Margin="10">
 
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
@@ -593,7 +608,6 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <Button Command="{Binding CreateAdmin}" Width="250" Content="Opret ny administrator" Margin="-6,0,0,0" Height="28"/>
 
                                 </WrapPanel>
 

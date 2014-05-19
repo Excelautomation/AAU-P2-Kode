@@ -242,6 +242,7 @@ namespace ARK.ViewModel.Administrationssystem
         }
 
         private void ResetFilter()
+
         {
             this.Boats = this._boatsNonFiltered.AsReadOnly();
         }

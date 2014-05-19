@@ -11,6 +11,7 @@ using ARK.View.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using ARK.ViewModel.Administrationssystem.Filters;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -78,6 +79,7 @@ namespace ARK.ViewModel.Administrationssystem
                                     longDistanceForm => longDistanceForm.Status == LongTripForm.BoatStatus.Awaiting)
                                     .OrderBy(longDistanceForm => longDistanceForm.PlannedStartDate)
                                     .Include(longDistanceForm => longDistanceForm.Boat)
+                                    .Include(longDistanceForm => longDistanceForm.ResponsibleMember)
                                     .Take(6)
                                     .ToList();
 
@@ -274,7 +276,7 @@ namespace ARK.ViewModel.Administrationssystem
 
         #region Methods
 
-        private void ResetFilter()
+        public void ResetFilter()
         {
             this.ShowBoatsOut = Visibility.Visible;
             this.ShowLangtur = Visibility.Visible;
@@ -298,6 +300,8 @@ namespace ARK.ViewModel.Administrationssystem
             var adminSystem = (AdminSystemViewModel)this.Parent;
             adminSystem.MenuForms.Execute(null);
             var formsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
+            var filterViewModel = (FormsFilterViewModel)formsViewModel.Filter.DataContext;
+            filterViewModel.ShowOpen = true;
 
             formsViewModel.SelectedTabIndex = 0;
             formsViewModel.OpenDamageForm(damageForm);
@@ -309,6 +313,9 @@ namespace ARK.ViewModel.Administrationssystem
             adminSystem.MenuForms.Execute(null);
 
             var formsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
+            var filterViewModel = (FormsFilterViewModel)formsViewModel.Filter.DataContext;
+
+            filterViewModel.ShowOpen = true;
             formsViewModel.OpenLongDistanceForm(longDistanceForm);
         }
 
