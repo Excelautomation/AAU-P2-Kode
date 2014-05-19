@@ -112,11 +112,6 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        // public Trip LocalTrip
-        // {
-        // get { return _localTrip; }
-        // set { _localTrip = value; Notify(); }
-        // }
         public bool RecentSave
         {
             get
@@ -182,6 +177,7 @@ namespace ARK.ViewModel.Administrationssystem
                                 db.Trip.Attach(this.CurrentTrip);
                                 this.CurrentTrip.Boat = (Boat)e;
                             }
+                            
 
                             this.NotifyCustom("CurrentTrip");
                         });
