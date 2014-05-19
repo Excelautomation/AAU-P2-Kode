@@ -11,8 +11,8 @@
     <Window.DataContext>
         <administrationssystem:AdminSystemViewModel />
     </Window.DataContext>
+    
     <!--Skalerer checkboxes-->
-
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Style TargetType="CheckBox">
@@ -44,13 +44,13 @@
             <ColumnDefinition Width="809*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Height="102" Margin="0,2,0,0">
+        <!--<StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Height="102" Margin="0,2,0,0">
             <Image Source="/View/images/logo.gif" Stretch="Uniform" Height="90"/>
             <TextBlock Text="Aalborg Roklub" FontFamily="Arial" FontSize="19"
 				HorizontalAlignment="Center" Foreground="#0a42f7" 
 				VerticalAlignment="Bottom" Margin="0,-20,0,10"/>
-        </StackPanel>
-
+        </StackPanel>-->
+        <Image Source="/View/images/aalborg_roklub_logo.png" />
         <!--Menu: Top-->
         <Grid Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.Background>
@@ -167,8 +167,6 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter TargetName="MenuTrips_bg" Property="Background" Value="#eff8fe"/>
                                     <Setter TargetName="MenuTrips_border" Property="BorderBrush"   Value="#e5eef2"/>
-                                    <!--<Setter TargetName="Img" Property="Source" Value="/images/setting_tools.png" />
-                                    <Setter TargetName="btnMenuIndstillinger" Property="Background" Value="black"/>-->
                                 </Trigger>
                                 <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="Trips">
                                     <Setter TargetName="MenuTrips_border" Property="Background" Value="#FF94ABDA" />
@@ -198,8 +196,6 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter TargetName="MenuConfigurations_bg" Property="Background" Value="#eff8fe"/>
                                     <Setter TargetName="MenuConfigurations_border" Property="BorderBrush"   Value="#e5eef2"/>
-                                    <!--<Setter TargetName="Img" Property="Source" Value="/images/setting_tools.png" />
-                                    <Setter TargetName="btnMenuIndstillinger" Property="Background" Value="black"/>-->
                                 </Trigger>
                                 <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="Configurations">
                                     <Setter TargetName="MenuConfigurations_border" Property="Background" Value="#FF94ABDA" />
@@ -250,12 +246,14 @@
                     <GradientStop Color="#FFCDCDCD"/>
                 </LinearGradientBrush>
             </Border.Background>
-
+            
+            <!-- Logo/filter/søgning -->
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="104"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
+                
                 <Image Source="/View/images/aalborg_roklub_logo.png" />
                 <StackPanel Orientation="Vertical" Grid.Row="1">
                     <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 

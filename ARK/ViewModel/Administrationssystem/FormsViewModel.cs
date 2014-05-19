@@ -46,6 +46,13 @@ namespace ARK.ViewModel.Administrationssystem
 
         private int _selectedTabIndex;
 
+        //private DamageForm _selectedDamageForm;
+        //public DamageForm SelectedDamageForm 
+        //{
+        //    get { return _selectedDamageForm; }
+        //    set { _selectedDamageForm = value; Notify(); }
+        //}
+
         #endregion
 
         #region Constructors and Destructors
@@ -343,12 +350,14 @@ namespace ARK.ViewModel.Administrationssystem
 
         public void OpenDamageForm(DamageForm damageForm)
         {
-            this.GoToDamageForm(this.DamageForms.First(form => form.Id == damageForm.Id));
+            if (this.DamageForms.Any())
+                this.GoToDamageForm(this.DamageForms.First(form => form.Id == damageForm.Id));
         }
 
         public void OpenLongDistanceForm(LongTripForm longTrip)
         {
-            this.GoToLongDistanceForm(this.LongDistanceForms.First(form => form.Id == longTrip.Id));
+            if (this.LongDistanceForms.Any())
+                this.GoToLongDistanceForm(this.LongDistanceForms.First(form => form.Id == longTrip.Id));
         }
 
         #endregion
@@ -384,7 +393,7 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        private void ResetFilter()
+        private void ResetFilter() // public fordi den skal bruges i overview
         {
             this.DamageForms = this._damageFormsNonFiltered.AsReadOnly().OrderBy(d => d.Closed).ThenBy(d => d.Date);
 
