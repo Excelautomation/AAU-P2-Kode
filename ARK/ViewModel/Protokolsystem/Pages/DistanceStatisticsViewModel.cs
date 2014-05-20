@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 
 using ARK.Model.DB;
+using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Confirmations;
 using ARK.View.Protokolsystem.Filters;

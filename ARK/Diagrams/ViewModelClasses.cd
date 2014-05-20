@@ -33,7 +33,7 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>CAgAACwACARAAAAADAEAAAAAAAAAAAAAAARAAAIAAAA=</HashCode>
+      <HashCode>CAgAACwACARAAAAADAEAAAAAAAAAAAAAAARAAgIAAAA=</HashCode>
       <FileName>ViewModel\Base\KeyboardContainerViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
