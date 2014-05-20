@@ -64,7 +64,7 @@ namespace ARK.HelperFunctions.SMSGateway
 
         public SmsWarnings()
         {
-            Gateway = new SmsIt("0000000000000000");
+            Gateway = new DemoSMSGateway();
         }
 
         public ISmsGateway Gateway { get; set; }
