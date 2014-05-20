@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 using ARK.HelperFunctions;
@@ -28,7 +31,7 @@ namespace ARK.ViewModel.Administrationssystem
             Error
         }
 
-        public MembersListWindow MembersListWindow;
+        private MembersListWindow MembersListWindow;
 
         private DamageType ReferenceToCurrentDamageType;
 
@@ -76,6 +79,10 @@ namespace ARK.ViewModel.Administrationssystem
 
         private ObservableCollection<StandardTrip> _standardTrips;
 
+        private string _smsDelay;
+
+        private string _smsWait;
+
         public SettingsViewModel()
         {
             // Initialize database and get data in a single thread(lock)
@@ -120,6 +127,11 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 CurrentSeason = _db.Season.AsEnumerable().Last(x => true);
             }
+
+            // Read SMS settings
+            Setting temp;
+            SmsDelay = (temp = _db.Settings.FirstOrDefault(x => x.Name == "SmsDelay")) != null ? temp.Value : "0";
+            SmsWait = (temp = _db.Settings.FirstOrDefault(x => x.Name == "SmsWait")) != null ? temp.Value : "0";
         }
 
         public ObservableCollection<Admin> Admins
@@ -900,6 +912,76 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        public string SmsDelay
+        {
+            get
+            {
+                return _smsDelay;
+            }
+            set
+            {
+                _smsDelay = value;
+                Notify();
+            }
+        }
+
+        public ICommand SmsDelayEnter
+        {
+            get
+            {
+                return new RelayCommand(
+                    x =>
+                        {
+                            var setting = _db.Settings.FirstOrDefault(e => e.Name == "SmsDelay");
+                            if (setting != null)
+                            {
+                                setting.Value = SmsDelay;
+                            }
+                            else
+                            {
+                                _db.Settings.Add(new Setting { Name = "SmsDelay", Value = SmsDelay });
+                            }
+                            _db.SaveChangesAsync();
+                        },
+                    x => !Regex.IsMatch(x as string, @"[^0-9]"));
+            }
+        }
+
+        public string SmsWait
+        {
+            get
+            {
+                return _smsWait;
+            }
+            set
+            {
+                _smsWait = value;
+                Notify();
+            }
+        }
+
+        public ICommand SmsWaitEnter
+        {
+            get
+            {
+                return new RelayCommand(
+                    x =>
+                        {
+                            var setting = _db.Settings.FirstOrDefault(e => e.Name == "SmsWait");
+                            if (setting != null)
+                            {
+                                setting.Value = SmsWait;
+                            }
+                            else
+                            {
+                                _db.Settings.Add(new Setting { Name = "SmsWait", Value = SmsWait });
+                            }
+                            _db.SaveChangesAsync();
+                        },
+                    x => !Regex.IsMatch(x as string, @"[^0-9]"));
+            }
+        }
+
         public ICommand ShowMembersContinue
         {
             get
@@ -925,6 +1007,14 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 _standardTrips = value;
                 Notify();
+            }
+        }
+
+        public DateTime Sunset
+        {
+            get
+            {
+                return SunsetClass.Sunset;
             }
         }
 

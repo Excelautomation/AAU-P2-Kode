@@ -33,6 +33,10 @@ namespace ARK.HelperFunctions.SMSGateway
 
         private const string Sender = "ARK";
 
+        private int _smsDelay;
+
+        private int _smsWait;
+
         private static Task _task;
 
         internal static void RunTask(CancellationToken token)
@@ -43,9 +47,9 @@ namespace ARK.HelperFunctions.SMSGateway
                     async () =>
                         {
                             var warn = new SmsWarnings();
-
                             while (true)
                             {
+                                warn.UpdateSmsSettings();
                                 warn.DoWork();
                                 await Task.Delay(new TimeSpan(0, 0, 5), token);
                             }
@@ -65,10 +69,10 @@ namespace ARK.HelperFunctions.SMSGateway
 
         public ISmsGateway Gateway { get; set; }
 
-        public void DoWork()
+        private void DoWork()
         {
             // Gør kun dette her når solen er nede
-            if (IsAfterSunset())
+            if (IsAfterSunsetAndWait())
             {
                 using (var db = new DbArkContext())
                 {
@@ -135,7 +139,7 @@ namespace ARK.HelperFunctions.SMSGateway
                 warnings.Where(warn => !warn.RecievedSms.HasValue)
                     .Where(warn => warn.SentSms.HasValue && !warn.SentAdminSms.HasValue)
                     .AsEnumerable()
-                    .Where(warn => (DateTime.Now - warn.SentSms.Value).TotalMinutes > 15))
+                    .Where(warn => (DateTime.Now - warn.SentSms.Value).TotalMinutes > _smsDelay))
             {
                 var numbers = db.Admin.Where(a => a.ContactDark && a.Member.Phone != null).Select(a => a.Member.Phone);
 
@@ -191,9 +195,23 @@ namespace ARK.HelperFunctions.SMSGateway
             }
         }
 
-        private bool IsAfterSunset()
+        private bool IsAfterSunsetAndWait()
         {
-            return XmlParser.GetSunsetFromXml() > DateTime.Now;
+            return DateTime.Now > SunsetClass.Sunset.AddMinutes(_smsWait);
+        }
+
+        private void UpdateSmsSettings()
+        {
+            using (var db = new DbArkContext())
+            {
+                Setting temp;
+                _smsDelay = (temp = db.Settings.FirstOrDefault(x => x.Name == "SmsDelay")) != null
+                                ? Convert.ToInt32(temp.Value)
+                                : 15;
+                _smsWait = (temp = db.Settings.FirstOrDefault(x => x.Name == "SmsWait")) != null
+                               ? Convert.ToInt32(temp.Value)
+                               : 5;
+            }
         }
     }
 }

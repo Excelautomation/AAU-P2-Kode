@@ -1,22 +1,21 @@
-﻿<UserControl x:Class="ARK.View.Administrationssystem.Pages.Indstillinger"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:c="clr-namespace:ARK.View.ValidationRules"
+             xmlns:test="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
              xmlns:VM="clr-namespace:ARK.ViewModel"
              xmlns:administrationssystem="clr-namespace:ARK.ViewModel.Administrationssystem"
+             xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ARK.View.Administrationssystem.Pages.Indstillinger"
              mc:Ignorable="d" 
              d:DesignHeight="605.97" d:DesignWidth="941.791">
 
-    <UserControl.DataContext>
-        <administrationssystem:SettingsViewModel/>
-    </UserControl.DataContext>
-
     <UserControl.Resources>
-        <Style x:Key="GreyWhNotSelected" TargetType="DockPanel">
+        <Style x:Key="GreyWhNotSelected" TargetType="{x:Type DockPanel}">
             <Style.Resources>
-                <Style TargetType="Button">
+                <Style TargetType="{x:Type Button}">
                     <Setter Property="FontFamily" Value="Calibri"/>
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="Height" Value="27"/>
@@ -35,7 +34,7 @@
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
 
         <!--Border style-->
-        <Style x:Key="styleContentBorders" TargetType="Border">
+        <Style x:Key="styleContentBorders" TargetType="{x:Type Border}">
             <Setter Property="CornerRadius" Value="3"/>
             <Setter Property="Background" Value="#FFF7F7F7"/>
             <Setter Property="Padding" Value="15"/>
@@ -51,13 +50,17 @@
             <Setter Property="FontFamily" Value="Calibri"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
-        
+
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="Height" Value="15"/>
             <Setter Property="Width" Value="15"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
     </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <administrationssystem:SettingsViewModel/>
+    </UserControl.DataContext>
 
     <Grid>
         <Grid>
@@ -70,8 +73,8 @@
                 <TabItem Header="  Generelt  ">
                     <DockPanel HorizontalAlignment="Left" Margin="10" Width="900">
                         <StackPanel>
-                            <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
-                                    Grid.ColumnSpan="2" Grid.Row="0" Background="#FFEAEAEA">
+                            <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding SearchVisibility}" 
+								Grid.ColumnSpan="2" Grid.Row="0" Background="#FFEAEAEA">
                                 <WrapPanel Margin="0,2,0,0">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -80,9 +83,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Image Source="/View/images/table_error.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
-                                                   Foreground="Black">
-                                            <Run Text="SÆSON INDSTILLINGER"/>
-                                        </TextBlock>
+											Foreground="Black"><Run Text="SÆSON INDSTILLINGER"/></TextBlock>
                                     </Grid>
                                 </WrapPanel>
                             </Border>
@@ -91,14 +92,14 @@
                                     <DockPanel>
                                         <TextBlock Width="250" Margin="4" Text="Nuværende sæsonstart:" FontWeight="SemiBold"/>
                                         <TextBox IsEnabled="False" HorizontalAlignment="Right" Margin="4" 
-                                                 Text="{Binding Path=CurrentSeason.SeasonStart, ConverterCulture=da-DK}" Width="215" Height="29"/>
+											Text="{Binding CurrentSeason.SeasonStart, ConverterCulture=da-DK}" Width="215" Height="29"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Width="250" Margin="4" Text="Planlagt ende på sæson:" FontWeight="SemiBold"/>
-                                        <DatePicker DisplayDateStart="{Binding Path=CurrentSeason.EarliestSeasonEnd, Mode=OneWay}" 
-                                                    DisplayDateEnd="{Binding Path=CurrentSeason.LatestSeasonEnd, Mode=OneWay}" 
-                                                    Name="EndSeasonDatePicker" SelectedDate="{Binding Path=CurrentSeason.SeasonEnd, Mode=TwoWay}" 
-                                                    HorizontalAlignment="Right" Margin="4" Width="215" Height="29" FontFamily="Calibri" FontSize="14"/>
+                                        <DatePicker DisplayDateStart="{Binding CurrentSeason.EarliestSeasonEnd, Mode=OneWay}" 
+											DisplayDateEnd="{Binding CurrentSeason.LatestSeasonEnd, Mode=OneWay}" 
+											x:Name="EndSeasonDatePicker" SelectedDate="{Binding CurrentSeason.SeasonEnd, Mode=TwoWay}" 
+											HorizontalAlignment="Right" Margin="4" Width="215" Height="29" FontFamily="Calibri" FontSize="14"/>
                                     </DockPanel>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -107,17 +108,17 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Command="{Binding Path=NewSeason}" 
-                                                Content="Start ny sæson" Padding="5" Width="150"/>
+                                        <Button Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Command="{Binding NewSeason}" 
+											Content="Start ny sæson" Padding="5" Width="150"/>
 
                                         <DockPanel Grid.Column="2" Margin="4" HorizontalAlignment="Right" Width="250" >
                                             <DockPanel.Style>
-                                                <Style TargetType="DockPanel">
+                                                <Style TargetType="{x:Type DockPanel}">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="false">
+                                                        <DataTrigger Binding="{Binding DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="false">
                                                             <Setter Property="Visibility" Value="Hidden"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Path=DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                        <DataTrigger Binding="{Binding DisplaySeasonErrorLabel, UpdateSourceTrigger=PropertyChanged}" Value="true">
                                                             <Setter Property="Visibility" Value="Visible"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -125,16 +126,16 @@
                                             </DockPanel.Style>
 
                                         </DockPanel>
-                                        
+
                                         <TextBlock Text="Én sæson skal mindst være 6 måneder gammel" Grid.Column="2" TextWrapping="Wrap" 
-                                                       Foreground="Red" Margin="4" HorizontalAlignment="Right"/>
+											Foreground="Red" Margin="4" HorizontalAlignment="Right"/>
 
                                     </Grid>
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
-                                    Grid.ColumnSpan="2" Grid.Row="0" Background="#FFEAEAEA" Margin="0,10,0,0">
+                            <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding SearchVisibility}" 
+								Grid.ColumnSpan="2" Grid.Row="0" Background="#FFEAEAEA" Margin="0,10,0,0">
                                 <WrapPanel Margin="0,2,0,0">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -143,18 +144,16 @@
                                         </Grid.ColumnDefinitions>
                                         <Image Source="/View/images/table_error.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                         <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
-                                                   Foreground="Black">
-                                            <Run Text="SMS INDSTILLINGER"/>
-                                        </TextBlock>
+											Foreground="Black"><Run Text="SMS INDSTILLINGER"/></TextBlock>
                                     </Grid>
                                 </WrapPanel>
                             </Border>
                             <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
                                 <StackPanel>
-                                    <DockPanel>
+                                    <WrapPanel>
                                         <TextBlock Text="I dag forventes mørkets frembrud klokken:" Margin="4" FontWeight="SemiBold"/>
-                                        <TextBox Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="20:23" Width="70" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14">
-                                            <TextBox.Style>
+                                        <TextBox x:Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="{Binding Sunset, Mode=OneWay}" Width="70" IsEnabled="False" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14">
+                                            <!--<TextBox.Style>
                                                 <Style TargetType="TextBox">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding ElementName=TimeOfDarkCheckBox, Path=IsChecked}" Value="True">
@@ -165,20 +164,42 @@
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
-                                            </TextBox.Style>
+                                            </TextBox.Style>-->
                                         </TextBox>
-                                        <WrapPanel HorizontalAlignment="Right">
+                                        <!--<WrapPanel HorizontalAlignment="Right">
                                             <TextBlock Margin="4">Håndtér automatisk</TextBlock>
                                             <CheckBox Name="TimeOfDarkCheckBox" IsChecked="True" Margin="4" VerticalAlignment="Center" />
-                                        </WrapPanel>
-                                    </DockPanel>
+                                        </WrapPanel>-->
+                                    </WrapPanel>
                                     <DockPanel Margin="0,5,0,0">
-                                        <TextBlock Text="Udsæt bekræftelses-SMS med:" Margin="4" FontWeight="SemiBold"/>
-                                        <ComboBox Margin="4" SelectedIndex="0" Width="90" HorizontalAlignment="Right">5 min</ComboBox>
+                                        <TextBlock Text="Udsæt bekræftelses-SMS med (i minutter):" Margin="4" FontWeight="SemiBold"/>
+                                        <TextBox Name="Delay" Margin="4" Width="90" HorizontalAlignment="Right">
+                                            <TextBox.Text>
+                                                <Binding Path="SmsDelay" UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <c:RegexExclusiveMatchRule Pattern="[^0-9]" ErrorMessage="Kun tal er tilladt"/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                            <TextBox.InputBindings>
+                                                <KeyBinding Key="Enter" Command="{Binding SmsDelayEnter}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TextBox}}, Path=Text}"/>
+                                            </TextBox.InputBindings>
+                                        </TextBox>
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBlock Text="Båden skal give en tilbagemelding indenfor:" Margin="4" FontWeight="SemiBold"/>
-                                        <ComboBox Margin="4" SelectedIndex="0" Width="90" HorizontalAlignment="Right">15 min</ComboBox>
+                                        <TextBlock Text="Båden skal give en tilbagemelding indenfor (i minutter):" Margin="4" FontWeight="SemiBold"/>
+                                        <TextBox Name="Wait" Margin="4" Width="90" HorizontalAlignment="Right">
+                                            <TextBox.Text>
+                                                <Binding Path="SmsWait" UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <c:RegexExclusiveMatchRule Pattern="[^0-9]" ErrorMessage="Kun tal er tilladt"/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                            <TextBox.InputBindings>
+                                                <KeyBinding Key="Enter" Command="{Binding SmsWaitEnter}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TextBox}}, Path=Text}"/>
+                                            </TextBox.InputBindings>
+                                        </TextBox>
                                     </DockPanel>
                                 </StackPanel>
                             </Border>
@@ -197,26 +218,26 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="4">
                                 <ListView x:Name="DamageTypeList" SelectionMode="Single" Margin="4" 
-                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="530" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                          ItemsSource="{Binding Path=DamageTypes}" SelectedIndex="{Binding Path=SelectedDamageType}">
+									VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="530" ScrollViewer.VerticalScrollBarVisibility="Auto"
+									ItemsSource="{Binding DamageTypes}" SelectedIndex="{Binding SelectedDamageType}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Margin="0,2,0,2">
                                                 <StackPanel.Resources>
                                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
                                                 </StackPanel.Resources>
-                                                <TextBlock Text="{Binding Path=Type}"/>
+                                                <TextBlock Text="{Binding Type}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding Path=SelectedChangeDamageType}" CommandParameter="{Binding ElementName=DamageTypeList, Path=SelectedItem}" />
+                                            <i:InvokeCommandAction Command="{Binding SelectedChangeDamageType}" CommandParameter="{Binding SelectedItem, ElementName=DamageTypeList}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ListView>
                             </StackPanel>
-                            
+
                             <!-- Detaljer -->
                             <StackPanel Grid.Column="2" Margin="4">
                                 <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}" Margin="4">
@@ -229,47 +250,47 @@
                                         </StackPanel.Resources>
                                         <WrapPanel>
                                             <TextBlock Width="210" Margin="4" Text="Type:" FontWeight="SemiBold"/>
-                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentDamageType.Type}"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding CurrentDamageType.Type}"/>
                                         </WrapPanel>
 
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" Margin="0,10,0,0">
                                             <Button Margin="4" Content="OK" DockPanel.Dock="Right" 
-                                                    Command="{Binding Path=SaveChangesDamageTypes}" Width="100"/>
+												Command="{Binding SaveChangesDamageTypes}" Width="100"/>
                                             <Button Margin="4" Content="Annuller" 
-                                                    Command="{Binding Path=CancelChangesDamageTypes}" Width="100"/>
+												Command="{Binding CancelChangesDamageTypes}" Width="100"/>
                                             <Button Margin="4" Content="Slet" Width="100"
-                                                    Command="{Binding Path=DeleteDamageType}" HorizontalAlignment="Right"/>
+												Command="{Binding DeleteDamageType}" HorizontalAlignment="Right"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
-                                
+
                                 <Button Command="{Binding CreateDamageType}" Margin="23,0,0,0" HorizontalAlignment="Left" Content="Opret ny skadetype" Width="250"/>
-                                
+
                                 <WrapPanel Margin="10">
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
-                                            <Style TargetType="Image">
+                                            <Style TargetType="{x:Type Image}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Default">
                                                         <Setter Property="Visibility" Value="Hidden"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Save">
                                                         <Setter Property="Source" Value="/View/images/accept.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
                                                         <Setter Property="Source" Value="/View/images/cancel.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Create">
                                                         <Setter Property="Source" Value="/View/images/add.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Source" Value="/View/images/delete.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Error">
                                                         <Setter Property="Source" Value="/View/images/error.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
@@ -279,34 +300,34 @@
                                     </Image>
                                     <TextBlock VerticalAlignment="Center">
                                         <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
+                                            <Style TargetType="{x:Type TextBlock}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Default">
                                                         <Setter Property="Visibility" Value="Hidden"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Save">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                         <Setter Property="Text" Value="Ændringer gemt"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                         <Setter Property="Text" Value="Ændringer annulleret"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Create">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                         <Setter Property="Text" Value="Skadetype oprettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                         <Setter Property="Text" Value="Skadetype slettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                    <DataTrigger Binding="{Binding FeedbackDamageType, UpdateSourceTrigger=PropertyChanged}" Value="Error">
                                                         <Setter Property="Foreground" Value="Red"/>
-                                                        <Setter Property="Text" Value="{Binding Path=ErrorDamageType}"/>
+                                                        <Setter Property="Text" Value="{Binding ErrorDamageType}"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -330,29 +351,29 @@
 
                             <!-- Standard ture liste -->
                             <StackPanel Grid.Column="0" Margin="4">
-                                
-                                    <ListView Height="530" x:Name="StandardTripList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                              ItemsSource="{Binding Path=StandardTrips}" SelectedIndex="{Binding Path=SelectedStandardTrip}"
-                                              SelectedItem="{Binding Path=CurrentStandardTrip}">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Margin="0,2,0,2">
-                                                    <StackPanel.Resources>
-                                                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
-                                                    </StackPanel.Resources>
-                                                    <TextBlock Text="{Binding Path=Title}"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding Path=SelectedChangeStandardTrip}" CommandParameter="{Binding ElementName=StandardTripList, Path=SelectedItem}"/>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </ListView>
-                               
+
+                                <ListView Height="530" x:Name="StandardTripList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+									ItemsSource="{Binding StandardTrips}" SelectedIndex="{Binding SelectedStandardTrip}"
+									SelectedItem="{Binding CurrentStandardTrip}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Margin="0,2,0,2">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                </StackPanel.Resources>
+                                                <TextBlock Text="{Binding Title}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedChangeStandardTrip}" CommandParameter="{Binding SelectedItem, ElementName=StandardTripList}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ListView>
+
                             </StackPanel>
-                            
+
                             <!-- Detaljer -->
                             <StackPanel Grid.Column="2" Margin="4">
                                 <Border Margin="4" Style="{StaticResource styleContentBorders}" >
@@ -365,20 +386,20 @@
                                         </StackPanel.Resources>
                                         <WrapPanel>
                                             <TextBlock Width="210" Margin="4" Text="Titel:" FontWeight="SemiBold"/>
-                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Title}"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding CurrentStandardTrip.Title}"/>
                                         </WrapPanel>
                                         <WrapPanel>
                                             <TextBlock Width="210" Margin="4" Text="Retning:" FontWeight="SemiBold"/>
-                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Direction}"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding CurrentStandardTrip.Direction}"/>
                                         </WrapPanel>
                                         <WrapPanel>
                                             <TextBlock Width="210" Margin="4" Text="Distance:" FontWeight="SemiBold"/>
-                                            <TextBox Width="260" Margin="4" Text="{Binding Path=CurrentStandardTrip.Distance}"/>
+                                            <TextBox Width="260" Margin="4" Text="{Binding CurrentStandardTrip.Distance}"/>
                                         </WrapPanel>
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" Margin="0,10,0,0">
-                                            <Button Margin="4" DockPanel.Dock="Right" Content="OK" Command="{Binding Path=SaveChangesStandardTrips}" Width="100"/>
-                                            <Button Margin="4" Content="Annuller" Command="{Binding Path=CancelChangesStandardTrips}" Width="100"/>
-                                            <Button Margin="4" Content="Slet" Command="{Binding Path=DeleteStandardTrip}" HorizontalAlignment="Right" Width="100"/>
+                                            <Button Margin="4" DockPanel.Dock="Right" Content="OK" Command="{Binding SaveChangesStandardTrips}" Width="100"/>
+                                            <Button Margin="4" Content="Annuller" Command="{Binding CancelChangesStandardTrips}" Width="100"/>
+                                            <Button Margin="4" Content="Slet" Command="{Binding DeleteStandardTrip}" HorizontalAlignment="Right" Width="100"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -388,28 +409,28 @@
                                 <WrapPanel Margin="10">
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
-                                            <Style TargetType="Image">
+                                            <Style TargetType="{x:Type Image}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Default">
                                                         <Setter Property="Visibility" Value="Hidden"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Save">
                                                         <Setter Property="Source" Value="/View/images/accept.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
                                                         <Setter Property="Source" Value="/View/images/cancel.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Create">
                                                         <Setter Property="Source" Value="/View/images/add.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Source" Value="/View/images/delete.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Error">
                                                         <Setter Property="Source" Value="/View/images/error.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
@@ -419,34 +440,34 @@
                                     </Image>
                                     <TextBlock VerticalAlignment="Center">
                                         <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
+                                            <Style TargetType="{x:Type TextBlock}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Default">
                                                         <Setter Property="Visibility" Value="Hidden"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Save">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                         <Setter Property="Text" Value="Ændringer gemt"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                         <Setter Property="Text" Value="Ændringer annulleret"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Create">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                         <Setter Property="Text" Value="Standardtur oprettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                         <Setter Property="Text" Value="Standardtur slettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                    <DataTrigger Binding="{Binding FeedbackStandardTrip, UpdateSourceTrigger=PropertyChanged}" Value="Error">
                                                         <Setter Property="Foreground" Value="Red"/>
-                                                        <Setter Property="Text" Value="{Binding Path=ErrorStandardTrip}"/>
+                                                        <Setter Property="Text" Value="{Binding ErrorStandardTrip}"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -473,8 +494,8 @@
                             <StackPanel Grid.Column="0" Margin="4">
                                 <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
                                     <ListView x:Name="AdminList" SelectionMode="Single" Margin="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                          IsSynchronizedWithCurrentItem="True" MinHeight="530"
-                                          ItemsSource="{Binding Path=Admins}" SelectedIndex="{Binding Path=SelectedAdmin}">
+										IsSynchronizedWithCurrentItem="True" MinHeight="530"
+										ItemsSource="{Binding Admins}" SelectedIndex="{Binding SelectedAdmin}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Margin="0,2,0,2">
@@ -482,17 +503,17 @@
                                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
                                                     </StackPanel.Resources>
                                                     <WrapPanel>
-                                                        <TextBlock Text="{Binding Path=Member.FirstName}"/>
+                                                        <TextBlock Text="{Binding Member.FirstName}"/>
                                                         <TextBlock Text=" "/>
-                                                        <TextBlock Text="{Binding Path=Member.LastName}"/>
+                                                        <TextBlock Text="{Binding Member.LastName}"/>
                                                     </WrapPanel>
-                                                    <TextBlock Text="{Binding Path=Username}"/>
+                                                    <TextBlock Text="{Binding Username}"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding Path=SelectedChangeAdmin}" CommandParameter="{Binding ElementName=AdminList, Path=SelectedItem}"/>
+                                                <i:InvokeCommandAction Command="{Binding SelectedChangeAdmin}" CommandParameter="{Binding SelectedItem, ElementName=AdminList}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListView>
@@ -531,7 +552,7 @@
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" HorizontalAlignment="Stretch" Margin="0,10,0,0">
                                             <Button Margin="4" Width="100" DockPanel.Dock="Right" Content="OK" Command="{Binding SaveChangesAdmins}"/>
                                             <Button Margin="4" Width="100" Content="Annuller" Command="{Binding CancelChangesAdmins}"/>
-                                            <Button Margin="4" Width="100" Content="Slet" Command="{Binding Path=DeleteAdmin}" HorizontalAlignment="Right"/>
+                                            <Button Margin="4" Width="100" Content="Slet" Command="{Binding DeleteAdmin}" HorizontalAlignment="Right"/>
                                         </DockPanel>
                                     </StackPanel>
                                 </Border>
@@ -542,28 +563,28 @@
 
                                     <Image Height="32" Margin="0,0,10,0">
                                         <Image.Style>
-                                            <Style TargetType="Image">
+                                            <Style TargetType="{x:Type Image}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Default">
                                                         <Setter Property="Visibility" Value="Hidden"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Save">
                                                         <Setter Property="Source" Value="/View/images/accept.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
                                                         <Setter Property="Source" Value="/View/images/cancel.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Create">
                                                         <Setter Property="Source" Value="/View/images/add.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Source" Value="/View/images/delete.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Error">
                                                         <Setter Property="Source" Value="/View/images/error.png"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
@@ -574,34 +595,34 @@
 
                                     <TextBlock VerticalAlignment="Center">
                                         <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
+                                            <Style TargetType="{x:Type TextBlock}">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Default">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Default">
                                                         <Setter Property="Visibility" Value="Hidden"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Save">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Save">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                         <Setter Property="Text" Value="Ændringer gemt"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Cancel">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                         <Setter Property="Text" Value="Ændringer annulleret"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Create">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Create">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                         <Setter Property="Text" Value="administrator oprettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Delete">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                         <Setter Property="Text" Value="administrator slettet"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Error">
+                                                    <DataTrigger Binding="{Binding FeedbackAdmin, UpdateSourceTrigger=PropertyChanged}" Value="Error">
                                                         <Setter Property="Foreground" Value="Red"/>
-                                                        <Setter Property="Text" Value="{Binding Path=ErrorAdmin}"/>
+                                                        <Setter Property="Text" Value="{Binding ErrorAdmin}"/>
                                                         <Setter Property="Visibility" Value="Visible"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
