@@ -4,27 +4,10 @@ namespace ARK.Model
 {
     public class DamageType : IEquatable<DamageType>
     {
-        #region Public Properties
-
         public int Id { get; set; }
 
         public string Type { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(DamageType left, DamageType right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(DamageType left, DamageType right)
-        {
-            return !Equals(left, right);
-        }
-
-        // states the type of the damage
         public bool Equals(DamageType other)
         {
             if (ReferenceEquals(null, other))
@@ -37,9 +20,20 @@ namespace ARK.Model
                 return true;
             }
 
-            return this.Id == other.Id;
+            return Id == other.Id;
         }
 
+        public static bool operator ==(DamageType left, DamageType right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(DamageType left, DamageType right)
+        {
+            return !Equals(left, right);
+        }
+
+        // states the type of the damage
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -52,19 +46,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((DamageType)obj);
+            return Equals((DamageType)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Id;
+            return Id;
         }
-
-        #endregion
     }
 }

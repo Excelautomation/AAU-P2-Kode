@@ -5,17 +5,11 @@ namespace ARK.ViewModel.Protokolsystem.Data
 {
     public class MemberViewModel : ViewModelBase
     {
-        #region Fields
-
         private bool _isResponsible;
 
         private Member _member;
 
         private bool _visible;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public MemberViewModel(Member member)
             : this(member, true)
@@ -24,25 +18,21 @@ namespace ARK.ViewModel.Protokolsystem.Data
 
         public MemberViewModel(Member member, bool visible)
         {
-            this.Member = member;
-            this.Visible = visible;
+            Member = member;
+            Visible = visible;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public bool IsResponsible
         {
             get
             {
-                return this._isResponsible;
+                return _isResponsible;
             }
 
             set
             {
-                this._isResponsible = value;
-                this.Notify();
+                _isResponsible = value;
+                Notify();
             }
         }
 
@@ -50,13 +40,13 @@ namespace ARK.ViewModel.Protokolsystem.Data
         {
             get
             {
-                return this._member;
+                return _member;
             }
 
             set
             {
-                this._member = value;
-                this.Notify();
+                _member = value;
+                Notify();
             }
         }
 
@@ -64,17 +54,15 @@ namespace ARK.ViewModel.Protokolsystem.Data
         {
             get
             {
-                return this._visible;
+                return _visible;
             }
 
             set
             {
-                this._visible = value;
-                this.Notify();
+                _visible = value;
+                Notify();
             }
         }
-
-        #endregion
 
         // Is responsible for longtrip (not used in begintrip)
     }

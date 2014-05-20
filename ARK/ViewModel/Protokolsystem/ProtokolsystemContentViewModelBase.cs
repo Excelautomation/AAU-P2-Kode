@@ -1,28 +1,21 @@
 ﻿using System.Windows.Input;
 
 using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem
 {
     public class ProtokolsystemContentViewModelBase : ContentViewModelBase
     {
-        #region Constructors and Destructors
-
         public ProtokolsystemContentViewModelBase()
         {
-            this.ParentAttached += (sender, args) => this.NotifyCustom("ProtocolSystem");
+            ParentAttached += (sender, args) => NotifyCustom("ProtocolSystem");
         }
-
-        #endregion
-
-        #region Public Properties
 
         public ProtocolSystemMainViewModel ProtocolSystem
         {
             get
             {
-                return this.Parent as ProtocolSystemMainViewModel;
+                return Parent as ProtocolSystemMainViewModel;
             }
         }
 
@@ -30,7 +23,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return this.GetCommand(e => { this.ProtocolSystem.EnableFilters = !this.ProtocolSystem.EnableFilters; });
+                return GetCommand(e => { ProtocolSystem.EnableFilters = !ProtocolSystem.EnableFilters; });
             }
         }
 
@@ -38,10 +31,8 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return this.GetCommand(e => { this.ProtocolSystem.EnableSearch = !this.ProtocolSystem.EnableSearch; });
+                return GetCommand(e => { ProtocolSystem.EnableSearch = !ProtocolSystem.EnableSearch; });
             }
         }
-
-        #endregion
     }
 }

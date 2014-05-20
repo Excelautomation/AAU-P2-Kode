@@ -9,52 +9,32 @@ namespace ARK.ViewModel.Base.Filter
 {
     public class FilterContent : ViewModelBase
     {
-        #region Fields
-
         private IContentViewModelBase _contentViewModel;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public FilterContent(IContentViewModelBase contentViewModel)
         {
-            this.ContentViewModel = contentViewModel;
+            ContentViewModel = contentViewModel;
         }
-
-        #endregion
-
-        #region Public Events
-
-        public event EventHandler<FilterChangedEventArgs> FilterChanged;
-
-        #endregion
-
-        #region Public Properties
 
         public IContentViewModelBase ContentViewModel
         {
             get
             {
-                return this._contentViewModel;
+                return _contentViewModel;
             }
 
             set
             {
-                this._contentViewModel = value;
-                this.Notify();
+                _contentViewModel = value;
+                Notify();
             }
         }
-
-        #endregion
-
-        #region Properties
 
         private IFilterContainerViewModel FilterContainer
         {
             get
             {
-                return this.ContentViewModel.Parent as IFilterContainerViewModel;
+                return ContentViewModel.Parent as IFilterContainerViewModel;
             }
         }
 
@@ -62,9 +42,7 @@ namespace ARK.ViewModel.Base.Filter
 
         private SearchEventArgs LastSearchEventArgs { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
+        public event EventHandler<FilterChangedEventArgs> FilterChanged;
 
         public static IEnumerable<T> FilterItems<T>(
             IEnumerable<T> items, 
@@ -107,60 +85,54 @@ namespace ARK.ViewModel.Base.Filter
 
         public void EnableFilter(bool enableSearch, bool enableFilters)
         {
-            this.ContentViewModel.ParentAttached += (sender, args) =>
+            ContentViewModel.ParentAttached += (sender, args) =>
                 {
                     // Filter
-                    this.FilterContainer.EnableSearch = enableSearch;
-                    this.FilterContainer.EnableFilters = enableFilters;
+                    FilterContainer.EnableSearch = enableSearch;
+                    FilterContainer.EnableFilters = enableFilters;
 
                     // Bind events
-                    this.FilterContainer.SearchTextChanged += this.FilterContainerOnSearchTextChanged;
-                    this.FilterContainer.FilterTextChanged += this.FilterContainerOnFilterTextChanged;
+                    FilterContainer.SearchTextChanged += FilterContainerOnSearchTextChanged;
+                    FilterContainer.FilterTextChanged += FilterContainerOnFilterTextChanged;
                 };
 
-            this.ContentViewModel.ParentDetached += (sender, args) =>
+            ContentViewModel.ParentDetached += (sender, args) =>
                 {
                     // Unbind events
-                    this.FilterContainer.SearchTextChanged -= this.FilterContainerOnSearchTextChanged;
-                    this.FilterContainer.FilterTextChanged -= this.FilterContainerOnFilterTextChanged;
+                    FilterContainer.SearchTextChanged -= FilterContainerOnSearchTextChanged;
+                    FilterContainer.FilterTextChanged -= FilterContainerOnFilterTextChanged;
 
                     // Delete last eventargs
-                    this.LastSearchEventArgs = null;
-                    this.LastFilterEventArgs = null;
+                    LastSearchEventArgs = null;
+                    LastFilterEventArgs = null;
                 };
         }
 
         public void UpdateFilter()
         {
-            this.OnFilterChanged();
+            OnFilterChanged();
         }
-
-        #endregion
-
-        #region Methods
 
         private void FilterContainerOnFilterTextChanged(object sender, FilterEventArgs e)
         {
-            this.LastFilterEventArgs = e;
+            LastFilterEventArgs = e;
 
-            this.OnFilterChanged();
+            OnFilterChanged();
         }
 
         private void FilterContainerOnSearchTextChanged(object sender, SearchEventArgs e)
         {
-            this.LastSearchEventArgs = e;
+            LastSearchEventArgs = e;
 
-            this.OnFilterChanged();
+            OnFilterChanged();
         }
 
         private void OnFilterChanged()
         {
-            if (this.FilterChanged != null)
+            if (FilterChanged != null)
             {
-                this.FilterChanged(this, new FilterChangedEventArgs(this.LastFilterEventArgs, this.LastSearchEventArgs));
+                FilterChanged(this, new FilterChangedEventArgs(LastFilterEventArgs, LastSearchEventArgs));
             }
         }
-
-        #endregion
     }
 }

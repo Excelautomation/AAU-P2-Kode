@@ -9,26 +9,20 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsLongTripViewModel : ContentViewModelBase
     {
-        #region Fields
-
         private LongTripForm _longDistanceForm;
 
         private bool _recentChange;
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand AcceptForm
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.LongDistanceForm.Status = LongTripForm.BoatStatus.Accepted;
+                            LongDistanceForm.Status = LongTripForm.BoatStatus.Accepted;
 
-                            this.Save();
+                            Save();
                         });
             }
         }
@@ -37,13 +31,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._longDistanceForm;
+                return _longDistanceForm;
             }
 
             set
             {
-                this._longDistanceForm = value;
-                this.Notify();
+                _longDistanceForm = value;
+                Notify();
             }
         }
 
@@ -51,13 +45,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._recentChange;
+                return _recentChange;
             }
 
             set
             {
-                this._recentChange = value;
-                this.Notify();
+                _recentChange = value;
+                Notify();
             }
         }
 
@@ -65,11 +59,11 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.LongDistanceForm.Status = LongTripForm.BoatStatus.Denied;
-                            this.Save();
+                            LongDistanceForm.Status = LongTripForm.BoatStatus.Denied;
+                            Save();
                         });
             }
         }
@@ -78,29 +72,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
-                    () =>
-                    {
-                        Save();
-                    });
+                return GetCommand(() => { Save(); });
             }
         }
-
-        #endregion
-
-        #region Methods
 
         private void Save()
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(this.LongDistanceForm).State = EntityState.Modified;
+                db.Entry(LongDistanceForm).State = EntityState.Modified;
                 db.SaveChanges();
             }
 
-            this.RecentChange = true;
+            RecentChange = true;
         }
-
-        #endregion
     }
 }

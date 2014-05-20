@@ -1,57 +1,44 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
     public class BoatsOutAdditionalInfoViewModel : ContentViewModelBase
     {
         // Fields
-        #region Fields
-
         private Trip _selectedTrip;
 
         private TripWarningSms _warningSms;
 
         private DbArkContext db;
 
-        #endregion
-
         // Constructor
-        #region Constructors and Destructors
-
         public BoatsOutAdditionalInfoViewModel()
         {
-            this.db = DbArkContext.GetDbContext();
+            db = DbArkContext.GetDbContext();
         }
 
-        #endregion
-
         // Properties
-        #region Public Properties
-
         public Trip SelectedTrip
         {
             get
             {
-                return this._selectedTrip;
+                return _selectedTrip;
             }
 
             set
             {
-                this._selectedTrip = value;
-                if (this._selectedTrip != null)
+                _selectedTrip = value;
+                if (_selectedTrip != null)
                 {
-                    this.WarningSms = this.db.TripWarningSms.FirstOrDefault(t => t.Trip.Id == this.SelectedTrip.Id);
+                    WarningSms = db.TripWarningSms.FirstOrDefault(t => t.Trip.Id == SelectedTrip.Id);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -59,9 +46,9 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                if (this.WarningSms != null)
+                if (WarningSms != null)
                 {
-                    return this.WarningSms.RecievedSms;
+                    return WarningSms.RecievedSms;
                 }
                 else
                 {
@@ -74,12 +61,12 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                if (this.SmsSentToBoat != null)
+                if (SmsSentToBoat != null)
                 {
-                    DateTime time = (DateTime)this.SmsSentToBoat;
+                    DateTime time = (DateTime)SmsSentToBoat;
                     if (DateTime.Compare(time, DateTime.Now.AddMinutes(-15)) < 0)
                     {
-                        return this.SmsSentToBoat.Value.AddMinutes(15);
+                        return SmsSentToBoat.Value.AddMinutes(15);
                     }
                     else
                     {
@@ -97,9 +84,9 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                if (this.WarningSms != null)
+                if (WarningSms != null)
                 {
-                    return this.WarningSms.SentSms;
+                    return WarningSms.SentSms;
                 }
                 else
                 {
@@ -112,18 +99,16 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._warningSms;
+                return _warningSms;
             }
 
             set
             {
-                this._warningSms = value;
-                this.NotifyCustom("SmsSentToBoat");
-                this.NotifyCustom("SmsRecievedFromBoat");
-                this.NotifyCustom("SmsSentToAdministration");
+                _warningSms = value;
+                NotifyCustom("SmsSentToBoat");
+                NotifyCustom("SmsRecievedFromBoat");
+                NotifyCustom("SmsSentToAdministration");
             }
         }
-
-        #endregion
     }
 }

@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Model.Extensions;
 using ARK.View.Administrationssystem.Filters;
 using ARK.View.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
@@ -18,8 +16,6 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class TripsViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        #region Fields
-
         public BoatListWindow NewBoatDialog;
 
         private List<Boat> _allBoats;
@@ -32,54 +28,46 @@ namespace ARK.ViewModel.Administrationssystem
 
         private IEnumerable<Trip> _tripsFiltered;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public TripsViewModel()
         {
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
                     // Load data
                     using (var db = new DbArkContext())
                     {
-                        this._trips = db.Trip.Include(trip => trip.Members).ToList();
+                        _trips = db.Trip.Include(trip => trip.Members).ToList();
 
-                        this._allBoats = db.Boat.ToList();
+                        _allBoats = db.Boat.ToList();
 
-                        if (this._trips.Count != 0)
+                        if (_trips.Count != 0)
                         {
-                            this.CurrentTrip = this._trips[0];
+                            CurrentTrip = _trips[0];
 
                             // LocalTrip = CurrentTrip;
                         }
                     }
 
                     // Reset filter
-                    this.ResetFilter();
+                    ResetFilter();
                 };
 
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
-            filterController.FilterChanged += (o, eventArgs) => this.UpdateFilter(eventArgs);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
-
-        #endregion
-
-        #region Public Properties
 
         public List<Boat> AllBoats
         {
             get
             {
-                return this._allBoats;
+                return _allBoats;
             }
 
             set
             {
-                this._allBoats = value;
-                this.Notify();
+                _allBoats = value;
+                Notify();
             }
         }
 
@@ -87,7 +75,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(this.Reload);
+                return GetCommand(Reload);
             }
         }
 
@@ -95,13 +83,96 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._currentTrip;
+                return _currentTrip;
             }
 
             set
             {
-                this._currentTrip = value;
-                this.Notify();
+                _currentTrip = value;
+                Notify();
+            }
+        }
+
+        public bool RecentSave
+        {
+            get
+            {
+                return _recentSave;
+            }
+
+            set
+            {
+                _recentSave = value;
+                Notify();
+            }
+        }
+
+        public ICommand SaveChanges
+        {
+            get
+            {
+                // CurrentTrip = LocalTrip;
+                return GetCommand(Save);
+            }
+        }
+
+        public ICommand SelectedChange
+        {
+            get
+            {
+                return GetCommand(
+                    e =>
+                        {
+                            CurrentTrip = (Trip)e;
+
+                            // LocalTrip = CurrentTrip;
+                            RecentSave = false;
+                        });
+            }
+        }
+
+        public ICommand ShowBoatDialog
+        {
+            get
+            {
+                return GetCommand(
+                    () =>
+                        {
+                            NewBoatDialog = new BoatListWindow();
+                            NewBoatDialog.DataContext = this;
+                            NewBoatDialog.ShowDialog();
+                        });
+            }
+        }
+
+        public ICommand ShowBoatsContinue
+        {
+            get
+            {
+                return GetCommand(
+                    e =>
+                        {
+                            NewBoatDialog.Close();
+
+                            CurrentTrip.Boat = (Boat)e;
+                            CurrentTrip.BoatId = CurrentTrip.Boat.Id;
+
+                            NotifyCustom("CurrentTrip");
+                        });
+            }
+        }
+
+        public IEnumerable<Trip> TripsFiltered
+        {
+            get
+            {
+                return _tripsFiltered;
+            }
+
+            set
+            {
+                _tripsFiltered = value;
+                Notify();
             }
         }
 
@@ -113,131 +184,40 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public bool RecentSave
-        {
-            get
-            {
-                return this._recentSave;
-            }
-
-            set
-            {
-                this._recentSave = value;
-                this.Notify();
-            }
-        }
-
-        public ICommand SaveChanges
-        {
-            get
-            {
-                // CurrentTrip = LocalTrip;
-                return this.GetCommand(this.Save);
-            }
-        }
-
-        public ICommand SelectedChange
-        {
-            get
-            {
-                return this.GetCommand(
-                    e =>
-                        {
-                            this.CurrentTrip = (Trip)e;
-
-                            // LocalTrip = CurrentTrip;
-                            this.RecentSave = false;
-                        });
-            }
-        }
-
-        public ICommand ShowBoatDialog
-        {
-            get
-            {
-                return this.GetCommand(
-                    () =>
-                        {
-                            this.NewBoatDialog = new BoatListWindow();
-                            this.NewBoatDialog.DataContext = this;
-                            this.NewBoatDialog.ShowDialog();
-                        });
-            }
-        }
-
-        public ICommand ShowBoatsContinue
-        {
-            get
-            {
-                return this.GetCommand(
-                    e =>
-                        {
-                            this.NewBoatDialog.Close();
-
-                            this.CurrentTrip.Boat = ((Boat)e);
-                            this.CurrentTrip.BoatId = this.CurrentTrip.Boat.Id;
-
-                            this.NotifyCustom("CurrentTrip");
-                        });
-            }
-        }
-
-        public IEnumerable<Trip> TripsFiltered
-        {
-            get
-            {
-                return this._tripsFiltered;
-            }
-
-            set
-            {
-                this._tripsFiltered = value;
-                this.Notify();
-            }
-        }
-
-        #endregion
-
-        #region Public Methods and Operators
-
         public void UpdateList<T>(IEnumerable<T> list)
         {
-            var tmp = this.TripsFiltered;
-            this.TripsFiltered = null;
-            this.TripsFiltered = tmp;
+            var tmp = TripsFiltered;
+            TripsFiltered = null;
+            TripsFiltered = tmp;
         }
-
-        #endregion
-
-        #region Methods
 
         private void Reload()
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(this.CurrentTrip).State = EntityState.Modified;
-                db.Entry(this.CurrentTrip).Reload();
+                db.Entry(CurrentTrip).State = EntityState.Modified;
+                db.Entry(CurrentTrip).Reload();
             }
 
-            this.RecentSave = false;
+            RecentSave = false;
 
             // Trigger notify - reset lists
-            this.UpdateList<Trip>(this.TripsFiltered);
+            UpdateList<Trip>(TripsFiltered);
 
-            this.NotifyCustom("CurrentTrip");
+            NotifyCustom("CurrentTrip");
         }
 
         private void ResetFilter()
         {
-            this.TripsFiltered = this._trips;
+            TripsFiltered = _trips;
         }
 
         private void Save()
         {
             using (var db = new DbArkContext())
             {
-                Trip trip = db.Trip.Find(this.CurrentTrip.Id);
-                db.Entry(trip).CurrentValues.SetValues(this.CurrentTrip);
+                Trip trip = db.Trip.Find(CurrentTrip.Id);
+                db.Entry(trip).CurrentValues.SetValues(CurrentTrip);
 
                 db.Entry(trip).State = EntityState.Modified;
                 db.Entry(trip.Boat).State = EntityState.Modified;
@@ -246,15 +226,15 @@ namespace ARK.ViewModel.Administrationssystem
             }
 
             // Trigger notify - reset lists
-            this.UpdateList<Trip>(this.TripsFiltered);
+            UpdateList<Trip>(TripsFiltered);
 
-            this.RecentSave = true;
+            RecentSave = true;
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
         {
             // Reset filters
-            this.ResetFilter();
+            ResetFilter();
 
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any())
                 && (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
@@ -265,17 +245,14 @@ namespace ARK.ViewModel.Administrationssystem
             // Filter
             if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                this.TripsFiltered = FilterContent.FilterItems(this.TripsFiltered, args.FilterEventArgs);
+                TripsFiltered = FilterContent.FilterItems(TripsFiltered, args.FilterEventArgs);
             }
 
             // Tjek søgning
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
-                this.TripsFiltered =
-                    this.TripsFiltered.Where(trip => trip.Filter(args.SearchEventArgs.SearchText)).ToList();
+                TripsFiltered = TripsFiltered.Where(trip => trip.Filter(args.SearchEventArgs.SearchText)).ToList();
             }
         }
-
-        #endregion
     }
 }

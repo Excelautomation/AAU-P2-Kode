@@ -10,17 +10,11 @@ namespace ARK.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<DbArkContext>
     {
-        #region Constructors and Destructors
-
         public Configuration()
         {
-            this.AutomaticMigrationsEnabled = true;
-            this.SetSqlGenerator("MySql.Data.MySqlClient", new MySqlMigrationSqlGenerator());
+            AutomaticMigrationsEnabled = true;
+            SetSqlGenerator("MySql.Data.MySqlClient", new MySqlMigrationSqlGenerator());
         }
-
-        #endregion
-
-        #region Methods
 
         protected override void Seed(DbArkContext context)
         {
@@ -35,7 +29,5 @@ namespace ARK.Migrations
             // new Person { FullName = "Rowan Miller" }
             // );
         }
-
-        #endregion
     }
 }

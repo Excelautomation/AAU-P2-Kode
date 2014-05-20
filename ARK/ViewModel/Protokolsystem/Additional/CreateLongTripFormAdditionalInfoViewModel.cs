@@ -6,33 +6,27 @@ namespace ARK.ViewModel.Protokolsystem.Additional
 {
     public class CreateLongTripFormAdditionalInfoViewModel : MemberSelectorViewModel
     {
-        #region Fields
-
         private MemberViewModel _responsibleMember;
 
         private bool _selectResponsible;
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand MemberClicked
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     member =>
                         {
                             var memberVm = (MemberViewModel)member;
 
-                            if (this.SelectResponsible)
+                            if (SelectResponsible)
                             {
-                                this.ResponsibleMember = memberVm;
+                                ResponsibleMember = memberVm;
                             }
                             else
                             {
                                 memberVm.IsResponsible = false;
-                                this.RemoveMember.Execute(memberVm);
+                                RemoveMember.Execute(memberVm);
                             }
                         });
             }
@@ -42,24 +36,24 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._responsibleMember;
+                return _responsibleMember;
             }
 
             set
             {
-                if (this._responsibleMember != null)
+                if (_responsibleMember != null)
                 {
-                    this._responsibleMember.IsResponsible = false;
+                    _responsibleMember.IsResponsible = false;
                 }
 
-                this._responsibleMember = value;
+                _responsibleMember = value;
 
-                if (this._responsibleMember != null)
+                if (_responsibleMember != null)
                 {
-                    this._responsibleMember.IsResponsible = true;
+                    _responsibleMember.IsResponsible = true;
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -67,7 +61,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this.GetCommand(() => { this.SelectResponsible = !this.SelectResponsible; });
+                return GetCommand(() => { SelectResponsible = !SelectResponsible; });
             }
         }
 
@@ -75,16 +69,14 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._selectResponsible;
+                return _selectResponsible;
             }
 
             set
             {
-                this._selectResponsible = value;
-                this.Notify();
+                _selectResponsible = value;
+                Notify();
             }
         }
-
-        #endregion
     }
 }

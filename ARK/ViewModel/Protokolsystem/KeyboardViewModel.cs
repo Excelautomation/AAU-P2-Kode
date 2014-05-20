@@ -7,25 +7,13 @@ namespace ARK.ViewModel.Protokolsystem
 {
     public class KeyboardViewModel : ContentViewModelBase
     {
-        #region Fields
-
         private string _text;
-
-        #endregion
-
-        #region Public Events
-
-        public event EventHandler<KeyboardEventArgs> TextChanged;
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand ClearCommand
         {
             get
             {
-                return this.GetCommand(s => { this.Text = string.Empty; });
+                return GetCommand(s => { Text = string.Empty; });
             }
         }
 
@@ -33,12 +21,12 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
-                            if (this.Text.Length > 0)
+                            if (Text.Length > 0)
                             {
-                                this.Text = this.Text.Substring(0, this.Text.Length - 1);
+                                Text = Text.Substring(0, Text.Length - 1);
                             }
                         });
             }
@@ -48,7 +36,7 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return this.GetCommand(s => { this.Text += (string)s; });
+                return GetCommand(s => { Text += (string)s; });
             }
         }
 
@@ -56,30 +44,30 @@ namespace ARK.ViewModel.Protokolsystem
         {
             get
             {
-                return this._text;
+                return _text;
             }
 
             set
             {
                 // Tjek at værdien er ændret
-                if (this._text != value)
+                if (_text != value)
                 {
-                    this._text = value;
+                    _text = value;
 
-                    this.Notify();
+                    Notify();
 
-                    if (this.TextChanged != null)
+                    if (TextChanged != null)
                     {
-                        this.TextChanged(this, new KeyboardEventArgs(this.Text));
+                        TextChanged(this, new KeyboardEventArgs(Text));
                     }
                 }
                 else
                 {
-                    this._text = value;
+                    _text = value;
                 }
             }
         }
 
-        #endregion
+        public event EventHandler<KeyboardEventArgs> TextChanged;
     }
 }

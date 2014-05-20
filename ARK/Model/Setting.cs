@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ARK.Model
+﻿namespace ARK.Model
 {
     public class Setting
     {
-        #region Public Properties
-
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Value { get; set; }
-
-        #endregion
     }
 }

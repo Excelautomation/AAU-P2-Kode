@@ -19,8 +19,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
     public class CreateLongTripViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        #region Fields
-
         private readonly ObservableCollection<MemberViewModel> _selectedMembers =
             new ObservableCollection<MemberViewModel>(); // Members in boat
 
@@ -46,41 +44,33 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private string _tourDescription;
 
-        #endregion
-
         // Constructor
-        #region Constructors and Destructors
-
         public CreateLongTripViewModel()
         {
             DbArkContext db = DbArkContext.GetDbContext();
 
             // Load of data
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
-                    this._members = db.Member.OrderBy(x => x.FirstName).ToList();
-                    this.MembersFiltered = this._members.Select(member => new MemberViewModel(member)).ToList();
+                    _members = db.Member.OrderBy(x => x.FirstName).ToList();
+                    MembersFiltered = _members.Select(member => new MemberViewModel(member)).ToList();
 
                     // get long trip forms
-                    this.LongTripForms = db.LongTripForm.OrderBy(x => x.FormCreated).Where(x => true).ToList();
-                    this.Boats = db.Boat.Where(x => x.Active).ToList();
+                    LongTripForms = db.LongTripForm.OrderBy(x => x.FormCreated).Where(x => true).ToList();
+                    Boats = db.Boat.Where(x => x.Active).ToList();
 
                     // Set info
-                    this.UpdateInfo();
+                    UpdateInfo();
                 };
         }
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand AddBlank
         {
             get
             {
                 return
-                    this.GetCommand(
-                        () => this.SelectedMembers.Add(new MemberViewModel(new Member { Id = -1, FirstName = "Blank" })));
+                    GetCommand(
+                        () => SelectedMembers.Add(new MemberViewModel(new Member { Id = -1, FirstName = "Blank" })));
             }
         }
 
@@ -89,8 +79,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    this.GetCommand(
-                        () => this.SelectedMembers.Add(new MemberViewModel(new Member { Id = -2, FirstName = "Gæst" })));
+                    GetCommand(
+                        () => SelectedMembers.Add(new MemberViewModel(new Member { Id = -2, FirstName = "Gæst" })));
             }
         }
 
@@ -99,13 +89,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._boats;
+                return _boats;
             }
 
             set
             {
-                this._boats = value;
-                this.Notify();
+                _boats = value;
+                Notify();
             }
         }
 
@@ -113,13 +103,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._campSites;
+                return _campSites;
             }
 
             set
             {
-                this._campSites = value;
-                this.NotifyCustom("AllDataFilled");
+                _campSites = value;
+                NotifyCustom("AllDataFilled");
             }
         }
 
@@ -127,13 +117,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._distancesPerDay;
+                return _distancesPerDay;
             }
 
             set
             {
-                this._distancesPerDay = value;
-                this.NotifyCustom("AllDataFilled");
+                _distancesPerDay = value;
+                NotifyCustom("AllDataFilled");
             }
         }
 
@@ -141,13 +131,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._longTripForms;
+                return _longTripForms;
             }
 
             set
             {
-                this._longTripForms = value;
-                this.Notify();
+                _longTripForms = value;
+                Notify();
             }
         }
 
@@ -155,14 +145,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._membersFiltered;
+                return _membersFiltered;
             }
 
             set
             {
-                this._membersFiltered = value;
+                _membersFiltered = value;
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -170,13 +160,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._plannedEndDate;
+                return _plannedEndDate;
             }
 
             set
             {
-                this._plannedEndDate = value;
-                this.NotifyCustom("AllDataFilled");
+                _plannedEndDate = value;
+                NotifyCustom("AllDataFilled");
             }
         }
 
@@ -184,13 +174,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._plannedStartDate;
+                return _plannedStartDate;
             }
 
             set
             {
-                this._plannedStartDate = value;
-                this.NotifyCustom("AllDataFilled");
+                _plannedStartDate = value;
+                NotifyCustom("AllDataFilled");
             }
         }
 
@@ -198,14 +188,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedBoat;
+                return _selectedBoat;
             }
 
             set
             {
-                this._selectedBoat = value;
-                this.Notify();
-                this.UpdateInfo();
+                _selectedBoat = value;
+                Notify();
+                UpdateInfo();
             }
         }
 
@@ -213,7 +203,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedMembers;
+                return _selectedMembers;
             }
         }
 
@@ -221,27 +211,25 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             LongTripForm longTripForm = null;
                             longTripForm = new LongTripForm
                                                {
                                                    FormCreated = DateTime.Now, 
-                                                   PlannedStartDate =
-                                                       this.PlannedStartDate ?? DateTime.MinValue, 
-                                                   PlannedEndDate = this.PlannedEndDate ?? DateTime.MinValue, 
-                                                   Boat = this.SelectedBoat, 
-                                                   TourDescription = this.TourDescription, 
-                                                   DistancesPerDay = this.DistancesPerDay, 
-                                                   CampSites = this.CampSites, 
+                                                   PlannedStartDate = PlannedStartDate ?? DateTime.MinValue, 
+                                                   PlannedEndDate = PlannedEndDate ?? DateTime.MinValue, 
+                                                   Boat = SelectedBoat, 
+                                                   TourDescription = TourDescription, 
+                                                   DistancesPerDay = DistancesPerDay, 
+                                                   CampSites = CampSites, 
                                                    Members =
-                                                       this.SelectedMembers.Select(mvm => mvm.Member)
-                                                       .ToList(), 
+                                                       SelectedMembers.Select(mvm => mvm.Member).ToList(), 
                                                    Status = LongTripForm.BoatStatus.Awaiting, 
                                                    ResponsibleMember =
-                                                       this.Info.ResponsibleMember != null
-                                                           ? this.Info.ResponsibleMember.Member
+                                                       Info.ResponsibleMember != null
+                                                           ? Info.ResponsibleMember.Member
                                                            : null
                                                };
                             var ConfirmView = new CreateLongTripConfirm();
@@ -249,7 +237,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
                             ConfirmViewModel.LongTrip = longTripForm;
 
-                            this.ProtocolSystem.ShowDialog(ConfirmView);
+                            ProtocolSystem.ShowDialog(ConfirmView);
                         });
             }
         }
@@ -258,13 +246,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._tourDescription;
+                return _tourDescription;
             }
 
             set
             {
-                this._tourDescription = value;
-                this.NotifyCustom("AllDataFilled");
+                _tourDescription = value;
+                NotifyCustom("AllDataFilled");
             }
         }
 
@@ -273,20 +261,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    this.GetCommand(
-                        () => this.ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
+                    GetCommand(() => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
             }
         }
-
-        #endregion
-
-        #region Properties
 
         private CreateLongTripFormAdditionalInfoViewModel Info
         {
             get
             {
-                return this.InfoPage.DataContext as CreateLongTripFormAdditionalInfoViewModel;
+                return InfoPage.DataContext as CreateLongTripFormAdditionalInfoViewModel;
             }
         }
 
@@ -294,22 +277,16 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._infoPage ?? (this._infoPage = new CreateLongTripFormAdditionalInfo());
+                return _infoPage ?? (_infoPage = new CreateLongTripFormAdditionalInfo());
             }
         }
 
-        #endregion
-
-        #region Methods
-
         private void UpdateInfo()
         {
-            this.Info.SelectedBoat = this.SelectedBoat;
-            this.Info.SelectedMembers = this.SelectedMembers;
+            Info.SelectedBoat = SelectedBoat;
+            Info.SelectedMembers = SelectedMembers;
 
-            this.ProtocolSystem.ChangeInfo(this.InfoPage, this.Info);
+            ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
-
-        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
@@ -9,8 +10,6 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 {
     internal class DistanceStatisticsFilterViewModel : FilterViewModelBase
     {
-        #region Fields
-
         private bool _dateTimeAll;
 
         private bool _dateTimeDay;
@@ -35,27 +34,19 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         private bool _statisticsOutrigger;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public DistanceStatisticsFilterViewModel()
         {
-            this.CurrentBoatType = new CategoryFilter<TripViewModel>(trip => true);
-            this.CurrentDateTimeFilter = new DateTimeFilter();
+            CurrentBoatType = new CategoryFilter<TripViewModel>(trip => true);
+            CurrentDateTimeFilter = new DateTimeFilter();
 
-            this.DateTimeFromPicker = DateTime.Now;
-            this.DateTimeToPicker = DateTime.Now;
+            DateTimeFromPicker = DateTime.Now;
+            DateTimeToPicker = DateTime.Now;
 
-            this.StatisticsAll = true;
-            this.DateTimeAll = true;
+            StatisticsAll = true;
+            DateTimeAll = true;
 
-            this.UpdateFilter();
+            UpdateFilter();
         }
-
-        #endregion
-
-        #region Public Properties
 
         public CategoryFilter<TripViewModel> CurrentBoatType { get; set; }
 
@@ -65,22 +56,22 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._dateTimeAll;
+                return _dateTimeAll;
             }
 
             set
             {
-                this._dateTimeAll = value;
+                _dateTimeAll = value;
                 if (value)
                 {
-                    this.DateTimeToPicker = DateTime.Now;
+                    DateTimeToPicker = DateTime.Now;
 
-                    this.FilterByDates = false;
+                    FilterByDates = false;
 
-                    this.UpdateDateTime();
+                    UpdateDateTime();
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -88,24 +79,24 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._dateTimeDay;
+                return _dateTimeDay;
             }
 
             set
             {
-                this._dateTimeDay = value;
+                _dateTimeDay = value;
 
                 if (value)
                 {
-                    this.DateTimeFromPicker = DateTime.Now.AddDays(-1);
-                    this.DateTimeToPicker = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddDays(-1);
+                    DateTimeToPicker = DateTime.Now;
 
-                    this.FilterByDates = true;
+                    FilterByDates = true;
 
-                    this.UpdateDateTime();
+                    UpdateDateTime();
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -113,16 +104,16 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this.DateTimeFrom;
+                return DateTimeFrom;
             }
 
             set
             {
-                this.DateTimeFrom = value;
+                DateTimeFrom = value;
 
                 // FilterByDates = true;
                 // UpdateDateTime();
-                this.Notify();
+                Notify();
             }
         }
 
@@ -130,24 +121,24 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._dateTimeHalfYear;
+                return _dateTimeHalfYear;
             }
 
             set
             {
-                this._dateTimeHalfYear = value;
+                _dateTimeHalfYear = value;
 
                 if (value)
                 {
-                    this.DateTimeFromPicker = DateTime.Now.AddMonths(-6);
-                    this.DateTimeToPicker = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddMonths(-6);
+                    DateTimeToPicker = DateTime.Now;
 
-                    this.FilterByDates = true;
+                    FilterByDates = true;
 
-                    this.UpdateDateTime();
+                    UpdateDateTime();
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -155,24 +146,24 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._dateTimeMonth;
+                return _dateTimeMonth;
             }
 
             set
             {
-                this._dateTimeMonth = value;
+                _dateTimeMonth = value;
 
                 if (value)
                 {
-                    this.DateTimeFromPicker = DateTime.Now.AddMonths(-1);
-                    this.DateTimeToPicker = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddMonths(-1);
+                    DateTimeToPicker = DateTime.Now;
 
-                    this.FilterByDates = true;
+                    FilterByDates = true;
 
-                    this.UpdateDateTime();
+                    UpdateDateTime();
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -180,15 +171,15 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this.DateTimeTo.HasValue ? this.DateTimeTo.Value : DateTime.Now;
+                return DateTimeTo.HasValue ? DateTimeTo.Value : DateTime.Now;
             }
 
             set
             {
-                this.DateTimeTo = value;
+                DateTimeTo = value;
 
                 // UpdateDateTime();
-                this.Notify();
+                Notify();
             }
         }
 
@@ -196,24 +187,24 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._dateTimeWeek;
+                return _dateTimeWeek;
             }
 
             set
             {
-                this._dateTimeWeek = value;
+                _dateTimeWeek = value;
 
                 if (value)
                 {
-                    this.DateTimeFromPicker = DateTime.Now.AddDays(-7);
-                    this.DateTimeToPicker = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddDays(-7);
+                    DateTimeToPicker = DateTime.Now;
 
-                    this.FilterByDates = true;
+                    FilterByDates = true;
 
-                    this.UpdateDateTime();
+                    UpdateDateTime();
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -221,24 +212,24 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._dateTimeYear;
+                return _dateTimeYear;
             }
 
             set
             {
-                this._dateTimeYear = value;
+                _dateTimeYear = value;
 
                 if (value)
                 {
-                    this.DateTimeFromPicker = DateTime.Now.AddYears(-1);
-                    this.DateTimeToPicker = DateTime.Now;
+                    DateTimeFromPicker = DateTime.Now.AddYears(-1);
+                    DateTimeToPicker = DateTime.Now;
 
-                    this.FilterByDates = true;
+                    FilterByDates = true;
 
-                    this.UpdateDateTime();
+                    UpdateDateTime();
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -248,18 +239,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._statisticsAll;
+                return _statisticsAll;
             }
 
             set
             {
-                this._statisticsAll = value;
+                _statisticsAll = value;
                 if (value)
                 {
-                    this.UpdateCategory(trip => true);
+                    UpdateCategory(trip => true);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -267,18 +258,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._statisticsErgometer;
+                return _statisticsErgometer;
             }
 
             set
             {
-                this._statisticsErgometer = value;
+                _statisticsErgometer = value;
                 if (value)
                 {
-                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Ergometer);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Ergometer);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -286,18 +277,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._statisticsGig;
+                return _statisticsGig;
             }
 
             set
             {
-                this._statisticsGig = value;
+                _statisticsGig = value;
                 if (value)
                 {
-                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Gig);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Gig);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -305,18 +296,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._statisticsInrigger;
+                return _statisticsInrigger;
             }
 
             set
             {
-                this._statisticsInrigger = value;
+                _statisticsInrigger = value;
                 if (value)
                 {
-                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Inrigger);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Inrigger);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -324,18 +315,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._statisticsKajak;
+                return _statisticsKajak;
             }
 
             set
             {
-                this._statisticsKajak = value;
+                _statisticsKajak = value;
                 if (value)
                 {
-                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Kajak);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Kajak);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -343,62 +334,48 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._statisticsOutrigger;
+                return _statisticsOutrigger;
             }
 
             set
             {
-                this._statisticsOutrigger = value;
+                _statisticsOutrigger = value;
                 if (value)
                 {
-                    this.UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Outrigger);
+                    UpdateCategory(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Outrigger);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
-
-        #endregion
-
-        #region Properties
 
         private DateTime? DateTimeFrom { get; set; }
 
         private DateTime? DateTimeTo { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
         public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<IFilter> { this.CurrentBoatType, this.CurrentDateTimeFilter };
+            return new List<IFilter> { CurrentBoatType, CurrentDateTimeFilter };
         }
-
-        #endregion
-
-        #region Methods
 
         private void UpdateCategory(Func<TripViewModel, bool> filter)
         {
-            this.CurrentBoatType.Filter = filter;
+            CurrentBoatType.Filter = filter;
 
-            this.UpdateFilter();
+            UpdateFilter();
         }
 
         private void UpdateDateTime()
         {
-            this.CurrentDateTimeFilter.StartDate = this.FilterByDates ? this.DateTimeFrom : DateTime.MinValue;
-            this.CurrentDateTimeFilter.EndDate = this.DateTimeTo;
+            CurrentDateTimeFilter.StartDate = FilterByDates ? DateTimeFrom : DateTime.MinValue;
+            CurrentDateTimeFilter.EndDate = DateTimeTo;
 
-            this.UpdateFilter();
+            UpdateFilter();
         }
 
         private void UpdateFilter()
         {
-            this.OnFilterChanged();
+            OnFilterChanged();
         }
-
-        #endregion
     }
 }

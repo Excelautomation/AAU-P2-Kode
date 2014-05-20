@@ -12,13 +12,7 @@ namespace ARK.Model.XML
         [XmlRoot(Namespace = "", IsNullable = false)]
         public partial class dataroot
         {
-            #region Fields
-
             private DateTime generatedField;
-
-            #endregion
-
-            #region Public Properties
 
             /// <remarks/>
             [XmlElement("Tur")]
@@ -30,29 +24,21 @@ namespace ARK.Model.XML
             {
                 get
                 {
-                    return this.generatedField;
+                    return generatedField;
                 }
 
                 set
                 {
-                    this.generatedField = value;
+                    generatedField = value;
                 }
             }
-
-            #endregion
         }
 
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         public partial class datarootTur
         {
-            #region Fields
-
             private DateTime datoField;
-
-            #endregion
-
-            #region Public Properties
 
             /// <remarks/>
             public byte BådID { get; set; }
@@ -62,12 +48,12 @@ namespace ARK.Model.XML
             {
                 get
                 {
-                    return this.datoField;
+                    return datoField;
                 }
 
                 set
                 {
-                    this.datoField = value;
+                    datoField = value;
                 }
             }
 
@@ -138,8 +124,6 @@ namespace ARK.Model.XML
             /// <remarks/>
             [XmlIgnore()]
             public bool Nr9Specified { get; set; }
-
-            #endregion
         }
     }
 }

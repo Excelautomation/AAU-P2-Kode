@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.View.Protokolsystem.Confirmations;
 using ARK.View.Protokolsystem.Pages;
-using ARK.ViewModel.Protokolsystem.Confirmations;
 
 namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class CreateDamageFormViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        #region Fields
-
         private List<DamageForm> _activeDamageForms;
 
         private List<Boat> _boats;
@@ -36,39 +31,31 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private Member _selectedMember;
 
-        #endregion
-
         // constructor
-        #region Constructors and Destructors
-
         public CreateDamageFormViewModel()
         {
             DbArkContext db = DbArkContext.GetDbContext();
 
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
-                    this.Members = db.Member.OrderBy(x => x.FirstName).ToList();
-                    this.Boats = db.Boat.OrderBy(x => x.Name).ToList();
-                    this.DamageTypes = db.DamageType.ToList();
-                    this.ActiveDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
+                    Members = db.Member.OrderBy(x => x.FirstName).ToList();
+                    Boats = db.Boat.OrderBy(x => x.Name).ToList();
+                    DamageTypes = db.DamageType.ToList();
+                    ActiveDamageForms = db.DamageForm.Where(d => d.Closed == false).ToList();
                 };
         }
-
-        #endregion
-
-        #region Public Properties
 
         public List<DamageForm> ActiveDamageForms
         {
             get
             {
-                return this._activeDamageForms;
+                return _activeDamageForms;
             }
 
             set
             {
-                this._activeDamageForms = value;
-                this.Notify();
+                _activeDamageForms = value;
+                Notify();
             }
         }
 
@@ -76,7 +63,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.SelectedBoat != null && this.SelectedMember != null && this.SelectedDamageType != null;
+                return SelectedBoat != null && SelectedMember != null && SelectedDamageType != null;
             }
         }
 
@@ -84,7 +71,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(b => { this.SelectedBoat = (Boat)b; });
+                return GetCommand(b => { SelectedBoat = (Boat)b; });
             }
         }
 
@@ -94,13 +81,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._boats;
+                return _boats;
             }
 
             set
             {
-                this._boats = value;
-                this.Notify();
+                _boats = value;
+                Notify();
             }
         }
 
@@ -108,9 +95,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return
-                    this.GetCommand(
-                        () => this.ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
             }
         }
 
@@ -118,7 +103,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(d => { this.SelectedDamageType = (DamageType)d; });
+                return GetCommand(d => { SelectedDamageType = (DamageType)d; });
             }
         }
 
@@ -126,13 +111,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._damageTypes;
+                return _damageTypes;
             }
 
             set
             {
-                this._damageTypes = value;
-                this.Notify();
+                _damageTypes = value;
+                Notify();
             }
         }
 
@@ -140,13 +125,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._description;
+                return _description;
             }
 
             set
             {
-                this._description = value;
-                this.NotifyCustom("AllFieldsFilled");
+                _description = value;
+                NotifyCustom("AllFieldsFilled");
             }
         }
 
@@ -154,13 +139,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._isFunctional;
+                return _isFunctional;
             }
 
             set
             {
-                this._isFunctional = value;
-                this.NotifyCustom("AllFieldsFilled");
+                _isFunctional = value;
+                NotifyCustom("AllFieldsFilled");
             }
         }
 
@@ -168,7 +153,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(e => { this.SelectedMember = (Member)e; });
+                return GetCommand(e => { SelectedMember = (Member)e; });
             }
         }
 
@@ -176,13 +161,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._members;
+                return _members;
             }
 
             set
             {
-                this._members = value;
-                this.Notify();
+                _members = value;
+                Notify();
             }
         }
 
@@ -191,13 +176,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedBoat;
+                return _selectedBoat;
             }
 
             set
             {
-                this._selectedBoat = value;
-                this.Notify();
+                _selectedBoat = value;
+                Notify();
             }
         }
 
@@ -205,14 +190,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedDamageForm;
+                return _selectedDamageForm;
             }
 
             set
             {
-                this._selectedDamageForm = value;
-                this.Notify();
-                this.NotifyCustom("AllFieldsFilled");
+                _selectedDamageForm = value;
+                Notify();
+                NotifyCustom("AllFieldsFilled");
             }
         }
 
@@ -220,14 +205,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedDamageType;
+                return _selectedDamageType;
             }
 
             set
             {
-                this._selectedDamageType = value;
-                this.Notify();
-                this.NotifyCustom("AllFieldsFilled");
+                _selectedDamageType = value;
+                Notify();
+                NotifyCustom("AllFieldsFilled");
             }
         }
 
@@ -235,13 +220,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedMember;
+                return _selectedMember;
             }
 
             set
             {
-                this._selectedMember = value;
-                this.Notify();
+                _selectedMember = value;
+                Notify();
             }
         }
 
@@ -249,28 +234,27 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Fjern evt tjek her i VM og lav button inactive ind til betingelser er ok.
-                            if (this.SelectedBoat != null && this.SelectedMember != null
-                                && this.SelectedDamageType != null)
+                            if (SelectedBoat != null && SelectedMember != null && SelectedDamageType != null)
                             {
                                 var damageForm = new DamageForm();
-                                damageForm.RegisteringMember = this.SelectedMember; // Member
-                                damageForm.Boat = this.SelectedBoat; // Boat
+                                damageForm.RegisteringMember = SelectedMember; // Member
+                                damageForm.Boat = SelectedBoat; // Boat
 
                                 // set damagetype
-                                damageForm.Type = this.SelectedDamageType.Type;
+                                damageForm.Type = SelectedDamageType.Type;
 
                                 // set additional description
-                                damageForm.Description = this.Description;
-                                damageForm.Functional = this.IsFunctional;
+                                damageForm.Description = Description;
+                                damageForm.Functional = IsFunctional;
 
                                 DbArkContext.GetDbContext().DamageForm.Add(damageForm);
                                 DbArkContext.GetDbContext().SaveChanges();
 
-                                this.ProtocolSystem.StatisticsDistance.Execute(null);
+                                ProtocolSystem.StatisticsDistance.Execute(null);
                             }
                         });
             }
@@ -280,12 +264,8 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return
-                    this.GetCommand(
-                        () => this.ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
+                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
             }
         }
-
-        #endregion
     }
 }

@@ -7,13 +7,9 @@ namespace ARK.View.Protokolsystem.Confirmations
     /// </summary>
     public partial class BeginTripBoatsConfirm : UserControl
     {
-        #region Constructors and Destructors
-
         public BeginTripBoatsConfirm()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }

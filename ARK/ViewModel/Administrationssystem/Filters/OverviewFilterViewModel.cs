@@ -9,34 +9,30 @@ namespace ARK.ViewModel.Administrationssystem.Filters
     public class OverviewFilterViewModel : FilterViewModelBase, IFilter
     {
         private bool _boatsOut;
-        private bool _showDamages;
+
         private bool _longTrip;
 
-        #region Constructors and Destructors
+        private bool _showDamages;
 
         public OverviewFilterViewModel()
         {
-            this.Damages = true;
-            this.LongTrip = true;
-            this.BoatsOut = true;
+            Damages = true;
+            LongTrip = true;
+            BoatsOut = true;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public bool BoatsOut
         {
             get
             {
-                return this._boatsOut;
+                return _boatsOut;
             }
 
             set
             {
-                this._boatsOut = value;
-                this.Notify();
-                this.CallEvent();
+                _boatsOut = value;
+                Notify();
+                CallEvent();
             }
         }
 
@@ -49,9 +45,9 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
             set
             {
-                this._showDamages = value;
-                this.Notify();
-                this.CallEvent();
+                _showDamages = value;
+                Notify();
+                CallEvent();
             }
         }
 
@@ -64,45 +60,36 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
             set
             {
-                this._longTrip = value;
-                this.Notify();
-                this.CallEvent();
+                _longTrip = value;
+                Notify();
+                CallEvent();
             }
-        }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        public override IEnumerable<IFilter> GetFilter()
-        {
-            return new List<IFilter> { this };
         }
 
         public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
         {
-            if (!this.Damages && !this.LongTrip && !this.BoatsOut)
+            if (!Damages && !LongTrip && !BoatsOut)
             {
                 return new List<T>();
             }
 
             if (typeof(DamageForm) == typeof(T))
             {
-                if (this.Damages)
+                if (Damages)
                 {
                     return items;
                 }
             }
             else if (typeof(LongTripForm) == typeof(T))
             {
-                if (this.LongTrip)
+                if (LongTrip)
                 {
                     return items;
                 }
             }
             else if (typeof(Boat) == typeof(T))
             {
-                if (this.BoatsOut)
+                if (BoatsOut)
                 {
                     return items;
                 }
@@ -111,15 +98,14 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             return new List<T>();
         }
 
-        #endregion
-
-        #region Methods
+        public override IEnumerable<IFilter> GetFilter()
+        {
+            return new List<IFilter> { this };
+        }
 
         private void CallEvent()
         {
-            base.OnFilterChanged();
+            OnFilterChanged();
         }
-
-        #endregion
     }
 }

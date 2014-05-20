@@ -5,7 +5,6 @@ using System.Windows;
 
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Additional;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Protokolsystem.Additional;
@@ -14,8 +13,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class MembersinformationViewModel : ProtokolsystemContentViewModelBase
     {
-        #region Fields
-
         private FrameworkElement _additionalInfoPage;
 
         private DateTime _latestData;
@@ -28,47 +25,36 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private DbArkContext db;
 
-        #endregion
-
         // Constructor
-        #region Constructors and Destructors
-
         public MembersinformationViewModel()
         {
-            this.db = DbArkContext.GetDbContext();
+            db = DbArkContext.GetDbContext();
 
-            this.ParentAttached += (sender, args) =>
+            ParentAttached += (sender, args) =>
                 {
                     // Load data
-                    this.LoadMembers();
-                    this.MembersFiltered = this._members;
+                    LoadMembers();
+                    MembersFiltered = _members;
 
                     // Set selected member
-                    this.SelectedMember = this.MembersFiltered.First();
+                    SelectedMember = MembersFiltered.First();
 
                     // Setup keyboard listener
-                    this.ProtocolSystem.KeyboardTextChanged += this.ProtocolSystem_KeyboardTextChanged;
+                    ProtocolSystem.KeyboardTextChanged += ProtocolSystem_KeyboardTextChanged;
 
                     // Update info
-                    this.UpdateInfo();
+                    UpdateInfo();
                 };
 
-            this.ParentDetached +=
-                (sender, args) =>
-                    {
-                        this.ProtocolSystem.KeyboardTextChanged -= this.ProtocolSystem_KeyboardTextChanged;
-                    };
+            ParentDetached +=
+                (sender, args) => { ProtocolSystem.KeyboardTextChanged -= ProtocolSystem_KeyboardTextChanged; };
         }
-
-        #endregion
-
-        #region Public Properties
 
         public IInfoContainerViewModel GetInfoContainerViewModel
         {
             get
             {
-                return this.Parent as IInfoContainerViewModel;
+                return Parent as IInfoContainerViewModel;
             }
         }
 
@@ -76,7 +62,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.InfoPage.DataContext as MembersInformationAdditionalInfoViewModel;
+                return InfoPage.DataContext as MembersInformationAdditionalInfoViewModel;
             }
         }
 
@@ -84,7 +70,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._additionalInfoPage ?? (this._additionalInfoPage = new MembersInformationAdditionalInfo());
+                return _additionalInfoPage ?? (_additionalInfoPage = new MembersInformationAdditionalInfo());
             }
         }
 
@@ -93,13 +79,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._membersFiltered;
+                return _membersFiltered;
             }
 
             set
             {
-                this._membersFiltered = value;
-                this.Notify();
+                _membersFiltered = value;
+                Notify();
             }
         }
 
@@ -107,38 +93,30 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedMember;
+                return _selectedMember;
             }
 
             set
             {
-                this._selectedMember = value;
-                this.Notify();
-                this.UpdateInfo();
+                _selectedMember = value;
+                Notify();
+                UpdateInfo();
             }
         }
 
-        #endregion
-
         // Methods
-        #region Public Methods and Operators
-
         public void Sort(Func<Member, string> predicate)
         {
-            this.MembersFiltered = this.MembersFiltered.OrderBy(predicate).ToList();
+            MembersFiltered = MembersFiltered.OrderBy(predicate).ToList();
         }
-
-        #endregion
-
-        #region Methods
 
         private void LoadMembers()
         {
-            if (this.MembersFiltered == null || (DateTime.Now - this._latestData).TotalHours > 1)
+            if (MembersFiltered == null || (DateTime.Now - _latestData).TotalHours > 1)
             {
-                this._latestData = DateTime.Now;
+                _latestData = DateTime.Now;
 
-                this._members = new List<Member>(this.db.Member).Select(
+                _members = new List<Member>(db.Member).Select(
                     x =>
                         {
                             x.FirstName = x.FirstName.Trim();
@@ -149,18 +127,16 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void ProtocolSystem_KeyboardTextChanged(object sender, KeyboardEventArgs e)
         {
-            this.MembersFiltered = string.IsNullOrEmpty(e.Text)
-                                       ? this._members
-                                       : this._members.Where(member => member.Filter(e.Text)).ToList();
+            MembersFiltered = string.IsNullOrEmpty(e.Text)
+                                  ? _members
+                                  : _members.Where(member => member.Filter(e.Text)).ToList();
         }
 
         private void UpdateInfo()
         {
-            this.Info.SelectedMember = this.SelectedMember;
+            Info.SelectedMember = SelectedMember;
 
-            this.GetInfoContainerViewModel.ChangeInfo(this.InfoPage, this.Info);
+            GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
-
-        #endregion
     }
 }

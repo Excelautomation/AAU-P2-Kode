@@ -1,18 +1,13 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Input;
+﻿using System.Linq;
 
 using ARK.Model;
 using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Protokolsystem.Data;
 
 namespace ARK.ViewModel.Protokolsystem.Additional
 {
     public class DistanceStatisticsAdditionalInfoViewModel : ContentViewModelBase
     {
-        #region Fields
-
         private double _kmErgometer;
 
         private double _kmGig;
@@ -29,21 +24,17 @@ namespace ARK.ViewModel.Protokolsystem.Additional
 
         private TripViewModel _selectedTrip;
 
-        #endregion
-
-        #region Public Properties
-
         public double KmErgometer
         {
             get
             {
-                return this._kmErgometer;
+                return _kmErgometer;
             }
 
             private set
             {
-                this._kmErgometer = value;
-                this.Notify();
+                _kmErgometer = value;
+                Notify();
             }
         }
 
@@ -51,13 +42,13 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._kmGig;
+                return _kmGig;
             }
 
             private set
             {
-                this._kmGig = value;
-                this.Notify();
+                _kmGig = value;
+                Notify();
             }
         }
 
@@ -65,13 +56,13 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._kmInrigger;
+                return _kmInrigger;
             }
 
             private set
             {
-                this._kmInrigger = value;
-                this.Notify();
+                _kmInrigger = value;
+                Notify();
             }
         }
 
@@ -79,13 +70,13 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._kmKajak;
+                return _kmKajak;
             }
 
             private set
             {
-                this._kmKajak = value;
-                this.Notify();
+                _kmKajak = value;
+                Notify();
             }
         }
 
@@ -93,13 +84,13 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._kmOutrigger;
+                return _kmOutrigger;
             }
 
             private set
             {
-                this._kmOutrigger = value;
-                this.Notify();
+                _kmOutrigger = value;
+                Notify();
             }
         }
 
@@ -107,13 +98,13 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._mostUsedBoat;
+                return _mostUsedBoat;
             }
 
             private set
             {
-                this._mostUsedBoat = value;
-                this.Notify();
+                _mostUsedBoat = value;
+                Notify();
             }
         }
 
@@ -121,52 +112,52 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._selectedMember;
+                return _selectedMember;
             }
 
             set
             {
-                this._selectedMember = value;
-                this.Notify();
+                _selectedMember = value;
+                Notify();
 
                 if (value == null)
                 {
-                    this.MostUsedBoat = null;
-                    this.KmOutrigger = 0;
-                    this.KmInrigger = 0;
-                    this.KmKajak = 0;
-                    this.KmErgometer = 0;
-                    this.KmGig = 0;
+                    MostUsedBoat = null;
+                    KmOutrigger = 0;
+                    KmInrigger = 0;
+                    KmKajak = 0;
+                    KmErgometer = 0;
+                    KmGig = 0;
                     return;
                 }
 
-                var boats = this._selectedMember.FilteredTrips.Select(trip => trip.Trip.Boat).ToList();
+                var boats = _selectedMember.FilteredTrips.Select(trip => trip.Trip.Boat).ToList();
 
-                this.MostUsedBoat =
+                MostUsedBoat =
                     boats.Distinct().OrderByDescending(boat => boats.Count(b => b.Id == boat.Id)).FirstOrDefault();
 
-                this.KmOutrigger =
-                    this._selectedMember.FilteredTrips.Where(
+                KmOutrigger =
+                    _selectedMember.FilteredTrips.Where(
                         trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Outrigger)
                         .Sum(trip => trip.Trip.Distance);
 
-                this.KmInrigger =
-                    this._selectedMember.FilteredTrips.Where(
+                KmInrigger =
+                    _selectedMember.FilteredTrips.Where(
                         trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Inrigger)
                         .Sum(trip => trip.Trip.Distance);
 
-                this.KmKajak =
-                    this._selectedMember.FilteredTrips.Where(
-                        trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Kajak).Sum(trip => trip.Trip.Distance);
+                KmKajak =
+                    _selectedMember.FilteredTrips.Where(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Kajak)
+                        .Sum(trip => trip.Trip.Distance);
 
-                this.KmErgometer =
-                    this._selectedMember.FilteredTrips.Where(
+                KmErgometer =
+                    _selectedMember.FilteredTrips.Where(
                         trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Ergometer)
                         .Sum(trip => trip.Trip.Distance);
 
-                this.KmGig =
-                    this._selectedMember.FilteredTrips.Where(
-                        trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Gig).Sum(trip => trip.Trip.Distance);
+                KmGig =
+                    _selectedMember.FilteredTrips.Where(trip => trip.Trip.Boat.SpecificBoatType == Boat.BoatType.Gig)
+                        .Sum(trip => trip.Trip.Distance);
             }
         }
 
@@ -174,16 +165,14 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._selectedTrip;
+                return _selectedTrip;
             }
 
             set
             {
-                this._selectedTrip = value;
-                this.Notify();
+                _selectedTrip = value;
+                Notify();
             }
         }
-
-        #endregion
     }
 }

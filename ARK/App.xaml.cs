@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows;
@@ -10,10 +8,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 using ARK.HelperFunctions;
-using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.Model.XML;
 
 namespace ARK
 {
@@ -22,11 +18,10 @@ namespace ARK
     /// </summary>
     public partial class App : Application
     {
-        #region Constructors and Destructors
-
         public App()
         {
 #if RELEASE || DEBUG
+
             // Start thread which downloads the sunset time every day
             var sunsetTokenSource = new CancellationTokenSource();
             SunsetClass.StartSunsetTask(sunsetTokenSource.Token);
@@ -63,7 +58,7 @@ namespace ARK
                                 break;
                             }
 
-                            this.CheckCurrentSeasonEnd();
+                            CheckCurrentSeasonEnd();
                         }
                     });
             checkForNewSeasonThread.Start();
@@ -90,10 +85,6 @@ namespace ARK
                 };
         }
 
-        #endregion
-
-        #region Public Methods and Operators
-
         public static T GetChildOfType<T>(DependencyObject depObj) where T : DependencyObject
         {
             if (depObj == null)
@@ -115,17 +106,13 @@ namespace ARK
             return null;
         }
 
-        #endregion
-
-        #region Methods
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             EventManager.RegisterClassHandler(
                 typeof(DatePicker), 
                 DatePicker.LoadedEvent, 
-                new RoutedEventHandler(this.DatePicker_Loaded));
+                new RoutedEventHandler(DatePicker_Loaded));
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -134,7 +121,7 @@ namespace ARK
             this.StartupUri = new Uri("/View/Administrationssystem/AdminSystem.xaml", UriKind.Relative);
 #else
 #if DEBUG
-            this.StartupUri = new Uri("/MainWindow.xaml", UriKind.Relative);
+            StartupUri = new Uri("/MainWindow.xaml", UriKind.Relative);
 #else
             this.StartupUri = new Uri("/View/Protokolsystem/ProtocolSystem.xaml", UriKind.Relative);
     #endif
@@ -192,7 +179,5 @@ namespace ARK
 
             wm.Content = "Vælg en dato";
         }
-
-        #endregion
     }
 }

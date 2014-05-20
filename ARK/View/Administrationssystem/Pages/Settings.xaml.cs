@@ -7,13 +7,9 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class Indstillinger : UserControl
     {
-        #region Constructors and Destructors
-
         public Indstillinger()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }
