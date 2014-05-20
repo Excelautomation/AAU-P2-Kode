@@ -7,13 +7,9 @@ namespace ARK.View.Protokolsystem.Confirmations
     /// </summary>
     public partial class CreateLongTripConfirm : UserControl
     {
-        #region Constructors and Destructors
-
         public CreateLongTripConfirm()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }

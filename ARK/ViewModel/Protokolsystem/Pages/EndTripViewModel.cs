@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Input;
 
-using ARK.HelperFunctions;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.View.Protokolsystem.Confirmations;
@@ -17,8 +15,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
     public class EndTripViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        #region Fields
-
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
 
         private List<Trip> _activeTrips;
@@ -33,36 +29,32 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private List<StandardTrip> _standardTrips;
 
-        #endregion
-
         // Constructor
-        #region Constructors and Destructors
-
         public EndTripViewModel()
         {
             TimeCounter.StartTimer();
 
-            this.ParentAttached += (sender, args) =>
+            ParentAttached += (sender, args) =>
                 {
-                    if (this.StandardTrips == null || (DateTime.Now - this._latestData).TotalHours > 1)
+                    if (StandardTrips == null || (DateTime.Now - _latestData).TotalHours > 1)
                     {
                         // Indlæs data
-                        this.GetStandardTrips();
+                        GetStandardTrips();
 
-                        this._latestData = DateTime.Now;
+                        _latestData = DateTime.Now;
                     }
 
-                    this.GetActiveTrips();
+                    GetActiveTrips();
 
                     // Reset selected trip
-                    this.SelectedTrip = null;
+                    SelectedTrip = null;
 
                     // Bind keyboard
                     // base.ProtocolSystem.KeyboardTextChanged += this.MonitorCustomDistance;
-                    this.ResetPage();
+                    ResetPage();
                 };
 
-            this.ParentDetached += (sender, args) =>
+            ParentDetached += (sender, args) =>
                 {
                     // base.ProtocolSystem.KeyboardTextChanged -= this.MonitorCustomDistance;
                 };
@@ -70,22 +62,18 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             TimeCounter.StopTime();
         }
 
-        #endregion
-
         // Props
-        #region Public Properties
-
         public List<Trip> ActiveTrips
         {
             get
             {
-                return this._activeTrips;
+                return _activeTrips;
             }
 
             set
             {
-                this._activeTrips = value;
-                this.Notify();
+                _activeTrips = value;
+                Notify();
             }
         }
 
@@ -93,13 +81,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._customDistance;
+                return _customDistance;
             }
 
             set
             {
-                this._customDistance = value;
-                this.Notify();
+                _customDistance = value;
+                Notify();
             }
         }
 
@@ -110,26 +98,24 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(
                     e =>
                         {
-                            if (this.SelectedStdTrip != null)
+                            if (SelectedStdTrip != null)
                             {
-                                this.SelectedTrip.Title = this.SelectedStdTrip.Title;
-                                this.SelectedTrip.Direction = this.SelectedStdTrip.Direction;
-                                this.SelectedTrip.Distance = this.SelectedStdTrip.Distance;
+                                SelectedTrip.Title = SelectedStdTrip.Title;
+                                SelectedTrip.Direction = SelectedStdTrip.Direction;
+                                SelectedTrip.Distance = SelectedStdTrip.Distance;
                             }
 
                             // set Custom distance if different from default
-                            this.SelectedTrip.Distance = this.CustomDistance > 0
-                                                             ? this.CustomDistance
-                                                             : this.SelectedTrip.Distance;
-                            this.SelectedTrip.TripEndedTime = DateTime.Now;
-                            this._db.SaveChanges();
+                            SelectedTrip.Distance = CustomDistance > 0 ? CustomDistance : SelectedTrip.Distance;
+                            SelectedTrip.TripEndedTime = DateTime.Now;
+                            _db.SaveChanges();
 
-                            this.GetActiveTrips();
-                            this.ProtocolSystem.UpdateDailyKilometers();
-                            this.ProtocolSystem.UpdateNumBoatsOut();
-                            this.ResetPage();
+                            GetActiveTrips();
+                            ProtocolSystem.UpdateDailyKilometers();
+                            ProtocolSystem.UpdateNumBoatsOut();
+                            ResetPage();
                         }, 
-                    e => this.SelectedStdTrip != null || this.CustomDistance > 0);
+                    e => SelectedStdTrip != null || CustomDistance > 0);
             }
         }
 
@@ -137,13 +123,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedStdTrip;
+                return _selectedStdTrip;
             }
 
             set
             {
-                this._selectedStdTrip = value;
-                this.Notify();
+                _selectedStdTrip = value;
+                Notify();
             }
         }
 
@@ -151,13 +137,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedTrip;
+                return _selectedTrip;
             }
 
             set
             {
-                this._selectedTrip = value;
-                this.Notify();
+                _selectedTrip = value;
+                Notify();
             }
         }
 
@@ -171,12 +157,12 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                             var confirmView = new ChangeDistanceConfirm();
                             var confirmViewModel = (ChangeDistanceConfirmViewModel)confirmView.DataContext;
 
-                            confirmViewModel.SelectedTrip = this.SelectedTrip;
-                            this.ProtocolSystem.ShowDialog(confirmView);
+                            confirmViewModel.SelectedTrip = SelectedTrip;
+                            ProtocolSystem.ShowDialog(confirmView);
 
                             base.ProtocolSystem.EnableSearch = true;
                         }, 
-                    x => this.SelectedTrip != null);
+                    x => SelectedTrip != null);
             }
         }
 
@@ -184,13 +170,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._standardTrips;
+                return _standardTrips;
             }
 
             set
             {
-                this._standardTrips = value;
-                this.Notify();
+                _standardTrips = value;
+                Notify();
             }
         }
 
@@ -198,36 +184,30 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     st =>
                         {
                             var temp = ((IList)st).Cast<StandardTrip>();
-                            this.SelectedStdTrip = temp.FirstOrDefault();
+                            SelectedStdTrip = temp.FirstOrDefault();
                         });
             }
         }
 
-        #endregion
-
-        #region Methods
-
         private void GetActiveTrips()
         {
-            this.ActiveTrips = this._db.Trip.Where(t => t.TripEndedTime == null).ToList();
+            ActiveTrips = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
         }
 
         private void GetStandardTrips()
         {
-            this.StandardTrips = this._db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
+            StandardTrips = _db.StandardTrip.OrderBy(trip => trip.Distance).ToList();
         }
 
         private void ResetPage()
         {
-            this.SelectedTrip = null;
-            this.SelectedStdTrip = null;
+            SelectedTrip = null;
+            SelectedStdTrip = null;
             base.ProtocolSystem.KeyboardClear();
         }
-
-        #endregion
     }
 }

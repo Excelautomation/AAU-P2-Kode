@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ARK.HelperFunctions
 {
-    //http://aspnetwebstack.codeplex.com/SourceControl/latest#src/System.Web.Helpers/Crypto.cs
-    class PasswordHashing
+    // http://aspnetwebstack.codeplex.com/SourceControl/latest#src/System.Web.Helpers/Crypto.cs
+    internal class PasswordHashing
     {
         private const int PBKDF2IterCount = 1000; // default for Rfc2898DeriveBytes
-        private const int PBKDF2SubkeyLength = 256 / 8; //256 / 8; // 256 bits
-        private const int SaltSize = 128 / 8; //128 / 8; // 128 bits
+
+        private const int PBKDF2SubkeyLength = 256 / 8; // 256 / 8; // 256 bits
+
+        private const int SaltSize = 128 / 8; // 128 / 8; // 128 bits
 
         /* =======================
          * HASHED PASSWORD FORMATS
@@ -24,7 +22,6 @@ namespace ARK.HelperFunctions
          * (See also: SDL crypto guidelines v5.1, Part III)
          * Format: { 0x00, salt, subkey }
          */
-
         public static string HashPassword(string password)
         {
             if (password == null)
@@ -100,7 +97,7 @@ namespace ARK.HelperFunctions
             bool areSame = true;
             for (int i = 0; i < a.Length; i++)
             {
-                areSame &= (a[i] == b[i]);
+                areSame &= a[i] == b[i];
             }
 
             return areSame;

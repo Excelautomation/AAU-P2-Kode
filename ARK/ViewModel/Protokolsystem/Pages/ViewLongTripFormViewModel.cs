@@ -14,47 +14,36 @@ namespace ARK.ViewModel.Protokolsystem.Pages
     internal class ViewLongTripFormViewModel : ProtokolsystemContentViewModelBase
     {
         // Fields
-        #region Fields
-
         private FrameworkElement _infoPage;
 
         private List<LongTripForm> _longTripForms;
 
         private LongTripForm _selectedLongTripForm;
 
-        #endregion
-
         // Constructor
-        #region Constructors and Destructors
-
         public ViewLongTripFormViewModel()
         {
             var db = DbArkContext.GetDbContext();
 
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
-                    this.LongTripForms = db.LongTripForm.ToList();
+                    LongTripForms = db.LongTripForm.ToList();
 
-                    if (this.LongTripForms.Any())
+                    if (LongTripForms.Any())
                     {
-                        this.SelectedLongTripForm = this.LongTripForms.First();
+                        SelectedLongTripForm = LongTripForms.First();
                     }
 
-                    this.UpdateInfo();
+                    UpdateInfo();
                 };
         }
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand CreateLongTripForm
         {
             get
             {
                 return
-                    this.GetCommand(
-                        () => this.ProtocolSystem.NavigateToPage(() => new CreateLongTripForm(), "OPRET NY LANGTUR"));
+                    GetCommand(() => ProtocolSystem.NavigateToPage(() => new CreateLongTripForm(), "OPRET NY LANGTUR"));
             }
         }
 
@@ -63,13 +52,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._longTripForms;
+                return _longTripForms;
             }
 
             set
             {
-                this._longTripForms = value;
-                this.Notify();
+                _longTripForms = value;
+                Notify();
             }
         }
 
@@ -77,14 +66,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedLongTripForm;
+                return _selectedLongTripForm;
             }
 
             set
             {
-                this._selectedLongTripForm = value;
-                this.Notify();
-                this.UpdateInfo();
+                _selectedLongTripForm = value;
+                Notify();
+                UpdateInfo();
             }
         }
 
@@ -93,20 +82,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             get
             {
                 return
-                    this.GetCommand(
-                        () => this.ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
+                    GetCommand(() => ProtocolSystem.NavigateToPage(() => new ViewLongTripForm(), "LANGTURSBLANKETTER"));
             }
         }
-
-        #endregion
-
-        #region Properties
 
         private ViewLongTripFormAdditionalInfoViewModel Info
         {
             get
             {
-                return this.InfoPage.DataContext as ViewLongTripFormAdditionalInfoViewModel;
+                return InfoPage.DataContext as ViewLongTripFormAdditionalInfoViewModel;
             }
         }
 
@@ -114,21 +98,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._infoPage ?? (this._infoPage = new ViewLongTripFormAdditionalInfo());
+                return _infoPage ?? (_infoPage = new ViewLongTripFormAdditionalInfo());
             }
         }
 
-        #endregion
-
-        #region Methods
-
         private void UpdateInfo()
         {
-            this.Info.SelectedLongTripForm = this.SelectedLongTripForm;
+            Info.SelectedLongTripForm = SelectedLongTripForm;
 
-            this.ProtocolSystem.ChangeInfo(this.InfoPage, this.Info);
+            ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
-
-        #endregion
     }
 }

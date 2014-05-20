@@ -1,33 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
-
-using ARK.HelperFunctions.SMSGateway;
 
 namespace ARK.Model.DB
 {
     public class DbArkContext : DbContext
     {
-        #region Static Fields
-
         private static DbArkContext _dbContext;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public DbArkContext()
             : base("DefaultDB")
         {
             // Database.SetInitializer<DbArkContext>(new DropCreateDatabaseAlways<DbArkContext>());
             Database.SetInitializer(new MySqlInitializer());
-            this.Database.Log = s => Debug.WriteLine("DBContext: " + s);
+            Database.Log = s => Debug.WriteLine("DBContext: " + s);
         }
-
-        #endregion
-
-        #region Public Properties
 
         public DbSet<Admin> Admin { get; set; }
 
@@ -57,18 +44,10 @@ namespace ARK.Model.DB
 
         public DbSet<TripWarningSms> TripWarningSms { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
         public static DbArkContext GetDbContext()
         {
             return _dbContext ?? (_dbContext = new DbArkContext());
         }
-
-        #endregion
-
-        #region Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -136,7 +115,5 @@ namespace ARK.Model.DB
 
             base.OnModelCreating(modelBuilder);
         }
-
-        #endregion
     }
 }

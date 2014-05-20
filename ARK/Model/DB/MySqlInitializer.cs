@@ -6,8 +6,6 @@ namespace ARK.Model.DB
 {
     public class MySqlInitializer : IDatabaseInitializer<DbArkContext>
     {
-        #region Public Methods and Operators
-
         public void InitializeDatabase(DbArkContext context)
         {
             if (!context.Database.Exists())
@@ -32,7 +30,5 @@ namespace ARK.Model.DB
                 }
             }
         }
-
-        #endregion
     }
 }

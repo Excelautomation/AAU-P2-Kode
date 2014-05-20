@@ -9,42 +9,41 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 {
     internal class BoatFilterViewModel : FilterViewModelBase, IFilter
     {
-        private bool _showInactiveBoats;
         private bool _showBoatsDamaged;
+
         private bool _showBoatsHome;
+
         private bool _showBoatsOut;
+
         private bool _showBoatsUnderService;
+
         private bool _showFunctionalBoats;
 
-        #region Constructors and Destructors
+        private bool _showInactiveBoats;
 
         public BoatFilterViewModel()
         {
-            this.ShowBoatsOut = true;
-            this.ShowBoatsHome = true;
-            this.ShowBoatsUnderService = true;
-            this.ShowBoatsDamaged = true;
-            this.ShowInactiveBoats = true;
-            this.ShowFunctionalBoats = true;
+            ShowBoatsOut = true;
+            ShowBoatsHome = true;
+            ShowBoatsUnderService = true;
+            ShowBoatsDamaged = true;
+            ShowInactiveBoats = true;
+            ShowFunctionalBoats = true;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public bool ShowBoatsDamaged
         {
             get
             {
-                return this._showBoatsDamaged;
+                return _showBoatsDamaged;
             }
 
             set
             {
-                this._showBoatsDamaged = value;
-                this.Notify();
+                _showBoatsDamaged = value;
+                Notify();
 
-                this.CallEvent();
+                CallEvent();
             }
         }
 
@@ -52,15 +51,15 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             get
             {
-                return this._showBoatsHome;
+                return _showBoatsHome;
             }
 
             set
             {
-                this._showBoatsHome = value;
-                this.Notify();
+                _showBoatsHome = value;
+                Notify();
 
-                this.CallEvent();
+                CallEvent();
             }
         }
 
@@ -68,15 +67,15 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             get
             {
-                return this._showBoatsOut;
+                return _showBoatsOut;
             }
 
             set
             {
-                this._showBoatsOut = value;
-                this.Notify();
+                _showBoatsOut = value;
+                Notify();
 
-                this.CallEvent();
+                CallEvent();
             }
         }
 
@@ -84,15 +83,15 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             get
             {
-                return this._showBoatsUnderService;
+                return _showBoatsUnderService;
             }
 
             set
             {
-                this._showBoatsUnderService = value;
-                this.Notify();
+                _showBoatsUnderService = value;
+                Notify();
 
-                this.CallEvent();
+                CallEvent();
             }
         }
 
@@ -100,15 +99,15 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             get
             {
-                return this._showFunctionalBoats;
+                return _showFunctionalBoats;
             }
 
             set
             {
-                this._showFunctionalBoats = value;
-                this.Notify();
+                _showFunctionalBoats = value;
+                Notify();
 
-                this.CallEvent();
+                CallEvent();
             }
         }
 
@@ -116,35 +115,22 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             get
             {
-                return this._showInactiveBoats;
+                return _showInactiveBoats;
             }
 
             set
             {
-                this._showInactiveBoats = value;
-                this.Notify();
+                _showInactiveBoats = value;
+                Notify();
 
-                this.CallEvent();
+                CallEvent();
             }
         }
 
-        #endregion
-
-        #region Public Methods and Operators
-
-        public override IEnumerable<IFilter> GetFilter()
-        {
-            return new List<IFilter> { this };
-        }
-
-        #endregion
-
-        #region Methods
-
         public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
         {
-            if (!this.ShowBoatsOut && !this.ShowBoatsHome && !this.ShowBoatsUnderService && !this.ShowBoatsDamaged
-                && !this.ShowInactiveBoats && !this.ShowFunctionalBoats)
+            if (!ShowBoatsOut && !ShowBoatsHome && !ShowBoatsUnderService && !ShowBoatsDamaged && !ShowInactiveBoats
+                && !ShowFunctionalBoats)
             {
                 return new List<T>();
             }
@@ -158,36 +144,35 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             var outputBoatsOutIn = new List<Boat>();
             var outputDamage = new List<Boat>();
 
-            if (this.ShowBoatsOut)
+            if (ShowBoatsOut)
             {
                 outputBoatsOutIn =
                     FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => boat.BoatOut)).ToList();
             }
 
-            if (this.ShowBoatsHome)
+            if (ShowBoatsHome)
             {
                 outputBoatsOutIn =
                     FilterContent.MergeLists(outputBoatsOutIn, boats.Where(boat => !boat.BoatOut)).ToList();
             }
 
-            if (this.ShowBoatsUnderService)
+            if (ShowBoatsUnderService)
             {
                 outputDamage =
-                    FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged && !boat.Usable))
-                        .ToList();
+                    FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged && !boat.Usable)).ToList();
             }
 
-            if (this.ShowBoatsDamaged)
+            if (ShowBoatsDamaged)
             {
                 outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Damaged)).ToList();
             }
 
-            if (this.ShowInactiveBoats)
+            if (ShowInactiveBoats)
             {
                 outputDamage = FilterContent.MergeLists(outputDamage, boats.Where(boat => !boat.Active)).ToList();
             }
 
-            if (this.ShowFunctionalBoats)
+            if (ShowFunctionalBoats)
             {
                 outputDamage =
                     FilterContent.MergeLists(outputDamage, boats.Where(boat => boat.Usable && boat.Active)).ToList();
@@ -196,11 +181,14 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             return outputBoatsOutIn.Where(boat => outputDamage.Any(boat2 => boat == boat2)).Cast<T>();
         }
 
-        private void CallEvent()
+        public override IEnumerable<IFilter> GetFilter()
         {
-            this.OnFilterChanged();
+            return new List<IFilter> { this };
         }
 
-        #endregion
+        private void CallEvent()
+        {
+            OnFilterChanged();
+        }
     }
 }

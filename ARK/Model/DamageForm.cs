@@ -4,16 +4,10 @@ namespace ARK.Model
 {
     public class DamageForm : IEquatable<DamageForm>
     {
-        #region Constructors and Destructors
-
         public DamageForm()
         {
-            this.Date = DateTime.Now;
+            Date = DateTime.Now;
         }
-
-        #endregion
-
-        #region Public Properties
 
         public virtual Boat Boat { get; set; }
 
@@ -36,20 +30,6 @@ namespace ARK.Model
 
         public string Type { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(DamageForm left, DamageForm right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(DamageForm left, DamageForm right)
-        {
-            return !Equals(left, right);
-        }
-
         public bool Equals(DamageForm other)
         {
             if (ReferenceEquals(null, other))
@@ -62,7 +42,17 @@ namespace ARK.Model
                 return true;
             }
 
-            return this.Id == other.Id;
+            return Id == other.Id;
+        }
+
+        public static bool operator ==(DamageForm left, DamageForm right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(DamageForm left, DamageForm right)
+        {
+            return !Equals(left, right);
         }
 
         public override bool Equals(object obj)
@@ -77,19 +67,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((DamageForm)obj);
+            return Equals((DamageForm)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Id;
+            return Id;
         }
-
-        #endregion
     }
 }

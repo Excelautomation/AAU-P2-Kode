@@ -4,8 +4,6 @@ namespace ARK.Model
 {
     public class FTPInfo : IEquatable<FTPInfo>
     {
-        #region Public Properties
-
         public string HostName { get; set; }
 
         public int Id { get; set; }
@@ -17,20 +15,6 @@ namespace ARK.Model
         public int Port { get; set; }
 
         public string Username { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(FTPInfo left, FTPInfo right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(FTPInfo left, FTPInfo right)
-        {
-            return !Equals(left, right);
-        }
 
         public bool Equals(FTPInfo other)
         {
@@ -44,7 +28,17 @@ namespace ARK.Model
                 return true;
             }
 
-            return this.Id == other.Id;
+            return Id == other.Id;
+        }
+
+        public static bool operator ==(FTPInfo left, FTPInfo right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(FTPInfo left, FTPInfo right)
+        {
+            return !Equals(left, right);
         }
 
         public override bool Equals(object obj)
@@ -59,19 +53,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((FTPInfo)obj);
+            return Equals((FTPInfo)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Id;
+            return Id;
         }
-
-        #endregion
     }
 }

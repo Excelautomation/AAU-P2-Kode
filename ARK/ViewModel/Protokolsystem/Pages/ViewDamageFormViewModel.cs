@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -16,8 +15,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class ViewDamageFormViewModel : ProtokolsystemContentViewModelBase
     {
-        #region Fields
-
         private List<DamageForm> _damageForms;
 
         private FrameworkElement _infoPage;
@@ -26,32 +23,22 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private DbArkContext db = DbArkContext.GetDbContext();
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public ViewDamageFormViewModel()
         {
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
-                    this.DamageForms = this.db.DamageForm.Where(x => x.Closed == false).ToList();
+                    DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
 
                     // Vis info
-                    this.UpdateInfo();
+                    UpdateInfo();
                 };
         }
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand CreateDamageForm
         {
             get
             {
-                return
-                    this.GetCommand(
-                        () => this.ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
+                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new CreateDamageForm(), "OPRET NY SKADE"));
             }
         }
 
@@ -59,13 +46,13 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._damageForms;
+                return _damageForms;
             }
 
             set
             {
-                this._damageForms = value;
-                this.Notify();
+                _damageForms = value;
+                Notify();
             }
         }
 
@@ -73,17 +60,17 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             var confirmView = new DamageFormConfirm();
                             var confirmViewModel = (DamageFormConfirmViewModel)confirmView.DataContext;
 
-                            confirmViewModel.DamageForm = this.SelectedDamageForm;
+                            confirmViewModel.DamageForm = SelectedDamageForm;
 
-                            this.ProtocolSystem.ShowDialog(confirmView);
+                            ProtocolSystem.ShowDialog(confirmView);
 
-                            this.ProtocolSystem.EnableSearch = true;
+                            ProtocolSystem.EnableSearch = true;
                         });
             }
         }
@@ -92,14 +79,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedDamageForm;
+                return _selectedDamageForm;
             }
 
             set
             {
-                this._selectedDamageForm = value;
-                this.Notify();
-                this.UpdateInfo();
+                _selectedDamageForm = value;
+                Notify();
+                UpdateInfo();
             }
         }
 
@@ -107,21 +94,15 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return
-                    this.GetCommand(
-                        () => this.ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
+                return GetCommand(() => ProtocolSystem.NavigateToPage(() => new ViewDamageForm(), "SKADEBLANKETTER"));
             }
         }
-
-        #endregion
-
-        #region Properties
 
         private ViewDamageFormAdditionalInfoViewModel Info
         {
             get
             {
-                return this.InfoPage.DataContext as ViewDamageFormAdditionalInfoViewModel;
+                return InfoPage.DataContext as ViewDamageFormAdditionalInfoViewModel;
             }
         }
 
@@ -129,35 +110,25 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._infoPage ?? (this._infoPage = new ViewDamageFormAdditionalInfo());
+                return _infoPage ?? (_infoPage = new ViewDamageFormAdditionalInfo());
             }
         }
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public void ResetList()
         {
-            this.DamageForms = this.db.DamageForm.Where(x => x.Closed == false).ToList();
+            DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
 
-            if (this.DamageForms.Any())
+            if (DamageForms.Any())
             {
-                this.SelectedDamageForm = this.DamageForms.First();
+                SelectedDamageForm = DamageForms.First();
             }
         }
 
-        #endregion
-
-        #region Methods
-
         private void UpdateInfo()
         {
-            this.Info.SelectedDamageForm = this.SelectedDamageForm;
+            Info.SelectedDamageForm = SelectedDamageForm;
 
-            this.ProtocolSystem.ChangeInfo(this.InfoPage, this.Info);
+            ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
-
-        #endregion
     }
 }

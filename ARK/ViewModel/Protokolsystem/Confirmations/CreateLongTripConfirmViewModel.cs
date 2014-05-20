@@ -1,38 +1,29 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
     public class CreateLongTripConfirmViewModel : ConfirmationViewModelBase
     {
         // Fields
-        #region Fields
-
         private string _errors;
 
         private LongTripForm _longTrip;
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand CancelForm
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.Hide();
-                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            Hide();
+                            ProtocolSystem.StatisticsDistance.Execute(null);
                         });
             }
         }
@@ -41,7 +32,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this.GetCommand(this.Hide);
+                return GetCommand(Hide);
             }
         }
 
@@ -49,13 +40,13 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this._errors;
+                return _errors;
             }
 
             set
             {
-                this._errors = value;
-                this.Notify();
+                _errors = value;
+                Notify();
             }
         }
 
@@ -63,14 +54,14 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this._longTrip;
+                return _longTrip;
             }
 
             set
             {
-                this._longTrip = value;
-                this.Notify();
-                this.UpdateErrors();
+                _longTrip = value;
+                Notify();
+                UpdateErrors();
             }
         }
 
@@ -78,75 +69,67 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.LongTrip.Members = this.LongTrip.Members.Where(member => member.Id >= 0).ToList();
+                            LongTrip.Members = LongTrip.Members.Where(member => member.Id >= 0).ToList();
 
-                            DbArkContext.GetDbContext().LongTripForm.Add(this.LongTrip);
+                            DbArkContext.GetDbContext().LongTripForm.Add(LongTrip);
                             DbArkContext.GetDbContext().SaveChanges();
 
-                            this.Hide();
-                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            Hide();
+                            ProtocolSystem.StatisticsDistance.Execute(null);
                         }, 
                     () =>
-                    this.LongTrip != null && !string.IsNullOrEmpty(this.LongTrip.TourDescription)
-                    && !string.IsNullOrEmpty(this.LongTrip.DistancesPerDay)
-                    && !string.IsNullOrEmpty(this.LongTrip.CampSites) && this.LongTrip.PlannedStartDate >= DateTime.Now
-                    && this.LongTrip.PlannedEndDate >= DateTime.Now
-                    && this.LongTrip.PlannedEndDate > this.LongTrip.PlannedStartDate && this.LongTrip.Members.Any()
-                    && this.LongTrip.ResponsibleMember != null);
+                    LongTrip != null && !string.IsNullOrEmpty(LongTrip.TourDescription)
+                    && !string.IsNullOrEmpty(LongTrip.DistancesPerDay) && !string.IsNullOrEmpty(LongTrip.CampSites)
+                    && LongTrip.PlannedStartDate >= DateTime.Now && LongTrip.PlannedEndDate >= DateTime.Now
+                    && LongTrip.PlannedEndDate > LongTrip.PlannedStartDate && LongTrip.Members.Any()
+                    && LongTrip.ResponsibleMember != null);
             }
         }
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public void UpdateErrors()
         {
             var sb = new StringBuilder();
 
-            if (string.IsNullOrEmpty(this.LongTrip.TourDescription))
+            if (string.IsNullOrEmpty(LongTrip.TourDescription))
             {
                 sb.AppendLine(string.Format("Indtast venligst en turbeskrivelse"));
             }
 
-            if (string.IsNullOrEmpty(this.LongTrip.DistancesPerDay))
+            if (string.IsNullOrEmpty(LongTrip.DistancesPerDay))
             {
                 sb.AppendLine(string.Format("Indtast venligst en distance"));
             }
 
-            if (string.IsNullOrEmpty(this.LongTrip.CampSites))
+            if (string.IsNullOrEmpty(LongTrip.CampSites))
             {
                 sb.AppendLine(string.Format("Indtast venligst hvor I ønsker at overnatte"));
             }
 
-            if (this.LongTrip.PlannedStartDate <= DateTime.Now)
+            if (LongTrip.PlannedStartDate <= DateTime.Now)
             {
                 sb.AppendLine(string.Format("Indtast venligst en gyldig startdato"));
             }
 
-            if (this.LongTrip.PlannedEndDate < DateTime.Now
-                || this.LongTrip.PlannedEndDate <= this.LongTrip.PlannedStartDate)
+            if (LongTrip.PlannedEndDate < DateTime.Now || LongTrip.PlannedEndDate <= LongTrip.PlannedStartDate)
             {
                 sb.AppendLine(string.Format("Indtast venligst en gyldig slutdato"));
             }
 
-            if (!this.LongTrip.Members.Any())
+            if (!LongTrip.Members.Any())
             {
                 sb.AppendLine("Vælg venligst nogle medlemmer der skal med på langturen");
             }
 
-            if (this.LongTrip.ResponsibleMember == null)
+            if (LongTrip.ResponsibleMember == null)
             {
                 sb.AppendLine(
                     "Vælg venligst den ansvarlige person for langturen - vælg \"Vælg ansvarlig\" knappen til højre");
             }
 
-            this.Errors = sb.ToString();
+            Errors = sb.ToString();
         }
-
-        #endregion
     }
 }

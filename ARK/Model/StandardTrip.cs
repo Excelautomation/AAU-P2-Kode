@@ -4,8 +4,6 @@ namespace ARK.Model
 {
     public class StandardTrip : IEquatable<StandardTrip>
     {
-        #region Public Properties
-
         public string Direction { get; set; }
 
         public double Distance { get; set; }
@@ -13,20 +11,6 @@ namespace ARK.Model
         public int Id { get; set; }
 
         public string Title { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(StandardTrip left, StandardTrip right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(StandardTrip left, StandardTrip right)
-        {
-            return !Equals(left, right);
-        }
 
         public bool Equals(StandardTrip other)
         {
@@ -40,7 +24,17 @@ namespace ARK.Model
                 return true;
             }
 
-            return this.Id == other.Id;
+            return Id == other.Id;
+        }
+
+        public static bool operator ==(StandardTrip left, StandardTrip right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(StandardTrip left, StandardTrip right)
+        {
+            return !Equals(left, right);
         }
 
         public override bool Equals(object obj)
@@ -55,19 +49,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((StandardTrip)obj);
+            return Equals((StandardTrip)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Id;
+            return Id;
         }
-
-        #endregion
     }
 }

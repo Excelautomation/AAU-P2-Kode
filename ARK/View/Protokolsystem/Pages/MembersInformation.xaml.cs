@@ -7,13 +7,9 @@ namespace ARK.View.Protokolsystem.Pages
     /// </summary>
     public partial class MembersInformation : UserControl
     {
-        #region Constructors and Destructors
-
         public MembersInformation()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }

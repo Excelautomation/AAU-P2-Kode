@@ -12,15 +12,9 @@ namespace ARK.ViewModel.Base
     /// </remarks>
     public class RelayCommand : ICommand
     {
-        #region Fields
-
         private readonly Predicate<object> _canExecute;
 
         private readonly Action<object> _execute;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public RelayCommand(Action<object> execute)
             : this(execute, null)
@@ -34,13 +28,9 @@ namespace ARK.ViewModel.Base
                 throw new ArgumentNullException("execute");
             }
 
-            this._execute = execute;
-            this._canExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
-
-        #endregion
-
-        #region Public Events
 
         public event EventHandler CanExecuteChanged
         {
@@ -55,21 +45,15 @@ namespace ARK.ViewModel.Base
             }
         }
 
-        #endregion
-
-        #region Public Methods and Operators
-
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return this._canExecute == null || this._canExecute(parameter);
+            return _canExecute == null || _canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            this._execute(parameter);
+            _execute(parameter);
         }
-
-        #endregion
     }
 }

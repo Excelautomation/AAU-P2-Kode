@@ -15,8 +15,6 @@ namespace ARK.Model.XML
 {
     public static class XmlParser
     {
-        #region Public Methods and Operators
-
         public static DateTime GetSunsetFromXml()
         {
             DateTime now = DateTime.Today;
@@ -48,155 +46,153 @@ namespace ARK.Model.XML
         {
             using (var context = new DbArkContext())
             {
-                var xmlString = DownloadLatestFromFtp(@"Tur.xml");
-                var xmlObject = ParseXML<XMLTrips.dataroot>(xmlString);
+            var xmlString = DownloadLatestFromFtp(@"Tur.xml");
+            var xmlObject = ParseXML<XMLTrips.dataroot>(xmlString);
 
                 IEnumerable<PropertyInfo> props = new List<PropertyInfo>(typeof (XMLTrips.datarootTur).GetProperties());
-                var filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
+            var filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
 
-                foreach (XMLTrips.datarootTur tripXml in xmlObject.Tur)
-                {
-                    var trip = new Trip();
+            foreach (XMLTrips.datarootTur tripXml in xmlObject.Tur)
+            {
+                var trip = new Trip();
 
-                    trip.Id = tripXml.ID;
-                    trip.Distance = tripXml.Kilometer;
-                    trip.TripStartTime = tripXml.Dato;
-                    trip.TripEndedTime = tripXml.Dato;
-                    trip.LongTrip = tripXml.Langtur == 1;
-                    trip.BoatId = tripXml.BådID;
+                trip.Id = tripXml.ID;
+                trip.Distance = tripXml.Kilometer;
+                trip.TripStartTime = tripXml.Dato;
+                trip.TripEndedTime = tripXml.Dato;
+                trip.LongTrip = tripXml.Langtur == 1;
+                trip.BoatId = tripXml.BådID;
                     trip.Members = new List<Member> {context.Member.Find((int) tripXml.Nr1)};
 
-                    foreach (PropertyInfo prop in filteredProps)
-                    {
+                foreach (PropertyInfo prop in filteredProps)
+                {
                         if ((bool) prop.GetValue(tripXml))
-                        {
-                            PropertyInfo elementProp =
-                                props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
-                            trip.Members.Add(context.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXml))));
-                        }
+                    {
+                        PropertyInfo elementProp =
+                            props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
+                        trip.Members.Add(context.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXml))));
                     }
-
-                    context.Trip.Add(trip);
                 }
 
-                context.SaveChanges();
+                context.Trip.Add(trip);
             }
+
+            context.SaveChanges();
+        }
         }
 
         public static void UpdateBoatsFromFtp(bool saveChanges = true)
         {
             using (var context = new DbArkContext())
             {
-                var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
-                if (xmlString == null)
-                {
-                    // If xmlString is null, no update is needed and the function returns immediately
-                    return;
-                }
-                var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
+            var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
+            if (xmlString == null)
+            {
+                // If xmlString is null, no update is needed and the function returns immediately
+                return;
+            }
 
-                foreach (var boat in context.Boat)
-                {
-                    if (xmlObject.BådeSpecifik.All(x => x.ID != boat.Id))
-                    {
-                        context.Boat.Remove(boat);
-                    }
-                }
+            var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
 
-                foreach (var boatXml in xmlObject.BådeSpecifik)
+            foreach (var boat in context.Boat)
+            {
+                if (xmlObject.BådeSpecifik.All(x => x.ID != boat.Id))
                 {
-                    Boat boat;
-                    if ((boat = context.Boat.Find(boatXml.ID)) != null)
-                    {
-                        BoatXmlToModel(boat, boatXml);
-                    }
-                    else
-                    {
-                        boat = new Boat()
-                        {
-                            DamageForms = new List<DamageForm>(),
-                            LongTripForms = new LinkedList<LongTripForm>()
-                        };
-                        BoatXmlToModel(boat, boatXml);
-                        context.Boat.Add(boat);
-                    }
-                }
-
-                if (saveChanges)
-                {
-                    context.SaveChanges();
+                    context.Boat.Remove(boat);
                 }
             }
+
+            foreach (var boatXml in xmlObject.BådeSpecifik)
+            {
+                Boat boat;
+                if ((boat = context.Boat.Find(boatXml.ID)) != null)
+                {
+                    BoatXmlToModel(boat, boatXml);
+                }
+                else
+                {
+                    boat = new Boat()
+                               {
+                                   DamageForms = new List<DamageForm>(),
+                                   LongTripForms = new LinkedList<LongTripForm>()
+                               };
+                    BoatXmlToModel(boat, boatXml);
+                    context.Boat.Add(boat);
+                }
+            }
+
+            if (saveChanges)
+            {
+                context.SaveChanges();
+            }
+        }
         }
 
         public static void UpdateDataFromFtp()
         {
             using (var context = new DbArkContext())
             {
-                UpdateBoatsFromFtp(false);
-                UpdateMembersFromFtp(false);
-                context.SaveChanges();
-            }
+            UpdateBoatsFromFtp(false);
+            UpdateMembersFromFtp(false);
+            context.SaveChanges();
+        }
         }
 
         public static void UpdateMembersFromFtp(bool saveChanges = true)
         {
             using (var context = new DbArkContext())
             {
-                var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
-                if (xmlString == null)
-                {
-                    // If xmlString is null, no update is needed and the function returns immediately
-                    return;
-                }
-                var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
+            var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
+            if (xmlString == null)
+            {
+                // If xmlString is null, no update is needed and the function returns immediately
+                return;
+            }
 
-                foreach (var member in context.Member)
-                {
-                    if (
-                        xmlObject.activeMembers.All(
-                            x => Convert.ToInt32(x.GetObjFromName(XMLMembers.ItemsChoiceType.ID)) != member.Id))
-                    {
-                        context.Member.Remove(member);
-                    }
-                }
+            var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
 
-                foreach (var memberXml in xmlObject.activeMembers)
+            foreach (var member in context.Member)
+            {
+                if (
+                    xmlObject.activeMembers.All(
+                        x => Convert.ToInt32(x.GetObjFromName(XMLMembers.ItemsChoiceType.ID)) != member.Id))
                 {
-                    Member member;
-                    if (
-                        (member =
-                            context.Member.Find(Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID))))
-                        != null)
-                    {
-                        MemberXmlToModel(member, memberXml);
-                    }
-                    else
-                    {
-                        member = new Member()
+                    context.Member.Remove(member);
+                }
+            }
+
+            foreach (var memberXml in xmlObject.activeMembers)
+            {
+                Member member;
+                if (
+                    (member =
+                     context.Member.Find(Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID))))
+                    != null)
+                {
+                    MemberXmlToModel(member, memberXml);
+                }
+                else
+                {
+                    member = new Member()
                         {
                             Trips = new List<Trip>(),
                             LongDistanceForms = new List<LongTripForm>(),
                             DamageForms = new List<DamageForm>()
                         };
-                        MemberXmlToModel(member, memberXml);
-                        context.Member.Add(member);
-                    }
-                }
-
-                if (saveChanges)
-                {
-                    context.SaveChanges();
+                    MemberXmlToModel(member, memberXml);
+                    context.Member.Add(member);
                 }
             }
-        }
 
-        #endregion
+            if (saveChanges)
+            {
+                context.SaveChanges();
+            }
+        }
+        }
 
         // Be careful when calling this function. If the db table is not clear it may cause foreign key conflicts.
         // Requires boats and members to have been added beforehand.
-        #region Methods
-
         private static void BoatXmlToModel(Boat boat, XMLBoats.datarootBådeSpecifik boatXml)
         {
             boat.Id = boatXml.ID;
@@ -233,57 +229,57 @@ namespace ARK.Model.XML
         {
             using (var context = new DbArkContext())
             {
-                var ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First();
-                var ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
+            var ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First();
+            var ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
                 var weekDays = new[] {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
-                var latestFolder = string.Empty;
-                var latestDateTime = new DateTime();
-                foreach (var weekDay in weekDays)
+            var latestFolder = string.Empty;
+            var latestDateTime = new DateTime();
+            foreach (var weekDay in weekDays)
+            {
+                var ub = new UriBuilder(
+                    "ftp",
+                    ftpInfo.HostName,
+                    ftpInfo.Port,
+                    @"/upload" + "/" + weekDay + "/" + filename);
+
+                var request = WebRequest.Create(ub.Uri) as FtpWebRequest;
+
+                request.Credentials = ftpCreds;
+                request.KeepAlive = true;
+                request.UsePassive = true;
+
+                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+
+                using (var response = request.GetResponse() as FtpWebResponse)
                 {
-                    var ub = new UriBuilder(
-                        "ftp",
-                        ftpInfo.HostName,
-                        ftpInfo.Port,
-                        @"/upload" + "/" + weekDay + "/" + filename);
-
-                    var request = WebRequest.Create(ub.Uri) as FtpWebRequest;
-
-                    request.Credentials = ftpCreds;
-                    request.KeepAlive = true;
-                    request.UsePassive = true;
-
-                    request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-
-                    using (var response = request.GetResponse() as FtpWebResponse)
+                    if (response.LastModified > latestDateTime)
                     {
-                        if (response.LastModified > latestDateTime)
-                        {
-                            latestDateTime = response.LastModified;
-                            latestFolder = weekDay;
-                        }
+                        latestDateTime = response.LastModified;
+                        latestFolder = weekDay;
                     }
                 }
+            }
 
                 if (latestDateTime > (DateTime) Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)])
-                {
-                    Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)] = latestDateTime;
-                    Properties.Settings.Default.Save();
+            {
+                Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)] = latestDateTime;
+                Properties.Settings.Default.Save();
 
-                    var uriBuilder = new UriBuilder(
-                        "ftp",
-                        ftpInfo.HostName,
-                        ftpInfo.Port,
-                        @"/upload" + @"/" + latestFolder + @"/" + filename);
+                var uriBuilder = new UriBuilder(
+                "ftp",
+                ftpInfo.HostName,
+                ftpInfo.Port,
+                @"/upload" + @"/" + latestFolder + @"/" + filename);
 
-                    return DlToMem(uriBuilder.Uri, ftpCreds);
-                }
-                else
-                {
-                    return null;
-                }
+                return DlToMem(uriBuilder.Uri, ftpCreds);
             }
+            else
+            {
+                return null;
+            }
+        }
         }
 
         private static void MemberXmlToModel(Member member, XMLMembers.datarootAktiveMedlemmer memberXml)
@@ -327,7 +323,5 @@ namespace ARK.Model.XML
                 new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }
-
-        #endregion
     }
 }

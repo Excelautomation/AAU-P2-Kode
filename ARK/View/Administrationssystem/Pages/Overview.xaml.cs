@@ -7,13 +7,9 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class Oversigt : UserControl
     {
-        #region Constructors and Destructors
-
         public Oversigt()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }

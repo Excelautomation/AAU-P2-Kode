@@ -8,17 +8,15 @@ using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.View.Administrationssystem.Filters;
+using ARK.ViewModel.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
-using ARK.ViewModel.Administrationssystem.Filters;
 
 namespace ARK.ViewModel.Administrationssystem
 {
     public class OverviewViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        #region Fields
-
         private IEnumerable<Boat> _boatsOut;
 
         private List<Boat> _boatsOutNonFiltered;
@@ -47,26 +45,22 @@ namespace ARK.ViewModel.Administrationssystem
 
         private List<DamageForm> _skadesblanketterNonFiltered;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public OverviewViewModel()
         {
             // Initilize lists
-            this._skadesblanketterNonFiltered = new List<DamageForm>();
-            this._longDistanceFormsNonFiltered = new List<LongTripForm>();
-            this._boatsOutNonFiltered = new List<Boat>();
+            _skadesblanketterNonFiltered = new List<DamageForm>();
+            _longDistanceFormsNonFiltered = new List<LongTripForm>();
+            _boatsOutNonFiltered = new List<Boat>();
 
-            this.ParentAttached += (sender, e) => Task.Factory.StartNew(
+            ParentAttached += (sender, e) => Task.Factory.StartNew(
                 () =>
                     {
-                        this.LoadingData = true;
+                        LoadingData = true;
 
                         // Load data
                         using (var db = new DbArkContext())
                         {
-                            this._skadesblanketterNonFiltered =
+                            _skadesblanketterNonFiltered =
                                 db.DamageForm.Where(damageForm => !damageForm.Closed)
                                     .OrderBy(damageForm => damageForm.Date)
                                     .Include(damageForm => damageForm.Boat)
@@ -74,7 +68,7 @@ namespace ARK.ViewModel.Administrationssystem
                                     .Take(6)
                                     .ToList();
 
-                            this._longDistanceFormsNonFiltered =
+                            _longDistanceFormsNonFiltered =
                                 db.LongTripForm.Where(
                                     longDistanceForm => longDistanceForm.Status == LongTripForm.BoatStatus.Awaiting)
                                     .OrderBy(longDistanceForm => longDistanceForm.PlannedStartDate)
@@ -83,7 +77,7 @@ namespace ARK.ViewModel.Administrationssystem
                                     .Take(6)
                                     .ToList();
 
-                            this._boatsOutNonFiltered =
+                            _boatsOutNonFiltered =
                                 db.Boat.Include(boat => boat.Trips)
                                     .Where(boat => boat.Trips.Any(trip => trip.TripEndedTime == null))
                                     .ToList()
@@ -91,40 +85,28 @@ namespace ARK.ViewModel.Administrationssystem
                                     .ToList();
 
                             // Nulstil filter
-                            this.ResetFilter();
-                            this.LoadingData = false;
+                            ResetFilter();
+                            LoadingData = false;
                         }
                     }).Wait(500);
 
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
-            filterController.FilterChanged += (o, eventArgs) => this.UpdateFilter(eventArgs);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
-
-        #endregion
-
-        #region Public Properties
 
         public IEnumerable<Boat> BoatsOut
         {
             get
             {
-                return this._boatsOut;
+                return _boatsOut;
             }
 
             private set
             {
-                this._boatsOut = value;
-                this.Notify();
-            }
-        }
-
-        public FrameworkElement Filter
-        {
-            get
-            {
-                return this._filter ?? (this._filter = new OverviewFilter());
+                _boatsOut = value;
+                Notify();
             }
         }
 
@@ -132,13 +114,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._loadingData;
+                return _loadingData;
             }
 
             set
             {
-                this._loadingData = value;
-                this.Notify();
+                _loadingData = value;
+                Notify();
             }
         }
 
@@ -146,13 +128,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._longDistanceForms;
+                return _longDistanceForms;
             }
 
             private set
             {
-                this._longDistanceForms = value;
-                this.Notify();
+                _longDistanceForms = value;
+                Notify();
             }
         }
 
@@ -160,19 +142,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedBoat;
+                return _selectedBoat;
             }
 
             set
             {
-                this._selectedBoat = value;
+                _selectedBoat = value;
 
-                if (this._selectedBoat != null)
+                if (_selectedBoat != null)
                 {
-                    this.ShowBoat(this._selectedBoat);
+                    ShowBoat(_selectedBoat);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -180,19 +162,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedDamageForm;
+                return _selectedDamageForm;
             }
 
             set
             {
-                this._selectedDamageForm = value;
+                _selectedDamageForm = value;
 
-                if (this._selectedDamageForm != null)
+                if (_selectedDamageForm != null)
                 {
-                    this.ShowDamageForm(this._selectedDamageForm);
+                    ShowDamageForm(_selectedDamageForm);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -200,19 +182,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedLongDistanceForm;
+                return _selectedLongDistanceForm;
             }
 
             set
             {
-                this._selectedLongDistanceForm = value;
+                _selectedLongDistanceForm = value;
 
-                if (this._selectedLongDistanceForm != null)
+                if (_selectedLongDistanceForm != null)
                 {
-                    this.ShowLongDistanceForm(this._selectedLongDistanceForm);
+                    ShowLongDistanceForm(_selectedLongDistanceForm);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -220,13 +202,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._showBoatsOut;
+                return _showBoatsOut;
             }
 
             set
             {
-                this._showBoatsOut = value;
-                this.Notify();
+                _showBoatsOut = value;
+                Notify();
             }
         }
 
@@ -234,13 +216,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._showLangtur;
+                return _showLangtur;
             }
 
             set
             {
-                this._showLangtur = value;
-                this.Notify();
+                _showLangtur = value;
+                Notify();
             }
         }
 
@@ -248,13 +230,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._showSkader;
+                return _showSkader;
             }
 
             set
             {
-                this._showSkader = value;
-                this.Notify();
+                _showSkader = value;
+                Notify();
             }
         }
 
@@ -262,34 +244,38 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._skadesblanketter;
+                return _skadesblanketter;
             }
 
             private set
             {
-                this._skadesblanketter = value;
-                this.Notify();
+                _skadesblanketter = value;
+                Notify();
             }
         }
 
-        #endregion
-
-        #region Methods
+        public FrameworkElement Filter
+        {
+            get
+            {
+                return _filter ?? (_filter = new OverviewFilter());
+            }
+        }
 
         public void ResetFilter()
         {
-            this.ShowBoatsOut = Visibility.Visible;
-            this.ShowLangtur = Visibility.Visible;
-            this.ShowSkader = Visibility.Visible;
+            ShowBoatsOut = Visibility.Visible;
+            ShowLangtur = Visibility.Visible;
+            ShowSkader = Visibility.Visible;
 
-            this.Skadesblanketter = this._skadesblanketterNonFiltered;
-            this.LongDistanceForms = this._longDistanceFormsNonFiltered;
-            this.BoatsOut = this._boatsOutNonFiltered;
+            Skadesblanketter = _skadesblanketterNonFiltered;
+            LongDistanceForms = _longDistanceFormsNonFiltered;
+            BoatsOut = _boatsOutNonFiltered;
         }
 
         private void ShowBoat(Boat boat)
         {
-            var adminSystem = (AdminSystemViewModel)this.Parent;
+            var adminSystem = (AdminSystemViewModel)Parent;
             adminSystem.MenuBoats.Execute(null);
             var boatsViewModel = (BoatViewModel)adminSystem.CurrentPage.DataContext;
             boatsViewModel.OpenBoat(boat);
@@ -297,7 +283,7 @@ namespace ARK.ViewModel.Administrationssystem
 
         private void ShowDamageForm(DamageForm damageForm)
         {
-            var adminSystem = (AdminSystemViewModel)this.Parent;
+            var adminSystem = (AdminSystemViewModel)Parent;
             adminSystem.MenuForms.Execute(null);
             var formsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
             var filterViewModel = (FormsFilterViewModel)formsViewModel.Filter.DataContext;
@@ -309,7 +295,7 @@ namespace ARK.ViewModel.Administrationssystem
 
         private void ShowLongDistanceForm(LongTripForm longDistanceForm)
         {
-            var adminSystem = (AdminSystemViewModel)this.Parent;
+            var adminSystem = (AdminSystemViewModel)Parent;
             adminSystem.MenuForms.Execute(null);
 
             var formsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
@@ -322,7 +308,7 @@ namespace ARK.ViewModel.Administrationssystem
         private void UpdateFilter(FilterChangedEventArgs args)
         {
             // Reset filters
-            this.ResetFilter();
+            ResetFilter();
 
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any())
                 && (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
@@ -333,35 +319,31 @@ namespace ARK.ViewModel.Administrationssystem
             // Filter
             if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                this.BoatsOut = FilterContent.FilterItems(this.BoatsOut, args.FilterEventArgs);
-                this.LongDistanceForms = FilterContent.FilterItems(this.LongDistanceForms, args.FilterEventArgs);
-                this.Skadesblanketter = FilterContent.FilterItems(this.Skadesblanketter, args.FilterEventArgs);
+                BoatsOut = FilterContent.FilterItems(BoatsOut, args.FilterEventArgs);
+                LongDistanceForms = FilterContent.FilterItems(LongDistanceForms, args.FilterEventArgs);
+                Skadesblanketter = FilterContent.FilterItems(Skadesblanketter, args.FilterEventArgs);
             }
 
             // Tjek søgning
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
-                this.Skadesblanketter = from skade in this.Skadesblanketter
-                                        where skade.Filter(args.SearchEventArgs.SearchText)
-                                        select skade;
+                Skadesblanketter = from skade in Skadesblanketter
+                                   where skade.Filter(args.SearchEventArgs.SearchText)
+                                   select skade;
 
-                this.LongDistanceForms = from distanceform in this.LongDistanceForms
-                                         where distanceform.Filter(args.SearchEventArgs.SearchText)
-                                         select distanceform;
+                LongDistanceForms = from distanceform in LongDistanceForms
+                                    where distanceform.Filter(args.SearchEventArgs.SearchText)
+                                    select distanceform;
 
-                this.BoatsOut = from boat in this.BoatsOut
-                                where boat.Filter(args.SearchEventArgs.SearchText)
-                                select boat;
+                BoatsOut = from boat in BoatsOut where boat.Filter(args.SearchEventArgs.SearchText) select boat;
             }
 
             // Skift visibility
-            this.ShowSkader = this.Skadesblanketter.Any() ? Visibility.Visible : Visibility.Collapsed;
+            ShowSkader = Skadesblanketter.Any() ? Visibility.Visible : Visibility.Collapsed;
 
-            this.ShowLangtur = this.LongDistanceForms.Any() ? Visibility.Visible : Visibility.Collapsed;
+            ShowLangtur = LongDistanceForms.Any() ? Visibility.Visible : Visibility.Collapsed;
 
-            this.ShowBoatsOut = this.BoatsOut.Any() ? Visibility.Visible : Visibility.Collapsed;
+            ShowBoatsOut = BoatsOut.Any() ? Visibility.Visible : Visibility.Collapsed;
         }
-
-        #endregion
     }
 }

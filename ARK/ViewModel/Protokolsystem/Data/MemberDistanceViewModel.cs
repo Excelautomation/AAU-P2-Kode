@@ -10,8 +10,6 @@ namespace ARK.ViewModel.Protokolsystem.Data
 {
     public class MemberDistanceViewModel : ViewModelBase
     {
-        #region Fields
-
         private readonly IEnumerable<TripViewModel> _trips;
 
         private double _distance;
@@ -22,36 +20,28 @@ namespace ARK.ViewModel.Protokolsystem.Data
 
         private int _position;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public MemberDistanceViewModel(Member member)
         {
-            this.Member = member;
-            this._trips =
+            Member = member;
+            _trips =
                 member.Trips.Where(t => t.TripEndedTime != null)
                     .OrderByDescending(t => t.TripEndedTime)
                     .Select(t => new TripViewModel(t));
 
-            this.ResetFilter();
+            ResetFilter();
         }
-
-        #endregion
-
-        #region Public Properties
 
         public double Distance
         {
             get
             {
-                return this._distance;
+                return _distance;
             }
 
             private set
             {
-                this._distance = value;
-                this.Notify();
+                _distance = value;
+                Notify();
             }
         }
 
@@ -59,15 +49,15 @@ namespace ARK.ViewModel.Protokolsystem.Data
         {
             get
             {
-                return this._filteredTrips;
+                return _filteredTrips;
             }
 
             private set
             {
-                this._filteredTrips = value;
-                this.Notify();
+                _filteredTrips = value;
+                Notify();
 
-                this.UpdateDistance();
+                UpdateDistance();
             }
         }
 
@@ -75,14 +65,14 @@ namespace ARK.ViewModel.Protokolsystem.Data
         {
             get
             {
-                return this._member;
+                return _member;
             }
 
             private set
             {
-                this._member = value;
+                _member = value;
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -90,23 +80,19 @@ namespace ARK.ViewModel.Protokolsystem.Data
         {
             get
             {
-                return this._position;
+                return _position;
             }
 
             set
             {
-                this._position = value;
-                this.Notify();
+                _position = value;
+                Notify();
             }
         }
 
-        #endregion
-
-        #region Public Methods and Operators
-
         public void ResetFilter()
         {
-            this.FilteredTrips = this._trips.ToList();
+            FilteredTrips = _trips.ToList();
         }
 
         public void UpdateDistance()
@@ -114,8 +100,8 @@ namespace ARK.ViewModel.Protokolsystem.Data
             var lowerTimeLimit = new DateTime();
             var upperTimeLimit = DateTime.Now;
 
-            this.Distance =
-                this.FilteredTrips.Where(
+            Distance =
+                FilteredTrips.Where(
                     t =>
                     t.Trip.TripEndedTime != null && t.Trip.TripStartTime > lowerTimeLimit
                     && t.Trip.TripStartTime < upperTimeLimit).Sum(t => t.Trip.Distance);
@@ -124,22 +110,20 @@ namespace ARK.ViewModel.Protokolsystem.Data
         public void UpdateFilter(FilterChangedEventArgs args)
         {
             // Reset filter
-            this.ResetFilter();
+            ResetFilter();
 
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any())
                 && (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
             {
-                this.UpdateDistance();
+                UpdateDistance();
                 return;
             }
 
             // Filter
             if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                this.FilteredTrips = FilterContent.FilterItems(this.FilteredTrips, args.FilterEventArgs);
+                FilteredTrips = FilterContent.FilterItems(FilteredTrips, args.FilterEventArgs);
             }
         }
-
-        #endregion
     }
 }

@@ -7,13 +7,9 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class FormsLongTrip : UserControl
     {
-        #region Constructors and Destructors
-
         public FormsLongTrip()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }

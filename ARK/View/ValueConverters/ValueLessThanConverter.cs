@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Data;
 
 namespace ARK.View.ValueConverters
 {
-    using System.Globalization;
-
     public class ValueLessThanConverter : IValueConverter
     {
-        #region Public Methods and Operators
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if ((int)value < (int)parameter)
@@ -21,15 +18,9 @@ namespace ARK.View.ValueConverters
             }
         }
 
-        public object ConvertBack(
-            object value, 
-            Type targetType, 
-            object parameter, 
-            CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 }

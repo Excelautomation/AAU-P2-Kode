@@ -1,41 +1,28 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.View.Protokolsystem.Pages;
-using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
     public class DamageFormConfirmViewModel : ConfirmationViewModelBase
     {
         // Fields
-        #region Fields
-
         private readonly DbArkContext db = DbArkContext.GetDbContext();
 
         private string _comment;
 
         private DamageForm _damageForm;
 
-        #endregion
-
-        #region Public Properties
-
         public ICommand Cancel
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
-                            this.Hide();
-                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            Hide();
+                            ProtocolSystem.StatisticsDistance.Execute(null);
                         });
             }
         }
@@ -44,7 +31,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this.GetCommand(e => { this.Hide(); });
+                return GetCommand(e => { Hide(); });
             }
         }
 
@@ -52,13 +39,13 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this._comment;
+                return _comment;
             }
 
             set
             {
-                this._comment = value;
-                this.Notify();
+                _comment = value;
+                Notify();
             }
         }
 
@@ -66,13 +53,13 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this._damageForm;
+                return _damageForm;
             }
 
             set
             {
-                this._damageForm = value;
-                this.Notify();
+                _damageForm = value;
+                Notify();
             }
         }
 
@@ -80,19 +67,17 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.DamageForm.Description = this.Comment;
-                            this.DamageForm.Closed = true;
+                            DamageForm.Description = Comment;
+                            DamageForm.Closed = true;
 
-                            this.db.SaveChanges();
-                            this.Hide();
-                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            db.SaveChanges();
+                            Hide();
+                            ProtocolSystem.StatisticsDistance.Execute(null);
                         });
             }
         }
-
-        #endregion
     }
 }

@@ -6,13 +6,7 @@ namespace ARK.Model
 {
     public class Member : IEquatable<Member>, IComparable<Member>
     {
-        #region Static Fields
-
         private static readonly IEqualityComparer<Member> IdComparerInstance = new IdEqualityComparer();
-
-        #endregion
-
-        #region Public Properties
 
         public static IEqualityComparer<Member> IdComparer
         {
@@ -73,23 +67,9 @@ namespace ARK.Model
 
         public int ZipCode { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(Member left, Member right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Member left, Member right)
-        {
-            return !Equals(left, right);
-        }
-
         public int CompareTo(Member other)
         {
-            return this.Id.CompareTo(other.Id);
+            return Id.CompareTo(other.Id);
         }
 
         // Equals
@@ -105,7 +85,17 @@ namespace ARK.Model
                 return true;
             }
 
-            return this.Id == other.Id;
+            return Id == other.Id;
+        }
+
+        public static bool operator ==(Member left, Member right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Member left, Member right)
+        {
+            return !Equals(left, right);
         }
 
         public override bool Equals(object obj)
@@ -120,30 +110,26 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((Member)obj);
+            return Equals((Member)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Id;
+            return Id;
         }
 
         public double GetTotalDistance()
         {
-            return this.Trips.Aggregate(0d, (a, b) => a + b.Distance);
+            return Trips.Aggregate(0d, (a, b) => a + b.Distance);
         }
-
-        #endregion
 
         private sealed class IdEqualityComparer : IEqualityComparer<Member>
         {
-            #region Public Methods and Operators
-
             public bool Equals(Member x, Member y)
             {
                 if (ReferenceEquals(x, y))
@@ -173,8 +159,6 @@ namespace ARK.Model
             {
                 return obj.Id;
             }
-
-            #endregion
         }
     }
 }

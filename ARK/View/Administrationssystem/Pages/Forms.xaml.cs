@@ -7,13 +7,9 @@ namespace ARK.View.Administrationssystem.Pages
     /// </summary>
     public partial class Blanketter : UserControl
     {
-        #region Constructors and Destructors
-
         public Blanketter()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }

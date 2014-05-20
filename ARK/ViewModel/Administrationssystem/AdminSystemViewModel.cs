@@ -12,8 +12,6 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class AdminSystemViewModel : KeyboardContainerViewModelBase, IFilterContainerViewModel
     {
-        #region Fields
-
         private Admin _currentLoggedInUser;
 
         private bool _enableFilters;
@@ -32,37 +30,21 @@ namespace ARK.ViewModel.Administrationssystem
 
         private string _searchText;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public AdminSystemViewModel()
         {
             TimeCounter.StartTimer();
 
             // Start oversigten
-            this.MenuOverview.Execute(null);
+            MenuOverview.Execute(null);
 
             TimeCounter.StopTime();
         }
-
-        #endregion
-
-        #region Public Events
-
-        public event EventHandler<FilterEventArgs> FilterTextChanged;
-
-        public event EventHandler<SearchEventArgs> SearchTextChanged;
-
-        #endregion
-
-        #region Public Properties
 
         public int ContentRow
         {
             get
             {
-                return this.EnableSearch && this.EnableFilters ? 2 : 0;
+                return EnableSearch && EnableFilters ? 2 : 0;
             }
         }
 
@@ -70,7 +52,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.EnableSearch && this.EnableFilters ? 1 : 3;
+                return EnableSearch && EnableFilters ? 1 : 3;
             }
         }
 
@@ -78,43 +60,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._currentLoggedInUser;
+                return _currentLoggedInUser;
             }
 
             set
             {
-                this._currentLoggedInUser = value;
-                this.Notify();
-            }
-        }
-
-        public bool EnableFilters
-        {
-            get
-            {
-                return this._enableFilters;
-            }
-
-            set
-            {
-                this._enableFilters = value;
-                this.Notify();
-                this.NotifyFilter();
-            }
-        }
-
-        public bool EnableSearch
-        {
-            get
-            {
-                return this._enableSearch;
-            }
-
-            set
-            {
-                this._enableSearch = value;
-                this.Notify();
-                this.NotifyFilter();
+                _currentLoggedInUser = value;
+                Notify();
             }
         }
 
@@ -122,37 +74,37 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._filter;
+                return _filter;
             }
 
             set
             {
                 IFilterViewModel filterViewModel;
 
-                if (this._filter != null)
+                if (_filter != null)
                 {
                     // Unbind event
-                    filterViewModel = this._filter.DataContext as IFilterViewModel;
+                    filterViewModel = _filter.DataContext as IFilterViewModel;
                     if (filterViewModel != null)
                     {
-                        filterViewModel.FilterChanged -= this.filter_FilterChanged;
+                        filterViewModel.FilterChanged -= filter_FilterChanged;
                     }
                 }
 
-                this._filter = value;
+                _filter = value;
 
                 // Tjek at filter ikke er null
-                if (this._filter != null)
+                if (_filter != null)
                 {
                     // Bind event
-                    filterViewModel = this._filter.DataContext as IFilterViewModel;
+                    filterViewModel = _filter.DataContext as IFilterViewModel;
                     if (filterViewModel != null)
                     {
-                        filterViewModel.FilterChanged += this.filter_FilterChanged;
+                        filterViewModel.FilterChanged += filter_FilterChanged;
                     }
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -160,7 +112,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.EnableSearch && this.EnableFilters ? Visibility.Visible : Visibility.Collapsed;
+                return EnableSearch && EnableFilters ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -168,7 +120,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.EnableFilters ? Visibility.Visible : Visibility.Collapsed;
+                return EnableFilters ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -176,7 +128,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(e => ((Window)e).Close());
+                return GetCommand(e => ((Window)e).Close());
             }
         }
 
@@ -184,7 +136,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetNavigateCommand(() => this.PageBoats, "Boats");
+                return GetNavigateCommand(() => PageBoats, "Boats");
             }
         }
 
@@ -192,7 +144,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetNavigateCommand(() => this.PageConfigurations, "Configurations");
+                return GetNavigateCommand(() => PageConfigurations, "Configurations");
             }
         }
 
@@ -200,7 +152,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetNavigateCommand(() => this.PageForms, "Forms");
+                return GetNavigateCommand(() => PageForms, "Forms");
             }
         }
 
@@ -208,7 +160,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetNavigateCommand(() => this.PageOverview, "Overview");
+                return GetNavigateCommand(() => PageOverview, "Overview");
             }
         }
 
@@ -216,7 +168,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetNavigateCommand(() => this.PageTrips, "Trips");
+                return GetNavigateCommand(() => PageTrips, "Trips");
             }
         }
 
@@ -224,12 +176,12 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     s =>
                         {
-                            if (this.SearchTextChanged != null)
+                            if (SearchTextChanged != null)
                             {
-                                this.SearchTextChanged(this, new SearchEventArgs((string)s));
+                                SearchTextChanged(this, new SearchEventArgs((string)s));
                             }
                         });
             }
@@ -239,13 +191,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._searchText;
+                return _searchText;
             }
 
             set
             {
-                this._searchText = value;
-                this.Notify();
+                _searchText = value;
+                Notify();
             }
         }
 
@@ -253,19 +205,15 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.EnableSearch ? Visibility.Visible : Visibility.Collapsed;
+                return EnableSearch ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-
-        #endregion
-
-        #region Properties
 
         private Baede PageBoats
         {
             get
             {
-                return this._pageBoats ?? (this._pageBoats = new Baede());
+                return _pageBoats ?? (_pageBoats = new Baede());
             }
         }
 
@@ -281,7 +229,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._pageForms ?? (this._pageForms = new Blanketter());
+                return _pageForms ?? (_pageForms = new Blanketter());
             }
         }
 
@@ -289,7 +237,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._pageOverview ?? (this._pageOverview = new Oversigt());
+                return _pageOverview ?? (_pageOverview = new Oversigt());
             }
         }
 
@@ -297,61 +245,85 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._pageTrips ?? (this._pageTrips = new Trips());
+                return _pageTrips ?? (_pageTrips = new Trips());
             }
         }
 
-        #endregion
+        public event EventHandler<FilterEventArgs> FilterTextChanged;
 
-        #region Public Methods and Operators
+        public event EventHandler<SearchEventArgs> SearchTextChanged;
+
+        public bool EnableFilters
+        {
+            get
+            {
+                return _enableFilters;
+            }
+
+            set
+            {
+                _enableFilters = value;
+                Notify();
+                NotifyFilter();
+            }
+        }
+
+        public bool EnableSearch
+        {
+            get
+            {
+                return _enableSearch;
+            }
+
+            set
+            {
+                _enableSearch = value;
+                Notify();
+                NotifyFilter();
+            }
+        }
 
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
         {
-            this.EnableSearch = false;
-            this.EnableFilters = false;
+            EnableSearch = false;
+            EnableFilters = false;
 
             base.NavigateToPage(page, pageTitle);
 
-            this.SearchText = string.Empty;
+            SearchText = string.Empty;
 
             // Set filter
-            this.UpdateFilter();
+            UpdateFilter();
         }
 
         public void UpdateFilter()
         {
-            var viewModelbase = this.CurrentPage.DataContext as IFilterContentViewModel;
+            var viewModelbase = CurrentPage.DataContext as IFilterContentViewModel;
             if (viewModelbase != null)
             {
-                this.Filter = viewModelbase.Filter;
+                Filter = viewModelbase.Filter;
             }
             else
             {
-                this.Filter = null;
+                Filter = null;
             }
         }
 
-        #endregion
-
-        #region Methods
-
         private void NotifyFilter()
         {
-            this.NotifyCustom("SearchVisibility");
-            this.NotifyCustom("FiltersVisibility");
-            this.NotifyCustom("FilterBarVisibility");
-            this.NotifyCustom("ContentRow");
-            this.NotifyCustom("ContentRowSpan");
+            NotifyCustom("SearchVisibility");
+            NotifyCustom("FiltersVisibility");
+            NotifyCustom("FilterBarVisibility");
+            NotifyCustom("ContentRow");
+            NotifyCustom("ContentRowSpan");
         }
 
         private void filter_FilterChanged(object sender, FilterEventArgs e)
         {
-            if (this.FilterTextChanged != null)
+            if (FilterTextChanged != null)
             {
-                this.FilterTextChanged(sender, e);
+                FilterTextChanged(sender, e);
             }
         }
-
-        #endregion
     }
 }

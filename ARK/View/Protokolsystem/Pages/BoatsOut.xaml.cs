@@ -7,13 +7,9 @@ namespace ARK.View.Protokolsystem.Pages
     /// </summary>
     public partial class BoatsOut : UserControl
     {
-        #region Constructors and Destructors
-
         public BoatsOut()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }
