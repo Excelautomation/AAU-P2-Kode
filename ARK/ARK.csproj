@@ -344,6 +344,7 @@
     <Compile Include="View\Protokolsystem\ProtocolSystem.xaml.cs">
       <DependentUpon>ProtocolSystem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ValidationRules\RegexExclusiveMatchRule.cs" />
     <Compile Include="View\ValueConverters\BoolToValueConverter.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminLoginViewModel.cs" />
     <Compile Include="ViewModel\Administrationssystem\AdminSystemViewModel.cs" />
