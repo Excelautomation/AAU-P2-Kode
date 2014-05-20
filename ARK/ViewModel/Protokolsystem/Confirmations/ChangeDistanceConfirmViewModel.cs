@@ -1,36 +1,23 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.View.Protokolsystem.Pages;
-using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
-using ARK.ViewModel.Protokolsystem.Pages;
 
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
     public class ChangeDistanceConfirmViewModel : ConfirmationViewModelBase
     {
-        #region Fields
-
         private string _selectedDistance;
 
         private Trip _selectedTrip;
 
-        #endregion
-
         // Fields
-        #region Public Properties
-
         public ICommand Cancel
         {
             get
             {
-                return this.GetCommand(this.Hide);
+                return GetCommand(Hide);
             }
         }
 
@@ -39,18 +26,18 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
             get
             {
                 double tmp;
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
-                            this.SelectedTrip.Distance = double.Parse(this.SelectedDistance);
-                            this.SelectedTrip.TripEndedTime = DateTime.Now;
+                            SelectedTrip.Distance = double.Parse(SelectedDistance);
+                            SelectedTrip.TripEndedTime = DateTime.Now;
                             DbArkContext.GetDbContext().SaveChanges();
-                            this.Hide();
-                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            Hide();
+                            ProtocolSystem.StatisticsDistance.Execute(null);
                         }, 
                     e =>
-                    !string.IsNullOrEmpty(this.SelectedDistance) && double.TryParse(this.SelectedDistance, out tmp)
-                    && double.Parse(this.SelectedDistance) > 0);
+                    !string.IsNullOrEmpty(SelectedDistance) && double.TryParse(SelectedDistance, out tmp)
+                    && double.Parse(SelectedDistance) > 0);
             }
         }
 
@@ -58,13 +45,13 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this._selectedDistance;
+                return _selectedDistance;
             }
 
             set
             {
-                this._selectedDistance = value;
-                this.Notify();
+                _selectedDistance = value;
+                Notify();
             }
         }
 
@@ -72,21 +59,19 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this._selectedTrip;
+                return _selectedTrip;
             }
 
             set
             {
-                this._selectedTrip = value;
-                this.Notify();
+                _selectedTrip = value;
+                Notify();
 
-                if (this._selectedTrip != null)
+                if (_selectedTrip != null)
                 {
-                    this.SelectedDistance = this._selectedTrip.Distance.ToString();
+                    SelectedDistance = _selectedTrip.Distance.ToString();
                 }
             }
         }
-
-        #endregion
     }
 }

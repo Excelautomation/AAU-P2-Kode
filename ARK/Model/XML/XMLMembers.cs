@@ -7,8 +7,6 @@ namespace ARK.Model.XML
 {
     public class XMLMembers
     {
-        #region Enums
-
         /// <remarks/>
         [XmlType(IncludeInSchema = false)]
         public enum ItemsChoiceType
@@ -98,20 +96,12 @@ namespace ARK.Model.XML
             TelefonMobil, 
         }
 
-        #endregion
-
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         [XmlRoot(Namespace = "", IsNullable = false)]
         public partial class dataroot
         {
-            #region Fields
-
             private DateTime generatedField;
-
-            #endregion
-
-            #region Public Properties
 
             /// <remarks/>
             [XmlElement("AktiveMedlemmer")]
@@ -123,24 +113,20 @@ namespace ARK.Model.XML
             {
                 get
                 {
-                    return this.generatedField;
+                    return generatedField;
                 }
 
                 set
                 {
-                    this.generatedField = value;
+                    generatedField = value;
                 }
             }
-
-            #endregion
         }
 
         /// <remarks/>
         [XmlType(AnonymousType = true)]
         public partial class datarootAktiveMedlemmer
         {
-            #region Public Properties
-
             /// <remarks/>
             [XmlElement("Adresse1", typeof(string))]
             [XmlElement("Adresse2", typeof(string))]
@@ -178,16 +164,12 @@ namespace ARK.Model.XML
             [XmlIgnore()]
             public ItemsChoiceType[] ItemsElementName { get; set; }
 
-            #endregion
-
-            #region Public Methods and Operators
-
             public object GetObjFromName(ItemsChoiceType name)
             {
                 object obj;
                 try
                 {
-                    obj = this.Items[Array.IndexOf(this.ItemsElementName, name)];
+                    obj = Items[Array.IndexOf(ItemsElementName, name)];
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -196,8 +178,6 @@ namespace ARK.Model.XML
 
                 return obj;
             }
-
-            #endregion
         }
     }
 }

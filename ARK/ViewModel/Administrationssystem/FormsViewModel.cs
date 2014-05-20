@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -20,8 +19,6 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsViewModel : PageContainerViewModelBase, IContentViewModelBase, IFilterContentViewModel
     {
-        #region Fields
-
         private readonly DbArkContext _dbArkContext;
 
         private bool _damageForm;
@@ -46,34 +43,29 @@ namespace ARK.ViewModel.Administrationssystem
 
         private int _selectedTabIndex;
 
-        //private DamageForm _selectedDamageForm;
-        //public DamageForm SelectedDamageForm 
-        //{
-        //    get { return _selectedDamageForm; }
-        //    set { _selectedDamageForm = value; Notify(); }
-        //}
-
-        #endregion
-
-        #region Constructors and Destructors
-
+        // private DamageForm _selectedDamageForm;
+        // public DamageForm SelectedDamageForm 
+        // {
+        // get { return _selectedDamageForm; }
+        // set { _selectedDamageForm = value; Notify(); }
+        // }
         public FormsViewModel()
         {
             // Opret dbcontext
-            this._dbArkContext = DbArkContext.GetDbContext();
+            _dbArkContext = DbArkContext.GetDbContext();
 
             // Load data
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
                     using (var db = new DbArkContext())
                     {
-                        this._damageFormsNonFiltered =
+                        _damageFormsNonFiltered =
                             db.DamageForm.Include(form => form.RegisteringMember)
                                 .Include(form => form.Boat)
                                 .OrderBy(form => form.Closed)
                                 .ToList();
 
-                        this._longTripFormsNonFiltered =
+                        _longTripFormsNonFiltered =
                             db.LongTripForm.Include(form => form.Boat)
                                 .Include(form => form.Members)
                                 .Include(form => form.ResponsibleMember)
@@ -81,56 +73,34 @@ namespace ARK.ViewModel.Administrationssystem
                     }
 
                     // Reset filter
-                    this.ResetFilter();
+                    ResetFilter();
 
                     // Set selected tab index to 0 - damage
-                    if (this.DamageForms.Any())
+                    if (DamageForms.Any())
                     {
-                        this.SelectedTabIndex = 0;
-                        this.SelectedIndexDamageForms = 0;
-                        this.GoToDamageForm(this.DamageForms.First());
+                        SelectedTabIndex = 0;
+                        SelectedIndexDamageForms = 0;
+                        GoToDamageForm(DamageForms.First());
                     }
                 };
 
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
-            filterController.FilterChanged += (o, eventArgs) => this.UpdateFilter(eventArgs);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
-
-        #endregion
-
-        #region Public Events
-
-        public event EventHandler ParentAttached;
-
-        public event EventHandler ParentDetached;
-
-        #endregion
-
-        #region Public Properties
 
         public IEnumerable<DamageForm> DamageForms
         {
             get
             {
-                return this._damageForms;
+                return _damageForms;
             }
 
             set
             {
-                this._damageForms = value;
-                this.Notify();
-            }
-        }
-
-        public FrameworkElement Filter
-        {
-            get
-            {
-                return this.DamageForm
-                           ? this._filterDamage ?? (this._filterDamage = new FormsFilterDamage())
-                           : this._filterLongDistance ?? (this._filterLongDistance = new FormsFilter());
+                _damageForms = value;
+                Notify();
             }
         }
 
@@ -138,17 +108,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.Parent as IFilterContainerViewModel;
-            }
-        }
-
-        public ICommand GotFocus
-        {
-            get
-            {
-                return
-                    this.GetCommand(
-                        element => ContentViewModelBase.GetKeyboard(this).GotFocus.Execute((FrameworkElement)element));
+                return Parent as IFilterContainerViewModel;
             }
         }
 
@@ -156,45 +116,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._longTripForms;
+                return _longTripForms;
             }
 
             set
             {
-                this._longTripForms = value;
-                this.Notify();
-            }
-        }
-
-        public IViewModelBase Parent
-        {
-            get
-            {
-                return this._parent;
-            }
-
-            set
-            {
-                if (value != null)
-                {
-                    // Attach
-                    this._parent = value;
-
-                    if (this.ParentAttached != null)
-                    {
-                        this.ParentAttached(this, new EventArgs());
-                    }
-                }
-                else
-                {
-                    // Detach
-                    if (this.ParentDetached != null)
-                    {
-                        this.ParentDetached(this, new EventArgs());
-                    }
-
-                    this._parent = null;
-                }
+                _longTripForms = value;
+                Notify();
             }
         }
 
@@ -202,7 +130,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
                             if (e == null)
@@ -210,7 +138,7 @@ namespace ARK.ViewModel.Administrationssystem
                                 return;
                             }
 
-                            this.GoToDamageForm((DamageForm)e);
+                            GoToDamageForm((DamageForm)e);
                         });
             }
         }
@@ -219,7 +147,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
                             if (e == null)
@@ -227,7 +155,7 @@ namespace ARK.ViewModel.Administrationssystem
                                 return;
                             }
 
-                            this.GoToLongDistanceForm((LongTripForm)e);
+                            GoToLongDistanceForm((LongTripForm)e);
                         });
             }
         }
@@ -236,13 +164,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedIndexDamageForms;
+                return _selectedIndexDamageForms;
             }
 
             set
             {
-                this._selectedIndexDamageForms = value;
-                this.Notify();
+                _selectedIndexDamageForms = value;
+                Notify();
             }
         }
 
@@ -250,13 +178,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedIndexLongDistanceForms;
+                return _selectedIndexLongDistanceForms;
             }
 
             set
             {
-                this._selectedIndexLongDistanceForms = value;
-                this.Notify();
+                _selectedIndexLongDistanceForms = value;
+                Notify();
             }
         }
 
@@ -264,27 +192,27 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedTabIndex;
+                return _selectedTabIndex;
             }
 
             set
             {
-                this._selectedTabIndex = value;
-                this.Notify();
+                _selectedTabIndex = value;
+                Notify();
 
-                switch (this._selectedTabIndex)
+                switch (_selectedTabIndex)
                 {
                     case 0:
-                        this.DamageForm = true;
-                        if (this.DamageForms.Any())
+                        DamageForm = true;
+                        if (DamageForms.Any())
                         {
-                            DamageForm df = this.DamageForms.First();
-                            this.NavigateToPage(() => new FormsDamage(), df.Description);
-                                
-                                // Hvorfor er det nødvendigt at Description bliver sendt med? -Martin
+                            DamageForm df = DamageForms.First();
+                            NavigateToPage(() => new FormsDamage(), df.Description);
+
+                            // Hvorfor er det nødvendigt at Description bliver sendt med? -Martin
 
                             // Sæt damageform
-                            var vm = this.CurrentPage.DataContext as FormsDamageViewModel;
+                            var vm = CurrentPage.DataContext as FormsDamageViewModel;
                             if (vm != null)
                             {
                                 vm.DamageForm = df;
@@ -293,22 +221,22 @@ namespace ARK.ViewModel.Administrationssystem
                             // SelectedIndexDamageForms = 0;
                         }
 
-                        var templdf = this.LongDistanceForms;
-                        this.LongDistanceForms = null;
-                        this.LongDistanceForms = templdf;
+                        var templdf = LongDistanceForms;
+                        LongDistanceForms = null;
+                        LongDistanceForms = templdf;
                         break;
                     case 1:
-                        this.DamageForm = false;
+                        DamageForm = false;
 
-                        if (this.LongDistanceForms.Any())
+                        if (LongDistanceForms.Any())
                         {
-                            LongTripForm ldf = this.LongDistanceForms.First();
-                            this.NavigateToPage(() => new FormsLongTrip(), ldf.TourDescription);
-                                
-                                // Hvorfor er det nødvendigt at Description bliver sendt med? -Martin
+                            LongTripForm ldf = LongDistanceForms.First();
+                            NavigateToPage(() => new FormsLongTrip(), ldf.TourDescription);
+
+                            // Hvorfor er det nødvendigt at Description bliver sendt med? -Martin
 
                             // Sæt damageform
-                            var vm = this.CurrentPage.DataContext as FormsLongTripViewModel;
+                            var vm = CurrentPage.DataContext as FormsLongTripViewModel;
                             if (vm != null)
                             {
                                 vm.LongDistanceForm = ldf;
@@ -318,61 +246,109 @@ namespace ARK.ViewModel.Administrationssystem
                         }
 
                         // GoToLongDistanceForm(LongDistanceForms.First());
-                        var tempdmf = this.DamageForms;
-                        this.DamageForms = null;
-                        this.DamageForms = tempdmf;
+                        var tempdmf = DamageForms;
+                        DamageForms = null;
+                        DamageForms = tempdmf;
                         break;
                 }
             }
         }
 
-        #endregion
-
-        #region Properties
-
         private bool DamageForm
         {
             get
             {
-                return this._damageForm;
+                return _damageForm;
             }
 
             set
             {
-                this._damageForm = value;
-                this.UpdateFilter();
+                _damageForm = value;
+                UpdateFilter();
             }
         }
 
-        #endregion
+        public event EventHandler ParentAttached;
 
-        #region Public Methods and Operators
+        public event EventHandler ParentDetached;
+
+        public ICommand GotFocus
+        {
+            get
+            {
+                return
+                    GetCommand(
+                        element => ContentViewModelBase.GetKeyboard(this).GotFocus.Execute((FrameworkElement)element));
+            }
+        }
+
+        public IViewModelBase Parent
+        {
+            get
+            {
+                return _parent;
+            }
+
+            set
+            {
+                if (value != null)
+                {
+                    // Attach
+                    _parent = value;
+
+                    if (ParentAttached != null)
+                    {
+                        ParentAttached(this, new EventArgs());
+                    }
+                }
+                else
+                {
+                    // Detach
+                    if (ParentDetached != null)
+                    {
+                        ParentDetached(this, new EventArgs());
+                    }
+
+                    _parent = null;
+                }
+            }
+        }
+
+        public FrameworkElement Filter
+        {
+            get
+            {
+                return DamageForm
+                           ? _filterDamage ?? (_filterDamage = new FormsFilterDamage())
+                           : _filterLongDistance ?? (_filterLongDistance = new FormsFilter());
+            }
+        }
 
         public void OpenDamageForm(DamageForm damageForm)
         {
-            if (this.DamageForms.Any())
-                this.GoToDamageForm(this.DamageForms.First(form => form.Id == damageForm.Id));
+            if (DamageForms.Any())
+            {
+                GoToDamageForm(DamageForms.First(form => form.Id == damageForm.Id));
+            }
         }
 
         public void OpenLongDistanceForm(LongTripForm longTrip)
         {
-            if (this.LongDistanceForms.Any())
-                this.GoToLongDistanceForm(this.LongDistanceForms.First(form => form.Id == longTrip.Id));
+            if (LongDistanceForms.Any())
+            {
+                GoToLongDistanceForm(LongDistanceForms.First(form => form.Id == longTrip.Id));
+            }
         }
-
-        #endregion
-
-        #region Methods
 
         private void GoToDamageForm(DamageForm df)
         {
             // Set tab index
-            this.SelectedTabIndex = 0;
+            SelectedTabIndex = 0;
 
-            this.NavigateToPage(() => new FormsDamage(), df.Description);
+            NavigateToPage(() => new FormsDamage(), df.Description);
 
             // Sæt damageform
-            var vm = this.CurrentPage.DataContext as FormsDamageViewModel;
+            var vm = CurrentPage.DataContext as FormsDamageViewModel;
             if (vm != null)
             {
                 vm.DamageForm = df;
@@ -382,28 +358,28 @@ namespace ARK.ViewModel.Administrationssystem
         private void GoToLongDistanceForm(LongTripForm ltf)
         {
             // Set tab index
-            this.SelectedTabIndex = 1;
+            SelectedTabIndex = 1;
 
-            this.NavigateToPage(() => new FormsLongTrip(), ltf.TourDescription);
+            NavigateToPage(() => new FormsLongTrip(), ltf.TourDescription);
 
-            var vm = this.CurrentPage.DataContext as FormsLongTripViewModel;
+            var vm = CurrentPage.DataContext as FormsLongTripViewModel;
             if (vm != null)
             {
                 vm.LongDistanceForm = ltf;
             }
         }
 
-        private void ResetFilter() // public fordi den skal bruges i overview
+        private void ResetFilter()
         {
-            this.DamageForms = this._damageFormsNonFiltered.AsReadOnly().OrderBy(d => d.Closed).ThenBy(d => d.Date);
+            // public fordi den skal bruges i overview
+            DamageForms = _damageFormsNonFiltered.AsReadOnly().OrderBy(d => d.Closed).ThenBy(d => d.Date);
 
-            this.LongDistanceForms =
-                this._longTripFormsNonFiltered.AsReadOnly().OrderBy(x => x.Status).ThenBy(x => x.FormCreated);
+            LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly().OrderBy(x => x.Status).ThenBy(x => x.FormCreated);
         }
 
         private void UpdateFilter()
         {
-            var vm = this.Parent as AdminSystemViewModel;
+            var vm = Parent as AdminSystemViewModel;
             if (vm != null)
             {
                 vm.UpdateFilter();
@@ -413,7 +389,7 @@ namespace ARK.ViewModel.Administrationssystem
         private void UpdateFilter(FilterChangedEventArgs args)
         {
             // Nulstil filter
-            this.ResetFilter();
+            ResetFilter();
 
             // Tjek om en af filtertyperne er aktive
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any())
@@ -425,23 +401,21 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek filter
             if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                this.LongDistanceForms = FilterContent.FilterItems(this.LongDistanceForms, args.FilterEventArgs);
-                this.DamageForms = FilterContent.FilterItems(this.DamageForms, args.FilterEventArgs);
+                LongDistanceForms = FilterContent.FilterItems(LongDistanceForms, args.FilterEventArgs);
+                DamageForms = FilterContent.FilterItems(DamageForms, args.FilterEventArgs);
             }
 
             // Tjek søgning
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
-                this.DamageForms = from damage in this.DamageForms
-                                   where damage.Filter(args.SearchEventArgs.SearchText)
-                                   select damage;
+                DamageForms = from damage in DamageForms
+                              where damage.Filter(args.SearchEventArgs.SearchText)
+                              select damage;
 
-                this.LongDistanceForms = from form in this.LongDistanceForms
-                                         where form.Filter(args.SearchEventArgs.SearchText)
-                                         select form;
+                LongDistanceForms = from form in LongDistanceForms
+                                    where form.Filter(args.SearchEventArgs.SearchText)
+                                    select form;
             }
         }
-
-        #endregion
     }
 }

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
-using ARK.HelperFunctions.SMSGateway;
-using ARK.Model;
-using ARK.Model.DB;
 using ARK.Model.XML;
-using ARK.View;
 using ARK.View.Administrationssystem;
 using ARK.View.Protokolsystem;
-using ARK.ViewModel.Protokolsystem;
 
 namespace ARK
 {
@@ -20,28 +11,22 @@ namespace ARK
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Constructors and Destructors
-
         public MainWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
-
-        #region Methods
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // var window = new AdminLogin();
             var window = new AdminSystem();
-            this.ShowWindow(window);
+            ShowWindow(window);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var window = new ProtocolSystem();
-            this.ShowWindow(window);
+            ShowWindow(window);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -52,17 +37,15 @@ namespace ARK
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             var window = new AdminLogin();
-            this.ShowWindow(window);
+            ShowWindow(window);
         }
 
         private void ShowWindow(Window window)
         {
             window.Show();
-            this.Hide();
+            Hide();
 
-            window.Closing += (sender, e) => this.Close();
+            window.Closing += (sender, e) => Close();
         }
-
-        #endregion
     }
 }

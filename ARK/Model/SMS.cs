@@ -5,8 +5,6 @@ namespace ARK.Model
 {
     public class SMS : IEquatable<SMS>
     {
-        #region Public Properties
-
         public bool Dispatched { get; set; }
 
         public bool Handled { get; set; }
@@ -22,20 +20,6 @@ namespace ARK.Model
 
         public bool approved { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(SMS left, SMS right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(SMS left, SMS right)
-        {
-            return !Equals(left, right);
-        }
-
         public bool Equals(SMS other)
         {
             if (ReferenceEquals(null, other))
@@ -48,7 +32,17 @@ namespace ARK.Model
                 return true;
             }
 
-            return string.Equals(this.Reciever, other.Reciever);
+            return string.Equals(Reciever, other.Reciever);
+        }
+
+        public static bool operator ==(SMS left, SMS right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(SMS left, SMS right)
+        {
+            return !Equals(left, right);
         }
 
         public override bool Equals(object obj)
@@ -63,19 +57,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((SMS)obj);
+            return Equals((SMS)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Reciever != null ? this.Reciever.GetHashCode() : 0;
+            return Reciever != null ? Reciever.GetHashCode() : 0;
         }
-
-        #endregion
     }
 }

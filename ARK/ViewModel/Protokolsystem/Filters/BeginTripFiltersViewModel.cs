@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using ARK.Model;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
-using ARK.ViewModel.Base.Interfaces.Filter;
 
 namespace ARK.ViewModel.Protokolsystem.Filters
 {
     internal class BeginTripFiltersViewModel : FilterViewModelBase
     {
-        #region Fields
-
         private bool _categoryAllSizesChecked;
 
         private bool _categoryAllTypesChecked;
@@ -39,41 +36,33 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         private bool _categoryTwoChecked;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public BeginTripFiltersViewModel()
         {
-            this.CurrentBoatType = new CategoryFilter<Boat>(boat => true);
-            this.CurrentBoatSizeFilter = new CategoryFilter<Boat>(boat => true);
+            CurrentBoatType = new CategoryFilter<Boat>(boat => true);
+            CurrentBoatSizeFilter = new CategoryFilter<Boat>(boat => true);
 
-            this.CategoryAllChecked = true;
-            this.CategoryAllSizesChecked = true;
+            CategoryAllChecked = true;
+            CategoryAllSizesChecked = true;
 
-            this.UpdateFilter();
+            UpdateFilter();
         }
-
-        #endregion
-
-        #region Public Properties
 
         public bool CategoryAllChecked
         {
             get
             {
-                return this._categoryAllTypesChecked;
+                return _categoryAllTypesChecked;
             }
 
             set
             {
-                this._categoryAllTypesChecked = value;
+                _categoryAllTypesChecked = value;
                 if (value)
                 {
-                    this.UpdateCategory(boat => true);
+                    UpdateCategory(boat => true);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -81,18 +70,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryAllSizesChecked;
+                return _categoryAllSizesChecked;
             }
 
             set
             {
-                this._categoryAllSizesChecked = value;
+                _categoryAllSizesChecked = value;
                 if (value)
                 {
-                    this.UpdateSide(boat => true);
+                    UpdateSide(boat => true);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -100,18 +89,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryEightChecked;
+                return _categoryEightChecked;
             }
 
             set
             {
-                this._categoryEightChecked = value;
+                _categoryEightChecked = value;
                 if (value)
                 {
-                    this.UpdateSide(boat => boat.NumberofSeats > 8);
+                    UpdateSide(boat => boat.NumberofSeats > 8);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -119,18 +108,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryErgometerChecked;
+                return _categoryErgometerChecked;
             }
 
             set
             {
-                this._categoryErgometerChecked = value;
+                _categoryErgometerChecked = value;
                 if (value)
                 {
-                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Ergometer);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Ergometer);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -138,18 +127,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryFourChecked;
+                return _categoryFourChecked;
             }
 
             set
             {
-                this._categoryFourChecked = value;
+                _categoryFourChecked = value;
                 if (value)
                 {
-                    this.UpdateSide(boat => boat.NumberofSeats == 4 || boat.NumberofSeats == 5);
+                    UpdateSide(boat => boat.NumberofSeats == 4 || boat.NumberofSeats == 5);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -157,18 +146,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryGigChecked;
+                return _categoryGigChecked;
             }
 
             set
             {
-                this._categoryGigChecked = value;
+                _categoryGigChecked = value;
                 if (value)
                 {
-                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Gig);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Gig);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -176,18 +165,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryInriggerChecked;
+                return _categoryInriggerChecked;
             }
 
             set
             {
-                this._categoryInriggerChecked = value;
+                _categoryInriggerChecked = value;
                 if (value)
                 {
-                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Inrigger);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Inrigger);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -195,18 +184,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryKajakChecked;
+                return _categoryKajakChecked;
             }
 
             set
             {
-                this._categoryKajakChecked = value;
+                _categoryKajakChecked = value;
                 if (value)
                 {
-                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Kajak);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Kajak);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -214,18 +203,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryLongTourChecked;
+                return _categoryLongTourChecked;
             }
 
             set
             {
-                this._categoryLongTourChecked = value;
+                _categoryLongTourChecked = value;
                 if (value)
                 {
-                    this.UpdateSide(boat => boat.LongTripBoat);
+                    UpdateSide(boat => boat.LongTripBoat);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -233,19 +222,19 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryOneChecked;
+                return _categoryOneChecked;
             }
 
             set
             {
-                this._categoryOneChecked = value;
+                _categoryOneChecked = value;
 
                 if (value)
                 {
-                    this.UpdateSide(boat => boat.NumberofSeats == 1);
+                    UpdateSide(boat => boat.NumberofSeats == 1);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -253,18 +242,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryOutriggerChecked;
+                return _categoryOutriggerChecked;
             }
 
             set
             {
-                this._categoryOutriggerChecked = value;
+                _categoryOutriggerChecked = value;
                 if (value)
                 {
-                    this.UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Outrigger);
+                    UpdateCategory(boat => boat.SpecificBoatType == Boat.BoatType.Outrigger);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -272,18 +261,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categorySixChecked;
+                return _categorySixChecked;
             }
 
             set
             {
-                this._categorySixChecked = value;
+                _categorySixChecked = value;
                 if (value)
                 {
-                    this.UpdateSide(boat => boat.NumberofSeats == 6);
+                    UpdateSide(boat => boat.NumberofSeats == 6);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -291,18 +280,18 @@ namespace ARK.ViewModel.Protokolsystem.Filters
         {
             get
             {
-                return this._categoryTwoChecked;
+                return _categoryTwoChecked;
             }
 
             set
             {
-                this._categoryTwoChecked = value;
+                _categoryTwoChecked = value;
                 if (value)
                 {
-                    this.UpdateSide(boat => boat.NumberofSeats == 2 || boat.NumberofSeats == 3);
+                    UpdateSide(boat => boat.NumberofSeats == 2 || boat.NumberofSeats == 3);
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -310,37 +299,27 @@ namespace ARK.ViewModel.Protokolsystem.Filters
 
         public CategoryFilter<Boat> CurrentBoatType { get; set; }
 
-        #endregion
-
-        #region Public Methods and Operators
-
         public override IEnumerable<IFilter> GetFilter()
         {
-            return new List<IFilter> { this.CurrentBoatType, this.CurrentBoatSizeFilter };
+            return new List<IFilter> { CurrentBoatType, CurrentBoatSizeFilter };
         }
-
-        #endregion
-
-        #region Methods
 
         private void UpdateCategory(Func<Boat, bool> filter)
         {
-            this.CurrentBoatType.Filter = filter;
+            CurrentBoatType.Filter = filter;
 
-            this.UpdateFilter();
+            UpdateFilter();
         }
 
         private void UpdateFilter()
         {
-            this.OnFilterChanged();
+            OnFilterChanged();
         }
 
         private void UpdateSide(Func<Boat, bool> filter)
         {
-            this.CurrentBoatSizeFilter.Filter = filter;
-            this.UpdateFilter();
+            CurrentBoatSizeFilter.Filter = filter;
+            UpdateFilter();
         }
-
-        #endregion
     }
 }

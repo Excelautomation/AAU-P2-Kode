@@ -7,13 +7,7 @@ namespace ARK.ViewModel.Base
 {
     public static class TimeCounter
     {
-        #region Static Fields
-
         private static readonly Stack<DateTime> Stack = new Stack<DateTime>();
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public static void StartTimer()
         {
@@ -39,7 +33,5 @@ namespace ARK.ViewModel.Base
         {
             return DateTime.Now - Stack.Pop();
         }
-
-        #endregion
     }
 }

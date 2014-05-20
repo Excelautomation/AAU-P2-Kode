@@ -6,8 +6,6 @@ namespace ARK.Model
 {
     public class Boat : IEquatable<Boat>
     {
-        #region Enums
-
         public enum BoatType
         {
             None = 0, 
@@ -25,18 +23,14 @@ namespace ARK.Model
             Ukendt = 6
         }
 
-        #endregion
-
         // states if the boat have seating for cox
-        #region Public Properties
-
         public bool Active { get; set; }
 
         public bool BoatOut
         {
             get
             {
-                return this.GetActiveTrip != default(Trip);
+                return GetActiveTrip != default(Trip);
             }
         }
 
@@ -48,7 +42,7 @@ namespace ARK.Model
             // Damaged or not
             get
             {
-                return this.DamageForms != null && this.DamageForms.Count != 0;
+                return DamageForms != null && DamageForms.Count != 0;
             }
         }
 
@@ -56,7 +50,7 @@ namespace ARK.Model
         {
             get
             {
-                return this.Trips.FirstOrDefault(trip => trip.TripEndedTime == null);
+                return Trips.FirstOrDefault(trip => trip.TripEndedTime == null);
             }
         }
 
@@ -70,7 +64,7 @@ namespace ARK.Model
         {
             get
             {
-                return this.Trips.Sum(t => t.Distance);
+                return Trips.Sum(t => t.Distance);
             }
         }
 
@@ -78,7 +72,7 @@ namespace ARK.Model
         {
             get
             {
-                return this.Trips.Count(t => t.LongTrip);
+                return Trips.Count(t => t.LongTrip);
             }
         }
 
@@ -100,7 +94,7 @@ namespace ARK.Model
         {
             get
             {
-                return this.Trips.Count;
+                return Trips.Count;
             }
         }
 
@@ -109,22 +103,30 @@ namespace ARK.Model
             // states if the boat is in a usable condition
             get
             {
-                return this.DamageForms != null && !this.DamageForms.Any(x => !x.Functional && !x.Closed);
+                return DamageForms != null && !DamageForms.Any(x => !x.Functional && !x.Closed);
             }
         }
 
         public int Year { get; set; }
 
-        #endregion
+        public bool Equals(Boat other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
 
-        #region Public Methods and Operators
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Id == other.Id;
+        }
 
         public static BoatType[] GetBoatTypes()
         {
-            return new[]
-                       {
-                          BoatType.Inrigger, BoatType.Outrigger, BoatType.Kajak, BoatType.Gig, BoatType.Ergometer 
-                       };
+            return new[] { BoatType.Inrigger, BoatType.Outrigger, BoatType.Kajak, BoatType.Gig, BoatType.Ergometer };
         }
 
         public static bool operator ==(Boat left, Boat right)
@@ -138,21 +140,6 @@ namespace ARK.Model
         }
 
         // Interfaces
-        public bool Equals(Boat other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            return this.Id == other.Id;
-        }
-
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -165,19 +152,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((Boat)obj);
+            return Equals((Boat)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Id;
+            return Id;
         }
-
-        #endregion
     }
 }

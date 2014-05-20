@@ -4,8 +4,6 @@ namespace ARK.Model
 {
     public class Admin : IEquatable<Admin>
     {
-        #region Public Properties
-
         public bool ContactDark { get; set; }
 
         public bool ContactTrip { get; set; }
@@ -16,20 +14,6 @@ namespace ARK.Model
         public string Password { get; set; }
 
         public string Username { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(Admin left, Admin right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Admin left, Admin right)
-        {
-            return !Equals(left, right);
-        }
 
         public bool Equals(Admin other)
         {
@@ -43,7 +27,17 @@ namespace ARK.Model
                 return true;
             }
 
-            return string.Equals(this.Username, other.Username);
+            return string.Equals(Username, other.Username);
+        }
+
+        public static bool operator ==(Admin left, Admin right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Admin left, Admin right)
+        {
+            return !Equals(left, right);
         }
 
         public override bool Equals(object obj)
@@ -58,19 +52,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((Admin)obj);
+            return Equals((Admin)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Username != null ? this.Username.GetHashCode() : 0;
+            return Username != null ? Username.GetHashCode() : 0;
         }
-
-        #endregion
     }
 }

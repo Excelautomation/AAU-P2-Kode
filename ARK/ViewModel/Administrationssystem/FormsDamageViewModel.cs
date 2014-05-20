@@ -9,26 +9,20 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class FormsDamageViewModel : ContentViewModelBase
     {
-        #region Fields
-
         private DamageForm _damageForm;
 
         private bool _recentChange;
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand CloseDamageForm
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.DamageForm.Closed = true;
+                            DamageForm.Closed = true;
 
-                            this.Save();
+                            Save();
                         });
             }
         }
@@ -37,13 +31,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.DamageForm.Closed = true;
-                            this.Save();
+                            DamageForm.Closed = true;
+                            Save();
 
-                            var vm = (FormsViewModel)this.Parent;
+                            var vm = (FormsViewModel)Parent;
                             var tempdmf2 = vm.DamageForms;
                             vm.DamageForms = null;
                             vm.DamageForms = tempdmf2;
@@ -55,13 +49,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._damageForm;
+                return _damageForm;
             }
 
             set
             {
-                this._damageForm = value;
-                this.Notify();
+                _damageForm = value;
+                Notify();
             }
         }
 
@@ -69,13 +63,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.DamageForm.Closed = false;
-                            this.Save();
+                            DamageForm.Closed = false;
+                            Save();
 
-                            var vm = (FormsViewModel)this.Parent;
+                            var vm = (FormsViewModel)Parent;
                             var tempdmf2 = vm.DamageForms;
                             vm.DamageForms = null;
                             vm.DamageForms = tempdmf2;
@@ -87,13 +81,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._recentChange;
+                return _recentChange;
             }
 
             set
             {
-                this._recentChange = value;
-                this.Notify();
+                _recentChange = value;
+                Notify();
             }
         }
 
@@ -101,25 +95,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(this.Save);
+                return GetCommand(Save);
             }
         }
-
-        #endregion
-
-        #region Methods
 
         private void Save()
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(this.DamageForm).State = EntityState.Modified;
+                db.Entry(DamageForm).State = EntityState.Modified;
                 db.SaveChanges();
             }
 
-            this.RecentChange = true;
+            RecentChange = true;
         }
-
-        #endregion
     }
 }

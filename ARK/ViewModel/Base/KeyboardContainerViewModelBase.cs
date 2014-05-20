@@ -13,109 +13,61 @@ namespace ARK.ViewModel.Base
 {
     public abstract class KeyboardContainerViewModelBase : PageContainerViewModelBase, IKeyboardContainerViewModelBase
     {
-        #region Fields
-
         private FrameworkElement _currentSelectedTextBox;
 
         private bool _enableKeyboard;
 
         private OnScreenKeyboard _keyboard;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public KeyboardContainerViewModelBase()
         {
             // Setup keyboard listener
-            this.KeyboardTextChanged += (sender, e) =>
+            KeyboardTextChanged += (sender, e) =>
                 {
-                    if (this.CurrentSelectedTextBox == null)
+                    if (CurrentSelectedTextBox == null)
                     {
                         return;
                     }
 
                     // Update currentselectedtextbox text
-                    var textBox = this.CurrentSelectedTextBox as TextBox;
+                    var textBox = CurrentSelectedTextBox as TextBox;
                     if (textBox != null)
                     {
-                        textBox.Text = this.KeyboardText;
+                        textBox.Text = KeyboardText;
                     }
 
                     // Update passwordtext
-                    if (!string.IsNullOrEmpty(this.KeyboardText))
+                    if (!string.IsNullOrEmpty(KeyboardText))
                     {
-                        var passwordbox = this.CurrentSelectedTextBox as PasswordBox;
+                        var passwordbox = CurrentSelectedTextBox as PasswordBox;
                         if (passwordbox != null)
                         {
-                            passwordbox.Password += this.KeyboardText;
-                            this.KeyboardClear();
+                            passwordbox.Password += KeyboardText;
+                            KeyboardClear();
                         }
                     }
                 };
-        }
-
-        #endregion
-
-        #region Public Events
-
-        public event EventHandler<KeyboardEventArgs> KeyboardTextChanged
-        {
-            add
-            {
-                ((KeyboardViewModel)this.Keyboard.DataContext).TextChanged += value;
-            }
-
-            remove
-            {
-                ((KeyboardViewModel)this.Keyboard.DataContext).TextChanged -= value;
-            }
-        }
-
-        #endregion
-
-        #region Public Properties
-
-        public ICommand GotFocus
-        {
-            get
-            {
-                return this.GetCommand(element => { this.CurrentSelectedTextBox = (FrameworkElement)element; });
-            }
         }
 
         public OnScreenKeyboard Keyboard
         {
             get
             {
-                if (this._keyboard != null)
+                if (_keyboard != null)
                 {
-                    return this._keyboard;
+                    return _keyboard;
                 }
 
-                this.Keyboard = new OnScreenKeyboard();
-                this.KeyboardHide();
+                Keyboard = new OnScreenKeyboard();
+                KeyboardHide();
 
-                return this.Keyboard;
+                return Keyboard;
             }
 
             set
             {
-                this._keyboard = value;
-                this.Notify();
-            }
-        }
-
-        public string KeyboardText
-        {
-            get
-            {
-                return ((KeyboardViewModel)this.Keyboard.DataContext).Text;
-            }
-
-            protected set
-            {
-                ((KeyboardViewModel)this.Keyboard.DataContext).Text = value;
+                _keyboard = value;
+                Notify();
             }
         }
 
@@ -123,23 +75,99 @@ namespace ARK.ViewModel.Base
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // If keyboardstate is on ignore check for currentSelectedTextBox
-                            if (this.KeyboardToggled)
+                            if (KeyboardToggled)
                             {
-                                this.KeyboardToggled = false;
+                                KeyboardToggled = false;
                                 return;
                             }
 
                             // Check if a textbox has been selected
                             // If true change keyboard state
-                            if (this.CurrentSelectedTextBox != null)
+                            if (CurrentSelectedTextBox != null)
                             {
-                                this.KeyboardToggled = !this.KeyboardToggled;
+                                KeyboardToggled = !KeyboardToggled;
                             }
                         });
+            }
+        }
+
+        private FrameworkElement CurrentSelectedTextBox
+        {
+            get
+            {
+                return _currentSelectedTextBox;
+            }
+
+            set
+            {
+                // Unbind event if current is not null
+                if (_currentSelectedTextBox != null)
+                {
+                    // Handle textbox
+                    var ctextbox = CurrentSelectedTextBox as TextBox;
+                    if (ctextbox != null)
+                    {
+                        ctextbox.TextChanged -= textbox_TextChanged;
+                    }
+                }
+
+                _currentSelectedTextBox = value;
+
+                // Update keyboard text and bind event
+                var textbox = CurrentSelectedTextBox as TextBox;
+                if (textbox != null)
+                {
+                    // Set text
+                    KeyboardText = textbox.Text;
+
+                    // Bind eventhandler to support twoway
+                    textbox.TextChanged += textbox_TextChanged;
+                }
+
+                // Handle passwordbox
+                var passwordbox = CurrentSelectedTextBox as PasswordBox;
+                if (passwordbox != null)
+                {
+                    KeyboardText = string.Empty;
+                }
+            }
+        }
+
+        public event EventHandler<KeyboardEventArgs> KeyboardTextChanged
+        {
+            add
+            {
+                ((KeyboardViewModel)Keyboard.DataContext).TextChanged += value;
+            }
+
+            remove
+            {
+                ((KeyboardViewModel)Keyboard.DataContext).TextChanged -= value;
+            }
+        }
+
+        public ICommand GotFocus
+        {
+            get
+            {
+                return GetCommand(element => { CurrentSelectedTextBox = (FrameworkElement)element; });
+            }
+        }
+
+        public string KeyboardText
+        {
+            get
+            {
+                return ((KeyboardViewModel)Keyboard.DataContext).Text;
+            }
+
+            protected set
+            {
+                ((KeyboardViewModel)Keyboard.DataContext).Text = value;
             }
         }
 
@@ -147,79 +175,29 @@ namespace ARK.ViewModel.Base
         {
             get
             {
-                return this._enableKeyboard;
+                return _enableKeyboard;
             }
 
             set
             {
-                this._enableKeyboard = value;
-                this.Notify();
+                _enableKeyboard = value;
+                Notify();
             }
         }
-
-        #endregion
-
-        #region Properties
-
-        private FrameworkElement CurrentSelectedTextBox
-        {
-            get
-            {
-                return this._currentSelectedTextBox;
-            }
-
-            set
-            {
-                // Unbind event if current is not null
-                if (this._currentSelectedTextBox != null)
-                {
-                    // Handle textbox
-                    var ctextbox = this.CurrentSelectedTextBox as TextBox;
-                    if (ctextbox != null)
-                    {
-                        ctextbox.TextChanged -= this.textbox_TextChanged;
-                    }
-                }
-
-                this._currentSelectedTextBox = value;
-
-                // Update keyboard text and bind event
-                var textbox = this.CurrentSelectedTextBox as TextBox;
-                if (textbox != null)
-                {
-                    // Set text
-                    this.KeyboardText = textbox.Text;
-
-                    // Bind eventhandler to support twoway
-                    textbox.TextChanged += this.textbox_TextChanged;
-                }
-
-                // Handle passwordbox
-                var passwordbox = this.CurrentSelectedTextBox as PasswordBox;
-                if (passwordbox != null)
-                {
-                    this.KeyboardText = string.Empty;
-                }
-            }
-        }
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public void KeyboardClear()
         {
-            this.KeyboardText = string.Empty;
+            KeyboardText = string.Empty;
         }
 
         public void KeyboardHide()
         {
-            this.KeyboardToggled = false;
+            KeyboardToggled = false;
         }
 
         public void KeyboardShow()
         {
-            this.KeyboardToggled = true;
+            KeyboardToggled = true;
         }
 
         public override void NavigateToPage(Func<FrameworkElement> page, string pageTitle)
@@ -227,28 +205,22 @@ namespace ARK.ViewModel.Base
             base.NavigateToPage(page, pageTitle);
 
             // Remove currentselected textbox
-            this.CurrentSelectedTextBox = null;
+            CurrentSelectedTextBox = null;
 
             // Hide and clear keyboard
-            this.KeyboardText = string.Empty;
-            this.KeyboardHide();
+            KeyboardText = string.Empty;
+            KeyboardHide();
         }
-
-        #endregion
-
-        #region Methods
 
         private void textbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Update keyboard text
-            var textbox = this.CurrentSelectedTextBox as TextBox;
+            var textbox = CurrentSelectedTextBox as TextBox;
             if (textbox != null)
             {
                 // Set text
-                this.KeyboardText = textbox.Text;
+                KeyboardText = textbox.Text;
             }
         }
-
-        #endregion
     }
 }

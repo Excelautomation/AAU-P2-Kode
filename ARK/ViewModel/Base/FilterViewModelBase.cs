@@ -8,52 +8,36 @@ namespace ARK.ViewModel.Base
 {
     public abstract class FilterViewModelBase : ViewModelBase, IFilterViewModel
     {
-        #region Public Events
-
         public event EventHandler<FilterEventArgs> FilterChanged
         {
             add
             {
-                this.FilterChangedInternal += value;
-                value(this, new FilterEventArgs(this.GetFilter()));
+                FilterChangedInternal += value;
+                value(this, new FilterEventArgs(GetFilter()));
             }
 
             remove
             {
-                this.FilterChangedInternal -= value;
+                FilterChangedInternal -= value;
             }
         }
 
-        #endregion
-
-        #region Events
-
         private event EventHandler<FilterEventArgs> FilterChangedInternal;
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public abstract IEnumerable<IFilter> GetFilter();
 
-        #endregion
-
-        #region Methods
-
         protected virtual void OnFilterChanged()
         {
-            this.OnFilterChanged(new FilterEventArgs(this.GetFilter()));
+            OnFilterChanged(new FilterEventArgs(GetFilter()));
         }
 
         protected virtual void OnFilterChanged(FilterEventArgs e)
         {
-            EventHandler<FilterEventArgs> handler = this.FilterChangedInternal;
+            EventHandler<FilterEventArgs> handler = FilterChangedInternal;
             if (handler != null)
             {
                 handler(this, e);
             }
         }
-
-        #endregion
     }
 }

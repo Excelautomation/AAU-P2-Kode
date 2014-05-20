@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 using ARK.Model;
@@ -10,39 +11,31 @@ using ARK.ViewModel.Base.Filter;
 
 namespace ARK.ViewModel.Administrationssystem.Filters
 {
-    using System.Windows;
-
     public class TripFilterViewModel : FilterViewModelBase, IFilter
     {
-        #region Fields
-
         private IDictionary<CheckBox, Func<IEnumerable<Trip>, IEnumerable<Trip>>> filters;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public TripFilterViewModel()
         {
             // Initialize lists
-            this.filters = new Dictionary<CheckBox, Func<IEnumerable<Trip>, IEnumerable<Trip>>>();
-            this.ControlsBoatType = new List<CheckBox>();
-            this.ControlsDistance = new List<CheckBox>();
-            this.ControlsYear = new List<CheckBox>();
+            filters = new Dictionary<CheckBox, Func<IEnumerable<Trip>, IEnumerable<Trip>>>();
+            ControlsBoatType = new List<CheckBox>();
+            ControlsDistance = new List<CheckBox>();
+            ControlsYear = new List<CheckBox>();
 
             // Add filters - first boattype
             foreach (var boattype in Boat.GetBoatTypes())
             {
-                this.AddCheckBox(
+                AddCheckBox(
                     boattype.ToString(), 
                     (trips) => trips.Where(trip => trip.Boat.SpecificBoatType == boattype), 
-                    this.ControlsBoatType);
+                    ControlsBoatType);
             }
 
             // Add distance
-            this.AddDistanceCheckBox("Mindre end 5 km", 0, 5, this.ControlsDistance);
-            this.AddDistanceCheckBox("5 til 10 km.", 5, 10, this.ControlsDistance);
-            this.AddDistanceCheckBox("Mere end 10 km.", 10, int.MaxValue, this.ControlsDistance);
+            AddDistanceCheckBox("Mindre end 5 km", 0, 5, ControlsDistance);
+            AddDistanceCheckBox("5 til 10 km.", 5, 10, ControlsDistance);
+            AddDistanceCheckBox("Mere end 10 km.", 10, int.MaxValue, ControlsDistance);
 
             // Add year
             using (var db = new DbArkContext())
@@ -51,24 +44,16 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
                 foreach (var year in years)
                 {
-                    this.AddYearCheckbox(year, this.ControlsYear);
+                    AddYearCheckbox(year, ControlsYear);
                 }
             }
         }
-
-        #endregion
-
-        #region Public Properties
 
         public ICollection<CheckBox> ControlsBoatType { get; private set; }
 
         public ICollection<CheckBox> ControlsDistance { get; private set; }
 
         public ICollection<CheckBox> ControlsYear { get; private set; }
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public IEnumerable<T> FilterItems<T>(IEnumerable<T> items)
         {
@@ -85,19 +70,19 @@ namespace ARK.ViewModel.Administrationssystem.Filters
 
             Func<CheckBox, bool> checkBoxSelector = control => control.IsChecked.HasValue && control.IsChecked.Value;
 
-            foreach (var control in this.ControlsBoatType.Where(checkBoxSelector))
+            foreach (var control in ControlsBoatType.Where(checkBoxSelector))
             {
-                boatTypes = FilterContent.MergeLists(boatTypes, this.filters[control](trips));
+                boatTypes = FilterContent.MergeLists(boatTypes, filters[control](trips));
             }
 
-            foreach (var control in this.ControlsDistance.Where(checkBoxSelector))
+            foreach (var control in ControlsDistance.Where(checkBoxSelector))
             {
-                distance = FilterContent.MergeLists(distance, this.filters[control](trips));
+                distance = FilterContent.MergeLists(distance, filters[control](trips));
             }
 
-            foreach (var control in this.ControlsYear.Where(checkBoxSelector))
+            foreach (var control in ControlsYear.Where(checkBoxSelector))
             {
-                year = FilterContent.MergeLists(year, this.filters[control](trips));
+                year = FilterContent.MergeLists(year, filters[control](trips));
             }
 
             return
@@ -111,10 +96,6 @@ namespace ARK.ViewModel.Administrationssystem.Filters
             return new List<IFilter> { this };
         }
 
-        #endregion
-
-        #region Methods
-
         private void AddCheckBox(
             string text, 
             Func<IEnumerable<Trip>, IEnumerable<Trip>> func, 
@@ -122,37 +103,29 @@ namespace ARK.ViewModel.Administrationssystem.Filters
         {
             // Add checkbox and bind events
             CheckBox checkBox = new CheckBox { Content = text, IsChecked = true };
-            checkBox.Checked += this.checkBox_CheckedChanged;
-            checkBox.Unchecked += this.checkBox_CheckedChanged;
+            checkBox.Checked += checkBox_CheckedChanged;
+            checkBox.Unchecked += checkBox_CheckedChanged;
 
             // Add to list
             targetList.Add(checkBox);
 
             // Add to dictionary
-            this.filters.Add(checkBox, func);
+            filters.Add(checkBox, func);
         }
 
         private void AddDistanceCheckBox(string text, int from, int to, ICollection<CheckBox> targetList)
         {
-            this.AddCheckBox(
-                text, 
-                (trips) => trips.Where(trip => trip.Distance >= from && trip.Distance <= to), 
-                targetList);
+            AddCheckBox(text, (trips) => trips.Where(trip => trip.Distance >= from && trip.Distance <= to), targetList);
         }
 
         private void AddYearCheckbox(int year, ICollection<CheckBox> targetList)
         {
-            this.AddCheckBox(
-                year.ToString(), 
-                (trips) => trips.Where(trip => trip.TripStartTime.Year == year), 
-                targetList);
+            AddCheckBox(year.ToString(), (trips) => trips.Where(trip => trip.TripStartTime.Year == year), targetList);
         }
 
         private void checkBox_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            this.OnFilterChanged();
+            OnFilterChanged();
         }
-
-        #endregion
     }
 }

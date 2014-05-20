@@ -16,8 +16,6 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class BoatViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        #region Fields
-
         private IEnumerable<Boat> _boats;
 
         private List<Boat> _boatsNonFiltered;
@@ -34,54 +32,46 @@ namespace ARK.ViewModel.Administrationssystem
 
         private IEnumerable<Trip> _trips;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public BoatViewModel()
         {
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
                     // Load data
                     using (var db = new DbArkContext())
                     {
-                        this._boatsNonFiltered =
+                        _boatsNonFiltered =
                             db.Boat.Include(boat => boat.DamageForms).Include(boat => boat.Trips).ToList();
 
-                        this._trips = db.Trip.Include(trip => trip.Members).Include(trip => trip.Boat).ToList();
+                        _trips = db.Trip.Include(trip => trip.Members).Include(trip => trip.Boat).ToList();
                     }
 
                     // Nulstil filter
-                    this.ResetFilter();
+                    ResetFilter();
 
                     // Sæt valgt båd
-                    if (this.Boats.Count() != 0)
+                    if (Boats.Count() != 0)
                     {
-                        this.CurrentBoat = this.Boats.First();
+                        CurrentBoat = Boats.First();
                     }
                 };
 
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(true, true);
-            filterController.FilterChanged += (o, eventArgs) => this.UpdateFilter(eventArgs);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
-
-        #endregion
-
-        #region Public Properties
 
         public IEnumerable<Boat> Boats
         {
             get
             {
-                return this._boats;
+                return _boats;
             }
 
             set
             {
-                this._boats = value;
-                this.Notify();
+                _boats = value;
+                Notify();
             }
         }
 
@@ -89,7 +79,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(this.Reload);
+                return GetCommand(Reload);
             }
         }
 
@@ -97,38 +87,30 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._currentBoat;
+                return _currentBoat;
             }
 
             set
             {
-                if (this._currentBoat != null)
+                if (_currentBoat != null)
                 {
-                    this.Reload();
+                    Reload();
                 }
 
-                this._currentBoat = value;
+                _currentBoat = value;
 
-                if (this._currentBoat != null)
+                if (_currentBoat != null)
                 {
-                    this.MostUsingMember = this.MostUsingMemberFunc();
+                    MostUsingMember = MostUsingMemberFunc();
                 }
                 else
                 {
-                    this.MostUsingMember = null;
+                    MostUsingMember = null;
                 }
 
-                this.RecentSave = false;
-                this.RecentCancel = false;
-                this.Notify();
-            }
-        }
-
-        public FrameworkElement Filter
-        {
-            get
-            {
-                return this._filter ?? (this._filter = new BoatsFilter());
+                RecentSave = false;
+                RecentCancel = false;
+                Notify();
             }
         }
 
@@ -136,13 +118,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._mostUsingMember;
+                return _mostUsingMember;
             }
 
             set
             {
-                this._mostUsingMember = value;
-                this.Notify();
+                _mostUsingMember = value;
+                Notify();
             }
         }
 
@@ -150,19 +132,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._recentCancel;
+                return _recentCancel;
             }
 
             set
             {
-                if (value != this._recentCancel)
+                if (value != _recentCancel)
                 {
-                    this._recentCancel = value;
-                    this._recentSave = false;
-                    this.NotifyCustom("RecentSave");
+                    _recentCancel = value;
+                    _recentSave = false;
+                    NotifyCustom("RecentSave");
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -170,19 +152,19 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._recentSave;
+                return _recentSave;
             }
 
             set
             {
-                if (value != this._recentSave)
+                if (value != _recentSave)
                 {
-                    this._recentSave = value;
-                    this._recentCancel = false;
-                    this.NotifyCustom("RecentCancel");
+                    _recentSave = value;
+                    _recentCancel = false;
+                    NotifyCustom("RecentCancel");
                 }
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -190,23 +172,27 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(this.Save);
+                return GetCommand(Save);
             }
         }
 
-        #endregion
-
-        #region Public Methods and Operators
+        public FrameworkElement Filter
+        {
+            get
+            {
+                return _filter ?? (_filter = new BoatsFilter());
+            }
+        }
 
         public Member MostUsingMemberFunc()
         {
-            if (this.CurrentBoat.Trips.Count == 0)
+            if (CurrentBoat.Trips.Count == 0)
             {
                 return null;
             }
 
             IEnumerable<Member> members =
-                this._trips.Where(trip => trip.Boat.Id == this.CurrentBoat.Id).SelectMany(trip => trip.Members);
+                _trips.Where(trip => trip.Boat.Id == CurrentBoat.Id).SelectMany(trip => trip.Members);
 
             return
                 (from member in members.Distinct()
@@ -216,52 +202,47 @@ namespace ARK.ViewModel.Administrationssystem
 
         public void OpenBoat(Boat boat)
         {
-            this.CurrentBoat = this.Boats.First(b => b.Id == boat.Id);
+            CurrentBoat = Boats.First(b => b.Id == boat.Id);
         }
-
-        #endregion
-
-        #region Methods
 
         private void Reload()
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(this.CurrentBoat).State = EntityState.Modified;
-                db.Entry(this.CurrentBoat).Reload();
+                db.Entry(CurrentBoat).State = EntityState.Modified;
+                db.Entry(CurrentBoat).Reload();
             }
 
-            this.RecentCancel = true;
+            RecentCancel = true;
 
             // Trigger notify - reset lists
-            IEnumerable<Boat> tmp = this.Boats;
-            this.Boats = null;
-            this.Boats = tmp;
+            IEnumerable<Boat> tmp = Boats;
+            Boats = null;
+            Boats = tmp;
 
-            this.NotifyCustom("CurrentBoat");
+            NotifyCustom("CurrentBoat");
         }
 
         private void ResetFilter()
-
         {
-            this.Boats = this._boatsNonFiltered.AsReadOnly();
+            Boats = _boatsNonFiltered.AsReadOnly();
         }
 
         private void Save()
         {
             using (var db = new DbArkContext())
             {
-                db.Entry(this.CurrentBoat).State = EntityState.Modified;
+                db.Entry(CurrentBoat).State = EntityState.Modified;
                 db.SaveChanges();
             }
 
-            this.RecentSave = true;
+            RecentSave = true;
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
         {
             // Nulstil filter
-            this.ResetFilter();
+            ResetFilter();
 
             // Tjek om en af filtertyperne er aktive
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any())
@@ -273,16 +254,14 @@ namespace ARK.ViewModel.Administrationssystem
             // Tjek filter
             if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                this.Boats = FilterContent.FilterItems(this.Boats, args.FilterEventArgs);
+                Boats = FilterContent.FilterItems(Boats, args.FilterEventArgs);
             }
 
             // Tjek søgning
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
-                this.Boats = from boat in this.Boats where boat.Filter(args.SearchEventArgs.SearchText) select boat;
+                Boats = from boat in Boats where boat.Filter(args.SearchEventArgs.SearchText) select boat;
             }
         }
-
-        #endregion
     }
 }

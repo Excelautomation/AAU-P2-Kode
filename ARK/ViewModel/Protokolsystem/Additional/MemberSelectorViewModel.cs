@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using ARK.Model;
@@ -15,29 +11,23 @@ namespace ARK.ViewModel.Protokolsystem.Additional
     public class MemberSelectorViewModel : ContentViewModelBase
     {
         // Fields
-        #region Fields
-
         private int _boatNumberOfSeats; // Default is 0
 
         private Boat _selectedBoat;
 
         private ObservableCollection<MemberViewModel> _selectedMembers;
 
-        #endregion
-
-        #region Public Properties
-
         public int BoatNumberOfSeats
         {
             get
             {
-                return this._boatNumberOfSeats;
+                return _boatNumberOfSeats;
             }
 
             private set
             {
-                this._boatNumberOfSeats = value;
-                this.Notify();
+                _boatNumberOfSeats = value;
+                Notify();
             }
         }
 
@@ -46,7 +36,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     member =>
                         {
                             if (member == null)
@@ -58,19 +48,19 @@ namespace ARK.ViewModel.Protokolsystem.Additional
 
                             if (memberVm.Member.Id < 0)
                             {
-                                var temp = this.SelectedMembers.ToList();
+                                var temp = SelectedMembers.ToList();
                                 temp.Remove(memberVm);
 
                                 // Clear because of sync
-                                this.SelectedMembers.Clear();
+                                SelectedMembers.Clear();
                                 foreach (var m in temp)
                                 {
-                                    this.SelectedMembers.Add(m);
+                                    SelectedMembers.Add(m);
                                 }
                             }
                             else
                             {
-                                this.SelectedMembers.Remove(memberVm);
+                                SelectedMembers.Remove(memberVm);
                             }
                         });
             }
@@ -80,17 +70,17 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._selectedBoat;
+                return _selectedBoat;
             }
 
             set
             {
-                this._selectedBoat = value;
+                _selectedBoat = value;
 
                 // Update number of seats
-                this.BoatNumberOfSeats = value != null ? value.NumberofSeats : 0;
+                BoatNumberOfSeats = value != null ? value.NumberofSeats : 0;
 
-                this.Notify();
+                Notify();
             }
         }
 
@@ -98,16 +88,14 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return this._selectedMembers;
+                return _selectedMembers;
             }
 
             set
             {
-                this._selectedMembers = value;
-                this.Notify();
+                _selectedMembers = value;
+                Notify();
             }
         }
-
-        #endregion
     }
 }

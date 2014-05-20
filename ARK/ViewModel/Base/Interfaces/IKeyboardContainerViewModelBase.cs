@@ -7,30 +7,18 @@ namespace ARK.ViewModel.Base.Interfaces
 {
     public interface IKeyboardContainerViewModelBase : IPageContainerViewModelBase
     {
-        #region Public Events
-
-        event EventHandler<KeyboardEventArgs> KeyboardTextChanged;
-
-        #endregion
-
-        #region Public Properties
-
         ICommand GotFocus { get; }
 
         string KeyboardText { get; }
 
         bool KeyboardToggled { get; }
 
-        #endregion
-
-        #region Public Methods and Operators
+        event EventHandler<KeyboardEventArgs> KeyboardTextChanged;
 
         void KeyboardClear();
 
         void KeyboardHide();
 
         void KeyboardShow();
-
-        #endregion
     }
 }

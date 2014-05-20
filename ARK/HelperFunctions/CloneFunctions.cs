@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ARK.HelperFunctions
 {
     public static class CloneFunctions
     {
-        #region Public Methods and Operators
-
         public static IEnumerable<T> CloneCollection<T>(IEnumerable<T> input) where T : class, new()
         {
             var output = new List<T>();
@@ -67,7 +63,5 @@ namespace ARK.HelperFunctions
                     where intType.IsGenericType && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                     select intType.GetGenericArguments()[0]).FirstOrDefault();
         }
-
-        #endregion
     }
 }

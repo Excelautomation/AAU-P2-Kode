@@ -7,13 +7,9 @@ namespace ARK.View.Protokolsystem.Filters
     /// </summary>
     public partial class BeginTripFilters : UserControl
     {
-        #region Constructors and Destructors
-
         public BeginTripFilters()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
-
-        #endregion
     }
 }

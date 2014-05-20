@@ -8,27 +8,17 @@ namespace ARK.ViewModel.Base
 {
     public abstract class ContentViewModelBase : ViewModelBase, IContentViewModelBase
     {
-        #region Fields
-
         private IViewModelBase _parent;
-
-        #endregion
-
-        #region Public Events
 
         public event EventHandler ParentAttached;
 
         public event EventHandler ParentDetached;
 
-        #endregion
-
-        #region Public Properties
-
         public ICommand GotFocus
         {
             get
             {
-                return this.GetCommand(element => this.GetKeyboard().GotFocus.Execute((FrameworkElement)element));
+                return GetCommand(element => GetKeyboard().GotFocus.Execute((FrameworkElement)element));
             }
         }
 
@@ -36,7 +26,7 @@ namespace ARK.ViewModel.Base
         {
             get
             {
-                return this._parent;
+                return _parent;
             }
 
             set
@@ -44,29 +34,25 @@ namespace ARK.ViewModel.Base
                 if (value != null)
                 {
                     // Attach
-                    this._parent = value;
+                    _parent = value;
 
-                    if (this.ParentAttached != null)
+                    if (ParentAttached != null)
                     {
-                        this.ParentAttached(this, new EventArgs());
+                        ParentAttached(this, new EventArgs());
                     }
                 }
                 else
                 {
                     // Detach
-                    if (this.ParentDetached != null)
+                    if (ParentDetached != null)
                     {
-                        this.ParentDetached(this, new EventArgs());
+                        ParentDetached(this, new EventArgs());
                     }
 
-                    this._parent = null;
+                    _parent = null;
                 }
             }
         }
-
-        #endregion
-
-        #region Public Methods and Operators
 
         public static IKeyboardContainerViewModelBase GetKeyboard(IContentViewModelBase content)
         {
@@ -85,15 +71,9 @@ namespace ARK.ViewModel.Base
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Methods
-
         private IKeyboardContainerViewModelBase GetKeyboard()
         {
             return GetKeyboard(this);
         }
-
-        #endregion
     }
 }

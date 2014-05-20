@@ -5,10 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-using ARK.HelperFunctions;
-using ARK.Model;
 using ARK.Model.DB;
-using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Additional;
 using ARK.View.Protokolsystem.Confirmations;
 using ARK.View.Protokolsystem.Filters;
@@ -24,8 +21,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
     public class DistanceStatisticsViewModel : ProtokolsystemContentViewModelBase, IFilterContentViewModel
     {
         // Fields
-        #region Fields
-
         private readonly DbArkContext _db;
 
         private FrameworkElement _additionalInfoPage;
@@ -42,34 +37,26 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private TripViewModel _selectedTrip;
 
-        #endregion
-
         // Constructor
-        #region Constructors and Destructors
-
         public DistanceStatisticsViewModel()
         {
-            this._db = DbArkContext.GetDbContext();
+            _db = DbArkContext.GetDbContext();
 
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
                     // Load data and order list
-                    this.LoadMembers();
-                    this.MemberKmCollectionFiltered = this._memberKmCollection.ToList();
+                    LoadMembers();
+                    MemberKmCollectionFiltered = _memberKmCollection.ToList();
 
                     // Set selected member
-                    this.SelectedMember = this.MemberKmCollectionFiltered.First();
+                    SelectedMember = MemberKmCollectionFiltered.First();
                 };
 
             // Setup filter
             var filterController = new FilterContent(this);
             filterController.EnableFilter(false, false);
-            filterController.FilterChanged += (o, eventArgs) => this.UpdateFilter(eventArgs);
+            filterController.FilterChanged += (o, eventArgs) => UpdateFilter(eventArgs);
         }
-
-        #endregion
-
-        #region Public Properties
 
         public ICommand ChangeDistance
         {
@@ -78,17 +65,101 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(
                     x =>
                         {
-                            this.DistanceSelector = true;
+                            DistanceSelector = true;
 
                             var confirmView = new ChangeDistanceConfirm();
                             var confirmViewModel = (ChangeDistanceConfirmViewModel)confirmView.DataContext;
 
-                            confirmViewModel.SelectedTrip = this.SelectedTrip.Trip;
-                            this.ProtocolSystem.ShowDialog(confirmView);
+                            confirmViewModel.SelectedTrip = SelectedTrip.Trip;
+                            ProtocolSystem.ShowDialog(confirmView);
 
-                            confirmViewModel.WindowHide += this.confirmViewModel_WindowHide;
+                            confirmViewModel.WindowHide += confirmViewModel_WindowHide;
                         }, 
-                    x => this.SelectedTrip != null && this.SelectedTrip.Editable);
+                    x => SelectedTrip != null && SelectedTrip.Editable);
+            }
+        }
+
+        public DistanceStatisticsAdditionalInfoViewModel Info
+        {
+            get
+            {
+                return InfoPage.DataContext as DistanceStatisticsAdditionalInfoViewModel;
+            }
+        }
+
+        public FrameworkElement InfoPage
+        {
+            get
+            {
+                return _additionalInfoPage ?? (_additionalInfoPage = new DistanceStatisticsAdditionalInfo());
+            }
+        }
+
+        public IEnumerable<MemberDistanceViewModel> MemberKmCollectionFiltered
+        {
+            get
+            {
+                return _memberKmCollectionFiltered;
+            }
+
+            private set
+            {
+                _memberKmCollectionFiltered = value;
+                Notify();
+            }
+        }
+
+        public ICommand MemberSelectionChanged
+        {
+            get
+            {
+                return GetCommand(e => { SelectedMember = (MemberDistanceViewModel)e; });
+            }
+        }
+
+        public MemberDistanceViewModel SelectedMember
+        {
+            get
+            {
+                return _selectedMember;
+            }
+
+            set
+            {
+                _selectedMember = value;
+                Notify();
+
+                UpdateInfo();
+            }
+        }
+
+        public TripViewModel SelectedTrip
+        {
+            get
+            {
+                return _selectedTrip;
+            }
+
+            set
+            {
+                _selectedTrip = value;
+                Notify();
+
+                UpdateInfo();
+            }
+        }
+
+        private bool DistanceSelector
+        {
+            get
+            {
+                return _distanceSelector;
+            }
+
+            set
+            {
+                _distanceSelector = value;
+                base.ProtocolSystem.EnableSearch = true;
             }
         }
 
@@ -100,116 +171,20 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
         }
 
-        public DistanceStatisticsAdditionalInfoViewModel Info
-        {
-            get
-            {
-                return this.InfoPage.DataContext as DistanceStatisticsAdditionalInfoViewModel;
-            }
-        }
-
-        public FrameworkElement InfoPage
-        {
-            get
-            {
-                return this._additionalInfoPage ?? (this._additionalInfoPage = new DistanceStatisticsAdditionalInfo());
-            }
-        }
-
-        public IEnumerable<MemberDistanceViewModel> MemberKmCollectionFiltered
-        {
-            get
-            {
-                return this._memberKmCollectionFiltered;
-            }
-
-            private set
-            {
-                this._memberKmCollectionFiltered = value;
-                this.Notify();
-            }
-        }
-
-        public ICommand MemberSelectionChanged
-        {
-            get
-            {
-                return this.GetCommand(e => { this.SelectedMember = (MemberDistanceViewModel)e; });
-            }
-        }
-
-        public MemberDistanceViewModel SelectedMember
-        {
-            get
-            {
-                return this._selectedMember;
-            }
-
-            set
-            {
-                this._selectedMember = value;
-                this.Notify();
-
-                this.UpdateInfo();
-            }
-        }
-
-        public TripViewModel SelectedTrip
-        {
-            get
-            {
-                return this._selectedTrip;
-            }
-
-            set
-            {
-                this._selectedTrip = value;
-                this.Notify();
-
-                this.UpdateInfo();
-            }
-        }
-
-        #endregion
-
-        #region Properties
-
-        private bool DistanceSelector
-        {
-            get
-            {
-                return this._distanceSelector;
-            }
-
-            set
-            {
-                this._distanceSelector = value;
-                base.ProtocolSystem.EnableSearch = true;
-            }
-        }
-
-        #endregion
-
-        #region Public Methods and Operators
-
         public void NotifyTripList()
         {
-            this.NotifyCustom("SelectedMember");
-            this.NotifyCustom("SelectedTrip");
+            NotifyCustom("SelectedMember");
+            NotifyCustom("SelectedTrip");
         }
-
-        #endregion
-
-        #region Methods
 
         private void LoadMembers()
         {
-            if (this._memberKmCollection == null || (DateTime.Now - this._latestData).TotalHours > 1)
+            if (_memberKmCollection == null || (DateTime.Now - _latestData).TotalHours > 1)
             {
-                this._latestData = DateTime.Now;
+                _latestData = DateTime.Now;
 
-                this._memberKmCollection =
-                    this._db.Member.OrderBy(x => x.FirstName)
+                _memberKmCollection =
+                    _db.Member.OrderBy(x => x.FirstName)
                         .Include(m => m.Trips)
                         .AsEnumerable()
                         .Select((member, i) => new MemberDistanceViewModel(member))
@@ -218,7 +193,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             }
             else
             {
-                foreach (var member in this._memberKmCollection)
+                foreach (var member in _memberKmCollection)
                 {
                     member.ResetFilter();
                     member.UpdateDistance();
@@ -228,31 +203,31 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void OrderFilter()
         {
-            this.MemberKmCollectionFiltered =
-                this.MemberKmCollectionFiltered.OrderByDescending(member => member.Distance).ToList();
+            MemberKmCollectionFiltered =
+                MemberKmCollectionFiltered.OrderByDescending(member => member.Distance).ToList();
         }
 
         private void ResetFilter()
         {
-            this.MemberKmCollectionFiltered = this._memberKmCollection.ToList();
+            MemberKmCollectionFiltered = _memberKmCollection.ToList();
         }
 
         private void UpdateFilter(FilterChangedEventArgs args)
         {
             // Ignore filter if distance is changing
-            if (this.DistanceSelector)
+            if (DistanceSelector)
             {
                 return;
             }
 
-            this.ResetFilter();
+            ResetFilter();
 
             if ((args.FilterEventArgs == null || !args.FilterEventArgs.Filters.Any())
                 && (args.SearchEventArgs == null || string.IsNullOrEmpty(args.SearchEventArgs.SearchText)))
             {
                 // Order filter
-                this.OrderFilter();
-                this.UpdateRank();
+                OrderFilter();
+                UpdateRank();
 
                 return;
             }
@@ -260,36 +235,36 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             // Filter
             if (args.FilterEventArgs != null && args.FilterEventArgs.Filters.Any())
             {
-                foreach (MemberDistanceViewModel elm in this.MemberKmCollectionFiltered)
+                foreach (MemberDistanceViewModel elm in MemberKmCollectionFiltered)
                 {
                     elm.UpdateFilter(args);
                 }
             }
 
             // Order filter
-            this.OrderFilter();
-            this.UpdateRank();
+            OrderFilter();
+            UpdateRank();
 
             // Search
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
-                this.MemberKmCollectionFiltered =
-                    this.MemberKmCollectionFiltered.Where(
-                        member => member.Member.Filter(args.SearchEventArgs.SearchText)).ToList();
+                MemberKmCollectionFiltered =
+                    MemberKmCollectionFiltered.Where(member => member.Member.Filter(args.SearchEventArgs.SearchText))
+                        .ToList();
             }
         }
 
         private void UpdateInfo()
         {
-            this.Info.SelectedMember = this.SelectedMember;
-            this.Info.SelectedTrip = this.SelectedTrip;
+            Info.SelectedMember = SelectedMember;
+            Info.SelectedTrip = SelectedTrip;
 
-            this.ProtocolSystem.ChangeInfo(this.InfoPage, this.Info);
+            ProtocolSystem.ChangeInfo(InfoPage, Info);
         }
 
         private void UpdateRank()
         {
-            this.MemberKmCollectionFiltered.Aggregate(
+            MemberKmCollectionFiltered.Aggregate(
                 1, 
                 (acc, val) =>
                     {
@@ -300,11 +275,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private void confirmViewModel_WindowHide(object sender, EventArgs e)
         {
-            ((ChangeDistanceConfirmViewModel)sender).WindowHide -= this.confirmViewModel_WindowHide;
+            ((ChangeDistanceConfirmViewModel)sender).WindowHide -= confirmViewModel_WindowHide;
 
-            this.DistanceSelector = false;
+            DistanceSelector = false;
         }
-
-        #endregion
     }
 }

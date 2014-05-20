@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+
+using ARK.Model.XML;
 
 namespace ARK.HelperFunctions
 {
-    using System.Threading;
-
-    using ARK.Model.XML;
-
     public static class XmlSynchronizer
     {
         private static Task _task;
@@ -20,13 +16,13 @@ namespace ARK.HelperFunctions
             {
                 _task = Task.Factory.StartNew(
                     async () =>
-                    {
-                        while (true)
                         {
-                            XmlParser.UpdateDataFromFtp();
-                            await Task.Delay(new TimeSpan(1, 0, 0), token);
-                        }
-                    },
+                            while (true)
+                            {
+                                XmlParser.UpdateDataFromFtp();
+                                await Task.Delay(new TimeSpan(1, 0, 0), token);
+                            }
+                        }, 
                     token);
             }
             else

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
@@ -13,8 +12,6 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 {
     internal class BoatsOutViewModel : ProtokolsystemContentViewModelBase
     {
-        #region Fields
-
         private readonly DbArkContext _db = DbArkContext.GetDbContext();
 
         private FrameworkElement _infoPage;
@@ -23,28 +20,20 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
         private List<Trip> _tripsOngoing = new List<Trip>();
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public BoatsOutViewModel()
         {
-            this.ParentAttached += (sender, e) =>
+            ParentAttached += (sender, e) =>
                 {
-                    this.TripsOngoing = this._db.Trip.Where(t => t.TripEndedTime == null).ToList();
-                    this.UpdateInfo();
+                    TripsOngoing = _db.Trip.Where(t => t.TripEndedTime == null).ToList();
+                    UpdateInfo();
                 };
         }
-
-        #endregion
-
-        #region Public Properties
 
         public BoatsOutAdditionalInfoViewModel Info
         {
             get
             {
-                return this.InfoPage.DataContext as BoatsOutAdditionalInfoViewModel;
+                return InfoPage.DataContext as BoatsOutAdditionalInfoViewModel;
             }
         }
 
@@ -52,7 +41,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._infoPage ?? (this._infoPage = new BoatsOutAdditionalInfo());
+                return _infoPage ?? (_infoPage = new BoatsOutAdditionalInfo());
             }
         }
 
@@ -60,14 +49,14 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._selectedTrip;
+                return _selectedTrip;
             }
 
             set
             {
-                this._selectedTrip = value;
-                this.Notify();
-                this.UpdateInfo();
+                _selectedTrip = value;
+                Notify();
+                UpdateInfo();
             }
         }
 
@@ -75,40 +64,30 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return this._tripsOngoing;
+                return _tripsOngoing;
             }
 
             set
             {
-                this._tripsOngoing = value;
-                this.Notify();
+                _tripsOngoing = value;
+                Notify();
             }
         }
 
-        #endregion
-
         // Methods
-        #region Properties
-
         private IInfoContainerViewModel GetInfoContainerViewModel
         {
             get
             {
-                return this.Parent as IInfoContainerViewModel;
+                return Parent as IInfoContainerViewModel;
             }
         }
 
-        #endregion
-
-        #region Methods
-
         private void UpdateInfo()
         {
-            this.Info.SelectedTrip = this.SelectedTrip;
+            Info.SelectedTrip = SelectedTrip;
 
-            this.GetInfoContainerViewModel.ChangeInfo(this.InfoPage, this.Info);
+            GetInfoContainerViewModel.ChangeInfo(InfoPage, Info);
         }
-
-        #endregion
     }
 }

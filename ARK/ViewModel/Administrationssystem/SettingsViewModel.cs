@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+
 using ARK.HelperFunctions;
 using ARK.Model;
 using ARK.Model.DB;
@@ -15,7 +13,20 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class SettingsViewModel : ContentViewModelBase
     {
-        #region Fields
+        public enum Feedback
+        {
+            Default, 
+
+            Save, 
+
+            Cancel, 
+
+            Delete, 
+
+            Create, 
+
+            Error
+        }
 
         public MembersListWindow MembersListWindow;
 
@@ -65,90 +76,63 @@ namespace ARK.ViewModel.Administrationssystem
 
         private ObservableCollection<StandardTrip> _standardTrips;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         public SettingsViewModel()
         {
             // Initialize database and get data in a single thread(lock)
-            this._db = DbArkContext.GetDbContext();
-            lock (this._db)
+            _db = DbArkContext.GetDbContext();
+            lock (_db)
             {
-                this.DamageTypes = new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(e => e.Type));
-                this.StandardTrips = new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(e => e.Title));
-                this.Admins = new ObservableCollection<Admin>(this._db.Admin.OrderBy(e => e.Member.FirstName));
-                this.Members = new ObservableCollection<Member>(this._db.Member.OrderBy(e => e.FirstName));
+                DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(e => e.Type));
+                StandardTrips = new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(e => e.Title));
+                Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(e => e.Member.FirstName));
+                Members = new ObservableCollection<Member>(_db.Member.OrderBy(e => e.FirstName));
             }
 
             // Initialize the selected items in the respective lists.
-            if (this.Admins.Any())
+            if (Admins.Any())
             {
-                this.SelectedAdmin = 0;
-                this.CurrentAdmin = this.Admins[0];
-                this.ReferenceToCurrentAdmin = this.CurrentAdmin;
+                SelectedAdmin = 0;
+                CurrentAdmin = Admins[0];
+                ReferenceToCurrentAdmin = CurrentAdmin;
             }
 
-            if (this.DamageTypes.Any())
+            if (DamageTypes.Any())
             {
-                this.SelectedDamageType = 0;
-                this.CurrentDamageType = this.DamageTypes[0];
-                this.ReferenceToCurrentDamageType = this.CurrentDamageType;
+                SelectedDamageType = 0;
+                CurrentDamageType = DamageTypes[0];
+                ReferenceToCurrentDamageType = CurrentDamageType;
             }
 
-            if (this.StandardTrips.Any())
+            if (StandardTrips.Any())
             {
-                this.SelectedStandardTrip = 0;
-                this.CurrentStandardTrip = this.StandardTrips[0];
-                this.ReferenceToCurrentStandardTrip = this.CurrentStandardTrip;
+                SelectedStandardTrip = 0;
+                CurrentStandardTrip = StandardTrips[0];
+                ReferenceToCurrentStandardTrip = CurrentStandardTrip;
             }
 
             // Check seasons
-            if (!this._db.Season.Any(x => true))
+            if (!_db.Season.Any(x => true))
             {
-                this.CurrentSeason = new Season();
-                this._db.Season.Add(this.CurrentSeason);
+                CurrentSeason = new Season();
+                _db.Season.Add(CurrentSeason);
             }
             else
             {
-                this.CurrentSeason = this._db.Season.AsEnumerable().Last(x => true);
+                CurrentSeason = _db.Season.AsEnumerable().Last(x => true);
             }
         }
-
-        #endregion
-
-        #region Enums
-
-        public enum Feedback
-        {
-            Default, 
-
-            Save, 
-
-            Cancel, 
-
-            Delete, 
-
-            Create, 
-
-            Error
-        }
-
-        #endregion
-
-        #region Public Properties
 
         public ObservableCollection<Admin> Admins
         {
             get
             {
-                return this._admins;
+                return _admins;
             }
 
             set
             {
-                this._admins = value;
-                this.Notify();
+                _admins = value;
+                Notify();
             }
         }
 
@@ -156,21 +140,21 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Reloads all the original values for the selected admin
-                            this.CurrentAdmin = new Admin()
-                                                    {
-                                                        Username = this.ReferenceToCurrentAdmin.Username, 
-                                                        Password = this.ReferenceToCurrentAdmin.Password, 
-                                                        Member = this.ReferenceToCurrentAdmin.Member, 
-                                                        ContactDark = this.ReferenceToCurrentAdmin.ContactDark, 
-                                                        ContactTrip = this.ReferenceToCurrentAdmin.ContactTrip
-                                                    };
+                            CurrentAdmin = new Admin()
+                                               {
+                                                   Username = ReferenceToCurrentAdmin.Username, 
+                                                   Password = ReferenceToCurrentAdmin.Password, 
+                                                   Member = ReferenceToCurrentAdmin.Member, 
+                                                   ContactDark = ReferenceToCurrentAdmin.ContactDark, 
+                                                   ContactTrip = ReferenceToCurrentAdmin.ContactTrip
+                                               };
 
                             // Give feedback through view
-                            this.FeedbackAdmin = Feedback.Cancel;
+                            FeedbackAdmin = Feedback.Cancel;
                         });
             }
         }
@@ -179,15 +163,15 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Revert changes made by user
                             // Copy from database to the selected damagetype
-                            this.CurrentDamageType = new DamageType() { Type = this.ReferenceToCurrentDamageType.Type };
+                            CurrentDamageType = new DamageType() { Type = ReferenceToCurrentDamageType.Type };
 
                             // Give feedback
-                            this.FeedbackDamageType = Feedback.Cancel;
+                            FeedbackDamageType = Feedback.Cancel;
                         });
             }
         }
@@ -196,25 +180,21 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Copies original info from database to the selected standardtrip
-                            this.CurrentStandardTrip = new StandardTrip()
-                                                           {
-                                                               Distance =
-                                                                   this.ReferenceToCurrentStandardTrip
-                                                                   .Distance, 
-                                                               Direction =
-                                                                   this.ReferenceToCurrentStandardTrip
-                                                                   .Direction, 
-                                                               Title =
-                                                                   this.ReferenceToCurrentStandardTrip
-                                                                   .Title
-                                                           };
+                            CurrentStandardTrip = new StandardTrip()
+                                                      {
+                                                          Distance =
+                                                              ReferenceToCurrentStandardTrip.Distance, 
+                                                          Direction =
+                                                              ReferenceToCurrentStandardTrip.Direction, 
+                                                          Title = ReferenceToCurrentStandardTrip.Title
+                                                      };
 
                             // Give feedback
-                            this.FeedbackStandardTrip = Feedback.Cancel;
+                            FeedbackStandardTrip = Feedback.Cancel;
                         });
             }
         }
@@ -223,55 +203,55 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Create a new object to store the info of the desired admin
-                            this.NewAdmin = new Admin();
+                            NewAdmin = new Admin();
 
                             // Initialize and open a new window for the user
                             // Get the required info for creating an admin through the new window
-                            this.MembersListWindow = new View.Administrationssystem.Pages.MembersListWindow();
-                            this.MembersListWindow.DataContext = this;
-                            this.MembersListWindow.ShowDialog();
-                            this.NewAdmin.ContactDark = false;
-                            this.NewAdmin.ContactTrip = false;
+                            MembersListWindow = new View.Administrationssystem.Pages.MembersListWindow();
+                            MembersListWindow.DataContext = this;
+                            MembersListWindow.ShowDialog();
+                            NewAdmin.ContactDark = false;
+                            NewAdmin.ContactTrip = false;
 
                             // Refresh from database
-                            this.Admins = new ObservableCollection<Admin>(this._db.Admin.ToList());
+                            Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
 
                             // Check there already exists an admin with the same username og member
                             // Also check if user made a password and username
-                            if (this.NewAdmin.Username.Length == 0 || this.NewAdmin.Password.Length == 0)
+                            if (NewAdmin.Username.Length == 0 || NewAdmin.Password.Length == 0)
                             {
                                 System.Windows.MessageBox.Show("Brugernavn og kodeord er påkrævet!");
                                 return;
                             }
-                            else if (this.Admins.Any(m => m.Member == this.NewAdmin.Member))
+                            else if (Admins.Any(m => m.Member == NewAdmin.Member))
                             {
                                 System.Windows.MessageBox.Show("Det valgte medlem er allerede administrator!");
                                 return;
                             }
-                            else if (this.Admins.Any(m => m.Username == this.NewAdmin.Username))
+                            else if (Admins.Any(m => m.Username == NewAdmin.Username))
                             {
                                 System.Windows.MessageBox.Show("Det ønskede brugernavn eksisterer allerede!");
                                 return;
                             }
 
                             // Convert username and password to lower-case
-                            this.NewAdmin.Username = this.NewAdmin.Username.ToLower();
-                            this.NewAdmin.Password = PasswordHashing.HashPassword(this.NewAdmin.Password.ToLower());
+                            NewAdmin.Username = NewAdmin.Username.ToLower();
+                            NewAdmin.Password = PasswordHashing.HashPassword(NewAdmin.Password.ToLower());
 
                             // Add the new admin to database and list
-                            this._db.Admin.Add(this.NewAdmin);
-                            this.Admins.Add(this.NewAdmin);
+                            _db.Admin.Add(NewAdmin);
+                            Admins.Add(NewAdmin);
 
                             // Try to save changes to database
-                            this._db.SaveChanges();
+                            _db.SaveChanges();
 
                             // Change focus in view to the last admin in the list and give feedback
-                            this.SelectedAdmin = this.Admins.Count - 1;
-                            this.FeedbackAdmin = Feedback.Create;
+                            SelectedAdmin = Admins.Count - 1;
+                            FeedbackAdmin = Feedback.Create;
                         });
             }
         }
@@ -280,23 +260,22 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Preconfigured damagetype to create
                             DamageType NewDamageType = new DamageType() { Type = "Ny skadetype" };
 
                             // Add new damagetype
-                            this._db.DamageType.Add(NewDamageType);
-                            this._db.SaveChanges();
-                            this.DamageTypes.Add(NewDamageType);
+                            _db.DamageType.Add(NewDamageType);
+                            _db.SaveChanges();
+                            DamageTypes.Add(NewDamageType);
 
                             // Refresh from database, select new damagetype and give feedback
-                            this.DamageTypes =
-                                new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
-                            this.SelectedDamageType =
-                                this.DamageTypes.IndexOf(this.DamageTypes.First(m => m.Type == NewDamageType.Type));
-                            this.FeedbackDamageType = Feedback.Create;
+                            DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
+                            SelectedDamageType =
+                                DamageTypes.IndexOf(DamageTypes.First(m => m.Type == NewDamageType.Type));
+                            FeedbackDamageType = Feedback.Create;
                         });
             }
         }
@@ -305,7 +284,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Create an object with premade info
@@ -317,17 +296,16 @@ namespace ARK.ViewModel.Administrationssystem
                                                                };
 
                             // Add the new object to list and database
-                            this._db.StandardTrip.Add(NewStandardTrip);
-                            this._db.SaveChanges();
-                            this.StandardTrips.Add(NewStandardTrip);
+                            _db.StandardTrip.Add(NewStandardTrip);
+                            _db.SaveChanges();
+                            StandardTrips.Add(NewStandardTrip);
 
                             // (hopefully) selects the new standardtrip and give feedback
-                            this.StandardTrips =
-                                new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
-                            this.SelectedStandardTrip =
-                                this.StandardTrips.IndexOf(
-                                    this.StandardTrips.First(m => m.Title == NewStandardTrip.Title));
-                            this.FeedbackStandardTrip = Feedback.Create;
+                            StandardTrips =
+                                new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
+                            SelectedStandardTrip =
+                                StandardTrips.IndexOf(StandardTrips.First(m => m.Title == NewStandardTrip.Title));
+                            FeedbackStandardTrip = Feedback.Create;
                         });
             }
         }
@@ -336,13 +314,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._currentAdmin;
+                return _currentAdmin;
             }
 
             set
             {
-                this._currentAdmin = value;
-                this.Notify();
+                _currentAdmin = value;
+                Notify();
             }
         }
 
@@ -350,13 +328,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._currentDamageType;
+                return _currentDamageType;
             }
 
             set
             {
-                this._currentDamageType = value;
-                this.Notify();
+                _currentDamageType = value;
+                Notify();
             }
         }
 
@@ -364,13 +342,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._currentSeason;
+                return _currentSeason;
             }
 
             set
             {
-                this._currentSeason = value;
-                this.Notify();
+                _currentSeason = value;
+                Notify();
             }
         }
 
@@ -378,13 +356,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._currentStandardTrip;
+                return _currentStandardTrip;
             }
 
             set
             {
-                this._currentStandardTrip = value;
-                this.Notify();
+                _currentStandardTrip = value;
+                Notify();
             }
         }
 
@@ -392,13 +370,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._damageTypes;
+                return _damageTypes;
             }
 
             set
             {
-                this._damageTypes = value;
-                this.Notify();
+                _damageTypes = value;
+                Notify();
             }
         }
 
@@ -406,45 +384,44 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Keep a temp. reference to the selected admin
                             // Refresh from database and select the desired admin again
-                            string tmpId = this.ReferenceToCurrentAdmin.Username;
-                            this.Admins = new ObservableCollection<Admin>(this._db.Admin.ToList());
-                            this.ReferenceToCurrentAdmin = this.Admins.First(m => m.Username == tmpId);
+                            string tmpId = ReferenceToCurrentAdmin.Username;
+                            Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
+                            ReferenceToCurrentAdmin = Admins.First(m => m.Username == tmpId);
 
                             // Check if there's only one admin
-                            if (this.Admins.Count == 1)
+                            if (Admins.Count == 1)
                             {
-                                this.ErrorAdmin = "Sidste administrator kan ikke slettes!";
-                                this.FeedbackAdmin = Feedback.Error;
+                                ErrorAdmin = "Sidste administrator kan ikke slettes!";
+                                FeedbackAdmin = Feedback.Error;
                                 return;
                             }
 
                             // Remove admin
-                            this._db.Admin.Remove(this.ReferenceToCurrentAdmin);
-                            this.Admins.Remove(this.ReferenceToCurrentAdmin);
+                            _db.Admin.Remove(ReferenceToCurrentAdmin);
+                            Admins.Remove(ReferenceToCurrentAdmin);
 
                             // Try to save changes.
                             try
                             {
-                                this._db.SaveChanges();
+                                _db.SaveChanges();
                             }
                             catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                             {
                                 // The admin has likely already been deleted
-                                this.Admins =
-                                    new ObservableCollection<Admin>(this._db.Admin.OrderBy(m => m.Member.FirstName));
-                                this.ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
-                                this.FeedbackAdmin = Feedback.Error;
+                                Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(m => m.Member.FirstName));
+                                ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
+                                FeedbackAdmin = Feedback.Error;
                                 return;
                             }
 
                             // Change focus in view to the last admin in the list and give feedback
-                            this.SelectedAdmin = this.Admins.Count - 1;
-                            this.FeedbackAdmin = Feedback.Delete;
+                            SelectedAdmin = Admins.Count - 1;
+                            FeedbackAdmin = Feedback.Delete;
                         });
             }
         }
@@ -453,32 +430,30 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Remove selected damagetype from list
-                            this._db.DamageType.Remove(this.ReferenceToCurrentDamageType);
+                            _db.DamageType.Remove(ReferenceToCurrentDamageType);
 
                             // Try to save Changes to database
                             try
                             {
-                                this._db.SaveChanges();
+                                _db.SaveChanges();
                             }
                             catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                             {
                                 // The selected damagetype has likely already been deleted
-                                this.DamageTypes =
-                                    new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
-                                this.ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
-                                this.FeedbackDamageType = Feedback.Error;
+                                DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
+                                ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
+                                FeedbackDamageType = Feedback.Error;
                                 return;
                             }
 
                             // Refresh database, select last item and give feedback
-                            this.DamageTypes =
-                                new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
-                            this.SelectedDamageType = this.DamageTypes.Count - 1;
-                            this.FeedbackDamageType = Feedback.Delete;
+                            DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
+                            SelectedDamageType = DamageTypes.Count - 1;
+                            FeedbackDamageType = Feedback.Delete;
                         });
             }
         }
@@ -487,32 +462,32 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Remove selected trip
-                            this._db.StandardTrip.Remove(this.ReferenceToCurrentStandardTrip);
+                            _db.StandardTrip.Remove(ReferenceToCurrentStandardTrip);
 
                             // Try to save changes
                             try
                             {
-                                this._db.SaveChanges();
+                                _db.SaveChanges();
                             }
                             catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                             {
                                 // The selected standardtrip has likely already been deleted from database
-                                this.StandardTrips =
-                                    new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
-                                this.ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
-                                this.FeedbackStandardTrip = Feedback.Error;
+                                StandardTrips =
+                                    new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
+                                ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
+                                FeedbackStandardTrip = Feedback.Error;
                                 return;
                             }
 
                             // Refresh database, select last standardtrip and give feedback
-                            this.StandardTrips =
-                                new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
-                            this.SelectedStandardTrip = this.StandardTrips.Count - 1;
-                            this.FeedbackDamageType = Feedback.Delete;
+                            StandardTrips =
+                                new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
+                            SelectedStandardTrip = StandardTrips.Count - 1;
+                            FeedbackDamageType = Feedback.Delete;
                         });
             }
         }
@@ -521,13 +496,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._displaySeasonErrorLabel;
+                return _displaySeasonErrorLabel;
             }
 
             set
             {
-                this._displaySeasonErrorLabel = value;
-                this.Notify();
+                _displaySeasonErrorLabel = value;
+                Notify();
             }
         }
 
@@ -535,13 +510,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._errorAdmin;
+                return _errorAdmin;
             }
 
             set
             {
-                this._errorAdmin = value;
-                this.Notify();
+                _errorAdmin = value;
+                Notify();
             }
         }
 
@@ -549,13 +524,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._errorDamageType;
+                return _errorDamageType;
             }
 
             set
             {
-                this._errorDamageType = value;
-                this.Notify();
+                _errorDamageType = value;
+                Notify();
             }
         }
 
@@ -563,13 +538,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._errorStandardTrip;
+                return _errorStandardTrip;
             }
 
             set
             {
-                this._errorStandardTrip = value;
-                this.Notify();
+                _errorStandardTrip = value;
+                Notify();
             }
         }
 
@@ -577,13 +552,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._feedbackAdmin;
+                return _feedbackAdmin;
             }
 
             set
             {
-                this._feedbackAdmin = value;
-                this.Notify();
+                _feedbackAdmin = value;
+                Notify();
             }
         }
 
@@ -591,13 +566,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._feedbackDamageType;
+                return _feedbackDamageType;
             }
 
             set
             {
-                this._feedbackDamageType = value;
-                this.Notify();
+                _feedbackDamageType = value;
+                Notify();
             }
         }
 
@@ -605,13 +580,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._feedbackStandardTrip;
+                return _feedbackStandardTrip;
             }
 
             set
             {
-                this._feedbackStandardTrip = value;
-                this.Notify();
+                _feedbackStandardTrip = value;
+                Notify();
             }
         }
 
@@ -619,13 +594,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._members;
+                return _members;
             }
 
             set
             {
-                this._members = value;
-                this.Notify();
+                _members = value;
+                Notify();
             }
         }
 
@@ -633,13 +608,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._newAdmin;
+                return _newAdmin;
             }
 
             set
             {
-                this._newAdmin = value;
-                this.Notify();
+                _newAdmin = value;
+                Notify();
             }
         }
 
@@ -647,25 +622,25 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // if current season started less then 183 days ago promt the user!
-                            if (this.CurrentSeason != null
-                                && DateTime.Compare(this.CurrentSeason.SeasonStart.AddDays(183), DateTime.Now) > 0)
+                            if (CurrentSeason != null
+                                && DateTime.Compare(CurrentSeason.SeasonStart.AddDays(183), DateTime.Now) > 0)
                             {
                                 // promp the user that the current season is less than a half year old!
                                 // throw new NotImplementedException();
-                                this.DisplaySeasonErrorLabel = true;
+                                DisplaySeasonErrorLabel = true;
                             }
                             else
                             {
-                                this.CurrentSeason.SeasonEnd = DateTime.Now;
+                                CurrentSeason.SeasonEnd = DateTime.Now;
                                 Season tmpSeason = new Season();
-                                this._db.Season.Add(tmpSeason);
-                                this.CurrentSeason = tmpSeason;
-                                this._db.SaveChanges();
-                                this.DisplaySeasonErrorLabel = false;
+                                _db.Season.Add(tmpSeason);
+                                CurrentSeason = tmpSeason;
+                                _db.SaveChanges();
+                                DisplaySeasonErrorLabel = false;
                             }
                         });
             }
@@ -675,13 +650,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._referenceToCurrentAdmin;
+                return _referenceToCurrentAdmin;
             }
 
             set
             {
-                this._referenceToCurrentAdmin = value;
-                this.Notify();
+                _referenceToCurrentAdmin = value;
+                Notify();
             }
         }
 
@@ -689,36 +664,34 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Save a temp. reference to the selected admin
-                            int tempindex = this.SelectedAdmin;
+                            int tempindex = SelectedAdmin;
 
                             // Retrieve changes from selected admin
-                            this.ReferenceToCurrentAdmin.ContactTrip = this.CurrentAdmin.ContactTrip;
-                            this.ReferenceToCurrentAdmin.ContactDark = this.CurrentAdmin.ContactDark;
+                            ReferenceToCurrentAdmin.ContactTrip = CurrentAdmin.ContactTrip;
+                            ReferenceToCurrentAdmin.ContactDark = CurrentAdmin.ContactDark;
 
                             // Try to save changes to database
                             try
                             {
-                                this._db.SaveChanges();
+                                _db.SaveChanges();
                             }
                             catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                             {
                                 // The selected admin has likely been deleted
-                                this.Admins =
-                                    new ObservableCollection<Admin>(this._db.Admin.OrderBy(m => m.Member.FirstName));
-                                this.ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
-                                this.FeedbackAdmin = Feedback.Error;
+                                Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(m => m.Member.FirstName));
+                                ErrorAdmin = "Administratoren blev ikke fundet i databasen!";
+                                FeedbackAdmin = Feedback.Error;
                                 return;
                             }
 
                             // Refresh from database, reselect the previously selected admin and give feedback
-                            this.Admins =
-                                new ObservableCollection<Admin>(this._db.Admin.OrderBy(m => m.Member.FirstName));
-                            this.SelectedAdmin = tempindex;
-                            this.FeedbackAdmin = Feedback.Save;
+                            Admins = new ObservableCollection<Admin>(_db.Admin.OrderBy(m => m.Member.FirstName));
+                            SelectedAdmin = tempindex;
+                            FeedbackAdmin = Feedback.Save;
                         });
             }
         }
@@ -727,31 +700,29 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
                             // Save the selected damagetype to the list synced with database
-                            this.ReferenceToCurrentDamageType.Type = this.CurrentDamageType.Type;
+                            ReferenceToCurrentDamageType.Type = CurrentDamageType.Type;
 
                             // Try to save changes to databse
                             try
                             {
-                                this._db.SaveChanges();
+                                _db.SaveChanges();
                             }
                             catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                             {
                                 // The sleceted damagetype has likely been deleted in database
-                                this.DamageTypes =
-                                    new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
-                                this.ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
-                                this.FeedbackDamageType = Feedback.Error;
+                                DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
+                                ErrorDamageType = "Skadetypen blev ikke fundet i databasen!";
+                                FeedbackDamageType = Feedback.Error;
                                 return;
                             }
 
                             // Refresh database and give feedback
-                            this.DamageTypes =
-                                new ObservableCollection<DamageType>(this._db.DamageType.OrderBy(m => m.Type));
-                            this.FeedbackDamageType = Feedback.Save;
+                            DamageTypes = new ObservableCollection<DamageType>(_db.DamageType.OrderBy(m => m.Type));
+                            FeedbackDamageType = Feedback.Save;
                         });
             }
         }
@@ -760,35 +731,35 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            int tmptrip = this.CurrentStandardTrip.Id;
+                            int tmptrip = CurrentStandardTrip.Id;
 
                             // Copies data from userinput to the list synched with the database
-                            this.ReferenceToCurrentStandardTrip.Distance = this.CurrentStandardTrip.Distance;
-                            this.ReferenceToCurrentStandardTrip.Title = this.CurrentStandardTrip.Title;
-                            this.ReferenceToCurrentStandardTrip.Direction = this.CurrentStandardTrip.Direction;
+                            ReferenceToCurrentStandardTrip.Distance = CurrentStandardTrip.Distance;
+                            ReferenceToCurrentStandardTrip.Title = CurrentStandardTrip.Title;
+                            ReferenceToCurrentStandardTrip.Direction = CurrentStandardTrip.Direction;
 
                             // Try to save changes
                             try
                             {
-                                this._db.SaveChanges();
+                                _db.SaveChanges();
                             }
                             catch (System.Data.Entity.Infrastructure.DbUpdateConcurrencyException)
                             {
                                 // The standardtrip has likely been deleted in the database
-                                this.StandardTrips =
-                                    new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
-                                this.ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
-                                this.FeedbackStandardTrip = Feedback.Error;
+                                StandardTrips =
+                                    new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
+                                ErrorStandardTrip = "Standardturen blev ikke fundet i databasen!";
+                                FeedbackStandardTrip = Feedback.Error;
                                 return;
                             }
 
                             // Reload database and give feedback.
-                            this.StandardTrips =
-                                new ObservableCollection<StandardTrip>(this._db.StandardTrip.OrderBy(m => m.Title));
-                            this.FeedbackStandardTrip = Feedback.Save;
+                            StandardTrips =
+                                new ObservableCollection<StandardTrip>(_db.StandardTrip.OrderBy(m => m.Title));
+                            FeedbackStandardTrip = Feedback.Save;
                         });
             }
         }
@@ -797,13 +768,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedAdmin;
+                return _selectedAdmin;
             }
 
             set
             {
-                this._selectedAdmin = value;
-                this.Notify();
+                _selectedAdmin = value;
+                Notify();
             }
         }
 
@@ -811,7 +782,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
                             // If the list is empty return safely (Should not be possibly for admins)
@@ -824,20 +795,20 @@ namespace ARK.ViewModel.Administrationssystem
 
                             // Sets CurrentAdmin to contain a copy of the selected item
                             // This object contains the direct changes made by the user
-                            this.CurrentAdmin = new Admin()
-                                                    {
-                                                        Username = admin.Username, 
-                                                        Password = admin.Password, 
-                                                        ContactTrip = admin.ContactTrip, 
-                                                        ContactDark = admin.ContactDark, 
-                                                        Member = admin.Member
-                                                    };
+                            CurrentAdmin = new Admin()
+                                               {
+                                                   Username = admin.Username, 
+                                                   Password = admin.Password, 
+                                                   ContactTrip = admin.ContactTrip, 
+                                                   ContactDark = admin.ContactDark, 
+                                                   Member = admin.Member
+                                               };
 
                             // Sets reference to the selected admin in database
-                            this.ReferenceToCurrentAdmin = admin;
+                            ReferenceToCurrentAdmin = admin;
 
                             // Give feedback
-                            this.FeedbackAdmin = Feedback.Default;
+                            FeedbackAdmin = Feedback.Default;
                         });
             }
         }
@@ -846,7 +817,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
                             // If list is empty return safely
@@ -858,13 +829,13 @@ namespace ARK.ViewModel.Administrationssystem
                             var damageType = (DamageType)e;
 
                             // Create a copy of the selected damagetype from database
-                            this.CurrentDamageType = new DamageType() { Type = damageType.Type };
+                            CurrentDamageType = new DamageType() { Type = damageType.Type };
 
                             // Remember reference to the selected damagetype in the list synced with database
-                            this.ReferenceToCurrentDamageType = damageType;
+                            ReferenceToCurrentDamageType = damageType;
 
                             // Give feedback
-                            this.FeedbackDamageType = Feedback.Default;
+                            FeedbackDamageType = Feedback.Default;
                         });
             }
         }
@@ -873,7 +844,7 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
                             // If the list is empty return safely
@@ -885,18 +856,18 @@ namespace ARK.ViewModel.Administrationssystem
                             var standardTrip = (StandardTrip)e;
 
                             // Create a copy from the selected item
-                            this.CurrentStandardTrip = new StandardTrip()
-                                                           {
-                                                               Distance = standardTrip.Distance, 
-                                                               Direction = standardTrip.Direction, 
-                                                               Title = standardTrip.Title
-                                                           };
+                            CurrentStandardTrip = new StandardTrip()
+                                                      {
+                                                          Distance = standardTrip.Distance, 
+                                                          Direction = standardTrip.Direction, 
+                                                          Title = standardTrip.Title
+                                                      };
 
                             // Save reference to the original position of the selected item
-                            this.ReferenceToCurrentStandardTrip = standardTrip;
+                            ReferenceToCurrentStandardTrip = standardTrip;
 
                             // Give feedback
-                            this.FeedbackStandardTrip = Feedback.Default;
+                            FeedbackStandardTrip = Feedback.Default;
                         });
             }
         }
@@ -905,13 +876,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedDamageType;
+                return _selectedDamageType;
             }
 
             set
             {
-                this._selectedDamageType = value;
-                this.Notify();
+                _selectedDamageType = value;
+                Notify();
             }
         }
 
@@ -919,13 +890,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._selectedStandardTrip;
+                return _selectedStandardTrip;
             }
 
             set
             {
-                this._selectedStandardTrip = value;
-                this.Notify();
+                _selectedStandardTrip = value;
+                Notify();
             }
         }
 
@@ -933,12 +904,12 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     e =>
                         {
                             // Assign a member as foreign key to the desired administrator
-                            this.NewAdmin.Member = (Member)e;
-                            this.MembersListWindow.Close();
+                            NewAdmin.Member = (Member)e;
+                            MembersListWindow.Close();
                         });
             }
         }
@@ -947,13 +918,13 @@ namespace ARK.ViewModel.Administrationssystem
         {
             get
             {
-                return this._standardTrips;
+                return _standardTrips;
             }
 
             set
             {
-                this._standardTrips = value;
-                this.Notify();
+                _standardTrips = value;
+                Notify();
             }
         }
 
@@ -964,7 +935,5 @@ namespace ARK.ViewModel.Administrationssystem
                 return DateTime.Now;
             }
         }
-
-        #endregion
     }
 }

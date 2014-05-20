@@ -4,8 +4,6 @@ namespace ARK.Model
 {
     public class GetSMS : IEquatable<GetSMS>
     {
-        #region Public Properties
-
         public string From { get; set; }
 
         public bool Handled { get; set; }
@@ -15,20 +13,6 @@ namespace ARK.Model
         public DateTime RecievedDate { get; set; }
 
         public string Text { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        public static bool operator ==(GetSMS left, GetSMS right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(GetSMS left, GetSMS right)
-        {
-            return !Equals(left, right);
-        }
 
         public bool Equals(GetSMS other)
         {
@@ -42,7 +26,17 @@ namespace ARK.Model
                 return true;
             }
 
-            return this.Id == other.Id;
+            return Id == other.Id;
+        }
+
+        public static bool operator ==(GetSMS left, GetSMS right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(GetSMS left, GetSMS right)
+        {
+            return !Equals(left, right);
         }
 
         public override bool Equals(object obj)
@@ -57,19 +51,17 @@ namespace ARK.Model
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            return this.Equals((GetSMS)obj);
+            return Equals((GetSMS)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.Id;
+            return Id;
         }
-
-        #endregion
     }
 }

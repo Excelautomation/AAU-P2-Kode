@@ -1,46 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
-using ARK.View.Protokolsystem.Pages;
-using ARK.ViewModel.Base;
-using ARK.ViewModel.Base.Interfaces;
 
 namespace ARK.ViewModel.Protokolsystem.Confirmations
 {
     public class BeginTripBoatsConfirmViewModel : ConfirmationViewModelBase
     {
         // Fields
-        #region Fields
-
         private Trip _trip;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public BeginTripBoatsConfirmViewModel()
         {
         }
 
-        #endregion
-
-        #region Public Properties
-
         public ICommand CancelTrip
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            this.Hide();
-                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            Hide();
+                            ProtocolSystem.StatisticsDistance.Execute(null);
                         });
             }
         }
@@ -49,7 +33,7 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this.GetCommand(this.Hide);
+                return GetCommand(Hide);
             }
         }
 
@@ -57,11 +41,11 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this.GetCommand(
+                return GetCommand(
                     () =>
                         {
-                            var members = this.Trip.Members;
-                            this.Trip.Members = new List<Member>();
+                            var members = Trip.Members;
+                            Trip.Members = new List<Member>();
 
                             // Add selected members to trip
                             foreach (var m in members)
@@ -73,23 +57,23 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                                 else if (m.Id == -2)
                                 {
                                     // -2 is a guest => Increment the crew count, but don't add the member to the member list
-                                    this.Trip.CrewCount++;
+                                    Trip.CrewCount++;
                                 }
                                 else
                                 {
                                     // Add the member reference and increment the crew count
-                                    this.Trip.Members.Add(m);
-                                    this.Trip.CrewCount++;
+                                    Trip.Members.Add(m);
+                                    Trip.CrewCount++;
                                 }
                             }
 
-                            DbArkContext.GetDbContext().Trip.Add(this.Trip);
+                            DbArkContext.GetDbContext().Trip.Add(Trip);
                             DbArkContext.GetDbContext().SaveChanges();
 
-                            this.ProtocolSystem.UpdateNumBoatsOut();
+                            ProtocolSystem.UpdateNumBoatsOut();
 
-                            this.Hide();
-                            this.ProtocolSystem.StatisticsDistance.Execute(null);
+                            Hide();
+                            ProtocolSystem.StatisticsDistance.Execute(null);
                         });
             }
         }
@@ -106,16 +90,14 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
         {
             get
             {
-                return this._trip;
+                return _trip;
             }
 
             set
             {
-                this._trip = value;
-                this.Notify();
+                _trip = value;
+                Notify();
             }
         }
-
-        #endregion
     }
 }

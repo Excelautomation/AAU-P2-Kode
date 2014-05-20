@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,15 +8,9 @@ namespace ARK.HelperFunctions
 {
     public static class SunsetClass
     {
-        #region Static Fields
-
         private static DateTime _sunset;
 
         private static Task _task;
-
-        #endregion
-
-        #region Public Properties
 
         public static DateTime Sunset
         {
@@ -33,10 +24,6 @@ namespace ARK.HelperFunctions
                 _sunset = value;
             }
         }
-
-        #endregion
-
-        #region Methods
 
         internal static void StartSunsetTask(CancellationToken token)
         {
@@ -59,7 +46,5 @@ namespace ARK.HelperFunctions
                 throw new InvalidOperationException("The task has already been started");
             }
         }
-
-        #endregion
     }
 }
