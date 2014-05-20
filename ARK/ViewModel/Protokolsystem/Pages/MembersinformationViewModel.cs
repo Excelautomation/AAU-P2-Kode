@@ -5,6 +5,7 @@ using System.Windows;
 
 using ARK.Model;
 using ARK.Model.DB;
+using ARK.Model.Extensions;
 using ARK.View.Protokolsystem.Additional;
 using ARK.ViewModel.Base.Interfaces;
 using ARK.ViewModel.Protokolsystem.Additional;

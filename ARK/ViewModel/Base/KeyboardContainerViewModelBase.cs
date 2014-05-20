@@ -154,8 +154,16 @@ namespace ARK.ViewModel.Base
         {
             get
             {
-                return GetCommand(element => { CurrentSelectedTextBox = (FrameworkElement)element; });
+                return GetCommand(element =>
+                {
+                    KeyboardGotFocus(element);
+                });
             }
+        }
+
+        protected virtual void KeyboardGotFocus(object element)
+        {
+            CurrentSelectedTextBox = (FrameworkElement)element;
         }
 
         public string KeyboardText
@@ -171,7 +179,7 @@ namespace ARK.ViewModel.Base
             }
         }
 
-        public bool KeyboardToggled
+        public virtual bool KeyboardToggled
         {
             get
             {

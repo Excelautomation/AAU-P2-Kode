@@ -320,6 +320,32 @@ namespace ARK.ViewModel.Protokolsystem
             }
         }
 
+        public override bool KeyboardToggled
+        {
+            get
+            {
+                return base.KeyboardToggled;
+            }
+            set
+            {
+                base.KeyboardToggled = value;
+
+                if (value)
+                {
+                    EnableFilters = false;
+                }
+
+                NotifyCustom("EnableSearch");
+            }
+        }
+
+        protected override void KeyboardGotFocus(object element)
+        {
+            base.KeyboardGotFocus(element);
+
+            KeyboardToggled = true;
+        }
+
         public bool EnableSearch
         {
             get
@@ -330,13 +356,6 @@ namespace ARK.ViewModel.Protokolsystem
             set
             {
                 KeyboardToggled = value;
-                Notify();
-
-                // If Keyboard is active
-                if (value)
-                {
-                    EnableFilters = false;
-                }
             }
         }
 
