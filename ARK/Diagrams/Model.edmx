@@ -409,7 +409,7 @@
           <Property Name="Member_Id" Type="Int32" Nullable="false" />
           <Property Name="ContactTrip" Type="Boolean" Nullable="false" />
           <Property Name="ContactDark" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Members" Relationship="Self.FK_Admins_Members_Member_Id" FromRole="Admins" ToRole="Members" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Admins_Members_Member_Id" FromRole="Admins" ToRole="Members" />
         </EntityType>
         <EntityType Name="Boats">
           <Key>
@@ -441,8 +441,8 @@
           <Property Name="Closed" Type="Boolean" Nullable="false" />
           <Property Name="RegisteringMemberId" Type="Int32" Nullable="false" />
           <Property Name="BoatId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Boats" Relationship="Self.FK_DamageForms_Boats_BoatId" FromRole="DamageForms" ToRole="Boats" />
-          <NavigationProperty Name="Members" Relationship="Self.FK_DamageForms_Members_RegisteringMemberId" FromRole="DamageForms" ToRole="Members" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_DamageForms_Boats_BoatId" FromRole="DamageForms" ToRole="Boats" />
+          <NavigationProperty Name="RegisteringMember" Relationship="Self.FK_DamageForms_Members_RegisteringMemberId" FromRole="DamageForms" ToRole="Members" />
         </EntityType>
         <EntityType Name="DamageTypes">
           <Key>
@@ -486,9 +486,9 @@
           <Property Name="DistancesPerDay" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="CampSites" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="ResponsibleMemberId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Boats" Relationship="Self.FK_LongTripForms_Boats_BoatId" FromRole="LongTripForms" ToRole="Boats" />
-          <NavigationProperty Name="Members" Relationship="Self.FK_LongTripForms_Members_ResponsibleMemberId" FromRole="LongTripForms" ToRole="Members" />
-          <NavigationProperty Name="Members1" Relationship="Self.LongTripFormMembers" FromRole="LongTripForms" ToRole="Members" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_LongTripForms_Boats_BoatId" FromRole="LongTripForms" ToRole="Boats" />
+          <NavigationProperty Name="Members" Relationship="DiagramarkModel.LongTripFormMembers" FromRole="LongTripForms" ToRole="Members" />
+          <NavigationProperty Name="ResponsibleMember" Relationship="DiagramarkModel.FK_LongTripForms_Members_ResponsibleMemberId" FromRole="LongTripForms" ToRole="Members" />
         </EntityType>
         <EntityType Name="Members">
           <Key>
@@ -516,10 +516,8 @@
           <Property Name="MayUseSculler" Type="Boolean" Nullable="false" />
           <Property Name="MayUseOutrigger" Type="Boolean" Nullable="false" />
           <Property Name="MayUseKayak" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Admins" Relationship="Self.FK_Admins_Members_Member_Id" FromRole="Members" ToRole="Admins" />
           <NavigationProperty Name="DamageForms" Relationship="Self.FK_DamageForms_Members_RegisteringMemberId" FromRole="Members" ToRole="DamageForms" />
-          <NavigationProperty Name="LongTripForms" Relationship="Self.FK_LongTripForms_Members_ResponsibleMemberId" FromRole="Members" ToRole="LongTripForms" />
-          <NavigationProperty Name="LongTripForms1" Relationship="Self.LongTripFormMembers" FromRole="Members" ToRole="LongTripForms" />
+          <NavigationProperty Name="LongTripForms" Relationship="DiagramarkModel.LongTripFormMembers" FromRole="Members" ToRole="LongTripForms" />
           <NavigationProperty Name="Trips" Relationship="Self.TripMembers" FromRole="Members" ToRole="Trips" />
         </EntityType>
         <EntityType Name="Seasons">
@@ -572,8 +570,7 @@
           <Property Name="Direction" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="Title" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="CrewCount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Boats" Relationship="Self.FK_Trips_Boats_BoatId" FromRole="Trips" ToRole="Boats" />
-          <NavigationProperty Name="TripWarningSms" Relationship="Self.FK_TripWarningSms_Trips_Id" FromRole="Trips" ToRole="TripWarningSms" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_Trips_Boats_BoatId" FromRole="Trips" ToRole="Boats" />
           <NavigationProperty Name="Members" Relationship="Self.TripMembers" FromRole="Trips" ToRole="Members" />
         </EntityType>
         <EntityType Name="TripWarningSms">
@@ -584,13 +581,13 @@
           <Property Name="RecievedSms" Type="DateTime" />
           <Property Name="SentAdminSms" Type="DateTime" />
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Trips" Relationship="Self.FK_TripWarningSms_Trips_Id" FromRole="TripWarningSms" ToRole="Trips" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_TripWarningSms_Trips_Id" FromRole="TripWarningSms" ToRole="Trips" />
         </EntityType>
         <Association Name="FK_Admins_Members_Member_Id">
           <End Role="Members" Type="Self.Members" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+          <End Role="Admins" Type="Self.Admins" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Members">
               <PropertyRef Name="Id" />

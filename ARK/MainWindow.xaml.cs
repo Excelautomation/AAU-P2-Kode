@@ -46,10 +46,7 @@ namespace ARK
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            // SmsWarnings warn = new SmsWarnings();
-            // warn.Test();
-
-            // XmlParser.UpdateDataFromFtp();
+            XmlParser.UpdateMembersFromFtp();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

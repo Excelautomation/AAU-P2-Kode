@@ -30,7 +30,6 @@ namespace ARK.Model
 
         public int Id { get; set; }
 
-        // bool that states if the boat is functional
         public virtual Member RegisteringMember { get; set; }
 
         public int RegisteringMemberId { get; set; }
