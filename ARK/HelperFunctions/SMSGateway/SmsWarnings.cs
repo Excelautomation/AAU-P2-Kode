@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
-
+using System.Threading;
+using System.Threading.Tasks;
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.XML;
@@ -32,6 +33,31 @@ namespace ARK.HelperFunctions.SMSGateway
 
         private const string Sender = "ARK";
 
+        private static Task _task;
+
+        internal static void RunTask(CancellationToken token)
+        {
+            if (_task == null)
+            {
+                _task = Task.Factory.StartNew(
+                    async () =>
+                        {
+                            var warn = new SmsWarnings();
+
+                            while (true)
+                            {
+                                warn.DoWork();
+                                await Task.Delay(new TimeSpan(0, 0, 5), token);
+                            }
+                        }, 
+                    token);
+            }
+            else
+            {
+                throw new InvalidOperationException("The task has already been started");
+            }
+        }
+
         public SmsWarnings()
         {
             Gateway = new SmsIt("0000000000000000");
@@ -39,10 +65,10 @@ namespace ARK.HelperFunctions.SMSGateway
 
         public ISmsGateway Gateway { get; set; }
 
-        public void Test()
+        public void DoWork()
         {
             // Gør kun dette her når solen er nede
-            if (IsAfterSunset() || true)
+            if (IsAfterSunset())
             {
                 using (var db = new DbArkContext())
                 {
