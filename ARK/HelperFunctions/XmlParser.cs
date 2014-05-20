@@ -8,10 +8,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
-
+using ARK.Model;
 using ARK.Model.DB;
+using ARK.Model.XML;
 
-namespace ARK.Model.XML
+namespace ARK.HelperFunctions
 {
     public static class XmlParser
     {

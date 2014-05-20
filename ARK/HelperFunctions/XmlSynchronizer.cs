@@ -6,7 +6,7 @@ using ARK.Model.XML;
 
 namespace ARK.HelperFunctions
 {
-    public static class XmlSynchronizer
+    internal static class XmlSynchronizer
     {
         private static Task _task;
 
