@@ -27,10 +27,13 @@ namespace ARK
         public App()
         {
 #if RELEASE || DEBUG
-
             // Start thread which downloads the sunset time every day
-            var wtoken = new CancellationTokenSource();
-            SunsetClass.StartSunsetTask(wtoken.Token);
+            var sunsetTokenSource = new CancellationTokenSource();
+            SunsetClass.StartSunsetTask(sunsetTokenSource.Token);
+
+            // Start thread which synchronizes the database with the FTP every hour
+            var xmlTokenSource = new CancellationTokenSource();
+            XmlSynchronizer.StartXmlSynchronizerTask(xmlTokenSource.Token);
 #endif
 
             // Thread that checks if a new season needs to be started

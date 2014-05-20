@@ -87,6 +87,11 @@ namespace ARK.Model.XML
             var context = DbArkContext.GetDbContext();
 
             var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
+            if (xmlString == null)
+            {
+                // If xmlString is null, no update is needed and the function returns immediately
+                return;
+            }
             var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
 
             foreach (var boat in context.Boat)
@@ -108,7 +113,7 @@ namespace ARK.Model.XML
                 {
                     boat = new Boat()
                                {
-                                   DamageForms = new List<DamageForm>(), 
+                                   DamageForms = new List<DamageForm>(),
                                    LongTripForms = new LinkedList<LongTripForm>()
                                };
                     BoatXmlToModel(boat, boatXml);
@@ -134,6 +139,11 @@ namespace ARK.Model.XML
         {
             var context = DbArkContext.GetDbContext();
             var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
+            if (xmlString == null)
+            {
+                // If xmlString is null, no update is needed and the function returns immediately
+                return;
+            }
             var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
 
             foreach (var member in context.Member)
@@ -159,11 +169,11 @@ namespace ARK.Model.XML
                 else
                 {
                     member = new Member()
-                                 {
-                                     Trips = new List<Trip>(), 
-                                     LongDistanceForms = new List<LongTripForm>(), 
-                                     DamageForms = new List<DamageForm>()
-                                 };
+                        {
+                            Trips = new List<Trip>(),
+                            LongDistanceForms = new List<LongTripForm>(),
+                            DamageForms = new List<DamageForm>()
+                        };
                     MemberXmlToModel(member, memberXml);
                     context.Member.Add(member);
                 }
@@ -216,7 +226,7 @@ namespace ARK.Model.XML
         private static string DownloadLatestFromFtp(string filename)
         {
             var context = DbArkContext.GetDbContext();
-            var ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First(x => true);
+            var ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First();
             var ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
             var weekDays = new[] { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" };
@@ -226,9 +236,9 @@ namespace ARK.Model.XML
             foreach (var weekDay in weekDays)
             {
                 var ub = new UriBuilder(
-                    "ftp", 
-                    ftpInfo.HostName, 
-                    ftpInfo.Port, 
+                    "ftp",
+                    ftpInfo.HostName,
+                    ftpInfo.Port,
                     @"/upload" + "/" + weekDay + "/" + filename);
 
                 var request = WebRequest.Create(ub.Uri) as FtpWebRequest;
@@ -249,13 +259,23 @@ namespace ARK.Model.XML
                 }
             }
 
-            var uriBuilder = new UriBuilder(
-                "ftp", 
-                ftpInfo.HostName, 
-                ftpInfo.Port, 
+            if (latestDateTime > (DateTime)Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)])
+            {
+                Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)] = latestDateTime;
+                Properties.Settings.Default.Save();
+
+                var uriBuilder = new UriBuilder(
+                "ftp",
+                ftpInfo.HostName,
+                ftpInfo.Port,
                 @"/upload" + @"/" + latestFolder + @"/" + filename);
 
-            return DlToMem(uriBuilder.Uri, ftpCreds);
+                return DlToMem(uriBuilder.Uri, ftpCreds);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private static void MemberXmlToModel(Member member, XMLMembers.datarootAktiveMedlemmer memberXml)
@@ -295,7 +315,7 @@ namespace ARK.Model.XML
         private static T ParseXML<T>(string xml) where T : class
         {
             var reader = XmlReader.Create(
-                new StringReader(xml), 
+                new StringReader(xml),
                 new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Auto });
             return new XmlSerializer(typeof(T)).Deserialize(reader) as T;
         }

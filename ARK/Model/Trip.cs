@@ -20,13 +20,10 @@ namespace ARK.Model
 
         public int Id { get; set; }
 
-        // Distance rowed.
         public bool LongTrip { get; set; }
 
-        // bool that states if the tour is a long trip, and therefore holds no Direction.
         public virtual ICollection<Member> Members { get; set; }
 
-        // Not mapped properties
         public TimeSpan TimeBoatOut
         {
             get
