@@ -1,4 +1,5 @@
 ﻿using System;
+using ARK.HelperFunctions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ARK.Model;
 using ARK.Model.XML;

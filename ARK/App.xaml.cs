@@ -35,11 +35,16 @@ namespace ARK
             var smsWarningTokenSource = new CancellationTokenSource();
             SmsWarnings.RunTask(smsWarningTokenSource.Token);
 
+            // Start thread which checks if a new season needs to be started
+            var seasonTokenSource = new CancellationTokenSource();
+            SeasonClass.StartCheckCurrentSeasonEndTask(seasonTokenSource.Token);
+
             Current.Exit += (sender, e) =>
             {
                 sunsetTokenSource.Cancel();
                 xmlTokenSource.Cancel();
                 smsWarningTokenSource.Cancel();
+                seasonTokenSource.Cancel();
             };
 #endif
 
@@ -119,33 +124,6 @@ namespace ARK
             this.StartupUri = new Uri("/View/Protokolsystem/ProtocolSystem.xaml", UriKind.Relative);
     #endif
 #endif
-        }
-
-        private void CheckCurrentSeasonEnd()
-        {
-            using (var db = new DbArkContext())
-            {
-                Season currentSeason;
-
-                // Get current season
-                if (!db.Season.Any(x => true))
-                {
-                    currentSeason = new Season();
-                    db.Season.Add(currentSeason);
-                }
-                else
-                {
-                    currentSeason = db.Season.AsEnumerable().Last(x => true);
-                }
-
-                // if current seasonEnd is before today add new season.
-                if (DateTime.Compare(currentSeason.SeasonEnd, DateTime.Now) <= 0)
-                {
-                    currentSeason = new Season();
-                    db.Season.Add(currentSeason);
-                    db.SaveChanges();
-                }
-            }
         }
 
         // Opdater Watermark

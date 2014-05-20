@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-
+using ARK.HelperFunctions;
 using ARK.Model.XML;
 using ARK.View.Administrationssystem;
 using ARK.View.Protokolsystem;
