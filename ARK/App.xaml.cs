@@ -8,6 +8,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 using ARK.HelperFunctions;
+using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
 
@@ -29,10 +30,21 @@ namespace ARK
             // Start thread which synchronizes the database with the FTP every hour
             var xmlTokenSource = new CancellationTokenSource();
             XmlSynchronizer.StartXmlSynchronizerTask(xmlTokenSource.Token);
+
+            // Start thread which sends SMS warnings
+            var smsWarningTokenSource = new CancellationTokenSource();
+            SmsWarnings.RunTask(smsWarningTokenSource.Token);
+
+            Current.Exit += (sender, e) =>
+            {
+                sunsetTokenSource.Cancel();
+                xmlTokenSource.Cancel();
+                smsWarningTokenSource.Cancel();
+            };
 #endif
 
             // Thread that checks if a new season needs to be started
-            var checkForNewSeasonThread = new Thread(
+            /*var checkForNewSeasonThread = new Thread(
                 () =>
                     {
                         while (true)
@@ -61,28 +73,9 @@ namespace ARK
                             CheckCurrentSeasonEnd();
                         }
                     });
-            checkForNewSeasonThread.Start();
+            checkForNewSeasonThread.Start();*/
 
-            // CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
-            // CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
             Current.ShutdownMode = System.Windows.ShutdownMode.OnLastWindowClose;
-
-            WindowsIdentity windowsIdentity = WindowsIdentity.GetCurrent();
-            Current.Exit += (sender, e) =>
-                {
-                    if (windowsIdentity != null
-                        && (windowsIdentity.Name == "SAHB-WIN7\\sahb" || windowsIdentity.Name == "Jonas-BB\\Jonas"))
-                    {
-                        // KILL IT!
-                        System.Diagnostics.Process.GetCurrentProcess().Kill();
-                    }
-
-                    if (checkForNewSeasonThread.ThreadState == ThreadState.Running
-                        || checkForNewSeasonThread.ThreadState == ThreadState.WaitSleepJoin)
-                    {
-                        checkForNewSeasonThread.Interrupt();
-                    }
-                };
         }
 
         public static T GetChildOfType<T>(DependencyObject depObj) where T : DependencyObject
@@ -120,9 +113,9 @@ namespace ARK
 #if AdministrationsSystem
             this.StartupUri = new Uri("/View/Administrationssystem/AdminSystem.xaml", UriKind.Relative);
 #else
-#if DEBUG
+    #if DEBUG
             StartupUri = new Uri("/MainWindow.xaml", UriKind.Relative);
-#else
+    #else
             this.StartupUri = new Uri("/View/Protokolsystem/ProtocolSystem.xaml", UriKind.Relative);
     #endif
 #endif
