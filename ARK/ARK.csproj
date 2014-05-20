@@ -144,6 +144,7 @@
     <Compile Include="HelperFunctions\CloneFunctions.cs" />
     <Compile Include="HelperFunctions\InputValidation.cs" />
     <Compile Include="HelperFunctions\PasswordHashing.cs" />
+    <Compile Include="HelperFunctions\SeasonClass.cs" />
     <Compile Include="HelperFunctions\SunsetClass.cs" />
     <Compile Include="HelperFunctions\XmlSynchronizer.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
@@ -265,7 +266,7 @@
     <Compile Include="Model\Trip.cs" />
     <Compile Include="Model\XML\XMLBoats.cs" />
     <Compile Include="Model\XML\XMLMembers.cs" />
-    <Compile Include="Model\XML\XmlParser.cs" />
+    <Compile Include="HelperFunctions\XmlParser.cs" />
     <Compile Include="Model\XML\XMLSunset.cs" />
     <Compile Include="Model\XML\XMLTrips.cs" />
     <Compile Include="View\Protokolsystem\Additional\CreateLongTripFormAdditionalInfo.xaml.cs">
