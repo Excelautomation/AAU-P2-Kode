@@ -46,142 +46,148 @@ namespace ARK.Model.XML
 
         public static void LoadTripsFromFtp()
         {
-            var context = DbArkContext.GetDbContext();
-
-            var xmlString = DownloadLatestFromFtp(@"Tur.xml");
-            var xmlObject = ParseXML<XMLTrips.dataroot>(xmlString);
-
-            IEnumerable<PropertyInfo> props = new List<PropertyInfo>(typeof(XMLTrips.datarootTur).GetProperties());
-            var filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
-
-            foreach (XMLTrips.datarootTur tripXml in xmlObject.Tur)
+            using (var context = new DbArkContext())
             {
-                var trip = new Trip();
+                var xmlString = DownloadLatestFromFtp(@"Tur.xml");
+                var xmlObject = ParseXML<XMLTrips.dataroot>(xmlString);
 
-                trip.Id = tripXml.ID;
-                trip.Distance = tripXml.Kilometer;
-                trip.TripStartTime = tripXml.Dato;
-                trip.TripEndedTime = tripXml.Dato;
-                trip.LongTrip = tripXml.Langtur == 1;
-                trip.BoatId = tripXml.BådID;
-                trip.Members = new List<Member> { context.Member.Find((int)tripXml.Nr1) };
+                IEnumerable<PropertyInfo> props = new List<PropertyInfo>(typeof (XMLTrips.datarootTur).GetProperties());
+                var filteredProps = props.Where(x => Regex.IsMatch(x.Name, @"Nr\dSpecified"));
 
-                foreach (PropertyInfo prop in filteredProps)
+                foreach (XMLTrips.datarootTur tripXml in xmlObject.Tur)
                 {
-                    if ((bool)prop.GetValue(tripXml))
+                    var trip = new Trip();
+
+                    trip.Id = tripXml.ID;
+                    trip.Distance = tripXml.Kilometer;
+                    trip.TripStartTime = tripXml.Dato;
+                    trip.TripEndedTime = tripXml.Dato;
+                    trip.LongTrip = tripXml.Langtur == 1;
+                    trip.BoatId = tripXml.BådID;
+                    trip.Members = new List<Member> {context.Member.Find((int) tripXml.Nr1)};
+
+                    foreach (PropertyInfo prop in filteredProps)
                     {
-                        PropertyInfo elementProp =
-                            props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
-                        trip.Members.Add(context.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXml))));
+                        if ((bool) prop.GetValue(tripXml))
+                        {
+                            PropertyInfo elementProp =
+                                props.First(x => Regex.IsMatch(prop.Name, x.Name) && prop.Name != x.Name);
+                            trip.Members.Add(context.Member.Find(Convert.ToInt32(elementProp.GetValue(tripXml))));
+                        }
                     }
+
+                    context.Trip.Add(trip);
                 }
 
-                context.Trip.Add(trip);
+                context.SaveChanges();
             }
-
-            context.SaveChanges();
         }
 
         public static void UpdateBoatsFromFtp(bool saveChanges = true)
         {
-            var context = DbArkContext.GetDbContext();
-
-            var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
-            if (xmlString == null)
+            using (var context = new DbArkContext())
             {
-                // If xmlString is null, no update is needed and the function returns immediately
-                return;
-            }
-            var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
-
-            foreach (var boat in context.Boat)
-            {
-                if (xmlObject.BådeSpecifik.All(x => x.ID != boat.Id))
+                var xmlString = DownloadLatestFromFtp(@"BådeSpecifik.xml");
+                if (xmlString == null)
                 {
-                    context.Boat.Remove(boat);
+                    // If xmlString is null, no update is needed and the function returns immediately
+                    return;
                 }
-            }
+                var xmlObject = ParseXML<XMLBoats.dataroot>(xmlString);
 
-            foreach (var boatXml in xmlObject.BådeSpecifik)
-            {
-                Boat boat;
-                if ((boat = context.Boat.Find(boatXml.ID)) != null)
+                foreach (var boat in context.Boat)
                 {
-                    BoatXmlToModel(boat, boatXml);
+                    if (xmlObject.BådeSpecifik.All(x => x.ID != boat.Id))
+                    {
+                        context.Boat.Remove(boat);
+                    }
                 }
-                else
-                {
-                    boat = new Boat()
-                               {
-                                   DamageForms = new List<DamageForm>(),
-                                   LongTripForms = new LinkedList<LongTripForm>()
-                               };
-                    BoatXmlToModel(boat, boatXml);
-                    context.Boat.Add(boat);
-                }
-            }
 
-            if (saveChanges)
-            {
-                context.SaveChanges();
+                foreach (var boatXml in xmlObject.BådeSpecifik)
+                {
+                    Boat boat;
+                    if ((boat = context.Boat.Find(boatXml.ID)) != null)
+                    {
+                        BoatXmlToModel(boat, boatXml);
+                    }
+                    else
+                    {
+                        boat = new Boat()
+                        {
+                            DamageForms = new List<DamageForm>(),
+                            LongTripForms = new LinkedList<LongTripForm>()
+                        };
+                        BoatXmlToModel(boat, boatXml);
+                        context.Boat.Add(boat);
+                    }
+                }
+
+                if (saveChanges)
+                {
+                    context.SaveChanges();
+                }
             }
         }
 
         public static void UpdateDataFromFtp()
         {
-            var context = DbArkContext.GetDbContext();
-            UpdateBoatsFromFtp(false);
-            UpdateMembersFromFtp(false);
-            context.SaveChanges();
+            using (var context = new DbArkContext())
+            {
+                UpdateBoatsFromFtp(false);
+                UpdateMembersFromFtp(false);
+                context.SaveChanges();
+            }
         }
 
         public static void UpdateMembersFromFtp(bool saveChanges = true)
         {
-            var context = DbArkContext.GetDbContext();
-            var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
-            if (xmlString == null)
+            using (var context = new DbArkContext())
             {
-                // If xmlString is null, no update is needed and the function returns immediately
-                return;
-            }
-            var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
-
-            foreach (var member in context.Member)
-            {
-                if (
-                    xmlObject.activeMembers.All(
-                        x => Convert.ToInt32(x.GetObjFromName(XMLMembers.ItemsChoiceType.ID)) != member.Id))
+                var xmlString = DownloadLatestFromFtp(@"AktiveMedlemmer.xml");
+                if (xmlString == null)
                 {
-                    context.Member.Remove(member);
+                    // If xmlString is null, no update is needed and the function returns immediately
+                    return;
                 }
-            }
+                var xmlObject = ParseXML<XMLMembers.dataroot>(xmlString);
 
-            foreach (var memberXml in xmlObject.activeMembers)
-            {
-                Member member;
-                if (
-                    (member =
-                     context.Member.Find(Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID))))
-                    != null)
+                foreach (var member in context.Member)
                 {
-                    MemberXmlToModel(member, memberXml);
+                    if (
+                        xmlObject.activeMembers.All(
+                            x => Convert.ToInt32(x.GetObjFromName(XMLMembers.ItemsChoiceType.ID)) != member.Id))
+                    {
+                        context.Member.Remove(member);
+                    }
                 }
-                else
+
+                foreach (var memberXml in xmlObject.activeMembers)
                 {
-                    member = new Member()
+                    Member member;
+                    if (
+                        (member =
+                            context.Member.Find(Convert.ToInt32(memberXml.GetObjFromName(XMLMembers.ItemsChoiceType.ID))))
+                        != null)
+                    {
+                        MemberXmlToModel(member, memberXml);
+                    }
+                    else
+                    {
+                        member = new Member()
                         {
                             Trips = new List<Trip>(),
                             LongDistanceForms = new List<LongTripForm>(),
                             DamageForms = new List<DamageForm>()
                         };
-                    MemberXmlToModel(member, memberXml);
-                    context.Member.Add(member);
+                        MemberXmlToModel(member, memberXml);
+                        context.Member.Add(member);
+                    }
                 }
-            }
 
-            if (saveChanges)
-            {
-                context.SaveChanges();
+                if (saveChanges)
+                {
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -225,56 +231,58 @@ namespace ARK.Model.XML
 
         private static string DownloadLatestFromFtp(string filename)
         {
-            var context = DbArkContext.GetDbContext();
-            var ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First();
-            var ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
-
-            var weekDays = new[] { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" };
-
-            var latestFolder = string.Empty;
-            var latestDateTime = new DateTime();
-            foreach (var weekDay in weekDays)
+            using (var context = new DbArkContext())
             {
-                var ub = new UriBuilder(
-                    "ftp",
-                    ftpInfo.HostName,
-                    ftpInfo.Port,
-                    @"/upload" + "/" + weekDay + "/" + filename);
+                var ftpInfo = context.FtpInfo.OrderByDescending(x => x.Id).First();
+                var ftpCreds = new NetworkCredential(ftpInfo.Username, ftpInfo.Password);
 
-                var request = WebRequest.Create(ub.Uri) as FtpWebRequest;
+                var weekDays = new[] {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
-                request.Credentials = ftpCreds;
-                request.KeepAlive = true;
-                request.UsePassive = true;
-
-                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-
-                using (var response = request.GetResponse() as FtpWebResponse)
+                var latestFolder = string.Empty;
+                var latestDateTime = new DateTime();
+                foreach (var weekDay in weekDays)
                 {
-                    if (response.LastModified > latestDateTime)
+                    var ub = new UriBuilder(
+                        "ftp",
+                        ftpInfo.HostName,
+                        ftpInfo.Port,
+                        @"/upload" + "/" + weekDay + "/" + filename);
+
+                    var request = WebRequest.Create(ub.Uri) as FtpWebRequest;
+
+                    request.Credentials = ftpCreds;
+                    request.KeepAlive = true;
+                    request.UsePassive = true;
+
+                    request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+
+                    using (var response = request.GetResponse() as FtpWebResponse)
                     {
-                        latestDateTime = response.LastModified;
-                        latestFolder = weekDay;
+                        if (response.LastModified > latestDateTime)
+                        {
+                            latestDateTime = response.LastModified;
+                            latestFolder = weekDay;
+                        }
                     }
                 }
-            }
 
-            if (latestDateTime > (DateTime)Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)])
-            {
-                Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)] = latestDateTime;
-                Properties.Settings.Default.Save();
+                if (latestDateTime > (DateTime) Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)])
+                {
+                    Properties.Settings.Default[Path.GetFileNameWithoutExtension(filename)] = latestDateTime;
+                    Properties.Settings.Default.Save();
 
-                var uriBuilder = new UriBuilder(
-                "ftp",
-                ftpInfo.HostName,
-                ftpInfo.Port,
-                @"/upload" + @"/" + latestFolder + @"/" + filename);
+                    var uriBuilder = new UriBuilder(
+                        "ftp",
+                        ftpInfo.HostName,
+                        ftpInfo.Port,
+                        @"/upload" + @"/" + latestFolder + @"/" + filename);
 
-                return DlToMem(uriBuilder.Uri, ftpCreds);
-            }
-            else
-            {
-                return null;
+                    return DlToMem(uriBuilder.Uri, ftpCreds);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
