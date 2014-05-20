@@ -18,7 +18,6 @@ namespace ARK.Model
 
         #endregion
 
-        // Navigation properties
         #region Public Properties
 
         public virtual Boat Boat { get; set; }

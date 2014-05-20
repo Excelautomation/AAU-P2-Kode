@@ -22,7 +22,14 @@
         <AssociationConnector Association="DiagramarkModel.FK_Admins_Members_Member_Id" ManuallyRouted="false" />
         <AssociationConnector Association="DiagramarkModel.FK_DamageForms_Boats_BoatId" ManuallyRouted="false" />
         <AssociationConnector Association="DiagramarkModel.FK_LongTripForms_Boats_BoatId" ManuallyRouted="false" />
-        <AssociationConnector Association="DiagramarkModel.FK_Trips_Boats_BoatId" ManuallyRouted="false" >
+        <AssociationConnector Association="DiagramarkModel.FK_Trips_Boats_BoatId" ManuallyRouted="true" >
+          <ConnectorPoint PointX="1.5439358828553302" PointY="4.0186979166666665" />
+          <ConnectorPoint PointX="1.5439358828553302" PointY="4.2819824734168543" />
+          <ConnectorPoint PointX="1.8750899474362348" PointY="4.2819824734168535" />
+          <ConnectorPoint PointX="2.0417566141029013" PointY="4.2819824734168543" />
+          <ConnectorPoint PointX="2.2796079758211776" PointY="4.2819824734168543" />
+          <ConnectorPoint PointX="2.2796079758211776" PointY="4.7089167608790516" />
+          <ConnectorPoint PointX="2.5" PointY="4.7089167608790516" />
         </AssociationConnector>
         <AssociationConnector Association="DiagramarkModel.FK_DamageForms_Members_RegisteringMemberId" ManuallyRouted="false" >
         </AssociationConnector>
