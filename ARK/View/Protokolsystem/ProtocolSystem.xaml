@@ -332,7 +332,7 @@
             <ContentControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Content="{Binding Path=CurrentPage}" Margin="3,0,3,0"/>
             
             <StackPanel x:Name="Buttons" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="3,0,3,6">
-                <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=EnableSearch, Converter={StaticResource BoolToVis}}" Height="182"/>
+                <ContentControl Content="{Binding Path=Keyboard}" Visibility="{Binding Path=KeyboardToggled, Converter={StaticResource BoolToVis}}" Height="182"/>
                 <ContentControl Content="{Binding Path=Filter}" Visibility="{Binding Path=EnableFilters, Converter={StaticResource BoolToVis}}" Height="182"/>
             </StackPanel>
         </Grid>
