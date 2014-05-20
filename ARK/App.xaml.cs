@@ -48,38 +48,6 @@ namespace ARK
             };
 #endif
 
-            // Thread that checks if a new season needs to be started
-            /*var checkForNewSeasonThread = new Thread(
-                () =>
-                    {
-                        while (true)
-                        {
-                            DateTime tomorrowAtTree = new DateTime(
-                                DateTime.Now.Year, 
-                                DateTime.Now.Month, 
-                                DateTime.Now.Day, 
-                                3, 
-                                00, 
-                                00);
-
-                            tomorrowAtTree = tomorrowAtTree.AddDays(1);
-
-                            TimeSpan TimeToTreeOCloc = tomorrowAtTree - DateTime.Now;
-
-                            try
-                            {
-                                Thread.Sleep((int)TimeToTreeOCloc.TotalMilliseconds); // sleep until 3.00 hours
-                            }
-                            catch (ThreadInterruptedException)
-                            {
-                                break;
-                            }
-
-                            CheckCurrentSeasonEnd();
-                        }
-                    });
-            checkForNewSeasonThread.Start();*/
-
             Current.ShutdownMode = System.Windows.ShutdownMode.OnLastWindowClose;
         }
 
