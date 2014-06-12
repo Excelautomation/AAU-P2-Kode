@@ -38,7 +38,15 @@ namespace ARK.HelperFunctions
 
             XMLSunset.sun sunXml = ParseXML<XMLSunset.sun>(xml);
             DateTime sunset = DateTime.Today;
-            sunset = sunset.Add(Convert.ToDateTime(sunXml.evening.twilight.nautical).TimeOfDay);
+            try
+            {
+                sunset = sunset.Add(Convert.ToDateTime(sunXml.evening.twilight.nautical).TimeOfDay);
+            }
+
+            catch (FormatException)
+            {
+                sunset = DateTime.Today.AddHours(23).AddMinutes(59).AddSeconds(59);
+            }
 
             return sunset;
         }
