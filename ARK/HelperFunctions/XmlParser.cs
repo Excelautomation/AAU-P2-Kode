@@ -40,12 +40,12 @@ namespace ARK.HelperFunctions
             DateTime sunset = DateTime.Today;
             try
             {
-                sunset = sunset.Add(Convert.ToDateTime(sunXml.evening.twilight.nautical).TimeOfDay);
+                sunset = sunset.Add(Convert.ToDateTime(sunXml.evening.twilight.civil).TimeOfDay);
             }
 
             catch (FormatException)
             {
-                sunset = DateTime.Today.AddHours(23).AddMinutes(59).AddSeconds(59);
+                sunset = sunset.AddHours(23).AddMinutes(59).AddSeconds(59);
             }
 
             return sunset;
