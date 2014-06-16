@@ -152,7 +152,7 @@
                                 <StackPanel>
                                     <WrapPanel>
                                         <TextBlock Text="I dag forventes mørkets frembrud klokken:" Margin="4" FontWeight="SemiBold"/>
-                                        <TextBox x:Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="{Binding Sunset, Mode=OneWay}" Width="70" IsEnabled="False" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14">
+                                        <TextBox x:Name="TimeOfDarkTextBox" Margin="4" MaxLength="5" Text="{Binding Sunset, Mode=OneWay, StringFormat={}{0:HH:mm}}" Width="70" IsEnabled="False" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14">
                                             <!--<TextBox.Style>
                                                 <Style TargetType="TextBox">
                                                     <Style.Triggers>
