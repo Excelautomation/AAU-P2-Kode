@@ -32,6 +32,8 @@ namespace ARK.ViewModel.Protokolsystem.Confirmations
                             SelectedTrip.Distance = double.Parse(SelectedDistance);
                             SelectedTrip.TripEndedTime = DateTime.Now;
                             DbArkContext.GetDbContext().SaveChanges();
+                            ProtocolSystem.UpdateDailyKilometers();
+                            ProtocolSystem.UpdateNumBoatsOut();
                             Hide();
                             ProtocolSystem.StatisticsDistance.Execute(null);
                         }, 
