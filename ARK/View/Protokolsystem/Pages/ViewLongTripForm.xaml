@@ -104,10 +104,10 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;LANGTUR" />
                 </Grid>
             </Button>
-            <!--
+
             <Button x:Name="btnAcceptLongTripForm"
                     DockPanel.Dock="Right"
-            	    Command="{Binding }"
+            	    Command="{Binding ShowConfirmDialog}"
             	    Background="{StaticResource AddBG}"
             	    BorderBrush="{StaticResource AddBorder}">
                 <Button.Style>
@@ -131,7 +131,7 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="BEGYND&#xA;LANGTUR" />
                 </Grid>
             </Button>
-            -->
+
         </DockPanel>
     </Grid>
 </UserControl>
