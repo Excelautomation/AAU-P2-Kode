@@ -12,6 +12,8 @@ using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
 
+using System.Net.Mail;
+
 namespace ARK
 {
     /// <summary>
@@ -117,6 +119,29 @@ namespace ARK
             }
 
             wm.Content = "Vælg en dato";
+        }
+
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Der opstod en fejl, ring venligst til 53552125 eller 3154013", "Kritisk fejl", MessageBoxButton.OK);
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("aaua304@gmail.com");
+            mail.To.Add("aaua304@gmail.com");
+            mail.Subject = "ARK - Exception";
+            mail.Body = "TEST TEXT";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("aaua304@gmail.com", "AAU304AAUA304");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            System.Windows.Forms.Application.Restart();
+
+                //e.Exception.
         }
     }
 }
