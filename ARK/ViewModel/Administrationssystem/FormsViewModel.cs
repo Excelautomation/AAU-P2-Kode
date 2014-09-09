@@ -63,6 +63,7 @@ namespace ARK.ViewModel.Administrationssystem
                             db.DamageForm.Include(form => form.RegisteringMember)
                                 .Include(form => form.Boat)
                                 .OrderBy(form => form.Closed)
+                                .ThenByDescending(form => form.Date)
                                 .ToList();
 
                         _longTripFormsNonFiltered =
@@ -372,9 +373,9 @@ namespace ARK.ViewModel.Administrationssystem
         private void ResetFilter()
         {
             // public fordi den skal bruges i overview
-            DamageForms = _damageFormsNonFiltered.AsReadOnly().OrderBy(d => d.Closed).ThenBy(d => d.Date);
+            DamageForms = _damageFormsNonFiltered.AsReadOnly();
 
-            LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly().OrderBy(x => x.Status).ThenBy(x => x.FormCreated);
+            LongDistanceForms = _longTripFormsNonFiltered.AsReadOnly();
         }
 
         public void UpdateFilter()
