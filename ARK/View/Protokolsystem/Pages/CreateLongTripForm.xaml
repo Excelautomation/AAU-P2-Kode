@@ -13,7 +13,8 @@
     <UserControl.DataContext>
         <pages:CreateLongTripViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
-
+   
+    
     <!--Content-->
     <Grid>
         <Grid.ColumnDefinitions>
@@ -181,8 +182,11 @@
                 </WrapPanel>
             </Border>
 
-
-            <DatePicker SelectedDate="{Binding Path=PlannedStartDate}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" Margin="0,0,2,1" FontSize="14"/>
+            <DatePicker CalendarStyle="{StaticResource styleCalendar}" 
+                        SelectedDate="{Binding Path=PlannedStartDate}" 
+                        Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" Background="White" Margin="0,0,2,1" 
+                        FontSize="14"/>
 
             <!--Hjemkomst-->
             <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.Column="1" Grid.Row="0" Margin="2.5,0,0,0">
@@ -198,8 +202,13 @@
                 </WrapPanel>
             </Border>
 
-            <DatePicker SelectedDate="{Binding Path=PlannedEndDate}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" Margin="2,0,0,1" FontSize="14"/>
-
+            <DatePicker CalendarStyle="{StaticResource styleCalendar}" 
+                        SelectedDate="{Binding Path=PlannedEndDate}" 
+                        Grid.Column="1" Grid.Row="1" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Background="White" 
+                        Margin="2,0,0,1" FontSize="14"/>
         </Grid>
 
         <!--Overnatningssteder-->
