@@ -89,7 +89,7 @@
                                     <DataTrigger Binding="{Binding Path=SelectedLongTripForm.Status}" Value="Ended">
                                         <Setter Property="Foreground" Value="Blue" />
                                         <Setter Property="FontWeight" Value="SemiBold"/>
-                                        <Setter Property="Text" Value="Aflyst"/>
+                                        <Setter Property="Text" Value="Afsluttet"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>

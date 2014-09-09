@@ -63,7 +63,7 @@
                                                 <Setter Property="BorderBrush" Value="IndianRed"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Status}" Value="Ended">
-                                                <Setter Property="BorderBrush" Value="Blue"/>
+                                                <Setter Property="BorderBrush" Value="#FF005304"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
