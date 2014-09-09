@@ -202,10 +202,10 @@
                     <Style TargetType="TextBlock">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="True">
-                                <Setter Property="Text" Value="Vælg Ansvarlig"/>
+                                <Setter Property="Text" Value="Vælg ansvarlig på tur"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="False">
-                                <Setter Property="Text" Value="Slet Medlem"/>
+                                <Setter Property="Text" Value="Fjern medlem fra tur"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

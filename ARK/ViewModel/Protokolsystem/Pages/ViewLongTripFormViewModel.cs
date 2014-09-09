@@ -58,6 +58,21 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
+                if (_longTripForms != null) 
+                {
+                    foreach (LongTripForm ltf in _longTripForms)
+                    {
+                        if (ltf.Status != LongTripForm.BoatStatus.Denied)
+                        {
+                            if (System.DateTime.Now > ltf.PlannedEndDate.AddDays(1))
+                            {
+                                ltf.Status = LongTripForm.BoatStatus.Ended;
+                            };
+                        };
+                    };
+                }
+                
+                
                 return _longTripForms;
             }
 

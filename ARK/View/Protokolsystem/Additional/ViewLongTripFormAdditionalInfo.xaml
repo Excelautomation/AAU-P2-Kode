@@ -86,6 +86,11 @@
                                         <Setter Property="FontWeight" Value="SemiBold"/>
                                         <Setter Property="Text" Value="Aflyst"/>
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=SelectedLongTripForm.Status}" Value="Ended">
+                                        <Setter Property="Foreground" Value="Blue" />
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="Text" Value="Aflyst"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Run.Style>

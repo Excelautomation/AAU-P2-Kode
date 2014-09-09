@@ -11,7 +11,9 @@ namespace ARK.Model
 
             Accepted, 
 
-            Denied
+            Denied,
+
+            Ended
         }
 
         public virtual Boat Boat { get; set; }
