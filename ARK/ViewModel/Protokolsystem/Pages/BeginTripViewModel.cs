@@ -220,7 +220,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
                 return new RelayCommand(
                     x => ConfirmTripData(), 
                     x =>
-                    SelectedBoat != null && SelectedMembers.Count == SelectedBoat.NumberofSeats && Direction != null);
+                    (SelectedBoat != null && SelectedMembers.Count == SelectedBoat.NumberofSeats && Direction != null) ||
+                    (SelectedBoat != null && SelectedMembers.Count == SelectedBoat.NumberofSeats && SelectedBoat.SpecificBoatType == Boat.BoatType.Ergometer) // Ergometer dont need direction!!
+                    );
             }
         }
 

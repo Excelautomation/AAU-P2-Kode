@@ -17,7 +17,6 @@ namespace ARK.ViewModel.Administrationssystem
 {
     public class OverviewViewModel : ContentViewModelBase, IFilterContentViewModel
     {
-        private IEnumerable<Boat> _boatsOut;
 
         private List<Boat> _boatsOutNonFiltered;
 
@@ -25,8 +24,11 @@ namespace ARK.ViewModel.Administrationssystem
 
         private bool _loadingData;
 
+        private IEnumerable<Boat> _boatsOut;
         private IEnumerable<LongTripForm> _longDistanceForms;
+        private IEnumerable<DamageForm> _skadesblanketter;
 
+        private List<DamageForm> _skadesblanketterNonFiltered;
         private List<LongTripForm> _longDistanceFormsNonFiltered;
 
         private Boat _selectedBoat;
@@ -35,16 +37,14 @@ namespace ARK.ViewModel.Administrationssystem
 
         private LongTripForm _selectedLongDistanceForm;
 
+
         private Visibility _showBoatsOut;
-
         private Visibility _showLangtur;
-
         private Visibility _showSkader;
 
-        private IEnumerable<DamageForm> _skadesblanketter;
 
-        private List<DamageForm> _skadesblanketterNonFiltered;
 
+        // Methods
         public OverviewViewModel()
         {
             // Initilize lists
@@ -275,6 +275,9 @@ namespace ARK.ViewModel.Administrationssystem
 
         private void ShowBoat(Boat boat)
         {
+            // first deselect boatbutton
+       
+            // then do this
             var adminSystem = (AdminSystemViewModel)Parent;
             adminSystem.MenuBoats.Execute(null);
             var boatsViewModel = (BoatViewModel)adminSystem.CurrentPage.DataContext;
@@ -284,6 +287,7 @@ namespace ARK.ViewModel.Administrationssystem
         private void ShowDamageForm(DamageForm damageForm)
         {
             var adminSystem = (AdminSystemViewModel)Parent;
+            
             adminSystem.MenuForms.Execute(null);
             var formsViewModel = (FormsViewModel)adminSystem.CurrentPage.DataContext;
             var filterViewModel = (FormsFilterViewModel)formsViewModel.Filter.DataContext;
@@ -291,6 +295,7 @@ namespace ARK.ViewModel.Administrationssystem
 
             formsViewModel.SelectedTabIndex = 0;
             formsViewModel.OpenDamageForm(damageForm);
+            SelectedDamageForm = null;
         }
 
         private void ShowLongDistanceForm(LongTripForm longDistanceForm)
