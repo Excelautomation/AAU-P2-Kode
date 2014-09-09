@@ -86,6 +86,12 @@ namespace ARK.ViewModel.Administrationssystem
 
                             // Nulstil filter
                             ResetFilter();
+
+                            // Reset selected
+                            SelectedBoat = null;
+                            SelectedDamageForm = null;
+                            SelectedLongDistanceForm = null;
+
                             LoadingData = false;
                         }
                     }).Wait(500);
@@ -275,7 +281,8 @@ namespace ARK.ViewModel.Administrationssystem
 
         private void ShowBoat(Boat boat)
         {
-            // first deselect boatbutton
+            if (Parent == null)
+                return;
        
             // then do this
             var adminSystem = (AdminSystemViewModel)Parent;
@@ -286,6 +293,9 @@ namespace ARK.ViewModel.Administrationssystem
 
         private void ShowDamageForm(DamageForm damageForm)
         {
+            if (Parent == null)
+                return;
+            
             var adminSystem = (AdminSystemViewModel)Parent;
             
             adminSystem.MenuForms.Execute(null);
@@ -300,6 +310,9 @@ namespace ARK.ViewModel.Administrationssystem
 
         private void ShowLongDistanceForm(LongTripForm longDistanceForm)
         {
+            if (Parent == null)
+                return;
+
             var adminSystem = (AdminSystemViewModel)Parent;
             adminSystem.MenuForms.Execute(null);
 
