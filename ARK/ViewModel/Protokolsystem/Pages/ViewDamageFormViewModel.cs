@@ -27,7 +27,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             ParentAttached += (sender, e) =>
                 {
-                    DamageForms = db.DamageForm.Where(x => x.Closed == false).ToList();
+                    DamageForms = db.DamageForm.Where(x => x.Closed == false).OrderByDescending(x => x.Date).ToList();
 
                     // Vis info
                     UpdateInfo();
