@@ -1,7 +1,8 @@
 ﻿<Application x:Class="ARK.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Startup="Application_Startup">
+             Startup="Application_Startup"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,6 +14,7 @@
                 <ResourceDictionary Source="/View/Resources/RadioButton.xaml"/>
                 <ResourceDictionary Source="/View/Resources/AdditionalInfo.xaml" />
                 <ResourceDictionary Source="/View/Resources/ListView.xaml" />
+                <ResourceDictionary Source="/View/Resources/Calendar.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

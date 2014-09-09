@@ -39,6 +39,7 @@ namespace ARK.HelperFunctions.SMSGateway
 
         private static Task _task;
 
+        // Methods
         internal static void RunTask(CancellationToken token)
         {
             if (_task == null)
@@ -71,7 +72,7 @@ namespace ARK.HelperFunctions.SMSGateway
 
         private void DoWork()
         {
-            // Gør kun dette her når solen er nede
+            // Do this after sunest plus optional extra time
             if (IsAfterSunsetAndWait())
             {
                 using (var db = new DbArkContext())
@@ -105,26 +106,27 @@ namespace ARK.HelperFunctions.SMSGateway
 
         private IEnumerable<TripWarningSms> GetTripWarningSms(DbArkContext db)
         {
-            // Find all trips which dosn't have a tripwarningsms yet - select tripWarningSms and add to db
+            // Find all trips which dosn't have a tripwarningsms yet - create a tripWarningSms and add to db
             IEnumerable<TripWarningSms> missingTrips =
                 (from trip in db.Trip where trip.TripEndedTime == null && !trip.LongTrip select trip).ToList()
                     .Where(trip => !db.TripWarningSms.Any(warning => warning.Trip.Id == trip.Id))
+                    .Where(trip => trip.Boat.SpecificBoatType != Boat.BoatType.Ergometer)
                     .Select(trip => new TripWarningSms { Trip = trip })
                     .ToList();
 
-            // Remove trips home
+            // Getting all trips that has ended
             IEnumerable<TripWarningSms> endedTrips =
                 db.TripWarningSms.Where(warning => warning.Trip.TripEndedTime != null).ToList();
 
             // Update database
             if (missingTrips.Any())
             {
-                db.TripWarningSms.AddRange(missingTrips);
+                db.TripWarningSms.AddRange(missingTrips);   // adds trips that is not yet finished
             }
 
             if (endedTrips.Any())
             {
-                db.TripWarningSms.RemoveRange(endedTrips);
+                db.TripWarningSms.RemoveRange(endedTrips);  // removes ended trips
             }
 
             return

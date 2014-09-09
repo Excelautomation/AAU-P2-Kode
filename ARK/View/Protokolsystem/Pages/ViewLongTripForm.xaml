@@ -43,7 +43,8 @@
         <ListView x:Name="lstLongTrip" ItemsSource="{Binding Path=LongTripForms}" Grid.Row="1"
                   SelectedItem="{Binding Path=SelectedLongTripForm}"
                   VerticalAlignment="Stretch"
-                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
@@ -104,7 +105,34 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;LANGTUR" />
                 </Grid>
             </Button>
-
+            <Button x:Name="btnAcceptLongTripForm"
+                    DockPanel.Dock="Right"
+                    Margin="3,0,0,0"
+        		    Command="{Binding ShowConfirmDialog}"
+        		    Background="{StaticResource SubmitBG}"
+        		    BorderBrush="{StaticResource SubmitBorder}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource btnFilter}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedLongTripForm.Status}" Value="Accepted">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/world_go.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="START&#xA;LANGTUR" />
+                </Grid>
+            </Button>
+            <!--
             <Button x:Name="btnAcceptLongTripForm"
                     DockPanel.Dock="Right"
             	    Command="{Binding ShowConfirmDialog}"
@@ -130,7 +158,7 @@
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/accept.png" />
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="BEGYND&#xA;LANGTUR" />
                 </Grid>
-            </Button>
+            </Button-->
 
         </DockPanel>
     </Grid>

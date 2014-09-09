@@ -3,6 +3,7 @@ using ARK.HelperFunctions;
 using ARK.Model.XML;
 using ARK.View.Administrationssystem;
 using ARK.View.Protokolsystem;
+using System;
 
 namespace ARK
 {
@@ -31,7 +32,8 @@ namespace ARK
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            XmlParser.UpdateMembersFromFtp();
+            throw new ArgumentException();
+            //XmlParser.UpdateMembersFromFtp();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

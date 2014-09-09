@@ -59,7 +59,8 @@
             <Border BorderBrush="Gray" BorderThickness="1">
                 <DockPanel>
                     <ListView x:Name="TripList" ItemsSource="{Binding Path=TripsFiltered}" 
-                              SelectedItem="{Binding Path=CurrentTrip, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single">
+                              SelectedItem="{Binding Path=CurrentTrip, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
+                              ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -127,7 +128,7 @@
                                             <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
                                         </StackPanel.Resources>
                                         <TextBlock Text="Båd ude:" FontWeight="SemiBold"/>
-                                        <TextBlock DockPanel.Dock="Left" Text="{Binding CurrentTrip.Boat.Name}"/>
+                                        <TextBlock DockPanel.Dock="Left" Text="{Binding CurrentTrip.Boat.Name}" Height="27"/>
                                         <Button Command="{Binding Path=ShowBoatDialog}" Content="Ændre båd" Width="80" HorizontalAlignment="Left" Height="21"/>
 
                                         <TextBlock Text="Retning:" FontWeight="SemiBold" Margin="0,10,0,0"/>

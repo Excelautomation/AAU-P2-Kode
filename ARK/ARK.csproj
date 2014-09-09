@@ -146,6 +146,7 @@
     <Compile Include="ViewModel\Administrationssystem\TripsViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Additional\MemberSelectorViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Confirmations\AdminLoginConfirmViewModel.cs" />
+    <Compile Include="ViewModel\Protokolsystem\Confirmations\ViewLongTripConfirmViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\Confirmations\ChangeDistanceConfirmViewModel.cs" />
     <Compile Include="ViewModel\Protokolsystem\ConfirmationViewModel.cs" />
     <Compile Include="ViewModel\Base\FilterViewModelBase.cs" />
@@ -274,6 +275,9 @@
     </Compile>
     <Compile Include="View\Protokolsystem\Additional\MembersInformationAdditionalInfo.xaml.cs">
       <DependentUpon>MembersInformationAdditionalInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Protokolsystem\Confirmations\ViewLongTripConfirm.xaml.cs">
+      <DependentUpon>ViewLongTripConfirm.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Protokolsystem\Confirmations\ChangeDistanceConfirm.xaml.cs">
       <DependentUpon>ChangeDistanceConfirm.xaml</DependentUpon>
@@ -448,6 +452,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Protokolsystem\Confirmations\ViewLongTripConfirm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Protokolsystem\Confirmations\ChangeDistanceConfirm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -493,6 +501,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Protokolsystem\ProtocolSystem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Resources\Calendar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

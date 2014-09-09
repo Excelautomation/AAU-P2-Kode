@@ -43,6 +43,19 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
+        <!-- If popup is down, gray out parent-->
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=DialogShow}" Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Setter Property="Opacity" Value="0.3"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+
+        
         <Grid HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="196" Grid.Row="1" Margin="-2,0,0,0">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Repeat">
@@ -58,6 +71,7 @@
                     <GradientStop Color="#FFCDCDCD"/>
                 </LinearGradientBrush>
             </Grid.Background>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="190"/>
                 <RowDefinition Height="200"/>
@@ -151,14 +165,12 @@
                             <Border x:Name="KilometerBorder" Background="{StaticResource InfoBG}" BorderBrush="{StaticResource InfoBorder}">
                                 <TextBlock x:Name="KilometerText" Text="KILOMETER&#xA;STATISTIK" />
                             </Border>
-
                             <ControlTemplate.Triggers>
                                 <DataTrigger Binding="{Binding Path=CurrentPageTitle}" Value="KILOMETERSTATISTIK">
                                     <Setter TargetName="KilometerText" Property="Foreground" Value="{StaticResource ResourceKey=SelectedText}"/>
                                     <Setter TargetName="KilometerBorder" Property="Background" Value="{StaticResource ResourceKey=SelectedBorder}"/>
                                 </DataTrigger>
                             </ControlTemplate.Triggers>
-
                         </ControlTemplate>
                     </Button.Template>
                 </Button>

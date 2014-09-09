@@ -124,16 +124,16 @@ namespace ARK.ViewModel.Protokolsystem.Pages
             {
                 Trip trip = new Trip
                 {
-                    //Id = db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
+                    Id = db.Trip.OrderByDescending(t => t.Id).First().Id + 1,
                     TripStartTime = DateTime.Now,
-                    //Members = new List<Member>(SelectedMembers.Select(member => member.Member)),
-                    //Boat = SelectedBoat,
+                    Members = new List<Member>(SelectedLongTripForm.Members),
+                    Boat = SelectedLongTripForm.Boat,
                     LongTrip = true,
-                    Direction = "Testretning"
+                    Direction = "LANGTUR"
                 };
 
-                var dlg = new BeginTripBoatsConfirm();
-                var confirmTripViewModel = (BeginTripBoatsConfirmViewModel)dlg.DataContext;
+                var dlg = new ViewLongTripConfirm();
+                var confirmTripViewModel = (ViewLongTripConfirmViewModel)dlg.DataContext;
                 confirmTripViewModel.Trip = trip;
                 ProtocolSystem.ShowDialog(dlg);
             }

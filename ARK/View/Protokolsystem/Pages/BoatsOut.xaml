@@ -41,7 +41,8 @@
 
         <ListView x:Name="lstBoatsOut" ItemsSource="{Binding Path=TripsOngoing}" 
                   SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}" Grid.Row="1" VerticalAlignment="Stretch"
-                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

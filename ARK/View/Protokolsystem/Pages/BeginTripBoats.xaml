@@ -75,7 +75,8 @@
                   SelectedItem="{Binding Path=SelectedBoat, Mode=TwoWay}"
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=Boats}" HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch" Grid.RowSpan="2">
+                  VerticalAlignment="Stretch" Grid.RowSpan="2"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -125,7 +126,8 @@
                   SelectionMode="Multiple"
                   IsEnabled="{Binding Path=EnableMembers}" SelectionChanged="AllMembersList_SelectionChanged" 
                   ItemContainerStyle="{StaticResource ItemContainerStyle}" Margin="5,0,0,0"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
