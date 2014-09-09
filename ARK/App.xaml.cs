@@ -128,19 +128,26 @@ namespace ARK
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-            mail.From = new MailAddress("aaua304@gmail.com");
-            mail.To.Add("aaua304@gmail.com");
+            mail.From = new MailAddress("aau304@gmail.com");
+            mail.To.Add("aau304@gmail.com");
             mail.Subject = "ARK - Exception";
-            mail.Body = "TEST TEXT";
+            mail.Body = "Der er sket en fejl på systemet, som kræver din opmærksomhed, følgende data blev samlet:\n";
+            mail.Body += "Exception Name: " + e.Exception.ToString() + "\n";
+            mail.Body += "Inner Exception: " + e.Exception.InnerException + "\n";
+            mail.Body += "Exception Besked: " + e.Exception.Message + "\n";
+            mail.Body += "Help Link: " + e.Exception.HelpLink + "\n";
+            mail.Body += "TargetSite: " + e.Exception.TargetSite + "\n";
+            mail.Body += "StackTrace: " + e.Exception.StackTrace + "\n";
 
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("aaua304@gmail.com", "AAU304AAUA304");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("aau304@gmail.com", "aalborguniversitet");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
 
             System.Windows.Forms.Application.Restart();
 
+            Application.Current.Shutdown();
                 //e.Exception.
         }
     }
