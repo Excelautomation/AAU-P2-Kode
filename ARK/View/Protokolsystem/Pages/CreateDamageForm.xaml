@@ -87,7 +87,8 @@
         </Border>
 
         <ListView x:Name="MembersList" ItemsSource="{Binding Path=Members}" Grid.Column="0" Grid.Row="1"
-                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
@@ -105,8 +106,10 @@
             </i:Interaction.Triggers>
         </ListView>
 
-        <ListView x:Name="BoatsList" ItemsSource="{Binding Path=Boats}" ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
-                  Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
+        <ListView x:Name="BoatsList" ItemsSource="{Binding Path=Boats}" 
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  Grid.Row="1" Grid.Column="1" Margin="5,0,0,0"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">

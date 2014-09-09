@@ -111,7 +111,8 @@
 
         <ListView x:Name="Members" ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=MemberKmCollectionFiltered}" Grid.Row="1" Grid.Column="0"
-                  SelectedItem="{Binding SelectedMember, Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedMember, Mode=TwoWay}"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" 
@@ -148,7 +149,8 @@
         <ListView x:Name="LastTrips" 
                   ItemsSource="{Binding Path=SelectedMember.FilteredTrips}" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0"
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
-                  SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}">
+                  SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
