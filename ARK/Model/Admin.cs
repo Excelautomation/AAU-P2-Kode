@@ -1,5 +1,7 @@
 ﻿using System;
 
+//ædnring
+
 namespace ARK.Model
 {
     public class Admin : IEquatable<Admin>
