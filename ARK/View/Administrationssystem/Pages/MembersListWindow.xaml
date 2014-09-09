@@ -27,24 +27,9 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Border Style="{StaticResource ResourceKey=brdHeadline}" Visibility="{Binding Path=SearchVisibility}" 
-                Grid.Row="0" Background="#FFEAEAEA">
-            <WrapPanel Margin="0,2,0,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="/View/images/table_error.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
-                               Foreground="Black">
-                        <Run Text="OPRET NY ADMINISTRATOR"/>
-                    </TextBlock>
-                </Grid>
-            </WrapPanel>
-        </Border>
-
-        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" Grid.Row="1" SelectionMode="Single"  IsSynchronizedWithCurrentItem="True">
+        <ListView x:Name="AllMembersList" ItemsSource="{Binding Path=Members}" Grid.Row="1" 
+                  SelectionMode="Single"  IsSynchronizedWithCurrentItem="True"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5">
@@ -83,7 +68,7 @@
         </StackPanel>
 
         <DockPanel HorizontalAlignment="Stretch" Grid.Row="3" Margin="5" LastChildFill="False">
-            <Button Content="Annuller" HorizontalAlignment="Right" Height="25" IsCancel="True" DockPanel.Dock="Left" Width="90"/>
+            <Button Content="Annullér" HorizontalAlignment="Right" Height="25" IsCancel="True" DockPanel.Dock="Left" Width="90"/>
             <Button Content="Opret" Width="90" Height="25"
                     Command="{Binding Path=ShowMembersContinue}" CommandParameter="{Binding ElementName=AllMembersList, Path=SelectedItem}" DockPanel.Dock="Right"/>
         </DockPanel>

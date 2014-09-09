@@ -67,7 +67,8 @@
         <!-- Båd Liste -->
         <DockPanel Grid.Row="2">
             <ListView Margin="4" DockPanel.Dock="Bottom" x:Name="BoatList" ItemsSource="{Binding Path=Boats}"
-                      IsSynchronizedWithCurrentItem="True" SelectionMode="Single" SelectedItem="{Binding Path=CurrentBoat, Mode=TwoWay}">
+                      IsSynchronizedWithCurrentItem="True" SelectionMode="Single" SelectedItem="{Binding Path=CurrentBoat, Mode=TwoWay}"
+                      ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Background" Value="#CCFFCC"/>
@@ -177,7 +178,7 @@
                                                     <TextBlock Text="Yderligere oplysninger:" FontWeight="SemiBold" Margin="0,10,0,0"/>
                                                     <TextBox Text="{Binding Path=CurrentBoat.InformationString, Mode=TwoWay}"/>
 
-                                                    <Button Content="Gem ændringer" Width="140" Command="{Binding SaveChanges}" Margin="0,10,0,0" HorizontalAlignment="Stretch" Height="24"/>
+                                                    <Button Content="Gem ændringer" Command="{Binding SaveChanges}" Margin="0,10,1,0" HorizontalAlignment="Stretch" Height="24"/>
 
                                                 </StackPanel>
                                             </Border>
@@ -231,38 +232,38 @@
                                                 <Border Style="{StaticResource styleContentBorders}" Height="530">
                                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                                                         <WrapPanel Margin="0,0,0,0">
-                                                        <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
-                                                            <ItemsControl.ItemTemplate>
-                                                                <DataTemplate>
-                                                                    <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="190"
+                                                            <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="190"
                                                                                 Margin="0,0,0,8" Padding="4">
-                                                                        <StackPanel Orientation="Vertical" >
-                                                                            <StackPanel.Resources>
-                                                                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
-                                                                            </StackPanel.Resources>
-                                                                            <TextBlock>
+                                                                            <StackPanel Orientation="Vertical" >
+                                                                                <StackPanel.Resources>
+                                                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                                                </StackPanel.Resources>
+                                                                                <TextBlock>
                                                                                     <Run Text="Retning:" FontWeight="SemiBold"/>
                                                                                     <Run Text="{Binding Path=Direction}"/>
-                                                                            </TextBlock>
-                                                                            <TextBlock>
+                                                                                </TextBlock>
+                                                                                <TextBlock>
                                                                                     <Run Text="Distance:" FontWeight="SemiBold"/>
                                                                                     <Run Text="{Binding Path=Distance}"/>
                                                                                     <Run Text="Km"/>
-                                                                            </TextBlock>
-                                                                            <TextBlock>
+                                                                                </TextBlock>
+                                                                                <TextBlock>
                                                                                     <Run Text="Start: " FontWeight="SemiBold"/>
                                                                                     <Run Text="{Binding Path=TripStartTime, ConverterCulture='da-DK'}"/>
-                                                                            </TextBlock>
-                                                                            <TextBlock>
+                                                                                </TextBlock>
+                                                                                <TextBlock>
                                                                                     <Run Text="Slut: " FontWeight="SemiBold"/>
                                                                                     <Run Text="{Binding Path=TripEndedTime, ConverterCulture='da-DK'}"/>
-                                                                            </TextBlock>
-                                                                        </StackPanel>
-                                                                    </Border>
-                                                                </DataTemplate>
-                                                            </ItemsControl.ItemTemplate>
-                                                        </ItemsControl>
-                                                    </WrapPanel>
+                                                                                </TextBlock>
+                                                                            </StackPanel>
+                                                                        </Border>
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </WrapPanel>
                                                     </ScrollViewer>
                                                 </Border>
                                             </StackPanel>

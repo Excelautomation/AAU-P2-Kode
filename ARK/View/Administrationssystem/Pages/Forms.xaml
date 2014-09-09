@@ -38,7 +38,8 @@
                         </WrapPanel>
                     </TabItem.Header>
                     <DockPanel>
-                        <ListView Margin="10" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}">
+                        <ListView Margin="10" Name="DamageList" ItemsSource="{Binding Path=DamageForms}" SelectionMode="Single" SelectedIndex="{Binding Path=SelectedIndexDamageForms}"
+                                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
@@ -99,7 +100,8 @@
                     
                     <DockPanel>
                         <ListView Margin="10" Name="LongDistanceListView" SelectedIndex="{Binding Path=SelectedIndexLongDistanceForms}" 
-                                  ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch">
+                                  ItemsSource="{Binding Path=LongDistanceForms}" HorizontalAlignment="Stretch"
+                                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="Background" Value="White"/>
