@@ -8,7 +8,7 @@ namespace ARK.ViewModel.Protokolsystem.Additional
     {
         private MemberViewModel _responsibleMember;
 
-        private bool _selectResponsible;
+        private bool _selectResponsible = true;
 
         public ICommand MemberClicked
         {
@@ -61,7 +61,15 @@ namespace ARK.ViewModel.Protokolsystem.Additional
         {
             get
             {
-                return GetCommand(() => { SelectResponsible = !SelectResponsible; });
+                return GetCommand(() => { SelectResponsible = true; });
+            }
+        }
+
+        public ICommand DeleteMemberClick
+        {
+            get
+            {
+                return GetCommand(() => { SelectResponsible = false; });
             }
         }
 

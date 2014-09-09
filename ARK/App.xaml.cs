@@ -12,6 +12,8 @@ using ARK.HelperFunctions.SMSGateway;
 using ARK.Model;
 using ARK.Model.DB;
 
+using System.Net.Mail;
+
 namespace ARK
 {
     /// <summary>
@@ -117,6 +119,36 @@ namespace ARK
             }
 
             wm.Content = "Vælg en dato";
+        }
+
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Der opstod en fejl, ring venligst til 53552125 eller 3154013", "Kritisk fejl", MessageBoxButton.OK);
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("aau304@gmail.com");
+            mail.To.Add("aau304@gmail.com");
+            mail.Subject = "ARK - Exception";
+            mail.Body = "Der er sket en fejl på systemet, som kræver din opmærksomhed, følgende data blev samlet:\n";
+            mail.Body += "Exception Name: " + e.Exception.ToString() + "\n";
+            mail.Body += "Inner Exception: " + e.Exception.InnerException + "\n";
+            mail.Body += "Exception Besked: " + e.Exception.Message + "\n";
+            mail.Body += "Help Link: " + e.Exception.HelpLink + "\n";
+            mail.Body += "TargetSite: " + e.Exception.TargetSite + "\n";
+            mail.Body += "StackTrace: " + e.Exception.StackTrace + "\n";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("aau304@gmail.com", "aalborguniversitet");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            System.Windows.Forms.Application.Restart();
+
+            Application.Current.Shutdown();
+                //e.Exception.
         }
     }
 }

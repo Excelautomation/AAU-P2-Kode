@@ -108,9 +108,111 @@
         <Grid Background="White" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"/>
+                <RowDefinition Height="25"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1" PanningMode="VerticalOnly" MaxHeight="360">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Button x:Name="btnSelectResponsible" Grid.Row="0" VerticalAlignment="Top"
+                    Command="{Binding Path=ResponsibleMemberClick}"
+                    BorderBrush="{DynamicResource ChangeBorder}" Height="46" Width="Auto"
+                    Margin="0,1,0,0">
+                    
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="True">
+                                    <Setter Property="Opacity" Value="1"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="False">
+                                    <Setter Property="Opacity" Value="0.3"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                        
+                    
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="tmpBorder" Grid.ColumnSpan="4" Background="{StaticResource BeginBG}"/>
+                                <Image x:Name="tmpImage" Grid.Column="1" Source="/View/images/user_striper_big.png">
+                                    <Image.Style>
+                                        <Style BasedOn="{StaticResource ResourceKey=btnImage}" TargetType="Image"/>
+                                    </Image.Style>
+                                </Image>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="btnDeleteMember" Grid.Column="1" VerticalAlignment="Top"
+                    Command="{Binding Path=DeleteMemberClick}"
+                    BorderBrush="{DynamicResource ChangeBorder}" Height="46" Width="Auto"
+                    Margin="0,1,0,0">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="True">
+                                    <Setter Property="Opacity" Value="0.3"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="False">
+                                    <Setter Property="Opacity" Value="1"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="tmpBorder" Grid.ColumnSpan="4" Background="{StaticResource EndBG}"/>
+                                <Image x:Name="tmpImage" Grid.Column="1" Source="/View/images/status_busy.png">
+                                    <Image.Style>
+                                        <Style BasedOn="{StaticResource ResourceKey=btnImage}" TargetType="Image"/>
+                                    </Image.Style>
+                                </Image>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <!-- Textbox som viser enten "Vælg ansvarlig" eller "Slet medlem"-->
+            <TextBlock Margin="5 0 0 0" Grid.Row="1" FontSize="14" FontWeight="Bold">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="True">
+                                <Setter Property="Text" Value="Vælg Ansvarlig"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="False">
+                                <Setter Property="Text" Value="Slet Medlem"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            
+            <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="2" PanningMode="VerticalOnly" MaxHeight="360">
                 <ItemsControl x:Name="MemberInfo" ItemsSource="{Binding Path=SelectedMembers}" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                       FontSize="18" BorderBrush="{x:Null}">
@@ -155,47 +257,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             </ScrollViewer>
-            
-            <Button x:Name="btnSelectResponsible" Grid.Row="0" VerticalAlignment="Top"
-                    Command="{Binding Path=ResponsibleMemberClick}"
-                    BorderBrush="{DynamicResource ChangeBorder}" Height="46" Width="Auto"
-                    Margin="0,1,0,0">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="8"/>
-                                <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="8"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border x:Name="tmpBorder" Grid.ColumnSpan="4"/>
-                            <TextBlock Grid.Column="3" x:Name="tmpText" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="18">
-                                <TextBlock.Style>
-                                    <Style BasedOn="{StaticResource ResourceKey=ButtonStyle}" TargetType="TextBlock"/>
-                                </TextBlock.Style>
-                            </TextBlock>
-                            <Image x:Name="tmpImage" Grid.Column="1">
-                                <Image.Style>
-                                    <Style BasedOn="{StaticResource ResourceKey=btnImage}" TargetType="Image"/>
-                                </Image.Style>
-                            </Image>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="True">
-                                <Setter TargetName="tmpBorder" Property="Background" Value="{StaticResource EndBG}"/>
-                                <Setter TargetName="tmpText" Property="Text" Value="FJERN&#10;MEDLEMMER"/>
-                                <Setter TargetName="tmpImage" Property="Source" Value="/View/images/status_busy.png"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=SelectResponsible}" Value="False">
-                                <Setter TargetName="tmpBorder" Property="Background" Value="{StaticResource BeginBG}"/>
-                                <Setter TargetName="tmpText" Property="Text" Value="VÆLG&#10;ANSVARLIG"/>
-                                <Setter TargetName="tmpImage" Property="Source" Value="/View/images/user_striper_big.png"/>
-                            </DataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
         </Grid>        
     </Grid>
 </UserControl>

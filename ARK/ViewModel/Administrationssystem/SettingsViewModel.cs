@@ -83,6 +83,7 @@ namespace ARK.ViewModel.Administrationssystem
 
         private string _smsWait;
 
+        // Constructor
         public SettingsViewModel()
         {
             // Initialize database and get data in a single thread(lock)
