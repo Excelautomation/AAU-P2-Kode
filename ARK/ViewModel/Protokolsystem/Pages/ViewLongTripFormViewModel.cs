@@ -33,7 +33,7 @@ namespace ARK.ViewModel.Protokolsystem.Pages
 
             ParentAttached += (sender, e) =>
                 {
-                    LongTripForms = db.LongTripForm.ToList();
+                    LongTripForms = db.LongTripForm.OrderByDescending(x => x.PlannedStartDate).ToList();
 
                     if (LongTripForms.Any())
                     {

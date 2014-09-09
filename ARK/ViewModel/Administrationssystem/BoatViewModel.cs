@@ -197,7 +197,7 @@ namespace ARK.ViewModel.Administrationssystem
             return
                 (from member in members.Distinct()
                  orderby members.Count(m => m.Id == member.Id) descending
-                 select member).First();
+                 select member).FirstOrDefault();
         }
 
         public void OpenBoat(Boat boat)
