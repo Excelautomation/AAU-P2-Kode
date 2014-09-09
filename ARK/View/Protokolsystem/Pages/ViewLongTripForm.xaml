@@ -104,6 +104,24 @@
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;LANGTUR" />
                 </Grid>
             </Button>
+            <Button x:Name="btnSendLongTrip"
+                    DockPanel.Dock="Right"
+                    Margin="3,0,0,0"
+        		    Command="{Binding ShowConfirmationDialog}"
+        		    Background="{StaticResource SubmitBG}"
+        		    BorderBrush="{StaticResource SubmitBorder}"
+                    Style="{StaticResource btnFilter}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/page_white_go.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="START&#xA;LANGTUR" />
+                </Grid>
+            </Button>
             <!--
             <Button x:Name="btnAcceptLongTripForm"
                     DockPanel.Dock="Right"
