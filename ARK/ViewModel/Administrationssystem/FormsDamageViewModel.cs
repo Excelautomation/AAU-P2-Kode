@@ -23,6 +23,9 @@ namespace ARK.ViewModel.Administrationssystem
                             DamageForm.Closed = true;
 
                             Save();
+
+                            var vm = (FormsViewModel)Parent;
+                            vm.UpdateFilter();
                         });
             }
         }
@@ -38,9 +41,7 @@ namespace ARK.ViewModel.Administrationssystem
                             Save();
 
                             var vm = (FormsViewModel)Parent;
-                            var tempdmf2 = vm.DamageForms;
-                            vm.DamageForms = null;
-                            vm.DamageForms = tempdmf2;
+                            vm.UpdateFilter();
                         });
             }
         }
@@ -70,9 +71,7 @@ namespace ARK.ViewModel.Administrationssystem
                             Save();
 
                             var vm = (FormsViewModel)Parent;
-                            var tempdmf2 = vm.DamageForms;
-                            vm.DamageForms = null;
-                            vm.DamageForms = tempdmf2;
+                            vm.UpdateFilter();
                         });
             }
         }
