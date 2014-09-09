@@ -23,6 +23,9 @@ namespace ARK.ViewModel.Administrationssystem
                             LongDistanceForm.Status = LongTripForm.BoatStatus.Accepted;
 
                             Save();
+
+                            var vm = (FormsViewModel)Parent;
+                            vm.UpdateFilter();
                         });
             }
         }
@@ -61,9 +64,14 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return GetCommand(
                     () =>
+
                         {
                             LongDistanceForm.Status = LongTripForm.BoatStatus.Denied;
                             Save();
+
+
+                            var vm = (FormsViewModel)Parent;
+                            vm.UpdateFilter();
                         });
             }
         }
