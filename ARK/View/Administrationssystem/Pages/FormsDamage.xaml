@@ -98,7 +98,7 @@
                     <TextBlock Text="Kommentarer: " FontWeight="SemiBold" Margin="0,0,10,0" />
                     <TextBox AcceptsReturn="True" Name="CommentTextbox" TextWrapping="Wrap" 
                              VerticalScrollBarVisibility="Auto" Text="{Binding Path=DamageForm.Description, Mode=TwoWay}" Height="314" Margin="0,0,10,0" Width="215"/>
-                    <Button Content="Gem ændringer" Width="140" Command="{Binding SaveChanges}" Margin="0,5,10,0" HorizontalAlignment="Right" Height="24"/>
+                    <Button Content="Gem ændringer" Width="215" Command="{Binding SaveChanges}" Margin="0,5,10,0" HorizontalAlignment="Right" Height="24"/>
                 </StackPanel>
             </Border>
 

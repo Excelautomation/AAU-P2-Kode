@@ -43,7 +43,8 @@
         <ListView x:Name="lstLongTrip" ItemsSource="{Binding Path=LongTripForms}" Grid.Row="1"
                   SelectedItem="{Binding Path=SelectedLongTripForm}"
                   VerticalAlignment="Stretch"
-                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2">
+                  ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
@@ -102,6 +103,24 @@
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/building_add.png" />
                     <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="OPRET NY&#xA;LANGTUR" />
+                </Grid>
+            </Button>
+            <Button x:Name="btnSendLongTrip"
+                    DockPanel.Dock="Right"
+                    Margin="3,0,0,0"
+        		    Command="{Binding ShowConfirmationDialog}"
+        		    Background="{StaticResource SubmitBG}"
+        		    BorderBrush="{StaticResource SubmitBorder}"
+                    Style="{StaticResource btnFilter}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Style="{StaticResource ResourceKey=btnImage}" Source="/ARK;component/View/images/world_go.png" />
+                    <TextBlock Grid.Column="3" Style="{StaticResource ResourceKey=ButtonStyle}" Text="START&#xA;LANGTUR" />
                 </Grid>
             </Button>
             <!--

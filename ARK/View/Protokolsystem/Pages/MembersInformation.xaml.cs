@@ -11,5 +11,10 @@ namespace ARK.View.Protokolsystem.Pages
         {
             InitializeComponent();
         }
+
+        private void OnManipulationBoundaryFeedback(object sender, System.Windows.Input.ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

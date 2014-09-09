@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/View/Resources/RadioButton.xaml"/>
                 <ResourceDictionary Source="/View/Resources/AdditionalInfo.xaml" />
                 <ResourceDictionary Source="/View/Resources/ListView.xaml" />
+                <ResourceDictionary Source="/View/Resources/Calendar.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

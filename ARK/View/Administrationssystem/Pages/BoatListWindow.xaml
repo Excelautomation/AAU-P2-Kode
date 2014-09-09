@@ -17,23 +17,9 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-
-        <Border Style="{DynamicResource ResourceKey=brdHeadline}" Background="Aqua" Grid.Row="0">
-            <WrapPanel Margin="20,2,0,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="/View/images/yacht.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBlock Grid.Column="1" Style="{DynamicResource ResourceKey=txbHeadline}" Foreground="Black">
-                        <Run Text="TILDEL NY BÅD"/>
-                    </TextBlock>
-                </Grid>
-            </WrapPanel>
-        </Border>
-
-        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=AllBoats}" Grid.Row="1" SelectionMode="Single"  IsSynchronizedWithCurrentItem="True">
+        <ListView x:Name="AllBoatsList" ItemsSource="{Binding Path=AllBoats}" 
+                  Grid.Row="1" SelectionMode="Single"  IsSynchronizedWithCurrentItem="True"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="5">
@@ -49,9 +35,9 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         </ListView>
 
         <DockPanel HorizontalAlignment="Stretch" Grid.Row="3">
-            <Button Content="Fortsæt" Margin="5" Padding="20,5,20,5" Background="#CCFFCC" 
-                    Command="{Binding Path=ShowBoatsContinue}" CommandParameter="{Binding ElementName=AllBoatsList, Path=SelectedItem}"/>
-            <Button Content="Annulér" HorizontalAlignment="Right" Margin="5" Padding="20,5,20,5" Background="#FFDEDE" IsCancel="True"/>
+            <Button Content="Annullér" Margin="5" Padding="20,5,20,5" IsCancel="True" Width="90" Height="25"/>
+            <Button Content="Fortsæt" Margin="5" Padding="20,5,20,5"  HorizontalAlignment="Right"
+                    Command="{Binding Path=ShowBoatsContinue}" CommandParameter="{Binding ElementName=AllBoatsList, Path=SelectedItem}" Width="90" Height="25"/>
         </DockPanel>
 
     </Grid>

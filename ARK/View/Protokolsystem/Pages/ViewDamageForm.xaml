@@ -55,7 +55,8 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=DamageForms}" Grid.Row="1" 
                   VerticalAlignment="Stretch"
-                  SelectedItem="{Binding Path=SelectedDamageForm, Mode=TwoWay}">
+                  SelectedItem="{Binding Path=SelectedDamageForm, Mode=TwoWay}"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">

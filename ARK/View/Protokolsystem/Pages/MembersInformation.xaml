@@ -45,11 +45,11 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=MembersFiltered}" Grid.Row="1" 
                   VerticalAlignment="Stretch"
-                  SelectedItem="{Binding Path=SelectedMember, Mode=TwoWay}">
+                  SelectedItem="{Binding Path=SelectedMember, Mode=TwoWay}"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-
                         <TextBlock Style="{StaticResource ResourceKey=lstListViewHeadline}">
                             <Run Text="{Binding MemberNumber}"/>
                             <Run Text="{Binding FirstName}"/>

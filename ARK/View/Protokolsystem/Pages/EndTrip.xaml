@@ -65,7 +65,8 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=ActiveTrips}" 
                   SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Orientation="Vertical">
@@ -88,7 +89,9 @@
                   ItemContainerStyle="{StaticResource styleListViewItem}" AlternationCount="2"
                   ItemsSource="{Binding Path=StandardTrips}"
                   SelectedItem="{Binding Path=SelectedStdTrip, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="lstStandardTrip_SelectionChanged">
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                  SelectionChanged="lstStandardTrip_SelectionChanged"
+                  ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
             <ListView.Style>
                 <Style TargetType="{x:Type ListView}">
                     <Style.Triggers>

@@ -62,8 +62,8 @@
                         </Border>
 
                         <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
-                            <ListView x:Name="DamageformsList" Margin="0,5,0,5" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch" 
-                                  SelectedValue="{Binding Path=SelectedDamageForm}">
+                            <ListView Margin="0,5,0,5" ItemsSource="{Binding Path=Skadesblanketter}" VerticalAlignment="Stretch" 
+                                  SelectedValue="{Binding Path=SelectedDamageForm}" ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
                                 </ListView.ItemContainerStyle>
@@ -133,7 +133,8 @@
                         </Border>
 
                         <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
-                            <ListView Margin="0,5,0,5" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch" SelectedItem="{Binding Path=SelectedLongDistanceForm}">
+                            <ListView Margin="0,5,0,5" ItemsSource="{Binding Path=LongDistanceForms}" VerticalAlignment="Stretch" 
+                                      SelectedItem="{Binding Path=SelectedLongDistanceForm}" ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
                                 </ListView.ItemContainerStyle>
@@ -207,7 +208,8 @@
 
                         <Border HorizontalAlignment="Stretch" Style="{StaticResource styleContentBorders}">
                             <ListView Name="OverviewBoatsOutList" HorizontalAlignment="Left" 
-                                  Margin="0,5,0,20" BorderThickness="0" ItemsSource="{Binding Path=BoatsOut}" SelectedItem="{Binding Path=SelectedBoat}">
+                                  Margin="0,5,0,20" BorderThickness="0" ItemsSource="{Binding Path=BoatsOut}" SelectedItem="{Binding Path=SelectedBoat}"
+                                      ManipulationBoundaryFeedback="OnManipulationBoundaryFeedback">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
                                 </ListView.ItemContainerStyle>

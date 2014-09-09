@@ -25,5 +25,10 @@ namespace ARK.View.Protokolsystem.Pages
 
             lstStandardTrip.SelectionChanged += lstStandardTrip_SelectionChanged;
         }
+
+        private void OnManipulationBoundaryFeedback(object sender, System.Windows.Input.ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
