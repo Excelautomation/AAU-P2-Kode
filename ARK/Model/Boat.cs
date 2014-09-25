@@ -117,7 +117,7 @@ namespace ARK.Model
                 TimeCounter.StartTimer();
 
                 // Hvis trips ikke indeholder nogle elementer
-                if (Trips.Any())
+                if (!Trips.Any())
                     return null;
 
                 IEnumerable<Member> members = Trips.Where(trip => trip.Boat.Id == Id).SelectMany(trip => trip.Members);
