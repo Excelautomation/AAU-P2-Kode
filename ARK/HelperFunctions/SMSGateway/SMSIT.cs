@@ -4,7 +4,7 @@ namespace ARK.HelperFunctions.SMSGateway
 {
     public class SmsIt : ISmsGateway
     {
-        private const string UrlBase = "http://www.smsit.dk/api/sendSms.php";
+        private const string UrlBase = "http://sms.stadel.dk/send.php?user=mclc&pass=y433zipx";
 
         public SmsIt(string apiKey)
             : this(apiKey, "UTF-8")
@@ -24,13 +24,10 @@ namespace ARK.HelperFunctions.SMSGateway
         public bool SendSms(string sender, string reciever, string message)
         {
             string url = string.Format(
-                "{0}?apiKey={1}&senderId={2}&mobile=45{3}&message={4}&charset={5}", 
-                UrlBase, 
-                ApiKey, 
-                sender, 
-                reciever, 
-                message, 
-                CharSet);
+                "{0}&message={1}&mobile=45{2}",
+                UrlBase,  
+                message,
+                reciever);
 
             var client = new WebClient();
             return client.DownloadString(url) == "0";
