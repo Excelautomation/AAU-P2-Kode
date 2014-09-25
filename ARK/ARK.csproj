@@ -600,23 +600,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Diagrams\Model.cd" />
-    <None Include="Diagrams\ProtokolsystemMain.cd" />
-    <None Include="Diagrams\ViewModelAdminSystem.cd" />
-    <None Include="Diagrams\ViewModelAdminSystemMain.cd" />
-    <None Include="Diagrams\ViewModelAdminSystemsFilter.cd" />
-    <None Include="Diagrams\ViewModelClasses.cd" />
-    <None Include="Diagrams\ViewModelFilterClasses.cd" />
-    <None Include="Diagrams\ViewModelInterfaces.cd" />
     <Resource Include="View\Administrationssystem\Fonts\arial.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\arialbd.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\arialbi.ttf" />
     <Resource Include="View\Administrationssystem\Fonts\ariali.ttf" />
-    <None Include="Diagrams\ViewModelProtokolsystemData.cd" />
-    <None Include="Diagrams\ViewModelProtokolsystemConfirmation.cd" />
-    <None Include="Diagrams\ViewModelProtokolsystemAdditional.cd" />
-    <None Include="Diagrams\ViewModelProtokolsystemFilters.cd" />
-    <None Include="Diagrams\ViewModelProtokolsystem.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
