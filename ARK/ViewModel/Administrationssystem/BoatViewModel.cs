@@ -103,31 +103,8 @@ namespace ARK.ViewModel.Administrationssystem
 
                 _currentBoat = value;
 
-                if (_currentBoat != null)
-                {
-                    MostUsingMember = MostUsingMemberFunc();
-                }
-                else
-                {
-                    MostUsingMember = null;
-                }
-
                 RecentSave = false;
                 RecentCancel = false;
-                Notify();
-            }
-        }
-
-        public Member MostUsingMember
-        {
-            get
-            {
-                return _mostUsingMember;
-            }
-
-            set
-            {
-                _mostUsingMember = value;
                 Notify();
             }
         }
@@ -186,22 +163,6 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return _filter ?? (_filter = new BoatsFilter());
             }
-        }
-
-        public Member MostUsingMemberFunc()
-        {
-            if (CurrentBoat.Trips.Count == 0)
-            {
-                return null;
-            }
-
-            IEnumerable<Member> members =
-                _trips.Where(trip => trip.Boat.Id == CurrentBoat.Id).SelectMany(trip => trip.Members);
-
-            return
-                (from member in members.Distinct()
-                 orderby members.Count(m => m.Id == member.Id) descending
-                 select member).FirstOrDefault();
         }
 
         public void OpenBoat(Boat boat)

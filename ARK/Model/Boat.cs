@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using ARK.ViewModel.Base;
 
 namespace ARK.Model
 {
@@ -108,6 +110,28 @@ namespace ARK.Model
         }
 
         public int Year { get; set; }
+
+        public Member MostUsingMember
+        {
+            get { 
+                TimeCounter.StartTimer();
+
+                // Hvis trips ikke indeholder nogle elementer
+                if (Trips.Any())
+                    return null;
+
+                IEnumerable<Member> members = Trips.Where(trip => trip.Boat.Id == Id).SelectMany(trip => trip.Members);
+
+                var o =
+                    (from member in members.Distinct()
+                    orderby members.Count(m => m.Id == member.Id) descending
+                    select member).FirstOrDefault();
+
+                TimeCounter.StopTime();
+
+                return o;
+            }
+        }
 
         public bool Equals(Boat other)
         {
