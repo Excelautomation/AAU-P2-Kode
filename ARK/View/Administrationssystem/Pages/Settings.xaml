@@ -550,6 +550,10 @@
                                             <CheckBox Margin="0,4,4,4" IsChecked="{Binding CurrentAdmin.ContactDark}" VerticalAlignment="Center"/>
                                             <TextBlock Margin="4" Text="Mørkets frembrud"/>
                                         </WrapPanel>
+                                        <WrapPanel HorizontalAlignment="Left">
+                                            <CheckBox Margin="0,4,4,4" IsChecked="{Binding CurrentAdmin.ContactDamage}" VerticalAlignment="Center"/>
+                                            <TextBlock Margin="4" Text="Ny skade"/>
+                                        </WrapPanel>
 
                                         <DockPanel Style="{StaticResource GreyWhNotSelected}" LastChildFill="False" HorizontalAlignment="Stretch" Margin="0,10,0,0">
                                             <Button Margin="4" Width="100" DockPanel.Dock="Right" Content="OK" Command="{Binding SaveChangesAdmins}"/>

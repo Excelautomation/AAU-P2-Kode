@@ -10,6 +10,8 @@ namespace ARK.Model
 
         public bool ContactTrip { get; set; }
 
+        public bool ContactDamage { get; set; }
+
         // Navigation property
         public virtual Member Member { get; set; }
 
