@@ -36,6 +36,14 @@
             <Setter Property="Padding" Value="15"/>
         </Style>
 
+        <Style x:Key="styleForms" TargetType="ListViewItem">
+            <Setter Property="Margin" Value="2,2,5,0"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FFBFBFBF"/>
+        </Style>
+
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="170"/>
@@ -236,10 +244,19 @@
                                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                                                         <WrapPanel Margin="0,0,0,0">
                                                             <ListView x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}" SelectedValue="{Binding Path=SelectedTrip, Mode=TwoWay}">
+                                                                <ListView.ItemContainerStyle>
+                                                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
+                                                                </ListView.ItemContainerStyle>
+                                                                <ListView.Template>
+                                                                    <!-- Removes default style -->
+                                                                    <ControlTemplate>
+                                                                        <ItemsPresenter/>
+                                                                    </ControlTemplate>
+                                                                </ListView.Template>
+
                                                                 <ListView.ItemTemplate>
                                                                     <DataTemplate>
-                                                                        <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="190"
-                                                                                Margin="0,0,0,8" Padding="4">
+                                                                        <Border>
                                                                             <StackPanel Orientation="Vertical" >
                                                                                 <StackPanel.Resources>
                                                                                     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
