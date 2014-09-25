@@ -89,11 +89,6 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=TripList, Path=SelectedItem}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
                     </ListView>
                 </DockPanel>
             </Border>

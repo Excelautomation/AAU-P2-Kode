@@ -42,7 +42,10 @@ namespace ARK.ViewModel.Administrationssystem
 
                         if (_trips.Count != 0)
                         {
-                            CurrentTrip = _trips[0];
+                            if (CurrentTrip != null)
+                            {
+                                CurrentTrip = _trips[0];
+                            }
 
                             // LocalTrip = CurrentTrip;
                         }
@@ -89,6 +92,9 @@ namespace ARK.ViewModel.Administrationssystem
 
             set
             {
+                if (_currentTrip != value)
+                    RecentSave = false;
+
                 _currentTrip = value;
                 Notify();
             }
@@ -117,19 +123,9 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
-        public ICommand SelectedChange
+        public void OpenTrip(Trip boat)
         {
-            get
-            {
-                return GetCommand(
-                    e =>
-                        {
-                            CurrentTrip = (Trip)e;
-
-                            // LocalTrip = CurrentTrip;
-                            RecentSave = false;
-                        });
-            }
+            CurrentTrip = TripsFiltered.First(b => b.Id == boat.Id);
         }
 
         public ICommand ShowBoatDialog

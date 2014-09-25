@@ -232,8 +232,8 @@
                                                 <Border Style="{StaticResource styleContentBorders}" Height="530">
                                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                                                         <WrapPanel Margin="0,0,0,0">
-                                                            <ItemsControl x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}">
-                                                                <ItemsControl.ItemTemplate>
+                                                            <ListView x:Name="BoatTripsList" ItemsSource="{Binding Path=CurrentBoat.Trips}" SelectedValue="{Binding Path=SelectedTrip, Mode=TwoWay}">
+                                                                <ListView.ItemTemplate>
                                                                     <DataTemplate>
                                                                         <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="190"
                                                                                 Margin="0,0,0,8" Padding="4">
@@ -261,8 +261,8 @@
                                                                             </StackPanel>
                                                                         </Border>
                                                                     </DataTemplate>
-                                                                </ItemsControl.ItemTemplate>
-                                                            </ItemsControl>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
                                                         </WrapPanel>
                                                     </ScrollViewer>
                                                 </Border>
