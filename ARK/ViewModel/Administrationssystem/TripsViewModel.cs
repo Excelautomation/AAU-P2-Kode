@@ -23,6 +23,8 @@ namespace ARK.ViewModel.Administrationssystem
 
         private Trip _currentTrip;
 
+        private Member _selectedMember;
+
         private bool _recentSave;
 
         private List<Trip> _trips;
@@ -96,6 +98,19 @@ namespace ARK.ViewModel.Administrationssystem
                     RecentSave = false;
 
                 _currentTrip = value;
+                Notify();
+            }
+        }
+
+        public Member SelectedMember
+        {
+            get
+            {
+                return _selectedMember;
+            }
+            set
+            {
+                _selectedMember = value;
                 Notify();
             }
         }
