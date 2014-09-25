@@ -83,6 +83,8 @@ namespace ARK.ViewModel.Administrationssystem
 
         private string _smsWait;
 
+        private bool _cancelRegistration;
+
         // Constructor
         public SettingsViewModel()
         {
@@ -163,7 +165,8 @@ namespace ARK.ViewModel.Administrationssystem
                                                    Password = ReferenceToCurrentAdmin.Password, 
                                                    Member = ReferenceToCurrentAdmin.Member, 
                                                    ContactDark = ReferenceToCurrentAdmin.ContactDark, 
-                                                   ContactTrip = ReferenceToCurrentAdmin.ContactTrip
+                                                   ContactTrip = ReferenceToCurrentAdmin.ContactTrip,
+                                                   ContactDamage = ReferenceToCurrentAdmin.ContactDamage
                                                };
 
                             // Give feedback through view
@@ -219,6 +222,9 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand(
                     () =>
                         {
+                            // Ugly fix: Bool used to determine if the user has canceled the registration-process of a new admin.
+                            _cancelRegistration = true;
+
                             // Create a new object to store the info of the desired admin
                             NewAdmin = new Admin();
 
@@ -229,15 +235,17 @@ namespace ARK.ViewModel.Administrationssystem
                             MembersListWindow.ShowDialog();
                             NewAdmin.ContactDark = false;
                             NewAdmin.ContactTrip = false;
+                            NewAdmin.ContactDamage = false;
 
                             // Refresh from database
                             Admins = new ObservableCollection<Admin>(_db.Admin.ToList());
 
                             // Check there already exists an admin with the same username og member
-                            // Also check if user made a password and username
-                            if (NewAdmin.Username.Length == 0 || NewAdmin.Password.Length == 0)
+                            // Also check if user made a password and username or if user has canceled(Ugly fix)
+                            if (NewAdmin.Username.Length == 0 || NewAdmin.Password.Length == 0 || _cancelRegistration)
                             {
-                                System.Windows.MessageBox.Show("Brugernavn og kodeord er påkrævet!");
+                                if (!_cancelRegistration) // If the statement wasn't caused by a user cancel: Show message.
+                                    System.Windows.MessageBox.Show("Brugernavn og kodeord er påkrævet!");
                                 return;
                             }
                             else if (Admins.Any(m => m.Member == NewAdmin.Member))
@@ -686,6 +694,7 @@ namespace ARK.ViewModel.Administrationssystem
                             // Retrieve changes from selected admin
                             ReferenceToCurrentAdmin.ContactTrip = CurrentAdmin.ContactTrip;
                             ReferenceToCurrentAdmin.ContactDark = CurrentAdmin.ContactDark;
+                            ReferenceToCurrentAdmin.ContactDamage = CurrentAdmin.ContactDamage;
 
                             // Try to save changes to database
                             try
@@ -814,6 +823,7 @@ namespace ARK.ViewModel.Administrationssystem
                                                    Password = admin.Password, 
                                                    ContactTrip = admin.ContactTrip, 
                                                    ContactDark = admin.ContactDark, 
+                                                   ContactDamage = admin.ContactDamage,
                                                    Member = admin.Member
                                                };
 
@@ -990,6 +1000,9 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand(
                     e =>
                         {
+                            // Ugly fix: Bool used to determine if the user has canceled the registration-process of a new admin.
+                            _cancelRegistration = false;
+
                             // Assign a member as foreign key to the desired administrator
                             NewAdmin.Member = (Member)e;
                             MembersListWindow.Close();
