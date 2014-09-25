@@ -86,7 +86,7 @@ namespace ARK
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 #if AdministrationsSystem
-            this.StartupUri = new Uri("/View/Administrationssystem/AdminSystem.xaml", UriKind.Relative);
+            this.StartupUri = new Uri("/View/Administrationssystem/AdminLogin.xaml", UriKind.Relative);
 #else
     #if DEBUG
             StartupUri = new Uri("/MainWindow.xaml", UriKind.Relative);
