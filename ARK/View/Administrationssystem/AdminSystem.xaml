@@ -7,7 +7,7 @@
         x:Class="ARK.View.Administrationssystem.AdminSystem"
         Title="Administrationssystem" Height="768" Width="1024"
         MinWidth="1024" MinHeight="768" WindowState="Maximized"
-        x:Name="AdminPanel">
+        x:Name="AdminPanel" Icon="/ARK;component/View/images/yacht.png">
     <Window.DataContext>
         <administrationssystem:AdminSystemViewModel />
     </Window.DataContext>

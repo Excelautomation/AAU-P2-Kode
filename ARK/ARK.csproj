@@ -132,6 +132,7 @@
     <Compile Include="HelperFunctions\SeasonClass.cs" />
     <Compile Include="HelperFunctions\SunsetClass.cs" />
     <Compile Include="HelperFunctions\XmlSynchronizer.cs" />
+    <Compile Include="Model\MailService.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="HelperFunctions\SMSGateway\ISMSGateway.cs" />
     <Compile Include="HelperFunctions\SMSGateway\SmsWarnings.cs" />

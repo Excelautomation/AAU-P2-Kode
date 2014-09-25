@@ -2,12 +2,14 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 using ARK.Model;
 using ARK.Model.DB;
 using ARK.Model.Extensions;
 using ARK.View.Administrationssystem.Filters;
+using ARK.ViewModel.Administrationssystem.Filters;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
@@ -31,6 +33,8 @@ namespace ARK.ViewModel.Administrationssystem
         private bool _recentSave;
 
         private IEnumerable<Trip> _trips;
+
+        private Trip _selectedTrip;
 
         public BoatViewModel()
         {
@@ -99,31 +103,8 @@ namespace ARK.ViewModel.Administrationssystem
 
                 _currentBoat = value;
 
-                if (_currentBoat != null)
-                {
-                    MostUsingMember = MostUsingMemberFunc();
-                }
-                else
-                {
-                    MostUsingMember = null;
-                }
-
                 RecentSave = false;
                 RecentCancel = false;
-                Notify();
-            }
-        }
-
-        public Member MostUsingMember
-        {
-            get
-            {
-                return _mostUsingMember;
-            }
-
-            set
-            {
-                _mostUsingMember = value;
                 Notify();
             }
         }
@@ -182,22 +163,6 @@ namespace ARK.ViewModel.Administrationssystem
             {
                 return _filter ?? (_filter = new BoatsFilter());
             }
-        }
-
-        public Member MostUsingMemberFunc()
-        {
-            if (CurrentBoat.Trips.Count == 0)
-            {
-                return null;
-            }
-
-            IEnumerable<Member> members =
-                _trips.Where(trip => trip.Boat.Id == CurrentBoat.Id).SelectMany(trip => trip.Members);
-
-            return
-                (from member in members.Distinct()
-                 orderby members.Count(m => m.Id == member.Id) descending
-                 select member).FirstOrDefault();
         }
 
         public void OpenBoat(Boat boat)
@@ -261,6 +226,56 @@ namespace ARK.ViewModel.Administrationssystem
             if (args.SearchEventArgs != null && !string.IsNullOrEmpty(args.SearchEventArgs.SearchText))
             {
                 Boats = from boat in Boats where boat.Filter(args.SearchEventArgs.SearchText) select boat;
+            }
+        }
+
+        public Trip SelectedTrip
+        {
+            get
+            {
+                return _selectedTrip;
+            }
+
+            set
+            {
+                _selectedTrip = value;
+
+                if (_selectedTrip != null)
+                {
+                    ShowTrip(_selectedTrip);
+                }
+
+                Notify();
+            }
+        }
+
+        private void ShowTrip(Trip trip)
+        {
+            if (Parent == null)
+                return;
+
+            var adminSystem = (AdminSystemViewModel)Parent;
+
+            adminSystem.MenuTrips.Execute(null);
+
+            var tripViewModel = (TripsViewModel) adminSystem.CurrentPage.DataContext;
+            var filterViewModel = (TripFilterViewModel) tripViewModel.Filter.DataContext;
+            
+            // Enable all filter
+            EnableFilter(filterViewModel.ControlsBoatType);
+            EnableFilter(filterViewModel.ControlsDistance);
+            EnableFilter(filterViewModel.ControlsYear);
+
+            tripViewModel.OpenTrip(trip);
+
+            SelectedTrip = null;
+        }
+
+        private void EnableFilter(IEnumerable<CheckBox> list)
+        {
+            foreach (var l in list)
+            {
+                l.IsChecked = true;
             }
         }
     }

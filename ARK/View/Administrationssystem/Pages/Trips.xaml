@@ -25,6 +25,14 @@
             <Setter Property="Height" Value="27"/>
         </Style>
 
+        <Style x:Key="styleForms" TargetType="ListViewItem">
+            <Setter Property="Margin" Value="2,2,5,0"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FFBFBFBF"/>
+        </Style>
+
         <!--Border style-->
         <Style x:Key="styleContentBorders" TargetType="Border">
             <Setter Property="CornerRadius" Value="3"/>
@@ -89,11 +97,6 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Path=SelectedChange}" CommandParameter="{Binding ElementName=TripList, Path=SelectedItem}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
                     </ListView>
                 </DockPanel>
             </Border>
@@ -104,82 +107,189 @@
                 <ScrollViewer Background="#DDDDDD">
                     <Border Margin="6" Padding="15,15,25,15" CornerRadius="5" Background="White">
                         <DockPanel Name="FormsDetailContent">
-                            <StackPanel HorizontalAlignment="Left" Orientation="Vertical" Width="300">
-                                <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" 
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="250"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!--Båd oplysninger-->
+                                <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                                    <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" 
                                         Visibility="{Binding Path=SearchVisibility}" 
                                         Background="#FFEAEAEA" HorizontalAlignment="Stretch">
-                                    <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="25"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Source="/View/images/document_info.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                            <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
+                                        <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="/View/images/document_info.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
                                                         Foreground="Black">
                                                 <Run Text="TUR OPLYSNINGER"/>
-                                            </TextBlock>
-                                        </Grid>
-                                    </WrapPanel>
-                                </Border>
-                                <Border Style="{StaticResource styleContentBorders}">
-                                    <StackPanel>
-                                        <StackPanel.Resources>
-                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
-                                        </StackPanel.Resources>
-                                        <TextBlock Text="Båd ude:" FontWeight="SemiBold"/>
-                                        <TextBlock DockPanel.Dock="Left" Text="{Binding CurrentTrip.Boat.Name}" Height="27"/>
-                                        <Button Command="{Binding Path=ShowBoatDialog}" Content="Ændre båd" Width="80" HorizontalAlignment="Left" Height="21"/>
+                                                </TextBlock>
+                                            </Grid>
+                                        </WrapPanel>
+                                    </Border>
+                                    <Border Style="{StaticResource styleContentBorders}">
+                                        <StackPanel>
+                                            <StackPanel.Resources>
+                                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                            </StackPanel.Resources>
+                                            <TextBlock Text="Båd ude:" FontWeight="SemiBold"/>
+                                            <TextBlock DockPanel.Dock="Left" Text="{Binding CurrentTrip.Boat.Name}" Height="27"/>
+                                            <Button Command="{Binding Path=ShowBoatDialog}" Content="Ændre båd" Width="80" HorizontalAlignment="Left" Height="21"/>
 
-                                        <TextBlock Text="Retning:" FontWeight="SemiBold" Margin="0,10,0,0"/>
-                                        <TextBox Text="{Binding CurrentTrip.Direction, StringFormat=Time, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+                                            <TextBlock Text="Retning:" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                            <TextBox Text="{Binding CurrentTrip.Direction, StringFormat=Time, Mode=TwoWay}" HorizontalAlignment="Stretch" />
 
-                                        <TextBlock Text="Starttid:" FontWeight="SemiBold" Margin="0,10,0,0"/>
-                                        <Toolkit:DateTimePicker Value="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay, StringFormat=Short}" 
+                                            <TextBlock Text="Starttid:" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                            <Toolkit:DateTimePicker Value="{Binding Path=CurrentTrip.TripStartTime, Mode=TwoWay, StringFormat=Short}" 
                                                             DockPanel.Dock="Right" />
 
-                                        <TextBlock Text="Sluttid:" FontWeight="SemiBold" Margin="0,10,0,0"/>
-                                        <Toolkit:DateTimePicker Value="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" DockPanel.Dock="Right" />
+                                            <TextBlock Text="Sluttid:" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                            <Toolkit:DateTimePicker Value="{Binding Path=CurrentTrip.TripEndedTime, Mode=TwoWay}" DockPanel.Dock="Right" />
 
-                                        <TextBlock Text="Tid ude:" FontWeight="SemiBold" Margin="0,10,0,0"/>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0:D2}:{1:D2}">
-                                                    <Binding Path="CurrentTrip.TimeBoatOut.Hours" />
-                                                    <Binding Path="CurrentTrip.TimeBoatOut.Minutes" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
+                                            <TextBlock Text="Tid ude:" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0:D2}:{1:D2}">
+                                                        <Binding Path="CurrentTrip.TimeBoatOut.Hours" />
+                                                        <Binding Path="CurrentTrip.TimeBoatOut.Minutes" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
 
-                                        <TextBlock Text="Distance:" FontWeight="SemiBold" Margin="0,10,0,0"/>
-                                        <WrapPanel >
-                                            <TextBox Width="246" Text="{Binding CurrentTrip.Distance, Mode=TwoWay}"/>
-                                            <TextBlock VerticalAlignment="Center" Text=" Km"/>
-                                        </WrapPanel>
+                                            <TextBlock Text="Distance:" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                            <WrapPanel >
+                                                <TextBox Width="146" Text="{Binding CurrentTrip.Distance, Mode=TwoWay}"/>
+                                                <TextBlock VerticalAlignment="Center" Text=" Km"/>
+                                            </WrapPanel>
 
-                                        <TextBlock Text="Langtur:" FontWeight="SemiBold" Margin="0,10,0,0"/>
-                                        <ComboBox  Width="270" Height="22" FontSize="14" FontFamily="Calibri"
+                                            <TextBlock Text="Langtur:" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                            <ComboBox  Width="170" Height="22" FontSize="14" FontFamily="Calibri"
                                                    x:Name="LongDistance" SelectedIndex="{Binding CurrentTrip.LongTrip}">
-                                            <ComboBoxItem Content="Nej"/>
-                                            <ComboBoxItem Content="Ja"/>
-                                        </ComboBox>
+                                                <ComboBoxItem Content="Nej"/>
+                                                <ComboBoxItem Content="Ja"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Border>
+                                    <Button Content="Gem ændringer" Width="170" Command="{Binding SaveChanges}" Margin="12,5,10,0" HorizontalAlignment="Center" Height="24"/>
+                                    <TextBlock>
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock" BasedOn="{StaticResource lstViewContent}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                        <Setter Property="Text" Value="Ændringer gemt"/>
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <!-- Tur oplysninger -->
+                                <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Row="0" >
+                                        <Border>
+                                            <StackPanel>
+                                                <Border Style="{StaticResource ResourceKey=brdHeadline}" Grid.ColumnSpan="2" 
+                                                        Visibility="{Binding Path=SearchVisibility}" 
+                                                        Background="#FFEAEAEA" HorizontalAlignment="Stretch">
+                                                    <WrapPanel Margin="0,2,0,0" HorizontalAlignment="Left">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="25"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Image Source="/View/images/document_info.png" Grid.Column="0" Height="16" Width="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                            <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=txbHeadline}"
+                                                                       Foreground="Black">
+                                                                <Run Text="MEDLEMMER PÅ TUR"/>
+                                                            </TextBlock>
+                                                        </Grid>
+                                                    </WrapPanel>
+                                                </Border>
+
+                                                <Border Style="{StaticResource styleContentBorders}" Height="430">
+                                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                        <WrapPanel Margin="0,0,0,0">
+                                                            <ListView x:Name="TripMembersList" ItemsSource="{Binding Path=CurrentTrip.Members}" 
+                                                                      BorderThickness="0" Margin="0 0 0 0" Background="Transparent" Width="210"
+                                                                      SelectedItem="{Binding Path=SelectedMember}">
+                                                                <ListView.ItemContainerStyle>
+                                                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource styleForms}"/>
+                                                                </ListView.ItemContainerStyle>
+                                                                <ListView.Template> <!-- Removes default style -->
+                                                                    <ControlTemplate>
+                                                                        <ItemsPresenter/>
+                                                                    </ControlTemplate>
+                                                                </ListView.Template>
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Border>
+                                                                            <StackPanel Orientation="Vertical" >
+                                                                                <StackPanel.Resources>
+                                                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource lstViewContent}"/>
+                                                                                </StackPanel.Resources>
+                                                                                <TextBlock>
+                                                                                    <Run Text="{Binding Path=FirstName}" FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=LastName}" FontWeight="SemiBold"/>
+                                                                                </TextBlock>
+                                                                                <!-- Adresse, postnummer, by , tlf, e-mail -->
+                                                                                <TextBlock>
+                                                                                    <Run Text="Adresse:" FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=Address1}"/>
+                                                                                </TextBlock>
+                                                                                <TextBlock>
+                                                                                    <Run Text="tlf: " FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=Cellphone}"/>
+                                                                                </TextBlock>
+                                                                                <TextBlock>
+                                                                                    <Run Text="E-mail: " FontWeight="SemiBold"/>
+                                                                                    <Run Text="{Binding Path=Email1}"/>
+                                                                                </TextBlock>
+                                                                            </StackPanel>
+                                                                        </Border>
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </WrapPanel>
+                                                    </ScrollViewer>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
                                     </StackPanel>
-                                </Border>
-                                <Button Content="Gem ændringer" Width="140" Command="{Binding SaveChanges}" Margin="0,5,10,0" HorizontalAlignment="Left" Height="24"/>
-                                <TextBlock>
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock" BasedOn="{StaticResource lstViewContent}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=RecentSave, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                    <Setter Property="Foreground" Value="Green"/>
-                                                    <Setter Property="Text" Value="Ændringer gemt"/>
-                                                    <Setter Property="FontWeight" Value="Bold"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                            </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.Column="1" Margin="0 0 0 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="125"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Tilfør of fjern medlemmer til/fra tur buttons -->
+                                    <Button Content="Tilføj medlem til tur"/>
+                                    <Button Grid.Column="2" Content="Fjern medlem fra tur"/>
+
+
+                                </Grid>
+                            </Grid>
+
                         </DockPanel>
                     </Border>
                 </ScrollViewer>
