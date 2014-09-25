@@ -227,7 +227,7 @@
                                                 <Border Style="{StaticResource styleContentBorders}" Height="430">
                                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                                                         <WrapPanel Margin="0,0,0,0">
-                                                            <ListView x:Name="TripMembersList" ItemsSource="{Binding Path=CurrentTrip.Members}" 
+                                                            <ListView x:Name="TripMembersList" ItemsSource="{Binding Path=CurrentTrip.ObservableMembers}" 
                                                                       BorderThickness="0" Margin="0 0 0 0" Background="Transparent" Width="210"
                                                                       SelectedItem="{Binding Path=SelectedMember}">
                                                                 <ListView.ItemContainerStyle>
@@ -283,8 +283,8 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <!-- Tilfør of fjern medlemmer til/fra tur buttons -->
-                                    <Button Content="Tilføj medlem til tur"/>
-                                    <Button Grid.Column="2" Content="Fjern medlem fra tur"/>
+                                    <Button Content="Tilføj medlem til tur" />
+                                    <Button Grid.Column="2" Content="Fjern medlem fra tur" Command="{Binding RemoveMemberFromTrip}"/>
 
 
                                 </Grid>

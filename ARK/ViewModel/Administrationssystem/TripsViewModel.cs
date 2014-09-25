@@ -174,6 +174,32 @@ namespace ARK.ViewModel.Administrationssystem
             }
         }
 
+        public ICommand ShowMemberDialog
+        {
+            get
+            {
+                return GetCommand(
+                    () =>
+                    {
+                        NewBoatDialog = new BoatListWindow();
+                        NewBoatDialog.DataContext = this;
+                        NewBoatDialog.ShowDialog();
+                    });
+            }
+        }
+
+        public ICommand RemoveMemberFromTrip
+        {
+            get
+            {
+                return GetCommand(
+                    () =>
+                    {
+                        CurrentTrip.ObservableMembers.Remove(SelectedMember);
+                    });
+            }
+        }
+
         public IEnumerable<Trip> TripsFiltered
         {
             get

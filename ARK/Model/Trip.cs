@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ARK.Model
 {
@@ -20,6 +22,38 @@ namespace ARK.Model
         public bool LongTrip { get; set; }
 
         public virtual ICollection<Member> Members { get; set; }
+
+        private ObservableCollection<Member> _observableMember;
+
+        [NotMapped]
+        public ObservableCollection<Member> ObservableMembers
+        {
+            get
+            {
+                if (_observableMember != null)
+                    return _observableMember;
+
+                _observableMember = new ObservableCollection<Member>(Members);
+                _observableMember.CollectionChanged += (sender, e) =>
+                {
+                    switch (e.Action)
+                    {
+                        case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                            foreach (var item in e.NewItems)
+                                Members.Add((Member)item);
+                            break;
+                        case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                            foreach (var item in e.OldItems)
+                                Members.Remove((Member)item);
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                };
+
+                return _observableMember;
+            }
+        }
 
         public TimeSpan TimeBoatOut
         {
