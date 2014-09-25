@@ -67,14 +67,14 @@
             <Button Content="9" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="9"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-            <Button Content="6" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="6"/>
-            <Button Content="5" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="5"/>
             <Button Content="4" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="4"/>
+            <Button Content="5" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="5"/>
+            <Button Content="6" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="6"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <Button Content="3" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="3"/>
-            <Button Content="2" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="2"/>
             <Button Content="1" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="1"/>
+            <Button Content="2" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="2"/>
+            <Button Content="3" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="3"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
             <Button Content="0" Style="{StaticResource ResourceKey=Key}" Command="{Binding Path=SendKeyCommand}" CommandParameter="0" Width="129" Margin="0,2,0,0"/>
