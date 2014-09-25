@@ -88,7 +88,10 @@
                             <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                             <WrapPanel>
                                 <TextBlock Margin="0,0,2,0" Text="Mest afvendt af:"/>
-                                <TextBlock Text="{Binding Path=MostUsingMember}"/>
+                                <TextBlock>
+                                    <Run Text="{Binding Path=MostUsingMember.FirstName}"/>
+                                    <Run Text="{Binding Path=MostUsingMember.LastName}"/>
+                                </TextBlock>
                             </WrapPanel>
                         </StackPanel>
                     </DataTemplate>
