@@ -74,7 +74,7 @@
                     <TextBlock Text="{Binding Path=DamageForm.Boat.Name}"/>
 
                     <TextBlock Text="Dato (Indsendt): " FontWeight="SemiBold" Margin="0,10,0,0"  />
-                    <TextBlock Text="{Binding Path=DamageForm.Date, StringFormat=d}"/>
+                    <TextBlock Text="{Binding Path=DamageForm.Date, StringFormat=dd/MM/yy}"/>
 
                     <TextBlock Text="Skadetype: " FontWeight="SemiBold" Margin="0,10,0,0"  />
                     <TextBlock Text="{Binding Path=DamageForm.Type}"/>
