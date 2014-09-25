@@ -128,9 +128,9 @@ namespace ARK.ViewModel.Protokolsystem.Pages
         {
             get
             {
-                return new RelayCommand(
+                return new RelayCommand(    
                     x => ConfirmTripData(),
-                    x => SelectedLongTripForm != null);
+                    x => SelectedLongTripForm != null && SelectedLongTripForm.Boat.BoatOut == false);
             }
         }
 
