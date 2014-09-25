@@ -113,23 +113,17 @@ namespace ARK.Model
 
         public Member MostUsingMember
         {
-            get { 
-                TimeCounter.StartTimer();
-
+            get {
                 // Hvis trips ikke indeholder nogle elementer
                 if (!Trips.Any())
                     return null;
 
-                IEnumerable<Member> members = Trips.Where(trip => trip.Boat.Id == Id).SelectMany(trip => trip.Members);
+                var members = Trips.Where(trip => trip.Boat.Id == Id).SelectMany(trip => trip.Members);
 
-                var o =
+                return
                     (from member in members.Distinct()
                     orderby members.Count(m => m.Id == member.Id) descending
                     select member).FirstOrDefault();
-
-                TimeCounter.StopTime();
-
-                return o;
             }
         }
 
