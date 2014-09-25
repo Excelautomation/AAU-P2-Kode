@@ -223,6 +223,9 @@
     <Compile Include="View\Administrationssystem\Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Administrationssystem\Pages\TripMembersWindow.xaml.cs">
+      <DependentUpon>TripMembersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Administrationssystem\Pages\Trips.xaml.cs">
       <DependentUpon>Trips.xaml</DependentUpon>
     </Compile>
@@ -418,6 +421,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Administrationssystem\Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Administrationssystem\Pages\TripMembersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

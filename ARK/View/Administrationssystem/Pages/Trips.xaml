@@ -283,7 +283,7 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <!-- Tilfør of fjern medlemmer til/fra tur buttons -->
-                                    <Button Content="Tilføj medlem til tur" />
+                                    <Button Content="Tilføj medlem til tur" Command="{Binding ShowMemberDialog}"/>
                                     <Button Grid.Column="2" Content="Fjern medlem fra tur" Command="{Binding RemoveMemberFromTrip}"/>
 
 

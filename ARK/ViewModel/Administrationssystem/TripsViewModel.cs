@@ -12,6 +12,7 @@ using ARK.View.Administrationssystem.Pages;
 using ARK.ViewModel.Base;
 using ARK.ViewModel.Base.Filter;
 using ARK.ViewModel.Base.Interfaces.Filter;
+using System.Collections.ObjectModel;
 
 namespace ARK.ViewModel.Administrationssystem
 {
@@ -19,11 +20,15 @@ namespace ARK.ViewModel.Administrationssystem
     {
         public BoatListWindow NewBoatDialog;
 
+        public TripMembersWindow NewTripMembersDialog;
+
         private List<Boat> _allBoats;
 
         private Trip _currentTrip;
 
         private Member _selectedMember;
+
+        private List<Member> _allMembers;
 
         private bool _recentSave;
 
@@ -39,7 +44,7 @@ namespace ARK.ViewModel.Administrationssystem
                     using (var db = new DbArkContext())
                     {
                         _trips = db.Trip.Include(trip => trip.Members).ToList();
-
+                        _allMembers = db.Member.OrderBy(m => m.FirstName).ToList();
                         _allBoats = db.Boat.ToList();
 
                         if (_trips.Count != 0)
@@ -73,6 +78,20 @@ namespace ARK.ViewModel.Administrationssystem
             set
             {
                 _allBoats = value;
+                Notify();
+            }
+        }
+
+        public List<Member> AllMembers
+        {
+            get
+            {
+                return _allMembers;
+            }
+
+            set
+            {
+                _allMembers = value;
                 Notify();
             }
         }
@@ -181,9 +200,32 @@ namespace ARK.ViewModel.Administrationssystem
                 return GetCommand(
                     () =>
                     {
-                        NewBoatDialog = new BoatListWindow();
-                        NewBoatDialog.DataContext = this;
-                        NewBoatDialog.ShowDialog();
+                        NewTripMembersDialog = new TripMembersWindow();
+                        NewTripMembersDialog.DataContext = this;
+                        NewTripMembersDialog.ShowDialog();
+                    });
+            }
+        }
+
+        public ICommand AddMemberToTrip
+        {
+            get
+            {
+                return GetCommand(
+                    e =>
+                    {
+                        foreach (Member member in CurrentTrip.Members)
+                        {
+                            if ((Member)e == member)
+                            {
+                                MessageBox.Show("Medlem er allerede på tur");
+                                return;
+                            }
+                        }
+
+
+                        CurrentTrip.ObservableMembers.Add((Member)e);
+                        NewTripMembersDialog.Close();
                     });
             }
         }
