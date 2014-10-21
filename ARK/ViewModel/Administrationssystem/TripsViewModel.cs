@@ -159,7 +159,20 @@ namespace ARK.ViewModel.Administrationssystem
 
         public void OpenTrip(Trip boat)
         {
-            CurrentTrip = TripsFiltered.First(b => b.Id == boat.Id);
+            CurrentTrip = TripsFiltered.FirstOrDefault(b => b.Id == boat.Id);
+
+            if (CurrentTrip == null)
+            {
+                if (_trips.FirstOrDefault(b => b.Id == boat.Id) == null)
+                {
+                    ResetFilter();
+                    CurrentTrip = _trips.FirstOrDefault(b => b.Id == boat.Id);
+                }
+                else
+                {
+                    MessageBox.Show("Båden eksisterer ikke mere i systemet.");
+                }
+            }
         }
 
         public ICommand ShowBoatDialog
