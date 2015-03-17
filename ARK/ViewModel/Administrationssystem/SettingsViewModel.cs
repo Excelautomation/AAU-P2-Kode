@@ -259,9 +259,9 @@ namespace ARK.ViewModel.Administrationssystem
                                 return;
                             }
 
-                            // Convert username and password to lower-case
+                            // Convert username
                             NewAdmin.Username = NewAdmin.Username.ToLower();
-                            NewAdmin.Password = PasswordHashing.HashPassword(NewAdmin.Password.ToLower());
+                            NewAdmin.Password = PasswordHashing.HashPassword(NewAdmin.Password);
 
                             // Add the new admin to database and list
                             _db.Admin.Add(NewAdmin);

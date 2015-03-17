@@ -54,9 +54,9 @@ namespace ARK.ViewModel.Administrationssystem
                         {
                             DbArkContext db = DbArkContext.GetDbContext();
 
-                            Admin admin = db.Admin.Find(Username);
+                            Admin admin = db.Admin.Find(Username.ToLower());
 
-                            if (admin != null && admin.Username == Username
+                            if (admin != null && admin.Username == Username.ToLower()
                                 && PasswordHashing.VerifyHashedPassword(
                                     admin.Password, 
                                     ((AdminLogin)e).PasswordBox.Password))
