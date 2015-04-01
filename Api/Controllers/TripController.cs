@@ -1,4 +1,5 @@
 ﻿using ARK.Model;
+using ARK.Model.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,31 +12,45 @@ namespace Api.Controllers
     public class TripController : ApiController
     {
         // GET: api/Trip
-        public IEnumerable<Trip> Get()
+        public IEnumerable<Trip> GetAll()
         {
-            
-            return null;
+            using (var db = new DbArkContext())
+            {
+                return db.Trip.Where(trip => true);
+            }
         }
 
         // GET: api/Trip/5
-        public string Get(int id)
+        public Trip Get(int id)
         {
-            return "value";
+            using (var db = new DbArkContext())
+            {
+                return db.Trip.Single(trip => trip.Id == id);
+            }
         }
 
         // POST: api/Trip
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public bool Edit([FromBody]string value)
         {
+            return false;
         }
 
         // PUT: api/Trip/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public bool CreateNewTrip(Trip trip, [FromBody]string value)
         {
+            return false;
         }
 
-        // DELETE: api/Trip/5
-        public void Delete(int id)
+        // PUT: api/Trip/5
+        [HttpPut]
+        public bool EndTrip(Trip trip, [FromBody]string value)
         {
+            // verify that trip contain valid data.
+
+            // end trip
+            return false;
         }
     }
 }
