@@ -13,7 +13,7 @@ namespace Api.Controllers
         // GET: api/Trip
         public IEnumerable<Trip> Get()
         {
-            //return new string[] { "value1", "value2" };
+            
             return null;
         }
 
